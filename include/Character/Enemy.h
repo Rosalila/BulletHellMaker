@@ -1,5 +1,5 @@
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include <map>
 #include <list>
@@ -12,9 +12,8 @@
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
 
-class Character
+class Enemy
 {
-protected:
     Sonido* sonido;
     Painter* painter;
     Receiver* receiver;
@@ -36,8 +35,7 @@ protected:
     std::list<Pattern*>* active_patterns;
 
 public:
-    Character(){}
-    Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
+    Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();

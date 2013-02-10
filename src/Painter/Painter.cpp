@@ -257,8 +257,9 @@ void Painter::draw2DImage	(
         x2=temp;
     }
 
-//    //OpenGL draw
-    glPushMatrix(); //Save the current matrix.
+    //OpenGL draw
+    //Save the current matrix.
+    glPushMatrix();
     //Change the current matrix.
     float translate_x=(x2-x1)/2+position_x;
     float translate_y=(y2-y1)/2+position_y;
@@ -290,11 +291,11 @@ void Painter::draw2DImage	(
     glEnd();
 
 
-//    //Reset the current matrix to the one that was saved.
+    //Reset the current matrix to the one that was saved.
     glPopMatrix();
 }
 
-void Painter::drawRectangle(int x,int y,int width,int height,int red,int green,int blue,int alpha,bool camera_align)
+void Painter::drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align)
 {
     glDisable(GL_TEXTURE_2D);
     GLubyte r=red;
@@ -302,11 +303,29 @@ void Painter::drawRectangle(int x,int y,int width,int height,int red,int green,i
     GLubyte b=blue;
     GLubyte a=alpha;
     glColor4ub(r, g, b,a);
+
     if(camera_align)
-        glRecti(x-camera_x, y+camera_y, width+x-camera_x, height+y+camera_y);
-    else
-        glRecti(x, y, width+x, height+y);
+    {
+        y+=camera_y;
+        x-=camera_x;
+    }
+
+    //OpenGL draw
+    //Save the current matrix.
+    glPushMatrix();
+    //Change the current matrix.
+    float translate_x=(width)/2+x;
+    float translate_y=(height)/2+y;
+    glTranslatef(translate_x,translate_y, 1.0);
+    glRotatef(-rotation, 0, 0, 1.0);
+    x-=translate_x;
+    y-=translate_y;
+
+    glRecti(x, y, width+x, height+y);
     glFlush();
+
+    //Reset the current matrix to the one that was saved.
+    glPopMatrix();
 }
 
 void Painter::frameCap()

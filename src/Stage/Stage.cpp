@@ -6,12 +6,7 @@ Stage::Stage(Painter* painter,Sonido* sonido,Receiver*receiver)
     this->sonido=sonido;
     this->receiver=receiver;
     enemies=new std::map<std::string,Character*>();
-
-    //efecto
-    bool efecto_camara=true;
-    bool moviendo_derecha=true;
-    int movimiento=0;
-    int borde_efecto=30;
+    this->iterator=0;
 }
 
 void Stage::drawLayer(Layer* layer)
@@ -41,7 +36,7 @@ void Stage::drawLayer(Layer* layer)
     int pos_x=layer->alignment_x;
     int pos_y=painter->screen_height-size_y-layer->alignment_y;
 
-    for(int i=0;i<painter->screen_width/size_x+2;i++)
+    for(int i=0;i<painter->screen_width/(size_x+layer->separation_x)+2;i++)
     {
         painter->draw2DImage
         (   texture,
@@ -89,6 +84,35 @@ void Stage::dibujarFront()
     {
         Layer* layer=front[i];
         drawLayer(layer);
+    }
+
+    for (std::list<Dialogue*>::iterator dialogue = active_dialogues.begin(); dialogue != active_dialogues.end(); dialogue++)
+        ((Dialogue*)*dialogue)->render();
+}
+
+void Stage::loadDialogues(std::string file)
+{
+    writeLogLine("Loading dialogues from XML.");
+
+    char *archivo=new char[255];
+    strcpy(archivo,"stages/");
+    strcat(archivo,file.c_str());
+    strcat(archivo,"/dialogues.xml");
+    TiXmlDocument doc_t( archivo );
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    TiXmlNode *dialogues_file=doc->FirstChild("DialoguesFile");
+
+    for(TiXmlNode *dialogue_node=dialogues_file->FirstChild("dialogue");
+            dialogue_node!=NULL;
+            dialogue_node=dialogue_node->NextSibling("dialogue"))
+    {
+        int frame=atoi(dialogue_node->ToElement()->Attribute("frame"));
+        std::string text=dialogue_node->ToElement()->Attribute("text");
+
+        dialogues[frame]=new Dialogue(painter,sonido,receiver,text);
     }
 }
 
@@ -209,6 +233,8 @@ void Stage::cargarDesdeXML(std::string path)
 
     std::string test="test";
     (*enemies)[test]=new Character(sonido,painter,receiver,"stages/"+path+"/Enemy/");
+
+    loadDialogues(path);
 }
 
 Stage::~Stage()
@@ -256,4 +282,34 @@ void Stage::setVelocity(int velocity)
 std::map<std::string,Character*>*Stage::getEnemies()
 {
     return enemies;
+}
+
+void Stage::render()
+{
+//    for (std::list<Character*>::iterator character = active_enemies->begin(); character != active_enemies->end(); character++)
+//        ((Character*)*character)->render();
+}
+
+void Stage::logic()
+{
+    iterator++;
+    if(dialogues.find(iterator)!=dialogues.end())
+    {
+        active_dialogues.push_back(dialogues[iterator]);
+    }
+
+    std::list<Dialogue*>::iterator i = active_dialogues.begin();
+    while (i != active_dialogues.end())
+    {
+        Dialogue*d=(Dialogue*)*i;
+        d->logic();
+        if (d->destroyFlag())
+        {
+            active_dialogues.erase(i++);
+        }
+        else
+        {
+            ++i;
+        }
+    }
 }

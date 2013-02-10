@@ -1,13 +1,23 @@
 #include "../include/Spells/Pattern.h"
 
-Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int angle,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown)
+Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,int angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,Hitbox*hitbox)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
 
+    this->hitbox=hitbox;
     this->velocity=velocity;
+    this->max_velocity=max_velocity;
+    this->acceleration=acceleration;
+    this->a_frequency=a_frequency;
+    this->current_a_frequency=0;
     this->angle=angle;
+    this->angle_change=angle_change;
+    this->stop_ac_at=stop_ac_at;
+    this->current_stop_ac_at=0;
+    this->ac_frequency=ac_frequency;
+    this->current_ac_frequency=0;
     this->offset_x=offset_x;
     this->offset_y=offset_y;
     this->startup=startup;
@@ -23,6 +33,9 @@ Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity
     this->state="startup";
     this->current_startup=0;
     this->current_cooldown=0;
+
+    this->iteration=0;
+    this->duration=duration;
 }
 
 Pattern::Pattern(Pattern*pattern,int x,int y)
@@ -31,12 +44,25 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->painter=pattern->painter;
     this->receiver=pattern->receiver;
 
+    this->hitbox=pattern->hitbox;
     this->velocity=pattern->velocity;
+    this->max_velocity=pattern->max_velocity;
+    this->acceleration=pattern->acceleration;
+    this->a_frequency=pattern->a_frequency;
+    this->current_a_frequency=0;
     this->angle=pattern->angle;
+    this->angle_change=pattern->angle_change;
+    this->stop_ac_at=pattern->stop_ac_at;
+    this->current_stop_ac_at=0;
+    this->ac_frequency=pattern->ac_frequency;
+    this->current_ac_frequency=0;
     this->x=x+pattern->offset_x;
     this->y=y-pattern->offset_y;
     this->animation_velocity=pattern->animation_velocity;
     this->bullet=pattern->bullet;
+
+    this->iteration=0;
+    this->duration=pattern->duration;
 
     //Sprites animation
     this->animation_iteration=0;
@@ -60,7 +86,7 @@ void Pattern::setState(std::string state)
     this->state=state;
 }
 
-void Pattern::updateState()
+void Pattern::updateStateShouting()
 {
     if(state=="startup")
     {
@@ -69,6 +95,7 @@ void Pattern::updateState()
             current_startup++;
         }else
         {
+            current_startup=0;
             state="ready";
         }
     }
@@ -80,9 +107,17 @@ void Pattern::updateState()
             current_cooldown++;
         }else
         {
-            state="startup";
+            current_cooldown=0;
+            state="ready";
         }
     }
+}
+
+void Pattern::updateStateNotShouting()
+{
+    current_startup=0;
+    current_cooldown=0;
+    state="startup";
 }
 
 
@@ -100,6 +135,28 @@ void Pattern::logic(int stage_speed)
         animation_iteration=0;
     }
     animation_iteration++;
+
+    current_a_frequency++;
+    if(current_a_frequency>a_frequency)
+    {
+        current_a_frequency=0;
+        velocity+=acceleration;
+        if(velocity>max_velocity)
+            velocity=max_velocity;
+    }
+
+    current_stop_ac_at++;
+    if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
+    {
+        current_ac_frequency++;
+        if(current_ac_frequency>ac_frequency)
+        {
+            current_ac_frequency=0;
+            angle+=angle_change;
+        }
+    }
+
+    iteration++;
 }
 
 void Pattern::render()
@@ -115,6 +172,11 @@ void Pattern::render()
         0,0,
         Color(255,255,255,255),
         true);
+
+    painter->drawRectangle(this->x+hitbox->getX()-hitbox->getWidth()/2,
+                           this->y+hitbox->getY()-hitbox->getHeight()/2,
+                           hitbox->getWidth(),hitbox->getHeight(),
+                           angle+hitbox->getAngle(),100,0,0,100,true);
 }
 
 int Pattern::getX()
@@ -124,4 +186,11 @@ int Pattern::getX()
 int Pattern::getY()
 {
     return this->y;
+}
+
+bool Pattern::destroyFlag()
+{
+    if(duration<0)
+        return false;
+    return iteration>duration;
 }

@@ -1,6 +1,6 @@
-#include "../include/Character/Character.h"
+#include "../include/Character/Enemy.h"
 
-Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Enemy::Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
 {
     //Loading file
     std::string main_path=directory+"main.xml";
@@ -35,7 +35,7 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     this->painter=painter;
     this->receiver=receiver;
     this->active_patterns=new std::list<Pattern*>;
-    this->x=500;
+    this->x=900;
     this->y=500;
     this->shooting=true;
     this->orientation="idle";
@@ -121,7 +121,7 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
             std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
             Bullet*bullet=bullets[bullet_name];
 
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,new Hitbox(0,0,40,10,0)));
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,new Hitbox(10,20,40,10,45)));
         }
         type[type_name]=patterns;
     }
@@ -132,14 +132,14 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     this->current_sprite=0;
 }
 
-void Character::logic(int stage_velocity)
+void Enemy::logic(int stage_velocity)
 {
     animationControl();
     inputControl();
     spellControl(stage_velocity);
 }
 
-void Character::animationControl()
+void Enemy::animationControl()
 {
     if(animation_iteration>=animation_velocity)
     {
@@ -153,11 +153,35 @@ void Character::animationControl()
     animation_iteration++;
 }
 
-void Character::inputControl()
+void Enemy::inputControl()
 {
+//    if(receiver->IsKeyDownn(SDLK_DOWN))
+//        orientation="down";
+//    else if(receiver->IsKeyDownn(SDLK_UP))
+//        orientation="up";
+//    else if(receiver->IsKeyDownn(SDLK_LEFT))
+//        orientation="left";
+//    else if(receiver->IsKeyDownn(SDLK_RIGHT))
+//        orientation="right";
+//    else
+//        orientation="idle";
+//
+//    if(receiver->IsKeyDownn(SDLK_DOWN))
+//        this->y+=velocity;
+//    if(receiver->IsKeyDownn(SDLK_UP))
+//        this->y-=velocity;
+//    if(receiver->IsKeyDownn(SDLK_LEFT))
+//        this->x-=velocity;
+//    if(receiver->IsKeyDownn(SDLK_RIGHT))
+//        this->x+=velocity;
+//
+//    if(receiver->IsKeyDownn(SDLK_z))
+//        this->shooting=true;
+//    else
+//        this->shooting=false;
 }
 
-void Character::spellControl(int stage_velocity)
+void Enemy::spellControl(int stage_velocity)
 {
     std::vector<Pattern*> patterns=type[current_type];
     for(int i=0;i<patterns.size();i++)
@@ -179,7 +203,7 @@ void Character::spellControl(int stage_velocity)
         ((Pattern*)*pattern)->logic(stage_velocity);
 }
 
-void Character::render()
+void Enemy::render()
 {
     painter->draw2DImage
     (   sprites[orientation][current_sprite],
@@ -196,32 +220,32 @@ void Character::render()
         ((Pattern*)*pattern)->render();
 }
 
-int Character::getX()
+int Enemy::getX()
 {
     return this->x;
 }
 
-int Character::getY()
+int Enemy::getY()
 {
     return this->y;
 }
 
-void Character::setX(int x)
+void Enemy::setX(int x)
 {
     this->x=x;
 }
 
-void Character::setY(int y)
+void Enemy::setY(int y)
 {
     this->y=y;
 }
 
-std::list<Pattern*>* Character::getActivePatterns()
+std::list<Pattern*>* Enemy::getActivePatterns()
 {
     return active_patterns;
 }
 
-void Character::setType(std::string type)
+void Enemy::setType(std::string type)
 {
     this->current_type=type;
 }

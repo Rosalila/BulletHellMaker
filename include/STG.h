@@ -6,6 +6,8 @@
 #include "Sonido/Sonido.h"
 #include "Input/Input.h"
 #include "Character/Character.h"
+#include "Character/Player.h"
+#include "Character/Enemy.h"
 #include "Stage/Stage.h"
 
 class STG
@@ -13,7 +15,8 @@ class STG
     Sonido* sonido;
     Painter* painter;
     Receiver* receiver;
-    Character*character;
+    Player*player;
+    Enemy*enemy;
     Stage*stage;
 
     bool isOutOfBounds(int pos_x,int pos_y);
@@ -23,7 +26,7 @@ class STG
     void deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2);
     void checkCharacterOutOfBounds();
 public:
-    STG(Sonido* sonido,Painter* painter,Receiver* receiver,Character*character,Stage*stage);
+    STG(Sonido* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
 };
 
 #endif

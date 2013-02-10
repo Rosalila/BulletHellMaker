@@ -1,6 +1,6 @@
-#include "../include/Character/Character.h"
+#include "../include/Character/Player.h"
 
-Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Player::Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
 {
     //Loading file
     std::string main_path=directory+"main.xml";
@@ -132,96 +132,30 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     this->current_sprite=0;
 }
 
-void Character::logic(int stage_velocity)
+void Player::inputControl()
 {
-    animationControl();
-    inputControl();
-    spellControl(stage_velocity);
-}
+    if(receiver->IsKeyDownn(SDLK_DOWN))
+        orientation="down";
+    else if(receiver->IsKeyDownn(SDLK_UP))
+        orientation="up";
+    else if(receiver->IsKeyDownn(SDLK_LEFT))
+        orientation="left";
+    else if(receiver->IsKeyDownn(SDLK_RIGHT))
+        orientation="right";
+    else
+        orientation="idle";
 
-void Character::animationControl()
-{
-    if(animation_iteration>=animation_velocity)
-    {
-        current_sprite++;
-        if(current_sprite>=sprites[orientation].size())
-        {
-            current_sprite=0;
-        }
-        animation_iteration=0;
-    }
-    animation_iteration++;
-}
+    if(receiver->IsKeyDownn(SDLK_DOWN))
+        this->y+=velocity;
+    if(receiver->IsKeyDownn(SDLK_UP))
+        this->y-=velocity;
+    if(receiver->IsKeyDownn(SDLK_LEFT))
+        this->x-=velocity;
+    if(receiver->IsKeyDownn(SDLK_RIGHT))
+        this->x+=velocity;
 
-void Character::inputControl()
-{
-}
-
-void Character::spellControl(int stage_velocity)
-{
-    std::vector<Pattern*> patterns=type[current_type];
-    for(int i=0;i<patterns.size();i++)
-    {
-        if(shooting)
-        {
-            patterns[i]->updateStateShouting();
-            if(patterns[i]->isReady())
-            {
-                active_patterns->push_back(new Pattern(patterns[i],this->x,this->y));
-            }
-        }else
-        {
-            patterns[i]->updateStateNotShouting();
-        }
-    }
-
-    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-        ((Pattern*)*pattern)->logic(stage_velocity);
-}
-
-void Character::render()
-{
-    painter->draw2DImage
-    (   sprites[orientation][current_sprite],
-        sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
-        this->x-sprites[orientation][current_sprite]->getWidth()/2,this->y-sprites[orientation][current_sprite]->getHeight()/2,
-        1.0,
-        0.0,
-        false,
-        0,0,
-        Color(255,255,255,255),
-        true);
-
-    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-        ((Pattern*)*pattern)->render();
-}
-
-int Character::getX()
-{
-    return this->x;
-}
-
-int Character::getY()
-{
-    return this->y;
-}
-
-void Character::setX(int x)
-{
-    this->x=x;
-}
-
-void Character::setY(int y)
-{
-    this->y=y;
-}
-
-std::list<Pattern*>* Character::getActivePatterns()
-{
-    return active_patterns;
-}
-
-void Character::setType(std::string type)
-{
-    this->current_type=type;
+    if(receiver->IsKeyDownn(SDLK_z))
+        this->shooting=true;
+    else
+        this->shooting=false;
 }

@@ -812,7 +812,7 @@
 1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1360131627 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
+1360532065 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1359412016 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
@@ -839,7 +839,7 @@
 1358151252 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
 	"Painter/Painter.h"
 
-1359413704 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
+1360528033 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
@@ -902,7 +902,7 @@
 1359256723 source:/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1360131880 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
+1360490681 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
 1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
@@ -923,18 +923,20 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1360337583 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+1360532046 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
 	"../include/STG.h"
 
-1360130902 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
+1360532016 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
 	"TinyXml/tinyxml.h"
 	"Painter/Painter.h"
 	"Sonido/Sonido.h"
 	"Input/Input.h"
 	"Character/Character.h"
+	"Character/Player.h"
+	"Character/Enemy.h"
 	"Stage/Stage.h"
 
-1359411860 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
+1360528022 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
 	<iostream>
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
@@ -963,10 +965,10 @@
 	"Input/Boton.h"
 	<IA/IA.h>
 
-1360047360 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+1360532171 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
 	"../include/Character/Character.h"
 
-1359938686 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+1360531967 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -977,17 +979,19 @@
 	"Spells/Bullet.h"
 	"Spells/Pattern.h"
 
-1360132061 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
+1360490023 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
 	"TinyXml/tinyxml.h"
 	"Painter/Painter.h"
 	"Sonido/Sonido.h"
 	"Character/Character.h"
+	"Stage/Layer.h"
+	"Stage/Dialogue.h"
 	<map>
 
 1359284077 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
 	"../include/Spells/Bullet.h"
 
-1360047395 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+1360531054 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
 	"../include/Spells/Pattern.h"
 
 1359261457 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
@@ -1007,7 +1011,7 @@
 	"Log/Log.h"
 	<iostream>
 
-1360047360 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+1360481855 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
 	"../include/Character/Character.h"
 
 1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Automata.cpp
@@ -1038,7 +1042,7 @@
 1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1360131627 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
+1360493737 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1359412016 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
@@ -1072,15 +1076,16 @@
 	"SDL/SDL.h"
 	"Painter/Timer.h"
 
-1360337583 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+1360493384 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
 	"../include/STG.h"
 
-1360130902 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/STG.h
+1360493288 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/STG.h
 	"TinyXml/tinyxml.h"
 	"Painter/Painter.h"
 	"Sonido/Sonido.h"
 	"Input/Input.h"
 	"Character/Character.h"
+	"Character/Enemy.h"
 	"Stage/Stage.h"
 
 1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinyxml.h
@@ -1127,7 +1132,7 @@
 	"Input/Boton.h"
 	<IA/IA.h>
 
-1359938686 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+1360469475 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -1138,11 +1143,13 @@
 	"Spells/Bullet.h"
 	"Spells/Pattern.h"
 
-1360132061 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
+1360490023 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
 	"TinyXml/tinyxml.h"
 	"Painter/Painter.h"
 	"Sonido/Sonido.h"
 	"Character/Character.h"
+	"Stage/Layer.h"
+	"Stage/Dialogue.h"
 	<map>
 
 1359256723 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
@@ -1151,10 +1158,10 @@
 1359284077 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
 	"../include/Spells/Bullet.h"
 
-1360047395 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+1360482064 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
 	"../include/Spells/Pattern.h"
 
-1360131880 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
+1360490681 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
 1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
@@ -1180,4 +1187,62 @@
 
 1359937455 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Enemy.cpp
 	"Stage/Enemy.h"
+
+1360489582 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Dialogue.cpp
+	"Stage/Dialogue.h"
+
+1360488831 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
+	"Stage/Layer.h"
+
+1360489582 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Dialogue.cpp
+	"Stage/Dialogue.h"
+
+1360488831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
+	"Stage/Layer.h"
+
+1360529269 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
+	"../include/Character/Enemy.h"
+
+1360493265 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Spells/Bullet.h"
+	"Spells/Pattern.h"
+
+1360493864 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
+	"../include/Character/Enemy.h"
+
+1360493265 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Spells/Bullet.h"
+	"Spells/Pattern.h"
+
+1360529055 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
+	"../include/Spells/Hitbox.h"
+
+1360531994 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
+	"../include/Character/Player.h"
+
+1360531923 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Spells/Bullet.h"
+	"Spells/Pattern.h"
+	"Character/Character.h"
 

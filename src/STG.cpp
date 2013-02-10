@@ -1,11 +1,12 @@
 #include "../include/STG.h"
 
-STG::STG(Sonido* sonido,Painter* painter,Receiver* receiver,Character*character,Stage*stage)
+STG::STG(Sonido* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
-    this->character=character;
+    this->player=player;
+    this->enemy=enemy;
     this->stage=stage;
     mainLoop();
 }
@@ -54,18 +55,51 @@ void STG::logic()
         stage->setVelocity(500);
     }
 
-    painter->camera_x+=stage->getVelocity();
-    character->logic(stage->getVelocity());
-    character->setX(character->getX()+stage->getVelocity());
 
-//    enemy->animationControl();
-//    enemy->spellControl(stage->getVelocity());
-//    enemy->setX(enemy->getX()+stage->getVelocity());
-//
-//
-//    enemy->setY(enemy->getY()-6);
-//    if(enemy->getY()<0)
-//        enemy->setY(800);
+
+    if(receiver->IsKeyPressed(SDLK_1))
+    {
+        player->setType("1");
+    }
+    if(receiver->IsKeyPressed(SDLK_2))
+    {
+        player->setType("2");
+    }
+    if(receiver->IsKeyPressed(SDLK_3))
+    {
+        player->setType("3");
+    }
+    if(receiver->IsKeyPressed(SDLK_4))
+    {
+        player->setType("4");
+    }
+    if(receiver->IsKeyPressed(SDLK_5))
+    {
+        player->setType("5");
+    }
+    if(receiver->IsKeyPressed(SDLK_6))
+    {
+        player->setType("6");
+    }
+    if(receiver->IsKeyPressed(SDLK_7))
+    {
+        player->setType("7");
+    }
+    if(receiver->IsKeyPressed(SDLK_8))
+    {
+        player->setType("8");
+    }
+    if(receiver->IsKeyPressed(SDLK_9))
+    {
+        player->setType("9");
+    }
+
+    painter->camera_x+=stage->getVelocity();
+    player->logic(stage->getVelocity());
+    player->setX(player->getX()+stage->getVelocity());
+    enemy->logic(stage->getVelocity());
+    enemy->setX(enemy->getX()+stage->getVelocity());
+    stage->logic();
 
     deletePatterns(stage->getBoundX1(),stage->getBoundY1(),stage->getBoundX2(),stage->getBoundY2());
     checkCharacterOutOfBounds();
@@ -74,7 +108,11 @@ void STG::logic()
 void STG::render()
 {
     stage->dibujarBack();
-    character->render();
+    player->render();
+    enemy->render();
+
+    stage->render();
+    stage->dibujarFront();
 
     receiver->updateInputs();
     painter->updateScreen();
@@ -94,12 +132,12 @@ bool STG::isOutOfBounds(int pos_x,int pos_y)
 
 void STG::deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2)
 {
-    std::list<Pattern*>* active_patterns=character->getActivePatterns();
+    std::list<Pattern*>* active_patterns=player->getActivePatterns();
     std::list<Pattern*>::iterator i = active_patterns->begin();
     while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
-        if (isOutOfBounds(p->getX(),p->getY()))
+        if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
         {
             active_patterns->erase(i++);
         }
@@ -110,30 +148,30 @@ void STG::deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x
     }
 
 
-//    std::list<Pattern*>* active_enemy_patterns=enemy->getActivePatterns();
-//    i = active_enemy_patterns->begin();
-//    while (i != active_enemy_patterns->end())
-//    {
-//        Pattern*p=(Pattern*)*i;
-//        if (isOutOfBounds(p->getX(),p->getY()))
-//        {
-//            active_enemy_patterns->erase(i++);
-//        }
-//        else
-//        {
-//            ++i;
-//        }
-//    }
+    active_patterns=enemy->getActivePatterns();
+    i = active_patterns->begin();
+    while (i != active_patterns->end())
+    {
+        Pattern*p=(Pattern*)*i;
+        if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
+        {
+            active_patterns->erase(i++);
+        }
+        else
+        {
+            ++i;
+        }
+    }
 }
 
 void STG::checkCharacterOutOfBounds()
 {
-    if(character->getX()<stage->getBoundX1()+painter->camera_x)
-        character->setX(stage->getBoundX1()+painter->camera_x);
-    if(character->getX()>stage->getBoundX2()+painter->camera_x)
-        character->setX(stage->getBoundX2()+painter->camera_x);
-    if(character->getY()<stage->getBoundY1())
-        character->setY(stage->getBoundY1());
-    if(character->getY()>stage->getBoundY2())
-        character->setY(stage->getBoundY2());
+    if(player->getX()<stage->getBoundX1()+painter->camera_x)
+        player->setX(stage->getBoundX1()+painter->camera_x);
+    if(player->getX()>stage->getBoundX2()+painter->camera_x)
+        player->setX(stage->getBoundX2()+painter->camera_x);
+    if(player->getY()<stage->getBoundY1())
+        player->setY(stage->getBoundY1());
+    if(player->getY()>stage->getBoundY2())
+        player->setY(stage->getBoundY2());
 }

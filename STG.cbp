@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Fighter2" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/STG" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Fighter2" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/STG" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Character/Character.h" />
+		<Unit filename="include/Character/Enemy.h" />
 		<Unit filename="include/IA/Automata.h" />
 		<Unit filename="include/IA/Estado.h" />
 		<Unit filename="include/IA/IA.h" />
@@ -57,12 +58,15 @@
 		<Unit filename="include/Sonido/Sonido.h" />
 		<Unit filename="include/Spells/Bullet.h" />
 		<Unit filename="include/Spells/Pattern.h" />
+		<Unit filename="include/Stage/Dialogue.h" />
 		<Unit filename="include/Stage/Enemy.h" />
+		<Unit filename="include/Stage/Layer.h" />
 		<Unit filename="include/Stage/Stage.h" />
 		<Unit filename="include/TinyXml/tinystr.h" />
 		<Unit filename="include/TinyXml/tinyxml.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Character/Character.cpp" />
+		<Unit filename="src/Character/Enemy.cpp" />
 		<Unit filename="src/IA/Automata.cpp" />
 		<Unit filename="src/IA/Estado.cpp" />
 		<Unit filename="src/IA/IA.cpp" />
@@ -87,7 +91,9 @@
 		<Unit filename="src/Sonido/Sonido.cpp" />
 		<Unit filename="src/Spells/Bullet.cpp" />
 		<Unit filename="src/Spells/Pattern.cpp" />
+		<Unit filename="src/Stage/Dialogue.cpp" />
 		<Unit filename="src/Stage/Enemy.cpp" />
+		<Unit filename="src/Stage/Layer.cpp" />
 		<Unit filename="src/Stage/Stage.cpp" />
 		<Unit filename="src/TinyXml/tinystr.cpp" />
 		<Unit filename="src/TinyXml/tinyxml.cpp" />

@@ -98,7 +98,7 @@ class Painter
 				 Color color_effects,
 				 bool camera_align);
     void drawText(std::string text,int position_x,int position_y);
-    void drawRectangle(int x,int y,int width,int height,int red,int green,int blue,int alpha,bool camera_align);
+    void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
     void frameCap();
 
