@@ -34,6 +34,7 @@
 		</Compiler>
 		<Unit filename="include/Character/Character.h" />
 		<Unit filename="include/Character/Enemy.h" />
+		<Unit filename="include/Character/Player.h" />
 		<Unit filename="include/IA/Automata.h" />
 		<Unit filename="include/IA/Estado.h" />
 		<Unit filename="include/IA/IA.h" />
@@ -41,7 +42,6 @@
 		<Unit filename="include/Input/Boton.h" />
 		<Unit filename="include/Input/Input.h" />
 		<Unit filename="include/Input/Receiver.h" />
-		<Unit filename="include/Log/Log.h" />
 		<Unit filename="include/Menu/Elemento.h" />
 		<Unit filename="include/Menu/Menu.h" />
 		<Unit filename="include/Menu/MenuBarra.h" />
@@ -57,6 +57,7 @@
 		<Unit filename="include/STG.h" />
 		<Unit filename="include/Sonido/Sonido.h" />
 		<Unit filename="include/Spells/Bullet.h" />
+		<Unit filename="include/Spells/Hitbox.h" />
 		<Unit filename="include/Spells/Pattern.h" />
 		<Unit filename="include/Stage/Dialogue.h" />
 		<Unit filename="include/Stage/Enemy.h" />
@@ -64,9 +65,11 @@
 		<Unit filename="include/Stage/Stage.h" />
 		<Unit filename="include/TinyXml/tinystr.h" />
 		<Unit filename="include/TinyXml/tinyxml.h" />
+		<Unit filename="include/Utility/Utility.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Character/Character.cpp" />
 		<Unit filename="src/Character/Enemy.cpp" />
+		<Unit filename="src/Character/Player.cpp" />
 		<Unit filename="src/IA/Automata.cpp" />
 		<Unit filename="src/IA/Estado.cpp" />
 		<Unit filename="src/IA/IA.cpp" />
@@ -74,7 +77,6 @@
 		<Unit filename="src/Input/Boton.cpp" />
 		<Unit filename="src/Input/Input.cpp" />
 		<Unit filename="src/Input/Receiver.cpp" />
-		<Unit filename="src/Log/Log.cpp" />
 		<Unit filename="src/Menu/Elemento.cpp" />
 		<Unit filename="src/Menu/Menu.cpp" />
 		<Unit filename="src/Menu/MenuBarra.cpp" />
@@ -90,6 +92,7 @@
 		<Unit filename="src/STG.cpp" />
 		<Unit filename="src/Sonido/Sonido.cpp" />
 		<Unit filename="src/Spells/Bullet.cpp" />
+		<Unit filename="src/Spells/Hitbox.cpp" />
 		<Unit filename="src/Spells/Pattern.cpp" />
 		<Unit filename="src/Stage/Dialogue.cpp" />
 		<Unit filename="src/Stage/Enemy.cpp" />
@@ -99,6 +102,7 @@
 		<Unit filename="src/TinyXml/tinyxml.cpp" />
 		<Unit filename="src/TinyXml/tinyxmlerror.cpp" />
 		<Unit filename="src/TinyXml/tinyxmlparser.cpp" />
+		<Unit filename="src/Utility/Utility.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

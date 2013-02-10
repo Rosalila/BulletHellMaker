@@ -1092,14 +1092,14 @@ void Menu::llenarInputsBotones()
                 if(pos!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=painter->convertInt((int)temp->botones[pos].getNumJoystick());
-                    mb->input_config+=painter->convertInt((int)temp->botones[pos].joystick);
+                    mb->input_config+=toString((int)temp->botones[pos].getNumJoystick());
+                    mb->input_config+=toString((int)temp->botones[pos].joystick);
                 }
 
                 if(posc!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=painter->convertInt((int)temp->cruz[posc].getNumJoystick());
+                    mb->input_config+=toString((int)temp->cruz[posc].getNumJoystick());
                     mb->input_config+="-";
                     if(temp->cruz[posc].joystick==-8)
                         mb->input_config+=std::string("up");
@@ -1110,7 +1110,7 @@ void Menu::llenarInputsBotones()
                     else if(temp->cruz[posc].joystick==-6)
                         mb->input_config+=std::string("right");
                     else
-                        mb->input_config+=painter->convertInt((int)temp->cruz[posc].joystick);
+                        mb->input_config+=toString((int)temp->cruz[posc].joystick);
                 }
             }
         }

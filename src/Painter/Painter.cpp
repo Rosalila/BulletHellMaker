@@ -344,7 +344,7 @@ void Painter::frameCap()
     std::string caption;
 
     //Calculate the frames per second and create the string
-    caption = "Average Frames Per Second: " + convertInt(frame / ( fps->get_ticks() / 1000.f ));
+    caption = "Average Frames Per Second: " + toString(frame / ( fps->get_ticks() / 1000.f ));
 
     //Reset the caption
     SDL_WM_SetCaption( caption.c_str(), NULL );

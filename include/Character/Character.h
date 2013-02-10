@@ -38,6 +38,7 @@ protected:
 public:
     Character(){}
     Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
+    void loadFromXML(std::string directory);
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();

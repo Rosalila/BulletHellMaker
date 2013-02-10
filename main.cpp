@@ -15,7 +15,7 @@
 #include "Painter/Painter.h"
 #include "Sonido/Sonido.h"
 #include "Menu/Menu.h"
-#include "Log/Log.h"
+#include "Utility/Utility.h"
 
 #include <iostream>
 using namespace std;

@@ -13,7 +13,7 @@ using namespace std;
 #include "SDL/SDL_ttf.h"
 #include "SDL/SDL_mixer.h"
 
-#include "Log/Log.h"
+#include "Utility/Utility.h"
 
 #include <map>
 

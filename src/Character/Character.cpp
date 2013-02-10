@@ -2,6 +2,27 @@
 
 Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
 {
+    //Setting up the other variables
+    this->sonido=sonido;
+    this->painter=painter;
+    this->receiver=receiver;
+    this->active_patterns=new std::list<Pattern*>;
+    this->x=500;
+    this->y=500;
+    this->shooting=true;
+    this->orientation="idle";
+    this->current_type="1";
+
+    //Sprites animation
+    this->animation_velocity=4;
+    this->animation_iteration=0;
+    this->current_sprite=0;
+
+    loadFromXML(directory);
+}
+
+void Character::loadFromXML(std::string directory)
+{
     //Loading file
     std::string main_path=directory+"main.xml";
     TiXmlDocument doc_t(main_path.c_str());
@@ -29,20 +50,6 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
         }
         sprites[sprites_orientation]=sprites_vector;
     }
-
-    //Setting up the other variables
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
-    this->active_patterns=new std::list<Pattern*>;
-    this->x=500;
-    this->y=500;
-    this->shooting=true;
-    this->orientation="idle";
-    this->current_type="1";
-
-
-
 
     //Loading bullets
     std::string bullets_path=directory+"bullets.xml";
@@ -77,9 +84,6 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     TiXmlNode *patterns_file=doc_pattern->FirstChild("PatternsFile");
 
     //Loading patterns
-    int offset_x=0;
-    int offset_y=0;
-
     for(TiXmlNode* pattern_type=patterns_file->FirstChild("Type");
             pattern_type!=NULL;
             pattern_type=pattern_type->NextSibling("Type"))
@@ -125,11 +129,6 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
         }
         type[type_name]=patterns;
     }
-
-    //Sprites animation
-    this->animation_velocity=4;
-    this->animation_iteration=0;
-    this->current_sprite=0;
 }
 
 void Character::logic(int stage_velocity)
