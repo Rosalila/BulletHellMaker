@@ -1,0 +1,8 @@
+bin/
+chars/
+menu/
+misc/
+obj/
+stages/
+config.xml
+log

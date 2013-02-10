@@ -1,0 +1,1183 @@
+# depslib dependency file v1.0
+1341982241 source:/home/mack/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Fighter.h"
+	<iostream>
+
+1341982241 /home/mack/Fighter/include/Fighter.h
+	"TinyXml/tinyxml.h"
+	"Menu/Menu.h"
+	<stdio.h>
+
+1341982241 /home/mack/Fighter/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1341982241 /home/mack/Fighter/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1341982241 /home/mack/Fighter/include/Menu/Menu.h
+	"Stage/Stage.h"
+	"Grafico/Grafico.h"
+	"irrKlang/irrKlang.h"
+	"Personaje/Personaje.h"
+	"Menu/MenuContenedor.h"
+	"Menu/MenuCharSelect.h"
+	"Sonido/Sonido.h"
+	"Fighter.h"
+
+1341982241 source:/home/mack/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1341993692 source:/home/mack/Fighter/src/Grafico/Grafico.cpp
+	"Grafico/Grafico.h"
+
+1341982241 source:/home/mack/Fighter/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1341982241 source:/home/mack/Fighter/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1341982241 source:/home/mack/Fighter/src/IA/IA.cpp
+	"IA/IA.h"
+
+1341982241 source:/home/mack/Fighter/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1341982241 source:/home/mack/Fighter/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1341982241 source:/home/mack/Fighter/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1341982241 source:/home/mack/Fighter/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1342034210 source:/home/mack/Fighter/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1341982241 source:/home/mack/Fighter/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Barra.cpp
+	"Personaje/Barra.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Frame.cpp
+	"Personaje/Frame.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/HitBox.cpp
+	"Personaje/HitBox.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Imagen.cpp
+	"Personaje/Imagen.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Modificador.cpp
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorBarra.cpp
+	"Personaje/ModificadorBarra.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorEntero.cpp
+	"Personaje/ModificadorEntero.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorHitboxes.cpp
+	"Personaje/ModificadorHitboxes.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorImagen.cpp
+	"Personaje/ModificadorImagen.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorPorVariable.cpp
+	"Personaje/ModificadorPorVariable.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorString.cpp
+	"Personaje/ModificadorString.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Movimiento.cpp
+	"Personaje/Movimiento.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Personaje.cpp
+	"Personaje/Personaje.h"
+
+1341982241 source:/home/mack/Fighter/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
+
+1341982241 source:/home/mack/Fighter/src/Sonido/Reproduccion.cpp
+	"Sonido/Reproduccion.h"
+
+1341982241 source:/home/mack/Fighter/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1341982241 source:/home/mack/Fighter/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1341982241 source:/home/mack/Fighter/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Fighter.h"
+	<iostream>
+
+1347829471 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
+	"TinyXml/tinyxml.h"
+	"Menu/Menu.h"
+	<stdio.h>
+
+1342183263 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1342183263 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1342201858 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
+	"Stage/Stage.h"
+	"Grafico/Grafico.h"
+	"irrKlang/irrKlang.h"
+	"Personaje/Personaje.h"
+	"Menu/MenuContenedor.h"
+	"Menu/MenuCharSelect.h"
+	"Sonido/Sonido.h"
+	"Fighter.h"
+
+1347843045 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1348165333 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+	"Grafico/Grafico.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
+	"IA/IA.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1345105382 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1347889338 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1344743575 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1345066440 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
+	"Personaje/Barra.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
+	"Personaje/Frame.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
+	"Personaje/HitBox.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Imagen.cpp
+	"Personaje/Imagen.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Modificador.cpp
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorBarra.cpp
+	"Personaje/ModificadorBarra.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorEntero.cpp
+	"Personaje/ModificadorEntero.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorHitboxes.cpp
+	"Personaje/ModificadorHitboxes.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorImagen.cpp
+	"Personaje/ModificadorImagen.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorPorVariable.cpp
+	"Personaje/ModificadorPorVariable.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorString.cpp
+	"Personaje/ModificadorString.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
+	"Personaje/Movimiento.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
+
+1347603608 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+	"Personaje/Personaje.h"
+
+1342720770 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
+	"Sonido/Reproduccion.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1345068079 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
+	"include/Fighter.h"
+	"Log/Log.h"
+	<iostream>
+
+1358148508 /home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
+	"TinyXml/tinyxml.h"
+	"Menu/Menu.h"
+	<stdio.h>
+
+1358107171 /home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1358107171 /home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1358138008 /home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
+	"Stage/Stage.h"
+	"Painter/Painter.h"
+	"irrKlang/irrKlang.h"
+	"Personaje/Personaje.h"
+	"Menu/MenuContenedor.h"
+	"Menu/MenuCharSelect.h"
+	"Sonido/Sonido.h"
+	"Fighter.h"
+
+1358150913 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1351051182 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Grafico/Grafico.cpp
+	"Grafico/Grafico.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
+	"IA/IA.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1358138200 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1358408732 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1358408096 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
+
+1358138229 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
+	"Personaje/Barra.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
+
+1358403709 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
+	"Personaje/Frame.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/HitBox.cpp
+	"Personaje/HitBox.h"
+
+1358144894 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
+	"Personaje/Imagen.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Modificador.cpp
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
+	"Personaje/ModificadorBarra.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
+	"Personaje/ModificadorEntero.h"
+
+1358148411 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
+	"Personaje/ModificadorHitboxes.h"
+
+1358147473 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
+	"Personaje/ModificadorImagen.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
+	"Personaje/ModificadorPorVariable.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
+	"Personaje/ModificadorString.h"
+
+1358403731 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
+	"Personaje/Movimiento.h"
+
+1358138256 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
+
+1358408169 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
+	"Personaje/Personaje.h"
+
+1358147686 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
+
+1354848831 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
+	"Sonido/Reproduccion.h"
+
+1358405241 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1358151277 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1358837004 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+	"Painter/Painter.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
+	"include/Fighter.h"
+	"Log/Log.h"
+	<iostream>
+
+1358148508 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
+	"TinyXml/tinyxml.h"
+	"Menu/Menu.h"
+	<stdio.h>
+
+1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1358138008 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
+	"Stage/Stage.h"
+	"Painter/Painter.h"
+	"irrKlang/irrKlang.h"
+	"Personaje/Personaje.h"
+	"Menu/MenuContenedor.h"
+	"Menu/MenuCharSelect.h"
+	"Sonido/Sonido.h"
+	"Fighter.h"
+
+1358150913 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
+	"IA/IA.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1358138200 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1358408732 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1358408096 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
+
+1358138229 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
+	"Personaje/Barra.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
+
+1358403709 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
+	"Personaje/Frame.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/HitBox.cpp
+	"Personaje/HitBox.h"
+
+1358144894 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
+	"Personaje/Imagen.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Modificador.cpp
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
+	"Personaje/ModificadorBarra.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
+	"Personaje/ModificadorEntero.h"
+
+1358148411 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
+	"Personaje/ModificadorHitboxes.h"
+
+1358147473 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
+	"Personaje/ModificadorImagen.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
+	"Personaje/ModificadorPorVariable.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
+	"Personaje/ModificadorString.h"
+
+1358403731 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
+	"Personaje/Movimiento.h"
+
+1358138256 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
+
+1358408169 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
+	"Personaje/Personaje.h"
+
+1358147686 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
+
+1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
+	"Sonido/Reproduccion.h"
+
+1358405241 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1358151277 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1358403997 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+	"Painter/Painter.h"
+
+1357262070 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/LTexture.cpp
+	"Painter/LTexture.h"
+
+1357257772 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/LUtil.cpp
+	"Painter/LUtil.h"
+	<IL/il.h>
+	<IL/ilu.h>
+	"Painter/LTexture.h"
+
+1358151252 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
+	"Painter/Painter.h"
+
+1358151252 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
+	"Painter/Painter.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Log/Log.cpp
+	"Log/Log.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Log/Log.cpp
+	"Log/Log.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Timer.cpp
+	"SDL/SDL.h"
+	"Painter/Timer.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Timer.cpp
+	"SDL/SDL.h"
+	"Painter/Timer.h"
+
+1359261457 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
+	"Input/Input.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Menu/Menu.h"
+	"Log/Log.h"
+	<iostream>
+
+1358148508 /home/turupawn/Projects/CodeBlocks/STG/include/Fighter.h
+	"TinyXml/tinyxml.h"
+	"Menu/Menu.h"
+	<stdio.h>
+
+1358107171 /home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1358107171 /home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1359260737 /home/turupawn/Projects/CodeBlocks/STG/include/Menu/Menu.h
+	"Stage/Stage.h"
+	"Painter/Painter.h"
+	"Personaje/Personaje.h"
+	"Menu/MenuContenedor.h"
+	"Menu/MenuCharSelect.h"
+	"Sonido/Sonido.h"
+	"STG.h"
+
+1358150913 source:/home/turupawn/Projects/CodeBlocks/STG/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/IA.cpp
+	"IA/IA.h"
+
+1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1359261139 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1359261150 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1358138200 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Log/Log.cpp
+	"Log/Log.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1360131627 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1359412016 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1359412037 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1359412068 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1359247680 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1359412076 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1359412106 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1359247718 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1358151252 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
+	"Painter/Painter.h"
+
+1359413704 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
+	"Painter/Painter.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
+	"SDL/SDL.h"
+	"Painter/Timer.h"
+
+1358408096 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
+
+1358138229 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Barra.cpp
+	"Personaje/Barra.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
+
+1358403709 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Frame.cpp
+	"Personaje/Frame.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/HitBox.cpp
+	"Personaje/HitBox.h"
+
+1358144894 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Imagen.cpp
+	"Personaje/Imagen.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Modificador.cpp
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorBarra.cpp
+	"Personaje/ModificadorBarra.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorEntero.cpp
+	"Personaje/ModificadorEntero.h"
+
+1358148411 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorHitboxes.cpp
+	"Personaje/ModificadorHitboxes.h"
+
+1358147473 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorImagen.cpp
+	"Personaje/ModificadorImagen.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorPorVariable.cpp
+	"Personaje/ModificadorPorVariable.h"
+
+1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorString.cpp
+	"Personaje/ModificadorString.h"
+
+1358403731 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Movimiento.cpp
+	"Personaje/Movimiento.h"
+
+1358138256 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
+
+1359255678 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Personaje.cpp
+	"Personaje/Personaje.h"
+
+1358147686 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
+
+1359256723 source:/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1360131880 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1360337583 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+	"../include/STG.h"
+
+1360130902 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Character/Character.h"
+	"Stage/Stage.h"
+
+1359411860 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
+	<iostream>
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"TinyXml/tinyxml.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	"Painter/Image.h"
+	"Painter/Timer.h"
+	"Log/Log.h"
+	<iostream>
+	<fstream>
+
+1359260734 /home/turupawn/Projects/CodeBlocks/STG/include/Sonido/Sonido.h
+	<string>
+	<vector>
+	<iostream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	"Log/Log.h"
+	<map>
+
+1359255314 /home/turupawn/Projects/CodeBlocks/STG/include/Input/Input.h
+	"Input/Boton.h"
+	<IA/IA.h>
+
+1360047360 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+	"../include/Character/Character.h"
+
+1359938686 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Spells/Bullet.h"
+	"Spells/Pattern.h"
+
+1360132061 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Character/Character.h"
+	<map>
+
+1359284077 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
+	"../include/Spells/Bullet.h"
+
+1360047395 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+	"../include/Spells/Pattern.h"
+
+1359261457 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
+	"Input/Input.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Menu/Menu.h"
+	"Log/Log.h"
+	<iostream>
+
+1360047360 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+	"../include/Character/Character.h"
+
+1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Automata.cpp
+	"IA/Automata.h"
+
+1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/IA.cpp
+	"IA/IA.h"
+
+1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1359261139 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
+	"Input/Boton.h"
+
+1359261150 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Input.cpp
+	"Input/Input.h"
+	<sstream>
+
+1358138200 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Receiver.cpp
+	"Input/Receiver.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Log/Log.cpp
+	"Log/Log.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
+	"Menu/Elemento.h"
+
+1360131627 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
+	"Menu/Menu.h"
+
+1359412016 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
+	"Menu/MenuBarra.h"
+
+1359412037 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBoton.cpp
+	"Menu/MenuBoton.h"
+
+1359412068 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
+	"Menu/MenuCharSelect.h"
+
+1359247680 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuContenedor.cpp
+	"Menu/MenuContenedor.h"
+
+1359412076 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuImagen.cpp
+	"Menu/MenuImagen.h"
+
+1359412106 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuLista.cpp
+	"Menu/MenuLista.h"
+
+1359247718 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuTexto.cpp
+	"Menu/MenuTexto.h"
+
+1358151252 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
+	"Painter/Painter.h"
+
+1359413704 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
+	"Painter/Painter.h"
+
+1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
+	"SDL/SDL.h"
+	"Painter/Timer.h"
+
+1360337583 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+	"../include/STG.h"
+
+1360130902 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/STG.h
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Character/Character.h"
+	"Stage/Stage.h"
+
+1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1359411860 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
+	<iostream>
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"TinyXml/tinyxml.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	"Painter/Image.h"
+	"Painter/Timer.h"
+	"Log/Log.h"
+	<iostream>
+	<fstream>
+
+1359260734 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Sonido/Sonido.h
+	<string>
+	<vector>
+	<iostream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	"Log/Log.h"
+	<map>
+
+1359255314 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Input/Input.h
+	"Input/Boton.h"
+	<IA/IA.h>
+
+1359938686 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Input/Input.h"
+	"Spells/Bullet.h"
+	"Spells/Pattern.h"
+
+1360132061 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
+	"TinyXml/tinyxml.h"
+	"Painter/Painter.h"
+	"Sonido/Sonido.h"
+	"Character/Character.h"
+	<map>
+
+1359256723 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
+	"Sonido/Sonido.h"
+
+1359284077 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
+	"../include/Spells/Bullet.h"
+
+1360047395 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+	"../include/Spells/Pattern.h"
+
+1360131880 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
+	"Stage/Stage.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1359937455 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Enemy.cpp
+	"Stage/Enemy.h"
+
+1359937455 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Enemy.cpp
+	"Stage/Enemy.h"
+

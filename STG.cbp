@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="STG" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Fighter2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Fighter2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Character/Character.h" />
+		<Unit filename="include/IA/Automata.h" />
+		<Unit filename="include/IA/Estado.h" />
+		<Unit filename="include/IA/IA.h" />
+		<Unit filename="include/IA/Transicion.h" />
+		<Unit filename="include/Input/Boton.h" />
+		<Unit filename="include/Input/Input.h" />
+		<Unit filename="include/Input/Receiver.h" />
+		<Unit filename="include/Log/Log.h" />
+		<Unit filename="include/Menu/Elemento.h" />
+		<Unit filename="include/Menu/Menu.h" />
+		<Unit filename="include/Menu/MenuBarra.h" />
+		<Unit filename="include/Menu/MenuBoton.h" />
+		<Unit filename="include/Menu/MenuCharSelect.h" />
+		<Unit filename="include/Menu/MenuContenedor.h" />
+		<Unit filename="include/Menu/MenuImagen.h" />
+		<Unit filename="include/Menu/MenuLista.h" />
+		<Unit filename="include/Menu/MenuTexto.h" />
+		<Unit filename="include/Painter/Image.h" />
+		<Unit filename="include/Painter/Painter.h" />
+		<Unit filename="include/Painter/Timer.h" />
+		<Unit filename="include/STG.h" />
+		<Unit filename="include/Sonido/Sonido.h" />
+		<Unit filename="include/Spells/Bullet.h" />
+		<Unit filename="include/Spells/Pattern.h" />
+		<Unit filename="include/Stage/Enemy.h" />
+		<Unit filename="include/Stage/Stage.h" />
+		<Unit filename="include/TinyXml/tinystr.h" />
+		<Unit filename="include/TinyXml/tinyxml.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Character/Character.cpp" />
+		<Unit filename="src/IA/Automata.cpp" />
+		<Unit filename="src/IA/Estado.cpp" />
+		<Unit filename="src/IA/IA.cpp" />
+		<Unit filename="src/IA/Transicion.cpp" />
+		<Unit filename="src/Input/Boton.cpp" />
+		<Unit filename="src/Input/Input.cpp" />
+		<Unit filename="src/Input/Receiver.cpp" />
+		<Unit filename="src/Log/Log.cpp" />
+		<Unit filename="src/Menu/Elemento.cpp" />
+		<Unit filename="src/Menu/Menu.cpp" />
+		<Unit filename="src/Menu/MenuBarra.cpp" />
+		<Unit filename="src/Menu/MenuBoton.cpp" />
+		<Unit filename="src/Menu/MenuCharSelect.cpp" />
+		<Unit filename="src/Menu/MenuContenedor.cpp" />
+		<Unit filename="src/Menu/MenuImagen.cpp" />
+		<Unit filename="src/Menu/MenuLista.cpp" />
+		<Unit filename="src/Menu/MenuTexto.cpp" />
+		<Unit filename="src/Painter/Image.cpp" />
+		<Unit filename="src/Painter/Painter.cpp" />
+		<Unit filename="src/Painter/Timer.cpp" />
+		<Unit filename="src/STG.cpp" />
+		<Unit filename="src/Sonido/Sonido.cpp" />
+		<Unit filename="src/Spells/Bullet.cpp" />
+		<Unit filename="src/Spells/Pattern.cpp" />
+		<Unit filename="src/Stage/Enemy.cpp" />
+		<Unit filename="src/Stage/Stage.cpp" />
+		<Unit filename="src/TinyXml/tinystr.cpp" />
+		<Unit filename="src/TinyXml/tinyxml.cpp" />
+		<Unit filename="src/TinyXml/tinyxmlerror.cpp" />
+		<Unit filename="src/TinyXml/tinyxmlparser.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
