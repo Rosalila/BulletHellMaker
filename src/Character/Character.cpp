@@ -14,7 +14,6 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     this->current_type="1";
 
     //Sprites animation
-    this->animation_velocity=4;
     this->animation_iteration=0;
     this->current_sprite=0;
 
@@ -34,6 +33,17 @@ void Character::loadFromXML(std::string directory)
     //Loading attributes
     TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
     this->velocity=atoi(attributes->Attribute("velocity"));
+    this->animation_velocity=atoi(attributes->Attribute("animation_velocity"));
+    this->max_hp=atoi(attributes->Attribute("hp"));
+    this->hp=this->max_hp;
+
+    TiXmlElement *hitbox_node=main_file->FirstChild("Hitbox")->ToElement();
+    int hitbox_x=atoi(hitbox_node->Attribute("x"));
+    int hitbox_y=atoi(hitbox_node->Attribute("y"));
+    int hitbox_width=atoi(hitbox_node->Attribute("width"));
+    int hitbox_height=atoi(hitbox_node->Attribute("height"));
+    int hitbox_angle=atoi(hitbox_node->Attribute("angle"));
+    this->hitbox.setValues(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
 
     //Loading sprites
     for(TiXmlNode* sprites_node=main_file->FirstChild("Sprites");
@@ -72,7 +82,14 @@ void Character::loadFromXML(std::string directory)
         {
             sprites_temp.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
-        bullets[node_name]=new Bullet(sonido,painter,receiver,sprites_temp);
+
+        TiXmlNode* hitbox_node=bullet_node->FirstChild("Hitbox");
+        int x=atoi(hitbox_node->ToElement()->Attribute("x"));
+        int y=atoi(hitbox_node->ToElement()->Attribute("y"));
+        int width=atoi(hitbox_node->ToElement()->Attribute("width"));
+        int height=atoi(hitbox_node->ToElement()->Attribute("height"));
+        int angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
+        bullets[node_name]=new Bullet(sonido,painter,receiver,sprites_temp,Hitbox(x,y,width,height,angle));
     }
 
     //Loading file
@@ -125,7 +142,22 @@ void Character::loadFromXML(std::string directory)
             std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
             Bullet*bullet=bullets[bullet_name];
 
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,new Hitbox(0,0,40,10,0)));
+            TiXmlNode* hitbox_node=pattern_node->FirstChild("Hitbox");
+            Hitbox* pattern_hitbox;
+            if(hitbox_node)
+            {
+                int hitbox_x=atoi(hitbox_node->ToElement()->Attribute("x"));
+                int hitbox_y=atoi(hitbox_node->ToElement()->Attribute("y"));
+                int hitbox_width=atoi(hitbox_node->ToElement()->Attribute("width"));
+                int hitbox_height=atoi(hitbox_node->ToElement()->Attribute("height"));
+                float hitbox_angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
+                pattern_hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+            }else
+            {
+                pattern_hitbox=new Hitbox(-40,-40,80,80,0);
+            }
+
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration));
         }
         type[type_name]=patterns;
     }
@@ -178,7 +210,7 @@ void Character::spellControl(int stage_velocity)
         ((Pattern*)*pattern)->logic(stage_velocity);
 }
 
-void Character::render()
+void Character::parrentRender()
 {
     painter->draw2DImage
     (   sprites[orientation][current_sprite],
@@ -191,8 +223,34 @@ void Character::render()
         Color(255,255,255,255),
         true);
 
+//    //Move the universe (the point b)
+//    float s = sin((0+this->getHitbox().getAngle())*PI/180);
+//    float c = cos((0+this->getHitbox().getAngle())*PI/180);
+//
+//    // translate point back to origin:
+//    int res_x = this->getHitbox().getX();
+//    int res_y = this->getHitbox().getY();
+//
+//    // rotate point
+//    float xnew = res_x * c + res_y * s;
+//    float ynew = -res_x * s + res_y * c;
+//
+//    // translate point back:
+//    res_x = xnew + this->x;
+//    res_y = ynew + this->y;
+
+    painter->drawRectangle(this->getHitbox().getX(),
+                           this->getHitbox().getY(),
+                           hitbox.getWidth(),hitbox.getHeight(),
+                           hitbox.getAngle(),100,0,0,100,true);
+
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
         ((Pattern*)*pattern)->render();
+}
+
+void Character::render()
+{
+    parrentRender();
 }
 
 int Character::getX()
@@ -223,4 +281,21 @@ std::list<Pattern*>* Character::getActivePatterns()
 void Character::setType(std::string type)
 {
     this->current_type=type;
+}
+
+bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
+{
+    return this->hitbox.getPlacedHitbox(Point(this->x,this->y),0).collides(hitbox);
+}
+
+void Character::hit(int damage)
+{
+    this->hp-=damage;
+    if(hp<0)
+        hp=0;
+}
+
+Hitbox Character::getHitbox()
+{
+    return hitbox.getPlacedHitbox(Point(this->x,this->y),0);
 }

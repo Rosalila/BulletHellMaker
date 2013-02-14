@@ -839,7 +839,7 @@
 1358151252 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
 	"Painter/Painter.h"
 
-1360533416 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
+1360718344 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
@@ -923,7 +923,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1360534557 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+1360874684 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
 	"../include/STG.h"
 
 1360532016 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
@@ -965,10 +965,10 @@
 	"Input/Boton.h"
 	<IA/IA.h>
 
-1360535307 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+1360875843 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
 	"../include/Character/Character.h"
 
-1360535088 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+1360799751 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -978,6 +978,7 @@
 	"Input/Input.h"
 	"Spells/Bullet.h"
 	"Spells/Pattern.h"
+	"Utility/Utility.h"
 
 1360490023 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
 	"TinyXml/tinyxml.h"
@@ -988,10 +989,10 @@
 	"Stage/Dialogue.h"
 	<map>
 
-1359284077 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
+1360795774 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
 	"../include/Spells/Bullet.h"
 
-1360531054 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+1360875549 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
 	"../include/Spells/Pattern.h"
 
 1359261457 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
@@ -1200,7 +1201,7 @@
 1360488831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
 	"Stage/Layer.h"
 
-1360535329 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
+1360535364 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
 	"../include/Character/Enemy.h"
 
 1360534844 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
@@ -1229,13 +1230,13 @@
 	"Spells/Bullet.h"
 	"Spells/Pattern.h"
 
-1360529055 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
+1360875829 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
 	"../include/Spells/Hitbox.h"
 
-1360535329 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
+1360750945 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
 	"../include/Character/Player.h"
 
-1360534593 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
+1360750854 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -1247,6 +1248,6 @@
 	"Spells/Pattern.h"
 	"Character/Character.h"
 
-1360533585 source:/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
+1360872790 source:/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
 	"Utility/Utility.h"
 

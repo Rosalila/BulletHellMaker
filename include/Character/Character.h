@@ -11,6 +11,7 @@
 #include "Input/Input.h"
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
+#include "Utility/Utility.h"
 
 class Character
 {
@@ -18,8 +19,11 @@ protected:
     Sonido* sonido;
     Painter* painter;
     Receiver* receiver;
+    int hp;
+    int max_hp;
     int x,y;
     int velocity;
+    Hitbox hitbox;
     bool shooting;
     std::string orientation;
     std::string current_type;
@@ -45,13 +49,17 @@ public:
     void inputControl();
     void spellControl(int stage_velocity);
 
+    void parrentRender();
     void render();
     void setX(int x);
     void setY(int y);
     int getX();
     int getY();
+    Hitbox getHitbox();
     void setType(std::string type);
     std::list<Pattern*>* getActivePatterns();
+    bool collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
+    void hit(int damage);
 };
 
 #endif

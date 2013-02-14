@@ -5,6 +5,7 @@
 #include "Painter/Painter.h"
 #include "Sonido/Sonido.h"
 #include "Input/Input.h"
+#include "Spells/Hitbox.h"
 
 class Bullet
 {
@@ -12,11 +13,13 @@ class Bullet
     Painter* painter;
     Receiver* receiver;
     vector<Image*>sprites;
+    Hitbox hitbox;
 public:
     Bullet(){};
-    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites);
+    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox);
     void logic();
     void render();
+    Hitbox getHitbox();
 
     Image*getImage(int position);
     int spritesSize();

@@ -17,7 +17,6 @@ class Pattern
     Sonido* sonido;
     Painter* painter;
     Receiver* receiver;
-    Hitbox *hitbox;
     double x,y;
     int offset_x,offset_y;
     int velocity;
@@ -25,7 +24,7 @@ class Pattern
     int acceleration;
     int a_frequency;
     int current_a_frequency;
-    int angle;
+    float angle;
     int angle_change;
     int stop_ac_at;
     int current_stop_ac_at;
@@ -43,13 +42,15 @@ class Pattern
     int current_startup, current_cooldown;
     std::string state;
 public:
-    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,int angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,Hitbox*hitbox);
+    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration);
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);
     void render();
 
     int getX();
     int getY();
+    float getAngle();
+    Hitbox getHitbox();
     bool isReady();
     void setState(std::string state);
     void updateStateShouting();

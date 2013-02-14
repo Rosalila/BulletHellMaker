@@ -114,6 +114,15 @@ void STG::render()
     stage->render();
     stage->dibujarFront();
 
+    for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
+    {
+        if(player->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+        {
+            painter->drawText("Bang!",10,10);
+            player->hit(10);
+        }
+    }
+
     receiver->updateInputs();
     painter->updateScreen();
 }

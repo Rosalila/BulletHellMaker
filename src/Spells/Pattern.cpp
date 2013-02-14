@@ -1,12 +1,11 @@
 #include "../include/Spells/Pattern.h"
 
-Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,int angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,Hitbox*hitbox)
+Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
 
-    this->hitbox=hitbox;
     this->velocity=velocity;
     this->max_velocity=max_velocity;
     this->acceleration=acceleration;
@@ -44,7 +43,6 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->painter=pattern->painter;
     this->receiver=pattern->receiver;
 
-    this->hitbox=pattern->hitbox;
     this->velocity=pattern->velocity;
     this->max_velocity=pattern->max_velocity;
     this->acceleration=pattern->acceleration;
@@ -173,10 +171,40 @@ void Pattern::render()
         Color(255,255,255,255),
         true);
 
-    painter->drawRectangle(this->x+hitbox->getX()-hitbox->getWidth()/2,
-                           this->y+hitbox->getY()-hitbox->getHeight()/2,
-                           hitbox->getWidth(),hitbox->getHeight(),
-                           angle+hitbox->getAngle(),100,0,0,100,true);
+
+//    //Move the universe (the point b)
+//    float s = sin((angle+this->getHitbox().getAngle())*PI/180);
+//    float c = cos((angle+this->getHitbox().getAngle())*PI/180);
+//
+//    // translate point back to origin:
+//    int res_x = this->getHitbox().getX();
+//    int res_y = this->getHitbox().getY();
+//
+//    // rotate point
+//    float xnew = res_x * c + res_y * s;
+//    float ynew = -res_x * s + res_y * c;
+//
+//    // translate point back:
+//    res_x = xnew + this->x;
+//    res_y = ynew + this->y;
+
+//    Point rotated=rotateAroundPoint(Point(this->getHitbox().getX(),this->getHitbox().getY()),
+//                                          Point(this->x,this->y),angle+this->getHitbox().getAngle());
+//
+//    painter->drawRectangle(rotated.x,
+//                           rotated.y,
+//                           this->getHitbox().getWidth(),this->getHitbox().getHeight(),
+//                           angle+this->getHitbox().getAngle(),100,0,0,100,true);
+
+//    painter->drawRectangle(this->getX()+this->getHitbox().getX(),
+//                           this->getY()+this->getHitbox().getY(),
+//                           this->getHitbox().getWidth(),this->getHitbox().getHeight(),
+//                           this->getHitbox().getAngle(),100,0,0,100,true);
+
+    painter->drawRectangle(this->getHitbox().getX(),
+                           this->getHitbox().getY(),
+                           this->getHitbox().getWidth(),this->getHitbox().getHeight(),
+                           this->getHitbox().getAngle(),100,0,0,100,true);
 }
 
 int Pattern::getX()
@@ -188,9 +216,27 @@ int Pattern::getY()
     return this->y;
 }
 
+Hitbox Pattern::getHitbox()
+{
+    Hitbox hitbox = bullet->getHitbox();
+//    Point rotated=rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
+//                                    Point(this->x,this->y),
+//                                    this->angle+hitbox.getAngle());
+//    hitbox.setX(rotated.x);
+//    hitbox.setY(rotated.y);
+//    hitbox.setAngle(this->angle+hitbox.getAngle());
+//    return hitbox;
+    return hitbox.getPlacedHitbox(Point(this->x,this->y),this->angle);
+}
+
 bool Pattern::destroyFlag()
 {
     if(duration<0)
         return false;
     return iteration>duration;
+}
+
+float Pattern::getAngle()
+{
+    return angle;
 }

@@ -302,7 +302,7 @@ void Painter::drawRectangle(int x,int y,int width,int height,float rotation,int 
     GLubyte g=green;
     GLubyte b=blue;
     GLubyte a=alpha;
-    glColor4ub(r, g, b,a);
+    glColor4ub(r,g,b,a);
 
     if(camera_align)
     {
@@ -314,8 +314,8 @@ void Painter::drawRectangle(int x,int y,int width,int height,float rotation,int 
     //Save the current matrix.
     glPushMatrix();
     //Change the current matrix.
-    float translate_x=(width)/2+x;
-    float translate_y=(height)/2+y;
+    float translate_x=x;
+    float translate_y=y;
     glTranslatef(translate_x,translate_y, 1.0);
     glRotatef(-rotation, 0, 0, 1.0);
     x-=translate_x;

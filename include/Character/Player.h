@@ -19,6 +19,7 @@ public:
     Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void logic(int stage_velocity);
     void inputControl();
+    void render();
 };
 
 #endif

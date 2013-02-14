@@ -55,3 +55,9 @@ void Player::logic(int stage_velocity)
     inputControl();
     spellControl(stage_velocity);
 }
+
+void Player::render()
+{
+    parrentRender();
+    painter->drawRectangle(300,50,(500*hp)/max_hp,50,0,255,0,0,255,false);
+}
