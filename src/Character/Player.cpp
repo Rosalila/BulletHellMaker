@@ -7,8 +7,6 @@ Player::Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string di
     this->painter=painter;
     this->receiver=receiver;
     this->active_patterns=new std::list<Pattern*>;
-    this->x=100;
-    this->y=500;
     this->shooting=true;
     this->orientation="idle";
     this->current_type="1";
@@ -52,7 +50,10 @@ void Player::inputControl()
 void Player::logic(int stage_velocity)
 {
     animationControl();
-    inputControl();
+    if(this->hp!=0)
+    {
+        inputControl();
+    }
     spellControl(stage_velocity);
 }
 

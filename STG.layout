@@ -2,13 +2,16 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="include/Character/Character.h" open="0" top="0" tabpos="5">
-		<Cursor position="1334" topLine="40" />
+		<Cursor position="465" topLine="17" />
 	</File>
-	<File name="include/Character/Enemy.h" open="0" top="0" tabpos="3">
-		<Cursor position="488" topLine="0" />
+	<File name="include/Character/Enemy.h" open="1" top="0" tabpos="1">
+		<Cursor position="401" topLine="5" />
 	</File>
 	<File name="include/Character/Player.h" open="0" top="0" tabpos="0">
-		<Cursor position="476" topLine="1" />
+		<Cursor position="311" topLine="1" />
+	</File>
+	<File name="include/Character/VariableChange.h" open="0" top="0" tabpos="0">
+		<Cursor position="207" topLine="0" />
 	</File>
 	<File name="include/IA/Automata.h" open="0" top="0" tabpos="7">
 		<Cursor position="93" topLine="0" />
@@ -76,7 +79,7 @@
 	<File name="include/Spells/Hitbox.h" open="0" top="0" tabpos="3">
 		<Cursor position="677" topLine="8" />
 	</File>
-	<File name="include/Spells/Pattern.h" open="0" top="0" tabpos="7">
+	<File name="include/Spells/Pattern.h" open="1" top="0" tabpos="3">
 		<Cursor position="1358" topLine="39" />
 	</File>
 	<File name="include/Stage/Dialogue.h" open="0" top="0" tabpos="3">
@@ -100,14 +103,17 @@
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="338" topLine="17" />
 	</File>
-	<File name="src/Character/Character.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="9742" topLine="226" />
+	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="6806" topLine="132" />
 	</File>
-	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="795" topLine="15" />
+	<File name="src/Character/Enemy.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="741" topLine="18" />
 	</File>
 	<File name="src/Character/Player.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1420" topLine="39" />
+		<Cursor position="1338" topLine="39" />
+	</File>
+	<File name="src/Character/VariableChange.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="93" topLine="0" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="13">
 		<Cursor position="593" topLine="16" />
@@ -163,8 +169,8 @@
 	<File name="src/Painter/Painter.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="8784" topLine="292" />
 	</File>
-	<File name="src/STG.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="2908" topLine="115" />
+	<File name="src/STG.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2908" topLine="103" />
 	</File>
 	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="20">
 		<Cursor position="946" topLine="34" />
@@ -175,8 +181,8 @@
 	<File name="src/Spells/Hitbox.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="1444" topLine="65" />
 	</File>
-	<File name="src/Spells/Pattern.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="5765" topLine="186" />
+	<File name="src/Spells/Pattern.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="3002" topLine="119" />
 	</File>
 	<File name="src/Stage/Dialogue.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="455" topLine="7" />

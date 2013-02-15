@@ -35,6 +35,8 @@ void Character::loadFromXML(std::string directory)
     this->velocity=atoi(attributes->Attribute("velocity"));
     this->animation_velocity=atoi(attributes->Attribute("animation_velocity"));
     this->max_hp=atoi(attributes->Attribute("hp"));
+    this->x=atoi(attributes->Attribute("initial_x"));
+    this->y=atoi(attributes->Attribute("initial_y"));
     this->hp=this->max_hp;
 
     TiXmlElement *hitbox_node=main_file->FirstChild("Hitbox")->ToElement();
@@ -162,12 +164,12 @@ void Character::loadFromXML(std::string directory)
         }
         type[type_name]=patterns;
     }
+    iteration=0;
 }
 
 void Character::logic(int stage_velocity)
 {
     animationControl();
-    inputControl();
     spellControl(stage_velocity);
 }
 
@@ -185,16 +187,12 @@ void Character::animationControl()
     animation_iteration++;
 }
 
-void Character::inputControl()
-{
-}
-
 void Character::spellControl(int stage_velocity)
 {
     std::vector<Pattern*> patterns=type[current_type];
     for(int i=0;i<patterns.size();i++)
     {
-        if(shooting)
+        if(shooting && this->hp!=0)
         {
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
@@ -224,22 +222,6 @@ void Character::parrentRender()
         Color(255,255,255,255),
         true);
 
-//    //Move the universe (the point b)
-//    float s = sin((0+this->getHitbox().getAngle())*PI/180);
-//    float c = cos((0+this->getHitbox().getAngle())*PI/180);
-//
-//    // translate point back to origin:
-//    int res_x = this->getHitbox().getX();
-//    int res_y = this->getHitbox().getY();
-//
-//    // rotate point
-//    float xnew = res_x * c + res_y * s;
-//    float ynew = -res_x * s + res_y * c;
-//
-//    // translate point back:
-//    res_x = xnew + this->x;
-//    res_y = ynew + this->y;
-
     if(receiver->IsKeyDownn(SDLK_h))
     {
         painter->drawRectangle(this->getHitbox().getX(),
@@ -265,6 +247,11 @@ int Character::getX()
 int Character::getY()
 {
     return this->y;
+}
+
+int Character::getHP()
+{
+    return this->hp;
 }
 
 void Character::setX(int x)

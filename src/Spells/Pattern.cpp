@@ -171,36 +171,6 @@ void Pattern::render()
         Color(255,255,255,255),
         true);
 
-
-//    //Move the universe (the point b)
-//    float s = sin((angle+this->getHitbox().getAngle())*PI/180);
-//    float c = cos((angle+this->getHitbox().getAngle())*PI/180);
-//
-//    // translate point back to origin:
-//    int res_x = this->getHitbox().getX();
-//    int res_y = this->getHitbox().getY();
-//
-//    // rotate point
-//    float xnew = res_x * c + res_y * s;
-//    float ynew = -res_x * s + res_y * c;
-//
-//    // translate point back:
-//    res_x = xnew + this->x;
-//    res_y = ynew + this->y;
-
-//    Point rotated=rotateAroundPoint(Point(this->getHitbox().getX(),this->getHitbox().getY()),
-//                                          Point(this->x,this->y),angle+this->getHitbox().getAngle());
-//
-//    painter->drawRectangle(rotated.x,
-//                           rotated.y,
-//                           this->getHitbox().getWidth(),this->getHitbox().getHeight(),
-//                           angle+this->getHitbox().getAngle(),100,0,0,100,true);
-
-//    painter->drawRectangle(this->getX()+this->getHitbox().getX(),
-//                           this->getY()+this->getHitbox().getY(),
-//                           this->getHitbox().getWidth(),this->getHitbox().getHeight(),
-//                           this->getHitbox().getAngle(),100,0,0,100,true);
-
     if(receiver->IsKeyDownn(SDLK_h))
     {
         painter->drawRectangle(this->getHitbox().getX(),
@@ -222,13 +192,6 @@ int Pattern::getY()
 Hitbox Pattern::getHitbox()
 {
     Hitbox hitbox = bullet->getHitbox();
-//    Point rotated=rotateAroundPoint(Point(hitbox.getX(),hitbox.getY()),
-//                                    Point(this->x,this->y),
-//                                    this->angle+hitbox.getAngle());
-//    hitbox.setX(rotated.x);
-//    hitbox.setY(rotated.y);
-//    hitbox.setAngle(this->angle+hitbox.getAngle());
-//    return hitbox;
     return hitbox.getPlacedHitbox(Point(this->x,this->y),this->angle);
 }
 

@@ -1,6 +1,6 @@
 #include "Stage/Dialogue.h"
 
-Dialogue::Dialogue(Painter* painter,Sonido* sonido,Receiver*receiver,std::string text)
+Dialogue::Dialogue(Painter* painter,Sonido* sonido,Receiver*receiver,std::string text,Image*image)
 {
     this->painter=painter;
     this->sonido=sonido;
@@ -8,6 +8,7 @@ Dialogue::Dialogue(Painter* painter,Sonido* sonido,Receiver*receiver,std::string
     this->text=text;
     this->iterator=0;
     this->duration=30;
+    this->image=image;
 }
 
 std::string Dialogue::getText()
@@ -15,9 +16,20 @@ std::string Dialogue::getText()
     return text;
 }
 
-void Dialogue::render()
+void Dialogue::render(int x,int y)
 {
-    painter->drawText(text,100,100);
+    painter->drawText(text,x,y);
+
+    painter->draw2DImage
+    (   image,
+        image->getWidth(),image->getHeight(),
+        x,y,
+        1.0,
+        0.0,
+        false,
+        0,0,
+        Color(255,255,255,255),
+        false);
 }
 
 void Dialogue::logic()

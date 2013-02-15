@@ -13,14 +13,17 @@ class Stage
 {
 private:
     std::vector<Layer*> back,front;
-    std::map<std::string,Character*>*enemies;
-    std::list<Character*>* active_enemies;
     std::map<int,Dialogue*>dialogues;
     std::list<Dialogue*>active_dialogues;
     std::string music_path;
     Painter* painter;
     Sonido* sonido;
     Receiver*receiver;
+    int dialogue_x;
+    int dialogue_y;
+    int dialogue_padding_x;
+    int dialogue_padding_y;
+    Image* dialogue_bg;
     int size;
     int pos_piso;
     int bound_x1,bound_y1,bound_x2,bound_y2;
@@ -41,7 +44,6 @@ public:
     int getVelocity();
     void logic();
     void render();
-    std::map<std::string,Character*>*getEnemies();
     void setVelocity(int velocity);
     ~Stage();
 };

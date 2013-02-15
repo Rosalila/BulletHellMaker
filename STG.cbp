@@ -35,6 +35,7 @@
 		<Unit filename="include/Character/Character.h" />
 		<Unit filename="include/Character/Enemy.h" />
 		<Unit filename="include/Character/Player.h" />
+		<Unit filename="include/Character/VariableChange.h" />
 		<Unit filename="include/IA/Automata.h" />
 		<Unit filename="include/IA/Estado.h" />
 		<Unit filename="include/IA/IA.h" />
@@ -70,6 +71,7 @@
 		<Unit filename="src/Character/Character.cpp" />
 		<Unit filename="src/Character/Enemy.cpp" />
 		<Unit filename="src/Character/Player.cpp" />
+		<Unit filename="src/Character/VariableChange.cpp" />
 		<Unit filename="src/IA/Automata.cpp" />
 		<Unit filename="src/IA/Estado.cpp" />
 		<Unit filename="src/IA/IA.cpp" />

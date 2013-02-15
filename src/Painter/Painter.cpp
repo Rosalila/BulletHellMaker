@@ -10,14 +10,16 @@ Painter::Painter()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    TiXmlElement *resolution_element=doc->FirstChild("Resolution")->ToElement();
+    TiXmlNode *config_file=doc->FirstChild("ConfigFile");
+
+    TiXmlElement *resolution_element=config_file->FirstChild("Resolution")->ToElement();
     int screen_resized_width=atoi(resolution_element->Attribute("x"));
     int screen_resized_height=atoi(resolution_element->Attribute("y"));
 
-    TiXmlElement *fullscreen_element=doc->FirstChild("Fullscreen")->ToElement();
+    TiXmlElement *fullscreen_element=config_file->FirstChild("Fullscreen")->ToElement();
     bool fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
 
-    TiXmlElement *font_element=doc->FirstChild("Font")->ToElement();
+    TiXmlElement *font_element=config_file->FirstChild("Font")->ToElement();
     int font_size=atoi(font_element->Attribute("size"));
     int font_red=atoi(font_element->Attribute("red"));
     int font_green=atoi(font_element->Attribute("green"));

@@ -12,6 +12,7 @@
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
 #include "Utility/Utility.h"
+#include "Character/VariableChange.h"
 
 class Character
 {
@@ -21,7 +22,8 @@ protected:
     Receiver* receiver;
     int hp;
     int max_hp;
-    int x,y;
+    int iteration;
+    float x,y;
     int velocity;
     Hitbox hitbox;
     bool shooting;
@@ -46,7 +48,6 @@ public:
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();
-    void inputControl();
     void spellControl(int stage_velocity);
 
     void parrentRender();
@@ -55,6 +56,7 @@ public:
     void setY(int y);
     int getX();
     int getY();
+    int getHP();
     Hitbox getHitbox();
     void setType(std::string type);
     std::list<Pattern*>* getActivePatterns();

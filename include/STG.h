@@ -9,6 +9,7 @@
 #include "Character/Player.h"
 #include "Character/Enemy.h"
 #include "Stage/Stage.h"
+#include "Painter/Animation.h"
 
 class STG
 {
@@ -18,6 +19,8 @@ class STG
     Player*player;
     Enemy*enemy;
     Stage*stage;
+
+    Animation you_win,you_loose;
 
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();

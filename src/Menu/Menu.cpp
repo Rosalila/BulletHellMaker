@@ -15,8 +15,10 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
     TiXmlDocument *doc;
     doc=&doc_t;
 
+    TiXmlNode *config_file=doc->FirstChild("ConfigFile");
+
     std::vector<std::string> chars,stages;
-    for(TiXmlNode* node_chars=doc->FirstChild("Chars");
+    for(TiXmlNode* node_chars=config_file->FirstChild("Chars");
             node_chars!=NULL;
             node_chars=node_chars->NextSibling("Chars"))
     {
@@ -28,7 +30,7 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
         }
     }
 
-    for(TiXmlNode* node_chars=doc->FirstChild("Stages");
+    for(TiXmlNode* node_chars=config_file->FirstChild("Stages");
             node_chars!=NULL;
             node_chars=node_chars->NextSibling("Stages"))
     {

@@ -15,10 +15,11 @@ private:
     std::string text;
     int iterator;
     int duration;
+    Image*image;
 public:
-    Dialogue(Painter* painter,Sonido* sonido,Receiver*receiver,std::string text);
+    Dialogue(Painter* painter,Sonido* sonido,Receiver*receiver,std::string text,Image*image);
     std::string getText();
-    void render();
+    void render(int x,int y);
     void logic();
     bool destroyFlag();
     ~Dialogue();

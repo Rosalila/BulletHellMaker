@@ -5,8 +5,8 @@ Stage::Stage(Painter* painter,Sonido* sonido,Receiver*receiver)
     this->painter=painter;
     this->sonido=sonido;
     this->receiver=receiver;
-    enemies=new std::map<std::string,Character*>();
     this->iterator=0;
+    this->dialogue_bg=painter->getTexture("misc/dialogue_bg.png");
 }
 
 void Stage::drawLayer(Layer* layer)
@@ -87,7 +87,19 @@ void Stage::dibujarFront()
     }
 
     for (std::list<Dialogue*>::iterator dialogue = active_dialogues.begin(); dialogue != active_dialogues.end(); dialogue++)
-        ((Dialogue*)*dialogue)->render();
+    {
+        painter->draw2DImage
+        (   dialogue_bg,
+            dialogue_bg->getWidth(),dialogue_bg->getHeight(),
+            dialogue_x,dialogue_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            false);
+        ((Dialogue*)*dialogue)->render(this->dialogue_x+this->dialogue_padding_x,this->dialogue_y+this->dialogue_padding_y);
+    }
 }
 
 void Stage::loadDialogues(std::string file)
@@ -111,8 +123,9 @@ void Stage::loadDialogues(std::string file)
     {
         int frame=atoi(dialogue_node->ToElement()->Attribute("frame"));
         std::string text=dialogue_node->ToElement()->Attribute("text");
+        std::string path=dialogue_node->ToElement()->Attribute("path");
 
-        dialogues[frame]=new Dialogue(painter,sonido,receiver,text);
+        dialogues[frame]=new Dialogue(painter,sonido,receiver,text,painter->getTexture("stages/"+file+"/"+path));
     }
 }
 
@@ -140,6 +153,12 @@ void Stage::cargarDesdeXML(std::string path)
 
     TiXmlNode *nodo_ss=stage_file->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
+
+    TiXmlNode *dialogue_pos_node=stage_file->FirstChild("DialoguePosition");
+    this->dialogue_x=atoi(dialogue_pos_node->ToElement()->Attribute("x"));
+    this->dialogue_y=atoi(dialogue_pos_node->ToElement()->Attribute("y"));
+    this->dialogue_padding_x=atoi(dialogue_pos_node->ToElement()->Attribute("padding_x"));
+    this->dialogue_padding_y=atoi(dialogue_pos_node->ToElement()->Attribute("padding_y"));
 
     TiXmlNode *nodo_floor=stage_file->FirstChild("Floor");
     this->pos_piso=atoi(nodo_floor->ToElement()->Attribute("position"));
@@ -231,9 +250,6 @@ void Stage::cargarDesdeXML(std::string path)
     }
     writeLogLine("Stage loaded succesfully from XML.");
 
-    std::string test="test";
-    (*enemies)[test]=new Character(sonido,painter,receiver,"stages/"+path+"/Enemy/");
-
     loadDialogues(path);
 }
 
@@ -277,11 +293,6 @@ int Stage::getVelocity()
 void Stage::setVelocity(int velocity)
 {
     this->velocity=velocity;
-}
-
-std::map<std::string,Character*>*Stage::getEnemies()
-{
-    return enemies;
 }
 
 void Stage::render()

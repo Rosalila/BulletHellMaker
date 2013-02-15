@@ -15,11 +15,15 @@
 
 class Enemy : public Character
 {
+    std::map<int, vector<VariableChange*>* >variable_changes;
+    float angle;
+    float angle_change;
 public:
     Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void logic(int stage_velocity);
-    void inputControl();
+    void modifiersControl();
     void render();
+    void loadModifiersFromXML(std::string directory);
 };
 
 #endif
