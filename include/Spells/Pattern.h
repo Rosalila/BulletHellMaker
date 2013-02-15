@@ -51,6 +51,8 @@ public:
     int getY();
     float getAngle();
     Hitbox getHitbox();
+    Bullet* getBullet();
+    int getDamage();
     bool isReady();
     void setState(std::string state);
     void updateStateShouting();

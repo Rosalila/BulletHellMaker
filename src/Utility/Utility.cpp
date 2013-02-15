@@ -123,7 +123,6 @@ bool pointIsInRect(int point_x,int point_y,
 bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
               int b_x,int b_y,int b_width,int b_height,float b_angle)
 {
-//    if(pointIsInRect(b_x+change_x_1+change_x_2,b_y-change_y_1+change_y_2,
     Point pa1(a_x,
               a_y);
 
@@ -148,12 +147,6 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
 
     Point pb4(b_x + sin (b_angle*PI/180) * b_height,
               b_y + cos (b_angle*PI/180) * b_height);
-
-
-//    Point pb1(b_x,b_y);
-//    Point pb2(b_x+b_width,b_y);
-//    Point pb3(b_x+b_width,b_y+b_height);
-//    Point pb4(b_x,b_y+b_height);
 
     Line la1(pa1,pa2);
     Line la2(pa2,pa3);
@@ -201,12 +194,102 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
     if(segmentIntersection(la4,lb4))
         return true;
 
+
+
+
+
+
+    vector<Point*>intersections;
+    intersections.push_back(lineIntersection(la1,lb1));
+    intersections.push_back(lineIntersection(la1,lb2));
+    intersections.push_back(lineIntersection(la1,lb3));
+    intersections.push_back(lineIntersection(la1,lb4));
+
+    intersections.push_back(lineIntersection(la2,lb1));
+    intersections.push_back(lineIntersection(la2,lb2));
+    intersections.push_back(lineIntersection(la2,lb3));
+    intersections.push_back(lineIntersection(la2,lb4));
+
+    intersections.push_back(lineIntersection(la3,lb1));
+    intersections.push_back(lineIntersection(la3,lb2));
+    intersections.push_back(lineIntersection(la3,lb3));
+    intersections.push_back(lineIntersection(la3,lb4));
+
+    intersections.push_back(lineIntersection(la4,lb1));
+    intersections.push_back(lineIntersection(la4,lb2));
+    intersections.push_back(lineIntersection(la4,lb3));
+    intersections.push_back(lineIntersection(la4,lb4));
+
+
+    int x_min=0;int x_max=0;
+    int y_max=0;int y_min=0;
+
+    if(a_width*a_height>b_width*b_height)
+    {
+        x_min = pa1.x;
+        x_min=min(x_min,pa2.x);
+        x_min=min(x_min,pa3.x);
+        x_min=min(x_min,pa4.x);
+        x_max = pa1.x;
+        x_max=max(x_max,pa2.x);
+        x_max=max(x_max,pa3.x);
+        x_max=max(x_max,pa4.x);
+
+        y_min = pa1.y;
+        y_min=min(y_min,pa2.y);
+        y_min=min(y_min,pa3.y);
+        y_min=min(y_min,pa4.y);
+        y_max = pa1.y;
+        y_max=max(y_max,pa2.y);
+        y_max=max(y_max,pa3.y);
+        y_max=max(y_max,pa4.y);
+    }else
+    {
+        x_min = pb1.x;
+        x_min=min(x_min,pb2.x);
+        x_min=min(x_min,pb3.x);
+        x_min=min(x_min,pb4.x);
+        x_max = pb1.x;
+        x_max=max(x_max,pb2.x);
+        x_max=max(x_max,pb3.x);
+        x_max=max(x_max,pb4.x);
+
+        y_min = pb1.y;
+        y_min=min(y_min,pb2.y);
+        y_min=min(y_min,pb3.y);
+        y_min=min(y_min,pb4.y);
+        y_max = pb1.y;
+        y_max=max(y_max,pb2.y);
+        y_max=max(y_max,pb3.y);
+        y_max=max(y_max,pb4.y);
+    }
+
+    int cont=0;
+
+    for(int i=0;i<intersections.size();i++)
+    {
+        Point* point=intersections[i];
+        if(point!=NULL)
+        {
+            if(point->x > x_min
+               && point->x < x_max
+               && point->y > y_min
+               && point->y < y_max)
+            {
+                cont++;
+            }
+        }
+    }
+
+    if(cont>=8)
+        return true;
+
     return false;
 }
 
 bool segmentIntersection(Line l1,Line l2)
 {
-    Point* p=intersection(l1,l2);
+    Point* p=lineIntersection(l1,l2);
     if(p!=NULL)
     {
         if((p->x<l1.p1.x && p->x<l1.p2.x)
@@ -229,7 +312,7 @@ bool segmentIntersection(Line l1,Line l2)
     return false;
 }
 
-Point* intersection(Line l1,Line l2) {
+Point* lineIntersection(Line l1,Line l2) {
     Point p1=l1.p1;
     Point p2=l1.p2;
     Point p3=l2.p1;
@@ -250,10 +333,10 @@ Point* intersection(Line l1,Line l2) {
     float y = ( pre * (y3 - y4) - (y1 - y2) * post ) / d;
 
     // Check if the x and y coordinates are within both lines
-    if ( x < min(x1, x2) || x > max(x1, x2) ||
-    x < min(x3, x4) || x > max(x3, x4) ) return NULL;
-    if ( y < min(y1, y2) || y > max(y1, y2) ||
-    y < min(y3, y4) || y > max(y3, y4) ) return NULL;
+//    if ( x < min(x1, x2) || x > max(x1, x2) ||
+//    x < min(x3, x4) || x > max(x3, x4) ) return NULL;
+//    if ( y < min(y1, y2) || y > max(y1, y2) ||
+//    y < min(y3, y4) || y > max(y3, y4) ) return NULL;
 
     // Return the point of intersection
     Point* ret = new Point();

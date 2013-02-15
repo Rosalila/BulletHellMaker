@@ -75,6 +75,7 @@ void Character::loadFromXML(std::string directory)
             bullet_node=bullet_node->NextSibling("Bullet"))
     {
         std::string node_name=bullet_node->ToElement()->Attribute("name");
+        int damage=atoi(bullet_node->ToElement()->Attribute("damage"));
         vector<Image*>sprites_temp;
         for(TiXmlNode* sprite_node=bullet_node->FirstChild("Sprite");
                 sprite_node!=NULL;
@@ -89,7 +90,7 @@ void Character::loadFromXML(std::string directory)
         int width=atoi(hitbox_node->ToElement()->Attribute("width"));
         int height=atoi(hitbox_node->ToElement()->Attribute("height"));
         int angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
-        bullets[node_name]=new Bullet(sonido,painter,receiver,sprites_temp,Hitbox(x,y,width,height,angle));
+        bullets[node_name]=new Bullet(sonido,painter,receiver,sprites_temp,Hitbox(x,y,width,height,angle),damage);
     }
 
     //Loading file
@@ -239,10 +240,13 @@ void Character::parrentRender()
 //    res_x = xnew + this->x;
 //    res_y = ynew + this->y;
 
-    painter->drawRectangle(this->getHitbox().getX(),
-                           this->getHitbox().getY(),
-                           hitbox.getWidth(),hitbox.getHeight(),
-                           hitbox.getAngle(),100,0,0,100,true);
+    if(receiver->IsKeyDownn(SDLK_h))
+    {
+        painter->drawRectangle(this->getHitbox().getX(),
+                               this->getHitbox().getY(),
+                               hitbox.getWidth(),hitbox.getHeight(),
+                               hitbox.getAngle(),100,0,0,100,true);
+    }
 
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
         ((Pattern*)*pattern)->render();

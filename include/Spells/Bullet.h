@@ -14,12 +14,14 @@ class Bullet
     Receiver* receiver;
     vector<Image*>sprites;
     Hitbox hitbox;
+    int damage;
 public:
     Bullet(){};
-    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox);
+    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox,int damage);
     void logic();
     void render();
     Hitbox getHitbox();
+    int getDamage();
 
     Image*getImage(int position);
     int spritesSize();

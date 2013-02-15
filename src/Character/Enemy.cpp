@@ -30,28 +30,10 @@ void Enemy::logic(int stage_velocity)
 
 void Enemy::inputControl()
 {
-//    if(receiver->IsKeyDownn(SDLK_DOWN))
-//        orientation="down";
-//    else if(receiver->IsKeyDownn(SDLK_UP))
-//        orientation="up";
-//    else if(receiver->IsKeyDownn(SDLK_LEFT))
-//        orientation="left";
-//    else if(receiver->IsKeyDownn(SDLK_RIGHT))
-//        orientation="right";
-//    else
-//        orientation="idle";
-//
-//    if(receiver->IsKeyDownn(SDLK_DOWN))
-//        this->y+=velocity;
-//    if(receiver->IsKeyDownn(SDLK_UP))
-//        this->y-=velocity;
-//    if(receiver->IsKeyDownn(SDLK_LEFT))
-//        this->x-=velocity;
-//    if(receiver->IsKeyDownn(SDLK_RIGHT))
-//        this->x+=velocity;
-//
-//    if(receiver->IsKeyDownn(SDLK_z))
-//        this->shooting=true;
-//    else
-//        this->shooting=false;
+}
+
+void Enemy::render()
+{
+    parrentRender();
+    painter->drawRectangle(300,650,(500*hp)/max_hp,50,0,0,255,0,255,false);
 }

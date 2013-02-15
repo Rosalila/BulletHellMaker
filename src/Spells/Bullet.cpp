@@ -1,12 +1,13 @@
 #include "../include/Spells/Bullet.h"
 
-Bullet::Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox)
+Bullet::Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox,int damage)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
     this->sprites=sprites;
     this->hitbox=hitbox;
+    this->damage=damage;
 }
 
 void Bullet::logic()
@@ -31,4 +32,9 @@ int Bullet::spritesSize()
 Hitbox Bullet::getHitbox()
 {
     return hitbox;
+}
+
+int Bullet::getDamage()
+{
+    return damage;
 }

@@ -118,8 +118,17 @@ void STG::render()
     {
         if(player->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
         {
-            painter->drawText("Bang!",10,10);
-            player->hit(10);
+            painter->drawText("Player hit!",10,10);
+            player->hit(((Pattern*)*pattern)->getDamage());
+        }
+    }
+
+    for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
+    {
+        if(enemy->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+        {
+            painter->drawText("Eneme hit!",800,10);
+            enemy->hit(((Pattern*)*pattern)->getDamage());
         }
     }
 
