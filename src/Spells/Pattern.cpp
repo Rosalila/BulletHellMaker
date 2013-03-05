@@ -1,6 +1,6 @@
 #include "../include/Spells/Pattern.h"
 
-Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration)
+Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -25,6 +25,8 @@ Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity
     this->y=0;
     this->animation_velocity=animation_velocity;
     this->bullet=bullet;
+    this->random_angle=random_angle;
+    this->aim_player=aim_player;
 
     //Sprites animation
     this->animation_iteration=0;
@@ -35,6 +37,8 @@ Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity
 
     this->iteration=0;
     this->duration=duration;
+    this->is_hit=false;
+    this->delete_flag=false;
 }
 
 Pattern::Pattern(Pattern*pattern,int x,int y)
@@ -58,6 +62,8 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->y=y-pattern->offset_y;
     this->animation_velocity=pattern->animation_velocity;
     this->bullet=pattern->bullet;
+    this->random_angle=pattern->random_angle;
+    this->aim_player=pattern->aim_player;
 
     this->iteration=0;
     this->duration=pattern->duration;
@@ -65,6 +71,8 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     //Sprites animation
     this->animation_iteration=0;
     this->current_sprite=0;
+    this->is_hit=false;
+    this->delete_flag=false;
 }
 
 bool Pattern::isReady()
@@ -127,8 +135,18 @@ void Pattern::logic(int stage_speed)
     if(animation_iteration>=animation_velocity)
     {
         current_sprite++;
-        if(current_sprite>=bullet->spritesSize())
-            current_sprite=0;
+        if(is_hit)
+        {
+            if(current_sprite>=bullet->spritesOnHitSize())
+            {
+                delete_flag=true;
+                current_sprite=0;
+            }
+        }else
+        {
+            if(current_sprite>=bullet->spritesSize())
+                current_sprite=0;
+        }
 
         animation_iteration=0;
     }
@@ -159,17 +177,27 @@ void Pattern::logic(int stage_speed)
 
 void Pattern::render()
 {
-    Image*image=bullet->getImage(current_sprite);
-    painter->draw2DImage
-    (   image,
-        image->getWidth(),image->getHeight(),
-        this->x-image->getWidth()/2,this->y-image->getHeight()/2,
-        1.0,
-        (float)angle,
-        false,
-        0,0,
-        Color(255,255,255,255),
-        true);
+    Image*image;
+    if(is_hit)
+    {
+        image=bullet->getOnHitImage(current_sprite);
+    }else
+    {
+        image=bullet->getImage(current_sprite);
+    }
+    if(image!=NULL)
+    {
+        painter->draw2DImage
+        (   image,
+            image->getWidth(),image->getHeight(),
+            this->x-image->getWidth()/2,this->y-image->getHeight()/2,
+            1.0,
+            (float)angle,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            true);
+    }
 
     if(receiver->IsKeyDownn(SDLK_h))
     {
@@ -197,6 +225,8 @@ Hitbox Pattern::getHitbox()
 
 bool Pattern::destroyFlag()
 {
+    if(delete_flag)
+        return true;
     if(duration<0)
         return false;
     return iteration>duration;
@@ -207,6 +237,18 @@ float Pattern::getAngle()
     return angle;
 }
 
+float Pattern::getRandomAngle()
+{
+    if(random_angle==0)
+        return 0;
+    return rand()%random_angle;
+}
+
+bool Pattern::getAimPlayer()
+{
+    return aim_player;
+}
+
 Bullet* Pattern::getBullet()
 {
     return this->bullet;
@@ -215,4 +257,28 @@ Bullet* Pattern::getBullet()
 int Pattern::getDamage()
 {
     return this->getBullet()->getDamage();
+}
+
+void Pattern::setAngle(float angle)
+{
+    this->angle=angle;
+}
+
+Pattern::~Pattern()
+{
+
+}
+
+void Pattern::hit()
+{
+    is_hit=true;
+    current_sprite=0;
+    velocity=0;
+    angle_change=0;
+    acceleration=0;
+}
+
+bool Pattern::isHit()
+{
+    return is_hit;
 }

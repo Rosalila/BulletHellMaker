@@ -50,7 +50,9 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name)
     writeLogLine("Initializing game.");
     Stage*stage=new Stage(painter,sonido,receiver);
     stage->cargarDesdeXML(stage_name);
-    STG*stg=new STG(sonido,painter,receiver,new Player(sonido,painter,receiver,"chars/"+character_name+"/"),new Enemy(sonido,painter,receiver,"stages/"+stage_name+"/Enemy/"),stage);
+    Player*player=new Player(sonido,painter,receiver,"chars/"+character_name+"/");
+    Enemy*enemy=new Enemy(sonido,painter,receiver,"stages/"+stage_name+"/Enemy/",player);
+    STG*stg=new STG(sonido,painter,receiver,player,enemy,stage);
     delete stg;
 }
 

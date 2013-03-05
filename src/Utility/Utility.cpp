@@ -281,6 +281,13 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
         }
     }
 
+    vector<Point*>::iterator i;
+    for ( i = intersections.begin() ; i < intersections.end(); i++ )
+    {
+        delete * i;
+    }
+
+
     if(cont>=8)
         return true;
 
@@ -294,21 +301,35 @@ bool segmentIntersection(Line l1,Line l2)
     {
         if((p->x<l1.p1.x && p->x<l1.p2.x)
            ||(p->x>l1.p1.x && p->x>l1.p2.x))
-            return false;
+           {
+               delete p;
+               return false;
+           }
 
         if((p->x<l2.p1.x && p->x<l2.p2.x)
            ||(p->x>l2.p1.x && p->x>l2.p2.x))
-            return false;
+           {
+               delete p;
+               return false;
+           }
 
         if((p->y<l1.p1.y && p->y<l1.p2.y)
            ||(p->y>l1.p1.y && p->y>l1.p2.y))
-            return false;
+           {
+               delete p;
+               return false;
+           }
 
         if((p->y<l2.p1.y && p->y<l2.p2.y)
            ||(p->y>l2.p1.y && p->y>l2.p2.y))
-            return false;
+           {
+               delete p;
+               return false;
+           }
+        delete p;
         return true;
     }
+    delete p;
     return false;
 }
 

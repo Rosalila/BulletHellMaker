@@ -32,16 +32,21 @@ void Player::inputControl()
     else
         orientation="idle";
 
-    if(receiver->IsKeyDownn(SDLK_DOWN))
+    if(receiver->IsKeyDownn(SDLK_DOWN)
+       || receiver->IsJoyDown(-2,0))
         this->y+=velocity;
-    if(receiver->IsKeyDownn(SDLK_UP))
+    if(receiver->IsKeyDownn(SDLK_UP)
+       || receiver->IsJoyDown(-8,0))
         this->y-=velocity;
-    if(receiver->IsKeyDownn(SDLK_LEFT))
+    if(receiver->IsKeyDownn(SDLK_LEFT)
+       || receiver->IsJoyDown(-4,0))
         this->x-=velocity;
-    if(receiver->IsKeyDownn(SDLK_RIGHT))
+    if(receiver->IsKeyDownn(SDLK_RIGHT)
+       || receiver->IsJoyDown(-6,0))
         this->x+=velocity;
 
-    if(receiver->IsKeyDownn(SDLK_z))
+    if(receiver->IsKeyDownn(SDLK_z)
+       || receiver->IsJoyDown(0,0))
         this->shooting=true;
     else
         this->shooting=false;
@@ -59,6 +64,10 @@ void Player::logic(int stage_velocity)
 
 void Player::render()
 {
+    painter->drawRectangle(70,35,(370*hp)/max_hp,30,0,0,255,0,255,false);
     parrentRender();
-    painter->drawRectangle(300,50,(500*hp)/max_hp,50,0,255,0,0,255,false);
+        painter->drawRectangle(this->getHitbox().getX(),
+                               this->getHitbox().getY(),
+                               hitbox.getWidth(),hitbox.getHeight(),
+                               hitbox.getAngle(),100,0,0,100,true);
 }

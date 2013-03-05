@@ -18,7 +18,7 @@ class Pattern
     Painter* painter;
     Receiver* receiver;
     double x,y;
-    int offset_x,offset_y;
+
     int velocity;
     int max_velocity;
     int acceleration;
@@ -33,6 +33,8 @@ class Pattern
     Bullet* bullet;
     int iteration;
     int duration;
+    int random_angle;
+    bool aim_player;
 
     //Sprites animation
     int animation_velocity;
@@ -41,8 +43,12 @@ class Pattern
     int startup,cooldown;
     int current_startup, current_cooldown;
     std::string state;
+    bool is_hit;
+    bool delete_flag;
 public:
-    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration);
+int offset_x,offset_y;
+    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player);
+    ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);
     void render();
@@ -50,14 +56,19 @@ public:
     int getX();
     int getY();
     float getAngle();
+    float getRandomAngle();
+    bool getAimPlayer();
     Hitbox getHitbox();
     Bullet* getBullet();
     int getDamage();
     bool isReady();
+    void setAngle(float angle);
     void setState(std::string state);
     void updateStateShouting();
     void updateStateNotShouting();
     bool destroyFlag();
+    void hit();
+    bool isHit();
 };
 
 #endif

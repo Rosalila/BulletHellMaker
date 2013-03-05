@@ -68,9 +68,9 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
             return joy_right_pressed_player_1;
         if(joyCode==-8)
             return joy_up_pressed_player_1;
+
         if(JOYKEYS_player1[joyCode])
         {
-          JOYKEYS_player1[joyCode]=false;
           return true;
         }
         return false;
@@ -130,7 +130,9 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i )
                 {
                     if(event.jbutton.which==0)
+                    {
                         JOYKEYS_player1[i]=true;
+                    }
                 }else
                 {
                     JOYKEYS_player1[i]=false;
@@ -141,7 +143,9 @@ void Receiver::updateInputs()
                 if ( event.jbutton.button == i )
                 {
                     if(event.jbutton.which==1)
+                    {
                         JOYKEYS_player2[i]=true;
+                    }
                 }else
                 {
                     JOYKEYS_player2[i]=false;

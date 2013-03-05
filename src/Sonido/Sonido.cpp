@@ -11,6 +11,8 @@ Sonido::Sonido()
         return;
     }
     writeLogLine("Success!");
+
+    current_channel=0;
 }
 
 void Sonido::drop()
@@ -22,20 +24,26 @@ void Sonido::drop()
 }
 void Sonido::agregarSonido(std::string variable,std::string valor)
 {
+    writeLogLine("Loading "+valor);
     if(sonidos.find(variable)==sonidos.end())
+    {
         sonidos[variable]=Mix_LoadWAV(valor.c_str());
+        channel[variable]=current_channel;
+        current_channel++;
+    }
 }
 void Sonido::reproducirSonido(std::string variable,bool looped)
 {
+    writeLogLine("Playing"+variable);
     if(sonidos.find(variable)==sonidos.end())
         return;
 
-    if(sonidos[variable]!=NULL)
+    if(sonidos[variable]!=NULL && !Mix_Playing(channel[variable]))
     {
         if(looped)
-            Mix_PlayChannel( -1, sonidos[variable], -1 );
+            Mix_PlayChannel( channel[variable], sonidos[variable], -1 );
         else
-            Mix_PlayChannel( -1, sonidos[variable], 0 );
+            Mix_PlayChannel( channel[variable], sonidos[variable], 0 );
     }
 }
 

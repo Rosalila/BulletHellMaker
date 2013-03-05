@@ -23,12 +23,16 @@ protected:
     int hp;
     int max_hp;
     int iteration;
-    float x,y;
+
     int velocity;
     Hitbox hitbox;
     bool shooting;
     std::string orientation;
     std::string current_type;
+
+    Image*life_bar;
+    int life_bar_x;
+    int life_bar_y;
 
     //Sprites animation
     int animation_velocity;
@@ -42,6 +46,8 @@ protected:
     std::list<Pattern*>* active_patterns;
 
 public:
+
+double x,y;
     Character(){}
     Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void loadFromXML(std::string directory);
@@ -49,6 +55,7 @@ public:
     //logic sub functions
     void animationControl();
     void spellControl(int stage_velocity);
+    virtual void addActivePattern(Pattern* pattern);
 
     void parrentRender();
     void render();

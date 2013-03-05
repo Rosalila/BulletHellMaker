@@ -1,11 +1,12 @@
 #include "../include/Character/Enemy.h"
 
-Enemy::Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Enemy::Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory,Player*player)
 {
     //Setting up the other variables
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
+    this->player=player;
     this->active_patterns=new std::list<Pattern*>;
     this->shooting=true;
     this->orientation="idle";
@@ -15,6 +16,8 @@ Enemy::Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string dire
     angle=180;
     velocity=0;
     angle_change=0;
+    life_bar_x=0;
+    life_bar_y=800-70;
 
     //Sprites animation
     this->animation_velocity=4;
@@ -77,8 +80,8 @@ void Enemy::logic(int stage_velocity)
 
 void Enemy::render()
 {
+    painter->drawRectangle(70,765,(370*hp)/max_hp,30,0,255,0,0,255,false);
     parrentRender();
-    painter->drawRectangle(300,650,(500*hp)/max_hp,50,0,0,255,0,255,false);
 }
 
 void Enemy::loadModifiersFromXML(std::string directory)
@@ -141,4 +144,22 @@ void Enemy::loadModifiersFromXML(std::string directory)
             }
         }
     }
+}
+
+void Enemy::addActivePattern(Pattern* pattern)
+{
+    Pattern* pattern_temp=new Pattern(pattern,this->x,this->y);
+    float angle=pattern_temp->getAngle();
+    angle+=pattern_temp->getRandomAngle();
+
+    if(pattern->getAimPlayer())
+    {
+        double distance_x=player->x-this->x-pattern->offset_x;
+        double distance_y=player->y-this->y+pattern->offset_y;
+        angle-=atan2(distance_y,distance_x)*180/PI;
+    }
+
+    pattern_temp->setAngle(angle);
+
+    active_patterns->push_back(pattern_temp);
 }

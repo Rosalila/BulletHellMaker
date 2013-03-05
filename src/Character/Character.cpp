@@ -17,6 +17,9 @@ Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::str
     this->animation_iteration=0;
     this->current_sprite=0;
 
+    this->life_bar_x=0;
+    this->life_bar_y=0;
+
     loadFromXML(directory);
 }
 
@@ -29,6 +32,8 @@ void Character::loadFromXML(std::string directory)
     TiXmlDocument *doc;
     doc=&doc_t;
     TiXmlNode *main_file=doc->FirstChild("MainFile");
+
+    life_bar=painter->getTexture(directory+"life_bar.png");
 
     //Loading attributes
     TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
@@ -77,6 +82,14 @@ void Character::loadFromXML(std::string directory)
             bullet_node=bullet_node->NextSibling("Bullet"))
     {
         std::string node_name=bullet_node->ToElement()->Attribute("name");
+        bool has_sound=false;
+        if(bullet_node->ToElement()->Attribute("sound")!=NULL)
+        {
+            std::string sound=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
+            sonido->agregarSonido("bullet."+node_name,sound);
+            has_sound=true;
+        }
+
         int damage=atoi(bullet_node->ToElement()->Attribute("damage"));
         vector<Image*>sprites_temp;
         for(TiXmlNode* sprite_node=bullet_node->FirstChild("Sprite");
@@ -92,7 +105,20 @@ void Character::loadFromXML(std::string directory)
         int width=atoi(hitbox_node->ToElement()->Attribute("width"));
         int height=atoi(hitbox_node->ToElement()->Attribute("height"));
         int angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
-        bullets[node_name]=new Bullet(sonido,painter,receiver,sprites_temp,Hitbox(x,y,width,height,angle),damage);
+
+        TiXmlNode* onhit_node=bullet_node->FirstChild("OnHit");
+        vector<Image*>sprites_onhit_temp;
+        if(onhit_node!=NULL)
+        {
+            for(TiXmlNode* sprite_node=onhit_node->FirstChild("Sprite");
+                    sprite_node!=NULL;
+                    sprite_node=sprite_node->NextSibling("Sprite"))
+            {
+                sprites_onhit_temp.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            }
+        }
+
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,Hitbox(x,y,width,height,angle),damage,has_sound);
     }
 
     //Loading file
@@ -142,25 +168,16 @@ void Character::loadFromXML(std::string directory)
             int duration=-1;
             if(pattern_node->ToElement()->Attribute("duration"))
                 duration=atoi(pattern_node->ToElement()->Attribute("duration"));
+            int random_angle=0;
+            if(pattern_node->ToElement()->Attribute("random_angle"))
+                random_angle=atoi(pattern_node->ToElement()->Attribute("random_angle"));
+            bool aim_player=false;
+            if(pattern_node->ToElement()->Attribute("aim_player"))
+                aim_player=strcmp(pattern_node->ToElement()->Attribute("aim_player"),"yes")==0;
             std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
             Bullet*bullet=bullets[bullet_name];
 
-            TiXmlNode* hitbox_node=pattern_node->FirstChild("Hitbox");
-            Hitbox* pattern_hitbox;
-            if(hitbox_node)
-            {
-                int hitbox_x=atoi(hitbox_node->ToElement()->Attribute("x"));
-                int hitbox_y=atoi(hitbox_node->ToElement()->Attribute("y"));
-                int hitbox_width=atoi(hitbox_node->ToElement()->Attribute("width"));
-                int hitbox_height=atoi(hitbox_node->ToElement()->Attribute("height"));
-                float hitbox_angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
-                pattern_hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
-            }else
-            {
-                pattern_hitbox=new Hitbox(-40,-40,80,80,0);
-            }
-
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration));
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player));
         }
         type[type_name]=patterns;
     }
@@ -197,7 +214,8 @@ void Character::spellControl(int stage_velocity)
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
             {
-                active_patterns->push_back(new Pattern(patterns[i],this->x,this->y));
+                patterns[i]->getBullet()->playSound();
+                this->addActivePattern(patterns[i]);
             }
         }else
         {
@@ -215,6 +233,17 @@ void Character::parrentRender()
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
         this->x-sprites[orientation][current_sprite]->getWidth()/2,this->y-sprites[orientation][current_sprite]->getHeight()/2,
+        1.0,
+        0.0,
+        false,
+        0,0,
+        Color(255,255,255,255),
+        true);
+
+    painter->draw2DImage
+    (   life_bar,
+        life_bar->getWidth(),life_bar->getHeight(),
+        painter->camera_x+life_bar_x,life_bar_y,
         1.0,
         0.0,
         false,
@@ -289,4 +318,15 @@ void Character::hit(int damage)
 Hitbox Character::getHitbox()
 {
     return hitbox.getPlacedHitbox(Point(this->x,this->y),0);
+}
+
+
+void Character::addActivePattern(Pattern* pattern)
+{
+    Pattern* pattern_temp=new Pattern(pattern,this->x,this->y);
+    float angle=pattern_temp->getAngle();
+    angle+=pattern_temp->getRandomAngle();
+    pattern_temp->setAngle(angle);
+
+    active_patterns->push_back(pattern_temp);
 }

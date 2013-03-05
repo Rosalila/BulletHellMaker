@@ -13,18 +13,23 @@ class Bullet
     Painter* painter;
     Receiver* receiver;
     vector<Image*>sprites;
+    vector<Image*>sprites_on_hit;
     Hitbox hitbox;
     int damage;
+    std::string name;
+    bool has_sound;
 public:
     Bullet(){};
-    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Image*>sprites,Hitbox hitbox,int damage);
+    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
     void logic();
     void render();
     Hitbox getHitbox();
     int getDamage();
-
+    void playSound();
     Image*getImage(int position);
+    Image*getOnHitImage(int position);
     int spritesSize();
+    int spritesOnHitSize();
 };
 
 #endif

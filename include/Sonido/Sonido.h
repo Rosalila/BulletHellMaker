@@ -20,6 +20,8 @@ using namespace std;
 class Sonido
 {
     std::map<std::string,Mix_Chunk*> sonidos;
+    std::map<std::string,int> channel;
+    int current_channel;
     Mix_Music *music;
 public:
     Sonido();

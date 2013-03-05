@@ -65,6 +65,7 @@ void STG::mainLoop()
         }
         logic();
         render();
+        receiver->updateInputs();
         if(player->getHP()==0
            || enemy->getHP()==0)
         {
@@ -166,19 +167,27 @@ void STG::render()
 
     for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
     {
-        if(player->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+        if(!((Pattern*)*pattern)->isHit())
         {
-            painter->drawText("Player hit!",10,10);
-            player->hit(((Pattern*)*pattern)->getDamage());
+            if(player->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+            {
+                ((Pattern*)*pattern)->hit();
+//                painter->drawText("Player hit!",10,10);
+                player->hit(((Pattern*)*pattern)->getDamage());
+            }
         }
     }
 
     for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
     {
-        if(enemy->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+        if(!((Pattern*)*pattern)->isHit())
         {
-            painter->drawText("Enemy hit!",800,10);
-            enemy->hit(((Pattern*)*pattern)->getDamage());
+            if(enemy->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+            {
+                ((Pattern*)*pattern)->hit();
+//                painter->drawText("Enemy hit!",800,10);
+                enemy->hit(((Pattern*)*pattern)->getDamage());
+            }
         }
     }
 
@@ -188,7 +197,7 @@ void STG::render()
         you_loose.render();
 
 
-    receiver->updateInputs();
+
     painter->updateScreen();
 }
 
@@ -214,6 +223,7 @@ void STG::deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x
         if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
         {
             active_patterns->erase(i++);
+            delete p;
         }
         else
         {
@@ -230,6 +240,7 @@ void STG::deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x
         if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
         {
             active_patterns->erase(i++);
+            delete p;
         }
         else
         {

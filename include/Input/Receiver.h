@@ -9,6 +9,7 @@ using namespace std;
 
 #include "../include/TinyXml/tinyxml.h"
 #include "SDL/SDL.h"
+#include "Utility/Utility.h"
 
 
 const int max_joystick_inputs=50;
