@@ -15,6 +15,7 @@
 
 class Player:public Character
 {
+    Image*life_bar;
 public:
     Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void logic(int stage_velocity);

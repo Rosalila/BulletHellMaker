@@ -48,7 +48,7 @@ std::string convertInt(int number)
         temp+=number%10+48;
         number/=10;
     }
-    for (int i=0;i<temp.length();i++)
+    for (int i=0;i<(int)temp.length();i++)
         returnvalue+=temp[temp.length()-i-1];
     return returnvalue;
 }
@@ -76,6 +76,7 @@ std::string Boton::getInput()
 
 std::string Boton::keyToString()
 {
+    return "";
 //    if(teclado==irr::KEY_KEY_Q)
 //        return "Q";
 //    if(teclado==irr::KEY_KEY_W)

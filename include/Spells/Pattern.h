@@ -7,6 +7,7 @@
 #include "Input/Input.h"
 #include "Spells/Bullet.h"
 #include "Spells/Hitbox.h"
+#include "Character/Modifier.h"
 
 #include <cmath>
 
@@ -45,9 +46,14 @@ class Pattern
     std::string state;
     bool is_hit;
     bool delete_flag;
+
+    //Modifiers
+    std::map<int, vector<Modifier*>* >*modifiers;
+    void modifiersControl();
+
 public:
 int offset_x,offset_y;
-    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player);
+    Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player, std::map<int, vector<Modifier*>* >*modifiers);
     ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);

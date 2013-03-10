@@ -53,6 +53,7 @@
 		<Unit filename="include/Menu/MenuLista.h" />
 		<Unit filename="include/Menu/MenuTexto.h" />
 		<Unit filename="include/Painter/Animation.h" />
+		<Unit filename="include/Painter/Cube.h" />
 		<Unit filename="include/Painter/Image.h" />
 		<Unit filename="include/Painter/Painter.h" />
 		<Unit filename="include/Painter/Timer.h" />
@@ -89,6 +90,7 @@
 		<Unit filename="src/Menu/MenuLista.cpp" />
 		<Unit filename="src/Menu/MenuTexto.cpp" />
 		<Unit filename="src/Painter/Animation.cpp" />
+		<Unit filename="src/Painter/Cube.cpp" />
 		<Unit filename="src/Painter/Image.cpp" />
 		<Unit filename="src/Painter/Painter.cpp" />
 		<Unit filename="src/Painter/Timer.cpp" />

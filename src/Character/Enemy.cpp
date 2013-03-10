@@ -26,38 +26,39 @@ Enemy::Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string dire
 
     loadFromXML(directory);
     loadModifiersFromXML(directory);
+    life_bar=painter->getTexture(directory+"life_bar.png");
 }
 
 void Enemy::modifiersControl()
 {
     bool flag_iterator_change=false;
 
-    vector<VariableChange*>* current_changes = this->variable_changes[iteration];
-    if(current_changes!=NULL)
+    vector<Modifier*>* current_modifiers = this->modifiers[iteration];
+    if(current_modifiers!=NULL)
     {
-        for(int i=0;i<current_changes->size();i++)
+        for(int i=0;i<(int)current_modifiers->size();i++)
         {
-            VariableChange* variable_change=(*current_changes)[i];
-            if(variable_change->variable=="velocity")
+            Modifier* modifier=(*current_modifiers)[i];
+            if(modifier->variable=="velocity")
             {
-                this->velocity=atoi(variable_change->value.c_str());
+                this->velocity=atoi(modifier->value.c_str());
             }
-            if(variable_change->variable=="angle")
+            if(modifier->variable=="angle")
             {
-                this->angle=atoi(variable_change->value.c_str());
+                this->angle=atoi(modifier->value.c_str());
             }
-            if(variable_change->variable=="angle_change")
+            if(modifier->variable=="angle_change")
             {
-                this->angle_change=atoi(variable_change->value.c_str());
+                this->angle_change=atoi(modifier->value.c_str());
             }
-            if(variable_change->variable=="iterator")
+            if(modifier->variable=="iterator")
             {
-                this->iteration=atoi(variable_change->value.c_str());
+                this->iteration=atoi(modifier->value.c_str());
                 flag_iterator_change=true;
             }
-            if(variable_change->variable=="pattern_type")
+            if(modifier->variable=="pattern_type")
             {
-                this->current_type=variable_change->value;
+                this->current_type=modifier->value;
             }
         }
     }
@@ -82,6 +83,17 @@ void Enemy::render()
 {
     painter->drawRectangle(70,765,(370*hp)/max_hp,30,0,255,0,0,255,false);
     parrentRender();
+
+    painter->draw2DImage
+    (   life_bar,
+        life_bar->getWidth(),life_bar->getHeight(),
+        painter->camera_x+life_bar_x,life_bar_y,
+        1.0,
+        0.0,
+        false,
+        0,0,
+        Color(255,255,255,255),
+        true);
 }
 
 void Enemy::loadModifiersFromXML(std::string directory)
@@ -98,41 +110,41 @@ void Enemy::loadModifiersFromXML(std::string directory)
             modifier_node!=NULL;
             modifier_node=modifier_node->NextSibling("Modifier"))
     {
-        vector<VariableChange*>* temp_variable_changes=new vector<VariableChange*>();
+        vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
 
         int at=atoi(modifier_node->ToElement()->Attribute("at"));
 
         if(modifier_node->ToElement()->Attribute("velocity")!=NULL)
         {
             std::string value=modifier_node->ToElement()->Attribute("velocity");
-            temp_variable_changes->push_back(new VariableChange("velocity",value));
+            temp_modifiers->push_back(new Modifier("velocity",value));
         }
 
         if(modifier_node->ToElement()->Attribute("angle")!=NULL)
         {
             std::string value=modifier_node->ToElement()->Attribute("angle");
-            temp_variable_changes->push_back(new VariableChange("angle",value));
+            temp_modifiers->push_back(new Modifier("angle",value));
         }
 
         if(modifier_node->ToElement()->Attribute("pattern_type")!=NULL)
         {
             std::string value=modifier_node->ToElement()->Attribute("pattern_type");
-            temp_variable_changes->push_back(new VariableChange("pattern_type",value));
+            temp_modifiers->push_back(new Modifier("pattern_type",value));
         }
 
         if(modifier_node->ToElement()->Attribute("angle_change")!=NULL)
         {
             std::string value=modifier_node->ToElement()->Attribute("angle_change");
-            temp_variable_changes->push_back(new VariableChange("angle_change",value));
+            temp_modifiers->push_back(new Modifier("angle_change",value));
         }
 
         if(modifier_node->ToElement()->Attribute("iterator")!=NULL)
         {
             std::string value=modifier_node->ToElement()->Attribute("iterator");
-            temp_variable_changes->push_back(new VariableChange("iterator",value));
+            temp_modifiers->push_back(new Modifier("iterator",value));
         }
 
-        this->variable_changes[at]=temp_variable_changes;
+        this->modifiers[at]=temp_modifiers;
 
         if(modifier_node->ToElement()->Attribute("repeat")!=NULL)
         {
@@ -140,7 +152,7 @@ void Enemy::loadModifiersFromXML(std::string directory)
             int frequency = atoi(modifier_node->ToElement()->Attribute("repeat_frequency"));
             for(int i=0;i<repeats;i++)
             {
-                this->variable_changes[at+frequency*(i+1)]=temp_variable_changes;
+                this->modifiers[at+frequency*(i+1)]=temp_modifiers;
             }
         }
     }

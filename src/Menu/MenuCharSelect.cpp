@@ -64,7 +64,7 @@ void MenuCharSelect::lockPA(int num_paleta)
         name_pos=rand()%5;
     }
     //si existe
-    if(name_pos>=names.size())
+    if(name_pos>=(int)names.size())
         return;
     std::string name=names[name_pos];
     Image*preview=previews[name_pos];
@@ -93,7 +93,7 @@ void MenuCharSelect::lockPB(int num_paleta)
         name_pos=rand()%5;
     }
     //si existe
-    if(name_pos>=names.size())
+    if(name_pos>=(int)names.size())
         return;
     std::string name=names[name_pos];
     Image*preview=previews[name_pos];

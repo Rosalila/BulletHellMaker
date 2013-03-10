@@ -1,6 +1,6 @@
 #include "../include/Spells/Pattern.h"
 
-Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player)
+Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,std::map<int, vector<Modifier*>* >*modifiers)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -39,6 +39,9 @@ Pattern::Pattern(Sonido* sonido,Painter* painter,Receiver* receiver,int velocity
     this->duration=duration;
     this->is_hit=false;
     this->delete_flag=false;
+
+    //Modifiers
+    this->modifiers=modifiers;
 }
 
 Pattern::Pattern(Pattern*pattern,int x,int y)
@@ -73,6 +76,9 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->current_sprite=0;
     this->is_hit=false;
     this->delete_flag=false;
+
+    //Modifiers
+    this->modifiers=pattern->modifiers;
 }
 
 bool Pattern::isReady()
@@ -172,7 +178,9 @@ void Pattern::logic(int stage_speed)
         }
     }
 
-    iteration++;
+    modifiersControl();
+
+    //iteration++;
 }
 
 void Pattern::render()
@@ -281,4 +289,114 @@ void Pattern::hit()
 bool Pattern::isHit()
 {
     return is_hit;
+}
+
+void Pattern::modifiersControl()
+{
+    bool flag_iterator_change=false;
+
+    vector<Modifier*>* current_modifiers = (*this->modifiers)[iteration];
+    if(current_modifiers!=NULL)
+    {
+        for(int i=0;i<(int)current_modifiers->size();i++)
+        {
+            Modifier* modifier=(*current_modifiers)[i];
+
+            if(modifier->variable=="bullet")
+            {
+                //!!!!
+                //this->velocity=atoi(modifier->value.c_str());
+            }
+
+            if(modifier->variable=="velocity")
+            {
+                this->velocity=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="max_velocity")
+            {
+                this->max_velocity=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="acceleration")
+            {
+                this->acceleration=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="a_frequency")
+            {
+                this->a_frequency=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="angle")
+            {
+                this->angle=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="angle_change")
+            {
+                this->angle_change=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="stop_ac_at")
+            {
+                this->stop_ac_at=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="ac_frequency")
+            {
+                this->ac_frequency=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="animation_velocity")
+            {
+                this->animation_velocity=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="offset_x")
+            {
+                this->offset_x=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="offset_y")
+            {
+                this->offset_y=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="startup")
+            {
+                this->startup=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="cooldown")
+            {
+                this->cooldown=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="duration")
+            {
+                this->duration=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="random_angle")
+            {
+                this->random_angle=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="aim_player")
+            {
+                this->aim_player=strcmp(modifier->value.c_str(),"yes")==0;
+            }
+
+
+            if(modifier->variable=="velocity")
+            {
+                this->velocity=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="angle")
+            {
+                this->angle=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="angle_change")
+            {
+                this->angle_change=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="iterator")
+            {
+                this->iteration=atoi(modifier->value.c_str());
+                flag_iterator_change=true;
+            }
+        }
+    }
+    angle+=angle_change;
+    this->x += cos (angle*PI/180) * velocity;
+    this->y -= sin (angle*PI/180) * velocity;
+
+    if(!flag_iterator_change)
+        iteration++;
 }

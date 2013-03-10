@@ -30,7 +30,7 @@ std::string toString(int number)
         temp+=number%10+48;
         number/=10;
     }
-    for (int i=0;i<temp.length();i++)
+    for (int i=0;i<(int)temp.length();i++)
         returnvalue+=temp[temp.length()-i-1];
     return returnvalue;
 }
@@ -266,7 +266,7 @@ bool hitboxCollision(int a_x,int a_y,int a_width,int a_height,float a_angle,
 
     int cont=0;
 
-    for(int i=0;i<intersections.size();i++)
+    for(int i=0;i<(int)intersections.size();i++)
     {
         Point* point=intersections[i];
         if(point!=NULL)

@@ -16,12 +16,12 @@ void Animation::addImage(Image*image)
     images.push_back(image);
 }
 
-Image* Animation::render()
+void Animation::render()
 {
     if(animation_iteration>=animation_velocity)
     {
         current_frame++;
-        if(current_frame>=images.size())
+        if(current_frame>=(int)images.size())
             current_frame=0;
         animation_iteration=0;
     }

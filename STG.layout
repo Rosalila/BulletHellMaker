@@ -2,13 +2,13 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="include/Character/Character.h" open="0" top="0" tabpos="1">
-		<Cursor position="632" topLine="20" />
+		<Cursor position="583" topLine="19" />
 	</File>
-	<File name="include/Character/Enemy.h" open="0" top="0" tabpos="5">
-		<Cursor position="311" topLine="8" />
+	<File name="include/Character/Enemy.h" open="0" top="0" tabpos="2">
+		<Cursor position="488" topLine="5" />
 	</File>
-	<File name="include/Character/Player.h" open="0" top="0" tabpos="7">
-		<Cursor position="311" topLine="1" />
+	<File name="include/Character/Player.h" open="0" top="0" tabpos="3">
+		<Cursor position="336" topLine="0" />
 	</File>
 	<File name="include/Character/VariableChange.h" open="0" top="0" tabpos="0">
 		<Cursor position="207" topLine="0" />
@@ -31,7 +31,7 @@
 	<File name="include/Input/Input.h" open="0" top="0" tabpos="11">
 		<Cursor position="30" topLine="0" />
 	</File>
-	<File name="include/Input/Receiver.h" open="1" top="0" tabpos="6">
+	<File name="include/Input/Receiver.h" open="0" top="0" tabpos="6">
 		<Cursor position="241" topLine="17" />
 	</File>
 	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="1">
@@ -61,11 +61,14 @@
 	<File name="include/Menu/MenuTexto.h" open="0" top="0" tabpos="0">
 		<Cursor position="274" topLine="0" />
 	</File>
+	<File name="include/Painter/Cube.h" open="1" top="0" tabpos="2">
+		<Cursor position="2293" topLine="56" />
+	</File>
 	<File name="include/Painter/Image.h" open="0" top="0" tabpos="2">
 		<Cursor position="192" topLine="0" />
 	</File>
 	<File name="include/Painter/Painter.h" open="0" top="0" tabpos="2">
-		<Cursor position="182" topLine="9" />
+		<Cursor position="1915" topLine="80" />
 	</File>
 	<File name="include/STG.h" open="0" top="0" tabpos="1">
 		<Cursor position="419" topLine="11" />
@@ -98,16 +101,16 @@
 		<Cursor position="851" topLine="25" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="338" topLine="17" />
+		<Cursor position="503" topLine="17" />
 	</File>
-	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="106" topLine="0" />
+	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="9872" topLine="226" />
 	</File>
-	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2293" topLine="74" />
+	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="2596" topLine="68" />
 	</File>
-	<File name="src/Character/Player.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="1367" topLine="27" />
+	<File name="src/Character/Player.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1540" topLine="24" />
 	</File>
 	<File name="src/Character/VariableChange.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="93" topLine="0" />
@@ -130,13 +133,13 @@
 	<File name="src/Input/Input.cpp" open="0" top="0" tabpos="17">
 		<Cursor position="3273" topLine="89" />
 	</File>
-	<File name="src/Input/Receiver.cpp" open="1" top="0" tabpos="3">
+	<File name="src/Input/Receiver.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="1728" topLine="59" />
 	</File>
 	<File name="src/Menu/Elemento.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="26" topLine="0" />
 	</File>
-	<File name="src/Menu/Menu.cpp" open="1" top="0" tabpos="4">
+	<File name="src/Menu/Menu.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="18094" topLine="464" />
 	</File>
 	<File name="src/Menu/MenuBarra.cpp" open="0" top="0" tabpos="0">
@@ -163,14 +166,17 @@
 	<File name="src/Painter/Animation.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="276" topLine="0" />
 	</File>
+	<File name="src/Painter/Cube.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="474" topLine="0" />
+	</File>
 	<File name="src/Painter/Image.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="459" topLine="17" />
+		<Cursor position="30" topLine="0" />
 	</File>
-	<File name="src/Painter/Painter.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="8573" topLine="291" />
+	<File name="src/Painter/Painter.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="14909" topLine="530" />
 	</File>
-	<File name="src/STG.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="2185" topLine="51" />
+	<File name="src/STG.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="4674" topLine="162" />
 	</File>
 	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1348" topLine="42" />
@@ -196,7 +202,7 @@
 	<File name="src/TinyXml/tinyxml.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="7535" topLine="347" />
 	</File>
-	<File name="src/Utility/Utility.cpp" open="1" top="0" tabpos="5">
+	<File name="src/Utility/Utility.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

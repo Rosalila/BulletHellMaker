@@ -2,9 +2,8 @@
 
 Image::Image()
 {
-    texture=NULL;
-    int width=-1;
-    int height=-1;
+    width=-1;
+    height=-1;
 }
 
 int Image::getWidth()

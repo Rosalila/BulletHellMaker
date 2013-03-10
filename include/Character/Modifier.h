@@ -3,12 +3,12 @@
 
 #include <iostream>
 
-class VariableChange
+class Modifier
 {
 public:
     std::string variable;
     std::string value;
-    VariableChange(std::string variable,std::string value);
+    Modifier(std::string variable,std::string value);
 };
 
 #endif

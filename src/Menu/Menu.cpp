@@ -972,6 +972,7 @@ std::string Menu::getInputPressed()
 
 int Menu::toKeyCode(std::string str)
 {
+    return -1;
 //    if(str==std::string("Q"))
 //        return irr::KEY_KEY_Q;
 //    if(str==std::string("W"))

@@ -12,7 +12,7 @@
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
 #include "Utility/Utility.h"
-#include "Character/VariableChange.h"
+#include "Character/Modifier.h"
 
 class Character
 {
@@ -30,7 +30,6 @@ protected:
     std::string orientation;
     std::string current_type;
 
-    Image*life_bar;
     int life_bar_x;
     int life_bar_y;
 
@@ -51,6 +50,9 @@ double x,y;
     Character(){}
     Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void loadFromXML(std::string directory);
+    void loadMainXML(std::string directory);
+    void loadBulletsXML(std::string directory);
+    void loadPatternsXML(std::string directory);
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();

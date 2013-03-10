@@ -22,5 +22,5 @@ public:
     Animation(){}
     Animation(int x,int y,int animation_velocity,Painter* painter);
     void addImage(Image*image);
-    Image* render();
+    void render();
 };

@@ -24,14 +24,14 @@ void Bullet::render()
 
 Image* Bullet::getImage(int position)
 {
-    if(position>=sprites.size())
+    if(position>=(int)sprites.size())
         return NULL;
     return sprites[position];
 }
 
 Image* Bullet::getOnHitImage(int position)
 {
-    if(position>=sprites_on_hit.size())
+    if(position>=(int)sprites_on_hit.size())
         return NULL;
     return sprites_on_hit[position];
 }

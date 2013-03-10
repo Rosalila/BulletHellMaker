@@ -735,7 +735,7 @@
 	"SDL/SDL.h"
 	"Painter/Timer.h"
 
-1360533585 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
+1362501754 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -796,7 +796,7 @@
 1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Transicion.cpp
 	"IA/Transicion.h"
 
-1359261139 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
+1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
 	"Input/Boton.h"
 
 1359261150 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Input.cpp
@@ -812,7 +812,7 @@
 1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1361047269 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
+1362900304 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1359412016 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
@@ -821,7 +821,7 @@
 1359412037 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1359412068 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
+1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
 1359247680 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuContenedor.cpp
@@ -836,10 +836,10 @@
 1359247718 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuTexto.cpp
 	"Menu/MenuTexto.h"
 
-1358151252 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
+1362900401 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
 	"Painter/Painter.h"
 
-1362189682 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
+1362901145 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
@@ -923,7 +923,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1362464497 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
+1362547097 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
 	"../include/STG.h"
 
 1361720911 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
@@ -937,7 +937,7 @@
 	"Stage/Stage.h"
 	"Painter/Animation.h"
 
-1362189688 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
+1362507490 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
 	<iostream>
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
@@ -947,6 +947,7 @@
 	<stdio.h>
 	"Painter/Image.h"
 	"Painter/Timer.h"
+	"Painter/Cube.h"
 	"Utility/Utility.h"
 	<iostream>
 	<fstream>
@@ -966,10 +967,10 @@
 	"Input/Boton.h"
 	<IA/IA.h>
 
-1361721396 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
+1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
 	"../include/Character/Character.h"
 
-1361721207 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
+1362899326 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -980,7 +981,7 @@
 	"Spells/Bullet.h"
 	"Spells/Pattern.h"
 	"Utility/Utility.h"
-	"Character/VariableChange.h"
+	"Character/Modifier.h"
 
 1360920442 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
 	"TinyXml/tinyxml.h"
@@ -991,10 +992,10 @@
 	"Stage/Dialogue.h"
 	<map>
 
-1361601358 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
+1362901145 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
 	"../include/Spells/Bullet.h"
 
-1361602293 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
+1362901145 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
 	"../include/Spells/Pattern.h"
 
 1360533585 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
@@ -1207,10 +1208,10 @@
 1360488831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
 	"Stage/Layer.h"
 
-1361721825 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
+1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
 	"../include/Character/Enemy.h"
 
-1361049914 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
+1362865078 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
@@ -1241,10 +1242,10 @@
 1360875829 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
 	"../include/Spells/Hitbox.h"
 
-1362465313 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
+1362547112 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
 	"../include/Character/Player.h"
 
-1360750854 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
+1362509621 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -1256,7 +1257,7 @@
 	"Spells/Pattern.h"
 	"Character/Character.h"
 
-1361073260 source:/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
+1362901145 source:/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
 	"Utility/Utility.h"
 
 1360893247 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/VariableChange.cpp
@@ -1286,10 +1287,10 @@
 1360886883 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
 	"Utility/Utility.h"
 
-1360914154 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Animation.cpp
+1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Animation.cpp
 	"Painter/Animation.h"
 
-1360913669 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Animation.h
+1362900318 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Animation.h
 	"SDL/SDL_image.h"
 	<GL/freeglut.h>
 	<GL/gl.h>
@@ -1311,4 +1312,10 @@
 
 1360914154 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Animation.cpp
 	"Painter/Animation.h"
+
+1362549128 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Cube.cpp
+	"Painter/Cube.h"
+
+1362864928 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Modifier.cpp
+	"../include/Character/Modifier.h"
 

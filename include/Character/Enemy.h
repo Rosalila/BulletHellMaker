@@ -16,10 +16,12 @@
 
 class Enemy : public Character
 {
-    std::map<int, vector<VariableChange*>* >variable_changes;
+    std::map<int, vector<Modifier*>* >modifiers;
     float angle;
     float angle_change;
     Player*player;
+
+    Image*life_bar;
 public:
     Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory,Player*player);
     void logic(int stage_velocity);

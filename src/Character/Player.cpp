@@ -17,6 +17,7 @@ Player::Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string di
     this->current_sprite=0;
 
     loadFromXML(directory);
+    life_bar=painter->getTexture(directory+"life_bar.png");
 }
 
 void Player::inputControl()
@@ -48,8 +49,12 @@ void Player::inputControl()
     if(receiver->IsKeyDownn(SDLK_z)
        || receiver->IsJoyDown(0,0))
         this->shooting=true;
+
     else
         this->shooting=false;
+
+    if(receiver->IsKeyDownn(SDLK_SPACE))
+        painter->explode();
 }
 
 void Player::logic(int stage_velocity)
@@ -66,8 +71,20 @@ void Player::render()
 {
     painter->drawRectangle(70,35,(370*hp)/max_hp,30,0,0,255,0,255,false);
     parrentRender();
-        painter->drawRectangle(this->getHitbox().getX(),
-                               this->getHitbox().getY(),
-                               hitbox.getWidth(),hitbox.getHeight(),
-                               hitbox.getAngle(),100,0,0,100,true);
+    painter->drawRectangle(this->getHitbox().getX(),
+                           this->getHitbox().getY(),
+                           hitbox.getWidth(),hitbox.getHeight(),
+                           hitbox.getAngle(),100,0,0,100,true);
+    painter->draw3D((float)this->getX()-painter->camera_x,(float)this->getY());
+
+    painter->draw2DImage
+    (   life_bar,
+        life_bar->getWidth(),life_bar->getHeight(),
+        painter->camera_x+life_bar_x,life_bar_y,
+        1.0,
+        0.0,
+        false,
+        0,0,
+        Color(255,255,255,255),
+        true);
 }

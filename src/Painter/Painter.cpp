@@ -51,7 +51,10 @@ Painter::Painter()
     }
 
     font = NULL;
-    textColor = { font_red, font_green, font_blue };
+    textColor.r = font_red;
+    textColor.g = font_green;
+    textColor.b = font_blue;
+
     font = TTF_OpenFont( "misc/font.ttf", font_size );
 
     if(font==NULL)
@@ -222,6 +225,17 @@ void Painter::draw2DImage	(
              bool camera_align)
 {
     glEnable( GL_TEXTURE_2D );
+
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
+    glMatrixMode( GL_MODELVIEW );
+
+    glDisable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+    glDisable (GL_DEPTH_TEST);
+
+
 
     //Camera and depth effect
     if(depth_effect_x>0)
@@ -415,6 +429,147 @@ void Painter::drawText(std::string text,int position_x,int position_y)
     glEnd();
     glDisable(GL_BLEND);
     glDisable(GL_TEXTURE_2D);
+}
+
+void Painter::draw3D(float pos_x,float pos_y)
+{
+    //  glViewport (0.0, 0.0, (GLfloat) screen_width, (GLfloat) screen_height);
+    //glDisable(GL_BLEND);
+    glEnable(GL_BLEND);
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    gluPerspective (45.0, (GLfloat) screen_width / (GLfloat) screen_height, 0.1, 100.0);
+    glMatrixMode (GL_MODELVIEW);
+
+
+
+    srand (time (NULL));
+
+    glEnable (GL_LIGHT0);
+    glEnable (GL_LIGHT1);
+    glLightfv (GL_LIGHT0, GL_AMBIENT, cube.light0Amb);
+    glLightfv (GL_LIGHT0, GL_DIFFUSE, cube.light0Dif);
+    glLightfv (GL_LIGHT0, GL_SPECULAR, cube.light0Spec);
+    glLightfv (GL_LIGHT0, GL_POSITION, cube.light0Pos);
+//    glLightfv (GL_LIGHT1, GL_AMBIENT, cube.light1Amb);
+//    glLightfv (GL_LIGHT1, GL_DIFFUSE, cube.light1Dif);
+//    glLightfv (GL_LIGHT1, GL_SPECULAR, cube.light1Spec);
+//    glLightfv (GL_LIGHT1, GL_POSITION, cube.light1Pos);
+    glLightModelf (GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+    glMaterialfv (GL_FRONT_AND_BACK, GL_AMBIENT, cube.materialAmb);
+    glMaterialfv (GL_FRONT_AND_BACK, GL_DIFFUSE, cube.materialDif);
+    glMaterialfv (GL_FRONT_AND_BACK, GL_SPECULAR, cube.materialSpec);
+    glMaterialf (GL_FRONT_AND_BACK, GL_SHININESS, cube.materialShininess);
+    glEnable (GL_NORMALIZE);
+
+    cube.logic();
+
+
+    //glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glLoadIdentity ();
+
+    /* Place the camera */
+    //
+    glPushMatrix ();
+
+    pos_x+=650.0;
+    pos_y+=400.0;
+    glTranslatef (-((screen_width-pos_x)/2.0)/5.0, ((screen_height-pos_y)/2.0)/5.0, -100.0);
+    glRotatef (cube.angle, 0.0, 1.0, 0.0);
+
+
+    /* If no explosion, draw cube */
+
+    if (cube.fuel == 0)
+    {
+        glEnable (GL_LIGHTING);
+        glDisable (GL_LIGHT0);
+        glEnable (GL_DEPTH_TEST);
+        glutSolidCube (4.0);
+    }
+
+    if (cube.fuel > 0)
+    {
+        glPushMatrix ();
+
+        glDisable (GL_LIGHTING);
+        glDisable (GL_DEPTH_TEST);
+
+        glBegin (GL_POINTS);
+
+        for (int i = 0; i < NUM_PARTICLES; i++)
+        {
+            glColor3fv (cube.particles[i].color);
+            glVertex3fv (cube.particles[i].position);
+        }
+
+        glEnd ();
+
+        glPopMatrix ();
+
+        glEnable (GL_LIGHTING);
+        glEnable (GL_LIGHT0);
+        glEnable (GL_DEPTH_TEST);
+
+        glNormal3f (0.0, 0.0, 1.0);
+
+        for (int i = 0; i < NUM_DEBRIS; i++)
+        {
+            glColor3fv (cube.debris[i].color);
+
+            glPushMatrix ();
+
+            glTranslatef (cube.debris[i].position[0],
+            cube.debris[i].position[1],
+            cube.debris[i].position[2]);
+
+            glRotatef (cube.debris[i].orientation[0], 1.0, 0.0, 0.0);
+            glRotatef (cube.debris[i].orientation[1], 0.0, 1.0, 0.0);
+            glRotatef (cube.debris[i].orientation[2], 0.0, 0.0, 1.0);
+
+//            glScalef (cube.debris[i].scale[0],
+//            cube.debris[i].scale[1],
+//            cube.debris[i].scale[2]);
+
+             GLfloat a=2.0;
+
+            GLfloat cube[6][3] = {
+            {-(GLfloat)1.358176*a, (GLfloat)0.000000*a, (GLfloat)0.000000*a},
+            {-(GLfloat)0.745718*a, (GLfloat)0.000000*a, -(GLfloat)1.000000*a},
+            {(GLfloat)1.254282*a, (GLfloat)0.000000*a, -(GLfloat)1.000000*a},
+            {(GLfloat)0.341046*a, (GLfloat)0.000000*a, (GLfloat)0.000000*a},
+            {-(GLfloat)0.745718*a, (GLfloat)0.000000*a, (GLfloat)1.000000*a},
+            {(GLfloat)1.254282*a, (GLfloat)0.000000*a, (GLfloat)1.000000*a}
+            };
+            glBegin (GL_TRIANGLES);
+
+	            glVertex3fv (cube[0]);
+	            glVertex3fv (cube[1]);
+	            glVertex3fv (cube[2]);
+
+	            glVertex3fv (cube[0]);
+	            glVertex3fv (cube[2]);
+	            glVertex3fv (cube[3]);
+
+	            glVertex3fv (cube[4]);
+	            glVertex3fv (cube[0]);
+	            glVertex3fv (cube[3]);
+
+	            glVertex3fv (cube[5]);
+	            glVertex3fv (cube[4]);
+	            glVertex3fv (cube[3]);
+            glEnd();
+
+            glPopMatrix ();
+        }
+    }
+    glPopMatrix();
+}
+
+void Painter::explode()
+{
+    cube.newExplosion();
 }
 
 void Painter::updateScreen()

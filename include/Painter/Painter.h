@@ -13,6 +13,7 @@
 
 #include "Painter/Image.h"
 #include "Painter/Timer.h"
+#include "Painter/Cube.h"
 #include "Utility/Utility.h"
 
 #include <iostream>
@@ -83,6 +84,9 @@ class Painter
     Timer *fps;
     Timer *update;
 
+    //3D
+    Cube cube;
+
     Painter();
     ~Painter();
     Image* getTexture(std::string filename);
@@ -99,6 +103,8 @@ class Painter
 				 bool camera_align);
     void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
+    void draw3D(float pos_x,float pos_y);
+    void explode();
     void updateScreen();
     void frameCap();
 };
