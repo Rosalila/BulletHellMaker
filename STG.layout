@@ -10,9 +10,6 @@
 	<File name="include/Character/Player.h" open="0" top="0" tabpos="3">
 		<Cursor position="336" topLine="0" />
 	</File>
-	<File name="include/Character/VariableChange.h" open="0" top="0" tabpos="0">
-		<Cursor position="207" topLine="0" />
-	</File>
 	<File name="include/IA/Automata.h" open="0" top="0" tabpos="7">
 		<Cursor position="93" topLine="0" />
 	</File>
@@ -26,13 +23,13 @@
 		<Cursor position="44" topLine="0" />
 	</File>
 	<File name="include/Input/Boton.h" open="0" top="0" tabpos="18">
-		<Cursor position="528" topLine="3" />
+		<Cursor position="528" topLine="0" />
 	</File>
 	<File name="include/Input/Input.h" open="0" top="0" tabpos="11">
 		<Cursor position="30" topLine="0" />
 	</File>
 	<File name="include/Input/Receiver.h" open="0" top="0" tabpos="6">
-		<Cursor position="241" topLine="17" />
+		<Cursor position="92" topLine="0" />
 	</File>
 	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="1">
 		<Cursor position="324" topLine="0" />
@@ -61,17 +58,20 @@
 	<File name="include/Menu/MenuTexto.h" open="0" top="0" tabpos="0">
 		<Cursor position="274" topLine="0" />
 	</File>
-	<File name="include/Painter/Cube.h" open="1" top="0" tabpos="2">
-		<Cursor position="2293" topLine="56" />
+	<File name="include/Painter/Cube.h" open="1" top="1" tabpos="4">
+		<Cursor position="199" topLine="0" />
 	</File>
 	<File name="include/Painter/Image.h" open="0" top="0" tabpos="2">
 		<Cursor position="192" topLine="0" />
 	</File>
+	<File name="include/Painter/Object3D.h" open="1" top="0" tabpos="1">
+		<Cursor position="184" topLine="0" />
+	</File>
 	<File name="include/Painter/Painter.h" open="0" top="0" tabpos="2">
-		<Cursor position="1915" topLine="80" />
+		<Cursor position="313" topLine="0" />
 	</File>
 	<File name="include/STG.h" open="0" top="0" tabpos="1">
-		<Cursor position="419" topLine="11" />
+		<Cursor position="419" topLine="0" />
 	</File>
 	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="12">
 		<Cursor position="250" topLine="0" />
@@ -85,7 +85,7 @@
 	<File name="include/Spells/Pattern.h" open="0" top="0" tabpos="1">
 		<Cursor position="961" topLine="29" />
 	</File>
-	<File name="include/Stage/Dialogue.h" open="0" top="0" tabpos="3">
+	<File name="include/Stage/Dialogue.h" open="0" top="0" tabpos="2">
 		<Cursor position="470" topLine="0" />
 	</File>
 	<File name="include/Stage/Layer.h" open="0" top="0" tabpos="0">
@@ -97,11 +97,11 @@
 	<File name="include/TinyXml/tinystr.h" open="0" top="0" tabpos="0">
 		<Cursor position="6531" topLine="233" />
 	</File>
-	<File name="include/Utility/Utility.h" open="0" top="0" tabpos="2">
-		<Cursor position="851" topLine="25" />
+	<File name="include/Utility/Utility.h" open="1" top="0" tabpos="3">
+		<Cursor position="37" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="503" topLine="17" />
+		<Cursor position="503" topLine="0" />
 	</File>
 	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="9872" topLine="226" />
@@ -109,11 +109,8 @@
 	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="2596" topLine="68" />
 	</File>
-	<File name="src/Character/Player.cpp" open="1" top="0" tabpos="4">
+	<File name="src/Character/Player.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1540" topLine="24" />
-	</File>
-	<File name="src/Character/VariableChange.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="93" topLine="0" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="13">
 		<Cursor position="593" topLine="16" />
@@ -128,7 +125,7 @@
 		<Cursor position="1898" topLine="50" />
 	</File>
 	<File name="src/Input/Boton.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3089" topLine="107" />
+		<Cursor position="3089" topLine="0" />
 	</File>
 	<File name="src/Input/Input.cpp" open="0" top="0" tabpos="17">
 		<Cursor position="3273" topLine="89" />
@@ -166,17 +163,20 @@
 	<File name="src/Painter/Animation.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="276" topLine="0" />
 	</File>
-	<File name="src/Painter/Cube.cpp" open="1" top="0" tabpos="3">
+	<File name="src/Painter/Cube.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="474" topLine="0" />
 	</File>
 	<File name="src/Painter/Image.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="30" topLine="0" />
 	</File>
-	<File name="src/Painter/Painter.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="14909" topLine="530" />
+	<File name="src/Painter/Object3D.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="84" topLine="0" />
 	</File>
-	<File name="src/STG.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="4674" topLine="162" />
+	<File name="src/Painter/Painter.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="15057" topLine="493" />
+	</File>
+	<File name="src/STG.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="4947" topLine="162" />
 	</File>
 	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1348" topLine="42" />
@@ -187,17 +187,17 @@
 	<File name="src/Spells/Hitbox.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="1444" topLine="65" />
 	</File>
-	<File name="src/Spells/Pattern.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="2005" topLine="39" />
+	<File name="src/Spells/Pattern.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="9107" topLine="362" />
 	</File>
-	<File name="src/Stage/Dialogue.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="455" topLine="7" />
+	<File name="src/Stage/Dialogue.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="453" topLine="0" />
 	</File>
 	<File name="src/Stage/Layer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="21" topLine="0" />
 	</File>
-	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="9658" topLine="286" />
+	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="2560" topLine="80" />
 	</File>
 	<File name="src/TinyXml/tinyxml.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="7535" topLine="347" />

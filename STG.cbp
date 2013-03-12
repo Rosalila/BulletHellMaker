@@ -34,8 +34,8 @@
 		</Compiler>
 		<Unit filename="include/Character/Character.h" />
 		<Unit filename="include/Character/Enemy.h" />
+		<Unit filename="include/Character/Modifier.h" />
 		<Unit filename="include/Character/Player.h" />
-		<Unit filename="include/Character/VariableChange.h" />
 		<Unit filename="include/IA/Automata.h" />
 		<Unit filename="include/IA/Estado.h" />
 		<Unit filename="include/IA/IA.h" />
@@ -55,8 +55,12 @@
 		<Unit filename="include/Painter/Animation.h" />
 		<Unit filename="include/Painter/Cube.h" />
 		<Unit filename="include/Painter/Image.h" />
+		<Unit filename="include/Painter/MPEGfilter.h" />
+		<Unit filename="include/Painter/Object3D.h" />
 		<Unit filename="include/Painter/Painter.h" />
+		<Unit filename="include/Painter/SDL_Movie.h" />
 		<Unit filename="include/Painter/Timer.h" />
+		<Unit filename="include/Painter/smpeg.h" />
 		<Unit filename="include/STG.h" />
 		<Unit filename="include/Sonido/Sonido.h" />
 		<Unit filename="include/Spells/Bullet.h" />
@@ -71,8 +75,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Character/Character.cpp" />
 		<Unit filename="src/Character/Enemy.cpp" />
+		<Unit filename="src/Character/Modifier.cpp" />
 		<Unit filename="src/Character/Player.cpp" />
-		<Unit filename="src/Character/VariableChange.cpp" />
 		<Unit filename="src/IA/Automata.cpp" />
 		<Unit filename="src/IA/Estado.cpp" />
 		<Unit filename="src/IA/IA.cpp" />
@@ -92,6 +96,7 @@
 		<Unit filename="src/Painter/Animation.cpp" />
 		<Unit filename="src/Painter/Cube.cpp" />
 		<Unit filename="src/Painter/Image.cpp" />
+		<Unit filename="src/Painter/Object3D.cpp" />
 		<Unit filename="src/Painter/Painter.cpp" />
 		<Unit filename="src/Painter/Timer.cpp" />
 		<Unit filename="src/STG.cpp" />

@@ -11,9 +11,11 @@
 #include <stdio.h>
 
 
+#include "Painter/smpeg.h"
 #include "Painter/Image.h"
 #include "Painter/Timer.h"
 #include "Painter/Cube.h"
+#include "Painter/Object3D.h"
 #include "Utility/Utility.h"
 
 #include <iostream>
@@ -73,6 +75,9 @@ class Painter
     SDL_Color textColor;
     int screen_width;
     int screen_height;
+    int screen_resized_width;
+    int screen_resized_height;
+    bool fullscreen;
     int screen_bpp;
     int camera_x,camera_y;
     SDL_Joystick *joystick_1;
@@ -105,7 +110,10 @@ class Painter
     void drawRectangle(int x,int y,int width,int height,float rotation,int red,int green,int blue,int alpha,bool camera_align);
     void draw3D(float pos_x,float pos_y);
     void explode();
+    void drawObject();
     void updateScreen();
     void frameCap();
+    void resetScreen();
+    void video(Painter*painter);
 };
 #endif

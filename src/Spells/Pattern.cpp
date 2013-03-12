@@ -372,8 +372,6 @@ void Pattern::modifiersControl()
             {
                 this->aim_player=strcmp(modifier->value.c_str(),"yes")==0;
             }
-
-
             if(modifier->variable=="velocity")
             {
                 this->velocity=atoi(modifier->value.c_str());

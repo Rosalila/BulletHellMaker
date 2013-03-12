@@ -13,11 +13,11 @@ Painter::Painter()
     TiXmlNode *config_file=doc->FirstChild("ConfigFile");
 
     TiXmlElement *resolution_element=config_file->FirstChild("Resolution")->ToElement();
-    int screen_resized_width=atoi(resolution_element->Attribute("x"));
-    int screen_resized_height=atoi(resolution_element->Attribute("y"));
+    screen_resized_width=atoi(resolution_element->Attribute("x"));
+    screen_resized_height=atoi(resolution_element->Attribute("y"));
 
     TiXmlElement *fullscreen_element=config_file->FirstChild("Fullscreen")->ToElement();
-    bool fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
+    fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
 
     TiXmlElement *font_element=config_file->FirstChild("Font")->ToElement();
     int font_size=atoi(font_element->Attribute("size"));
@@ -33,11 +33,11 @@ Painter::Painter()
     screen_width = 1280;
     screen_height = 800;
 
-    screen_bpp = 16;
+    screen_bpp = 32;
     camera_x=camera_y=0;
 
     //Initialize all SDL subsystems
-    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+    if( SDL_Init( SDL_INIT_EVERYTHING | SDL_INIT_AUDIO | SDL_INIT_VIDEO ) == -1 )
     {
         writeLogLine(SDL_GetError());
         return;
@@ -135,6 +135,15 @@ Painter::Painter()
     //If everything initialized fine
     writeLogLine("Success! SDL initialized.");
     return;
+}
+
+void Painter::resetScreen()
+{
+    //Set up the screen
+    if(!fullscreen)
+        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL );
+    else
+        screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL | SDL_FULLSCREEN );
 }
 
 Painter::~Painter()
@@ -531,40 +540,18 @@ void Painter::draw3D(float pos_x,float pos_y)
 //            glScalef (cube.debris[i].scale[0],
 //            cube.debris[i].scale[1],
 //            cube.debris[i].scale[2]);
-
-             GLfloat a=2.0;
-
-            GLfloat cube[6][3] = {
-            {-(GLfloat)1.358176*a, (GLfloat)0.000000*a, (GLfloat)0.000000*a},
-            {-(GLfloat)0.745718*a, (GLfloat)0.000000*a, -(GLfloat)1.000000*a},
-            {(GLfloat)1.254282*a, (GLfloat)0.000000*a, -(GLfloat)1.000000*a},
-            {(GLfloat)0.341046*a, (GLfloat)0.000000*a, (GLfloat)0.000000*a},
-            {-(GLfloat)0.745718*a, (GLfloat)0.000000*a, (GLfloat)1.000000*a},
-            {(GLfloat)1.254282*a, (GLfloat)0.000000*a, (GLfloat)1.000000*a}
-            };
-            glBegin (GL_TRIANGLES);
-
-	            glVertex3fv (cube[0]);
-	            glVertex3fv (cube[1]);
-	            glVertex3fv (cube[2]);
-
-	            glVertex3fv (cube[0]);
-	            glVertex3fv (cube[2]);
-	            glVertex3fv (cube[3]);
-
-	            glVertex3fv (cube[4]);
-	            glVertex3fv (cube[0]);
-	            glVertex3fv (cube[3]);
-
-	            glVertex3fv (cube[5]);
-	            glVertex3fv (cube[4]);
-	            glVertex3fv (cube[3]);
-            glEnd();
+            drawObject();
 
             glPopMatrix ();
         }
     }
     glPopMatrix();
+}
+
+void Painter::drawObject()
+{
+    Object3D object;
+    object.draw();
 }
 
 void Painter::explode()
@@ -585,4 +572,92 @@ void Painter::updateScreen()
     frameCap();
     SDL_GL_SwapBuffers();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Painter::video(Painter*painter)
+{
+    // Surface for the movie
+    SDL_Surface *movieSurface = 0;
+
+    // Holds the movie information
+    SMPEG_Info movieInfo;
+
+    // Load the movie
+    SMPEG *movie =  0;
+
+    painter->screen = SDL_SetVideoMode(painter->screen_resized_width, painter->screen_resized_height, painter->screen_bpp,SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_ANYFORMAT);
+
+    // Load the movie and store the information about it
+    movie = SMPEG_new("demo.mpg", &movieInfo, true);
+
+    char* error = SMPEG_error(movie);
+
+    if( error != NULL || movie == NULL )
+    {
+        printf( "Error loading MPEG: %s\n", error );
+        return;
+    }
+
+    // Create a temporary surface to render the movie to
+    SDL_Surface *tempSurface2 = SDL_CreateRGBSurface(SDL_SWSURFACE,
+    movieInfo.width, movieInfo.height, 32, painter->screen->format->Rmask,
+    painter->screen->format->Gmask, painter->screen->format->Bmask, painter->screen->format->Amask);
+
+    // Now make a surface optimized for the main screen
+    movieSurface = SDL_DisplayFormat(tempSurface2);
+
+    // Free the temporary surface
+    SDL_FreeSurface(tempSurface2);
+
+    // Set the surface to draw to
+    SMPEG_setdisplay(movie, movieSurface, 0, 0);
+
+    // Set the display region
+    SMPEG_setdisplayregion(movie, 0, 0, movieInfo.width, movieInfo.height);
+
+    // Loop forever
+    SMPEG_loop(movie, -1);
+
+    SDL_ShowCursor(SDL_DISABLE);
+
+    int done = 0;
+
+    SMPEG_play(movie);
+    SMPEG_getinfo(movie, &movieInfo);
+
+    while(done == 0)
+    {
+        SDL_Event event;
+
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                done = 1;
+            }
+
+            if (event.type == SDL_KEYDOWN)
+            {
+                if (event.key.keysym.sym == SDLK_ESCAPE)
+                {
+                    done = 1;
+                }
+            }
+        }
+
+        SDL_Rect dest;
+        dest.x = 0;
+        dest.y = 0;
+        SDL_BlitSurface(movieSurface, NULL, painter->screen, &dest);
+
+        // Flip the main screen
+        SDL_Flip(painter->screen);
+    }
+
+    SDL_FreeSurface(movieSurface);
+    SMPEG_stop(movie);
+    SMPEG_delete(movie);
+    movie = NULL;
+    SDL_ShowCursor(SDL_ENABLE);
+    painter->resetScreen();
 }

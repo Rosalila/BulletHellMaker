@@ -6,7 +6,7 @@
 #include <math.h>
 
 #define NUM_PARTICLES    2          /* Number of particles  */
-#define NUM_DEBRIS       50            /* Number of debris     */
+#define NUM_DEBRIS       4            /* Number of debris     */
 
 /* GLUT menu entries */
 

@@ -35,6 +35,8 @@ int main(int argc, char *argv[])
 
     Painter*painter=new Painter();
 
+    painter->video(painter);
+
 //painter->update.start();
 //painter->fps.start();
 
