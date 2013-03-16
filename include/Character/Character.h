@@ -7,7 +7,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Input/Input.h"
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
@@ -17,7 +17,7 @@
 class Character
 {
 protected:
-    Sonido* sonido;
+    Sound* sonido;
     Painter* painter;
     Receiver* receiver;
     int hp;
@@ -48,7 +48,7 @@ public:
 
 double x,y;
     Character(){}
-    Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
+    Character(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void loadFromXML(std::string directory);
     void loadMainXML(std::string directory);
     void loadBulletsXML(std::string directory);

@@ -1,5 +1,5 @@
-#include "Menu/Menu.h"
-Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
+#include "STGMenu/STGMenu.h"
+Menu::Menu(Painter* painter,Receiver* receiver,Sound* sonido,char* archivo)
 {
     this->painter=painter;
     this->receiver=receiver;
@@ -7,6 +7,7 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
     this->exit_signal=false;
     this->save_inputs_signal=false;
     this->char_select=NULL;
+    this->selectables_container=NULL;
 
     vs_screen=painter->getTexture("misc/vs_screen.png");
 
@@ -115,14 +116,14 @@ void Menu::loopMenu()
             {
             }else if(inputa->getBufferInputs()[0]=="6")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_x++;
                 if(char_select->select_p1_x>=char_select->size_x)
                     char_select->select_p1_x=0;
                 tecla_arriba_p1=false;
             }else if(inputa->getBufferInputs()[0]=="4")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_x--;
                 if(char_select->select_p1_x<0)
                     char_select->select_p1_x=char_select->size_x-1;
@@ -130,7 +131,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="2")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_y++;
                 if(char_select->select_p1_y>=char_select->size_y)
                     char_select->select_p1_y=0;
@@ -138,7 +139,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="8")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_y--;
                 if(char_select->select_p1_y<0)
                     char_select->select_p1_y=char_select->size_y-1;
@@ -146,49 +147,49 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="a")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(0);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="b")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(1);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="c")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(2);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="d")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(3);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="e")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(4);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="f")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(5);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="g")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(6);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="h")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(7);
                 tecla_arriba_p1=false;
             }
@@ -210,14 +211,14 @@ void Menu::loopMenu()
             {
             }else if(inputb->getBufferInputs()[0]=="6")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_x++;
                 if(char_select->select_p2_x>=char_select->size_x)
                     char_select->select_p2_x=0;
                 tecla_arriba_p2=false;
             }else if(inputb->getBufferInputs()[0]=="4")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_x--;
                 if(char_select->select_p2_x<0)
                     char_select->select_p2_x=char_select->size_x-1;
@@ -225,7 +226,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="2")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_y++;
                 if(char_select->select_p2_y>=char_select->size_y)
                     char_select->select_p2_y=0;
@@ -233,7 +234,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="8")
             {
-                sonido->reproducirSonido(std::string("Menu.move_char"),false);
+                sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_y--;
                 if(char_select->select_p2_y<0)
                     char_select->select_p2_y=char_select->size_y-1;
@@ -241,49 +242,49 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="a")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(0);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="b")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(1);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="c")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(2);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="d")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(3);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="e")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(4);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="f")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(5);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="g")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(6);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="h")
             {
-                sonido->reproducirSonido(std::string("Menu.select_char"),false);
+                sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(7);
                 tecla_arriba_p2=false;
             }
@@ -296,31 +297,31 @@ void Menu::loopMenu()
            && !receiver->IsKeyDownn(SDLK_ESCAPE)
            )
             tecla_arriba=true;
-        if(tecla_arriba)
+        if(tecla_arriba && selectables_container!=NULL)
         {
             tecla_arriba=false;
             if(receiver->IsKeyDownn(SDLK_ESCAPE))
             {
-                sonido->reproducirSonido(std::string("Menu.back"),false);
+                sonido->playSound(std::string("Menu.back"));
                 exit_signal=true;
                 break;
             }
             else if(receiver->IsKeyDownn(SDLK_DOWN))
             {
-                sonido->reproducirSonido(std::string("Menu.move"),false);
-                ((MenuContenedor*)contenedor_actual)->avanzar();
+                sonido->playSound(std::string("Menu.move"));
+                ((MenuContenedor*)selectables_container)->avanzar();
             }
             else if(receiver->IsKeyDownn(SDLK_UP))
             {
-                sonido->reproducirSonido(std::string("Menu.move"),false);
-                ((MenuContenedor*)contenedor_actual)->retroceder();
+                sonido->playSound(std::string("Menu.move"));
+                ((MenuContenedor*)selectables_container)->retroceder();
             }
             else if(receiver->IsKeyDownn(SDLK_RIGHT))
             {
-                sonido->reproducirSonido(std::string("Menu.move"),false);
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Lista")
+                sonido->playSound(std::string("Menu.move"));
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
-                    MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                     ml->avanzar();
 //                    if(ml->getAccion()==0)
 //                    {
@@ -343,9 +344,9 @@ void Menu::loopMenu()
 //                        rounds=atoi(str_ptr);
 //                    }
                 }
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Barra")
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Barra")
                 {
-                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                     mb->avanzar();
                     if(mb->getAccion()==0)
                     {
@@ -355,10 +356,10 @@ void Menu::loopMenu()
             }
             else if(receiver->IsKeyDownn(SDLK_LEFT))
             {
-                sonido->reproducirSonido(std::string("Menu.move"),false);
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Lista")
+                sonido->playSound(std::string("Menu.move"));
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
-                    MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                     ml->retroceder();
 //                    if(ml->getAccion()==0)
 //                    {
@@ -381,9 +382,9 @@ void Menu::loopMenu()
 //                        rounds=atoi(str_ptr);
 //                    }
                 }
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Barra")
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Barra")
                 {
-                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                     mb->retroceder();
                     if(mb->getAccion()==0)
                     {
@@ -392,15 +393,15 @@ void Menu::loopMenu()
                 }
             }else if(receiver->IsKeyPressed(SDLK_RETURN))
             {
-                sonido->reproducirSonido(std::string("Menu.select"),false);
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Lista")
+                sonido->playSound(std::string("Menu.select"));
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
                     if(char_select->listoPA())
                         iniciarJuego(char_select->getLockedNamesPA()[0],getStage());
                 }
-                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()=="Boton")
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
                 {
-                    MenuBoton*mb=((MenuBoton*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                     if(mb->getAccion()=="Start")
                     {
 //                        iniciarJuego();
@@ -414,7 +415,7 @@ void Menu::loopMenu()
                         exit_signal=true;
                         break;
                     }
-                    if(mb->getAccion()=="Load")
+                    if(mb->getAccion()=="load")
                     {
                         Menu *temp=new Menu(painter,receiver,sonido,mb->load_menu);
                         temp->loopMenu();
@@ -573,33 +574,26 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->agregarSonido("Menu.select","menu/audio/select.ogg");
-    sonido->agregarSonido("Menu.select_char","menu/audio/select_char.ogg");
-    sonido->agregarSonido("Menu.move","menu/audio/move.ogg");
-    sonido->agregarSonido("Menu.move_char","menu/audio/move_char.ogg");
-    sonido->agregarSonido("Menu.back","menu/audio/back.ogg");
+    sonido->addSound("Menu.select","menu/audio/select.ogg");
+    sonido->addSound("Menu.select_char","menu/audio/select_char.ogg");
+    sonido->addSound("Menu.move","menu/audio/move.ogg");
+    sonido->addSound("Menu.move_char","menu/audio/move_char.ogg");
+    sonido->addSound("Menu.back","menu/audio/back.ogg");
 
-    for(TiXmlNode* elemento=doc->FirstChild();
-            elemento!=NULL;
-            elemento=elemento->NextSibling())
+    TiXmlNode* elemento=doc->FirstChild("svg");
+    TiXmlNode* g_node=elemento->FirstChild("g");
+
+    std::vector<Elemento*>elementos_contenedor;
+    for(TiXmlNode* image_node=g_node->FirstChild("image");
+            image_node!=NULL;
+            image_node=image_node->NextSibling("image"))
     {
-        TiXmlElement* e=elemento->ToElement();
-        if(strcmp(e->Value(),"CharSelect")==0)
+        TiXmlElement* e=image_node->ToElement();
+
+        if(e->Attribute("type")==NULL)
         {
-            char_select=new MenuCharSelect(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),
-                                                          atoi(e->Attribute("size_x")),atoi(e->Attribute("size_y")),atoi(e->Attribute("box_size_x")),atoi(e->Attribute("box_size_y")),
-                                                          atoi(e->Attribute("box_separation_x")),atoi(e->Attribute("box_separation_y")),
-                                                          atoi(e->Attribute("chars_player1")),atoi(e->Attribute("chars_player2")),
-                                                          atoi(e->Attribute("preview_player1_x")),atoi(e->Attribute("preview_player1_y")),
-                                                          atoi(e->Attribute("preview_player2_x")),atoi(e->Attribute("preview_player2_y")),
-                                                          chars,
-                                                          atoi(e->Attribute("player1_cursor_x")),atoi(e->Attribute("player1_cursor_y")),
-                                                          atoi(e->Attribute("player2_cursor_x")),atoi(e->Attribute("player2_cursor_y"))
-                                                          );
-            elementos.push_back((Elemento*)char_select);
-        }else if(strcmp(e->Value(),"Image")==0)
-        {
-            std::string path(e->Attribute("path"));
+            std::string path(e->Attribute("xlink:href"));
+
             std::string dir("menu/");
             path=dir+path;
             int displacement_x=0;
@@ -608,6 +602,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             int stop_displacement_y_at=0;
             int fade_in_initial=-1;
             int fade_in_speed=0;
+
             if(e->Attribute("displacement_x")!=NULL)
                 displacement_x=atoi(e->Attribute("displacement_x"));
             if(e->Attribute("displacement_y")!=NULL)
@@ -620,205 +615,356 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                 fade_in_initial=atoi(e->Attribute("fade_in_initial"));
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
-
             Image* image=painter->getTexture(path);
 
             elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
-                                                          atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,image,""
+                                                          atoi(e->Attribute("width")),atoi(e->Attribute("height")),image,""
                                                           ));
-        }else if(strcmp(e->Value(),"Text")==0)
+        }else if(strcmp(e->Attribute("type"),"button")==0)
         {
-                elementos.push_back((Elemento*)new MenuTexto(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
-                                                             e->Attribute("text")
-                                                             ));
-        }else if(strcmp(e->Value(),"Container")==0)
-        {
-            std::vector<Elemento*>elementos_contenedor;
-            for(TiXmlNode* elem_container=elemento->FirstChild();
-                    elem_container!=NULL;
-                    elem_container=elem_container->NextSibling())
+            std::string action="";
+            if(e->Attribute("action")!=NULL)
+               action=e->Attribute("action");
+
+            char* menu_load=new char[255];
+            strcpy(menu_load,"");
+            if(action=="load")
             {
-                TiXmlElement* ec=elem_container->ToElement();
-                if(strcmp(ec->Value(),"Button")==0)
-                {
-                    std::string action="";
-                    if(ec->Attribute("action")!=NULL)
-                       action=ec->Attribute("action");
-
-                    char* menu_load=new char[255];
-                    strcpy(menu_load,"");
-                    if(action=="Load")
-                    {
-                        strcpy(menu_load,"menu/");
-                        strcat(menu_load,ec->Attribute("load_menu"));
-                    }
-
-                    elementos_contenedor.push_back((Elemento*)new MenuBoton(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path"))),atoi(ec->Attribute("text_x")),atoi(ec->Attribute("text_y")),ec->Attribute("text"),
-                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_selected"))),atoi(ec->Attribute("text_x_selected")),atoi(ec->Attribute("text_y_selected")),ec->Attribute("text_selected"),
-                                                                            action,menu_load
-                                                                            ));
-                }
-                if(strcmp(ec->Value(),"Bar")==0)
-                {
-                    int accion=-1;
-                    int default_value=atoi(ec->Attribute("default_value"));
-                    if(ec->Attribute("action")!=NULL)
-                    {
-                        if(strcmp(ec->Attribute("action"),"AI level")==0)
-                        {
-                            accion=0;
-                            default_value=ai_level;
-                        }
-                    }
-                        accion=atoi(ec->Attribute("action"));
-                    elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_bg"))),atoi(ec->Attribute("bar_x")),atoi(ec->Attribute("bar_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path"))),
-                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_bg_selected"))),atoi(ec->Attribute("bar_x_selected")),atoi(ec->Attribute("bar_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_selected"))),
-                                                                            atoi(ec->Attribute("max")),default_value,accion
-                                                                            )
-                                                   );
-                }
-                if(strcmp(ec->Value(),"List")==0)
-                {
-                    std::vector<Elemento*>elem_lista;
-
-                    for(TiXmlNode* elem_list=elem_container->FirstChild();
-                            elem_list!=NULL;
-                            elem_list=elem_list->NextSibling())
-                    {
-                        TiXmlElement* el=elem_list->ToElement();
-                        if(strcmp(el->Value(),"Text")==0)
-                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(ec->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                             el->Attribute("text")
-                                                             ));
-                        if(strcmp(el->Value(),"Image")==0)
-                        {
-                            std::string path(el->Attribute("path"));
-                            std::string dir("menu/");
-                            path=dir+path;
-
-                            int displacement_x=0;
-                            int displacement_y=0;
-                            int stop_displacement_x_at=0;
-                            int stop_displacement_y_at=0;
-                            int fade_in_initial=-1;
-                            int fade_in_speed=0;
-                            if(e->Attribute("displacement_x")!=NULL)
-                                displacement_x=atoi(e->Attribute("displacement_x"));
-                            if(e->Attribute("displacement_y")!=NULL)
-                                displacement_y=atoi(e->Attribute("displacement_y"));
-                            if(e->Attribute("stop_displacement_x_at")!=NULL)
-                                stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
-                            if(e->Attribute("stop_displacement_y_at")!=NULL)
-                                stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-                            if(e->Attribute("fade_in_initial")!=NULL)
-                                fade_in_initial=atoi(e->Attribute("fade_in_initial"));
-                            if(e->Attribute("fade_in_speed")!=NULL)
-                                fade_in_speed=atoi(e->Attribute("fade_in_speed"));
-
-                            Image*image=painter->getTexture(path);
-
-//                            if(fade_in_initial!=-1)//!!SET APLHA
-//                                painter->setAlpha(fade_in_initial,image,original_image);
-
-                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
-                                                                           atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,image,""
-                                                                           ));
-                        }
-                        if(strcmp(el->Value(),"chars")==0)
-                        {
-//                            int player=atoi(el->Attribute("player"));
-//                            int pos=atoi(el->Attribute("number"));
-//                            if(player==1)
-//                                pos_pa[pos]=elementos_contenedor.size();
-//                            if(player==2)
-//                                pos_pb[pos]=elementos_contenedor.size();
-                            for(int i=0;i<(int)chars.size();i++)
-                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                             chars[i]
-                                                             ));
-                        }
-                        if(strcmp(el->Value(),"stage")==0)
-                        {
-                            pos_stage=elementos_contenedor.size();
-                            for(int i=0;i<(int)stages.size();i++)
-                            {
-                                int displacement_x=0;
-                                int displacement_y=0;
-                                int stop_displacement_x_at=0;
-                                int stop_displacement_y_at=0;
-                                int fade_in_initial=-1;
-                                int fade_in_speed=0;
-                                if(e->Attribute("displacement_x")!=NULL)
-                                    displacement_x=atoi(e->Attribute("displacement_x"));
-                                if(e->Attribute("displacement_y")!=NULL)
-                                    displacement_y=atoi(e->Attribute("displacement_y"));
-                                if(e->Attribute("stop_displacement_x_at")!=NULL)
-                                    stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
-                                if(e->Attribute("stop_displacement_y_at")!=NULL)
-                                    stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-                                if(e->Attribute("fade_in_initial")!=NULL)
-                                    fade_in_initial=atoi(e->Attribute("fade_in_initial"));
-                                if(e->Attribute("fade_in_speed")!=NULL)
-                                    fade_in_speed=atoi(e->Attribute("fade_in_speed"));
-
-                                Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
-
-
-                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
-                                                                               atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,image,stages[i]
-                                                                               ));
-                            }
-//                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-//                                                             stages[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
-//                                                             ));
-                        }
-                    }
-                    int accion=-1;
-                    if(ec->Attribute("action")!=NULL)
-                    {
-//                        if(strcmp(ec->Attribute("action"),"Time")==0)
-//                            accion=0;
-//                        if(strcmp(ec->Attribute("action"),"Rounds")==0)
-//                            accion=1;
-
-                        if(strcmp(ec->Attribute("action"),"1v1")==0)
-                            accion=0;
-                        if(strcmp(ec->Attribute("action"),"2v2")==0)
-                            accion=1;
-                        if(strcmp(ec->Attribute("action"),"3v3")==0)
-                            accion=3;
-
-                        if(strcmp(ec->Attribute("action"),"1v1cpu")==0)
-                            accion=4;
-                        if(strcmp(ec->Attribute("action"),"2v2cpu")==0)
-                            accion=5;
-                        if(strcmp(ec->Attribute("action"),"3v3cpu")==0)
-                            accion=6;
-                    }
-                    elementos_contenedor.push_back((Elemento*)new MenuLista(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            atoi(ec->Attribute("arrow_left_x")),atoi(ec->Attribute("arrow_left_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_left"))),
-                                                                            atoi(ec->Attribute("arrow_right_x")),atoi(ec->Attribute("arrow_right_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_right"))),
-                                                                            atoi(ec->Attribute("arrow_left_x_selected")),atoi(ec->Attribute("arrow_left_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_left_selected"))),
-                                                                            atoi(ec->Attribute("arrow_right_x_selected")),atoi(ec->Attribute("arrow_right_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_right_selected"))),
-                                                                            elem_lista,
-                                                                            accion
-                                                                            )
-                                                   );
-                }
+                strcpy(menu_load,"menu/");
+                strcat(menu_load,e->Attribute("load_menu"));
             }
-            contenedor_actual=new MenuContenedor(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")
-                                                              ,elementos_contenedor);
-            elementos.push_back((Elemento*)contenedor_actual);
+
+            int x=atoi(e->Attribute("x"));
+            int y=atoi(e->Attribute("y"));
+            int width=atoi(e->Attribute("width"));
+            int height=atoi(e->Attribute("height"));
+            std::string path=e->Attribute("xlink:href");
+
+            int text_x=x;
+            if(e->Attribute("text_x")!=NULL)
+                text_x=atoi(e->Attribute("text_x"));
+
+            int text_y=y;
+            if(e->Attribute("text_y")!=NULL)
+                text_x=atoi(e->Attribute("text_y"));
+
+            std::string text="";
+            if(e->Attribute("text")!=NULL)
+                text=e->Attribute("text");
+
+            std::string path_selected=path;
+            if(e->Attribute("image_selected")!=NULL)
+                path_selected=e->Attribute("image_selected");
+
+            int text_x_selected=text_x;
+            if(e->Attribute("text_x_selected")!=NULL)
+                text_x_selected=atoi(e->Attribute("text_x_selected"));
+
+            int text_y_selected=text_y;
+            if(e->Attribute("text_y_selected")!=NULL)
+                text_y_selected=atoi(e->Attribute("text_y_selected"));
+
+            std::string text_selected=text;
+            if(e->Attribute("text_selected")!=NULL)
+                text_selected=e->Attribute("text_selected");
+
+
+            elementos_contenedor.push_back((Elemento*)new MenuBoton(painter,
+                                                                    x,y,
+                                                                    width,height,
+                                                                    painter->getTexture(std::string("menu/")+path),
+                                                                    text_x,text_y,text,
+                                                                    painter->getTexture(std::string("menu/")+path_selected),
+                                                                    text_x_selected,text_y_selected,text_selected,
+                                                                    action,menu_load
+                                                                    ));
+
+        }else if(strcmp(e->Attribute("type"),"bar")==0)
+        {
+            int accion=-1;
+            int default_value=0;
+            if(e->Attribute("default_value")!=NULL)
+                atoi(e->Attribute("default_value"));
+            if(e->Attribute("action")!=NULL)
+            {
+                if(strcmp(e->Attribute("action"),"AI level")==0)
+                {
+                    accion=0;
+                    default_value=ai_level;
+                }
+                accion=atoi(e->Attribute("action"));
+            }
+
+            int x=atoi(e->Attribute("x"));
+            int y=atoi(e->Attribute("y"));
+            int width=atoi(e->Attribute("width"));
+            int height=atoi(e->Attribute("height"));
+
+            std::string path(e->Attribute("xlink:href"));
+
+            std::string background=path;
+            if(e->Attribute("background")!=NULL)
+                background=e->Attribute("background");
+
+            int bar_x=x;
+            if(e->Attribute("bar_x")!=NULL)
+                bar_x=atoi(e->Attribute("bar_x"));
+
+            int bar_y=y;
+            if(e->Attribute("bar_y")!=NULL)
+                bar_y=atoi(e->Attribute("bar_y"));
+
+            std::string background_selected=background;
+            if(e->Attribute("background_selected")!=NULL)
+                background_selected=e->Attribute("background_selected");
+
+            int bar_x_selected=bar_x;
+            if(e->Attribute("bar_x_selected")!=NULL)
+                bar_x_selected=atoi(e->Attribute("bar_x_selected"));
+
+            int bar_y_selected=bar_y;
+            if(e->Attribute("bar_y_selected")!=NULL)
+                bar_y_selected=atoi(e->Attribute("bar_y_selected"));
+
+            std::string image_selected=path;
+            if(e->Attribute("image_selected")!=NULL)
+                image_selected=e->Attribute("image_selected");
+
+            int max=9999;
+            if(e->Attribute("max")!=NULL)
+                max=atoi(e->Attribute("max"));
+
+            elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,
+                                                                    x,y,
+                                                                    width,height,
+                                                                    painter->getTexture(std::string("menu/")+background),
+                                                                    bar_x,bar_y,
+                                                                    painter->getTexture(std::string("menu/")+path),
+                                                                    painter->getTexture(std::string("menu/")+background_selected),
+                                                                    bar_x_selected,bar_y_selected,
+                                                                    painter->getTexture(std::string("menu/")+image_selected),
+                                                                    max,default_value,accion
+                                                                    )
+                                           );
         }
     }
+
+    if(g_node->FirstChild("rect")!=NULL)
+    for(TiXmlNode* rect_node=g_node->FirstChild("rect");
+            rect_node!=NULL;
+            rect_node=rect_node->NextSibling("rect"))
+    {
+        TiXmlElement* e=rect_node->ToElement();
+        if(e->Attribute("type")!=NULL)
+        {
+            if(strcmp(e->Attribute("type"),"char_select")==0)
+            {
+                int x=atoi(e->Attribute("x"));
+                int y=atoi(e->Attribute("y"));
+                int size_x=3;
+                if(e->Attribute("size_x")!=NULL)
+                    size_x=atoi(e->Attribute("size_x"));
+
+                int size_y=3;
+                if(e->Attribute("size_y")!=NULL)
+                    size_y=atoi(e->Attribute("size_y"));
+
+                int box_size_x=100;
+                if(e->Attribute("box_size_x")!=NULL)
+                    box_size_x=atoi(e->Attribute("box_size_x"));
+
+                int box_size_y=100;
+                if(e->Attribute("box_size_y")!=NULL)
+                    box_size_y=atoi(e->Attribute("box_size_y"));
+
+                int box_separation_x=0;
+                if(e->Attribute("box_separation_x")!=NULL)
+                    box_separation_x=atoi(e->Attribute("box_separation_x"));
+
+                int box_separation_y=0;
+                if(e->Attribute("box_separation_y")!=NULL)
+                    box_separation_y=atoi(e->Attribute("box_separation_y"));
+
+                int chars_player1=1;
+                if(e->Attribute("chars_player1")!=NULL)
+                    chars_player1=atoi(e->Attribute("chars_player1"));
+
+                int chars_player2=1;
+                if(e->Attribute("chars_player2")!=NULL)
+                    chars_player2=atoi(e->Attribute("chars_player2"));
+
+                int preview_player1_x=0;
+                if(e->Attribute("preview_player1_x")!=NULL)
+                    preview_player1_x=atoi(e->Attribute("preview_player1_x"));
+
+                int preview_player1_y=0;
+                if(e->Attribute("preview_player1_y")!=NULL)
+                    preview_player1_y=atoi(e->Attribute("preview_player1_y"));
+
+                int preview_player2_x=0;
+                if(e->Attribute("preview_player2_x")!=NULL)
+                    preview_player2_x=atoi(e->Attribute("preview_player2_x"));
+
+                int preview_player2_y=0;
+                if(e->Attribute("preview_player2_y")!=NULL)
+                    preview_player2_y=atoi(e->Attribute("preview_player2_y"));
+
+                int player1_cursor_x=0;
+                if(e->Attribute("player1_cursor_x")!=NULL)
+                    player1_cursor_x=atoi(e->Attribute("player1_cursor_x"));
+
+                int player1_cursor_y=0;
+                if(e->Attribute("player1_cursor_y")!=NULL)
+                    player1_cursor_y=atoi(e->Attribute("player1_cursor_y"));
+
+                int player2_cursor_x=0;
+                if(e->Attribute("player2_cursor_x")!=NULL)
+                    player2_cursor_x=atoi(e->Attribute("player2_cursor_x"));
+
+                int player2_cursor_y=0;
+                if(e->Attribute("player2_cursor_y")!=NULL)
+                    player2_cursor_y=atoi(e->Attribute("player2_cursor_y"));
+
+                char_select=new MenuCharSelect(painter,x,y,
+                                               size_x,size_y,
+                                               box_size_x,box_size_y,
+                                               box_separation_x,box_separation_y,
+                                               chars_player1,chars_player2,
+                                               preview_player1_x,preview_player1_y,
+                                               preview_player2_x,preview_player2_y,
+                                               chars,
+                                               player1_cursor_x,player1_cursor_y,
+                                               player2_cursor_x,player2_cursor_y
+                                               );
+                elementos.push_back((Elemento*)char_select);
+
+            }else if(strcmp(e->Attribute("type"),"stage_select")==0)
+            {
+                pos_stage=elementos_contenedor.size();
+                std::vector<Elemento*>elem_lista;
+                for(int i=0;i<(int)stages.size();i++)
+                {
+                    int displacement_x=0;
+                    int displacement_y=0;
+                    int stop_displacement_x_at=0;
+                    int stop_displacement_y_at=0;
+                    int fade_in_initial=-1;
+                    int fade_in_speed=0;
+                    if(e->Attribute("displacement_x")!=NULL)
+                        displacement_x=atoi(e->Attribute("displacement_x"));
+                    if(e->Attribute("displacement_y")!=NULL)
+                        displacement_y=atoi(e->Attribute("displacement_y"));
+                    if(e->Attribute("stop_displacement_x_at")!=NULL)
+                        stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
+                    if(e->Attribute("stop_displacement_y_at")!=NULL)
+                        stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+                    if(e->Attribute("fade_in_initial")!=NULL)
+                        fade_in_initial=atoi(e->Attribute("fade_in_initial"));
+                    if(e->Attribute("fade_in_speed")!=NULL)
+                        fade_in_speed=atoi(e->Attribute("fade_in_speed"));
+
+                    Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
+
+
+                    elem_lista.push_back((Elemento*)new MenuImagen(painter,
+                                                                   atoi(e->Attribute("x")),atoi(e->Attribute("y")),
+                                                                   displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
+                                                                   atoi(e->Attribute("width")),atoi(e->Attribute("height")),
+                                                                   image,stages[i]
+                                                                   ));
+                }
+
+                int x=atoi(e->Attribute("x"));
+                int y=atoi(e->Attribute("y"));
+
+                int arrow_left_x=x;
+                if(e->Attribute("arrow_left_x"))
+                    atoi(e->Attribute("arrow_left_x"));
+
+                int arrow_left_y=y;
+                if(e->Attribute("arrow_left_y"))
+                    atoi(e->Attribute("arrow_left_y"));
+
+                Image*path_left=NULL;
+                if(e->Attribute("path_left")!=NULL)
+                    path_left=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left")));
+
+                int arrow_right_x=x;
+                if(e->Attribute("arrow_right_x"))
+                    atoi(e->Attribute("arrow_right_x"));
+
+                int arrow_right_y=y;
+                if(e->Attribute("arrow_right_y"))
+                    atoi(e->Attribute("arrow_right_y"));
+
+                Image*path_right=NULL;
+                if(e->Attribute("path_right")!=NULL)
+                    path_right=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right")));
+
+                int arrow_left_x_selected=x;
+                if(e->Attribute("arrow_left_x_selected"))
+                    atoi(e->Attribute("arrow_left_x_selected"));
+
+                int arrow_left_y_selected=y;
+                if(e->Attribute("arrow_left_y_selected"))
+                    atoi(e->Attribute("arrow_left_y_selected"));
+
+                Image*path_left_selected=path_left;
+                if(e->Attribute("path_left_selected")!=NULL)
+                    path_left_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left_selected")));
+
+                int arrow_right_x_selected=x;
+                if(e->Attribute("arrow_right_x_selected"))
+                    atoi(e->Attribute("arrow_right_x_selected"));
+
+                int arrow_right_y_selected=y;
+                if(e->Attribute("arrow_right_y_selected"))
+                    atoi(e->Attribute("arrow_right_y_selected"));
+
+                Image*path_right_selected=path_right;
+                if(e->Attribute("path_right_selected")!=NULL)
+                    path_right_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right_selected")));
+
+                elementos_contenedor.push_back((Elemento*)new MenuLista(painter,x,y,
+                                                                        arrow_left_x,arrow_left_y,
+                                                                        path_left,
+                                                                        arrow_right_x,arrow_right_y,
+                                                                        path_right,
+                                                                        arrow_left_x_selected,arrow_left_y_selected,
+                                                                        path_left_selected,
+                                                                        arrow_right_x_selected,arrow_right_y_selected,
+                                                                        path_right_selected,
+                                                                        elem_lista,
+                                                                        "start"
+                                                                        )
+                                               );
+
+            }
+        }
+    }
+
+
+    for(TiXmlNode* text_node=g_node->FirstChild("text");
+            text_node!=NULL;
+            text_node=text_node->NextSibling("text"))
+    {
+        TiXmlElement* e=text_node->ToElement();
+
+        TiXmlElement* text_span_elem=text_node->FirstChild("tspan")->ToElement();
+
+        elementos.push_back((Elemento*)new MenuTexto(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),
+                                                     text_span_elem->GetText()
+                                                     ));
+    }
+
+    selectables_container=new MenuContenedor(painter,elementos_contenedor);
+    elementos.push_back((Elemento*)selectables_container);
 }
 
 std::string Menu::getStage()
 {
     //!
-    MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
+    MenuContenedor *mc=((MenuContenedor*)selectables_container);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
     MenuImagen *mt=(MenuImagen*)ml->getElementoActual();
     std::string str=mt->value;
@@ -1031,11 +1177,13 @@ int Menu::toKeyCode(std::string str)
 
 void Menu::llenarInputsBotones()
 {
-    for(int i=0;i<(int)contenedor_actual->elementos.size();i++)
+    if(selectables_container==NULL)
+        return;
+    for(int i=0;i<(int)selectables_container->elementos.size();i++)
     {
-        if(((MenuContenedor*)contenedor_actual)->elementos[i]->getTipo()=="Contenedor")
+        if(((MenuContenedor*)selectables_container)->elementos[i]->getTipo()=="Contenedor")
         {
-            MenuBoton*mb=(MenuBoton*)contenedor_actual->elementos[i];
+            MenuBoton*mb=(MenuBoton*)selectables_container->elementos[i];
             if(mb->getAccion().substr(0,6)=="Player")
             {
                 int player;

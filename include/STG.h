@@ -3,7 +3,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Input/Input.h"
 #include "Character/Character.h"
 #include "Character/Player.h"
@@ -13,7 +13,7 @@
 
 class STG
 {
-    Sonido* sonido;
+    Sound* sonido;
     Painter* painter;
     Receiver* receiver;
     Player*player;
@@ -29,7 +29,7 @@ class STG
     void deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2);
     void checkCharacterOutOfBounds();
 public:
-    STG(Sonido* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
+    STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
 };
 
 #endif

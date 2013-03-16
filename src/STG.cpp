@@ -1,6 +1,6 @@
 #include "../include/STG.h"
 
-STG::STG(Sonido* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
+STG::STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
 {
     this->sonido=sonido;
     this->painter=painter;

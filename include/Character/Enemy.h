@@ -7,7 +7,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Input/Input.h"
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
@@ -23,7 +23,7 @@ class Enemy : public Character
 
     Image*life_bar;
 public:
-    Enemy(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory,Player*player);
+    Enemy(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory,Player*player);
     void logic(int stage_velocity);
     void modifiersControl();
     void render();

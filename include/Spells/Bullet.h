@@ -3,13 +3,13 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Input/Input.h"
 #include "Spells/Hitbox.h"
 
 class Bullet
 {
-    Sonido* sonido;
+    Sound* sonido;
     Painter* painter;
     Receiver* receiver;
     vector<Image*>sprites;
@@ -20,7 +20,7 @@ class Bullet
     bool has_sound;
 public:
     Bullet(){};
-    Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
+    Bullet(Sound* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
     void logic();
     void render();
     Hitbox getHitbox();

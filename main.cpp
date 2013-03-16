@@ -13,8 +13,8 @@
 
 #include "Input/Input.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
-#include "Menu/Menu.h"
+#include "RosalilaSound/RosalilaSound.h"
+#include "STGMenu/STGMenu.h"
 #include "Utility/Utility.h"
 
 #include <iostream>
@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
 //painter->fps.start();
 
 
-    Sonido*sonido = new Sonido();
-    Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");
+    Sound*sonido = new Sound();
+    Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.svg");
     sonido->playMusic(menu->music_path);
 
     menu->loopMenu();

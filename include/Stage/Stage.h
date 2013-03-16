@@ -3,7 +3,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Character/Character.h"
 #include "Stage/Layer.h"
 #include "Stage/Dialogue.h"
@@ -17,7 +17,7 @@ private:
     std::list<Dialogue*>active_dialogues;
     std::string music_path;
     Painter* painter;
-    Sonido* sonido;
+    Sound* sonido;
     Receiver*receiver;
     int dialogue_x;
     int dialogue_y;
@@ -31,7 +31,7 @@ private:
     int iterator;
 
 public:
-    Stage(Painter* painter,Sonido* sonido,Receiver*receiver);
+    Stage(Painter* painter,Sound* sonido,Receiver*receiver);
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);

@@ -7,7 +7,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Input/Input.h"
 #include "Spells/Bullet.h"
 #include "Spells/Pattern.h"
@@ -17,7 +17,7 @@ class Player:public Character
 {
     Image*life_bar;
 public:
-    Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory);
+    Player(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory);
     void logic(int stage_velocity);
     void inputControl();
     void render();

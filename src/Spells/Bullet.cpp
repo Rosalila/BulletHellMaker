@@ -1,6 +1,6 @@
 #include "../include/Spells/Bullet.h"
 
-Bullet::Bullet(Sonido* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound)
+Bullet::Bullet(Sound* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -60,6 +60,6 @@ void Bullet::playSound()
 {
     if(has_sound)
     {
-        sonido->reproducirSonido("bullet."+name,false);
+        sonido->playSound("bullet."+name);
     }
 }

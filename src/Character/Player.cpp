@@ -1,6 +1,6 @@
 #include "../include/Character/Player.h"
 
-Player::Player(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Player::Player(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory)
 {
     //Setting up the other variables
     this->sonido=sonido;

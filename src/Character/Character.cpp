@@ -1,6 +1,6 @@
 #include "../include/Character/Character.h"
 
-Character::Character(Sonido* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Character::Character(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory)
 {
     //Setting up the other variables
     this->sonido=sonido;
@@ -98,7 +98,7 @@ void Character::loadBulletsXML(std::string directory)
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sound=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
-            sonido->agregarSonido("bullet."+node_name,sound);
+            sonido->addSound("bullet."+node_name,sound);
             has_sound=true;
         }
 

@@ -1,208 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="Rosalila/Input/Input.h" open="0" top="0" tabpos="0">
+		<Cursor position="30" topLine="0" />
+	</File>
 	<File name="include/Character/Character.h" open="0" top="0" tabpos="1">
-		<Cursor position="583" topLine="19" />
+		<Cursor position="1021" topLine="36" />
 	</File>
 	<File name="include/Character/Enemy.h" open="0" top="0" tabpos="2">
-		<Cursor position="488" topLine="5" />
+		<Cursor position="513" topLine="6" />
 	</File>
 	<File name="include/Character/Player.h" open="0" top="0" tabpos="3">
-		<Cursor position="336" topLine="0" />
-	</File>
-	<File name="include/IA/Automata.h" open="0" top="0" tabpos="7">
-		<Cursor position="93" topLine="0" />
-	</File>
-	<File name="include/IA/Estado.h" open="0" top="0" tabpos="8">
-		<Cursor position="164" topLine="0" />
-	</File>
-	<File name="include/IA/IA.h" open="0" top="0" tabpos="9">
-		<Cursor position="53" topLine="0" />
-	</File>
-	<File name="include/IA/Transicion.h" open="0" top="0" tabpos="10">
-		<Cursor position="44" topLine="0" />
-	</File>
-	<File name="include/Input/Boton.h" open="0" top="0" tabpos="18">
-		<Cursor position="528" topLine="0" />
-	</File>
-	<File name="include/Input/Input.h" open="0" top="0" tabpos="11">
-		<Cursor position="30" topLine="0" />
-	</File>
-	<File name="include/Input/Receiver.h" open="0" top="0" tabpos="6">
-		<Cursor position="92" topLine="0" />
-	</File>
-	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="1">
-		<Cursor position="324" topLine="0" />
-	</File>
-	<File name="include/Menu/Menu.h" open="0" top="0" tabpos="1">
-		<Cursor position="709" topLine="8" />
-	</File>
-	<File name="include/Menu/MenuBarra.h" open="0" top="0" tabpos="0">
-		<Cursor position="529" topLine="0" />
-	</File>
-	<File name="include/Menu/MenuBoton.h" open="0" top="0" tabpos="0">
-		<Cursor position="602" topLine="6" />
-	</File>
-	<File name="include/Menu/MenuCharSelect.h" open="0" top="0" tabpos="3">
-		<Cursor position="1946" topLine="36" />
-	</File>
-	<File name="include/Menu/MenuContenedor.h" open="0" top="0" tabpos="0">
-		<Cursor position="329" topLine="0" />
-	</File>
-	<File name="include/Menu/MenuImagen.h" open="0" top="0" tabpos="3">
-		<Cursor position="496" topLine="0" />
-	</File>
-	<File name="include/Menu/MenuLista.h" open="0" top="0" tabpos="0">
-		<Cursor position="435" topLine="6" />
-	</File>
-	<File name="include/Menu/MenuTexto.h" open="0" top="0" tabpos="0">
-		<Cursor position="274" topLine="0" />
-	</File>
-	<File name="include/Painter/Cube.h" open="1" top="1" tabpos="4">
-		<Cursor position="199" topLine="0" />
-	</File>
-	<File name="include/Painter/Image.h" open="0" top="0" tabpos="2">
-		<Cursor position="192" topLine="0" />
-	</File>
-	<File name="include/Painter/Object3D.h" open="1" top="0" tabpos="1">
-		<Cursor position="184" topLine="0" />
-	</File>
-	<File name="include/Painter/Painter.h" open="0" top="0" tabpos="2">
-		<Cursor position="313" topLine="0" />
+		<Cursor position="375" topLine="0" />
 	</File>
 	<File name="include/STG.h" open="0" top="0" tabpos="1">
-		<Cursor position="419" topLine="0" />
+		<Cursor position="732" topLine="3" />
 	</File>
-	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="12">
-		<Cursor position="250" topLine="0" />
+	<File name="include/STGMenu/STGMenu.h" open="0" top="0" tabpos="0">
+		<Cursor position="873" topLine="12" />
 	</File>
 	<File name="include/Spells/Bullet.h" open="0" top="0" tabpos="4">
-		<Cursor position="809" topLine="9" />
+		<Cursor position="446" topLine="0" />
 	</File>
 	<File name="include/Spells/Hitbox.h" open="0" top="0" tabpos="3">
-		<Cursor position="677" topLine="8" />
+		<Cursor position="134" topLine="0" />
 	</File>
 	<File name="include/Spells/Pattern.h" open="0" top="0" tabpos="1">
-		<Cursor position="961" topLine="29" />
+		<Cursor position="1121" topLine="41" />
 	</File>
 	<File name="include/Stage/Dialogue.h" open="0" top="0" tabpos="2">
-		<Cursor position="470" topLine="0" />
+		<Cursor position="373" topLine="0" />
 	</File>
 	<File name="include/Stage/Layer.h" open="0" top="0" tabpos="0">
-		<Cursor position="30" topLine="0" />
+		<Cursor position="132" topLine="0" />
 	</File>
 	<File name="include/Stage/Stage.h" open="0" top="0" tabpos="1">
-		<Cursor position="858" topLine="12" />
+		<Cursor position="740" topLine="19" />
 	</File>
-	<File name="include/TinyXml/tinystr.h" open="0" top="0" tabpos="0">
-		<Cursor position="6531" topLine="233" />
+	<File name="main.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="860" topLine="22" />
 	</File>
-	<File name="include/Utility/Utility.h" open="1" top="0" tabpos="3">
-		<Cursor position="37" topLine="0" />
+	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="3468" topLine="86" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="503" topLine="0" />
+	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="59" topLine="2" />
 	</File>
-	<File name="src/Character/Character.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="9872" topLine="226" />
-	</File>
-	<File name="src/Character/Enemy.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="2596" topLine="68" />
-	</File>
-	<File name="src/Character/Player.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1540" topLine="24" />
-	</File>
-	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="13">
-		<Cursor position="593" topLine="16" />
-	</File>
-	<File name="src/IA/Estado.cpp" open="0" top="0" tabpos="14">
-		<Cursor position="388" topLine="0" />
-	</File>
-	<File name="src/IA/IA.cpp" open="0" top="0" tabpos="15">
-		<Cursor position="431" topLine="1" />
-	</File>
-	<File name="src/IA/Transicion.cpp" open="0" top="0" tabpos="16">
-		<Cursor position="1898" topLine="50" />
-	</File>
-	<File name="src/Input/Boton.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3089" topLine="0" />
-	</File>
-	<File name="src/Input/Input.cpp" open="0" top="0" tabpos="17">
-		<Cursor position="3273" topLine="89" />
-	</File>
-	<File name="src/Input/Receiver.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="1728" topLine="59" />
-	</File>
-	<File name="src/Menu/Elemento.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="26" topLine="0" />
-	</File>
-	<File name="src/Menu/Menu.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="18094" topLine="464" />
-	</File>
-	<File name="src/Menu/MenuBarra.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3399" topLine="135" />
-	</File>
-	<File name="src/Menu/MenuBoton.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3231" topLine="109" />
-	</File>
-	<File name="src/Menu/MenuCharSelect.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="4992" topLine="166" />
-	</File>
-	<File name="src/Menu/MenuContenedor.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="232" topLine="0" />
-	</File>
-	<File name="src/Menu/MenuImagen.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="1309" topLine="28" />
-	</File>
-	<File name="src/Menu/MenuLista.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="4617" topLine="132" />
-	</File>
-	<File name="src/Menu/MenuTexto.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="202" topLine="0" />
-	</File>
-	<File name="src/Painter/Animation.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="276" topLine="0" />
-	</File>
-	<File name="src/Painter/Cube.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="474" topLine="0" />
-	</File>
-	<File name="src/Painter/Image.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="30" topLine="0" />
-	</File>
-	<File name="src/Painter/Object3D.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="84" topLine="0" />
-	</File>
-	<File name="src/Painter/Painter.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="15057" topLine="493" />
+	<File name="src/Character/Player.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="62" topLine="2" />
 	</File>
 	<File name="src/STG.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="4947" topLine="162" />
+		<Cursor position="43" topLine="2" />
 	</File>
-	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1348" topLine="42" />
+	<File name="src/STGMenu/STGMenu.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="13990" topLine="352" />
 	</File>
 	<File name="src/Spells/Bullet.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="727" topLine="41" />
+		<Cursor position="1124" topLine="37" />
 	</File>
 	<File name="src/Spells/Hitbox.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="1444" topLine="65" />
 	</File>
 	<File name="src/Spells/Pattern.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="9107" topLine="362" />
+		<Cursor position="62" topLine="2" />
 	</File>
 	<File name="src/Stage/Dialogue.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="453" topLine="0" />
+		<Cursor position="71" topLine="0" />
 	</File>
 	<File name="src/Stage/Layer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="21" topLine="0" />
 	</File>
 	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2560" topLine="80" />
-	</File>
-	<File name="src/TinyXml/tinyxml.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="7535" topLine="347" />
-	</File>
-	<File name="src/Utility/Utility.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="62" topLine="2" />
 	</File>
 </CodeBlocks_layout_file>
