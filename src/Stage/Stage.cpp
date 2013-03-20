@@ -114,6 +114,9 @@ void Stage::loadDialogues(std::string file)
 
     TiXmlNode *dialogues_file=doc->FirstChild("DialoguesFile");
 
+    if(dialogues_file==NULL)
+        return;
+
     for(TiXmlNode *dialogue_node=dialogues_file->FirstChild("dialogue");
             dialogue_node!=NULL;
             dialogue_node=dialogue_node->NextSibling("dialogue"))
@@ -148,17 +151,18 @@ void Stage::cargarDesdeXML(std::string path)
     strcat(music,"/music.ogg");
     music_path=(std::string)music;
 
-    TiXmlNode *nodo_ss=stage_file->FirstChild("StageSize");
-    this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
-
-    TiXmlNode *dialogue_pos_node=stage_file->FirstChild("DialoguePosition");
-    this->dialogue_x=atoi(dialogue_pos_node->ToElement()->Attribute("x"));
-    this->dialogue_y=atoi(dialogue_pos_node->ToElement()->Attribute("y"));
-    this->dialogue_padding_x=atoi(dialogue_pos_node->ToElement()->Attribute("padding_x"));
-    this->dialogue_padding_y=atoi(dialogue_pos_node->ToElement()->Attribute("padding_y"));
-
-    TiXmlNode *nodo_floor=stage_file->FirstChild("Floor");
-    this->pos_piso=atoi(nodo_floor->ToElement()->Attribute("position"));
+    this->dialogue_x=0;
+    this->dialogue_y=0;
+    this->dialogue_padding_x=0;
+    this->dialogue_padding_y=0;
+    if(stage_file->FirstChild("DialoguePosition")!=NULL)
+    {
+        TiXmlNode *dialogue_pos_node=stage_file->FirstChild("DialoguePosition");
+        this->dialogue_x=atoi(dialogue_pos_node->ToElement()->Attribute("x"));
+        this->dialogue_y=atoi(dialogue_pos_node->ToElement()->Attribute("y"));
+        this->dialogue_padding_x=atoi(dialogue_pos_node->ToElement()->Attribute("padding_x"));
+        this->dialogue_padding_y=atoi(dialogue_pos_node->ToElement()->Attribute("padding_y"));
+    }
 
     TiXmlNode *nodo_bounds=stage_file->FirstChild("Bounds");
     this->bound_x1=atoi(nodo_bounds->ToElement()->Attribute("x1"));
@@ -176,12 +180,29 @@ void Stage::cargarDesdeXML(std::string path)
             nodo_back!=NULL;
             nodo_back=nodo_back->NextSibling("BackLayer"))
     {
-        int frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
-        int depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
-        int depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
-        int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
-        int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
-        int separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
+        int frame_duration=0;
+        if(nodo_back->ToElement()->Attribute("frame_duration")!=NULL)
+            frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+
+        int depth_effect_x=0;
+        if(nodo_back->ToElement()->Attribute("depth_effect_x")!=NULL)
+            depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+
+        int depth_effect_y=0;
+        if(nodo_back->ToElement()->Attribute("depth_effect_y")!=NULL)
+            depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+
+        int align_x=0;
+        if(nodo_back->ToElement()->Attribute("align_x")!=NULL)
+            align_x=atoi(nodo_back->ToElement()->Attribute("align_x"));
+
+        int align_y=0;
+        if(nodo_back->ToElement()->Attribute("align_y")!=NULL)
+            align_y=atoi(nodo_back->ToElement()->Attribute("align_y"));
+
+        int separation_x=0;
+        if(nodo_back->ToElement()->Attribute("separation_x")!=NULL)
+            separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
 
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
@@ -196,15 +217,23 @@ void Stage::cargarDesdeXML(std::string path)
             strcat(image,path.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
-            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
 
-            textures.push_back(painter->getTexture(image));
+            Image *image_temp=painter->getTexture(image);
+
+            int size_x=image_temp->getWidth();
+            int size_y=image_temp->getHeight();
+
+            if(layer->ToElement()->Attribute("width")!=NULL)
+                size_x=atoi(layer->ToElement()->Attribute("width"));
+            if(layer->ToElement()->Attribute("height")!=NULL)
+                size_y=atoi(layer->ToElement()->Attribute("height"));
+
+            textures.push_back(image_temp);
             textures_size_x.push_back(size_x);
             textures_size_y.push_back(size_y);
         }
 
-        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y,separation_x));
+        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x));
     }
 
     writeLogLine("Loading stage's FrontLayers.");
@@ -214,12 +243,29 @@ void Stage::cargarDesdeXML(std::string path)
             nodo_back!=NULL;
             nodo_back=nodo_back->NextSibling("FrontLayer"))
     {
-        int frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
-        int depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
-        int depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
-        int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
-        int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
-        int separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
+        int frame_duration=0;
+        if(nodo_back->ToElement()->Attribute("frame_duration")!=NULL)
+            frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+
+        int depth_effect_x=0;
+        if(nodo_back->ToElement()->Attribute("depth_effect_x")!=NULL)
+            depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+
+        int depth_effect_y=0;
+        if(nodo_back->ToElement()->Attribute("depth_effect_y")!=NULL)
+            depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+
+        int align_x=0;
+        if(nodo_back->ToElement()->Attribute("align_x")!=NULL)
+            align_x=atoi(nodo_back->ToElement()->Attribute("align_x"));
+
+        int align_y=0;
+        if(nodo_back->ToElement()->Attribute("align_y")!=NULL)
+            align_y=atoi(nodo_back->ToElement()->Attribute("align_y"));
+
+        int separation_x=0;
+        if(nodo_back->ToElement()->Attribute("separation_x")!=NULL)
+            separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
 
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
@@ -234,15 +280,23 @@ void Stage::cargarDesdeXML(std::string path)
             strcat(image,path.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
-            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
 
-            textures.push_back(painter->getTexture(image));
+            Image *image_temp=painter->getTexture(image);
+
+            int size_x=image_temp->getWidth();
+            int size_y=image_temp->getHeight();
+
+            if(layer->ToElement()->Attribute("width")!=NULL)
+                size_x=atoi(layer->ToElement()->Attribute("width"));
+            if(layer->ToElement()->Attribute("height")!=NULL)
+                size_y=atoi(layer->ToElement()->Attribute("height"));
+
+            textures.push_back(image_temp);
             textures_size_x.push_back(size_x);
             textures_size_y.push_back(size_y);
         }
 
-        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y,separation_x
+        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x
                                   ));
     }
     writeLogLine("Stage loaded succesfully from XML.");
@@ -320,4 +374,9 @@ void Stage::logic()
             ++i;
         }
     }
+}
+
+void Stage::playMusic()
+{
+    sonido->playMusic(this->music_path);
 }

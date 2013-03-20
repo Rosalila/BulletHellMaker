@@ -27,7 +27,7 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sound* sonido,char* archivo)
                 node_chars2!=NULL;
                 node_chars2=node_chars2->NextSibling("char"))
         {
-            chars.push_back(std::string(node_chars2->ToElement()->Attribute("nombre")));
+            chars.push_back(std::string(node_chars2->ToElement()->Attribute("name")));
         }
     }
 
@@ -39,7 +39,7 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sound* sonido,char* archivo)
                 node_chars2!=NULL;
                 node_chars2=node_chars2->NextSibling("stage"))
         {
-            stages.push_back(std::string(node_chars2->ToElement()->Attribute("nombre")));
+            stages.push_back(std::string(node_chars2->ToElement()->Attribute("name")));
         }
     }
 
@@ -55,6 +55,8 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name)
     Enemy*enemy=new Enemy(sonido,painter,receiver,"stages/"+stage_name+"/Enemy/",player);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage);
     delete stg;
+    this->playMusic();
+    char_select->clearLocks();
 }
 
 void Menu::loopMenu()
@@ -1284,4 +1286,9 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         false);
 
     painter->updateScreen();
+}
+
+void Menu::playMusic()
+{
+    sonido->playMusic(this->music_path);
 }

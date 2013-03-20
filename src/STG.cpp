@@ -21,7 +21,7 @@ STG::STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*e
 
     TiXmlNode *config_file=doc->FirstChild("ConfigFile");
 
-    TiXmlNode *you_loose_node=config_file->FirstChild("YouLoose");
+    TiXmlNode *you_loose_node=config_file->FirstChild("YouLose");
 
     int you_loose_x=atoi(you_loose_node->ToElement()->Attribute("x"));
     int you_loose_y=atoi(you_loose_node->ToElement()->Attribute("y"));
@@ -52,6 +52,8 @@ STG::STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*e
         you_win.addImage(painter->getTexture(path));
     }
 
+    stage->playMusic();
+
     mainLoop();
 }
 
@@ -61,7 +63,7 @@ void STG::mainLoop()
     {
         if(receiver->IsKeyDownn(SDLK_ESCAPE))
         {
-            exit(0);
+            break;
         }
         logic();
         render();

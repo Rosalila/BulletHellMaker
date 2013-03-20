@@ -12,6 +12,7 @@ Character::Character(Sound* sonido,Painter* painter,Receiver* receiver,std::stri
     this->shooting=true;
     this->orientation="idle";
     this->current_type="1";
+    this->visible=true;
 
     //Sprites animation
     this->animation_iteration=0;
@@ -52,6 +53,38 @@ void Character::loadMainXML(std::string directory)
     this->x=atoi(attributes->Attribute("initial_x"));
     this->y=atoi(attributes->Attribute("initial_y"));
     this->hp=this->max_hp;
+
+    this->life_bar_x=0;
+    this->life_bar_y=0;
+    this->life_bar_rect_offset_x=0;
+    this->life_bar_rect_offset_y=0;
+    this->life_bar_rect_height=0;
+    this->life_bar_rect_width=0;
+
+    if(main_file->FirstChild("LifeBar")!=NULL)
+    {
+        TiXmlElement *life_bar=main_file->FirstChild("LifeBar")->ToElement();
+        if(life_bar->Attribute("x")!=NULL)
+            this->life_bar_x=atoi(life_bar->Attribute("x"));
+        if(life_bar->Attribute("y")!=NULL)
+            this->life_bar_y=atoi(life_bar->Attribute("y"));
+        if(life_bar->Attribute("color_r")!=NULL)
+            this->color.red=atoi(life_bar->Attribute("color_r"));
+        if(life_bar->Attribute("color_g")!=NULL)
+            this->color.green=atoi(life_bar->Attribute("color_g"));
+        if(life_bar->Attribute("color_b")!=NULL)
+            this->color.blue=atoi(life_bar->Attribute("color_b"));
+        if(life_bar->Attribute("color_a")!=NULL)
+            this->color.alpha=atoi(life_bar->Attribute("color_a"));
+        if(life_bar->Attribute("rect_offset_x")!=NULL)
+            this->life_bar_rect_offset_x=atoi(life_bar->Attribute("rect_offset_x"));
+        if(life_bar->Attribute("rect_offset_y")!=NULL)
+            this->life_bar_rect_offset_y=atoi(life_bar->Attribute("rect_offset_y"));
+        if(life_bar->Attribute("rect_height")!=NULL)
+            this->life_bar_rect_height=atoi(life_bar->Attribute("rect_height"));
+        if(life_bar->Attribute("rect_width")!=NULL)
+            this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
+    }
 
     TiXmlElement *hitbox_node=main_file->FirstChild("Hitbox")->ToElement();
     int hitbox_x=atoi(hitbox_node->Attribute("x"));
@@ -332,6 +365,8 @@ void Character::animationControl()
         if(current_sprite>=(int)sprites[orientation].size())
         {
             current_sprite=0;
+            if(orientation=="destroyed")
+                visible=false;
         }
         animation_iteration=0;
     }
@@ -363,6 +398,8 @@ void Character::spellControl(int stage_velocity)
 
 void Character::parrentRender()
 {
+    if(!visible)
+        return;
     painter->draw2DImage
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),

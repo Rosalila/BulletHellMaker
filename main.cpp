@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
     Sound*sonido = new Sound();
     Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.svg");
-    sonido->playMusic(menu->music_path);
+    menu->playMusic();
 
     menu->loopMenu();
     return 0;

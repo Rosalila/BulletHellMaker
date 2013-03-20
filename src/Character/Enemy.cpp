@@ -11,18 +11,20 @@ Enemy::Enemy(Sound* sonido,Painter* painter,Receiver* receiver,std::string direc
     this->shooting=true;
     this->orientation="idle";
     this->current_type="";
+    this->visible=true;
 
     //Enemy variables
-    angle=180;
-    velocity=0;
-    angle_change=0;
-    life_bar_x=0;
-    life_bar_y=800-70;
+    this->angle=180;
+    this->velocity=0;
+    this->angle_change=0;
+
 
     //Sprites animation
     this->animation_velocity=4;
     this->animation_iteration=0;
     this->current_sprite=0;
+
+    this->iteration=0;
 
     loadFromXML(directory);
     loadModifiersFromXML(directory);
@@ -77,11 +79,16 @@ void Enemy::logic(int stage_velocity)
 
     if(this->hp!=0)
         modifiersControl();
+    else
+    {
+        orientation="destroyed";
+        this->hitbox.setValues(0,0,0,0,0);
+    }
 }
 
 void Enemy::render()
 {
-    painter->drawRectangle(70,765,(370*hp)/max_hp,30,0,255,0,0,255,false);
+    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
     parrentRender();
 
     painter->draw2DImage

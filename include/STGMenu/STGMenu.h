@@ -48,6 +48,7 @@ public:
     void llenarInputsBotones();
     int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
+    void playMusic();
 };
 
 #endif

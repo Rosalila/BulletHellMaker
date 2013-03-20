@@ -24,8 +24,6 @@ private:
     int dialogue_padding_x;
     int dialogue_padding_y;
     Image* dialogue_bg;
-    int size;
-    int pos_piso;
     int bound_x1,bound_y1,bound_x2,bound_y2;
     int velocity;
     int iterator;
@@ -45,6 +43,7 @@ public:
     void logic();
     void render();
     void setVelocity(int velocity);
+    void playMusic();
     ~Stage();
 };
 

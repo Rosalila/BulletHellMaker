@@ -23,6 +23,7 @@ protected:
     int hp;
     int max_hp;
     int iteration;
+    bool visible;
 
     int velocity;
     Hitbox hitbox;
@@ -30,8 +31,14 @@ protected:
     std::string orientation;
     std::string current_type;
 
+    //Life bar variables
     int life_bar_x;
     int life_bar_y;
+    int life_bar_rect_offset_x;
+    int life_bar_rect_offset_y;
+    int life_bar_rect_height;
+    int life_bar_rect_width;
+    Color color;
 
     //Sprites animation
     int animation_velocity;
