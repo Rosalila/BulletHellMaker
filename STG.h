@@ -2,19 +2,19 @@
 #define STG_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
+#include "RosalilaInputs/RosalilaInputs.h"
 #include "Character/Character.h"
 #include "Character/Player.h"
 #include "Character/Enemy.h"
 #include "Stage/Stage.h"
-#include "Painter/Animation.h"
+#include "RosalilaGraphics/Animation.h"
 
 class STG
 {
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
     Player*player;
     Enemy*enemy;
@@ -29,7 +29,7 @@ class STG
     void deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2);
     void checkCharacterOutOfBounds();
 public:
-    STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
+    STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
 };
 
 #endif

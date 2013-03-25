@@ -1,5 +1,5 @@
-#include "STGMenu/STGMenu.h"
-Menu::Menu(Painter* painter,Receiver* receiver,Sound* sonido,char* archivo)
+#include "STGMenu.h"
+Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo)
 {
     this->painter=painter;
     this->receiver=receiver;
@@ -63,9 +63,9 @@ void Menu::loopMenu()
 {
     bool tecla_arriba=false;
 
-    llenarInputsBotones();
-    inputa=new Input();
-    inputb=new Input();
+    llenarRosalilaInputssBotones();
+    inputa=new RosalilaInputs();
+    inputb=new RosalilaInputs();
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
     bool tecla_arriba_p1=true;
@@ -103,11 +103,11 @@ void Menu::loopMenu()
         }
 
         inputa->actualizarBuffer();
-        if(inputa->getBufferInputs()[0]!="6"
-           && inputa->getBufferInputs()[0]!="4"
-           && inputa->getBufferInputs()[0]!="2"
-           && inputa->getBufferInputs()[0]!="8"
-           && inputa->getBufferInputs()[0]!="a"
+        if(inputa->getBufferRosalilaInputss()[0]!="6"
+           && inputa->getBufferRosalilaInputss()[0]!="4"
+           && inputa->getBufferRosalilaInputss()[0]!="2"
+           && inputa->getBufferRosalilaInputss()[0]!="8"
+           && inputa->getBufferRosalilaInputss()[0]!="a"
            )
         {
             tecla_arriba_p1=true;
@@ -116,14 +116,14 @@ void Menu::loopMenu()
         {
             if(char_select->listoPA())
             {
-            }else if(inputa->getBufferInputs()[0]=="6")
+            }else if(inputa->getBufferRosalilaInputss()[0]=="6")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_x++;
                 if(char_select->select_p1_x>=char_select->size_x)
                     char_select->select_p1_x=0;
                 tecla_arriba_p1=false;
-            }else if(inputa->getBufferInputs()[0]=="4")
+            }else if(inputa->getBufferRosalilaInputss()[0]=="4")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_x--;
@@ -131,7 +131,7 @@ void Menu::loopMenu()
                     char_select->select_p1_x=char_select->size_x-1;
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="2")
+            else if(inputa->getBufferRosalilaInputss()[0]=="2")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_y++;
@@ -139,7 +139,7 @@ void Menu::loopMenu()
                     char_select->select_p1_y=0;
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="8")
+            else if(inputa->getBufferRosalilaInputss()[0]=="8")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p1_y--;
@@ -147,49 +147,49 @@ void Menu::loopMenu()
                     char_select->select_p1_y=char_select->size_y-1;
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="a")
+            else if(inputa->getBufferRosalilaInputss()[0]=="a")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(0);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="b")
+            else if(inputa->getBufferRosalilaInputss()[0]=="b")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(1);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="c")
+            else if(inputa->getBufferRosalilaInputss()[0]=="c")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(2);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="d")
+            else if(inputa->getBufferRosalilaInputss()[0]=="d")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(3);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="e")
+            else if(inputa->getBufferRosalilaInputss()[0]=="e")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(4);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="f")
+            else if(inputa->getBufferRosalilaInputss()[0]=="f")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(5);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="g")
+            else if(inputa->getBufferRosalilaInputss()[0]=="g")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(6);
                 tecla_arriba_p1=false;
             }
-            else if(inputa->getBufferInputs()[0]=="h")
+            else if(inputa->getBufferRosalilaInputss()[0]=="h")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(7);
@@ -198,11 +198,11 @@ void Menu::loopMenu()
         }
 
         inputb->actualizarBuffer();
-        if(inputb->getBufferInputs()[0]!="6"
-           && inputb->getBufferInputs()[0]!="4"
-           && inputb->getBufferInputs()[0]!="2"
-           && inputb->getBufferInputs()[0]!="8"
-           && inputb->getBufferInputs()[0]!="a"
+        if(inputb->getBufferRosalilaInputss()[0]!="6"
+           && inputb->getBufferRosalilaInputss()[0]!="4"
+           && inputb->getBufferRosalilaInputss()[0]!="2"
+           && inputb->getBufferRosalilaInputss()[0]!="8"
+           && inputb->getBufferRosalilaInputss()[0]!="a"
            )
         {
             tecla_arriba_p2=true;
@@ -211,14 +211,14 @@ void Menu::loopMenu()
         {
             if(char_select->listoPB())
             {
-            }else if(inputb->getBufferInputs()[0]=="6")
+            }else if(inputb->getBufferRosalilaInputss()[0]=="6")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_x++;
                 if(char_select->select_p2_x>=char_select->size_x)
                     char_select->select_p2_x=0;
                 tecla_arriba_p2=false;
-            }else if(inputb->getBufferInputs()[0]=="4")
+            }else if(inputb->getBufferRosalilaInputss()[0]=="4")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_x--;
@@ -226,7 +226,7 @@ void Menu::loopMenu()
                     char_select->select_p2_x=char_select->size_x-1;
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="2")
+            else if(inputb->getBufferRosalilaInputss()[0]=="2")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_y++;
@@ -234,7 +234,7 @@ void Menu::loopMenu()
                     char_select->select_p2_y=0;
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="8")
+            else if(inputb->getBufferRosalilaInputss()[0]=="8")
             {
                 sonido->playSound(std::string("Menu.move_char"));
                 char_select->select_p2_y--;
@@ -242,49 +242,49 @@ void Menu::loopMenu()
                     char_select->select_p2_y=char_select->size_y-1;
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="a")
+            else if(inputb->getBufferRosalilaInputss()[0]=="a")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(0);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="b")
+            else if(inputb->getBufferRosalilaInputss()[0]=="b")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(1);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="c")
+            else if(inputb->getBufferRosalilaInputss()[0]=="c")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(2);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="d")
+            else if(inputb->getBufferRosalilaInputss()[0]=="d")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(3);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="e")
+            else if(inputb->getBufferRosalilaInputss()[0]=="e")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(4);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="f")
+            else if(inputb->getBufferRosalilaInputss()[0]=="f")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(5);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="g")
+            else if(inputb->getBufferRosalilaInputss()[0]=="g")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(6);
                 tecla_arriba_p2=false;
             }
-            else if(inputb->getBufferInputs()[0]=="h")
+            else if(inputb->getBufferRosalilaInputss()[0]=="h")
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(7);
@@ -451,8 +451,8 @@ void Menu::loopMenu()
                             player=1;
                         else
                             player=2;
-                        Input* temp=new Input();
-                        Input* temp2=new Input();
+                        RosalilaInputs* temp=new RosalilaInputs();
+                        RosalilaInputs* temp2=new RosalilaInputs();
                         if(player==1)
                         {
                             temp->cargarDesdeXML(1,receiver);
@@ -474,7 +474,7 @@ void Menu::loopMenu()
                         if(accion=="Player1.KeyConfig:f"||accion=="Player2.KeyConfig:f")mapeo="f";
 
                         mb->input_config="";
-                        std::string str_input=getInputPressed();
+                        std::string str_input=getRosalilaInputsPressed();
                         //key
                         if((char)str_input[0]!='j')
                         {
@@ -527,9 +527,9 @@ void Menu::loopMenu()
                             }
                         }
 
-                        escribirInputsXML(temp,temp2);
+                        escribirRosalilaInputssXML(temp,temp2);
                         //mb->input_config=b.keyToString();
-                        llenarInputsBotones();
+                        llenarRosalilaInputssBotones();
                     }
                 }
             }else
@@ -545,7 +545,7 @@ void Menu::dibujarMenu()
     for(int i=0;i<(int)elementos.size();i++)
         elementos[i]->dibujar();
 
-    receiver->updateInputs();
+    receiver->updateRosalilaInputss();
     painter->updateScreen();
 }
 
@@ -981,21 +981,21 @@ bool Menu::getExitSignal()
     return temp;
 }
 
-bool Menu::getSaveInputsSignal()
+bool Menu::getSaveRosalilaInputssSignal()
 {
     bool temp=save_inputs_signal;
     save_inputs_signal=false;
     return temp;
 }
 
-void Menu::escribirInputsXML(Input* ia,Input* ib)
+void Menu::escribirRosalilaInputssXML(RosalilaInputs* ia,RosalilaInputs* ib)
 {
     TiXmlDocument *doc=new TiXmlDocument();
     ib->getXML(ia->getXML(doc));
     doc->SaveFile( "misc/inputs.xml" );
 }
 
-std::string Menu::getInputPressed()
+std::string Menu::getRosalilaInputsPressed()
 {
     while(true)
     {
@@ -1177,7 +1177,7 @@ int Menu::toKeyCode(std::string str)
 }
 
 
-void Menu::llenarInputsBotones()
+void Menu::llenarRosalilaInputssBotones()
 {
     if(selectables_container==NULL)
         return;
@@ -1195,8 +1195,8 @@ void Menu::llenarInputsBotones()
                     player=1;
                 else
                     player=2;
-                Input* temp=new Input();
-                Input* temp2=new Input();
+                RosalilaInputs* temp=new RosalilaInputs();
+                RosalilaInputs* temp2=new RosalilaInputs();
                 if(player==1)
                 {
                     temp->cargarDesdeXML(1,receiver);

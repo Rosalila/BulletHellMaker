@@ -6,13 +6,13 @@
 #include <vector>
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
-#include "Spells/Bullet.h"
-#include "Spells/Pattern.h"
-#include "Character/Character.h"
-#include "Character/Player.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Spells/Bullet.h"
+#include "../Spells/Pattern.h"
+#include "Character.h"
+#include "Player.h"
 
 class Enemy : public Character
 {
@@ -23,7 +23,7 @@ class Enemy : public Character
 
     Image*life_bar;
 public:
-    Enemy(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory,Player*player);
+    Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory,Player*player);
     void logic(int stage_velocity);
     void modifiersControl();
     void render();

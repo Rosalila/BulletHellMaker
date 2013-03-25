@@ -6,19 +6,19 @@
 #include <vector>
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
-#include "Spells/Bullet.h"
-#include "Spells/Pattern.h"
-#include "Utility/Utility.h"
-#include "Character/Modifier.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Spells/Bullet.h"
+#include "../Spells/Pattern.h"
+#include "RosalilaUtility/RosalilaUtility.h"
+#include "Modifier.h"
 
 class Character
 {
 protected:
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
     int hp;
     int max_hp;
@@ -55,7 +55,7 @@ public:
 
 double x,y;
     Character(){}
-    Character(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory);
+    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory);
     void loadFromXML(std::string directory);
     void loadMainXML(std::string directory);
     void loadBulletsXML(std::string directory);

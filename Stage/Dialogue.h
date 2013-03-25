@@ -2,14 +2,14 @@
 #define DIALOGUE_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
+#include "RosalilaInputs/RosalilaInputs.h"
 
 class Dialogue
 {
 private:
-    Painter* painter;
+    RosalilaGraphics* painter;
     Sound* sonido;
     Receiver*receiver;
     std::string text;
@@ -17,7 +17,7 @@ private:
     int duration;
     Image*image;
 public:
-    Dialogue(Painter* painter,Sound* sonido,Receiver*receiver,std::string text,Image*image);
+    Dialogue(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver,std::string text,Image*image);
     std::string getText();
     void render(int x,int y);
     void logic();

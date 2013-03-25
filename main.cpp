@@ -11,11 +11,11 @@
 #include "SDL/SDL_mixer.h"
 #include <string>
 
-#include "Input/Input.h"
-#include "Painter/Painter.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
 #include "STGMenu/STGMenu.h"
-#include "Utility/Utility.h"
+#include "RosalilaUtility/RosalilaUtility.h"
 
 #include <iostream>
 using namespace std;
@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
     clearLog();
     //Creadas abierto
     Receiver* receiver=new Receiver();
-    Input*inputa=new Input();
-    Input*inputb=new Input();
+    RosalilaInputs*inputa=new RosalilaInputs();
+    RosalilaInputs*inputb=new RosalilaInputs();
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
 
-    Painter*painter=new Painter();
+    RosalilaGraphics*painter=new RosalilaGraphics();
 
     painter->video(painter);
 

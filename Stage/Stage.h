@@ -2,11 +2,11 @@
 #define STAGE_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Character/Character.h"
-#include "Stage/Layer.h"
-#include "Stage/Dialogue.h"
+#include "../Character/Character.h"
+#include "Layer.h"
+#include "Dialogue.h"
 #include <map>
 
 class Stage
@@ -16,7 +16,7 @@ private:
     std::map<int,Dialogue*>dialogues;
     std::list<Dialogue*>active_dialogues;
     std::string music_path;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Sound* sonido;
     Receiver*receiver;
     int dialogue_x;
@@ -29,7 +29,7 @@ private:
     int iterator;
 
 public:
-    Stage(Painter* painter,Sound* sonido,Receiver*receiver);
+    Stage(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver);
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);

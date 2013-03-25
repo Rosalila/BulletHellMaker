@@ -2,12 +2,12 @@
 #define PATTERN_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
-#include "Spells/Bullet.h"
-#include "Spells/Hitbox.h"
-#include "Character/Modifier.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+#include "Bullet.h"
+#include "Hitbox.h"
+#include "../Character/Modifier.h"
 
 #include <cmath>
 
@@ -16,7 +16,7 @@
 class Pattern
 {
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
     double x,y;
 
@@ -53,7 +53,7 @@ class Pattern
 
 public:
 int offset_x,offset_y;
-    Pattern(Sound* sonido,Painter* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player, std::map<int, vector<Modifier*>* >*modifiers);
+    Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player, std::map<int, vector<Modifier*>* >*modifiers);
     ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);

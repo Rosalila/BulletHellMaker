@@ -1,4 +1,4 @@
-#include "../include/Character/Modifier.h"
+#include "Modifier.h"
 
 Modifier::Modifier(std::string variable,std::string value)
 {

@@ -1,6 +1,6 @@
-#include "../include/Character/Character.h"
+#include "Character.h"
 
-Character::Character(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory)
 {
     //Setting up the other variables
     this->sonido=sonido;

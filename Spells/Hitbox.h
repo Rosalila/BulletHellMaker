@@ -2,9 +2,9 @@
 #define HITBOX_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
+#include "RosalilaInputs/RosalilaInputs.h"
 
 class Hitbox
 {

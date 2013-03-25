@@ -1,6 +1,6 @@
-#include "../include/STG.h"
+#include "STG.h"
 
-STG::STG(Sound* sonido,Painter* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
+STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -67,7 +67,7 @@ void STG::mainLoop()
         }
         logic();
         render();
-        receiver->updateInputs();
+        receiver->updateRosalilaInputss();
         if(player->getHP()==0
            || enemy->getHP()==0)
         {

@@ -1,4 +1,4 @@
-#include "../include/Spells/Hitbox.h"
+#include "Hitbox.h"
 
 Hitbox::Hitbox(int x,int y,int width,int height,float angle)
 {

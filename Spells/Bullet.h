@@ -2,15 +2,15 @@
 #define BULLET_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Input/Input.h"
-#include "Spells/Hitbox.h"
+#include "RosalilaInputs/RosalilaInputs.h"
+#include "Hitbox.h"
 
 class Bullet
 {
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
     vector<Image*>sprites;
     vector<Image*>sprites_on_hit;
@@ -20,7 +20,7 @@ class Bullet
     bool has_sound;
 public:
     Bullet(){};
-    Bullet(Sound* sonido,Painter* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
+    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
     void logic();
     void render();
     Hitbox getHitbox();

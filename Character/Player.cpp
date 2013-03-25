@@ -1,6 +1,6 @@
-#include "../include/Character/Player.h"
+#include "Player.h"
 
-Player::Player(Sound* sonido,Painter* painter,Receiver* receiver,std::string directory)
+Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory)
 {
     //Setting up the other variables
     this->sonido=sonido;
@@ -54,9 +54,6 @@ void Player::inputControl()
         this->shooting=true;
     else
         this->shooting=false;
-
-    if(receiver->IsKeyDownn(SDLK_SPACE))
-        painter->explode();
 }
 
 void Player::logic(int stage_velocity)

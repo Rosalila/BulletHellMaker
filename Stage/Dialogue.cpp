@@ -1,6 +1,6 @@
-#include "Stage/Dialogue.h"
+#include "Dialogue.h"
 
-Dialogue::Dialogue(Painter* painter,Sound* sonido,Receiver*receiver,std::string text,Image*image)
+Dialogue::Dialogue(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver,std::string text,Image*image)
 {
     this->painter=painter;
     this->sonido=sonido;
