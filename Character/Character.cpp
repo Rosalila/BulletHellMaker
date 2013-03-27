@@ -1,8 +1,10 @@
 #include "Character.h"
 
-Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory)
+Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name)
 {
     //Setting up the other variables
+    this->name=name;
+    this->directory="";
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
@@ -23,19 +25,19 @@ Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,
 
     this->iteration=0;
 
-    loadFromXML(directory);
+    loadFromXML();
 }
 
-void Character::loadFromXML(std::string directory)
+void Character::loadFromXML()
 {
-    loadMainXML(directory);
+    loadMainXML();
 
-    loadBulletsXML(directory);
+    loadBulletsXML();
 
-    loadPatternsXML(directory);
+    loadPatternsXML();
 }
 
-void Character::loadMainXML(std::string directory)
+void Character::loadMainXML()
 {
     //Loading file
     std::string main_path=directory+"main.xml";
@@ -101,6 +103,11 @@ void Character::loadMainXML(std::string directory)
     {
         std::vector<Image*>sprites_vector;
         std::string sprites_orientation=sprites_node->ToElement()->Attribute("orientation");
+        if(sprites_node->ToElement()->Attribute("sound")!=NULL)
+        {
+            std::string sprites_sound=sprites_node->ToElement()->Attribute("sound");
+            this->sonido->addSound(name+"."+sprites_orientation,directory+"sounds/"+sprites_sound);
+        }
         for(TiXmlNode* sprite_node=sprites_node->FirstChild("Sprite");
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
@@ -111,7 +118,7 @@ void Character::loadMainXML(std::string directory)
     }
 }
 
-void Character::loadBulletsXML(std::string directory)
+void Character::loadBulletsXML()
 {
     //Loading bullets
     std::string bullets_path=directory+"bullets.xml";
@@ -127,12 +134,15 @@ void Character::loadBulletsXML(std::string directory)
             bullet_node=bullet_node->NextSibling("Bullet"))
     {
         std::string node_name=bullet_node->ToElement()->Attribute("name");
-        bool has_sound=false;
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sound=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
             sonido->addSound("bullet."+node_name,sound);
-            has_sound=true;
+        }
+        if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
+        {
+            std::string sound_hit=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
+            sonido->addSound("bullet_hit."+node_name,sound_hit);
         }
 
         int damage=atoi(bullet_node->ToElement()->Attribute("damage"));
@@ -163,11 +173,11 @@ void Character::loadBulletsXML(std::string directory)
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,Hitbox(x,y,width,height,angle),damage,has_sound);
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,Hitbox(x,y,width,height,angle),damage);
     }
 }
 
-void Character::loadPatternsXML(std::string directory)
+void Character::loadPatternsXML()
 {
 //Loading file
     std::string pattern_path=directory+"patterns.xml";

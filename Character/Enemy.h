@@ -23,11 +23,11 @@ class Enemy : public Character
 
     Image*life_bar;
 public:
-    Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory,Player*player);
+    Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player);
     void logic(int stage_velocity);
     void modifiersControl();
     void render();
-    void loadModifiersFromXML(std::string directory);
+    void loadModifiersFromXML();
     virtual void addActivePattern(Pattern* pattern);
 };
 

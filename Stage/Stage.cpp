@@ -129,7 +129,7 @@ void Stage::loadDialogues(std::string file)
     }
 }
 
-void Stage::cargarDesdeXML(std::string path)
+void Stage::loadFromXML(std::string path)
 {
     writeLogLine("Loading stage from XML.");
 

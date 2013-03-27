@@ -50,9 +50,9 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name)
 {
     writeLogLine("Initializing game.");
     Stage*stage=new Stage(painter,sonido,receiver);
-    stage->cargarDesdeXML(stage_name);
-    Player*player=new Player(sonido,painter,receiver,"chars/"+character_name+"/");
-    Enemy*enemy=new Enemy(sonido,painter,receiver,"stages/"+stage_name+"/Enemy/",player);
+    stage->loadFromXML(stage_name);
+    Player*player=new Player(sonido,painter,receiver,character_name);
+    Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage);
     delete stg;
     this->playMusic();
@@ -66,8 +66,8 @@ void Menu::loopMenu()
     llenarRosalilaInputssBotones();
     inputa=new RosalilaInputs();
     inputb=new RosalilaInputs();
-    inputa->cargarDesdeXML(1,receiver);
-    inputb->cargarDesdeXML(2,receiver);
+    inputa->loadFromXML(1,receiver);
+    inputb->loadFromXML(2,receiver);
     bool tecla_arriba_p1=true;
     bool tecla_arriba_p2=true;
     //inicio
@@ -455,12 +455,12 @@ void Menu::loopMenu()
                         RosalilaInputs* temp2=new RosalilaInputs();
                         if(player==1)
                         {
-                            temp->cargarDesdeXML(1,receiver);
-                            temp2->cargarDesdeXML(2,receiver);
+                            temp->loadFromXML(1,receiver);
+                            temp2->loadFromXML(2,receiver);
                         }else
                         {
-                            temp->cargarDesdeXML(2,receiver);
-                            temp2->cargarDesdeXML(1,receiver);
+                            temp->loadFromXML(2,receiver);
+                            temp2->loadFromXML(1,receiver);
                         }
                         if(accion=="Player1.KeyConfig:up"||accion=="Player2.KeyConfig:up")mapeo="8";
                         if(accion=="Player1.KeyConfig:down"||accion=="Player2.KeyConfig:down")mapeo="2";
@@ -545,7 +545,7 @@ void Menu::dibujarMenu()
     for(int i=0;i<(int)elementos.size();i++)
         elementos[i]->dibujar();
 
-    receiver->updateRosalilaInputss();
+    receiver->updateInputs();
     painter->updateScreen();
 }
 
@@ -1199,12 +1199,12 @@ void Menu::llenarRosalilaInputssBotones()
                 RosalilaInputs* temp2=new RosalilaInputs();
                 if(player==1)
                 {
-                    temp->cargarDesdeXML(1,receiver);
-                    temp2->cargarDesdeXML(2,receiver);
+                    temp->loadFromXML(1,receiver);
+                    temp2->loadFromXML(2,receiver);
                 }else
                 {
-                    temp->cargarDesdeXML(2,receiver);
-                    temp2->cargarDesdeXML(1,receiver);
+                    temp->loadFromXML(2,receiver);
+                    temp2->loadFromXML(1,receiver);
                 }
                 if(accion=="Player1.KeyConfig:up"||accion=="Player2.KeyConfig:up")mapeo="8";
                 if(accion=="Player1.KeyConfig:down"||accion=="Player2.KeyConfig:down")mapeo="2";

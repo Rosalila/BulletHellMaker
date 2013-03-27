@@ -1,8 +1,10 @@
 #include "Player.h"
 
-Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory)
+Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name)
 {
     //Setting up the other variables
+    this->name=name;
+    this->directory="chars/"+name+"/";
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
@@ -19,22 +21,42 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
 
     this->iteration=0;
 
-    loadFromXML(directory);
+    loadFromXML();
     life_bar=painter->getTexture(directory+"life_bar.png");
 }
 
 void Player::inputControl()
 {
     if(receiver->IsKeyDownn(SDLK_DOWN))
+    {
+        if(orientation!="down" && this->sonido->soundExists(name+".down"))
+            this->sonido->playSound(name+".down");
         orientation="down";
+    }
     else if(receiver->IsKeyDownn(SDLK_UP))
+    {
+        if(orientation!="up" && this->sonido->soundExists(name+".up"))
+            this->sonido->playSound(name+".up");
         orientation="up";
+    }
     else if(receiver->IsKeyDownn(SDLK_LEFT))
+    {
+        if(orientation!="left" && this->sonido->soundExists(name+".left"))
+            this->sonido->playSound(name+".left");
         orientation="left";
+    }
     else if(receiver->IsKeyDownn(SDLK_RIGHT))
+    {
+        if(orientation!="right" && this->sonido->soundExists(name+".right"))
+            this->sonido->playSound(name+".right");
         orientation="right";
+    }
     else
+    {
+        if(orientation!="idle" && this->sonido->soundExists(name+".idle"))
+            this->sonido->playSound(name+".idle");
         orientation="idle";
+    }
 
     if(receiver->IsKeyDownn(SDLK_DOWN)
        || receiver->IsJoyDown(-2,0))
@@ -64,6 +86,8 @@ void Player::logic(int stage_velocity)
         inputControl();
     }else
     {
+        if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
+            this->sonido->playSound(name+".destroyed");
         orientation="destroyed";
         this->hitbox.setValues(0,0,0,0,0);
     }

@@ -67,7 +67,7 @@ void STG::mainLoop()
         }
         logic();
         render();
-        receiver->updateRosalilaInputss();
+        receiver->updateInputs();
         if(player->getHP()==0
            || enemy->getHP()==0)
         {

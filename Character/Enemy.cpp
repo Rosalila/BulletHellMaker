@@ -1,8 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory,Player*player)
+Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player)
 {
     //Setting up the other variables
+    this->name=name;
+    this->directory="stages/"+name+"/Enemy/";
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
@@ -26,8 +28,9 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
 
     this->iteration=0;
 
-    loadFromXML(directory);
-    loadModifiersFromXML(directory);
+    loadFromXML();
+
+    loadModifiersFromXML();
     life_bar=painter->getTexture(directory+"life_bar.png");
 }
 
@@ -81,6 +84,8 @@ void Enemy::logic(int stage_velocity)
         modifiersControl();
     else
     {
+        if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
+            this->sonido->playSound(name+".destroyed");
         orientation="destroyed";
         this->hitbox.setValues(0,0,0,0,0);
     }
@@ -103,7 +108,7 @@ void Enemy::render()
         true);
 }
 
-void Enemy::loadModifiersFromXML(std::string directory)
+void Enemy::loadModifiersFromXML()
 {
     //Loading file
     std::string main_path=directory+"modifiers.xml";

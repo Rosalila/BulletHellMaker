@@ -20,6 +20,9 @@ protected:
     Sound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
+
+    std::string name;
+    std::string directory;
     int hp;
     int max_hp;
     int iteration;
@@ -55,11 +58,11 @@ public:
 
 double x,y;
     Character(){}
-    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory);
-    void loadFromXML(std::string directory);
-    void loadMainXML(std::string directory);
-    void loadBulletsXML(std::string directory);
-    void loadPatternsXML(std::string directory);
+    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name);
+    void loadFromXML();
+    void loadMainXML();
+    void loadBulletsXML();
+    void loadPatternsXML();
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();

@@ -33,7 +33,7 @@ public:
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);
-    void cargarDesdeXML(std::string archivo);
+    void loadFromXML(std::string archivo);
     void loadDialogues(std::string file);
     int getBoundX1();
     int getBoundY1();

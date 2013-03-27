@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound)
+Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -10,7 +10,6 @@ Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->hitbox=hitbox;
     this->damage=damage;
     this->name=name;
-    this->has_sound=has_sound;
 }
 
 void Bullet::logic()
@@ -58,8 +57,16 @@ int Bullet::getDamage()
 
 void Bullet::playSound()
 {
-    if(has_sound)
+    if(sonido->soundExists("bullet."+name))
     {
         sonido->playSound("bullet."+name);
+    }
+}
+
+void Bullet::playHitSound()
+{
+    if(sonido->soundExists("bullet_hit."+name))
+    {
+        sonido->playSound("bullet_hit."+name);
     }
 }

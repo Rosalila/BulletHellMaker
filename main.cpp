@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     Receiver* receiver=new Receiver();
     RosalilaInputs*inputa=new RosalilaInputs();
     RosalilaInputs*inputb=new RosalilaInputs();
-    inputa->cargarDesdeXML(1,receiver);
-    inputb->cargarDesdeXML(2,receiver);
+    inputa->loadFromXML(1,receiver);
+    inputb->loadFromXML(2,receiver);
 
     RosalilaGraphics*painter=new RosalilaGraphics();
 

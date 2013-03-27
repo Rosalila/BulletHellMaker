@@ -17,15 +17,15 @@ class Bullet
     Hitbox hitbox;
     int damage;
     std::string name;
-    bool has_sound;
 public:
     Bullet(){};
-    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage,bool has_sound);
+    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage);
     void logic();
     void render();
     Hitbox getHitbox();
     int getDamage();
     void playSound();
+    void playHitSound();
     Image*getImage(int position);
     Image*getOnHitImage(int position);
     int spritesSize();

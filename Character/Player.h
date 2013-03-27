@@ -17,7 +17,7 @@ class Player:public Character
 {
     Image*life_bar;
 public:
-    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string directory);
+    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name);
     void logic(int stage_velocity);
     void inputControl();
     void render();

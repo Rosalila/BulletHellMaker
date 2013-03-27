@@ -32,6 +32,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Character/Character.cpp" />
+		<Unit filename="Character/Character.h" />
+		<Unit filename="Character/Enemy.cpp" />
+		<Unit filename="Character/Enemy.h" />
+		<Unit filename="Character/Modifier.cpp" />
+		<Unit filename="Character/Modifier.h" />
+		<Unit filename="Character/Player.cpp" />
+		<Unit filename="Character/Player.h" />
 		<Unit filename="Rosalila/RosalilaAI/Automata.cpp" />
 		<Unit filename="Rosalila/RosalilaAI/Automata.h" />
 		<Unit filename="Rosalila/RosalilaAI/Estado.cpp" />
@@ -87,6 +95,22 @@
 		<Unit filename="Rosalila/TinyXml/tinyxml.h" />
 		<Unit filename="Rosalila/TinyXml/tinyxmlerror.cpp" />
 		<Unit filename="Rosalila/TinyXml/tinyxmlparser.cpp" />
+		<Unit filename="STG.cpp" />
+		<Unit filename="STG.h" />
+		<Unit filename="STGMenu/STGMenu.cpp" />
+		<Unit filename="STGMenu/STGMenu.h" />
+		<Unit filename="Spells/Bullet.cpp" />
+		<Unit filename="Spells/Bullet.h" />
+		<Unit filename="Spells/Hitbox.cpp" />
+		<Unit filename="Spells/Hitbox.h" />
+		<Unit filename="Spells/Pattern.cpp" />
+		<Unit filename="Spells/Pattern.h" />
+		<Unit filename="Stage/Dialogue.cpp" />
+		<Unit filename="Stage/Dialogue.h" />
+		<Unit filename="Stage/Layer.cpp" />
+		<Unit filename="Stage/Layer.h" />
+		<Unit filename="Stage/Stage.cpp" />
+		<Unit filename="Stage/Stage.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

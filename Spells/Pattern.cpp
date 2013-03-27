@@ -279,6 +279,7 @@ Pattern::~Pattern()
 
 void Pattern::hit()
 {
+    bullet->playHitSound();
     is_hit=true;
     current_sprite=0;
     velocity=0;
