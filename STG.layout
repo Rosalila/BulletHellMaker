@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="5464" topLine="119" />
+	<File name="Character/Character.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="11086" topLine="284" />
 	</File>
 	<File name="Character/Character.h" open="0" top="0" tabpos="2">
-		<Cursor position="533" topLine="6" />
+		<Cursor position="533" topLine="9" />
 	</File>
-	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="2094" topLine="66" />
+	<File name="Character/Enemy.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="4655" topLine="143" />
 	</File>
 	<File name="Character/Enemy.h" open="0" top="0" tabpos="0">
 		<Cursor position="735" topLine="6" />
@@ -16,8 +16,11 @@
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="138" topLine="0" />
 	</File>
-	<File name="Character/Player.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="2641" topLine="64" />
+	<File name="Character/Modifier.h" open="0" top="0" tabpos="0">
+		<Cursor position="214" topLine="0" />
+	</File>
+	<File name="Character/Player.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="2953" topLine="84" />
 	</File>
 	<File name="Character/Player.h" open="0" top="0" tabpos="0">
 		<Cursor position="478" topLine="0" />
@@ -43,6 +46,9 @@
 	<File name="Rosalila/RosalilaGraphics/Animation.h" open="0" top="0" tabpos="0">
 		<Cursor position="248" topLine="0" />
 	</File>
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1105" topLine="21" />
+	</File>
 	<File name="Rosalila/RosalilaInputs/Boton.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1133" topLine="27" />
 	</File>
@@ -61,35 +67,41 @@
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="0">
 		<Cursor position="942" topLine="1" />
 	</File>
+	<File name="Rosalila/RosalilaMenus/MenuCharSelect.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="386" topLine="0" />
+	</File>
 	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1194" topLine="35" />
 	</File>
 	<File name="Rosalila/RosalilaSound/RosalilaSound.h" open="0" top="0" tabpos="0">
 		<Cursor position="340" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2044" topLine="52" />
+	<File name="STG.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="5564" topLine="176" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="49368" topLine="1178" />
+	<File name="STGMenu/STGMenu.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="42876" topLine="985" />
 	</File>
 	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="252" topLine="0" />
 	</File>
-	<File name="Spells/Bullet.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="410" topLine="0" />
+	<File name="Spells/Bullet.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="453" topLine="5" />
 	</File>
-	<File name="Spells/Bullet.h" open="1" top="0" tabpos="2">
-		<Cursor position="423" topLine="7" />
+	<File name="Spells/Bullet.h" open="0" top="0" tabpos="1">
+		<Cursor position="463" topLine="6" />
 	</File>
-	<File name="Spells/Hitbox.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="10" topLine="0" />
+	<File name="Spells/Hitbox.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="1582" topLine="67" />
 	</File>
-	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="6241" topLine="265" />
+	<File name="Spells/Hitbox.h" open="0" top="0" tabpos="9">
+		<Cursor position="811" topLine="4" />
 	</File>
-	<File name="Spells/Pattern.h" open="1" top="0" tabpos="4">
-		<Cursor position="1076" topLine="50" />
+	<File name="Spells/Pattern.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="5106" topLine="198" />
+	</File>
+	<File name="Spells/Pattern.h" open="0" top="0" tabpos="5">
+		<Cursor position="1733" topLine="51" />
 	</File>
 	<File name="Stage/Dialogue.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -98,7 +110,7 @@
 		<Cursor position="10" topLine="0" />
 	</File>
 	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3599" topLine="103" />
+		<Cursor position="5946" topLine="220" />
 	</File>
 	<File name="Stage/Stage.h" open="0" top="0" tabpos="0">
 		<Cursor position="866" topLine="7" />

@@ -598,6 +598,10 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
             std::string dir("menu/");
             path=dir+path;
+            int x=0;
+            int y=0;
+            int width=0;
+            int height=0;
             int displacement_x=0;
             int displacement_y=0;
             int stop_displacement_x_at=0;
@@ -605,6 +609,14 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             int fade_in_initial=-1;
             int fade_in_speed=0;
 
+            if(e->Attribute("x")!=NULL)
+                x=atoi(e->Attribute("x"));
+            if(e->Attribute("y")!=NULL)
+                y=atoi(e->Attribute("y"));
+            if(e->Attribute("width")!=NULL)
+                width=atoi(e->Attribute("width"));
+            if(e->Attribute("height")!=NULL)
+                height=atoi(e->Attribute("height"));
             if(e->Attribute("displacement_x")!=NULL)
                 displacement_x=atoi(e->Attribute("displacement_x"));
             if(e->Attribute("displacement_y")!=NULL)
@@ -619,8 +631,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
             Image* image=painter->getTexture(path);
 
-            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
-                                                          atoi(e->Attribute("width")),atoi(e->Attribute("height")),image,""
+            elementos.push_back((Elemento*)new MenuImagen(painter,x,y,displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
+                                                          width,height,image,""
                                                           ));
         }else if(strcmp(e->Attribute("type"),"button")==0)
         {
@@ -636,11 +648,24 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                 strcat(menu_load,e->Attribute("load_menu"));
             }
 
-            int x=atoi(e->Attribute("x"));
-            int y=atoi(e->Attribute("y"));
-            int width=atoi(e->Attribute("width"));
-            int height=atoi(e->Attribute("height"));
+            int x=0;
+            int y=0;
+            int width=0;
+            int height=0;
+
             std::string path=e->Attribute("xlink:href");
+
+            if(e->Attribute("x")!=NULL)
+                x=atoi(e->Attribute("x"));
+
+            if(e->Attribute("y")!=NULL)
+                y=atoi(e->Attribute("y"));
+
+            if(e->Attribute("width")!=NULL)
+                width=atoi(e->Attribute("width"));
+
+            if(e->Attribute("height")!=NULL)
+                height=atoi(e->Attribute("height"));
 
             int text_x=x;
             if(e->Attribute("text_x")!=NULL)
@@ -681,74 +706,75 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                                                     action,menu_load
                                                                     ));
 
-        }else if(strcmp(e->Attribute("type"),"bar")==0)
-        {
-            int accion=-1;
-            int default_value=0;
-            if(e->Attribute("default_value")!=NULL)
-                atoi(e->Attribute("default_value"));
-            if(e->Attribute("action")!=NULL)
-            {
-                if(strcmp(e->Attribute("action"),"AI level")==0)
-                {
-                    accion=0;
-                    default_value=ai_level;
-                }
-                accion=atoi(e->Attribute("action"));
-            }
-
-            int x=atoi(e->Attribute("x"));
-            int y=atoi(e->Attribute("y"));
-            int width=atoi(e->Attribute("width"));
-            int height=atoi(e->Attribute("height"));
-
-            std::string path(e->Attribute("xlink:href"));
-
-            std::string background=path;
-            if(e->Attribute("background")!=NULL)
-                background=e->Attribute("background");
-
-            int bar_x=x;
-            if(e->Attribute("bar_x")!=NULL)
-                bar_x=atoi(e->Attribute("bar_x"));
-
-            int bar_y=y;
-            if(e->Attribute("bar_y")!=NULL)
-                bar_y=atoi(e->Attribute("bar_y"));
-
-            std::string background_selected=background;
-            if(e->Attribute("background_selected")!=NULL)
-                background_selected=e->Attribute("background_selected");
-
-            int bar_x_selected=bar_x;
-            if(e->Attribute("bar_x_selected")!=NULL)
-                bar_x_selected=atoi(e->Attribute("bar_x_selected"));
-
-            int bar_y_selected=bar_y;
-            if(e->Attribute("bar_y_selected")!=NULL)
-                bar_y_selected=atoi(e->Attribute("bar_y_selected"));
-
-            std::string image_selected=path;
-            if(e->Attribute("image_selected")!=NULL)
-                image_selected=e->Attribute("image_selected");
-
-            int max=9999;
-            if(e->Attribute("max")!=NULL)
-                max=atoi(e->Attribute("max"));
-
-            elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,
-                                                                    x,y,
-                                                                    width,height,
-                                                                    painter->getTexture(std::string("menu/")+background),
-                                                                    bar_x,bar_y,
-                                                                    painter->getTexture(std::string("menu/")+path),
-                                                                    painter->getTexture(std::string("menu/")+background_selected),
-                                                                    bar_x_selected,bar_y_selected,
-                                                                    painter->getTexture(std::string("menu/")+image_selected),
-                                                                    max,default_value,accion
-                                                                    )
-                                           );
         }
+//        else if(strcmp(e->Attribute("type"),"bar")==0)
+//        {
+//            int accion=-1;
+//            int default_value=0;
+//            if(e->Attribute("default_value")!=NULL)
+//                atoi(e->Attribute("default_value"));
+//            if(e->Attribute("action")!=NULL)
+//            {
+//                if(strcmp(e->Attribute("action"),"AI level")==0)
+//                {
+//                    accion=0;
+//                    default_value=ai_level;
+//                }
+//                accion=atoi(e->Attribute("action"));
+//            }
+//
+//            int x=atoi(e->Attribute("x"));
+//            int y=atoi(e->Attribute("y"));
+//            int width=atoi(e->Attribute("width"));
+//            int height=atoi(e->Attribute("height"));
+//
+//            std::string path(e->Attribute("xlink:href"));
+//
+//            std::string background=path;
+//            if(e->Attribute("background")!=NULL)
+//                background=e->Attribute("background");
+//
+//            int bar_x=x;
+//            if(e->Attribute("bar_x")!=NULL)
+//                bar_x=atoi(e->Attribute("bar_x"));
+//
+//            int bar_y=y;
+//            if(e->Attribute("bar_y")!=NULL)
+//                bar_y=atoi(e->Attribute("bar_y"));
+//
+//            std::string background_selected=background;
+//            if(e->Attribute("background_selected")!=NULL)
+//                background_selected=e->Attribute("background_selected");
+//
+//            int bar_x_selected=bar_x;
+//            if(e->Attribute("bar_x_selected")!=NULL)
+//                bar_x_selected=atoi(e->Attribute("bar_x_selected"));
+//
+//            int bar_y_selected=bar_y;
+//            if(e->Attribute("bar_y_selected")!=NULL)
+//                bar_y_selected=atoi(e->Attribute("bar_y_selected"));
+//
+//            std::string image_selected=path;
+//            if(e->Attribute("image_selected")!=NULL)
+//                image_selected=e->Attribute("image_selected");
+//
+//            int max=9999;
+//            if(e->Attribute("max")!=NULL)
+//                max=atoi(e->Attribute("max"));
+//
+//            elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,
+//                                                                    x,y,
+//                                                                    width,height,
+//                                                                    painter->getTexture(std::string("menu/")+background),
+//                                                                    bar_x,bar_y,
+//                                                                    painter->getTexture(std::string("menu/")+path),
+//                                                                    painter->getTexture(std::string("menu/")+background_selected),
+//                                                                    bar_x_selected,bar_y_selected,
+//                                                                    painter->getTexture(std::string("menu/")+image_selected),
+//                                                                    max,default_value,accion
+//                                                                    )
+//                                           );
+//        }
     }
 
     if(g_node->FirstChild("rect")!=NULL)
@@ -761,8 +787,14 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
         {
             if(strcmp(e->Attribute("type"),"char_select")==0)
             {
-                int x=atoi(e->Attribute("x"));
-                int y=atoi(e->Attribute("y"));
+                int x=0;
+                if(e->Attribute("x")!=NULL)
+                    x=atoi(e->Attribute("x"));
+
+                int y=0;
+                if(e->Attribute("y")!=NULL)
+                    y=atoi(e->Attribute("y"));
+
                 int size_x=3;
                 if(e->Attribute("size_x")!=NULL)
                     size_x=atoi(e->Attribute("size_x"));
@@ -852,18 +884,18 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                     int stop_displacement_y_at=0;
                     int fade_in_initial=-1;
                     int fade_in_speed=0;
-                    if(e->Attribute("displacement_x")!=NULL)
-                        displacement_x=atoi(e->Attribute("displacement_x"));
-                    if(e->Attribute("displacement_y")!=NULL)
-                        displacement_y=atoi(e->Attribute("displacement_y"));
-                    if(e->Attribute("stop_displacement_x_at")!=NULL)
-                        stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
-                    if(e->Attribute("stop_displacement_y_at")!=NULL)
-                        stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-                    if(e->Attribute("fade_in_initial")!=NULL)
-                        fade_in_initial=atoi(e->Attribute("fade_in_initial"));
-                    if(e->Attribute("fade_in_speed")!=NULL)
-                        fade_in_speed=atoi(e->Attribute("fade_in_speed"));
+//                    if(e->Attribute("displacement_x")!=NULL)
+//                        displacement_x=atoi(e->Attribute("displacement_x"));
+//                    if(e->Attribute("displacement_y")!=NULL)
+//                        displacement_y=atoi(e->Attribute("displacement_y"));
+//                    if(e->Attribute("stop_displacement_x_at")!=NULL)
+//                        stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
+//                    if(e->Attribute("stop_displacement_y_at")!=NULL)
+//                        stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+//                    if(e->Attribute("fade_in_initial")!=NULL)
+//                        fade_in_initial=atoi(e->Attribute("fade_in_initial"));
+//                    if(e->Attribute("fade_in_speed")!=NULL)
+//                        fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
                     Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
@@ -876,8 +908,13 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                                                    ));
                 }
 
-                int x=atoi(e->Attribute("x"));
-                int y=atoi(e->Attribute("y"));
+                int x=0;
+                if(e->Attribute("x")!=NULL)
+                    x=atoi(e->Attribute("x"));
+
+                int y=0;
+                if(e->Attribute("y"))
+                    y=atoi(e->Attribute("y"));
 
                 int arrow_left_x=x;
                 if(e->Attribute("arrow_left_x"))
@@ -952,10 +989,28 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
     {
         TiXmlElement* e=text_node->ToElement();
 
-        TiXmlElement* text_span_elem=text_node->FirstChild("tspan")->ToElement();
+        int x=0;
+        if(atoi(e->Attribute("x")))
+        {
+            x=atoi(e->Attribute("x"));
+        }
 
-        elementos.push_back((Elemento*)new MenuTexto(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),
-                                                     text_span_elem->GetText()
+        int y=0;
+        if(atoi(e->Attribute("y")))
+        {
+            y=atoi(e->Attribute("y"));
+        }
+
+        std::string tspan="";
+        if(text_node->FirstChild("tspan")!=NULL)
+        {
+            TiXmlElement* text_span_elem=text_node->FirstChild("tspan")->ToElement();
+            if(text_span_elem->GetText()!=NULL)
+                tspan=text_span_elem->GetText();
+        }
+
+        elementos.push_back((Elemento*)new MenuTexto(painter,x,y,
+                                                     tspan
                                                      ));
     }
 

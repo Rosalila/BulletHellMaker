@@ -1764,7 +1764,7 @@
 1364183396 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"RosalilaGraphics/Object3D.h"
 
-1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1364681110 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics/RosalilaGraphics.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -1780,7 +1780,7 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBoton.cpp
 	"RosalilaMenus/MenuBoton.h"
 
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
+1364680481 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
 	"RosalilaMenus/MenuCharSelect.h"
 
 1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuContenedor.cpp
@@ -1817,7 +1817,7 @@
 	"RosalilaInputs/RosalilaInputs.h"
 	<sstream>
 
-1364376201 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
+1364695425 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
 	"Character.h"
 
 1364367783 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
@@ -1833,20 +1833,20 @@
 	"RosalilaUtility/RosalilaUtility.h"
 	"Modifier.h"
 
-1364375993 /home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.h
+1364432600 /home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 	"Hitbox.h"
 
-1364191058 /home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.h
+1364439935 /home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1364191381 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
+1364432686 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -1859,7 +1859,7 @@
 1362864984 /home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.h
 	<iostream>
 
-1364369940 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
+1364692479 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
 	"Enemy.h"
 
 1364366947 /home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
@@ -1893,7 +1893,7 @@
 1364369925 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
 	"Player.h"
 
-1364365546 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
+1364444237 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
 	"STG.h"
 
 1364191058 /home/turupawn/Projects/CodeBlocks/STG/STG.h
@@ -1928,7 +1928,7 @@
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1364375551 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
+1364698785 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
 1364191545 /home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.h
@@ -1939,13 +1939,13 @@
 	"RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
-1364376227 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.cpp
+1364432611 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1364191560 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.cpp
+1364439903 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.cpp
 	"Hitbox.h"
 
-1364376109 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
+1364443547 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1364191573 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Dialogue.cpp
@@ -1954,6 +1954,6 @@
 1364191579 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Layer.cpp
 	"Layer.h"
 
-1364375551 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
+1364693664 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
 	"Stage.h"
 

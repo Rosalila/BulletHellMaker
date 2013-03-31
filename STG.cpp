@@ -169,26 +169,36 @@ void STG::render()
 
     for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
     {
-        if(!((Pattern*)*pattern)->isHit())
+        Pattern*p=(Pattern*)*pattern;
+        if(!p->isHit())
         {
-            if(player->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
-                ((Pattern*)*pattern)->hit();
-//                painter->drawText("Player hit!",10,10);
-                player->hit(((Pattern*)*pattern)->getDamage());
+                p->getBullet()->getHitboxes()[i];
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getAngle());
+                if(player->collides(h,0,0,0))
+                {
+                    p->hit();
+                    player->hit(p->getDamage());
+                }
             }
         }
     }
 
     for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
     {
-        if(!((Pattern*)*pattern)->isHit())
+        Pattern*p=(Pattern*)*pattern;
+        if(!p->isHit())
         {
-            if(enemy->collides(((Pattern*)*pattern)->getHitbox(),0,0,0))
+            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
-                ((Pattern*)*pattern)->hit();
-//                painter->drawText("Enemy hit!",800,10);
-                enemy->hit(((Pattern*)*pattern)->getDamage());
+                p->getBullet()->getHitboxes()[i];
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getAngle());
+                if(enemy->collides(h,0,0,0))
+                {
+                    p->hit();
+                    enemy->hit(p->getDamage());
+                }
             }
         }
     }

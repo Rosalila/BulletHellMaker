@@ -161,7 +161,9 @@ void Enemy::loadModifiersFromXML()
         if(modifier_node->ToElement()->Attribute("repeat")!=NULL)
         {
             int repeats = atoi(modifier_node->ToElement()->Attribute("repeat"));
-            int frequency = atoi(modifier_node->ToElement()->Attribute("repeat_frequency"));
+            int frequency = 1;
+            if(modifier_node->ToElement()->Attribute("repeat_frequency")!=NULL)
+                frequency = atoi(modifier_node->ToElement()->Attribute("repeat_frequency"));
             for(int i=0;i<repeats;i++)
             {
                 this->modifiers[at+frequency*(i+1)]=temp_modifiers;

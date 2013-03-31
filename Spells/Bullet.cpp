@@ -1,13 +1,13 @@
 #include "Bullet.h"
 
-Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage)
+Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,int damage)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
     this->sprites=sprites;
     this->sprites_on_hit=sprites_on_hit;
-    this->hitbox=hitbox;
+    this->hitboxes=hitboxes;
     this->damage=damage;
     this->name=name;
 }
@@ -45,9 +45,9 @@ int Bullet::spritesOnHitSize()
     return sprites_on_hit.size();
 }
 
-Hitbox Bullet::getHitbox()
+vector<Hitbox*> Bullet::getHitboxes()
 {
-    return hitbox;
+    return hitboxes;
 }
 
 int Bullet::getDamage()

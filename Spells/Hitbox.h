@@ -27,6 +27,7 @@ public:
     void setAngle(float angle);
     void setValues(int x,int y, int width, int height,float angle);
     bool collides(Hitbox hitbox_param);
+    bool collides(Hitbox hitbox_param,int hitbox_x,int hitbox_y,int hitbox_angle);
 };
 
 #endif

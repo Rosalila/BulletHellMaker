@@ -14,15 +14,15 @@ class Bullet
     Receiver* receiver;
     vector<Image*>sprites;
     vector<Image*>sprites_on_hit;
-    Hitbox hitbox;
+    vector<Hitbox*> hitboxes;
     int damage;
     std::string name;
 public:
     Bullet(){};
-    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,Hitbox hitbox,int damage);
+    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,int damage);
     void logic();
     void render();
-    Hitbox getHitbox();
+    vector<Hitbox*> getHitboxes();
     int getDamage();
     void playSound();
     void playHitSound();

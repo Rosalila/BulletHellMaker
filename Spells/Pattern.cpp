@@ -209,10 +209,14 @@ void Pattern::render()
 
     if(receiver->IsKeyDownn(SDLK_h))
     {
-        painter->drawRectangle(this->getHitbox().getX(),
-                               this->getHitbox().getY(),
-                               this->getHitbox().getWidth(),this->getHitbox().getHeight(),
-                               this->getHitbox().getAngle(),100,0,0,100,true);
+        for(int i=0;i<(int)bullet->getHitboxes().size();i++)
+        {
+            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(Point(this->getX(),this->getY()),this->getAngle());
+            painter->drawRectangle(h.getX(),
+                                   h.getY(),
+                                   this->bullet->getHitboxes()[i]->getWidth(),this->bullet->getHitboxes()[i]->getHeight(),
+                                   h.getAngle(),100,0,0,100,true);
+        }
     }
 }
 
@@ -223,12 +227,6 @@ int Pattern::getX()
 int Pattern::getY()
 {
     return this->y;
-}
-
-Hitbox Pattern::getHitbox()
-{
-    Hitbox hitbox = bullet->getHitbox();
-    return hitbox.getPlacedHitbox(Point(this->x,this->y),this->angle);
 }
 
 bool Pattern::destroyFlag()

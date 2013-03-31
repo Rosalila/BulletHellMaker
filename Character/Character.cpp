@@ -49,12 +49,37 @@ void Character::loadMainXML()
 
     //Loading attributes
     TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
-    this->velocity=atoi(attributes->Attribute("velocity"));
-    this->animation_velocity=atoi(attributes->Attribute("animation_velocity"));
-    this->max_hp=atoi(attributes->Attribute("hp"));
-    this->x=atoi(attributes->Attribute("initial_x"));
-    this->y=atoi(attributes->Attribute("initial_y"));
+    this->velocity=5;
+    if(attributes->Attribute("velocity")!=NULL)
+    {
+        this->velocity=atoi(attributes->Attribute("velocity"));
+    }
+
+    this->animation_velocity=5;
+    if(attributes->Attribute("animation_velocity")!=NULL)
+    {
+        this->animation_velocity=atoi(attributes->Attribute("animation_velocity"));
+    }
+
+    this->max_hp=100;
+    this->hp=100;
+    if(attributes->Attribute("hp")!=NULL)
+    {
+        this->max_hp=atoi(attributes->Attribute("hp"));
+    }
     this->hp=this->max_hp;
+
+    this->x=100;
+    if(attributes->Attribute("initial_x")!=NULL)
+    {
+        this->x=atoi(attributes->Attribute("initial_x"));
+    }
+
+    this->y=500;
+    if(attributes->Attribute("initial_y")!=NULL)
+    {
+        this->y=atoi(attributes->Attribute("initial_y"));
+    }
 
     this->life_bar_x=0;
     this->life_bar_y=0;
@@ -62,6 +87,10 @@ void Character::loadMainXML()
     this->life_bar_rect_offset_y=0;
     this->life_bar_rect_height=0;
     this->life_bar_rect_width=0;
+    this->color.red=0;
+    this->color.green=0;
+    this->color.blue=0;
+    this->color.alpha=255;
 
     if(main_file->FirstChild("LifeBar")!=NULL)
     {
@@ -145,7 +174,12 @@ void Character::loadBulletsXML()
             sonido->addSound("bullet_hit."+node_name,sound_hit);
         }
 
-        int damage=atoi(bullet_node->ToElement()->Attribute("damage"));
+        int damage=0;
+        if(bullet_node->ToElement()->Attribute("damage")!=NULL)
+        {
+            damage=atoi(bullet_node->ToElement()->Attribute("damage"));
+        }
+
         vector<Image*>sprites_temp;
         for(TiXmlNode* sprite_node=bullet_node->FirstChild("Sprite");
                 sprite_node!=NULL;
@@ -154,12 +188,33 @@ void Character::loadBulletsXML()
             sprites_temp.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
 
-        TiXmlNode* hitbox_node=bullet_node->FirstChild("Hitbox");
-        int x=atoi(hitbox_node->ToElement()->Attribute("x"));
-        int y=atoi(hitbox_node->ToElement()->Attribute("y"));
-        int width=atoi(hitbox_node->ToElement()->Attribute("width"));
-        int height=atoi(hitbox_node->ToElement()->Attribute("height"));
-        int angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
+        vector<Hitbox*>hitboxes_temp;
+        for(TiXmlNode* hitbox_node=bullet_node->FirstChild("Hitbox");
+                hitbox_node!=NULL;
+                hitbox_node=hitbox_node->NextSibling("Hitbox"))
+        {
+            int x=0;
+            if(hitbox_node->ToElement()->Attribute("x")!=NULL)
+            {
+                x=atoi(hitbox_node->ToElement()->Attribute("x"));
+            }
+            int y=0;
+            if(hitbox_node->ToElement()->Attribute("y")!=NULL)
+            {
+                y=atoi(hitbox_node->ToElement()->Attribute("y"));
+            }
+
+            int width=atoi(hitbox_node->ToElement()->Attribute("width"));
+            int height=atoi(hitbox_node->ToElement()->Attribute("height"));
+
+            int angle=0;
+            if(hitbox_node->ToElement()->Attribute("angle")!=NULL)
+            {
+                angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
+            }
+
+            hitboxes_temp.push_back(new Hitbox(x,y,width,height,angle));
+        }
 
         TiXmlNode* onhit_node=bullet_node->FirstChild("OnHit");
         vector<Image*>sprites_onhit_temp;
@@ -173,7 +228,7 @@ void Character::loadBulletsXML()
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,Hitbox(x,y,width,height,angle),damage);
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage);
     }
 }
 
@@ -198,42 +253,72 @@ void Character::loadPatternsXML()
                 pattern_node!=NULL;
                 pattern_node=pattern_node->NextSibling("Pattern"))
         {
-            int velocity=atoi(pattern_node->ToElement()->Attribute("velocity"));
+            std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
+            Bullet*bullet=bullets[bullet_name];
+
+            int velocity=0;
+            if(pattern_node->ToElement()->Attribute("velocity")!=NULL)
+                velocity=atoi(pattern_node->ToElement()->Attribute("velocity"));
+
             int max_velocity=9999999;
             if(pattern_node->ToElement()->Attribute("max_velocity")!=NULL)
                 max_velocity=atoi(pattern_node->ToElement()->Attribute("max_velocity"));
+
             int acceleration=0;
             if(pattern_node->ToElement()->Attribute("acceleration")!=NULL)
                 acceleration=atoi(pattern_node->ToElement()->Attribute("acceleration"));
-            int a_frequency=1;
+
+            int a_frequency=0;
             if(pattern_node->ToElement()->Attribute("a_frequency")!=NULL)
                 a_frequency=atoi(pattern_node->ToElement()->Attribute("a_frequency"));
-            int angle=atoi(pattern_node->ToElement()->Attribute("angle"));
+
+            int angle=0;
+            if(pattern_node->ToElement()->Attribute("angle")!=NULL)
+                angle=atoi(pattern_node->ToElement()->Attribute("angle"));
+
             int angle_change=0;
             if(pattern_node->ToElement()->Attribute("angle_change")!=NULL)
                 angle_change=atoi(pattern_node->ToElement()->Attribute("angle_change"));
+
             int stop_ac_at=-1;
             if(pattern_node->ToElement()->Attribute("stop_ac_at")!=NULL)
                 stop_ac_at=atoi(pattern_node->ToElement()->Attribute("stop_ac_at"));
-            int ac_frequency=1;
+
+            int ac_frequency=0;
             if(pattern_node->ToElement()->Attribute("ac_frequency")!=NULL)
                 ac_frequency=atoi(pattern_node->ToElement()->Attribute("ac_frequency"));
-            int offset_x=atoi(pattern_node->ToElement()->Attribute("offset_x"));
-            int offset_y=atoi(pattern_node->ToElement()->Attribute("offset_y"));
-            int startup=atoi(pattern_node->ToElement()->Attribute("startup"));
-            int cooldown=atoi(pattern_node->ToElement()->Attribute("cooldown"));
-            int animation_velocity=atoi(pattern_node->ToElement()->Attribute("animation_velocity"));
+
+            int offset_x=0;
+            if(pattern_node->ToElement()->Attribute("offset_x")!=NULL)
+                offset_x=atoi(pattern_node->ToElement()->Attribute("offset_x"));
+
+            int offset_y=0;
+            if(pattern_node->ToElement()->Attribute("offset_y")!=NULL)
+                offset_y=atoi(pattern_node->ToElement()->Attribute("offset_y"));
+
+            int startup=0;
+            if(pattern_node->ToElement()->Attribute("startup")!=NULL)
+                startup=atoi(pattern_node->ToElement()->Attribute("startup"));
+
+            int cooldown=0;
+            if(pattern_node->ToElement()->Attribute("cooldown")!=NULL)
+                cooldown=atoi(pattern_node->ToElement()->Attribute("cooldown"));
+
+            int animation_velocity=0;
+            if(pattern_node->ToElement()->Attribute("animation_velocity")!=NULL)
+                animation_velocity=atoi(pattern_node->ToElement()->Attribute("animation_velocity"));
+
             int duration=-1;
             if(pattern_node->ToElement()->Attribute("duration"))
                 duration=atoi(pattern_node->ToElement()->Attribute("duration"));
+
             int random_angle=0;
             if(pattern_node->ToElement()->Attribute("random_angle"))
                 random_angle=atoi(pattern_node->ToElement()->Attribute("random_angle"));
+
             bool aim_player=false;
             if(pattern_node->ToElement()->Attribute("aim_player"))
                 aim_player=strcmp(pattern_node->ToElement()->Attribute("aim_player"),"yes")==0;
-            std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
-            Bullet*bullet=bullets[bullet_name];
 
             //Modifiers
             std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
@@ -475,7 +560,7 @@ void Character::setType(std::string type)
 
 bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
 {
-    return this->hitbox.getPlacedHitbox(Point(this->x,this->y),0).collides(hitbox);
+    return this->hitbox.getPlacedHitbox(Point(this->x,this->y),0).collides(hitbox,0,0,0);
 }
 
 void Character::hit(int damage)

@@ -81,6 +81,18 @@ bool Hitbox::collides(Hitbox hitbox_param)
                     this->getX(),this->getY(),this->getWidth(),this->getHeight(),this->getAngle());
 }
 
+bool Hitbox::collides(Hitbox hitbox_param,int hitbox_x,int hitbox_y,int hitbox_angle)
+{
+    hitbox_param.setX(hitbox_param.getX()+hitbox_x);
+    hitbox_param.setY(hitbox_param.getY()+hitbox_y);
+    hitbox_param.setAngle(hitbox_param.getAngle()+hitbox_angle);
+
+    return hitboxCollision(this->getX(),this->getY(),this->getWidth(),this->getHeight(),this->getAngle(),
+                    hitbox_param.getX(),hitbox_param.getY(),hitbox_param.getWidth(),hitbox_param.getHeight(),hitbox_param.getAngle())
+        || hitboxCollision(hitbox_param.getX(),hitbox_param.getY(),hitbox_param.getWidth(),hitbox_param.getHeight(),hitbox_param.getAngle(),
+                    this->getX(),this->getY(),this->getWidth(),this->getHeight(),this->getAngle());
+}
+
 Hitbox Hitbox::getPlacedHitbox(Point p,float a)
 {
     Hitbox hitbox = *this;
