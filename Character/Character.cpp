@@ -465,7 +465,8 @@ void Character::animationControl()
         }
         animation_iteration=0;
     }
-    animation_iteration++;
+    if(getIterateSlowdownFlag())
+        animation_iteration++;
 }
 
 void Character::spellControl(int stage_velocity)

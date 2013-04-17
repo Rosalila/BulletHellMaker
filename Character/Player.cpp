@@ -22,7 +22,7 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->iteration=0;
 
     loadFromXML();
-    life_bar=painter->getTexture(directory+"life_bar.png");
+    life_bar=painter->getTexture(directory+"life_bar.png");;
 }
 
 void Player::inputControl()
@@ -58,18 +58,22 @@ void Player::inputControl()
         orientation="idle";
     }
 
+    int slowdown = 1;
+    if(isSlowPressed())
+        slowdown = 3;
+
     if(receiver->IsKeyDownn(SDLK_DOWN)
        || receiver->IsJoyDown(-2,0))
-        this->y+=velocity;
+        this->y+=velocity/slowdown;
     if(receiver->IsKeyDownn(SDLK_UP)
        || receiver->IsJoyDown(-8,0))
-        this->y-=velocity;
+        this->y-=velocity/slowdown;
     if(receiver->IsKeyDownn(SDLK_LEFT)
        || receiver->IsJoyDown(-4,0))
-        this->x-=velocity;
+        this->x-=velocity/slowdown;
     if(receiver->IsKeyDownn(SDLK_RIGHT)
        || receiver->IsJoyDown(-6,0))
-        this->x+=velocity;
+        this->x+=velocity/slowdown;
 
     if(receiver->IsKeyDownn(SDLK_z)
        || receiver->IsJoyDown(0,0))
@@ -92,6 +96,8 @@ void Player::logic(int stage_velocity)
         this->hitbox.setValues(0,0,0,0,0);
     }
     spellControl(stage_velocity);
+
+    slowExtraControl();
 }
 
 void Player::render()

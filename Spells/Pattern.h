@@ -8,6 +8,7 @@
 #include "Bullet.h"
 #include "Hitbox.h"
 #include "../Character/Modifier.h"
+#include "../STGUtility/STGUtility.h"
 
 #include <cmath>
 

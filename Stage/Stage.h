@@ -7,6 +7,7 @@
 #include "../Character/Character.h"
 #include "Layer.h"
 #include "Dialogue.h"
+#include "../STGUtility/STGUtility.h"
 #include <map>
 
 class Stage
@@ -27,6 +28,10 @@ private:
     int bound_x1,bound_y1,bound_x2,bound_y2;
     int velocity;
     int iterator;
+
+    //slow extra control
+    bool iterate_slowdown_flag;
+    int current_slowdown_iteration;
 
 public:
     Stage(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver);

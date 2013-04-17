@@ -79,37 +79,6 @@ void STG::mainLoop()
 
 void STG::logic()
 {
-    if(receiver->IsKeyPressed(SDLK_q))
-    {
-        stage->setVelocity(0);
-    }
-    if(receiver->IsKeyPressed(SDLK_w))
-    {
-        stage->setVelocity(5);
-    }
-    if(receiver->IsKeyPressed(SDLK_e))
-    {
-        stage->setVelocity(10);
-    }
-    if(receiver->IsKeyPressed(SDLK_r))
-    {
-        stage->setVelocity(50);
-    }
-    if(receiver->IsKeyPressed(SDLK_r))
-    {
-        stage->setVelocity(100);
-    }
-    if(receiver->IsKeyPressed(SDLK_t))
-    {
-        stage->setVelocity(200);
-    }
-    if(receiver->IsKeyPressed(SDLK_y))
-    {
-        stage->setVelocity(500);
-    }
-
-
-
     if(receiver->IsKeyPressed(SDLK_1))
     {
         player->setType("1");
@@ -147,11 +116,14 @@ void STG::logic()
         player->setType("9");
     }
 
-    painter->camera_x+=stage->getVelocity();
-    player->logic(stage->getVelocity());
-    player->setX(player->getX()+stage->getVelocity());
-    enemy->logic(stage->getVelocity());
-    enemy->setX(enemy->getX()+stage->getVelocity());
+    int stage_displacement = stage->getVelocity();
+    if(isSlowPressed())
+        stage_displacement/=3;
+    painter->camera_x+=stage_displacement;
+    player->logic(stage_displacement);
+    player->setX(player->getX()+stage_displacement);
+    enemy->logic(stage_displacement);
+    enemy->setX(enemy->getX()+stage_displacement);
     stage->logic();
 
     deletePatterns(stage->getBoundX1(),stage->getBoundY1(),stage->getBoundX2(),stage->getBoundY2());

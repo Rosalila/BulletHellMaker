@@ -99,6 +99,8 @@
 		<Unit filename="STG.h" />
 		<Unit filename="STGMenu/STGMenu.cpp" />
 		<Unit filename="STGMenu/STGMenu.h" />
+		<Unit filename="STGUtility/STGUtility.cpp" />
+		<Unit filename="STGUtility/STGUtility.h" />
 		<Unit filename="Spells/Bullet.cpp" />
 		<Unit filename="Spells/Bullet.h" />
 		<Unit filename="Spells/Hitbox.cpp" />

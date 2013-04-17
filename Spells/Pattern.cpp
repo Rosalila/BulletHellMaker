@@ -100,29 +100,34 @@ void Pattern::setState(std::string state)
 
 void Pattern::updateStateShouting()
 {
-    if(state=="startup")
+    if(getIterateSlowdownFlag())
     {
-        if(current_startup<startup)
+        if(state=="startup")
         {
-            current_startup++;
-        }else
+            if(current_startup<startup)
+            {
+                current_startup++;
+            }else
+            {
+                current_startup=0;
+                state="ready";
+            }
+        }
+
+        if(state=="cooldown")
         {
-            current_startup=0;
-            state="ready";
+            if(current_cooldown<cooldown)
+            {
+                current_cooldown++;
+            }else
+            {
+                current_cooldown=0;
+                state="ready";
+            }
         }
     }
 
-    if(state=="cooldown")
-    {
-        if(current_cooldown<cooldown)
-        {
-            current_cooldown++;
-        }else
-        {
-            current_cooldown=0;
-            state="ready";
-        }
-    }
+    slowExtraControl();
 }
 
 void Pattern::updateStateNotShouting()
@@ -135,8 +140,12 @@ void Pattern::updateStateNotShouting()
 
 void Pattern::logic(int stage_speed)
 {
-    this->x += cos (angle*PI/180) * velocity + stage_speed;
-    this->y -= sin (angle*PI/180) * velocity;
+    int slowdown = 1;
+    if(isSlowPressed())
+        slowdown = 3;
+
+    this->x += (cos (angle*PI/180) * velocity ) / slowdown + stage_speed;
+    this->y -= sin (angle*PI/180) * velocity / slowdown;
 
     if(animation_iteration>=animation_velocity)
     {
@@ -156,9 +165,13 @@ void Pattern::logic(int stage_speed)
 
         animation_iteration=0;
     }
-    animation_iteration++;
 
-    current_a_frequency++;
+    if(getIterateSlowdownFlag())
+    {
+        animation_iteration++;
+        current_a_frequency++;
+    }
+
     if(current_a_frequency>a_frequency)
     {
         current_a_frequency=0;
@@ -167,20 +180,22 @@ void Pattern::logic(int stage_speed)
             velocity=max_velocity;
     }
 
-    current_stop_ac_at++;
+    if(getIterateSlowdownFlag())
+        current_stop_ac_at++;
     if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
     {
-        current_ac_frequency++;
+        if(getIterateSlowdownFlag())
+            current_ac_frequency++;
         if(current_ac_frequency>ac_frequency)
         {
             current_ac_frequency=0;
-            angle+=angle_change;
+            angle+=angle_change/slowdown;
         }
     }
 
     modifiersControl();
 
-    //iteration++;
+    slowExtraControl();
 }
 
 void Pattern::render()
@@ -390,10 +405,7 @@ void Pattern::modifiersControl()
             }
         }
     }
-    angle+=angle_change;
-    this->x += cos (angle*PI/180) * velocity;
-    this->y -= sin (angle*PI/180) * velocity;
 
-    if(!flag_iterator_change)
+    if( !flag_iterator_change && getIterateSlowdownFlag())
         iteration++;
 }

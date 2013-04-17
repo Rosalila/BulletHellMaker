@@ -36,6 +36,10 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
 
 void Enemy::modifiersControl()
 {
+    int slowdown = 1;
+    if(isSlowPressed())
+        slowdown = 3;
+
     bool flag_iterator_change=false;
 
     vector<Modifier*>* current_modifiers = this->modifiers[iteration];
@@ -67,11 +71,11 @@ void Enemy::modifiersControl()
             }
         }
     }
-    angle+=angle_change;
-    this->x += cos (angle*PI/180) * velocity;
-    this->y -= sin (angle*PI/180) * velocity;
 
-    if(!flag_iterator_change)
+    this->x += cos (angle*PI/180) * velocity / slowdown;
+    this->y -= sin (angle*PI/180) * velocity / slowdown;
+
+    if(!flag_iterator_change && getIterateSlowdownFlag())
         iteration++;
 }
 
@@ -89,6 +93,8 @@ void Enemy::logic(int stage_velocity)
         orientation="destroyed";
         this->hitbox.setValues(0,0,0,0,0);
     }
+
+    getIterateSlowdownFlag();
 }
 
 void Enemy::render()

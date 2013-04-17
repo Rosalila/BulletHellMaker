@@ -7,6 +7,10 @@ Stage::Stage(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver)
     this->receiver=receiver;
     this->iterator=0;
     this->dialogue_bg=painter->getTexture("misc/dialogue_bg.png");
+
+    //slow extra control
+    this->iterate_slowdown_flag=false;
+    this->current_slowdown_iteration=0;
 }
 
 void Stage::drawLayer(Layer* layer)
@@ -19,7 +23,9 @@ void Stage::drawLayer(Layer* layer)
     }
 
     //Loop animation
-    layer->time_elapsed++;
+    if(getIterateSlowdownFlag())
+        layer->time_elapsed++;
+
     if(layer->current_frame>=(int)layer->textures.size())
         layer->current_frame=0;
 
@@ -53,14 +59,12 @@ void Stage::drawLayer(Layer* layer)
         if(painter->camera_x/layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
         {
             layer->alignment_x+=size_x+layer->separation_x;
-//            layer->alignment_y+=50;
         }
     }else if(layer->depth_effect_x<0)
     {
         if(painter->camera_x-layer->depth_effect_x>size_x+layer->alignment_x)
         {
             layer->alignment_x+=size_x;
-//            layer->alignment_y+=50;
         }
     }
 
@@ -370,7 +374,9 @@ void Stage::render()
 
 void Stage::logic()
 {
-    iterator++;
+    if(getIterateSlowdownFlag())
+        iterator++;
+
     if(dialogues.find(iterator)!=dialogues.end())
     {
         active_dialogues.push_back(dialogues[iterator]);
@@ -390,6 +396,8 @@ void Stage::logic()
             ++i;
         }
     }
+
+    slowExtraControl();
 }
 
 void Stage::playMusic()

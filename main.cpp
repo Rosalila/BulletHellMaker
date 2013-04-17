@@ -16,6 +16,7 @@
 #include "RosalilaSound/RosalilaSound.h"
 #include "STGMenu/STGMenu.h"
 #include "RosalilaUtility/RosalilaUtility.h"
+#include "STGUtility/STGUtility.h"
 
 #include <iostream>
 using namespace std;
@@ -27,11 +28,7 @@ int main(int argc, char *argv[])
 
     clearLog();
     //Creadas abierto
-    Receiver* receiver=new Receiver();
-    RosalilaInputs*inputa=new RosalilaInputs();
-    RosalilaInputs*inputb=new RosalilaInputs();
-    inputa->loadFromXML(1,receiver);
-    inputb->loadFromXML(2,receiver);
+    setReceiver(new Receiver());
 
     RosalilaGraphics*painter=new RosalilaGraphics();
 
@@ -42,7 +39,7 @@ int main(int argc, char *argv[])
 
 
     Sound*sonido = new Sound();
-    Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.svg");
+    Menu* menu=new Menu(painter,getReceiver(),sonido,(char*)"menu/main_menu.svg");
     menu->playMusic();
 
     menu->loopMenu();
