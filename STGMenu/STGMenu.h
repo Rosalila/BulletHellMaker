@@ -23,9 +23,6 @@ private:
     bool exit_signal,save_inputs_signal;
     MenuCharSelect* char_select;
 
-    //config vars
-    int ai_level,time,rounds;
-
     void iniciarJuego(std::string character_name,std::string stage_name);
 public:
     std::string music_path;
@@ -33,12 +30,11 @@ public:
     Stage* stage;
 
     //Misc
-    Image* vs_screen;
+    Image* loading_screen;
 
     Menu(){}
     Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
-    void cargarConfig();
     void loopMenu();
     std::string getStage();
     bool getExitSignal();
@@ -47,7 +43,7 @@ public:
     std::string getRosalilaInputsPressed();
     void llenarRosalilaInputssBotones();
     int toKeyCode(std::string str);
-    void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
+    void printLoadingScreen();
     void playMusic();
 };
 

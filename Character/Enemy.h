@@ -17,8 +17,8 @@
 class Enemy : public Character
 {
     std::map<int, vector<Modifier*>* >modifiers;
-    float angle;
-    float angle_change;
+    double angle;
+    double angle_change;
     Player*player;
 
     Image*life_bar;
@@ -29,6 +29,7 @@ public:
     void render();
     void loadModifiersFromXML();
     virtual void addActivePattern(Pattern* pattern);
+    void aimPlayer(Pattern* pattern);
 };
 
 #endif

@@ -21,7 +21,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
 
     TiXmlNode *config_file=doc->FirstChild("ConfigFile");
 
-    TiXmlNode *you_loose_node=config_file->FirstChild("YouLose");
+    TiXmlNode *you_loose_node=config_file->FirstChild("YouLoose");
 
     int you_loose_x=atoi(you_loose_node->ToElement()->Attribute("x"));
     int you_loose_y=atoi(you_loose_node->ToElement()->Attribute("y"));
@@ -117,17 +117,18 @@ void STG::logic()
     }
 
     int stage_displacement = stage->getVelocity();
-    if(isSlowPressed())
+    if(isSlowActive())
         stage_displacement/=3;
     painter->camera_x+=stage_displacement;
     player->logic(stage_displacement);
     player->setX(player->getX()+stage_displacement);
     enemy->logic(stage_displacement);
-    enemy->setX(enemy->getX()+stage_displacement);
+    //enemy->setX(enemy->getX()+stage_displacement);
     stage->logic();
 
     deletePatterns(stage->getBoundX1(),stage->getBoundY1(),stage->getBoundX2(),stage->getBoundY2());
     checkCharacterOutOfBounds();
+    slowExtraControl();
 }
 
 void STG::render()

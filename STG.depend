@@ -1,1827 +1,8 @@
 # depslib dependency file v1.0
-1341982241 source:/home/mack/Fighter/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"include/Fighter.h"
-	<iostream>
-
-1341982241 /home/mack/Fighter/include/Fighter.h
-	"TinyXml/tinyxml.h"
-	"Menu/Menu.h"
-	<stdio.h>
-
-1341982241 /home/mack/Fighter/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1341982241 /home/mack/Fighter/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1341982241 /home/mack/Fighter/include/Menu/Menu.h
-	"Stage/Stage.h"
-	"Grafico/Grafico.h"
-	"irrKlang/irrKlang.h"
-	"Personaje/Personaje.h"
-	"Menu/MenuContenedor.h"
-	"Menu/MenuCharSelect.h"
-	"Sonido/Sonido.h"
-	"Fighter.h"
-
-1341982241 source:/home/mack/Fighter/src/Fighter.cpp
-	"../include/Fighter.h"
-
-1341993692 source:/home/mack/Fighter/src/Grafico/Grafico.cpp
-	"Grafico/Grafico.h"
-
-1341982241 source:/home/mack/Fighter/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1341982241 source:/home/mack/Fighter/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1341982241 source:/home/mack/Fighter/src/IA/IA.cpp
-	"IA/IA.h"
-
-1341982241 source:/home/mack/Fighter/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1341982241 source:/home/mack/Fighter/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1341982241 source:/home/mack/Fighter/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1341982241 source:/home/mack/Fighter/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1342034210 source:/home/mack/Fighter/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1341982241 source:/home/mack/Fighter/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Animacion.cpp
-	"Personaje/Animacion.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Barra.cpp
-	"Personaje/Barra.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Condicion.cpp
-	"Personaje/Condicion.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Frame.cpp
-	"Personaje/Frame.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/HitBox.cpp
-	"Personaje/HitBox.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Imagen.cpp
-	"Personaje/Imagen.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/InputMovimiento.cpp
-	"Personaje/InputMovimiento.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Modificador.cpp
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorBarra.cpp
-	"Personaje/ModificadorBarra.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorEntero.cpp
-	"Personaje/ModificadorEntero.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorHitboxes.cpp
-	"Personaje/ModificadorHitboxes.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorImagen.cpp
-	"Personaje/ModificadorImagen.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorPorVariable.cpp
-	"Personaje/ModificadorPorVariable.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/ModificadorString.cpp
-	"Personaje/ModificadorString.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Movimiento.cpp
-	"Personaje/Movimiento.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Paleta.cpp
-	"Personaje/Paleta.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Personaje.cpp
-	"Personaje/Personaje.h"
-
-1341982241 source:/home/mack/Fighter/src/Personaje/Proyectil.cpp
-	"Personaje/Proyectil.h"
-
-1341982241 source:/home/mack/Fighter/src/Sonido/Reproduccion.cpp
-	"Sonido/Reproduccion.h"
-
-1341982241 source:/home/mack/Fighter/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1341982241 source:/home/mack/Fighter/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1341982241 source:/home/mack/Fighter/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1341982241 source:/home/mack/Fighter/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"include/Fighter.h"
-	<iostream>
-
-1347829471 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
-	"TinyXml/tinyxml.h"
-	"Menu/Menu.h"
-	<stdio.h>
-
-1342183263 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1342183263 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1342201858 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
-	"Stage/Stage.h"
-	"Grafico/Grafico.h"
-	"irrKlang/irrKlang.h"
-	"Personaje/Personaje.h"
-	"Menu/MenuContenedor.h"
-	"Menu/MenuCharSelect.h"
-	"Sonido/Sonido.h"
-	"Fighter.h"
-
-1347843045 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
-	"../include/Fighter.h"
-
-1348165333 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
-	"Grafico/Grafico.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
-	"IA/IA.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1345105382 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1347889338 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1344743575 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1345066440 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Animacion.cpp
-	"Personaje/Animacion.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
-	"Personaje/Barra.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
-	"Personaje/Condicion.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
-	"Personaje/Frame.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
-	"Personaje/HitBox.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Imagen.cpp
-	"Personaje/Imagen.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
-	"Personaje/InputMovimiento.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Modificador.cpp
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorBarra.cpp
-	"Personaje/ModificadorBarra.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorEntero.cpp
-	"Personaje/ModificadorEntero.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorHitboxes.cpp
-	"Personaje/ModificadorHitboxes.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorImagen.cpp
-	"Personaje/ModificadorImagen.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorPorVariable.cpp
-	"Personaje/ModificadorPorVariable.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorString.cpp
-	"Personaje/ModificadorString.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
-	"Personaje/Movimiento.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp
-	"Personaje/Paleta.h"
-
-1347603608 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
-	"Personaje/Personaje.h"
-
-1342720770 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
-	"Personaje/Proyectil.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
-	"Sonido/Reproduccion.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1345068079 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	<string>
-	"include/Fighter.h"
-	"Log/Log.h"
-	<iostream>
-
-1358148508 /home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
-	"TinyXml/tinyxml.h"
-	"Menu/Menu.h"
-	<stdio.h>
-
-1358107171 /home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1358107171 /home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1358138008 /home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
-	"Stage/Stage.h"
-	"Painter/Painter.h"
-	"irrKlang/irrKlang.h"
-	"Personaje/Personaje.h"
-	"Menu/MenuContenedor.h"
-	"Menu/MenuCharSelect.h"
-	"Sonido/Sonido.h"
-	"Fighter.h"
-
-1358150913 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
-	"../include/Fighter.h"
-
-1351051182 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Grafico/Grafico.cpp
-	"Grafico/Grafico.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
-	"IA/IA.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1358138200 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1358408732 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1358408096 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
-	"Personaje/Animacion.h"
-
-1358138229 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
-	"Personaje/Barra.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
-	"Personaje/Condicion.h"
-
-1358403709 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
-	"Personaje/Frame.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/HitBox.cpp
-	"Personaje/HitBox.h"
-
-1358144894 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
-	"Personaje/Imagen.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
-	"Personaje/InputMovimiento.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Modificador.cpp
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
-	"Personaje/ModificadorBarra.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
-	"Personaje/ModificadorEntero.h"
-
-1358148411 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
-	"Personaje/ModificadorHitboxes.h"
-
-1358147473 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
-	"Personaje/ModificadorImagen.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
-	"Personaje/ModificadorPorVariable.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
-	"Personaje/ModificadorString.h"
-
-1358403731 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
-	"Personaje/Movimiento.h"
-
-1358138256 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
-	"Personaje/Paleta.h"
-
-1358408169 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
-	"Personaje/Personaje.h"
-
-1358147686 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
-	"Personaje/Proyectil.h"
-
-1354848831 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
-	"Sonido/Reproduccion.h"
-
-1358405241 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1358151277 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1358837004 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	<string>
-	"include/Fighter.h"
-	"Log/Log.h"
-	<iostream>
-
-1358148508 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
-	"TinyXml/tinyxml.h"
-	"Menu/Menu.h"
-	<stdio.h>
-
-1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1358138008 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
-	"Stage/Stage.h"
-	"Painter/Painter.h"
-	"irrKlang/irrKlang.h"
-	"Personaje/Personaje.h"
-	"Menu/MenuContenedor.h"
-	"Menu/MenuCharSelect.h"
-	"Sonido/Sonido.h"
-	"Fighter.h"
-
-1358150913 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
-	"../include/Fighter.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
-	"IA/IA.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1358138200 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1358408732 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1358408096 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
-	"Personaje/Animacion.h"
-
-1358138229 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
-	"Personaje/Barra.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
-	"Personaje/Condicion.h"
-
-1358403709 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
-	"Personaje/Frame.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/HitBox.cpp
-	"Personaje/HitBox.h"
-
-1358144894 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
-	"Personaje/Imagen.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
-	"Personaje/InputMovimiento.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Modificador.cpp
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
-	"Personaje/ModificadorBarra.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
-	"Personaje/ModificadorEntero.h"
-
-1358148411 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
-	"Personaje/ModificadorHitboxes.h"
-
-1358147473 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
-	"Personaje/ModificadorImagen.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
-	"Personaje/ModificadorPorVariable.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
-	"Personaje/ModificadorString.h"
-
-1358403731 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
-	"Personaje/Movimiento.h"
-
-1358138256 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
-	"Personaje/Paleta.h"
-
-1358408169 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
-	"Personaje/Personaje.h"
-
-1358147686 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
-	"Personaje/Proyectil.h"
-
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
-	"Sonido/Reproduccion.h"
-
-1358405241 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1358151277 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1358403997 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1357262070 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/LTexture.cpp
-	"Painter/LTexture.h"
-
-1357257772 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/LUtil.cpp
-	"Painter/LUtil.h"
-	<IL/il.h>
-	<IL/ilu.h>
-	"Painter/LTexture.h"
-
-1358151252 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1358151252 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Log/Log.cpp
-	"Log/Log.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Log/Log.cpp
-	"Log/Log.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1366230899 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	<string>
-	"RosalilaInputs/RosalilaInputs.h"
-	"RosalilaGraphics/RosalilaGraphics.h"
-	"RosalilaSound/RosalilaSound.h"
-	"STGMenu/STGMenu.h"
-	"RosalilaUtility/RosalilaUtility.h"
-	"STGUtility/STGUtility.h"
-	<iostream>
-
-1358148508 /home/turupawn/Projects/CodeBlocks/STG/include/Fighter.h
-	"TinyXml/tinyxml.h"
-	"Menu/Menu.h"
-	<stdio.h>
-
-1358107171 /home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1358107171 /home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1359260737 /home/turupawn/Projects/CodeBlocks/STG/include/Menu/Menu.h
-	"Stage/Stage.h"
-	"Painter/Painter.h"
-	"Personaje/Personaje.h"
-	"Menu/MenuContenedor.h"
-	"Menu/MenuCharSelect.h"
-	"Sonido/Sonido.h"
-	"STG.h"
-
-1358150913 source:/home/turupawn/Projects/CodeBlocks/STG/src/Fighter.cpp
-	"../include/Fighter.h"
-
-1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/IA.cpp
-	"IA/IA.h"
-
-1359255227 source:/home/turupawn/Projects/CodeBlocks/STG/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1359261150 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1362465303 source:/home/turupawn/Projects/CodeBlocks/STG/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1360533226 source:/home/turupawn/Projects/CodeBlocks/STG/src/Log/Log.cpp
-	"Log/Log.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1362900304 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1359412016 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1359412037 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1359247680 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1359412076 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1359412106 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1359247718 source:/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1362900401 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1363046063 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1358408096 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Animacion.cpp
-	"Personaje/Animacion.h"
-
-1358138229 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Barra.cpp
-	"Personaje/Barra.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Condicion.cpp
-	"Personaje/Condicion.h"
-
-1358403709 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Frame.cpp
-	"Personaje/Frame.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/HitBox.cpp
-	"Personaje/HitBox.h"
-
-1358144894 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Imagen.cpp
-	"Personaje/Imagen.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/InputMovimiento.cpp
-	"Personaje/InputMovimiento.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Modificador.cpp
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorBarra.cpp
-	"Personaje/ModificadorBarra.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorEntero.cpp
-	"Personaje/ModificadorEntero.h"
-
-1358148411 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorHitboxes.cpp
-	"Personaje/ModificadorHitboxes.h"
-
-1358147473 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorImagen.cpp
-	"Personaje/ModificadorImagen.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorPorVariable.cpp
-	"Personaje/ModificadorPorVariable.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/ModificadorString.cpp
-	"Personaje/ModificadorString.h"
-
-1358403731 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Movimiento.cpp
-	"Personaje/Movimiento.h"
-
-1358138256 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Paleta.cpp
-	"Personaje/Paleta.h"
-
-1359255678 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Personaje.cpp
-	"Personaje/Personaje.h"
-
-1358147686 source:/home/turupawn/Projects/CodeBlocks/STG/src/Personaje/Proyectil.cpp
-	"Personaje/Proyectil.h"
-
-1361068749 source:/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1363748805 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1363748753 source:/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
-	"../include/STG.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG/include/STG.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Character/Character.h"
-	"Character/Player.h"
-	"Character/Enemy.h"
-	"Stage/Stage.h"
-	"Painter/Animation.h"
-
-1363046055 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
-	<iostream>
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"TinyXml/tinyxml.h"
-	<GL/freeglut.h>
-	<GL/gl.h>
-	<stdio.h>
-	"Painter/smpeg.h"
-	"Painter/Image.h"
-	"Painter/Timer.h"
-	"Painter/Cube.h"
-	"Painter/Object3D.h"
-	"Utility/Utility.h"
-	<iostream>
-	<fstream>
-
-1361064552 /home/turupawn/Projects/CodeBlocks/STG/include/Sonido/Sonido.h
-	<string>
-	<vector>
-	<iostream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	"Utility/Utility.h"
-	<map>
-
-1359255314 /home/turupawn/Projects/CodeBlocks/STG/include/Input/Input.h
-	"Input/Boton.h"
-	<IA/IA.h>
-
-1363675304 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
-	"../include/Character/Character.h"
-
-1363672527 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Utility/Utility.h"
-	"Character/Modifier.h"
-
-1363748755 /home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Character/Character.h"
-	"Stage/Layer.h"
-	"Stage/Dialogue.h"
-	<map>
-
-1363391675 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
-	"../include/Spells/Bullet.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
-	"../include/Spells/Pattern.h"
-
-1363393561 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	<string>
-	"Input/Input.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"STGMenu/STGMenu.h"
-	"Utility/Utility.h"
-	<iostream>
-
-1363391641 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Character.cpp
-	"../include/Character/Character.h"
-
-1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Automata.cpp
-	"IA/Automata.h"
-
-1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Estado.cpp
-	"IA/Estado.h"
-
-1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/IA.cpp
-	"IA/IA.h"
-
-1359255227 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1362900287 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Boton.cpp
-	"Input/Boton.h"
-
-1359261150 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1362465303 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Log/Log.cpp
-	"Log/Log.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1362900304 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/Menu.cpp
-	"Menu/Menu.h"
-
-1359412016 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1359412037 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1362900287 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1359247680 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1359412076 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1359412106 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1359247718 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1362900401 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1362901546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/STG.cpp
-	"../include/STG.h"
-
-1363391545 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/STG.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Character/Character.h"
-	"Character/Player.h"
-	"Character/Enemy.h"
-	"Stage/Stage.h"
-	"Painter/Animation.h"
-
-1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinyxml.h
-	<ctype.h>
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	<assert.h>
-	<string>
-	<iostream>
-	<sstream>
-	"tinystr.h"
-
-1358107171 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/TinyXml/tinystr.h
-	<assert.h>
-	<string.h>
-
-1362507490 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Painter/Painter.h
-	<iostream>
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"TinyXml/tinyxml.h"
-	<GL/freeglut.h>
-	<GL/gl.h>
-	<stdio.h>
-	"Painter/Image.h"
-	"Painter/Timer.h"
-	"Painter/Cube.h"
-	"Utility/Utility.h"
-	<iostream>
-	<fstream>
-
-1361064552 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Sonido/Sonido.h
-	<string>
-	<vector>
-	<iostream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	"Utility/Utility.h"
-	<map>
-
-1359255314 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Input/Input.h
-	"Input/Boton.h"
-	<IA/IA.h>
-
-1363391479 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Character.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Utility/Utility.h"
-	"Character/Modifier.h"
-
-1363391503 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Stage/Stage.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Character/Character.h"
-	"Stage/Layer.h"
-	"Stage/Dialogue.h"
-	<map>
-
-1361068749 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Sonido/Sonido.cpp
-	"Sonido/Sonido.h"
-
-1363391675 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Bullet.cpp
-	"../include/Spells/Bullet.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Pattern.cpp
-	"../include/Spells/Pattern.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1359937455 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Enemy.cpp
-	"Stage/Enemy.h"
-
-1359937455 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Enemy.cpp
-	"Stage/Enemy.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Dialogue.cpp
-	"Stage/Dialogue.h"
-
-1360488831 source:/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
-	"Stage/Layer.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Dialogue.cpp
-	"Stage/Dialogue.h"
-
-1360488831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Stage/Layer.cpp
-	"Stage/Layer.h"
-
-1363674901 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
-	"../include/Character/Enemy.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-	"Character/Player.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Enemy.cpp
-	"../include/Character/Enemy.h"
-
-1363391545 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Enemy.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-	"Character/Player.h"
-
-1360875829 source:/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
-	"../include/Spells/Hitbox.h"
-
-1363749759 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
-	"../include/Character/Player.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-
-1362901145 source:/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
-	"Utility/Utility.h"
-
-1360893247 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/VariableChange.cpp
-	"../include/Character/VariableChange.h"
-
-1363391546 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Player.cpp
-	"../include/Character/Player.h"
-
-1360893247 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/VariableChange.cpp
-	"../include/Character/VariableChange.h"
-
-1363391545 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Character/Player.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-
-1360875829 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Spells/Hitbox.cpp
-	"../include/Spells/Hitbox.h"
-
-1362901145 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Utility/Utility.cpp
-	"Utility/Utility.h"
-
-1362900287 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Animation.cpp
-	"Painter/Animation.h"
-
-1362900318 /home/turupawn/Projects/CodeBlocks/STG/include/Painter/Animation.h
-	"SDL/SDL_image.h"
-	<GL/freeglut.h>
-	<GL/gl.h>
-	<stdio.h>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"Sonido/Sonido.h"
-	"Input/Input.h"
-
-1362900318 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/include/Painter/Animation.h
-	"SDL/SDL_image.h"
-	<GL/freeglut.h>
-	<GL/gl.h>
-	<stdio.h>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"Sonido/Sonido.h"
-	"Input/Input.h"
-
-1362900287 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Animation.cpp
-	"Painter/Animation.h"
-
-1362549128 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Cube.cpp
-	"Painter/Cube.h"
-
-1362864928 source:/home/turupawn/Projects/CodeBlocks/STG/src/Character/Modifier.cpp
-	"../include/Character/Modifier.h"
-
-1362864928 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Character/Modifier.cpp
-	"../include/Character/Modifier.h"
-
-1362549128 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Cube.cpp
-	"Painter/Cube.h"
-
-1362939601 source:/home/turupawn/Projects/CodeBlocks/STG/src/Painter/Object3D.cpp
-	"Painter/Object3D.h"
-
-1361469679 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/IA/Automata.cpp
-	"IA/Automata.h"
-
-1359959968 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/IA/Estado.cpp
-	"IA/Estado.h"
-
-1361469684 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/IA/IA.cpp
-	"IA/IA.h"
-
-1359959968 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1359960714 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Input/Boton.cpp
-	"Input/Boton.h"
-
-1359964685 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1359958586 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1363069429 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1363069609 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1363073068 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1363145837 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1363071197 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1363071321 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1363145302 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1363071337 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1362900287 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Animation.cpp
-	"Painter/Animation.h"
-
-1362549128 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Cube.cpp
-	"Painter/Cube.h"
-
-1362900401 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1362939601 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Object3D.cpp
-	"Painter/Object3D.h"
-
-1363333974 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1363231901 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/RosalilaSound/RosalilaSound.cpp
-	"RosalilaSound.h"
-
-1363228574 /home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/RosalilaSound/RosalilaSound.h
-	<string>
-	<vector>
-	<iostream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	"Utility/Utility.h"
-	<map>
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1361073260 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/Rosalila/Utility/Utility.cpp
-	"Utility/Utility.h"
-
-1363393561 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/main.cpp
-	<pthread.h>
-	<stdio.h>
-	<stdlib.h>
-	<sstream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	<string>
-	"Input/Input.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"STGMenu/STGMenu.h"
-	"Utility/Utility.h"
-	<iostream>
-
-1363391641 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Character/Character.cpp
-	"../include/Character/Character.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Character/Enemy.cpp
-	"../include/Character/Enemy.h"
-
-1362864928 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Character/Modifier.cpp
-	"../include/Character/Modifier.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Character/Player.cpp
-	"../include/Character/Player.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/STG.cpp
-	"../include/STG.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG (copy)/include/STG.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Character/Character.h"
-	"Character/Player.h"
-	"Character/Enemy.h"
-	"Stage/Stage.h"
-	"Painter/Animation.h"
-
-1363391479 /home/turupawn/Projects/CodeBlocks/STG (copy)/include/Character/Character.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Utility/Utility.h"
-	"Character/Modifier.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG (copy)/include/Character/Player.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-
-1363391545 /home/turupawn/Projects/CodeBlocks/STG (copy)/include/Character/Enemy.h
-	<map>
-	<list>
-	<vector>
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Input/Input.h"
-	"Spells/Bullet.h"
-	"Spells/Pattern.h"
-	"Character/Character.h"
-	"Character/Player.h"
-
-1363391503 /home/turupawn/Projects/CodeBlocks/STG (copy)/include/Stage/Stage.h
-	"TinyXml/tinyxml.h"
-	"Painter/Painter.h"
-	"RosalilaSound/RosalilaSound.h"
-	"Character/Character.h"
-	"Stage/Layer.h"
-	"Stage/Dialogue.h"
-	<map>
-
-1363391675 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Spells/Bullet.cpp
-	"../include/Spells/Bullet.h"
-
-1360875829 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Spells/Hitbox.cpp
-	"../include/Spells/Hitbox.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Spells/Pattern.cpp
-	"../include/Spells/Pattern.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Stage/Dialogue.cpp
-	"Stage/Dialogue.h"
-
-1360488831 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Stage/Layer.cpp
-	"Stage/Layer.h"
-
-1363391546 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/Stage/Stage.cpp
-	"Stage/Stage.h"
-
-1363395900 source:/home/turupawn/Projects/CodeBlocks/STG (copy)/src/STGMenu/STGMenu.cpp
-	"STGMenu/STGMenu.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Automata.cpp
-	"IA/Automata.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Estado.cpp
-	"IA/Estado.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/IA.cpp
-	"IA/IA.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Boton.cpp
-	"Input/Boton.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1363747829 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Animation.cpp
-	"Painter/Animation.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Cube.cpp
-	"Painter/Cube.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Object3D.cpp
-	"Painter/Object3D.h"
-
-1363653996 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1364369632 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
-	"RosalilaSound.h"
-
-1364369260 /home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.h
-	<string>
-	<vector>
-	<iostream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	"RosalilaUtility/RosalilaUtility.h"
-	<map>
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Utility/Utility.cpp
-	"Utility/Utility.h"
-
-1363748940 source:/home/turupawn/Projects/CodeBlocks/STG/src/STGMenu/STGMenu.cpp
-	"STGMenu/STGMenu.h"
-
-1361469679 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Automata.cpp
-	"IA/Automata.h"
-
-1359959968 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Estado.cpp
-	"IA/Estado.h"
-
-1361469684 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/IA.cpp
-	"IA/IA.h"
-
-1359959968 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/IA/Transicion.cpp
-	"IA/Transicion.h"
-
-1359960714 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Boton.cpp
-	"Input/Boton.h"
-
-1359964685 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Input.cpp
-	"Input/Input.h"
-	<sstream>
-
-1359958586 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Input/Receiver.cpp
-	"Input/Receiver.h"
-
-1363069429 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/Elemento.cpp
-	"Menu/Elemento.h"
-
-1363069609 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuBarra.cpp
-	"Menu/MenuBarra.h"
-
-1363073068 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuBoton.cpp
-	"Menu/MenuBoton.h"
-
-1363145837 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuCharSelect.cpp
-	"Menu/MenuCharSelect.h"
-
-1363071197 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuContenedor.cpp
-	"Menu/MenuContenedor.h"
-
-1363071321 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuImagen.cpp
-	"Menu/MenuImagen.h"
-
-1363145302 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuLista.cpp
-	"Menu/MenuLista.h"
-
-1363071337 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Menu/MenuTexto.cpp
-	"Menu/MenuTexto.h"
-
-1362900287 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Animation.cpp
-	"Painter/Animation.h"
-
-1362549128 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Cube.cpp
-	"Painter/Cube.h"
-
-1362900401 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Image.cpp
-	"Painter/Painter.h"
-
-1362939601 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Object3D.cpp
-	"Painter/Object3D.h"
-
-1363467368 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Painter.cpp
-	"Painter/Painter.h"
-
-1358107907 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Painter/Timer.cpp
-	"SDL/SDL.h"
-	"Painter/Timer.h"
-
-1363231901 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
-	"RosalilaSound.h"
-
-1363228574 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.h
-	<string>
-	<vector>
-	<iostream>
-	"SDL/SDL.h"
-	"SDL/SDL_image.h"
-	"SDL/SDL_ttf.h"
-	"SDL/SDL_mixer.h"
-	"Utility/Utility.h"
-	<map>
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinystr.cpp
-	"TinyXml/tinystr.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxml.cpp
-	<ctype.h>
-	<sstream>
-	<iostream>
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlerror.cpp
-	"TinyXml/tinyxml.h"
-
-1358107173 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlparser.cpp
-	<ctype.h>
-	<stddef.h>
-	"TinyXml/tinyxml.h"
-	<windows.h>
-
-1361073260 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/Utility/Utility.cpp
-	"Utility/Utility.h"
-
-1363395900 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/src/STGMenu/STGMenu.cpp
-	"STGMenu/STGMenu.h"
-
-1364183333 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Estado.cpp
-	"RosalilaAI/Estado.h"
-
-1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Animation.cpp
-	"RosalilaGraphics/Animation.h"
-
-1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
-	"RosalilaGraphics/Cube.h"
-
-1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Image.cpp
-	"RosalilaGraphics/RosalilaGraphics.h"
-
-1364183396 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
-	"RosalilaGraphics/Object3D.h"
-
-1365471102 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
-	"RosalilaGraphics/RosalilaGraphics.h"
-
-1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
-	"SDL/SDL.h"
-	"RosalilaGraphics/Timer.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/Elemento.cpp
-	"RosalilaMenus/Elemento.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBarra.cpp
-	"RosalilaMenus/MenuBarra.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBoton.cpp
-	"RosalilaMenus/MenuBoton.h"
-
-1364680481 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
-	"RosalilaMenus/MenuCharSelect.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuContenedor.cpp
-	"RosalilaMenus/MenuContenedor.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuImagen.cpp
-	"RosalilaMenus/MenuImagen.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuLista.cpp
-	"RosalilaMenus/MenuLista.h"
-
-1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuTexto.cpp
-	"RosalilaMenus/MenuTexto.h"
-
-1364194144 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
-	"RosalilaUtility/RosalilaUtility.h"
-
-1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Automata.cpp
-	"RosalilaAI/Automata.h"
-
-1364193698 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/RosalilaAI.cpp
-	"RosalilaAI/RosalilaAI.h"
-
-1364183333 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Transicion.cpp
-	"RosalilaAI/Transicion.h"
-
-1364194131 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Boton.cpp
-	"RosalilaInputs/Boton.h"
-
-1364196477 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Receiver.cpp
-	"RosalilaInputs/RosalilaInputs.h"
-
-1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
-	"RosalilaInputs/RosalilaInputs.h"
-	<sstream>
-
 1366231664 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
 	"Character.h"
 
-1366231634 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
+1366768060 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -1847,7 +28,7 @@
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1366231470 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
+1366770893 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -1861,10 +42,17 @@
 1362864984 /home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.h
 	<iostream>
 
-1366231695 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
+1366841824 /home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.h
+	<iostream>
+	<fstream>
+	<cmath>
+	<vector>
+	"RosalilaInputs/RosalilaInputs.h"
+
+1366848351 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
 	"Enemy.h"
 
-1364366947 /home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
+1366841839 /home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
@@ -1877,7 +65,7 @@
 	"Character.h"
 	"Player.h"
 
-1364366963 /home/turupawn/Projects/CodeBlocks/STG/Character/Player.h
+1366240763 /home/turupawn/Projects/CodeBlocks/STG/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -1892,10 +80,110 @@
 1364191440 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1366231714 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
+1366240940 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
 	"Player.h"
 
-1366222293 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
+1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Automata.cpp
+	"RosalilaAI/Automata.h"
+
+1364183333 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Estado.cpp
+	"RosalilaAI/Estado.h"
+
+1364193698 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/RosalilaAI.cpp
+	"RosalilaAI/RosalilaAI.h"
+
+1364183333 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Transicion.cpp
+	"RosalilaAI/Transicion.h"
+
+1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Animation.cpp
+	"RosalilaGraphics/Animation.h"
+
+1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
+	"RosalilaGraphics/Cube.h"
+
+1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Image.cpp
+	"RosalilaGraphics/RosalilaGraphics.h"
+
+1364183396 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
+	"RosalilaGraphics/Object3D.h"
+
+1365471102 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+	"RosalilaGraphics/RosalilaGraphics.h"
+
+1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
+	"SDL/SDL.h"
+	"RosalilaGraphics/Timer.h"
+
+1364194131 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Boton.cpp
+	"RosalilaInputs/Boton.h"
+
+1364196477 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Receiver.cpp
+	"RosalilaInputs/RosalilaInputs.h"
+
+1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+	"RosalilaInputs/RosalilaInputs.h"
+	<sstream>
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/Elemento.cpp
+	"RosalilaMenus/Elemento.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBarra.cpp
+	"RosalilaMenus/MenuBarra.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBoton.cpp
+	"RosalilaMenus/MenuBoton.h"
+
+1366663982 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
+	"RosalilaMenus/MenuCharSelect.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuContenedor.cpp
+	"RosalilaMenus/MenuContenedor.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuImagen.cpp
+	"RosalilaMenus/MenuImagen.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuLista.cpp
+	"RosalilaMenus/MenuLista.h"
+
+1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuTexto.cpp
+	"RosalilaMenus/MenuTexto.h"
+
+1364369632 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+	"RosalilaSound.h"
+
+1364369260 /home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.h
+	<string>
+	<vector>
+	<iostream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	"RosalilaUtility/RosalilaUtility.h"
+	<map>
+
+1364194144 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+	"RosalilaUtility/RosalilaUtility.h"
+
+1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1363482959 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1366848260 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
 	"STG.h"
 
 1364191058 /home/turupawn/Projects/CodeBlocks/STG/STG.h
@@ -1931,10 +219,10 @@
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1364698785 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
+1366667691 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
-1364191545 /home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.h
+1366664394 /home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.h
 	"../Stage/Stage.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaMenus/MenuContenedor.h"
@@ -1942,13 +230,16 @@
 	"RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
+1366841828 source:/home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.cpp
+	"STGUtility.h"
+
 1364432611 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
 1364439903 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.cpp
 	"Hitbox.h"
 
-1366231570 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
+1366772475 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1364191573 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Dialogue.cpp
@@ -1957,16 +248,24 @@
 1364191579 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Layer.cpp
 	"Layer.h"
 
-1366231151 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
+1366664144 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1366230925 source:/home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.cpp
-	"STGUtility.h"
-
-1366232139 /home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.h
-	<iostream>
-	<fstream>
-	<cmath>
-	<vector>
+1366230899 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
 	"RosalilaInputs/RosalilaInputs.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"STGMenu/STGMenu.h"
+	"RosalilaUtility/RosalilaUtility.h"
+	"STGUtility/STGUtility.h"
+	<iostream>
 

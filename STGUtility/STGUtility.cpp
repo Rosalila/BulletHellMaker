@@ -2,17 +2,18 @@
 
 int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
+bool slow_enabled=false;
 Receiver* receiver = new Receiver();
 
 bool getIterateSlowdownFlag()
 {
-    return !isSlowPressed() || iterate_slowdown_flag;
+    return !isSlowActive() || iterate_slowdown_flag;
 }
 
 void slowExtraControl()
 {
     //slow extra control
-    if(isSlowPressed())
+    if(isSlowActive())
     {
         iterate_slowdown_flag=false;
         current_slowdown_iteration++;
@@ -37,4 +38,29 @@ Receiver* getReceiver()
 bool isSlowPressed()
 {
     return receiver->IsKeyDownn(SDLK_x);
+}
+
+void disableSlow()
+{
+    slow_enabled=false;
+}
+void enableSlow()
+{
+    slow_enabled=true;
+}
+bool isSlowEnabled()
+{
+    return slow_enabled;
+}
+bool isSlowActive()
+{
+    return isSlowEnabled() && isSlowPressed();
+}
+
+double getSlowdown()
+{
+    int slowdown = 1.0;
+    if(isSlowPressed() && isSlowEnabled())
+        slowdown = 3.0;
+    return slowdown;
 }

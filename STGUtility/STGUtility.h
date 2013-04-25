@@ -13,8 +13,13 @@ using namespace std;
 
 bool getIterateSlowdownFlag();
 bool isSlowPressed();
+bool isSlowEnabled();
+bool isSlowActive();
 void slowExtraControl();
 void setReceiver(Receiver*receiver_param);
 Receiver* getReceiver();
+void disableSlow();
+void enableSlow();
+double getSlowdown();
 
 #endif

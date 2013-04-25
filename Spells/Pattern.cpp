@@ -126,8 +126,6 @@ void Pattern::updateStateShouting()
             }
         }
     }
-
-    slowExtraControl();
 }
 
 void Pattern::updateStateNotShouting()
@@ -140,12 +138,8 @@ void Pattern::updateStateNotShouting()
 
 void Pattern::logic(int stage_speed)
 {
-    int slowdown = 1;
-    if(isSlowPressed())
-        slowdown = 3;
-
-    this->x += (cos (angle*PI/180) * velocity ) / slowdown + stage_speed;
-    this->y -= sin (angle*PI/180) * velocity / slowdown;
+    this->x += (cos (angle*PI/180) * velocity ) / getSlowdown() + stage_speed;
+    this->y -= sin (angle*PI/180) * velocity / getSlowdown();
 
     if(animation_iteration>=animation_velocity)
     {
@@ -189,13 +183,11 @@ void Pattern::logic(int stage_speed)
         if(current_ac_frequency>ac_frequency)
         {
             current_ac_frequency=0;
-            angle+=angle_change/slowdown;
+            angle+=angle_change/getSlowdown();
         }
     }
 
     modifiersControl();
-
-    slowExtraControl();
 }
 
 void Pattern::render()
@@ -262,12 +254,26 @@ float Pattern::getRandomAngle()
 {
     if(random_angle==0)
         return 0;
+    if(random_angle<0)
+    {
+        return -(rand()%(-random_angle));
+    }
     return rand()%random_angle;
 }
 
 bool Pattern::getAimPlayer()
 {
-    return aim_player;
+    if(!aim_player)
+        return false;
+    aim_player=false;
+    return true;
+}
+
+void aimTo(int x,int y)
+{
+//    double distance_x=player->x-this->x-pattern->y;
+//    double distance_y=player->y-this->y+pattern->x;
+//    angle-=atan2(distance_y,distance_x)*180/PI;
 }
 
 Bullet* Pattern::getBullet()
@@ -361,10 +367,12 @@ void Pattern::modifiersControl()
             if(modifier->variable=="offset_x")
             {
                 this->offset_x=atoi(modifier->value.c_str());
+                this->x+=this->offset_x;
             }
             if(modifier->variable=="offset_y")
             {
                 this->offset_y=atoi(modifier->value.c_str());
+                this->y+=this->offset_y;
             }
             if(modifier->variable=="startup")
             {
@@ -381,6 +389,7 @@ void Pattern::modifiersControl()
             if(modifier->variable=="random_angle")
             {
                 this->random_angle=atoi(modifier->value.c_str());
+                this->angle+=this->getRandomAngle();
             }
             if(modifier->variable=="aim_player")
             {

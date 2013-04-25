@@ -35,6 +35,8 @@ protected:
     std::string current_type;
 
     //Life bar variables
+    int current_slow;
+    int max_slow;
     int life_bar_x;
     int life_bar_y;
     int life_bar_rect_offset_x;

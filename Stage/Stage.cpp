@@ -6,7 +6,7 @@ Stage::Stage(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver)
     this->sonido=sonido;
     this->receiver=receiver;
     this->iterator=0;
-    this->dialogue_bg=painter->getTexture("misc/dialogue_bg.png");
+    //this->dialogue_bg=painter->getTexture("misc/dialogue_bg.png");
 
     //slow extra control
     this->iterate_slowdown_flag=false;
@@ -396,8 +396,6 @@ void Stage::logic()
             ++i;
         }
     }
-
-    slowExtraControl();
 }
 
 void Stage::playMusic()

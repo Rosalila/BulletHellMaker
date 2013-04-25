@@ -65,6 +65,7 @@ int offset_x,offset_y;
     float getAngle();
     float getRandomAngle();
     bool getAimPlayer();
+    void aimTo(int x,int y);
     Bullet* getBullet();
     int getDamage();
     bool isReady();

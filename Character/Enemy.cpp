@@ -36,10 +36,6 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
 
 void Enemy::modifiersControl()
 {
-    int slowdown = 1;
-    if(isSlowPressed())
-        slowdown = 3;
-
     bool flag_iterator_change=false;
 
     vector<Modifier*>* current_modifiers = this->modifiers[iteration];
@@ -72,9 +68,6 @@ void Enemy::modifiersControl()
         }
     }
 
-    this->x += cos (angle*PI/180) * velocity / slowdown;
-    this->y -= sin (angle*PI/180) * velocity / slowdown;
-
     if(!flag_iterator_change && getIterateSlowdownFlag())
         iteration++;
 }
@@ -83,6 +76,14 @@ void Enemy::logic(int stage_velocity)
 {
     animationControl();
     spellControl(stage_velocity);
+
+    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
+        if(((Pattern*)*pattern)->getAimPlayer())
+        {
+            double distance_x=player->x-((Pattern*)*pattern)->getX();
+            double distance_y=player->y-((Pattern*)*pattern)->getY();
+            ((Pattern*)*pattern)->setAngle(((Pattern*)*pattern)->getAngle()-atan2(distance_y,distance_x)*180/PI);
+        }
 
     if(this->hp!=0)
         modifiersControl();
@@ -93,6 +94,11 @@ void Enemy::logic(int stage_velocity)
         orientation="destroyed";
         this->hitbox.setValues(0,0,0,0,0);
     }
+
+    this->angle+=this->angle_change / getSlowdown();
+
+    this->x += cos (angle*PI/180) * velocity / getSlowdown() + stage_velocity;
+    this->y -= sin (angle*PI/180) * velocity / getSlowdown();
 
     getIterateSlowdownFlag();
 }
@@ -184,14 +190,14 @@ void Enemy::addActivePattern(Pattern* pattern)
     float angle=pattern_temp->getAngle();
     angle+=pattern_temp->getRandomAngle();
 
-    if(pattern->getAimPlayer())
-    {
-        double distance_x=player->x-this->x-pattern->offset_x;
-        double distance_y=player->y-this->y+pattern->offset_y;
-        angle-=atan2(distance_y,distance_x)*180/PI;
-    }
-
     pattern_temp->setAngle(angle);
+
+    if(pattern_temp->getAimPlayer())
+    {
+        double distance_x=player->x-pattern_temp->getX();
+        double distance_y=player->y-pattern_temp->getY();
+        pattern_temp->setAngle(pattern_temp->getAngle()-atan2(distance_y,distance_x)*180/PI);
+    }
 
     active_patterns->push_back(pattern_temp);
 }
