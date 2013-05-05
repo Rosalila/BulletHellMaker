@@ -46,14 +46,14 @@
 	<File name="Rosalila/RosalilaGraphics/Animation.h" open="0" top="0" tabpos="0">
 		<Cursor position="248" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/Cube.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="1412" topLine="59" />
+	<File name="Rosalila/RosalilaGraphics/Cube.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1412" topLine="71" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/Cube.h" open="0" top="0" tabpos="0">
 		<Cursor position="1645" topLine="62" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="17030" topLine="588" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="10139" topLine="334" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="0">
 		<Cursor position="2154" topLine="64" />
