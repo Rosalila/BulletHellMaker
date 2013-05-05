@@ -37,7 +37,7 @@ Receiver* getReceiver()
 
 bool isSlowPressed()
 {
-    return receiver->IsKeyDownn(SDLK_x);
+    return receiver->IsKeyDownn(SDLK_x) || receiver->IsJoyDown(5,0);
 }
 
 void disableSlow()

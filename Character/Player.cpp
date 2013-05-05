@@ -242,4 +242,9 @@ void Player::render()
         0,0,
         Color(255,255,255,255),
         true);
+
+    if(isSlowActive())
+    {
+        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0);
+    }
 }
