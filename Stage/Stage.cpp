@@ -133,13 +133,15 @@ void Stage::loadDialogues(std::string file)
     }
 }
 
-void Stage::loadFromXML(std::string path)
+void Stage::loadFromXML(std::string name)
 {
+    this->name=name;
+
     writeLogLine("Loading stage from XML.");
 
     char *archivo=new char[255];
     strcpy(archivo,"stages/");
-    strcat(archivo,path.c_str());
+    strcat(archivo,name.c_str());
     strcat(archivo,"/main.xml");
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
@@ -151,7 +153,7 @@ void Stage::loadFromXML(std::string path)
     //Load settings
     char *music=new char[255];
     strcpy(music,"stages/");
-    strcat(music,path.c_str());
+    strcat(music,name.c_str());
     strcat(music,"/music.ogg");
     music_path=(std::string)music;
 
@@ -234,7 +236,7 @@ void Stage::loadFromXML(std::string path)
         {
             char *image=new char[255];
             strcpy(image,"stages/");
-            strcat(image,path.c_str());
+            strcat(image,name.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
 
@@ -297,7 +299,7 @@ void Stage::loadFromXML(std::string path)
         {
             char *image=new char[255];
             strcpy(image,"stages/");
-            strcat(image,path.c_str());
+            strcat(image,name.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
 
@@ -321,7 +323,7 @@ void Stage::loadFromXML(std::string path)
     }
     writeLogLine("Stage loaded succesfully from XML.");
 
-    loadDialogues(path);
+    loadDialogues(name);
 }
 
 Stage::~Stage()
@@ -360,6 +362,10 @@ int Stage::getBoundY2()
 int Stage::getVelocity()
 {
     return velocity;
+}
+string Stage::getName()
+{
+    return name;
 }
 void Stage::setVelocity(int velocity)
 {

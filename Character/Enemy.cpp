@@ -28,6 +28,9 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
 
     this->iteration=0;
 
+    this->score_upload_message="";
+    bool flag_begin_upload=false;
+
     loadFromXML();
 
     loadModifiersFromXML();
@@ -72,7 +75,7 @@ void Enemy::modifiersControl()
         iteration++;
 }
 
-void Enemy::logic(int stage_velocity)
+void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, string username)
 {
     animationControl();
     spellControl(stage_velocity);
@@ -85,14 +88,32 @@ void Enemy::logic(int stage_velocity)
             ((Pattern*)*pattern)->setAngle(((Pattern*)*pattern)->getAngle()-atan2(distance_y,distance_x)*180/PI);
         }
 
-    if(this->hp!=0)
+    if(this->hp>0)
         modifiersControl();
     else
     {
-        if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
-            this->sonido->playSound(name+".destroyed");
-        orientation="destroyed";
-        this->hitbox.setValues(0,0,0,0,0);
+        if(orientation!="destroyed" && flag_begin_upload)
+        {
+            orientation="destroyed";
+            if(this->sonido->soundExists(name+".destroyed"))
+                this->sonido->playSound(name+".destroyed");
+
+            this->hitbox.setValues(0,0,0,0,0);
+
+            //Delete bullets
+            std::list<Pattern*>* active_patterns=getActivePatterns();
+            std::list<Pattern*>::iterator i = active_patterns->begin();
+            while (i != active_patterns->end())
+            {
+                Pattern*p=(Pattern*)*i;
+                active_patterns->erase(i++);
+                delete p;
+            }
+
+            RosalilaNetwork network(painter);
+            score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
+            //score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
+        }
     }
 
     this->angle+=this->angle_change / getSlowdown();
@@ -118,6 +139,12 @@ void Enemy::render()
         0,0,
         Color(255,255,255,255),
         true);
+    if(this->hp<=0)
+    {
+        painter->drawText("Uploading score.",0,80);
+        painter->drawText(score_upload_message,0,95);
+        flag_begin_upload = true;
+    }
 }
 
 void Enemy::loadModifiersFromXML()

@@ -85,6 +85,8 @@
 		<Unit filename="Rosalila/RosalilaMenus/MenuLista.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuTexto.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuTexto.h" />
+		<Unit filename="Rosalila/RosalilaNetwork/RosalilaNetwork.cpp" />
+		<Unit filename="Rosalila/RosalilaNetwork/RosalilaNetwork.h" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />

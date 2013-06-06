@@ -539,6 +539,11 @@ int Character::getHP()
     return this->hp;
 }
 
+int Character::getIteration()
+{
+    return iteration;
+}
+
 void Character::setX(int x)
 {
     this->x=x;

@@ -20,7 +20,10 @@ class STG
     Enemy*enemy;
     Stage*stage;
 
+    string username;
+
     Animation you_win,you_loose;
+    int iteration;
 
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();

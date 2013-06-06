@@ -13,6 +13,7 @@
 #include "../Spells/Pattern.h"
 #include "RosalilaUtility/RosalilaUtility.h"
 #include "Modifier.h"
+#include "RosalilaNetwork/RosalilaNetwork.h"
 
 class Character
 {
@@ -78,6 +79,7 @@ double x,y;
     int getX();
     int getY();
     int getHP();
+    int getIteration();
     Hitbox getHitbox();
     void setType(std::string type);
     std::list<Pattern*>* getActivePatterns();

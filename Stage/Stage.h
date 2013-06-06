@@ -28,6 +28,7 @@ private:
     int bound_x1,bound_y1,bound_x2,bound_y2;
     int velocity;
     int iterator;
+    string name;
 
     //slow extra control
     bool iterate_slowdown_flag;
@@ -38,13 +39,14 @@ public:
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);
-    void loadFromXML(std::string archivo);
+    void loadFromXML(std::string name);
     void loadDialogues(std::string file);
     int getBoundX1();
     int getBoundY1();
     int getBoundX2();
     int getBoundY2();
     int getVelocity();
+    string getName();
     void logic();
     void render();
     void setVelocity(int velocity);

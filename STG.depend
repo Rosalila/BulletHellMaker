@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1366231664 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
+1370209281 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
 	"Character.h"
 
-1366768060 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
+1370209244 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -14,6 +14,7 @@
 	"../Spells/Pattern.h"
 	"RosalilaUtility/RosalilaUtility.h"
 	"Modifier.h"
+	"RosalilaNetwork/RosalilaNetwork.h"
 
 1364432600 /home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.h
 	"TinyXml/tinyxml.h"
@@ -42,17 +43,17 @@
 1362864984 /home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.h
 	<iostream>
 
-1366841824 /home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.h
+1370538464 /home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
 	<vector>
 	"RosalilaInputs/RosalilaInputs.h"
 
-1366848351 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
+1370539462 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
 	"Enemy.h"
 
-1366841839 /home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
+1370229216 /home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
@@ -80,7 +81,7 @@
 1364191440 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1367719465 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
+1370126002 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
 	"Player.h"
 
 1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -98,7 +99,7 @@
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Animation.cpp
 	"RosalilaGraphics/Animation.h"
 
-1367722503 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
+1368902238 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
 	"RosalilaGraphics/Cube.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Image.cpp
@@ -107,7 +108,7 @@
 1364183396 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"RosalilaGraphics/Object3D.h"
 
-1367724324 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1370226197 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics/RosalilaGraphics.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -117,7 +118,7 @@
 1364194131 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Boton.cpp
 	"RosalilaInputs/Boton.h"
 
-1364196477 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Receiver.cpp
+1370127320 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs/RosalilaInputs.h"
 
 1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
@@ -183,10 +184,10 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1366848260 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
+1370228738 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
 	"STG.h"
 
-1364191058 /home/turupawn/Projects/CodeBlocks/STG/STG.h
+1370210364 /home/turupawn/Projects/CodeBlocks/STG/STG.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -197,7 +198,7 @@
 	"Stage/Stage.h"
 	"RosalilaGraphics/Animation.h"
 
-1366231053 /home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.h
+1370217481 /home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -219,7 +220,7 @@
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1366667691 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
+1370127599 source:/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
 1366664394 /home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.h
@@ -248,7 +249,7 @@
 1364191579 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Layer.cpp
 	"Layer.h"
 
-1366664144 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
+1370217619 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
 	"Stage.h"
 
 1366230899 source:/home/turupawn/Projects/CodeBlocks/STG/main.cpp
@@ -268,4 +269,277 @@
 	"RosalilaUtility/RosalilaUtility.h"
 	"STGUtility/STGUtility.h"
 	<iostream>
+
+1366231664 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
+	"Character.h"
+
+1366768060 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"../Spells/Bullet.h"
+	"../Spells/Pattern.h"
+	"RosalilaUtility/RosalilaUtility.h"
+	"Modifier.h"
+
+1364432600 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"Hitbox.h"
+
+1364439935 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+
+1366770893 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"Bullet.h"
+	"Hitbox.h"
+	"../Character/Modifier.h"
+	"../STGUtility/STGUtility.h"
+	<cmath>
+
+1362864984 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.h
+	<iostream>
+
+1366841824 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.h
+	<iostream>
+	<fstream>
+	<cmath>
+	<vector>
+	"RosalilaInputs/RosalilaInputs.h"
+
+1366848351 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.cpp
+	"Enemy.h"
+
+1366841839 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Enemy.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"../Spells/Bullet.h"
+	"../Spells/Pattern.h"
+	"Character.h"
+	"Player.h"
+
+1366240763 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Player.h
+	<map>
+	<list>
+	<vector>
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"../Spells/Bullet.h"
+	"../Spells/Pattern.h"
+	"Character.h"
+
+1364191440 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.cpp
+	"Modifier.h"
+
+1368902447 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
+	"Player.h"
+
+1364375376 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Automata.cpp
+	"RosalilaAI/Automata.h"
+
+1364183333 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Estado.cpp
+	"RosalilaAI/Estado.h"
+
+1364193698 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/RosalilaAI.cpp
+	"RosalilaAI/RosalilaAI.h"
+
+1364183333 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Transicion.cpp
+	"RosalilaAI/Transicion.h"
+
+1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Animation.cpp
+	"RosalilaGraphics/Animation.h"
+
+1368902238 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
+	"RosalilaGraphics/Cube.h"
+
+1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Image.cpp
+	"RosalilaGraphics/RosalilaGraphics.h"
+
+1364183396 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
+	"RosalilaGraphics/Object3D.h"
+
+1368902331 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+	"RosalilaGraphics/RosalilaGraphics.h"
+
+1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
+	"SDL/SDL.h"
+	"RosalilaGraphics/Timer.h"
+
+1364194131 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Boton.cpp
+	"RosalilaInputs/Boton.h"
+
+1364196477 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/Receiver.cpp
+	"RosalilaInputs/RosalilaInputs.h"
+
+1364375376 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+	"RosalilaInputs/RosalilaInputs.h"
+	<sstream>
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/Elemento.cpp
+	"RosalilaMenus/Elemento.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBarra.cpp
+	"RosalilaMenus/MenuBarra.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuBoton.cpp
+	"RosalilaMenus/MenuBoton.h"
+
+1366663982 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
+	"RosalilaMenus/MenuCharSelect.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuContenedor.cpp
+	"RosalilaMenus/MenuContenedor.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuImagen.cpp
+	"RosalilaMenus/MenuImagen.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuLista.cpp
+	"RosalilaMenus/MenuLista.h"
+
+1364183485 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuTexto.cpp
+	"RosalilaMenus/MenuTexto.h"
+
+1364369632 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+	"RosalilaSound.h"
+
+1364369260 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.h
+	<string>
+	<vector>
+	<iostream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	"RosalilaUtility/RosalilaUtility.h"
+	<map>
+
+1364194144 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+	"RosalilaUtility/RosalilaUtility.h"
+
+1363482959 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinystr.cpp
+	"TinyXml/tinystr.h"
+
+1363482959 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"TinyXml/tinyxml.h"
+
+1363482959 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlerror.cpp
+	"TinyXml/tinyxml.h"
+
+1363482959 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"TinyXml/tinyxml.h"
+	<windows.h>
+
+1366848260 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
+	"STG.h"
+
+1364191058 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STG.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+	"Character/Character.h"
+	"Character/Player.h"
+	"Character/Enemy.h"
+	"Stage/Stage.h"
+	"RosalilaGraphics/Animation.h"
+
+1366231053 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"../Character/Character.h"
+	"Layer.h"
+	"Dialogue.h"
+	"../STGUtility/STGUtility.h"
+	<map>
+
+1364191058 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Layer.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+
+1364191058 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Dialogue.h
+	"TinyXml/tinyxml.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"RosalilaInputs/RosalilaInputs.h"
+
+1366667691 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.cpp
+	"STGMenu.h"
+
+1366664394 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STGMenu/STGMenu.h
+	"../Stage/Stage.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaMenus/MenuContenedor.h"
+	"RosalilaMenus/MenuCharSelect.h"
+	"RosalilaSound/RosalilaSound.h"
+	"../STG.h"
+
+1367272891 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/STGUtility/STGUtility.cpp
+	"STGUtility.h"
+
+1364432611 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Bullet.cpp
+	"Bullet.h"
+
+1364439903 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.cpp
+	"Hitbox.h"
+
+1366851430 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
+	"Pattern.h"
+
+1364191573 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Dialogue.cpp
+	"Dialogue.h"
+
+1364191579 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Layer.cpp
+	"Layer.h"
+
+1366664144 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Stage/Stage.cpp
+	"Stage.h"
+
+1366230899 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL/SDL.h"
+	"SDL/SDL_image.h"
+	"SDL/SDL_ttf.h"
+	"SDL/SDL_mixer.h"
+	<string>
+	"RosalilaInputs/RosalilaInputs.h"
+	"RosalilaGraphics/RosalilaGraphics.h"
+	"RosalilaSound/RosalilaSound.h"
+	"STGMenu/STGMenu.h"
+	"RosalilaUtility/RosalilaUtility.h"
+	"STGUtility/STGUtility.h"
+	<iostream>
+
+1370538859 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
+	"RosalilaNetwork/RosalilaNetwork.h"
 

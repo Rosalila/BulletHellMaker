@@ -121,25 +121,29 @@ void Player::loadPlayerFromXML()
 
 void Player::inputControl()
 {
-    if(receiver->IsKeyDownn(SDLK_DOWN))
+    if(receiver->IsKeyDownn(SDLK_DOWN)
+       || receiver->IsJoyDown(-2,0))
     {
         if(orientation!="down" && this->sonido->soundExists(name+".down"))
             this->sonido->playSound(name+".down");
         orientation="down";
     }
-    else if(receiver->IsKeyDownn(SDLK_UP))
+    else if(receiver->IsKeyDownn(SDLK_UP)
+       || receiver->IsJoyDown(-8,0))
     {
         if(orientation!="up" && this->sonido->soundExists(name+".up"))
             this->sonido->playSound(name+".up");
         orientation="up";
     }
-    else if(receiver->IsKeyDownn(SDLK_LEFT))
+    else if(receiver->IsKeyDownn(SDLK_LEFT)
+       || receiver->IsJoyDown(-4,0))
     {
         if(orientation!="left" && this->sonido->soundExists(name+".left"))
             this->sonido->playSound(name+".left");
         orientation="left";
     }
-    else if(receiver->IsKeyDownn(SDLK_RIGHT))
+    else if(receiver->IsKeyDownn(SDLK_RIGHT)
+       || receiver->IsJoyDown(-6,0))
     {
         if(orientation!="right" && this->sonido->soundExists(name+".right"))
             this->sonido->playSound(name+".right");
@@ -154,22 +158,34 @@ void Player::inputControl()
 
     if(receiver->IsKeyDownn(SDLK_DOWN)
        || receiver->IsJoyDown(-2,0))
+    {
         this->y+=velocity/getSlowdown();
+    }
     if(receiver->IsKeyDownn(SDLK_UP)
        || receiver->IsJoyDown(-8,0))
+    {
         this->y-=velocity/getSlowdown();
+    }
     if(receiver->IsKeyDownn(SDLK_LEFT)
        || receiver->IsJoyDown(-4,0))
+    {
         this->x-=velocity/getSlowdown();
+    }
     if(receiver->IsKeyDownn(SDLK_RIGHT)
        || receiver->IsJoyDown(-6,0))
-        this->x+=velocity/getSlowdown();
+    {
+       this->x+=velocity/getSlowdown();
+    }
 
     if(receiver->IsKeyDownn(SDLK_z)
        || receiver->IsJoyDown(0,0))
+    {
         this->shooting=true;
+    }
     else
+    {
         this->shooting=false;
+    }
 }
 
 void Player::logic(int stage_velocity)
@@ -245,6 +261,9 @@ void Player::render()
 
     if(isSlowActive())
     {
-        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0);
+        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,180));
+    }else
+    {
+        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,100));
     }
 }

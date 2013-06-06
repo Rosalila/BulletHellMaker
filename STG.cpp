@@ -10,6 +10,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     this->stage=stage;
     painter->camera_x=0;
     painter->camera_y=0;
+    iteration=0;
 
     //XML Initializations
     char *archivo=new char[255];
@@ -20,6 +21,9 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     doc=&doc_t;
 
     TiXmlNode *config_file=doc->FirstChild("ConfigFile");
+
+    TiXmlNode *user_node=config_file->FirstChild("User");
+    username=user_node->ToElement()->Attribute("name");
 
     TiXmlNode *you_loose_node=config_file->FirstChild("YouLoose");
 
@@ -65,8 +69,9 @@ void STG::mainLoop()
         {
             break;
         }
-        logic();
+
         render();
+        logic();
         receiver->updateInputs();
         if(player->getHP()==0
            || enemy->getHP()==0)
@@ -122,13 +127,16 @@ void STG::logic()
     painter->camera_x+=stage_displacement;
     player->logic(stage_displacement);
     player->setX(player->getX()+stage_displacement);
-    enemy->logic(stage_displacement);
+    enemy->logic(stage_displacement,stage->getName(),iteration,username);
     //enemy->setX(enemy->getX()+stage_displacement);
     stage->logic();
 
     deletePatterns(stage->getBoundX1(),stage->getBoundY1(),stage->getBoundX2(),stage->getBoundY2());
     checkCharacterOutOfBounds();
     slowExtraControl();
+
+    if(enemy->getHP()>0)
+        iteration++;
 }
 
 void STG::render()
@@ -181,6 +189,7 @@ void STG::render()
     if(player->getHP()==0)
         you_loose.render();
 
+    painter->drawText("Time: "+toString(iteration),0,65);
 
 
     painter->updateScreen();

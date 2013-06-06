@@ -22,9 +22,12 @@ class Enemy : public Character
     Player*player;
 
     Image*life_bar;
+
+    string score_upload_message;
+    bool flag_begin_upload;
 public:
     Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player);
-    void logic(int stage_velocity);
+    void logic(int stage_velocity, string stage_name, int global_iteration, string username);
     void modifiersControl();
     void render();
     void loadModifiersFromXML();

@@ -106,13 +106,14 @@ void Menu::loopMenu()
         if(selectables_container!=NULL)
         {
             tecla_arriba=false;
-            if(receiver->IsKeyPressed(SDLK_ESCAPE) || receiver->IsKeyPressed(SDLK_x))
+            if(receiver->IsKeyPressed(SDLK_ESCAPE) || receiver->IsKeyPressed(SDLK_x) || receiver->IsJoyPressed(5,0))
             {
                 sonido->playSound(std::string("Menu.back"));
                 exit_signal=true;
                 break;
             }
-            else if(receiver->IsKeyPressed(SDLK_DOWN))
+            else if(receiver->IsKeyPressed(SDLK_DOWN)
+                    || receiver->IsJoyPressed(-2,0))
             {
                 sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->avanzar();
@@ -133,7 +134,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_UP))
+            else if(receiver->IsKeyPressed(SDLK_UP)
+                    || receiver->IsJoyPressed(-8,0))
             {
                 sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->retroceder();
@@ -154,7 +156,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_RIGHT))
+            else if(receiver->IsKeyPressed(SDLK_RIGHT)
+                    || receiver->IsJoyPressed(-6,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -172,7 +175,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_LEFT))
+            else if(receiver->IsKeyPressed(SDLK_LEFT)
+                    || receiver->IsJoyPressed(-4,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -189,7 +193,7 @@ void Menu::loopMenu()
                         ml->retroceder();
                     }
                 }
-            }else if(receiver->IsKeyPressed(SDLK_RETURN) || receiver->IsKeyPressed(SDLK_z) )
+            }else if(receiver->IsKeyPressed(SDLK_RETURN) || receiver->IsKeyPressed(SDLK_z) || receiver->IsJoyPressed(0,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
