@@ -111,8 +111,8 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
             }
 
             RosalilaNetwork network(painter);
-            score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
-            //score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
+            //score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
+            score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
         }
     }
 

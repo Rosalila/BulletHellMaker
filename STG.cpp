@@ -63,6 +63,8 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
 
 void STG::mainLoop()
 {
+    bool end_key_up_keyboard=false;
+    bool end_key_up_joystick=false;
     for (;;)
     {
         if(receiver->IsKeyDownn(SDLK_ESCAPE))
@@ -72,13 +74,22 @@ void STG::mainLoop()
 
         render();
         logic();
-        receiver->updateInputs();
         if(player->getHP()==0
            || enemy->getHP()==0)
         {
-            if(receiver->IsKeyDownn(SDLK_RETURN))
+            if(receiver->IsKeyPressed(SDLK_RETURN))
                 break;
+            if(receiver->IsKeyPressed(SDLK_z) && end_key_up_keyboard)
+                break;
+            if(receiver->IsJoyPressed(0,0) && end_key_up_joystick)
+                break;
+            if(!receiver->IsKeyPressed(SDLK_z))
+                end_key_up_keyboard=true;
+            if(!receiver->IsJoyPressed(0,0))
+                end_key_up_joystick=true;
+
         }
+        receiver->updateInputs();
     }
 }
 

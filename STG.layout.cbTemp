@@ -7,8 +7,8 @@
 	<File name="Character/Character.h" open="0" top="0" tabpos="5">
 		<Cursor position="1921" topLine="70" />
 	</File>
-	<File name="Character/Enemy.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="3510" topLine="105" />
+	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="3646" topLine="107" />
 	</File>
 	<File name="Character/Enemy.h" open="0" top="0" tabpos="3">
 		<Cursor position="526" topLine="19" />
@@ -79,8 +79,8 @@
 	<File name="Rosalila/RosalilaMenus/MenuCharSelect.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="386" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaNetwork/RosalilaNetwork.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="287" topLine="0" />
+	<File name="Rosalila/RosalilaNetwork/RosalilaNetwork.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="304" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaNetwork/RosalilaNetwork.h" open="1" top="0" tabpos="2">
 		<Cursor position="292" topLine="1" />
