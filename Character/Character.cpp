@@ -354,7 +354,7 @@ void Character::loadPatternsXML()
                     if(pattern_modifier_node->ToElement()->Attribute("acceleration")!=NULL)
                     {
                         std::string value=pattern_modifier_node->ToElement()->Attribute("acceleration");
-                        temp_modifiers->push_back(new Modifier("aceleration",value));
+                        temp_modifiers->push_back(new Modifier("acceleration",value));
                     }
 
                     if(pattern_modifier_node->ToElement()->Attribute("a_frequency")!=NULL)
@@ -440,7 +440,7 @@ void Character::loadPatternsXML()
             }
 
             //Pattern ready, now push
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player,pattern_modifiers));
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player,pattern_modifiers,&bullets));
         }
         type[type_name]=patterns;
     }

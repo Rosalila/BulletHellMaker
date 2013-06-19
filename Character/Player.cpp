@@ -266,4 +266,10 @@ void Player::render()
     {
         painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,100));
     }
+
+    if(shooting)
+    {
+        painter->addExplosion(this->x,this->y);
+    }
+    painter->draw3D();
 }
