@@ -1,11 +1,13 @@
 #include "Pattern.h"
 
-Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
+Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,
+                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,bool freeze, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
 
+    this->freeze=freeze;
     this->velocity=velocity;
     this->max_velocity=max_velocity;
     this->acceleration=acceleration;
@@ -68,6 +70,7 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->bullet=pattern->bullet;
     this->random_angle=pattern->random_angle;
     this->aim_player=pattern->aim_player;
+    this->freeze=pattern->freeze;
 
     this->iteration=0;
     this->duration=pattern->duration;
@@ -140,6 +143,12 @@ void Pattern::updateStateNotShouting()
 
 void Pattern::logic(int stage_speed)
 {
+
+    if(freeze){
+        this->x += stage_speed;
+        modifiersControl();
+        return;
+    }
     this->x += (cos (angle*PI/180) * velocity ) / getSlowdown() + stage_speed;
     this->y -= sin (angle*PI/180) * velocity / getSlowdown();
 
@@ -395,6 +404,10 @@ void Pattern::modifiersControl()
             if(modifier->variable=="aim_player")
             {
                 this->aim_player=strcmp(modifier->value.c_str(),"yes")==0;
+            }
+            if(modifier->variable=="freeze")
+            {
+                this->freeze=modifier->value=="yes";
             }
             if(modifier->variable=="velocity")
             {

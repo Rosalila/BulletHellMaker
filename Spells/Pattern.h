@@ -37,6 +37,7 @@ class Pattern
     int duration;
     int random_angle;
     bool aim_player;
+    bool freeze;
 
     //Sprites animation
     int animation_velocity;
@@ -48,6 +49,7 @@ class Pattern
     bool is_hit;
     bool delete_flag;
 
+
     //Bullets pointer
     std::map<std::string,Bullet*> *bullets;
 
@@ -57,7 +59,8 @@ class Pattern
 
 public:
 int offset_x,offset_y;
-    Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets);
+    Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,
+            Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,bool freeze, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets);
     ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);

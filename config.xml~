@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigFile>
+	<User name="chubixx"/>
+    <Resolution x="1366" y="768"/>
+    <ScreenSize x="1366" y="768"/>
+    <Fullscreen enabled="no"/>
+    <Font blue="255" green="255" red="255" size="20"/>
+    <Chars>
+		<char name="Iguro"/>
+    </Chars>
+    <Stages>
+		<stage name="FeministKillBot_normal"/>
+		<stage name="BeeBoss"/>
+    </Stages>
+    <YouLoose animation_velocity="5" x="500" y="200">
+        <sprite path="misc/you loose/1.png"/>
+        <sprite path="misc/you loose/2.png"/>
+        <sprite path="misc/you loose/3.png"/>
+        <sprite path="misc/you loose/4.png"/>
+        <sprite path="misc/you loose/5.png"/>
+        <sprite path="misc/you loose/6.png"/>
+    </YouLoose>
+    <YouWin animation_velocity="5" x="500" y="200">
+        <sprite path="misc/you win/1.png"/>
+        <sprite path="misc/you win/2.png"/>
+        <sprite path="misc/you win/3.png"/>
+        <sprite path="misc/you win/4.png"/>
+        <sprite path="misc/you win/5.png"/>
+        <sprite path="misc/you win/6.png"/>
+    </YouWin>
+</ConfigFile>
