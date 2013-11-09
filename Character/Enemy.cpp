@@ -80,13 +80,23 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     animationControl();
     spellControl(stage_velocity);
 
-    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-        if(((Pattern*)*pattern)->getAimPlayer())
+    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++) {
+        Pattern* p =  (Pattern*)*pattern;
+        double distance_x= player->getHitbox().getX() - p->getX();
+        double distance_y= player->getHitbox().getY() - p->getY();
+
+        if (p->getHoming() != 0)
         {
-            double distance_x=player->x-((Pattern*)*pattern)->getX();
-            double distance_y=player->y-((Pattern*)*pattern)->getY();
-            ((Pattern*)*pattern)->setAngle(((Pattern*)*pattern)->getAngle()-atan2(distance_y,distance_x)*180/PI);
+            p->setAngle(-atan2(distance_y,distance_x)*180/PI);
         }
+        else if(p->getAimPlayer())
+        {
+            p->setAngle(p->getAngle()-atan2(distance_y,distance_x)*180/PI);
+        }
+
+
+    }
+
 
     if(this->hp>0)
         modifiersControl();

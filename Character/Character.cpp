@@ -324,6 +324,10 @@ void Character::loadPatternsXML()
             if(pattern_node->ToElement()->Attribute("freeze"))
                 freeze=strcmp(pattern_node->ToElement()->Attribute("freeze"),"yes")==0;
 
+            bool homing = false;
+            if (pattern_node->ToElement()->Attribute("homing"))
+                 homing = strcmp(pattern_node->ToElement()->Attribute("homing"), "yes") == 0;
+
             //Modifiers
             std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
 
@@ -445,12 +449,19 @@ void Character::loadPatternsXML()
                         temp_modifiers->push_back(new Modifier("freeze",value));
                     }
 
+                    if(pattern_modifier_node->ToElement()->Attribute("homing")!=NULL)
+                    {
+                        std::string value=pattern_modifier_node->ToElement()->Attribute("homing");
+                        temp_modifiers->push_back(new Modifier("homing",value));
+                    }
+
                     (*pattern_modifiers)[at]=temp_modifiers;
                 }
             }
 
             //Pattern ready, now push
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player,freeze,pattern_modifiers,&bullets));
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,
+                                           startup,cooldown,duration,random_angle,aim_player,freeze, homing,pattern_modifiers,&bullets));
         }
         type[type_name]=patterns;
     }
