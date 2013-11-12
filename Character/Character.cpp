@@ -320,6 +320,18 @@ void Character::loadPatternsXML()
             if(pattern_node->ToElement()->Attribute("aim_player"))
                 aim_player=strcmp(pattern_node->ToElement()->Attribute("aim_player"),"yes")==0;
 
+            int bullet_rotation=0;
+            if(pattern_node->ToElement()->Attribute("bullet_rotation"))
+                bullet_rotation=atoi(pattern_node->ToElement()->Attribute("bullet_rotation"));
+
+            int br_change=0;
+            if(pattern_node->ToElement()->Attribute("br_change"))
+                br_change=atoi(pattern_node->ToElement()->Attribute("br_change"));
+
+            bool independent_br=false;
+            if(pattern_node->ToElement()->Attribute("independent_br"))
+                independent_br=strcmp(pattern_node->ToElement()->Attribute("independent_br"),"yes")==0;
+
             //Modifiers
             std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
 
@@ -435,12 +447,30 @@ void Character::loadPatternsXML()
                         temp_modifiers->push_back(new Modifier("aim_player",value));
                     }
 
+                    if(pattern_modifier_node->ToElement()->Attribute("bullet_rotation")!=NULL)
+                    {
+                        std::string value=pattern_modifier_node->ToElement()->Attribute("bullet_rotation");
+                        temp_modifiers->push_back(new Modifier("bullet_rotation",value));
+                    }
+
+                    if(pattern_modifier_node->ToElement()->Attribute("br_change")!=NULL)
+                    {
+                        std::string value=pattern_modifier_node->ToElement()->Attribute("br_change");
+                        temp_modifiers->push_back(new Modifier("br_change",value));
+                    }
+
+                    if(pattern_modifier_node->ToElement()->Attribute("independent_br")!=NULL)
+                    {
+                        std::string value=pattern_modifier_node->ToElement()->Attribute("independent_br");
+                        temp_modifiers->push_back(new Modifier("independent_br",value));
+                    }
+
                     (*pattern_modifiers)[at]=temp_modifiers;
                 }
             }
 
             //Pattern ready, now push
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player,pattern_modifiers,&bullets));
+            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,pattern_modifiers,&bullets));
         }
         type[type_name]=patterns;
     }
@@ -590,4 +620,6 @@ void Character::addActivePattern(Pattern* pattern)
     pattern_temp->setAngle(angle);
 
     active_patterns->push_back(pattern_temp);
+
+    painter->addExplosion(pattern_temp->getX()-pattern_temp->getBullet()->getImage(0)->getWidth()/2,pattern_temp->getY());
 }

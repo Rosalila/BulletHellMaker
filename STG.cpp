@@ -142,7 +142,7 @@ void STG::logic()
     //enemy->setX(enemy->getX()+stage_displacement);
     stage->logic();
 
-    deletePatterns(stage->getBoundX1(),stage->getBoundY1(),stage->getBoundX2(),stage->getBoundY2());
+    deletePatterns();
     checkCharacterOutOfBounds();
     slowExtraControl();
 
@@ -167,7 +167,7 @@ void STG::render()
             for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
                 p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getAngle());
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getBulletAngle());
                 if(player->collides(h,0,0,0))
                 {
                     p->hit();
@@ -185,7 +185,7 @@ void STG::render()
             for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
                 p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getAngle());
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getBulletAngle());
                 if(enemy->collides(h,0,0,0))
                 {
                     p->hit();
@@ -208,17 +208,20 @@ void STG::render()
 
 bool STG::isOutOfBounds(int pos_x,int pos_y)
 {
-    if(pos_x<stage->getBoundX1()+painter->camera_x
-       ||pos_x>stage->getBoundX2()+painter->camera_x
-       ||pos_y<stage->getBoundY1()
-       ||pos_y>stage->getBoundY2())
+    int bullet_bound_addition_x = (stage->getBoundX2()-stage->getBoundX1())/2;
+    int bullet_bound_addition_y = (stage->getBoundY2()-stage->getBoundY1())/2;
+    if(pos_x<stage->getBoundX1()+painter->camera_x-bullet_bound_addition_x
+       ||pos_x>stage->getBoundX2()+painter->camera_x+bullet_bound_addition_x
+       ||pos_y<stage->getBoundY1()-bullet_bound_addition_y
+       ||pos_y>stage->getBoundY2()+bullet_bound_addition_y
+       )
     {
         return true;
     }
     return false;
 }
 
-void STG::deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2)
+void STG::deletePatterns()
 {
     std::list<Pattern*>* active_patterns=player->getActivePatterns();
     std::list<Pattern*>::iterator i = active_patterns->begin();

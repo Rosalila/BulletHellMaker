@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1371599574 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
+1377810196 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Character.cpp
 	"Character.h"
 
 1371520366 /home/turupawn/Projects/CodeBlocks/STG/Character/Character.h
@@ -29,7 +29,7 @@
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 
-1371599444 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
+1373475522 /home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -81,7 +81,7 @@
 1364191440 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1371522250 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
+1372715662 source:/home/turupawn/Projects/CodeBlocks/STG/Character/Player.cpp
 	"Player.h"
 
 1364375376 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -99,7 +99,7 @@
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Animation.cpp
 	"RosalilaGraphics/Animation.h"
 
-1368902238 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
+1372721751 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Cube.cpp
 	"RosalilaGraphics/Cube.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Image.cpp
@@ -108,7 +108,7 @@
 1371517796 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"RosalilaGraphics/Object3D.h"
 
-1371601859 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1372717307 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics/RosalilaGraphics.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -149,7 +149,7 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"RosalilaMenus/MenuTexto.h"
 
-1364369632 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1375717403 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1364369260 /home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaSound/RosalilaSound.h
@@ -184,10 +184,10 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1370812757 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
+1373475772 source:/home/turupawn/Projects/CodeBlocks/STG/STG.cpp
 	"STG.h"
 
-1370210364 /home/turupawn/Projects/CodeBlocks/STG/STG.h
+1372369067 /home/turupawn/Projects/CodeBlocks/STG/STG.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -240,7 +240,7 @@
 1364439903 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Hitbox.cpp
 	"Hitbox.h"
 
-1371600716 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
+1373476921 source:/home/turupawn/Projects/CodeBlocks/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1364191573 source:/home/turupawn/Projects/CodeBlocks/STG/Stage/Dialogue.cpp
@@ -547,6 +547,9 @@
 1370538859 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 	"RosalilaNetwork/RosalilaNetwork.h"
 
-1371601848 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Explosion.cpp
+1372723003 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Explosion.cpp
 	"RosalilaGraphics/Explosion.h"
+
+1371611335 source:/home/turupawn/Projects/CodeBlocks/STG/Rosalila/RosalilaGraphics/Explosion2.cpp
+	"RosalilaGraphics/Explosion2.h"
 

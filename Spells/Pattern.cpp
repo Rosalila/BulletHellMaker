@@ -1,6 +1,6 @@
 #include "Pattern.h"
 
-Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
+Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,float bullet_rotation, float br_change, bool independent_br,std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -34,6 +34,11 @@ Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int 
     this->state="startup";
     this->current_startup=0;
     this->current_cooldown=0;
+
+    //Bullet rotation
+    this->bullet_rotation=bullet_rotation;
+    this->br_change=br_change;
+    this->independent_br=independent_br;
 
     this->iteration=0;
     this->duration=duration;
@@ -77,6 +82,11 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->current_sprite=0;
     this->is_hit=false;
     this->delete_flag=false;
+
+    //Bullet rotation
+    this->bullet_rotation=pattern->bullet_rotation;
+    this->br_change=pattern->br_change;
+    this->independent_br=pattern->independent_br;
 
     //Modifiers
     this->modifiers=pattern->modifiers;
@@ -178,7 +188,7 @@ void Pattern::logic(int stage_speed)
 
     if(getIterateSlowdownFlag())
         current_stop_ac_at++;
-    if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
+    if((current_stop_ac_at<stop_ac_at&& stop_ac_at>0) || stop_ac_at==-1)
     {
         if(getIterateSlowdownFlag())
             current_ac_frequency++;
@@ -188,6 +198,8 @@ void Pattern::logic(int stage_speed)
             angle+=angle_change/getSlowdown();
         }
     }
+
+    bullet_rotation += br_change;
 
     modifiersControl();
 }
@@ -209,7 +221,7 @@ void Pattern::render()
             image->getWidth(),image->getHeight(),
             this->x-image->getWidth()/2,this->y-image->getHeight()/2,
             1.0,
-            (float)angle,
+            getBulletAngle(),
             false,
             0,0,
             Color(255,255,255,255),
@@ -220,7 +232,7 @@ void Pattern::render()
     {
         for(int i=0;i<(int)bullet->getHitboxes().size();i++)
         {
-            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(Point(this->getX(),this->getY()),this->getAngle());
+            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(Point(this->getX(),this->getY()),this->getBulletAngle());
             painter->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->getHitboxes()[i]->getWidth(),this->bullet->getHitboxes()[i]->getHeight(),
@@ -250,6 +262,16 @@ bool Pattern::destroyFlag()
 float Pattern::getAngle()
 {
     return angle;
+}
+
+float Pattern::getBulletAngle()
+{
+    float angle_temp = angle + bullet_rotation;
+    if(independent_br)
+    {
+        angle_temp = bullet_rotation;
+    }
+    return angle_temp;
 }
 
 float Pattern::getRandomAngle()
@@ -400,18 +422,22 @@ void Pattern::modifiersControl()
             {
                 this->velocity=atoi(modifier->value.c_str());
             }
-            if(modifier->variable=="angle")
-            {
-                this->angle=atoi(modifier->value.c_str());
-            }
-            if(modifier->variable=="angle_change")
-            {
-                this->angle_change=atoi(modifier->value.c_str());
-            }
             if(modifier->variable=="iterator")
             {
                 this->iteration=atoi(modifier->value.c_str());
                 flag_iterator_change=true;
+            }
+            if(modifier->variable=="bullet_rotation")
+            {
+                this->bullet_rotation=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="br_change")
+            {
+                this->br_change=atoi(modifier->value.c_str());
+            }
+            if(modifier->variable=="independent_br")
+            {
+                this->independent_br=strcmp(modifier->value.c_str(),"yes")==0;
             }
         }
     }

@@ -29,7 +29,7 @@ class STG
     void mainLoop();
     void logic();
     void render();
-    void deletePatterns(int stage_bound_x1,int stage_bound_y1,int stage_bound_x2,int stage_bound_y2);
+    void deletePatterns();
     void checkCharacterOutOfBounds();
 public:
     STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage);
