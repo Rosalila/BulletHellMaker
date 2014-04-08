@@ -1,11 +1,17 @@
 #include "Pattern.h"
 
+<<<<<<< HEAD
 Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,float bullet_rotation, float br_change, bool independent_br,std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
+=======
+Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,
+                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,bool freeze, bool homing, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
+>>>>>>> f702d097367cccdba1d8383398a34296a18a244e
 {
     this->sonido=sonido;
     this->painter=painter;
     this->receiver=receiver;
 
+    this->freeze=freeze;
     this->velocity=velocity;
     this->max_velocity=max_velocity;
     this->acceleration=acceleration;
@@ -27,6 +33,7 @@ Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int 
     this->bullet=bullet;
     this->random_angle=random_angle;
     this->aim_player=aim_player;
+    this->homing = homing;
 
     //Sprites animation
     this->animation_iteration=0;
@@ -73,6 +80,8 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->bullet=pattern->bullet;
     this->random_angle=pattern->random_angle;
     this->aim_player=pattern->aim_player;
+    this->freeze=pattern->freeze;
+    this->homing = pattern->homing;
 
     this->iteration=0;
     this->duration=pattern->duration;
@@ -150,8 +159,14 @@ void Pattern::updateStateNotShouting()
 
 void Pattern::logic(int stage_speed)
 {
-    this->x += (cos (angle*PI/180) * velocity ) / getSlowdown() + stage_speed;
-    this->y -= sin (angle*PI/180) * velocity / getSlowdown();
+
+    if(freeze){
+        this->x += stage_speed;
+        modifiersControl();
+        return;
+    }
+    this->x += (cos (angle * PI / 180) * velocity ) / getSlowdown() + stage_speed;
+    this->y -= sin (angle * PI / 180) * velocity / getSlowdown();
 
     if(animation_iteration>=animation_velocity)
     {
@@ -172,23 +187,26 @@ void Pattern::logic(int stage_speed)
         animation_iteration=0;
     }
 
-    if(getIterateSlowdownFlag())
-    {
+    if(getIterateSlowdownFlag()) {
         animation_iteration++;
         current_a_frequency++;
+        current_stop_ac_at++;
     }
 
-    if(current_a_frequency>a_frequency)
-    {
+    if(current_a_frequency >= a_frequency) {
         current_a_frequency=0;
         velocity+=acceleration;
         if(velocity>max_velocity)
             velocity=max_velocity;
     }
 
+<<<<<<< HEAD
     if(getIterateSlowdownFlag())
         current_stop_ac_at++;
     if((current_stop_ac_at<stop_ac_at&& stop_ac_at>0) || stop_ac_at==-1)
+=======
+    if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
+>>>>>>> f702d097367cccdba1d8383398a34296a18a244e
     {
         if(getIterateSlowdownFlag())
             current_ac_frequency++;
@@ -291,6 +309,10 @@ bool Pattern::getAimPlayer()
         return false;
     aim_player=false;
     return true;
+}
+
+int Pattern::getHoming() {
+    return this->homing;
 }
 
 void aimTo(int x,int y)
@@ -417,6 +439,14 @@ void Pattern::modifiersControl()
             if(modifier->variable=="aim_player")
             {
                 this->aim_player=strcmp(modifier->value.c_str(),"yes")==0;
+            }
+            if(modifier->variable=="freeze")
+            {
+                this->freeze=modifier->value=="yes";
+            }
+            if(modifier->variable=="homing")
+            {
+                this->homing=modifier->value=="yes";
             }
             if(modifier->variable=="velocity")
             {
