@@ -1,11 +1,8 @@
 #include "Pattern.h"
 
-<<<<<<< HEAD
-Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,float bullet_rotation, float br_change, bool independent_br,std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
-=======
+
 Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,
-                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,bool freeze, bool homing, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
->>>>>>> f702d097367cccdba1d8383398a34296a18a244e
+                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -200,13 +197,7 @@ void Pattern::logic(int stage_speed)
             velocity=max_velocity;
     }
 
-<<<<<<< HEAD
-    if(getIterateSlowdownFlag())
-        current_stop_ac_at++;
-    if((current_stop_ac_at<stop_ac_at&& stop_ac_at>0) || stop_ac_at==-1)
-=======
     if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
->>>>>>> f702d097367cccdba1d8383398a34296a18a244e
     {
         if(getIterateSlowdownFlag())
             current_ac_frequency++;
