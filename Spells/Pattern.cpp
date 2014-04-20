@@ -237,7 +237,7 @@ void Pattern::render()
             true);
     }
 
-    if(receiver->IsKeyDownn(SDLK_h))
+    if(receiver->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)bullet->getHitboxes().size();i++)
         {

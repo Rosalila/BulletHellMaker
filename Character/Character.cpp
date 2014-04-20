@@ -557,7 +557,7 @@ void Character::parrentRender()
         Color(255,255,255,255),
         true);
 
-    if(receiver->IsKeyDownn(SDLK_h))
+    if(receiver->isKeyDown(SDLK_h))
     {
         painter->drawRectangle(this->getHitbox().getX(),
                                this->getHitbox().getY(),

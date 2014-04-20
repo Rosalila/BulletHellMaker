@@ -54,8 +54,6 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Cube.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Explosion.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Explosion.h" />
-		<Unit filename="Rosalila/RosalilaGraphics/Explosion2.cpp" />
-		<Unit filename="Rosalila/RosalilaGraphics/Explosion2.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/MPEGfilter.h" />
@@ -83,6 +81,8 @@
 		<Unit filename="Rosalila/RosalilaMenus/MenuCharSelect.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuContenedor.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuContenedor.h" />
+		<Unit filename="Rosalila/RosalilaMenus/MenuGallery.cpp" />
+		<Unit filename="Rosalila/RosalilaMenus/MenuGallery.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuImagen.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuImagen.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuLista.cpp" />

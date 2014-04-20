@@ -67,7 +67,7 @@ void STG::mainLoop()
     bool end_key_up_joystick=false;
     for (;;)
     {
-        if(receiver->IsKeyDownn(SDLK_ESCAPE))
+        if(receiver->isKeyDown(SDLK_ESCAPE))
         {
             break;
         }
@@ -77,15 +77,15 @@ void STG::mainLoop()
         if(player->getHP()==0
            || enemy->getHP()==0)
         {
-            if(receiver->IsKeyPressed(SDLK_RETURN))
+            if(receiver->isKeyPressed(SDLK_RETURN))
                 break;
-            if(receiver->IsKeyPressed(SDLK_z) && end_key_up_keyboard)
+            if(receiver->isKeyPressed(SDLK_z) && end_key_up_keyboard)
                 break;
-            if(receiver->IsJoyPressed(0,0) && end_key_up_joystick)
+            if(receiver->isJoyPressed(0,0) && end_key_up_joystick)
                 break;
-            if(!receiver->IsKeyPressed(SDLK_z))
+            if(!receiver->isKeyPressed(SDLK_z))
                 end_key_up_keyboard=true;
-            if(!receiver->IsJoyPressed(0,0))
+            if(!receiver->isJoyPressed(0,0))
                 end_key_up_joystick=true;
 
         }
@@ -95,39 +95,39 @@ void STG::mainLoop()
 
 void STG::logic()
 {
-    if(receiver->IsKeyPressed(SDLK_1))
+    if(receiver->isKeyPressed(SDLK_1))
     {
         player->setType("1");
     }
-    if(receiver->IsKeyPressed(SDLK_2))
+    if(receiver->isKeyPressed(SDLK_2))
     {
         player->setType("2");
     }
-    if(receiver->IsKeyPressed(SDLK_3))
+    if(receiver->isKeyPressed(SDLK_3))
     {
         player->setType("3");
     }
-    if(receiver->IsKeyPressed(SDLK_4))
+    if(receiver->isKeyPressed(SDLK_4))
     {
         player->setType("4");
     }
-    if(receiver->IsKeyPressed(SDLK_5))
+    if(receiver->isKeyPressed(SDLK_5))
     {
         player->setType("5");
     }
-    if(receiver->IsKeyPressed(SDLK_6))
+    if(receiver->isKeyPressed(SDLK_6))
     {
         player->setType("6");
     }
-    if(receiver->IsKeyPressed(SDLK_7))
+    if(receiver->isKeyPressed(SDLK_7))
     {
         player->setType("7");
     }
-    if(receiver->IsKeyPressed(SDLK_8))
+    if(receiver->isKeyPressed(SDLK_8))
     {
         player->setType("8");
     }
-    if(receiver->IsKeyPressed(SDLK_9))
+    if(receiver->isKeyPressed(SDLK_9))
     {
         player->setType("9");
     }

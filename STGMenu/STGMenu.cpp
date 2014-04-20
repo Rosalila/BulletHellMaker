@@ -106,14 +106,14 @@ void Menu::loopMenu()
         if(selectables_container!=NULL)
         {
             tecla_arriba=false;
-            if(receiver->IsKeyPressed(SDLK_ESCAPE) || receiver->IsKeyPressed(SDLK_x) || receiver->IsJoyPressed(5,0))
+            if(receiver->isKeyPressed(SDLK_ESCAPE) || receiver->isKeyPressed(SDLK_x) || receiver->isJoyPressed(5,0))
             {
                 sonido->playSound(std::string("Menu.back"));
                 exit_signal=true;
                 break;
             }
-            else if(receiver->IsKeyPressed(SDLK_DOWN)
-                    || receiver->IsJoyPressed(-2,0))
+            else if(receiver->isKeyPressed(SDLK_DOWN)
+                    || receiver->isJoyPressed(-2,0))
             {
                 sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->avanzar();
@@ -134,8 +134,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_UP)
-                    || receiver->IsJoyPressed(-8,0))
+            else if(receiver->isKeyPressed(SDLK_UP)
+                    || receiver->isJoyPressed(-8,0))
             {
                 sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->retroceder();
@@ -156,8 +156,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_RIGHT)
-                    || receiver->IsJoyPressed(-6,0))
+            else if(receiver->isKeyPressed(SDLK_RIGHT)
+                    || receiver->isJoyPressed(-6,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -175,8 +175,8 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyPressed(SDLK_LEFT)
-                    || receiver->IsJoyPressed(-4,0))
+            else if(receiver->isKeyPressed(SDLK_LEFT)
+                    || receiver->isJoyPressed(-4,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -193,7 +193,7 @@ void Menu::loopMenu()
                         ml->retroceder();
                     }
                 }
-            }else if(receiver->IsKeyPressed(SDLK_RETURN) || receiver->IsKeyPressed(SDLK_z) || receiver->IsJoyPressed(0,0))
+            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyPressed(SDLK_z) || receiver->isJoyPressed(0,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -836,119 +836,119 @@ std::string Menu::getRosalilaInputsPressed()
     {
 
         dibujarMenu();
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_Q))
+//        if(receiver->isKeyDown(irr::KEY_KEY_Q))
 //            return "Q";
-//        if(receiver->IsKeyDownn(SDLK_w))
+//        if(receiver->isKeyDown(SDLK_w))
 //            return "W";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_E))
+//        if(receiver->isKeyDown(irr::KEY_KEY_E))
 //            return "E";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_R))
+//        if(receiver->isKeyDown(irr::KEY_KEY_R))
 //            return "R";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_T))
+//        if(receiver->isKeyDown(irr::KEY_KEY_T))
 //            return "T";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_Y))
+//        if(receiver->isKeyDown(irr::KEY_KEY_Y))
 //            return "Y";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_U))
+//        if(receiver->isKeyDown(irr::KEY_KEY_U))
 //            return "U";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_I))
+//        if(receiver->isKeyDown(irr::KEY_KEY_I))
 //            return "I";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_O))
+//        if(receiver->isKeyDown(irr::KEY_KEY_O))
 //            return "O";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_P))
+//        if(receiver->isKeyDown(irr::KEY_KEY_P))
 //            return "P";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_A))
+//        if(receiver->isKeyDown(irr::KEY_KEY_A))
 //            return "A";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_S))
+//        if(receiver->isKeyDown(irr::KEY_KEY_S))
 //            return "S";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_D))
+//        if(receiver->isKeyDown(irr::KEY_KEY_D))
 //            return "D";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_F))
+//        if(receiver->isKeyDown(irr::KEY_KEY_F))
 //            return "F";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_G))
+//        if(receiver->isKeyDown(irr::KEY_KEY_G))
 //            return "G";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_H))
+//        if(receiver->isKeyDown(irr::KEY_KEY_H))
 //            return "H";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_J))
+//        if(receiver->isKeyDown(irr::KEY_KEY_J))
 //            return "J";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_K))
+//        if(receiver->isKeyDown(irr::KEY_KEY_K))
 //            return "K";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_L))
+//        if(receiver->isKeyDown(irr::KEY_KEY_L))
 //            return "L";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_Z))
+//        if(receiver->isKeyDown(irr::KEY_KEY_Z))
 //            return "Z";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_X))
+//        if(receiver->isKeyDown(irr::KEY_KEY_X))
 //            return "X";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_C))
+//        if(receiver->isKeyDown(irr::KEY_KEY_C))
 //            return "C";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_V))
+//        if(receiver->isKeyDown(irr::KEY_KEY_V))
 //            return "V";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_B))
+//        if(receiver->isKeyDown(irr::KEY_KEY_B))
 //            return "B";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_N))
+//        if(receiver->isKeyDown(irr::KEY_KEY_N))
 //            return "N";
-//        if(receiver->IsKeyDownn(irr::KEY_KEY_M))
+//        if(receiver->isKeyDown(irr::KEY_KEY_M))
 //            return "M";
 
-        if(receiver->IsJoyDown(0,0))
+        if(receiver->isJoyDown(0,0))
             return "j0-0";
-        if(receiver->IsJoyDown(1,0))
+        if(receiver->isJoyDown(1,0))
             return "j0-1";
-        if(receiver->IsJoyDown(2,0))
+        if(receiver->isJoyDown(2,0))
             return "j0-2";
-        if(receiver->IsJoyDown(3,0))
+        if(receiver->isJoyDown(3,0))
             return "j0-3";
-        if(receiver->IsJoyDown(4,0))
+        if(receiver->isJoyDown(4,0))
             return "j0-4";
-        if(receiver->IsJoyDown(5,0))
+        if(receiver->isJoyDown(5,0))
             return "j0-5";
-        if(receiver->IsJoyDown(6,0))
+        if(receiver->isJoyDown(6,0))
             return "j0-6";
-        if(receiver->IsJoyDown(7,0))
+        if(receiver->isJoyDown(7,0))
             return "j0-7";
-        if(receiver->IsJoyDown(8,0))
+        if(receiver->isJoyDown(8,0))
             return "j0-8";
-        if(receiver->IsJoyDown(9,0))
+        if(receiver->isJoyDown(9,0))
             return "j0-9";
-        if(receiver->IsJoyDown(10,0))
+        if(receiver->isJoyDown(10,0))
             return "j0-10";
-        if(receiver->IsJoyDown(-2,0))
+        if(receiver->isJoyDown(-2,0))
             return "j0-d";
-        if(receiver->IsJoyDown(-4,0))
+        if(receiver->isJoyDown(-4,0))
             return "j0-l";
-        if(receiver->IsJoyDown(-6,0))
+        if(receiver->isJoyDown(-6,0))
             return "j0-r";
-        if(receiver->IsJoyDown(-8,0))
+        if(receiver->isJoyDown(-8,0))
             return "j0-u";
 
-        if(receiver->IsJoyDown(0,1))
+        if(receiver->isJoyDown(0,1))
             return "j1-0";
-        if(receiver->IsJoyDown(1,1))
+        if(receiver->isJoyDown(1,1))
             return "j1-1";
-        if(receiver->IsJoyDown(2,1))
+        if(receiver->isJoyDown(2,1))
             return "j1-2";
-        if(receiver->IsJoyDown(3,1))
+        if(receiver->isJoyDown(3,1))
             return "j1-3";
-        if(receiver->IsJoyDown(4,1))
+        if(receiver->isJoyDown(4,1))
             return "j1-4";
-        if(receiver->IsJoyDown(5,1))
+        if(receiver->isJoyDown(5,1))
             return "j1-5";
-        if(receiver->IsJoyDown(6,1))
+        if(receiver->isJoyDown(6,1))
             return "j1-6";
-        if(receiver->IsJoyDown(7,1))
+        if(receiver->isJoyDown(7,1))
             return "j1-7";
-        if(receiver->IsJoyDown(8,1))
+        if(receiver->isJoyDown(8,1))
             return "j1-8";
-        if(receiver->IsJoyDown(9,1))
+        if(receiver->isJoyDown(9,1))
             return "j1-9";
-        if(receiver->IsJoyDown(10,1))
+        if(receiver->isJoyDown(10,1))
             return "j1-10";
-        if(receiver->IsJoyDown(-2,1))
+        if(receiver->isJoyDown(-2,1))
             return "j1-d";
-        if(receiver->IsJoyDown(-4,1))
+        if(receiver->isJoyDown(-4,1))
             return "j1-l";
-        if(receiver->IsJoyDown(-6,1))
+        if(receiver->isJoyDown(-6,1))
             return "j1-r";
-        if(receiver->IsJoyDown(-8,1))
+        if(receiver->isJoyDown(-8,1))
             return "j1-u";
     }
 }
