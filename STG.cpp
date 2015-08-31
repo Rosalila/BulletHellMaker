@@ -13,9 +13,8 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     iteration=0;
 
     //XML Initializations
-    char *archivo=new char[255];
-    strcpy(archivo,"config.xml");
-    TiXmlDocument doc_t( archivo );
+    string config_directory = assets_directory+"config.xml";
+    TiXmlDocument doc_t( (char*)config_directory.c_str() );
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -25,7 +24,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     TiXmlNode *user_node=config_file->FirstChild("User");
     username=user_node->ToElement()->Attribute("name");
 
-    TiXmlNode *you_loose_node=config_file->FirstChild("YouLoose");
+    TiXmlNode *you_loose_node=config_file->FirstChild("YouLose");
 
     int you_loose_x=atoi(you_loose_node->ToElement()->Attribute("x"));
     int you_loose_y=atoi(you_loose_node->ToElement()->Attribute("y"));
@@ -37,7 +36,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
             sprites_node=sprites_node->NextSibling("sprite"))
     {
         std::string path=sprites_node->ToElement()->Attribute("path");
-        you_loose.addImage(painter->getTexture(path));
+        you_loose.addImage(painter->getTexture(assets_directory+path));
     }
 
 
@@ -53,7 +52,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
             sprites_node=sprites_node->NextSibling("sprite"))
     {
         std::string path=sprites_node->ToElement()->Attribute("path");
-        you_win.addImage(painter->getTexture(path));
+        you_win.addImage(painter->getTexture(assets_directory+path));
     }
 
     stage->playMusic();
@@ -167,7 +166,7 @@ void STG::render()
             for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
                 p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getBulletAngle());
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(player->collides(h,0,0,0))
                 {
                     p->hit();
@@ -185,7 +184,7 @@ void STG::render()
             for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
                 p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(Point(p->getX(),p->getY()),p->getBulletAngle());
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(enemy->collides(h,0,0,0))
                 {
                     p->hit();

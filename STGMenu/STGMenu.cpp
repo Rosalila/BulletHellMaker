@@ -9,9 +9,10 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
     this->char_select=NULL;
     this->selectables_container=NULL;
 
-    loading_screen=painter->getTexture("misc/loading_screen.png");
+    loading_screen=painter->getTexture(assets_directory+"misc/loading_screen.png");
 
-    TiXmlDocument doc_t((char*)"config.xml");
+    string config_directory = assets_directory+"config.xml";
+    TiXmlDocument doc_t((char*)config_directory.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -63,7 +64,6 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name)
 void Menu::loopMenu()
 {
     bool tecla_arriba=false;
-
     llenarRosalilaInputssBotones();
     inputa=new RosalilaInputs();
     inputb=new RosalilaInputs();
@@ -74,9 +74,7 @@ void Menu::loopMenu()
     //inicio
 	for (;;)
 	{
-
         dibujarMenu();
-
         //Move Elements
         for(int i=0;i<(int)elementos.size();i++)
         {
@@ -102,7 +100,6 @@ void Menu::loopMenu()
                 e->current_displacement_y++;
             }
         }
-
         if(selectables_container!=NULL)
         {
             tecla_arriba=false;
@@ -112,7 +109,7 @@ void Menu::loopMenu()
                 exit_signal=true;
                 break;
             }
-            else if(receiver->isKeyPressed(SDLK_DOWN)
+            else if(receiver->isKeyPressed(SDL_SCANCODE_DOWN)
                     || receiver->isJoyPressed(-2,0))
             {
                 sonido->playSound(std::string("Menu.move"));
@@ -134,7 +131,7 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->isKeyPressed(SDLK_UP)
+            else if(receiver->isKeyPressed(SDL_SCANCODE_UP)
                     || receiver->isJoyPressed(-8,0))
             {
                 sonido->playSound(std::string("Menu.move"));
@@ -156,7 +153,7 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->isKeyPressed(SDLK_RIGHT)
+            else if(receiver->isKeyPressed(SDL_SCANCODE_RIGHT)
                     || receiver->isJoyPressed(-6,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -175,7 +172,7 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->isKeyPressed(SDLK_LEFT)
+            else if(receiver->isKeyPressed(SDL_SCANCODE_LEFT)
                     || receiver->isJoyPressed(-4,0))
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -227,7 +224,8 @@ void Menu::loopMenu()
                     }
                     if(mb->getAccion()=="load")
                     {
-                        Menu *temp=new Menu(painter,receiver,sonido,mb->load_menu);
+                        string menu_directory = assets_directory+mb->load_menu;
+                        Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
                         temp->loopMenu();
                     }
                     if(mb->getAccion().substr(0,6)=="Player")
@@ -347,7 +345,7 @@ void Menu::dibujarMenu()
 
 void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::string> stages)
 {
-    music_path="menu/audio/music.ogg";
+    music_path=assets_directory+"menu/audio/music.ogg";
 
     //cargarConfig();
 
@@ -356,11 +354,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->addSound("Menu.select","menu/audio/select.ogg");
-    sonido->addSound("Menu.select_char","menu/audio/select_char.ogg");
-    sonido->addSound("Menu.move","menu/audio/move.ogg");
-    sonido->addSound("Menu.move_char","menu/audio/move_char.ogg");
-    sonido->addSound("Menu.back","menu/audio/back.ogg");
+    sonido->addSound("Menu.select",assets_directory+"menu/audio/select.ogg");
+    sonido->addSound("Menu.select_char",assets_directory+"menu/audio/select_char.ogg");
+    sonido->addSound("Menu.move",assets_directory+"menu/audio/move.ogg");
+    sonido->addSound("Menu.move_char",assets_directory+"menu/audio/move_char.ogg");
+    sonido->addSound("Menu.back",assets_directory+"menu/audio/back.ogg");
 
     TiXmlNode* elemento=doc->FirstChild("svg");
     TiXmlNode* g_node=elemento->FirstChild("g");
@@ -409,7 +407,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                 fade_in_initial=atoi(e->Attribute("fade_in_initial"));
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
-            Image* image=painter->getTexture(path);
+            Image* image=painter->getTexture(assets_directory+path);
 
             elementos.push_back((Elemento*)new MenuImagen(painter,x,y,displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
                                                           width,height,image,""
@@ -479,9 +477,9 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             elementos_contenedor.push_back((Elemento*)new MenuBoton(painter,
                                                                     x,y,
                                                                     width,height,
-                                                                    painter->getTexture(std::string("menu/")+path),
+                                                                    painter->getTexture(assets_directory+std::string("menu/")+path),
                                                                     text_x,text_y,text,
-                                                                    painter->getTexture(std::string("menu/")+path_selected),
+                                                                    painter->getTexture(assets_directory+std::string("menu/")+path_selected),
                                                                     text_x_selected,text_y_selected,text_selected,
                                                                     action,menu_load
                                                                     ));
@@ -677,7 +675,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 //                    if(e->Attribute("fade_in_speed")!=NULL)
 //                        fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                    Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
+                    Image*image=painter->getTexture(assets_directory+std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
 
                     elem_lista.push_back((Elemento*)new MenuImagen(painter,
@@ -718,7 +716,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
                 Image*path_right=NULL;
                 if(e->Attribute("path_right")!=NULL)
-                    path_right=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right")));
+                    path_right=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_right")));
 
                 int arrow_left_x_selected=x;
                 if(e->Attribute("arrow_left_x_selected"))
@@ -730,7 +728,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
                 Image*path_left_selected=path_left;
                 if(e->Attribute("path_left_selected")!=NULL)
-                    path_left_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left_selected")));
+                    path_left_selected=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_left_selected")));
 
                 int arrow_right_x_selected=x;
                 if(e->Attribute("arrow_right_x_selected"))
@@ -742,7 +740,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
                 Image*path_right_selected=path_right;
                 if(e->Attribute("path_right_selected")!=NULL)
-                    path_right_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right_selected")));
+                    path_right_selected=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_right_selected")));
 
                 elementos_contenedor.push_back((Elemento*)new MenuLista(painter,x,y,
                                                                         arrow_left_x,arrow_left_y,
@@ -1118,6 +1116,7 @@ void Menu::printLoadingScreen()
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         false);
 
     painter->updateScreen();

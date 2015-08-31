@@ -234,6 +234,7 @@ void Pattern::render()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             true);
     }
 
@@ -241,7 +242,7 @@ void Pattern::render()
     {
         for(int i=0;i<(int)bullet->getHitboxes().size();i++)
         {
-            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(Point(this->getX(),this->getY()),this->getBulletAngle());
+            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(this->getX(),this->getY(),this->getBulletAngle());
             painter->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->getHitboxes()[i]->getWidth(),this->bullet->getHitboxes()[i]->getHeight(),

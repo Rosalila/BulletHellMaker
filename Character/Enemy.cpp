@@ -34,7 +34,7 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
     loadFromXML();
 
     loadModifiersFromXML();
-    life_bar=painter->getTexture(directory+"life_bar.png");
+    life_bar=painter->getTexture(assets_directory+directory+"life_bar.png");
 }
 
 void Enemy::modifiersControl()
@@ -120,9 +120,9 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
                 delete p;
             }
 
-            RosalilaNetwork network(painter);
-            //score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
-            score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
+//            RosalilaNetwork network(painter);
+//            //score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
+//            score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
         }
     }
 
@@ -148,6 +148,7 @@ void Enemy::render()
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         true);
     if(this->hp<=0)
     {
@@ -160,7 +161,7 @@ void Enemy::render()
 void Enemy::loadModifiersFromXML()
 {
     //Loading file
-    std::string main_path=directory+"modifiers.xml";
+    std::string main_path=assets_directory+directory+"modifiers.xml";
     TiXmlDocument doc_t(main_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;

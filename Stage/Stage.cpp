@@ -51,6 +51,7 @@ void Stage::drawLayer(Layer* layer)
             layer->depth_effect_x,
             layer->depth_effect_y,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 
@@ -98,6 +99,7 @@ void Stage::dibujarFront()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
         ((Dialogue*)*dialogue)->render(this->dialogue_x+this->dialogue_padding_x,this->dialogue_y+this->dialogue_padding_y);
     }
@@ -107,11 +109,8 @@ void Stage::loadDialogues(std::string file)
 {
     writeLogLine("Loading dialogues from XML.");
 
-    char *archivo=new char[255];
-    strcpy(archivo,"stages/");
-    strcat(archivo,file.c_str());
-    strcat(archivo,"/dialogues.xml");
-    TiXmlDocument doc_t( archivo );
+    string dialogues_path = assets_directory+"stages/"+file+"/dialogues.xml";
+    TiXmlDocument doc_t((char*)dialogues_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -129,7 +128,7 @@ void Stage::loadDialogues(std::string file)
         std::string text=dialogue_node->ToElement()->Attribute("text");
         std::string path=dialogue_node->ToElement()->Attribute("path");
 
-        dialogues[frame]=new Dialogue(painter,sonido,receiver,text,painter->getTexture("stages/"+file+"/"+path));
+        dialogues[frame]=new Dialogue(painter,sonido,receiver,text,painter->getTexture(assets_directory+"stages/"+file+"/"+path));
     }
 }
 
@@ -139,11 +138,8 @@ void Stage::loadFromXML(std::string name)
 
     writeLogLine("Loading stage from XML.");
 
-    char *archivo=new char[255];
-    strcpy(archivo,"stages/");
-    strcat(archivo,name.c_str());
-    strcat(archivo,"/main.xml");
-    TiXmlDocument doc_t( archivo );
+    string main_path = assets_directory+"stages/"+name+"/main.xml";
+    TiXmlDocument doc_t((char*)main_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -151,11 +147,7 @@ void Stage::loadFromXML(std::string name)
     TiXmlNode *stage_file=doc->FirstChild("StageFile");
 
     //Load settings
-    char *music=new char[255];
-    strcpy(music,"stages/");
-    strcat(music,name.c_str());
-    strcat(music,"/music.ogg");
-    music_path=(std::string)music;
+    music_path = assets_directory+"stages/"+name+"/music.ogg";
 
     this->dialogue_x=0;
     this->dialogue_y=0;
@@ -240,7 +232,7 @@ void Stage::loadFromXML(std::string name)
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
 
-            Image *image_temp=painter->getTexture(image);
+            Image *image_temp=painter->getTexture(assets_directory+image);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();
@@ -297,13 +289,9 @@ void Stage::loadFromXML(std::string name)
                 layer!=NULL;
                 layer=layer->NextSibling("frame"))
         {
-            char *image=new char[255];
-            strcpy(image,"stages/");
-            strcat(image,name.c_str());
-            strcat(image,"/images/");
-            strcat(image,layer->ToElement()->Attribute("image_path"));
+            string image_path = assets_directory+"stages/"+name+"/images/"+layer->ToElement()->Attribute("image_path");
 
-            Image *image_temp=painter->getTexture(image);
+            Image *image_temp=painter->getTexture(image_path);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();

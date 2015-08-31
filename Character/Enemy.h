@@ -5,10 +5,10 @@
 #include <list>
 #include <vector>
 
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaSound/RosalilaSound.h"
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Rosalila/TinyXml/tinyxml.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include "../Spells/Bullet.h"
 #include "../Spells/Pattern.h"
 #include "Character.h"

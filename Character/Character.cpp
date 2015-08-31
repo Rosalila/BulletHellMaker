@@ -40,7 +40,7 @@ void Character::loadFromXML()
 void Character::loadMainXML()
 {
     //Loading file
-    std::string main_path=directory+"main.xml";
+    std::string main_path=assets_directory+directory+"main.xml";
     TiXmlDocument doc_t(main_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
@@ -135,13 +135,13 @@ void Character::loadMainXML()
         if(sprites_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sprites_sound=sprites_node->ToElement()->Attribute("sound");
-            this->sonido->addSound(name+"."+sprites_orientation,directory+"sounds/"+sprites_sound);
+            this->sonido->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
         }
         for(TiXmlNode* sprite_node=sprites_node->FirstChild("Sprite");
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_vector.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_vector.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
         sprites[sprites_orientation]=sprites_vector;
     }
@@ -150,7 +150,7 @@ void Character::loadMainXML()
 void Character::loadBulletsXML()
 {
     //Loading bullets
-    std::string bullets_path=directory+"bullets.xml";
+    std::string bullets_path=assets_directory+directory+"bullets.xml";
     TiXmlDocument doc_bullets_t(bullets_path.c_str());
     doc_bullets_t.LoadFile();
     TiXmlDocument *doc_bullets;
@@ -165,12 +165,12 @@ void Character::loadBulletsXML()
         std::string node_name=bullet_node->ToElement()->Attribute("name");
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
-            std::string sound=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
+            std::string sound=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
             sonido->addSound("bullet."+node_name,sound);
         }
         if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
         {
-            std::string sound_hit=directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
+            std::string sound_hit=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
             sonido->addSound("bullet_hit."+node_name,sound_hit);
         }
 
@@ -185,7 +185,7 @@ void Character::loadBulletsXML()
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_temp.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_temp.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
 
         vector<Hitbox*>hitboxes_temp;
@@ -224,7 +224,7 @@ void Character::loadBulletsXML()
                     sprite_node!=NULL;
                     sprite_node=sprite_node->NextSibling("Sprite"))
             {
-                sprites_onhit_temp.push_back(painter->getTexture(directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+                sprites_onhit_temp.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
             }
         }
 
@@ -235,7 +235,7 @@ void Character::loadBulletsXML()
 void Character::loadPatternsXML()
 {
 //Loading file
-    std::string pattern_path=directory+"patterns.xml";
+    std::string pattern_path=assets_directory+directory+"patterns.xml";
     TiXmlDocument doc_pattern_t(pattern_path.c_str());
     doc_pattern_t.LoadFile();
     TiXmlDocument *doc_pattern;
@@ -555,6 +555,7 @@ void Character::parrentRender()
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         true);
 
     if(receiver->isKeyDown(SDLK_h))
@@ -616,7 +617,7 @@ void Character::setType(std::string type)
 
 bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
 {
-    return this->hitbox.getPlacedHitbox(Point(this->x,this->y),0).collides(hitbox,0,0,0);
+    return this->hitbox.getPlacedHitbox(this->x,this->y).collides(hitbox);
 }
 
 void Character::hit(int damage)
@@ -628,7 +629,7 @@ void Character::hit(int damage)
 
 Hitbox Character::getHitbox()
 {
-    return hitbox.getPlacedHitbox(Point(this->x,this->y),0);
+    return hitbox.getPlacedHitbox(this->x,this->y);
 }
 
 

@@ -93,6 +93,10 @@
 		<Unit filename="Rosalila/RosalilaNetwork/RosalilaNetwork.h" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.h" />
+		<Unit filename="Rosalila/RosalilaUtility/Font.cpp" />
+		<Unit filename="Rosalila/RosalilaUtility/Font.h" />
+		<Unit filename="Rosalila/RosalilaUtility/Hitbox.cpp" />
+		<Unit filename="Rosalila/RosalilaUtility/Hitbox.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.h" />
 		<Unit filename="Rosalila/TinyXml/tinystr.cpp" />
@@ -109,8 +113,6 @@
 		<Unit filename="STGUtility/STGUtility.h" />
 		<Unit filename="Spells/Bullet.cpp" />
 		<Unit filename="Spells/Bullet.h" />
-		<Unit filename="Spells/Hitbox.cpp" />
-		<Unit filename="Spells/Hitbox.h" />
 		<Unit filename="Spells/Pattern.cpp" />
 		<Unit filename="Spells/Pattern.h" />
 		<Unit filename="Stage/Dialogue.cpp" />

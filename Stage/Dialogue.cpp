@@ -29,6 +29,7 @@ void Dialogue::render(int x,int y)
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         false);
 }
 

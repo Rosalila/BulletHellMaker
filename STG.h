@@ -1,15 +1,15 @@
 #ifndef STG_H
 #define STG_H
 
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaSound/RosalilaSound.h"
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "Rosalila/TinyXml/tinyxml.h"
+#include "Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "Rosalila/RosalilaSound/RosalilaSound.h"
+#include "Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include "Character/Character.h"
 #include "Character/Player.h"
 #include "Character/Enemy.h"
 #include "Stage/Stage.h"
-#include "RosalilaGraphics/Animation.h"
+#include "Rosalila/RosalilaGraphics/Animation.h"
 
 class STG
 {

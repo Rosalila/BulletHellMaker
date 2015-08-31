@@ -23,7 +23,7 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
 
     this->slow_in_cooldown=false;
 
-    life_bar=painter->getTexture(directory+"life_bar.png");
+    life_bar=painter->getTexture(assets_directory+directory+"life_bar.png");
 
     loadPlayerFromXML();
 }
@@ -33,7 +33,7 @@ void Player::loadPlayerFromXML()
     loadFromXML();
 
     //Loading file
-    std::string main_path=directory+"main.xml";
+    std::string main_path=assets_directory+directory+"main.xml";
     TiXmlDocument doc_t(main_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
@@ -121,28 +121,28 @@ void Player::loadPlayerFromXML()
 
 void Player::inputControl()
 {
-    if(receiver->isKeyDown(SDLK_DOWN)
+    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
     {
         if(orientation!="down" && this->sonido->soundExists(name+".down"))
             this->sonido->playSound(name+".down");
         orientation="down";
     }
-    else if(receiver->isKeyDown(SDLK_UP)
+    else if(receiver->isKeyDown(SDL_SCANCODE_UP)
        || receiver->isJoyDown(-8,0))
     {
         if(orientation!="up" && this->sonido->soundExists(name+".up"))
             this->sonido->playSound(name+".up");
         orientation="up";
     }
-    else if(receiver->isKeyDown(SDLK_LEFT)
+    else if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
        || receiver->isJoyDown(-4,0))
     {
         if(orientation!="left" && this->sonido->soundExists(name+".left"))
             this->sonido->playSound(name+".left");
         orientation="left";
     }
-    else if(receiver->isKeyDown(SDLK_RIGHT)
+    else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
        || receiver->isJoyDown(-6,0))
     {
         if(orientation!="right" && this->sonido->soundExists(name+".right"))
@@ -156,22 +156,22 @@ void Player::inputControl()
         orientation="idle";
     }
 
-    if(receiver->isKeyDown(SDLK_DOWN)
+    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
     {
         this->y+=velocity/getSlowdown();
     }
-    if(receiver->isKeyDown(SDLK_UP)
+    if(receiver->isKeyDown(SDL_SCANCODE_UP)
        || receiver->isJoyDown(-8,0))
     {
         this->y-=velocity/getSlowdown();
     }
-    if(receiver->isKeyDown(SDLK_LEFT)
+    if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
        || receiver->isJoyDown(-4,0))
     {
         this->x-=velocity/getSlowdown();
     }
-    if(receiver->isKeyDown(SDLK_RIGHT)
+    if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
        || receiver->isJoyDown(-6,0))
     {
        this->x+=velocity/getSlowdown();
@@ -259,6 +259,7 @@ void Player::render()
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         true);
 
     if(isSlowActive())

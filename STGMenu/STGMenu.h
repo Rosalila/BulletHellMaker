@@ -2,10 +2,10 @@
 #define MENUTEST_H
 
 #include "../Stage/Stage.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaMenus/MenuContenedor.h"
-#include "RosalilaMenus/MenuCharSelect.h"
-#include "RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaMenus/MenuContenedor.h"
+#include "../Rosalila/RosalilaMenus/MenuCharSelect.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../STG.h"
 
 class Menu

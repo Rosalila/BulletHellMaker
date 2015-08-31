@@ -1,12 +1,12 @@
 #ifndef PATTERN_H
 #define PATTERN_H
 
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaSound/RosalilaSound.h"
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Rosalila/TinyXml/tinyxml.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include "Bullet.h"
-#include "Hitbox.h"
+#include "../Rosalila/RosalilaUtility/Hitbox.h"
 #include "../Character/Modifier.h"
 #include "../STGUtility/STGUtility.h"
 

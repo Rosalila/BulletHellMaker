@@ -1,9 +1,5 @@
 bin/
-chars/
-menu/
-misc/
 Rosalila/
 obj/
-stages/
-config.xml
 log
+assets/

@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 #define PI 3.14159265
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
 
 bool getIterateSlowdownFlag();
 bool isSlowPressed();
