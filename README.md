@@ -47,3 +47,25 @@ You should add the following
 7. Celebrate
 ------------
 Well done.
+
+Support
+--------------------
+This software is licensed under the GPL License.
+
+Please file issues [click here] at Github. 
+
+Please visit us at [Rosalila Studio].
+
+[Rosalila Studio]:http://www.rosalilastudio.com/
+[click here]:https://github.com/Rosalila/STG/issues
+
+Contributing
+--------------------
+
+Create your feature branch (git checkout -b my-new-feature)
+
+Commit your changes (git commit -am 'Add some feature')
+
+Push to the branch (git push origin my-new-feature)
+
+Create a new Pull Request
