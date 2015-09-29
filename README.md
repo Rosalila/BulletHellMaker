@@ -50,7 +50,7 @@ Well done.
 
 Support
 --------------------
-This software is licensed under the GPL License.
+This software is licensed under the LGPL License.
 
 Please file issues [click here] at Github. 
 

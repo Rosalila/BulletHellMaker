@@ -66,6 +66,8 @@ double x,y;
     void loadMainXML();
     void loadBulletsXML();
     void loadPatternsXML();
+    vector<Modifier*>* loadModifierXML(TiXmlNode* modifier_node);
+    Pattern* loadPatternXML(TiXmlNode* pattern_node);
     void logic(int stage_velocity);
     //logic sub functions
     void animationControl();

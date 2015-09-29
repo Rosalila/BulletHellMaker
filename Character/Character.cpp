@@ -232,6 +232,251 @@ void Character::loadBulletsXML()
     }
 }
 
+Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
+{
+    TiXmlElement* pattern_element = pattern_node->ToElement();
+    std::string bullet_name=pattern_element->Attribute("bullet");
+    Bullet*bullet=bullets[bullet_name];
+
+    int velocity=0;
+    if(pattern_element->Attribute("velocity")!=NULL)
+        velocity=atoi(pattern_element->Attribute("velocity"));
+
+    int max_velocity=9999999;
+    if(pattern_element->Attribute("max_velocity")!=NULL)
+        max_velocity=atoi(pattern_element->Attribute("max_velocity"));
+
+    int acceleration=0;
+    if(pattern_element->Attribute("acceleration")!=NULL)
+        acceleration=atoi(pattern_element->Attribute("acceleration"));
+
+    int a_frequency=0;
+    if(pattern_element->Attribute("a_frequency")!=NULL)
+        a_frequency=atoi(pattern_element->Attribute("a_frequency"));
+
+    int angle=0;
+    if(pattern_element->Attribute("angle")!=NULL)
+        angle=atoi(pattern_element->Attribute("angle"));
+
+    int angle_change=0;
+    if(pattern_element->Attribute("angle_change")!=NULL)
+        angle_change=atoi(pattern_element->Attribute("angle_change"));
+
+    int stop_ac_at=-1;
+    if(pattern_element->Attribute("stop_ac_at")!=NULL)
+        stop_ac_at=atoi(pattern_element->Attribute("stop_ac_at"));
+
+    int ac_frequency=0;
+    if(pattern_element->Attribute("ac_frequency")!=NULL)
+        ac_frequency=atoi(pattern_element->Attribute("ac_frequency"));
+
+    int offset_x=0;
+    if(pattern_element->Attribute("offset_x")!=NULL)
+        offset_x=atoi(pattern_element->Attribute("offset_x"));
+
+    int offset_y=0;
+    if(pattern_element->Attribute("offset_y")!=NULL)
+        offset_y=atoi(pattern_element->Attribute("offset_y"));
+
+    int startup=0;
+    if(pattern_element->Attribute("startup")!=NULL)
+        startup=atoi(pattern_element->Attribute("startup"));
+
+    int cooldown=0;
+    if(pattern_element->Attribute("cooldown")!=NULL)
+        cooldown=atoi(pattern_element->Attribute("cooldown"));
+
+    int animation_velocity=0;
+    if(pattern_element->Attribute("animation_velocity")!=NULL)
+        animation_velocity=atoi(pattern_element->Attribute("animation_velocity"));
+
+    int duration=-1;
+    if(pattern_element->Attribute("duration"))
+        duration=atoi(pattern_element->Attribute("duration"));
+
+    int random_angle=0;
+    if(pattern_element->Attribute("random_angle"))
+        random_angle=atoi(pattern_element->Attribute("random_angle"));
+
+    bool aim_player=false;
+    if(pattern_element->Attribute("aim_player"))
+        aim_player=strcmp(pattern_element->Attribute("aim_player"),"yes")==0;
+
+    int bullet_rotation=0;
+    if(pattern_element->Attribute("bullet_rotation"))
+        bullet_rotation=atoi(pattern_element->Attribute("bullet_rotation"));
+
+    int br_change=0;
+    if(pattern_element->Attribute("br_change"))
+        br_change=atoi(pattern_element->Attribute("br_change"));
+
+    bool independent_br=false;
+    if(pattern_element->Attribute("independent_br"))
+        independent_br=strcmp(pattern_element->Attribute("independent_br"),"yes")==0;
+
+    bool freeze=false;
+    if(pattern_element->Attribute("freeze"))
+        freeze=strcmp(pattern_element->Attribute("freeze"),"yes")==0;
+
+    bool homing = false;
+    if (pattern_element->Attribute("homing"))
+         homing = strcmp(pattern_element->Attribute("homing"), "yes") == 0;
+
+    //Modifiers
+    std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
+
+    if(pattern_node->FirstChild("Modifier")!=NULL)
+    {
+        for(TiXmlNode* pattern_modifier_node=pattern_node->FirstChild("Modifier");
+                pattern_modifier_node!=NULL;
+                pattern_modifier_node=pattern_modifier_node->NextSibling("Modifier"))
+        {
+            int at=atoi(pattern_modifier_node->ToElement()->Attribute("at"));
+            (*pattern_modifiers)[at]=loadModifierXML(pattern_modifier_node);
+        }
+    }
+    return new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,
+                                           startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,pattern_modifiers,&bullets);
+}
+
+vector<Modifier*>* Character::loadModifierXML(TiXmlNode* modifier_node)
+{
+    vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
+
+    if(modifier_node->ToElement()->Attribute("bullet")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("bullet");
+        temp_modifiers->push_back(new Modifier("bullet",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("velocity")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("velocity");
+        temp_modifiers->push_back(new Modifier("velocity",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("max_velocity")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("max_velocity");
+        temp_modifiers->push_back(new Modifier("max_velocity",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("acceleration")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("acceleration");
+        temp_modifiers->push_back(new Modifier("acceleration",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("a_frequency")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("a_frequency");
+        temp_modifiers->push_back(new Modifier("a_frequency",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("angle")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("angle");
+        temp_modifiers->push_back(new Modifier("angle",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("angle_change")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("angle_change");
+        temp_modifiers->push_back(new Modifier("angle_change",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("stop_ac_at")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("stop_ac_at");
+        temp_modifiers->push_back(new Modifier("stop_ac_at",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("ac_frequency")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("ac_frequency");
+        temp_modifiers->push_back(new Modifier("ac_frequency",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("animation_velocity")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("animation_velocity");
+        temp_modifiers->push_back(new Modifier("animation_velocity",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("offset_x")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("offset_x");
+        temp_modifiers->push_back(new Modifier("offset_x",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("offset_y")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("offset_y");
+        temp_modifiers->push_back(new Modifier("offset_y",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("startup")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("startup");
+        temp_modifiers->push_back(new Modifier("startup",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("cooldown")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("cooldown");
+        temp_modifiers->push_back(new Modifier("cooldown",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("duration")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("duration");
+        temp_modifiers->push_back(new Modifier("duration",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("random_angle")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("random_angle");
+        temp_modifiers->push_back(new Modifier("random_angle",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("aim_player")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("aim_player");
+        temp_modifiers->push_back(new Modifier("aim_player",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("bullet_rotation")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("bullet_rotation");
+        temp_modifiers->push_back(new Modifier("bullet_rotation",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("br_change")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("br_change");
+        temp_modifiers->push_back(new Modifier("br_change",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("independent_br")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("independent_br");
+        temp_modifiers->push_back(new Modifier("independent_br",value));
+    }
+    if(modifier_node->ToElement()->Attribute("freeze")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("freeze");
+        temp_modifiers->push_back(new Modifier("freeze",value));
+    }
+
+    if(modifier_node->ToElement()->Attribute("homing")!=NULL)
+    {
+        std::string value=modifier_node->ToElement()->Attribute("homing");
+        temp_modifiers->push_back(new Modifier("homing",value));
+    }
+
+    return temp_modifiers;
+}
+
 void Character::loadPatternsXML()
 {
 //Loading file
@@ -253,244 +498,90 @@ void Character::loadPatternsXML()
                 pattern_node!=NULL;
                 pattern_node=pattern_node->NextSibling("Pattern"))
         {
-            std::string bullet_name=pattern_node->ToElement()->Attribute("bullet");
-            Bullet*bullet=bullets[bullet_name];
+            //Pattern ready, now push
+            patterns.push_back(loadPatternXML(pattern_node));
+        }
+        for(TiXmlNode* repeat_node=pattern_type->FirstChild("Repeat");
+                repeat_node!=NULL;
+                repeat_node=repeat_node->NextSibling("Repeat"))
+        {
+            TiXmlElement* repeat_element = repeat_node->ToElement();
+            int amount = atoi(repeat_element->Attribute("amount"));
+
+            for(int i=0;i<amount;i++)
+            {
+                Pattern* p = loadPatternXML(repeat_node->FirstChild("Pattern"));
 
             int velocity=0;
-            if(pattern_node->ToElement()->Attribute("velocity")!=NULL)
-                velocity=atoi(pattern_node->ToElement()->Attribute("velocity"));
+            if(repeat_element->Attribute("velocity")!=NULL)
+                p->velocity+=atoi(repeat_element->Attribute("velocity"))*i;
 
             int max_velocity=9999999;
-            if(pattern_node->ToElement()->Attribute("max_velocity")!=NULL)
-                max_velocity=atoi(pattern_node->ToElement()->Attribute("max_velocity"));
+            if(repeat_element->Attribute("max_velocity")!=NULL)
+                p->max_velocity+=atoi(repeat_element->Attribute("max_velocity"))*i;
 
             int acceleration=0;
-            if(pattern_node->ToElement()->Attribute("acceleration")!=NULL)
-                acceleration=atoi(pattern_node->ToElement()->Attribute("acceleration"));
+            if(repeat_element->Attribute("acceleration")!=NULL)
+                p->acceleration+=atoi(repeat_element->Attribute("acceleration"))*i;
 
             int a_frequency=0;
-            if(pattern_node->ToElement()->Attribute("a_frequency")!=NULL)
-                a_frequency=atoi(pattern_node->ToElement()->Attribute("a_frequency"));
+            if(repeat_element->Attribute("a_frequency")!=NULL)
+                p->a_frequency+=atoi(repeat_element->Attribute("a_frequency"))*i;
 
             int angle=0;
-            if(pattern_node->ToElement()->Attribute("angle")!=NULL)
-                angle=atoi(pattern_node->ToElement()->Attribute("angle"));
+            if(repeat_element->Attribute("angle")!=NULL)
+                p->angle+=atoi(repeat_element->Attribute("angle"))*i;
 
             int angle_change=0;
-            if(pattern_node->ToElement()->Attribute("angle_change")!=NULL)
-                angle_change=atoi(pattern_node->ToElement()->Attribute("angle_change"));
+            if(repeat_element->Attribute("angle_change")!=NULL)
+                p->angle_change+=atoi(repeat_element->Attribute("angle_change"))*i;
 
             int stop_ac_at=-1;
-            if(pattern_node->ToElement()->Attribute("stop_ac_at")!=NULL)
-                stop_ac_at=atoi(pattern_node->ToElement()->Attribute("stop_ac_at"));
+            if(repeat_element->Attribute("stop_ac_at")!=NULL)
+                p->stop_ac_at+=atoi(repeat_element->Attribute("stop_ac_at"))*i;
 
             int ac_frequency=0;
-            if(pattern_node->ToElement()->Attribute("ac_frequency")!=NULL)
-                ac_frequency=atoi(pattern_node->ToElement()->Attribute("ac_frequency"));
+            if(repeat_element->Attribute("ac_frequency")!=NULL)
+                p->ac_frequency+=atoi(repeat_element->Attribute("ac_frequency"))*i;
 
             int offset_x=0;
-            if(pattern_node->ToElement()->Attribute("offset_x")!=NULL)
-                offset_x=atoi(pattern_node->ToElement()->Attribute("offset_x"));
+            if(repeat_element->Attribute("offset_x")!=NULL)
+                p->offset_x+=atoi(repeat_element->Attribute("offset_x"))*i;
 
             int offset_y=0;
-            if(pattern_node->ToElement()->Attribute("offset_y")!=NULL)
-                offset_y=atoi(pattern_node->ToElement()->Attribute("offset_y"));
+            if(repeat_element->Attribute("offset_y")!=NULL)
+                p->offset_y+=atoi(repeat_element->Attribute("offset_y"))*i;
 
             int startup=0;
-            if(pattern_node->ToElement()->Attribute("startup")!=NULL)
-                startup=atoi(pattern_node->ToElement()->Attribute("startup"));
+            if(repeat_element->Attribute("startup")!=NULL)
+                p->startup+=atoi(repeat_element->Attribute("startup"))*i;
 
             int cooldown=0;
-            if(pattern_node->ToElement()->Attribute("cooldown")!=NULL)
-                cooldown=atoi(pattern_node->ToElement()->Attribute("cooldown"));
+            if(repeat_element->Attribute("cooldown")!=NULL)
+                p->cooldown+=atoi(repeat_element->Attribute("cooldown"))*i;
 
             int animation_velocity=0;
-            if(pattern_node->ToElement()->Attribute("animation_velocity")!=NULL)
-                animation_velocity=atoi(pattern_node->ToElement()->Attribute("animation_velocity"));
+            if(repeat_element->Attribute("animation_velocity")!=NULL)
+                p->animation_velocity+=atoi(repeat_element->Attribute("animation_velocity"))*i;
 
             int duration=-1;
-            if(pattern_node->ToElement()->Attribute("duration"))
-                duration=atoi(pattern_node->ToElement()->Attribute("duration"));
+            if(repeat_element->Attribute("duration"))
+                p->duration+=atoi(repeat_element->Attribute("duration"))*i;
 
             int random_angle=0;
-            if(pattern_node->ToElement()->Attribute("random_angle"))
-                random_angle=atoi(pattern_node->ToElement()->Attribute("random_angle"));
-
-            bool aim_player=false;
-            if(pattern_node->ToElement()->Attribute("aim_player"))
-                aim_player=strcmp(pattern_node->ToElement()->Attribute("aim_player"),"yes")==0;
+            if(repeat_element->Attribute("random_angle"))
+                p->random_angle+=atoi(repeat_element->Attribute("random_angle"))*i;
 
             int bullet_rotation=0;
-            if(pattern_node->ToElement()->Attribute("bullet_rotation"))
-                bullet_rotation=atoi(pattern_node->ToElement()->Attribute("bullet_rotation"));
+            if(repeat_element->Attribute("bullet_rotation"))
+                p->bullet_rotation+=atoi(repeat_element->Attribute("bullet_rotation"))*i;
 
             int br_change=0;
-            if(pattern_node->ToElement()->Attribute("br_change"))
-                br_change=atoi(pattern_node->ToElement()->Attribute("br_change"));
+            if(repeat_element->Attribute("br_change"))
+                p->br_change+=atoi(repeat_element->Attribute("br_change"))*i;
 
-            bool independent_br=false;
-            if(pattern_node->ToElement()->Attribute("independent_br"))
-                independent_br=strcmp(pattern_node->ToElement()->Attribute("independent_br"),"yes")==0;
-
-            bool freeze=false;
-            if(pattern_node->ToElement()->Attribute("freeze"))
-                freeze=strcmp(pattern_node->ToElement()->Attribute("freeze"),"yes")==0;
-
-            bool homing = false;
-            if (pattern_node->ToElement()->Attribute("homing"))
-                 homing = strcmp(pattern_node->ToElement()->Attribute("homing"), "yes") == 0;
-
-            //Modifiers
-            std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
-
-            if(pattern_node->FirstChild("Modifier")!=NULL)
-            {
-                for(TiXmlNode* pattern_modifier_node=pattern_node->FirstChild("Modifier");
-                        pattern_modifier_node!=NULL;
-                        pattern_modifier_node=pattern_modifier_node->NextSibling("Modifier"))
-                {
-                    vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
-
-                    int at=atoi(pattern_modifier_node->ToElement()->Attribute("at"));
-
-                    if(pattern_modifier_node->ToElement()->Attribute("bullet")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("bullet");
-                        temp_modifiers->push_back(new Modifier("bullet",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("velocity")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("velocity");
-                        temp_modifiers->push_back(new Modifier("velocity",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("max_velocity")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("max_velocity");
-                        temp_modifiers->push_back(new Modifier("max_velocity",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("acceleration")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("acceleration");
-                        temp_modifiers->push_back(new Modifier("acceleration",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("a_frequency")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("a_frequency");
-                        temp_modifiers->push_back(new Modifier("a_frequency",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("angle")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("angle");
-                        temp_modifiers->push_back(new Modifier("angle",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("angle_change")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("angle_change");
-                        temp_modifiers->push_back(new Modifier("angle_change",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("stop_ac_at")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("stop_ac_at");
-                        temp_modifiers->push_back(new Modifier("stop_ac_at",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("ac_frequency")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("ac_frequency");
-                        temp_modifiers->push_back(new Modifier("ac_frequency",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("animation_velocity")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("animation_velocity");
-                        temp_modifiers->push_back(new Modifier("animation_velocity",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("offset_x")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("offset_x");
-                        temp_modifiers->push_back(new Modifier("offset_x",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("offset_y")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("offset_y");
-                        temp_modifiers->push_back(new Modifier("offset_y",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("startup")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("startup");
-                        temp_modifiers->push_back(new Modifier("startup",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("cooldown")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("cooldown");
-                        temp_modifiers->push_back(new Modifier("cooldown",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("duration")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("duration");
-                        temp_modifiers->push_back(new Modifier("duration",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("random_angle")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("random_angle");
-                        temp_modifiers->push_back(new Modifier("random_angle",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("aim_player")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("aim_player");
-                        temp_modifiers->push_back(new Modifier("aim_player",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("bullet_rotation")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("bullet_rotation");
-                        temp_modifiers->push_back(new Modifier("bullet_rotation",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("br_change")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("br_change");
-                        temp_modifiers->push_back(new Modifier("br_change",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("independent_br")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("independent_br");
-                        temp_modifiers->push_back(new Modifier("independent_br",value));
-                    }
-                    if(pattern_modifier_node->ToElement()->Attribute("freeze")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("freeze");
-                        temp_modifiers->push_back(new Modifier("freeze",value));
-                    }
-
-                    if(pattern_modifier_node->ToElement()->Attribute("homing")!=NULL)
-                    {
-                        std::string value=pattern_modifier_node->ToElement()->Attribute("homing");
-                        temp_modifiers->push_back(new Modifier("homing",value));
-                    }
-
-                    (*pattern_modifiers)[at]=temp_modifiers;
-                }
+                patterns.push_back(p);
             }
-
-            //Pattern ready, now push
-            patterns.push_back(new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,
-                                           startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,pattern_modifiers,&bullets));
         }
         type[type_name]=patterns;
     }

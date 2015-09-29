@@ -20,7 +20,7 @@ class Pattern
     RosalilaGraphics* painter;
     Receiver* receiver;
     double x,y;
-
+public:
     int velocity;
     int max_velocity;
     int acceleration;
