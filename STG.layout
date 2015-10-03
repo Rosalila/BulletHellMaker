@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="1" tabpos="6">
-		<Cursor position="21407" topLine="555" />
+	<File name="Character/Character.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="24527" topLine="651" />
 	</File>
-	<File name="Character/Character.h" open="1" top="0" tabpos="7">
-		<Cursor position="1681" topLine="54" />
+	<File name="Character/Character.h" open="1" top="0" tabpos="3">
+		<Cursor position="2183" topLine="73" />
 	</File>
 	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="879" topLine="184" />
+		<Cursor position="2242" topLine="57" />
 	</File>
 	<File name="Character/Enemy.h" open="0" top="0" tabpos="0">
 		<Cursor position="259" topLine="0" />
@@ -67,13 +67,13 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.h" open="0" top="0" tabpos="6">
 		<Cursor position="185" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="3809" topLine="126" />
+	<File name="STG.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="3758" topLine="126" />
 	</File>
 	<File name="STG.h" open="0" top="0" tabpos="0">
-		<Cursor position="353" topLine="0" />
+		<Cursor position="392" topLine="0" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="1" top="0" tabpos="2">
+	<File name="STGMenu/STGMenu.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="8804" topLine="215" />
 	</File>
 	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="0">
@@ -88,11 +88,11 @@
 	<File name="Spells/Bullet.h" open="0" top="0" tabpos="0">
 		<Cursor position="254" topLine="0" />
 	</File>
-	<File name="Spells/Pattern.cpp" open="0" top="0" tabpos="10">
-		<Cursor position="6288" topLine="236" />
+	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="1427" topLine="24" />
 	</File>
-	<File name="Spells/Pattern.h" open="0" top="0" tabpos="0">
-		<Cursor position="304" topLine="0" />
+	<File name="Spells/Pattern.h" open="1" top="0" tabpos="4">
+		<Cursor position="1124" topLine="39" />
 	</File>
 	<File name="Stage/Dialogue.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="628" topLine="23" />
@@ -103,13 +103,13 @@
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="0">
 		<Cursor position="209" topLine="0" />
 	</File>
-	<File name="Stage/Stage.cpp" open="1" top="0" tabpos="4">
+	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="9932" topLine="282" />
 	</File>
 	<File name="Stage/Stage.h" open="0" top="0" tabpos="0">
 		<Cursor position="156" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1">
+	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="932" topLine="17" />
 	</File>
 </CodeBlocks_layout_file>

@@ -37,7 +37,7 @@ Add the following:
 Compile the project and celebrate.
 
 Support
---------------------
+-------
 This software is licensed under the LGPL License.
 
 Please file issues [click here] at Github. 
@@ -48,7 +48,7 @@ Please visit us at [Rosalila Studio].
 [click here]:https://github.com/Rosalila/STG/issues
 
 Contributing
---------------------
+------------
 
 Create your feature branch (git checkout -b my-new-feature)
 

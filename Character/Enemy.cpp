@@ -66,6 +66,14 @@ void Enemy::modifiersControl()
             }
             if(modifier->variable=="pattern_type")
             {
+                //Reset cooldowns
+                for(int i=0;i<type[current_type].size();i++)
+                {
+                    type[current_type][i]->current_cooldown=0;
+                    type[current_type][i]->current_startup=0;
+                    type[current_type][i]->iteration=0;
+                    type[current_type][i]->state="startup";
+                }
                 this->current_type=modifier->value;
             }
         }

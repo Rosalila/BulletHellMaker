@@ -197,7 +197,7 @@ void Pattern::logic(int stage_speed)
             velocity=max_velocity;
     }
 
-    if(current_stop_ac_at<stop_ac_at&& stop_ac_at>0)
+    if(current_stop_ac_at<stop_ac_at || stop_ac_at==-1)
     {
         if(getIterateSlowdownFlag())
             current_ac_frequency++;
