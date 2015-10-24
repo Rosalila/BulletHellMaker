@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="1" tabpos="2">
+	<File name="Character/Character.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="24527" topLine="651" />
 	</File>
 	<File name="Character/Character.h" open="1" top="0" tabpos="3">
-		<Cursor position="2183" topLine="73" />
+		<Cursor position="2183" topLine="65" />
 	</File>
 	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="5">
 		<Cursor position="2242" topLine="57" />
@@ -51,6 +51,9 @@
 	</File>
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="5">
 		<Cursor position="150" topLine="0" />
+	</File>
+	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="154" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaUtility/Font.h" open="0" top="0" tabpos="0">
 		<Cursor position="579" topLine="2" />

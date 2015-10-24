@@ -63,9 +63,9 @@ void Stage::drawLayer(Layer* layer)
         }
     }else if(layer->depth_effect_x<0)
     {
-        if(painter->camera_x-layer->depth_effect_x>size_x+layer->alignment_x)
+        if(painter->camera_x*-layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
         {
-            layer->alignment_x+=size_x;
+            layer->alignment_x+=size_x+layer->separation_x;
         }
     }
 
