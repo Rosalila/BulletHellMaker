@@ -52,7 +52,8 @@ void Stage::drawLayer(Layer* layer)
             layer->depth_effect_y,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
 
     if(layer->depth_effect_x>0)
@@ -100,7 +101,8 @@ void Stage::dibujarFront()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
         ((Dialogue*)*dialogue)->render(this->dialogue_x+this->dialogue_padding_x,this->dialogue_y+this->dialogue_padding_y);
     }
 }

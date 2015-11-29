@@ -40,8 +40,8 @@
 	<File name="Rosalila/RosalilaGraphics/Object3D.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="153" topLine="0" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="8427" topLine="268" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="0">
 		<Cursor position="1885" topLine="109" />
@@ -52,7 +52,7 @@
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="5">
 		<Cursor position="150" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="1" top="1" tabpos="6">
+	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="1" top="0" tabpos="6">
 		<Cursor position="154" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaUtility/Font.h" open="0" top="0" tabpos="0">
@@ -103,14 +103,17 @@
 	<File name="Stage/Dialogue.h" open="0" top="0" tabpos="0">
 		<Cursor position="215" topLine="0" />
 	</File>
-	<File name="Stage/Layer.h" open="0" top="0" tabpos="0">
+	<File name="Stage/Layer.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="Stage/Layer.h" open="1" top="0" tabpos="8">
 		<Cursor position="209" topLine="0" />
 	</File>
-	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="9932" topLine="282" />
+	<File name="Stage/Stage.cpp" open="1" top="1" tabpos="10">
+		<Cursor position="1900" topLine="45" />
 	</File>
-	<File name="Stage/Stage.h" open="0" top="0" tabpos="0">
-		<Cursor position="156" topLine="0" />
+	<File name="Stage/Stage.h" open="1" top="0" tabpos="9">
+		<Cursor position="156" topLine="12" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="932" topLine="17" />

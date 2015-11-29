@@ -260,7 +260,8 @@ void Player::render()
         0,0,
         Color(255,255,255,255),
         0,0,
-        true);
+        true,
+        FlatShadow());
 
     if(isSlowActive())
     {

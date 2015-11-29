@@ -157,7 +157,8 @@ void Enemy::render()
         0,0,
         Color(255,255,255,255),
         0,0,
-        true);
+        true,
+        FlatShadow());
     if(this->hp<=0)
     {
         painter->drawText("Uploading score.",0,80);

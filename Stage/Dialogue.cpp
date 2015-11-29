@@ -30,7 +30,8 @@ void Dialogue::render(int x,int y)
         0,0,
         Color(255,255,255,255),
         0,0,
-        false);
+        false,
+        FlatShadow());
 }
 
 void Dialogue::logic()
