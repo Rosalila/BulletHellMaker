@@ -54,6 +54,8 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Cube.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Explosion.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Explosion.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/MPEGfilter.h" />

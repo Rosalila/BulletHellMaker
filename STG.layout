@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="24527" topLine="651" />
+	<File name="Character/Character.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="25195" topLine="664" />
 	</File>
 	<File name="Character/Character.h" open="1" top="0" tabpos="3">
 		<Cursor position="2183" topLine="65" />
@@ -109,7 +109,7 @@
 	<File name="Stage/Layer.h" open="1" top="0" tabpos="8">
 		<Cursor position="209" topLine="0" />
 	</File>
-	<File name="Stage/Stage.cpp" open="1" top="1" tabpos="10">
+	<File name="Stage/Stage.cpp" open="1" top="0" tabpos="10">
 		<Cursor position="1900" topLine="45" />
 	</File>
 	<File name="Stage/Stage.h" open="1" top="0" tabpos="9">
