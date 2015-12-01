@@ -1,6 +1,6 @@
 #include "STG.h"
 
-STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage)
+STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -8,7 +8,8 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     this->player=player;
     this->enemy=enemy;
     this->stage=stage;
-    painter->camera_x=0;
+    this->game_mode=game_mode;
+
     painter->camera_y=0;
     iteration=0;
 
@@ -55,9 +56,18 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         you_win.addImage(painter->getTexture(assets_directory+path));
     }
 
-    stage->playMusic();
+    if(game_mode=="Stage select")
+    {
+        stageSelectModeInit();
+    }
 
     mainLoop();
+}
+
+void STG::stageSelectModeInit()
+{
+    stage->playMusic();
+    painter->camera_x=0;
 }
 
 void STG::mainLoop()
@@ -68,6 +78,7 @@ void STG::mainLoop()
     {
         if(receiver->isKeyDown(SDLK_ESCAPE))
         {
+            exit(0);
             break;
         }
 
@@ -199,7 +210,8 @@ void STG::render()
     if(player->getHP()==0)
         you_loose.render();
 
-    painter->drawText("Time: "+toString(iteration),0,65);
+    painter->drawText("Time: "+toString(iteration),25,70);
+    painter->drawText(enemy->getName(),25,110);
 
 
     painter->updateScreen();
@@ -266,4 +278,14 @@ void STG::checkCharacterOutOfBounds()
         player->setY(stage->getBoundY1());
     if(player->getY()>stage->getBoundY2())
         player->setY(stage->getBoundY2());
+}
+
+bool STG::playerWon()
+{
+    return enemy->getHP()==0;
+}
+
+bool STG::enemyWon()
+{
+    return player->getHP()==0;
 }

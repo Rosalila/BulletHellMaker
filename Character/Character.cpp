@@ -704,6 +704,27 @@ int Character::getHP()
     return this->hp;
 }
 
+string Character::getName()
+{
+    return name;
+}
+
+void Character::setHP(int hp)
+{
+    this->hp=hp;
+}
+
+void Character::setVisible(bool visible)
+{
+    this->visible=visible;
+}
+
+void Character::setOrientation(string orientation)
+{
+    this->orientation=orientation;
+    this->current_sprite=0;
+}
+
 int Character::getIteration()
 {
     return iteration;
@@ -731,6 +752,8 @@ void Character::setType(std::string new_current_type)
 
 bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
 {
+    if(!visible)
+        return false;
     return this->hitbox.getPlacedHitbox(this->x,this->y).collides(hitbox);
 }
 

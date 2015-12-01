@@ -22,8 +22,9 @@ private:
     int pos_stage,pos_ia_lvl;
     bool exit_signal,save_inputs_signal;
     MenuCharSelect* char_select;
+    map<string,vector<string> >arcade_paths;
 
-    void iniciarJuego(std::string character_name,std::string stage_name);
+    void iniciarJuego(std::string character_name,std::string stage_name,string game_mode);
 public:
     std::string music_path;
     RosalilaInputs *inputa,*inputb;

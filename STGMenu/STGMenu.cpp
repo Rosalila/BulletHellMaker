@@ -44,10 +44,24 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
         }
     }
 
+    if(config_file->FirstChild("Arcade"))
+    for(TiXmlNode* node_path=config_file->FirstChild("Arcade")->FirstChild("Path");
+            node_path!=NULL;
+            node_path=node_path->NextSibling("Path"))
+    {
+        vector<string> path_stages;
+        for(TiXmlNode* node_stage=node_path->FirstChild("stage");
+                node_stage!=NULL;
+                node_stage=node_stage->NextSibling("stage"))
+        {
+            path_stages.push_back(node_stage->ToElement()->Attribute("name"));
+        }
+        arcade_paths[node_path->ToElement()->Attribute("name")]=path_stages;
+    }
     cargarDesdeXml(archivo,chars,stages);
 }
 
-void Menu::iniciarJuego(std::string character_name,std::string stage_name)
+void Menu::iniciarJuego(std::string character_name,std::string stage_name,string game_mode)
 {
     this->printLoadingScreen();
     writeLogLine("Initializing game.");
@@ -55,8 +69,12 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name)
     stage->loadFromXML(stage_name);
     Player*player=new Player(sonido,painter,receiver,character_name);
     Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player);
-    STG*stg=new STG(sonido,painter,receiver,player,enemy,stage);
+    STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode);
     delete stg;
+//    if(stg->playerWon())
+//        iniciarJuego(character_name,"StageAhmedB");
+//    if(stg->enemyWon())
+//        iniciarJuego(character_name,stage_name);
     this->playMusic();
     char_select->clearLocks();
 }
@@ -202,7 +220,7 @@ void Menu::loopMenu()
                     else
                     {
                         sonido->playSound(std::string("Menu.select"));
-                        iniciarJuego(char_select->getLockedNamesPA()[0],getStage());
+                        iniciarJuego(char_select->getLockedNamesPA()[0],getStage(),"Stage select");
                     }
                 }
 
@@ -212,6 +230,45 @@ void Menu::loopMenu()
                     if(mb->getAccion()=="Start")
                     {
 //                        iniciarJuego();
+                    }
+                    if(mb->getAccion()=="Arcade")
+                    {
+                        this->printLoadingScreen();
+                        writeLogLine("Initializing arcade game initializer.");
+                        Stage*stage=new Stage(painter,sonido,receiver);
+                        stage->loadFromXML(arcade_paths["Easy"][0]);
+                        Player*player=new Player(sonido,painter,receiver,"Demo");
+                        player->x+=painter->camera_x;
+                        int last_cammera=0;
+                        stage->playMusic();
+                        for(int i=0;i<arcade_paths["Easy"].size();i++)
+                        {
+
+                            //this->printLoadingScreen();
+                            writeLogLine("Initializing arcade game.");
+                            Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player);
+                            enemy->x+=painter->camera_x;
+                            STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
+                            if(stg->enemyWon())
+                            {
+                                player->setHP(5);
+                                player->setVisible(true);
+                                player->setOrientation("up");
+                                i--;
+                            }
+                            if(i==arcade_paths["Easy"].size()-1 && stg->playerWon())
+                            {
+                                this->playMusic();
+                                string menu_directory = assets_directory+"/menu/ending.svg";
+                                Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
+                                temp->loopMenu();
+                            }
+//                            last_cammera
+                            //painter->camera_x=last_cammera;
+                            delete stg;
+
+                        }
+                        //this->playMusic();
                     }
                     if(mb->getAccion()=="Continue")
                     {

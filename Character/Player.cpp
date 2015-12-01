@@ -199,7 +199,7 @@ void Player::logic(int stage_velocity)
         if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
             this->sonido->playSound(name+".destroyed");
         orientation="destroyed";
-        this->hitbox.setValues(0,0,0,0,0);
+        //this->hitbox.setValues(0,0,0,0,0);
     }
     //Enable or disable slow
     if(isSlowPressed() && !slow_in_cooldown)

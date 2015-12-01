@@ -159,12 +159,12 @@ void Enemy::render()
         0,0,
         true,
         FlatShadow());
-    if(this->hp<=0)
-    {
-        painter->drawText("Uploading score.",0,80);
-        painter->drawText(score_upload_message,0,95);
-        flag_begin_upload = true;
-    }
+//    if(this->hp<=0)
+//    {
+//        painter->drawText("Uploading score.",0,80);
+//        painter->drawText(score_upload_message,0,95);
+//        flag_begin_upload = true;
+//    }
 }
 
 void Enemy::loadModifiersFromXML()
