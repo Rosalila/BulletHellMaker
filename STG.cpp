@@ -169,6 +169,11 @@ void STG::render()
     stage->render();
     stage->dibujarFront();
 
+    float distance_x=enemy->x - player->x;
+    float distance_y=enemy->y - player->y;
+    float distance=sqrt(distance_x*distance_x+distance_y*distance_y);
+    float damage_level=6-distance/250.0;
+
     for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
     {
         Pattern*p=(Pattern*)*pattern;
@@ -199,7 +204,8 @@ void STG::render()
                 if(enemy->collides(h,0,0,0))
                 {
                     p->hit();
-                    enemy->hit(p->getDamage());
+                    enemy->hit(p->getDamage()+damage_level);
+                    painter->shakeScreen(5,5);
                 }
             }
         }
@@ -212,6 +218,7 @@ void STG::render()
 
     painter->drawText("Time: "+toString(iteration),25,70);
     painter->drawText(enemy->getName(),25,110);
+    painter->drawText("Damage level: "+toString(damage_level),25,170);
 
 
     painter->updateScreen();
