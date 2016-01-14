@@ -19,6 +19,12 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->animation_iteration=0;
     this->current_sprite=0;
 
+    //Color effect
+    current_color_effect_r=255;
+    current_color_effect_g=255;
+    current_color_effect_b=255;
+    current_color_effect_a=255;
+
     this->iteration=0;
 
     this->slow_in_cooldown=false;
@@ -238,38 +244,51 @@ void Player::logic(int stage_velocity)
     spellControl(stage_velocity);
 
     iteration++;
+
+    current_color_effect_a = (255*hp)/max_hp;
+    //current_color_effect_b = (255*hp)/max_hp;
+
+    //Color effect
+//    if(current_color_effect_r<255)
+//        current_color_effect_r++;
+//    if(current_color_effect_g<255)
+//        current_color_effect_g++;
+//    if(current_color_effect_b<255)
+//        current_color_effect_b++;
+//    if(current_color_effect_a<255)
+//        current_color_effect_a++;
 }
 
 void Player::render()
 {
     //HP
-    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
-    if(!slow_in_cooldown)
-        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_color.getRed(),this->slow_bar_color.getGreen(),this->slow_bar_color.getBlue(),this->slow_bar_color.getAlpha(),false);
-    else
-        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_cooldown_color.getRed(),this->slow_bar_cooldown_color.getGreen(),this->slow_bar_cooldown_color.getBlue(),this->slow_bar_cooldown_color.getAlpha(),false);
+//    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
+//    if(!slow_in_cooldown)
+//        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_color.getRed(),this->slow_bar_color.getGreen(),this->slow_bar_color.getBlue(),this->slow_bar_color.getAlpha(),false);
+//    else
+//        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_cooldown_color.getRed(),this->slow_bar_cooldown_color.getGreen(),this->slow_bar_cooldown_color.getBlue(),this->slow_bar_cooldown_color.getAlpha(),false);
     parrentRender();
-
-    painter->draw2DImage
-    (   life_bar,
-        life_bar->getWidth(),life_bar->getHeight(),
-        painter->camera_x+life_bar_x,life_bar_y,
-        1.0,
-        0.0,
-        false,
-        0,0,
-        Color(255,255,255,255),
-        0,0,
-        true,
-        FlatShadow());
-
-    if(isSlowActive())
-    {
-        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,180));
-    }else
-    {
-        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,100));
-    }
+//
+//    painter->draw2DImage
+//    (   life_bar,
+//        life_bar->getWidth(),life_bar->getHeight(),
+//        painter->camera_x+life_bar_x,life_bar_y,
+//        1.0,
+//        0.0,
+//        false,
+//        0,0,
+//        Color(255,255,255,255),
+//        0,0,
+//        true,
+//        FlatShadow());
+//
+//    if(isSlowActive())
+//    {
+//        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,180));
+//    }else
+//    {
+//        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,100));
+//    }
 
 //    if(shooting)
 //    {

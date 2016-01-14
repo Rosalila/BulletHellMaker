@@ -187,6 +187,7 @@ void STG::render()
                 {
                     p->hit();
                     player->hit(p->getDamage());
+                    painter->shakeScreen(30,10);
                 }
             }
         }
@@ -205,7 +206,6 @@ void STG::render()
                 {
                     p->hit();
                     enemy->hit(p->getDamage()+damage_level);
-                    painter->shakeScreen(5,5);
                 }
             }
         }
@@ -216,9 +216,9 @@ void STG::render()
     if(player->getHP()==0)
         you_loose.render();
 
-    painter->drawText("Time: "+toString(iteration),25,70);
-    painter->drawText(enemy->getName(),25,110);
-    painter->drawText("Damage level: "+toString(damage_level),25,170);
+//    painter->drawText("Time: "+toString(iteration),25,70);
+//    painter->drawText(enemy->getName(),25,110);
+//    painter->drawText("Damage level: "+toString(damage_level),25,170);
 
 
     painter->updateScreen();

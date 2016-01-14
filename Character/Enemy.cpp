@@ -31,6 +31,12 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
     this->score_upload_message="";
     bool flag_begin_upload=false;
 
+    //Color effect
+    current_color_effect_r=255;
+    current_color_effect_g=255;
+    current_color_effect_b=255;
+    current_color_effect_a=255;
+
     loadFromXML();
 
     loadModifiersFromXML();
@@ -140,25 +146,41 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     this->y -= sin (angle*PI/180) * velocity / getSlowdown();
 
     getIterateSlowdownFlag();
+
+    //Color effect
+//    if(current_color_effect_r<255)
+//        current_color_effect_r++;
+//    if(current_color_effect_g<255)
+//        current_color_effect_g++;
+//    if(current_color_effect_b<255)
+//        current_color_effect_b++;
+//    if(current_color_effect_a<255)
+//        current_color_effect_a++;
+
+
+    current_color_effect_a = (255*hp)/max_hp;
+    //current_color_effect_b = (255*hp)/max_hp;
 }
 
 void Enemy::render()
 {
-    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
+//    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
     parrentRender();
+//
+//    painter->draw2DImage
+//    (   life_bar,
+//        life_bar->getWidth(),life_bar->getHeight(),
+//        painter->camera_x+life_bar_x,life_bar_y,
+//        1.0,
+//        0.0,
+//        false,
+//        0,0,
+//        Color(255,255,255,255),
+//        0,0,
+//        true,
+//        FlatShadow());
 
-    painter->draw2DImage
-    (   life_bar,
-        life_bar->getWidth(),life_bar->getHeight(),
-        painter->camera_x+life_bar_x,life_bar_y,
-        1.0,
-        0.0,
-        false,
-        0,0,
-        Color(255,255,255,255),
-        0,0,
-        true,
-        FlatShadow());
+
 //    if(this->hp<=0)
 //    {
 //        painter->drawText("Uploading score.",0,80);

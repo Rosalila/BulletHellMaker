@@ -57,9 +57,21 @@ protected:
     std::map<std::string, std::vector<Pattern*> > type;
     std::list<Pattern*>* active_patterns;
 
+    //Color effect
+    int current_color_effect_r;
+    int current_color_effect_g;
+    int current_color_effect_b;
+    int current_color_effect_a;
+
 public:
     Image* flat_shadow_texture;
-    vector<Point*>shadow_align_points;
+    vector<Point*>shadow_align_points_left;
+    vector<Point*>shadow_align_points_right;
+    vector<Point*>shadow_align_points_top;
+
+    vector<Point*>inbetween_shadow_align_points_left;
+    vector<Point*>inbetween_shadow_align_points_right;
+    vector<Point*>inbetween_shadow_align_points_top;
 
 double x,y;
     Character(){}

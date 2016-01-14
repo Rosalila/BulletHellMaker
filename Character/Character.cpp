@@ -25,6 +25,12 @@ Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,
 
     this->iteration=0;
 
+    //Color effect
+    current_color_effect_r=255;
+    current_color_effect_g=255;
+    current_color_effect_b=255;
+    current_color_effect_a=255;
+
     //Flat Shadow
     flat_shadow_texture = NULL;
 
@@ -152,13 +158,59 @@ void Character::loadMainXML()
     if(main_file->FirstChild("FlatShadow")!=NULL)
     {
         flat_shadow_texture = painter->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("Point");
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Point");
                 point_node!=NULL;
                 point_node=point_node->NextSibling("Point"))
         {
             int x=atoi(point_node->ToElement()->Attribute("x"));
             int y=atoi(point_node->ToElement()->Attribute("y"));
-            shadow_align_points.push_back(new Point(x,y));
+            shadow_align_points_right.push_back(new Point(x,y));
+        }
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Point");
+                point_node!=NULL;
+                point_node=point_node->NextSibling("Point"))
+        {
+            int x=atoi(point_node->ToElement()->Attribute("x"));
+            int y=atoi(point_node->ToElement()->Attribute("y"));
+            shadow_align_points_left.push_back(new Point(x,y));
+        }
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Point");
+                point_node!=NULL;
+                point_node=point_node->NextSibling("Point"))
+        {
+            int x=atoi(point_node->ToElement()->Attribute("x"));
+            int y=atoi(point_node->ToElement()->Attribute("y"));
+            shadow_align_points_top.push_back(new Point(x,y));
+        }
+
+
+
+        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Inbetween"))
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Inbetween")->FirstChild("Point");
+                point_node!=NULL;
+                point_node=point_node->NextSibling("Point"))
+        {
+            int x=atoi(point_node->ToElement()->Attribute("x"));
+            int y=atoi(point_node->ToElement()->Attribute("y"));
+            inbetween_shadow_align_points_right.push_back(new Point(x,y));
+        }
+        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Inbetween"))
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Inbetween")->FirstChild("Point");
+                point_node!=NULL;
+                point_node=point_node->NextSibling("Point"))
+        {
+            int x=atoi(point_node->ToElement()->Attribute("x"));
+            int y=atoi(point_node->ToElement()->Attribute("y"));
+            inbetween_shadow_align_points_left.push_back(new Point(x,y));
+        }
+        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Inbetween"))
+        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Inbetween")->FirstChild("Point");
+                point_node!=NULL;
+                point_node=point_node->NextSibling("Point"))
+        {
+            int x=atoi(point_node->ToElement()->Attribute("x"));
+            int y=atoi(point_node->ToElement()->Attribute("y"));
+            inbetween_shadow_align_points_top.push_back(new Point(x,y));
         }
     }
 }
@@ -613,6 +665,14 @@ void Character::logic(int stage_velocity)
 {
     animationControl();
     spellControl(stage_velocity);
+    if(current_color_effect_r<255)
+        current_color_effect_r++;
+    if(current_color_effect_g<255)
+        current_color_effect_g++;
+    if(current_color_effect_b<255)
+        current_color_effect_b++;
+    if(current_color_effect_a<255)
+        current_color_effect_a++;
 }
 
 void Character::animationControl()
@@ -667,10 +727,12 @@ void Character::parrentRender()
         0.0,
         false,
         0,0,
-        Color(255,255,255,255),
+        Color(current_color_effect_r,current_color_effect_g,current_color_effect_b,current_color_effect_a),
         0,0,
         true,
-        FlatShadow(flat_shadow_texture,2,60,0,700,-500,shadow_align_points));
+        FlatShadow(flat_shadow_texture,2,60,0,700,-500,
+                   shadow_align_points_left,shadow_align_points_right,shadow_align_points_top,
+                   inbetween_shadow_align_points_left,inbetween_shadow_align_points_right,inbetween_shadow_align_points_top));
 
     if(receiver->isKeyDown(SDLK_h))
     {
@@ -762,6 +824,7 @@ void Character::hit(int damage)
     this->hp-=damage;
     if(hp<0)
         hp=0;
+    //current_color_effect_r = 0;
 }
 
 Hitbox Character::getHitbox()
