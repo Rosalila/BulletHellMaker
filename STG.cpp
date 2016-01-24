@@ -297,8 +297,8 @@ void STG::deleteAllPatterns()
     while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
-        active_patterns->erase(i++);
-        delete p;
+        p->hit();
+        i++;
     }
 
 
@@ -307,8 +307,8 @@ void STG::deleteAllPatterns()
     while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
-        active_patterns->erase(i++);
-        delete p;
+        p->hit();
+        i++;
     }
 }
 
