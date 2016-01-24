@@ -26,6 +26,7 @@ class STG
 
     Animation you_win,you_loose;
     int iteration;
+    int boss_fury_level;
 
 
     bool isOutOfBounds(int pos_x,int pos_y);
@@ -33,6 +34,7 @@ class STG
     void logic();
     void render();
     void deletePatterns();
+    void deleteAllPatterns();
     void checkCharacterOutOfBounds();
 public:
     bool playerWon();

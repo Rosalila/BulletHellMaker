@@ -35,7 +35,8 @@ public:
     Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name);
     void logic(int stage_velocity);
     void inputControl();
-    void render();
+    void bottomRender();
+    void topRender();
     void loadPlayerFromXML();
 };
 

@@ -88,8 +88,8 @@ double x,y;
     void spellControl(int stage_velocity);
     virtual void addActivePattern(Pattern* pattern);
 
-    void parrentRender();
-    void render();
+    void bottomRender();
+    void topRender();
     void setX(int x);
     void setY(int y);
     int getX();

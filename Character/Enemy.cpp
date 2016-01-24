@@ -162,10 +162,11 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     //current_color_effect_b = (255*hp)/max_hp;
 }
 
-void Enemy::render()
+void Enemy::bottomRender()
 {
+    Character::bottomRender();
 //    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
-    parrentRender();
+    //parrentRender();
 //
 //    painter->draw2DImage
 //    (   life_bar,
@@ -187,6 +188,11 @@ void Enemy::render()
 //        painter->drawText(score_upload_message,0,95);
 //        flag_begin_upload = true;
 //    }
+}
+
+void Enemy::topRender()
+{
+    Character::topRender();
 }
 
 void Enemy::loadModifiersFromXML()

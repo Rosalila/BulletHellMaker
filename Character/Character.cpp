@@ -715,7 +715,7 @@ void Character::spellControl(int stage_velocity)
         ((Pattern*)*pattern)->logic(stage_velocity);
 }
 
-void Character::parrentRender()
+void Character::bottomRender()
 {
     if(!visible)
         return;
@@ -741,14 +741,14 @@ void Character::parrentRender()
                                hitbox.getWidth(),hitbox.getHeight(),
                                hitbox.getAngle(),100,0,0,100,true);
     }
-
-    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-        ((Pattern*)*pattern)->render();
 }
 
-void Character::render()
+void Character::topRender()
 {
-    parrentRender();
+    if(!visible)
+        return;
+    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
+        ((Pattern*)*pattern)->render();
 }
 
 int Character::getX()

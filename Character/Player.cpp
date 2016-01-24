@@ -259,15 +259,16 @@ void Player::logic(int stage_velocity)
 //        current_color_effect_a++;
 }
 
-void Player::render()
+void Player::bottomRender()
 {
+    Character::bottomRender();
     //HP
 //    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
 //    if(!slow_in_cooldown)
 //        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_color.getRed(),this->slow_bar_color.getGreen(),this->slow_bar_color.getBlue(),this->slow_bar_color.getAlpha(),false);
 //    else
 //        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_cooldown_color.getRed(),this->slow_bar_cooldown_color.getGreen(),this->slow_bar_cooldown_color.getBlue(),this->slow_bar_cooldown_color.getAlpha(),false);
-    parrentRender();
+    //parrentRender();
 //
 //    painter->draw2DImage
 //    (   life_bar,
@@ -296,4 +297,9 @@ void Player::render()
 //            painter->addExplosion(this->x,this->y);
 //    }
     painter->draw3D();
+}
+
+void Player::topRender()
+{
+    Character::topRender();
 }

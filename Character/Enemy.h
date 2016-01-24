@@ -29,7 +29,8 @@ public:
     Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player);
     void logic(int stage_velocity, string stage_name, int global_iteration, string username);
     void modifiersControl();
-    void render();
+    void bottomRender();
+    void topRender();
     void loadModifiersFromXML();
     virtual void addActivePattern(Pattern* pattern);
     void aimPlayer(Pattern* pattern);

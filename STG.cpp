@@ -12,6 +12,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
 
     painter->camera_y=0;
     iteration=0;
+    boss_fury_level=0;
 
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
@@ -105,6 +106,11 @@ void STG::mainLoop()
 
 void STG::logic()
 {
+    if(receiver->isKeyPressed(SDLK_t))
+    {
+        boss_fury_level+=1;
+        deleteAllPatterns();
+    }
     if(receiver->isKeyPressed(SDLK_1))
     {
         player->setType("1");
@@ -149,6 +155,11 @@ void STG::logic()
     player->logic(stage_displacement);
     player->setX(player->getX()+stage_displacement);
     enemy->logic(stage_displacement,stage->getName(),iteration,username);
+    for(int i=0;i<boss_fury_level;i++)
+    {
+        iteration++;
+        enemy->logic(0,stage->getName(),iteration,username);
+    }
     //enemy->setX(enemy->getX()+stage_displacement);
     stage->logic();
 
@@ -163,8 +174,10 @@ void STG::logic()
 void STG::render()
 {
     stage->dibujarBack();
-    player->render();
-    enemy->render();
+    player->bottomRender();
+    enemy->bottomRender();
+    player->topRender();
+    enemy->topRender();
 
     stage->render();
     stage->dibujarFront();
@@ -206,6 +219,8 @@ void STG::render()
                 {
                     p->hit();
                     enemy->hit(p->getDamage()+damage_level);
+                    if(enemy->getHP()==0)
+                        painter->shakeScreen(50,20);
                 }
             }
         }
@@ -272,6 +287,28 @@ void STG::deletePatterns()
         {
             ++i;
         }
+    }
+}
+
+void STG::deleteAllPatterns()
+{
+    std::list<Pattern*>* active_patterns=player->getActivePatterns();
+    std::list<Pattern*>::iterator i = active_patterns->begin();
+    while (i != active_patterns->end())
+    {
+        Pattern*p=(Pattern*)*i;
+        active_patterns->erase(i++);
+        delete p;
+    }
+
+
+    active_patterns=enemy->getActivePatterns();
+    i = active_patterns->begin();
+    while (i != active_patterns->end())
+    {
+        Pattern*p=(Pattern*)*i;
+        active_patterns->erase(i++);
+        delete p;
     }
 }
 
