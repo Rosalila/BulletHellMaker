@@ -62,6 +62,9 @@ public:
     std::map<int, vector<Modifier*>* >*modifiers;
     void modifiersControl();
 
+    //This is sooooo wierd
+    Pattern* pattern;
+
 public:
 int offset_x,offset_y;
     Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,

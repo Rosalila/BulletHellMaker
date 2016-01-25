@@ -695,6 +695,7 @@ void Character::animationControl()
 void Character::spellControl(int stage_velocity)
 {
     std::vector<Pattern*> patterns=type[current_type];
+    //cout<<patterns.size()<<endl;
     for(int i=0;i<(int)patterns.size();i++)
     {
         if(shooting && this->hp!=0)

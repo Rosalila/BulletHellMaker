@@ -97,6 +97,9 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     //Modifiers
     this->modifiers=pattern->modifiers;
     this->bullets=pattern->bullets;
+
+    //Keeping the parent for reasons
+    this->pattern=pattern;
 }
 
 bool Pattern::isReady()
@@ -118,6 +121,7 @@ void Pattern::setState(std::string state)
 
 void Pattern::updateStateShouting()
 {
+    //cout<<state<<endl;
     if(getIterateSlowdownFlag())
     {
         if(state=="startup")
@@ -149,8 +153,9 @@ void Pattern::updateStateShouting()
 void Pattern::updateStateNotShouting()
 {
     current_startup=0;
-    current_cooldown=0;
-    state="startup";
+    //current_cooldown=0;
+    current_cooldown++;
+    //state="startup";
 }
 
 
