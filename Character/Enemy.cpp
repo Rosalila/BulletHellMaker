@@ -102,10 +102,12 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     animationControl();
     spellControl(stage_velocity);
 
-    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++) {
+    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
+    {
         Pattern* p =  (Pattern*)*pattern;
-        double distance_x= player->getHitbox().getX() - p->getX();
-        double distance_y= player->getHitbox().getY() - p->getY();
+        double distance_x= player->hitboxes[0]->getX() - p->getX();
+        double distance_y= player->hitboxes[0]->getY() - p->getY();
+        //.getPlacedHitbox(this->x,this->y)
 
         if (p->getHoming() != 0)
         {
@@ -115,8 +117,6 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
         {
             p->setAngle(p->getAngle()-atan2(distance_y,distance_x)*180/PI);
         }
-
-
     }
 
 
@@ -130,17 +130,8 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
             if(this->sonido->soundExists(name+".destroyed"))
                 this->sonido->playSound(name+".destroyed");
 
-            this->hitbox.setValues(0,0,0,0,0);
-
-            //Delete bullets
-            std::list<Pattern*>* active_patterns=getActivePatterns();
-            std::list<Pattern*>::iterator i = active_patterns->begin();
-            while (i != active_patterns->end())
-            {
-                Pattern*p=(Pattern*)*i;
-                active_patterns->erase(i++);
-                delete p;
-            }
+            for(int i=0;i<hitboxes.size();i++)
+                this->hitboxes[i]->setValues(0,0,0,0,0);
 
 //            RosalilaNetwork network(painter);
 //            //score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);

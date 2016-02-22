@@ -30,7 +30,6 @@ protected:
     bool visible;
 
     int velocity;
-    Hitbox hitbox;
     bool shooting;
     std::string orientation;
     std::string current_type;
@@ -72,6 +71,8 @@ protected:
     int sound_channel_base;
 
 public:
+    vector<Hitbox*> hitboxes;
+
     Image* flat_shadow_texture;
     vector<Point*>shadow_align_points_left;
     vector<Point*>shadow_align_points_right;
@@ -108,7 +109,6 @@ double x,y;
     void setVisible(bool visible);
     void setOrientation(string orientation);
     int getIteration();
-    Hitbox getHitbox();
     void setType(std::string new_current_type);
     std::list<Pattern*>* getActivePatterns();
     bool collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);

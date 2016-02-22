@@ -134,13 +134,22 @@ void Character::loadMainXML()
             this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
     }
 
-    TiXmlElement *hitbox_node=main_file->FirstChild("Hitbox")->ToElement();
-    int hitbox_x=atoi(hitbox_node->Attribute("x"));
-    int hitbox_y=atoi(hitbox_node->Attribute("y"));
-    int hitbox_width=atoi(hitbox_node->Attribute("width"));
-    int hitbox_height=atoi(hitbox_node->Attribute("height"));
-    int hitbox_angle=atoi(hitbox_node->Attribute("angle"));
-    this->hitbox.setValues(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+    TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
+
+    if(hitboxes_node->FirstChild("Hitbox"))
+    for(TiXmlNode* hitbox_node=hitboxes_node->FirstChild("Hitbox");
+            hitbox_node!=NULL;
+            hitbox_node=hitbox_node->NextSibling("Hitbox"))
+    {
+        TiXmlElement *hitbox_element=hitbox_node->ToElement();
+        int hitbox_x=atoi(hitbox_element->Attribute("x"));
+        int hitbox_y=atoi(hitbox_element->Attribute("y"));
+        int hitbox_width=atoi(hitbox_element->Attribute("width"));
+        int hitbox_height=atoi(hitbox_element->Attribute("height"));
+        int hitbox_angle=atoi(hitbox_element->Attribute("angle"));
+        Hitbox* hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+        this->hitboxes.push_back(hitbox);
+    }
 
     if(main_file->FirstChild("Sounds"))
     {
@@ -698,14 +707,14 @@ void Character::logic(int stage_velocity)
 
 void Character::animationControl()
 {
+    if(orientation=="destroyed")
+        visible=false;
     if(animation_iteration>=animation_velocity)
     {
         current_sprite++;
         if(current_sprite>=(int)sprites[orientation].size())
         {
             current_sprite=0;
-            if(orientation=="destroyed")
-                visible=false;
         }
         animation_iteration=0;
     }
@@ -775,17 +784,18 @@ void Character::bottomRender()
 
     if(receiver->isKeyDown(SDLK_h))
     {
-        painter->drawRectangle(this->getHitbox().getX(),
-                               this->getHitbox().getY(),
-                               hitbox.getWidth(),hitbox.getHeight(),
-                               hitbox.getAngle(),100,0,0,100,true);
+        for(int i=0;i<hitboxes.size();i++)
+        {
+            painter->drawRectangle(hitboxes[i]->getX()+x,
+                                   hitboxes[i]->getY()+y,
+                                   hitboxes[i]->getWidth(),hitboxes[i]->getHeight(),
+                                   hitboxes[i]->getAngle(),100,0,0,100,true);
+        }
     }
 }
 
 void Character::topRender()
 {
-    if(!visible)
-        return;
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
         ((Pattern*)*pattern)->render();
 
@@ -883,7 +893,10 @@ bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_an
 {
     if(!visible)
         return false;
-    return this->hitbox.getPlacedHitbox(this->x,this->y).collides(hitbox);
+    for(int i=0;i<hitboxes.size();i++)
+        if(hitboxes[i]->getPlacedHitbox(this->x,this->y).collides(hitbox))
+            return true;
+    return false;
 }
 
 void Character::hit(int damage)
@@ -893,12 +906,6 @@ void Character::hit(int damage)
         hp=0;
     //current_color_effect_r = 0;
 }
-
-Hitbox Character::getHitbox()
-{
-    return hitbox.getPlacedHitbox(this->x,this->y);
-}
-
 
 void Character::addActivePattern(Pattern* pattern)
 {
