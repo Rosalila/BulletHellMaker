@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="26876" topLine="672" />
+	<File name="Character/Character.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="30198" topLine="784" />
 	</File>
-	<File name="Character/Character.h" open="1" top="0" tabpos="3">
-		<Cursor position="2426" topLine="79" />
+	<File name="Character/Character.h" open="0" top="0" tabpos="2">
+		<Cursor position="1706" topLine="59" />
 	</File>
-	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="2713" topLine="82" />
+	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="6011" topLine="163" />
 	</File>
-	<File name="Character/Enemy.h" open="1" top="0" tabpos="5">
-		<Cursor position="872" topLine="14" />
+	<File name="Character/Enemy.h" open="0" top="0" tabpos="6">
+		<Cursor position="757" topLine="15" />
 	</File>
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Character/Player.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="8025" topLine="276" />
+	<File name="Character/Player.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="354" topLine="54" />
 	</File>
-	<File name="Character/Player.h" open="1" top="0" tabpos="7">
-		<Cursor position="1005" topLine="18" />
+	<File name="Character/Player.h" open="0" top="0" tabpos="4">
+		<Cursor position="821" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaAI/Automata.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />
@@ -33,6 +33,9 @@
 	</File>
 	<File name="Rosalila/RosalilaAI/RosalilaAI.h" open="0" top="0" tabpos="1">
 		<Cursor position="142" topLine="1" />
+	</File>
+	<File name="Rosalila/RosalilaGraphics/Animation.h" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="4" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/Explosion.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="8633" topLine="292" />
@@ -49,11 +52,11 @@
 	<File name="Rosalila/RosalilaGraphics/Object3D.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="24716" topLine="784" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="20578" topLine="624" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="3">
-		<Cursor position="2589" topLine="122" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="1" top="0" tabpos="1">
+		<Cursor position="2463" topLine="134" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="7027" topLine="260" />
@@ -61,8 +64,11 @@
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="5">
 		<Cursor position="150" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="1042" topLine="21" />
+	<File name="Rosalila/RosalilaSound/RosalilaSound.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="1516" topLine="52" />
+	</File>
+	<File name="Rosalila/RosalilaSound/RosalilaSound.h" open="0" top="0" tabpos="11">
+		<Cursor position="448" topLine="22" />
 	</File>
 	<File name="Rosalila/RosalilaUtility/Font.h" open="0" top="0" tabpos="0">
 		<Cursor position="579" topLine="2" />
@@ -79,14 +85,14 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.h" open="0" top="0" tabpos="6">
 		<Cursor position="185" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="8751" topLine="295" />
+	<File name="STG.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="7735" topLine="93" />
 	</File>
-	<File name="STG.h" open="1" top="0" tabpos="1">
+	<File name="STG.h" open="0" top="0" tabpos="1">
 		<Cursor position="805" topLine="13" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="10597" topLine="250" />
+	<File name="STGMenu/STGMenu.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="9810" topLine="230" />
 	</File>
 	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="6">
 		<Cursor position="841" topLine="18" />
@@ -97,14 +103,17 @@
 	<File name="STGUtility/STGUtility.h" open="0" top="0" tabpos="0">
 		<Cursor position="182" topLine="0" />
 	</File>
-	<File name="Spells/Bullet.h" open="1" top="0" tabpos="9">
-		<Cursor position="254" topLine="9" />
+	<File name="Spells/Bullet.cpp" open="0" top="0" tabpos="8">
+		<Cursor position="1194" topLine="49" />
 	</File>
-	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="11">
-		<Cursor position="7891" topLine="326" />
+	<File name="Spells/Bullet.h" open="0" top="0" tabpos="7">
+		<Cursor position="875" topLine="12" />
 	</File>
-	<File name="Spells/Pattern.h" open="1" top="0" tabpos="10">
-		<Cursor position="2477" topLine="70" />
+	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="5985" topLine="245" />
+	</File>
+	<File name="Spells/Pattern.h" open="1" top="0" tabpos="3">
+		<Cursor position="542" topLine="66" />
 	</File>
 	<File name="Stage/Dialogue.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="628" topLine="23" />
@@ -118,11 +127,11 @@
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="8">
 		<Cursor position="209" topLine="0" />
 	</File>
-	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1464" topLine="42" />
+	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="12225" topLine="381" />
 	</File>
-	<File name="Stage/Stage.h" open="0" top="0" tabpos="9">
-		<Cursor position="156" topLine="12" />
+	<File name="Stage/Stage.h" open="0" top="0" tabpos="3">
+		<Cursor position="457" topLine="6" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="932" topLine="17" />

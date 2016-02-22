@@ -357,6 +357,12 @@ string Stage::getName()
 {
     return name;
 }
+
+void Stage::setName(string name)
+{
+    this->name=name;
+}
+
 void Stage::setVelocity(int velocity)
 {
     this->velocity=velocity;
@@ -397,4 +403,9 @@ void Stage::logic()
 void Stage::playMusic()
 {
     sonido->playMusic(this->music_path);
+}
+
+string Stage::getMusicPath()
+{
+    return music_path;
 }

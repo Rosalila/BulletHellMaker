@@ -63,6 +63,14 @@ protected:
     int current_color_effect_b;
     int current_color_effect_a;
 
+    //Shake
+    int current_screen_shake_x;
+    int current_screen_shake_y;
+    int shake_time;
+    int shake_magnitude;
+
+    int sound_channel_base;
+
 public:
     Image* flat_shadow_texture;
     vector<Point*>shadow_align_points_left;
@@ -75,7 +83,7 @@ public:
 
 double x,y;
     Character(){}
-    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name);
+    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     void loadFromXML();
     void loadMainXML();
     void loadBulletsXML();
@@ -105,6 +113,7 @@ double x,y;
     std::list<Pattern*>* getActivePatterns();
     bool collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
     void hit(int damage);
+    void shakeScreen(int shake_magnitude, int shake_time);
 };
 
 #endif

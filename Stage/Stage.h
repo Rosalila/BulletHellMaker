@@ -47,6 +47,8 @@ public:
     int getBoundY2();
     int getVelocity();
     string getName();
+    void setName(string name);
+    string getMusicPath();
     void logic();
     void render();
     void setVelocity(int velocity);

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name)
+Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
@@ -25,11 +25,19 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     current_color_effect_b=255;
     current_color_effect_a=255;
 
+    //Shake
+    current_screen_shake_x=0;
+    current_screen_shake_y=0;
+    shake_time=0;
+    shake_magnitude=0;
+
     this->iteration=0;
 
     this->slow_in_cooldown=false;
 
     life_bar=painter->getTexture(assets_directory+directory+"life_bar.png");
+
+    this->sound_channel_base=sound_channel_base;
 
     loadPlayerFromXML();
 }

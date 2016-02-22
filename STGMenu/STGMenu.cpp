@@ -67,8 +67,8 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     writeLogLine("Initializing game.");
     Stage*stage=new Stage(painter,sonido,receiver);
     stage->loadFromXML(stage_name);
-    Player*player=new Player(sonido,painter,receiver,character_name);
-    Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player);
+    Player*player=new Player(sonido,painter,receiver,character_name,10);
+    Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player,20);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode);
     delete stg;
 //    if(stg->playerWon())
@@ -237,17 +237,19 @@ void Menu::loopMenu()
                         writeLogLine("Initializing arcade game initializer.");
                         Stage*stage=new Stage(painter,sonido,receiver);
                         stage->loadFromXML(arcade_paths["Easy"][0]);
-                        Player*player=new Player(sonido,painter,receiver,"Demo");
+                        Player*player=new Player(sonido,painter,receiver,"Demo",10);
                         player->x+=painter->camera_x;
                         int last_cammera=0;
-                        stage->playMusic();
+                        //stage->playMusic();
+                        Mix_HaltMusic();
                         for(int i=0;i<arcade_paths["Easy"].size();i++)
                         {
 
                             //this->printLoadingScreen();
                             writeLogLine("Initializing arcade game.");
-                            Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player);
+                            Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player,20);
                             enemy->x+=painter->camera_x;
+                            stage->setName(arcade_paths["Easy"][i]);
                             STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
                             if(stg->enemyWon())
                             {

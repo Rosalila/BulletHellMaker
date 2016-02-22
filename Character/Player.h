@@ -32,7 +32,7 @@ class Player:public Character
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
 public:
-    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name);
+    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     void logic(int stage_velocity);
     void inputControl();
     void bottomRender();

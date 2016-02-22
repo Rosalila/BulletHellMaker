@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player)
+Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
@@ -36,6 +36,14 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
     current_color_effect_g=255;
     current_color_effect_b=255;
     current_color_effect_a=255;
+
+    //Shake
+    current_screen_shake_x=0;
+    current_screen_shake_y=0;
+    shake_time=0;
+    shake_magnitude=0;
+
+    this->sound_channel_base=sound_channel_base;
 
     loadFromXML();
 

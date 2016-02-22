@@ -33,6 +33,11 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     int you_loose_animation_velocity=atoi(you_loose_node->ToElement()->Attribute("animation_velocity"));
     you_loose=Animation(you_loose_x,you_loose_y,you_loose_animation_velocity,painter);
 
+    if(you_loose_node->ToElement()->Attribute("sound"))
+    {
+        sonido->addSound("you lose",assets_directory+you_loose_node->ToElement()->Attribute("sound"));
+    }
+
     for(TiXmlNode* sprites_node=you_loose_node->FirstChild("sprite");
             sprites_node!=NULL;
             sprites_node=sprites_node->NextSibling("sprite"))
@@ -48,6 +53,11 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     int you_win_y=atoi(you_win_node->ToElement()->Attribute("y"));
     int you_win_animation_velocity=atoi(you_win_node->ToElement()->Attribute("animation_velocity"));
     you_win=Animation(you_win_x,you_win_y,you_win_animation_velocity,painter);
+
+    if(you_win_node->ToElement()->Attribute("sound"))
+    {
+        sonido->addSound("you win",assets_directory+you_win_node->ToElement()->Attribute("sound"));
+    }
 
     for(TiXmlNode* sprites_node=you_win_node->FirstChild("sprite");
             sprites_node!=NULL;
@@ -75,12 +85,19 @@ void STG::mainLoop()
 {
     bool end_key_up_keyboard=false;
     bool end_key_up_joystick=false;
+    string music_path_temp = assets_directory+"stages/"+stage->getName()+"/music.ogg";
+    Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
     for (;;)
     {
         if(receiver->isKeyDown(SDLK_ESCAPE))
         {
             exit(0);
             break;
+        }
+
+        if(!Mix_PlayingMusic())
+        {
+            Mix_PlayMusic(music,0);
         }
 
         render();
@@ -201,6 +218,12 @@ void STG::render()
                     p->hit();
                     player->hit(p->getDamage());
                     painter->shakeScreen(30,10);
+                    if(this->sonido->soundExists(player->getName()+".hit"))
+                        this->sonido->playSound(player->getName()+".hit");
+                    if(player->getHP()==0)
+                    {
+                        sonido->playSound("you lose");
+                    }
                 }
             }
         }
@@ -219,8 +242,14 @@ void STG::render()
                 {
                     p->hit();
                     enemy->hit(p->getDamage()+damage_level);
+                    enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
+                    if(this->sonido->soundExists(enemy->getName()+".hit"))
+                        this->sonido->playSound(enemy->getName()+".hit");
                     if(enemy->getHP()==0)
+                    {
                         painter->shakeScreen(50,20);
+                        sonido->playSound("you win");
+                    }
                 }
             }
         }

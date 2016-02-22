@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name)
+Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
@@ -30,6 +30,14 @@ Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,
     current_color_effect_g=255;
     current_color_effect_b=255;
     current_color_effect_a=255;
+
+    //Shake
+    current_screen_shake_x=0;
+    current_screen_shake_y=0;
+    shake_time=0;
+    shake_magnitude=0;
+
+    this->sound_channel_base=sound_channel_base;
 
     //Flat Shadow
     flat_shadow_texture = NULL;
@@ -133,6 +141,15 @@ void Character::loadMainXML()
     int hitbox_height=atoi(hitbox_node->Attribute("height"));
     int hitbox_angle=atoi(hitbox_node->Attribute("angle"));
     this->hitbox.setValues(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+
+    if(main_file->FirstChild("Sounds"))
+    {
+        TiXmlElement *sounds_element=main_file->FirstChild("Sounds")->ToElement();
+        if(sounds_element->Attribute("hit"))
+        {
+            sonido->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
+        }
+    }
 
     //Loading sprites
     for(TiXmlNode* sprites_node=main_file->FirstChild("Sprites");
@@ -296,7 +313,7 @@ void Character::loadBulletsXML()
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage);
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage,sound_channel_base);
     }
 }
 
@@ -358,6 +375,10 @@ Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
     if(pattern_element->Attribute("animation_velocity")!=NULL)
         animation_velocity=atoi(pattern_element->Attribute("animation_velocity"));
 
+    double auto_scale=0;
+    if(pattern_element->Attribute("auto_scale"))
+        auto_scale=atof(pattern_element->Attribute("auto_scale"));
+
     int duration=-1;
     if(pattern_element->Attribute("duration"))
         duration=atoi(pattern_element->Attribute("duration"));
@@ -403,7 +424,7 @@ Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
             (*pattern_modifiers)[at]=loadModifierXML(pattern_modifier_node);
         }
     }
-    return new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity,bullet,offset_x,offset_y,
+    return new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity, auto_scale,bullet,offset_x,offset_y,
                                            startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,pattern_modifiers,&bullets);
 }
 
@@ -703,7 +724,7 @@ void Character::spellControl(int stage_velocity)
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
             {
-                patterns[i]->getBullet()->playSound();
+                patterns[i]->getBullet()->playSound(sound_channel_base);
                 this->addActivePattern(patterns[i]);
             }
         }else
@@ -720,10 +741,27 @@ void Character::bottomRender()
 {
     if(!visible)
         return;
+
+    //Shake
+    if(shake_time>0)
+    {
+        shake_time--;
+        if(shake_time==0)
+        {
+            current_screen_shake_x = 0;
+            current_screen_shake_y = 0;
+        }else
+        {
+            current_screen_shake_x = (rand()*10000)%shake_magnitude;
+            current_screen_shake_y = (rand()*10000)%shake_magnitude;
+        }
+    }
+
     painter->draw2DImage
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
-        this->x-sprites[orientation][current_sprite]->getWidth()/2,this->y-sprites[orientation][current_sprite]->getHeight()/2,
+        this->x-sprites[orientation][current_sprite]->getWidth()/2+current_screen_shake_x,
+        this->y-sprites[orientation][current_sprite]->getHeight()/2+current_screen_shake_y,
         1.0,
         0.0,
         false,
@@ -750,6 +788,34 @@ void Character::topRender()
         return;
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
         ((Pattern*)*pattern)->render();
+
+//    vector<int>position_x;
+//    vector<int>position_y;
+//    vector<float>angle;
+//    Image* image=NULL;
+//    for (std::list<Pattern*>::iterator pattern_iterator = active_patterns->begin(); pattern_iterator != active_patterns->end(); pattern_iterator++)
+//    {
+//        Pattern*pattern = ((Pattern*)*pattern_iterator);
+//        image=pattern->bullet->getImage(current_sprite);
+//
+//        position_x.push_back(pattern->x-image->getWidth()/2);
+//        position_y.push_back(pattern->y-image->getHeight()/2);
+//        angle.push_back(pattern->getBulletAngle());
+//    }
+//
+//    if(image!=NULL)
+//    painter->draw2DImageBatch
+//    (   image,
+//        image->getWidth(),image->getHeight(),
+//        position_x,position_y,
+//        1.0,//-(pattern->frame*pattern->auto_scale),
+//        angle,
+//        false,
+//        0,0,
+//        Color(255,255,255,255),
+//        0,0,
+//        true,
+//        FlatShadow());
 }
 
 int Character::getX()
@@ -844,4 +910,10 @@ void Character::addActivePattern(Pattern* pattern)
     active_patterns->push_back(pattern_temp);
 
     painter->addExplosion(pattern_temp->getX()-pattern_temp->getBullet()->getImage(0)->getWidth()/2,pattern_temp->getY());
+}
+
+void Character::shakeScreen(int shake_magnitude, int shake_time)
+{
+    this->shake_magnitude=shake_magnitude;
+    this->shake_time=shake_time;
 }

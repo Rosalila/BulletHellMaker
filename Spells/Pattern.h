@@ -19,8 +19,8 @@ class Pattern
     Sound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
-    double x,y;
 public:
+    double x,y;
     int velocity;
     int max_velocity;
     int acceleration;
@@ -39,11 +39,14 @@ public:
     bool aim_player;
     bool freeze;
     bool homing;
+    int frame;
 
     //Sprites animation
     int animation_velocity;
     int animation_iteration;
     int current_sprite;
+    double auto_scale;
+
     int startup,cooldown;
     int current_startup, current_cooldown;
     std::string state;
@@ -67,7 +70,7 @@ public:
 
 public:
 int offset_x,offset_y;
-    Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity,
+    Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity, double auto_scale,
             Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets);
     ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
