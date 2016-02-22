@@ -34,7 +34,6 @@ class STG
     void logic();
     void render();
     void deletePatterns();
-    void deleteAllPatterns();
     void checkCharacterOutOfBounds();
 public:
     bool playerWon();

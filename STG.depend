@@ -2114,10 +2114,10 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1454990705 source:/home/turupawn/Projects/STG/Character/Character.cpp
+1456160306 source:/home/turupawn/Projects/STG/Character/Character.cpp
 	"Character.h"
 
-1453844665 /home/turupawn/Projects/STG/Character/Character.h
+1456160186 /home/turupawn/Projects/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -2490,7 +2490,7 @@
 1454026444 source:/home/turupawn/Projects/STG/STG.cpp
 	"STG.h"
 
-1452821913 /home/turupawn/Projects/STG/STG.h
+1456160379 /home/turupawn/Projects/STG/STG.h
 	"Rosalila/TinyXml/tinyxml.h"
 	"Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"Rosalila/RosalilaSound/RosalilaSound.h"
@@ -2552,8 +2552,7 @@
 1454005904 source:/home/turupawn/Projects/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1448810538 source:/home/turupawn/Projects/STG/main.cpp
-	<pthread.h>
+1456160103 source:/home/turupawn/Projects/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>

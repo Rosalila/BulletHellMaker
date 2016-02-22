@@ -114,6 +114,7 @@ double x,y;
     bool collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
     void hit(int damage);
     void shakeScreen(int shake_magnitude, int shake_time);
+    void deleteActivePatterns();
 };
 
 #endif

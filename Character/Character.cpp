@@ -917,3 +917,14 @@ void Character::shakeScreen(int shake_magnitude, int shake_time)
     this->shake_magnitude=shake_magnitude;
     this->shake_time=shake_time;
 }
+
+void Character::deleteActivePatterns()
+{
+    std::list<Pattern*>::iterator i = getActivePatterns()->begin();
+    while (i != getActivePatterns()->end())
+    {
+        Pattern*p=(Pattern*)*i;
+        p->hit();
+        i++;
+    }
+}

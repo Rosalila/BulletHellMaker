@@ -123,47 +123,48 @@ void STG::mainLoop()
 
 void STG::logic()
 {
-    if(receiver->isKeyPressed(SDLK_t))
-    {
-        boss_fury_level+=1;
-        deleteAllPatterns();
-    }
-    if(receiver->isKeyPressed(SDLK_1))
-    {
-        player->setType("1");
-    }
-    if(receiver->isKeyPressed(SDLK_2))
-    {
-        player->setType("2");
-    }
-    if(receiver->isKeyPressed(SDLK_3))
-    {
-        player->setType("3");
-    }
-    if(receiver->isKeyPressed(SDLK_4))
-    {
-        player->setType("4");
-    }
-    if(receiver->isKeyPressed(SDLK_5))
-    {
-        player->setType("5");
-    }
-    if(receiver->isKeyPressed(SDLK_6))
-    {
-        player->setType("6");
-    }
-    if(receiver->isKeyPressed(SDLK_7))
-    {
-        player->setType("7");
-    }
-    if(receiver->isKeyPressed(SDLK_8))
-    {
-        player->setType("8");
-    }
-    if(receiver->isKeyPressed(SDLK_9))
-    {
-        player->setType("9");
-    }
+//    if(receiver->isKeyPressed(SDLK_t))
+//    {
+//        //boss_fury_level+=1;
+//        //player->deleteActivePatterns();
+//        //enemy->deleteActivePatterns();
+//    }
+//    if(receiver->isKeyPressed(SDLK_1))
+//    {
+//        player->setType("1");
+//    }
+//    if(receiver->isKeyPressed(SDLK_2))
+//    {
+//        player->setType("2");
+//    }
+//    if(receiver->isKeyPressed(SDLK_3))
+//    {
+//        player->setType("3");
+//    }
+//    if(receiver->isKeyPressed(SDLK_4))
+//    {
+//        player->setType("4");
+//    }
+//    if(receiver->isKeyPressed(SDLK_5))
+//    {
+//        player->setType("5");
+//    }
+//    if(receiver->isKeyPressed(SDLK_6))
+//    {
+//        player->setType("6");
+//    }
+//    if(receiver->isKeyPressed(SDLK_7))
+//    {
+//        player->setType("7");
+//    }
+//    if(receiver->isKeyPressed(SDLK_8))
+//    {
+//        player->setType("8");
+//    }
+//    if(receiver->isKeyPressed(SDLK_9))
+//    {
+//        player->setType("9");
+//    }
 
     int stage_displacement = stage->getVelocity();
     if(isSlowActive())
@@ -249,6 +250,7 @@ void STG::render()
                     {
                         painter->shakeScreen(50,20);
                         sonido->playSound("you win");
+                        enemy->deleteActivePatterns();
                     }
                 }
             }
@@ -316,28 +318,6 @@ void STG::deletePatterns()
         {
             ++i;
         }
-    }
-}
-
-void STG::deleteAllPatterns()
-{
-    std::list<Pattern*>* active_patterns=player->getActivePatterns();
-    std::list<Pattern*>::iterator i = active_patterns->begin();
-    while (i != active_patterns->end())
-    {
-        Pattern*p=(Pattern*)*i;
-        p->hit();
-        i++;
-    }
-
-
-    active_patterns=enemy->getActivePatterns();
-    i = active_patterns->begin();
-    while (i != active_patterns->end())
-    {
-        Pattern*p=(Pattern*)*i;
-        p->hit();
-        i++;
     }
 }
 
