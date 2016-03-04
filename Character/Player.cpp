@@ -40,6 +40,8 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->sound_channel_base=sound_channel_base;
 
     loadPlayerFromXML();
+
+    current_shield=max_shield;
 }
 
 void Player::loadPlayerFromXML()
@@ -254,6 +256,10 @@ void Player::logic(int stage_velocity)
     iteration++;
 
     current_color_effect_a = (255*hp)/max_hp;
+
+    current_shield-=shield_fade;
+    if(current_shield<0)
+        current_shield=0;
     //current_color_effect_b = (255*hp)/max_hp;
 
     //Color effect
@@ -270,6 +276,27 @@ void Player::logic(int stage_velocity)
 void Player::bottomRender()
 {
     Character::bottomRender();
+
+    if(current_shield>0)
+    {
+        double shield_transparency = 255.0*getShieldPercentage();
+
+        if(shield_image)
+        painter->draw2DImage
+            (   shield_image,
+                shield_image->getWidth(),shield_image->getHeight(),
+                this->x-shield_image->getWidth()/2+current_screen_shake_x,
+                this->y-shield_image->getHeight()/2+current_screen_shake_y,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,shield_transparency),
+                0,0,
+                true,
+                FlatShadow());
+    }
+
     //HP
 //    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
 //    if(!slow_in_cooldown)
@@ -310,4 +337,65 @@ void Player::bottomRender()
 void Player::topRender()
 {
     Character::topRender();
+}
+
+void Player::hit(int damage)
+{
+    if(current_shield==0.0)
+    {
+        Character::hit(damage);
+    }else
+    {
+        double prorated_damage = ((double)damage)*proration*getShieldPercentage();
+        Character::hit(prorated_damage);
+    }
+    current_shield=max_shield;
+}
+
+double Player::getShieldPercentage()
+{
+    if(current_shield==0 || max_shield==0)
+        return 1.0;
+    return (double)current_shield/(double)max_shield;
+}
+
+void Player::loadFromXML()
+{
+    Character::loadFromXML();
+    //Loading file
+    std::string main_path=assets_directory+directory+"main.xml";
+    TiXmlDocument doc_t(main_path.c_str());
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+    TiXmlNode *main_file=doc->FirstChild("MainFile");
+
+    //Loading attributes
+    this->max_shield=0;
+    this->shield_fade=0;
+    this->proration=0;
+    this->shield_image=NULL;
+    if(main_file->FirstChild("Shield"))
+    {
+        TiXmlElement *attributes=main_file->FirstChild("Shield")->ToElement();
+        if(attributes->Attribute("max_shield")!=NULL)
+        {
+            this->max_shield=atoi(attributes->Attribute("max_shield"));
+        }
+
+        if(attributes->Attribute("shield_fade")!=NULL)
+        {
+            this->shield_fade=atoi(attributes->Attribute("shield_fade"));
+        }
+
+        if(attributes->Attribute("shield_fade")!=NULL)
+        {
+            this->proration=((double)atoi(attributes->Attribute("shield_fade")))/100.0;
+        }
+
+        if(attributes->Attribute("sprite")!=NULL)
+        {
+            this->shield_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+        }
+    }
 }

@@ -935,3 +935,11 @@ void Character::deleteActivePatterns()
         i++;
     }
 }
+
+Character::~Character()
+{
+    for(int i=0;i<hitboxes.size();i++)
+    {
+        delete hitboxes[i];
+    }
+}

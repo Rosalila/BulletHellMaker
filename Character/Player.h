@@ -31,6 +31,12 @@ class Player:public Character
     int slow_bar_rect_width;
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
+    int current_shield;
+    int max_shield;
+    int shield_fade;
+    double proration;
+    Image* shield_image;
+    double getShieldPercentage();
 public:
     Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     void logic(int stage_velocity);
@@ -38,6 +44,8 @@ public:
     void bottomRender();
     void topRender();
     void loadPlayerFromXML();
+    void hit(int damage);
+    void loadFromXML();
 };
 
 #endif

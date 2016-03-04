@@ -253,7 +253,7 @@ void Menu::loopMenu()
                             STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
                             if(stg->enemyWon())
                             {
-                                player->setHP(5);
+                                player->setHP(500);
                                 player->setVisible(true);
                                 player->setOrientation("up");
                                 i--;
@@ -265,6 +265,7 @@ void Menu::loopMenu()
                                 Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
                                 temp->loopMenu();
                             }
+                            delete enemy;
 //                            last_cammera
                             //painter->camera_x=last_cammera;
                             delete stg;

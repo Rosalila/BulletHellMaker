@@ -85,6 +85,7 @@ public:
 double x,y;
     Character(){}
     Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
+    ~Character();
     void loadFromXML();
     void loadMainXML();
     void loadBulletsXML();
