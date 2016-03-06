@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Character/Character.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="32585" topLine="885" />
+	<File name="Character/Character.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="28435" topLine="719" />
 	</File>
 	<File name="Character/Character.h" open="0" top="0" tabpos="1">
 		<Cursor position="2207" topLine="72" />
@@ -16,11 +16,11 @@
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Character/Player.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="10592" topLine="274" />
+	<File name="Character/Player.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="6809" topLine="195" />
 	</File>
-	<File name="Character/Player.h" open="1" top="0" tabpos="5">
-		<Cursor position="1087" topLine="10" />
+	<File name="Character/Player.h" open="1" top="0" tabpos="4">
+		<Cursor position="1113" topLine="30" />
 	</File>
 	<File name="Rosalila/RosalilaAI/Automata.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />

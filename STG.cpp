@@ -109,7 +109,7 @@ void STG::mainLoop()
                 break;
             if(receiver->isKeyPressed(SDLK_z) && end_key_up_keyboard)
                 break;
-            if(receiver->isJoyPressed(0,0) && end_key_up_joystick)
+            if(receiver->isJoyDown(0,0) && end_key_up_joystick)
                 break;
             if(!receiver->isKeyPressed(SDLK_z))
                 end_key_up_keyboard=true;
@@ -123,6 +123,96 @@ void STG::mainLoop()
 
 void STG::logic()
 {
+    float distance_x=enemy->x - player->x;
+    float distance_y=enemy->y - player->y;
+    float distance=sqrt(distance_x*distance_x+distance_y*distance_y);
+    float damage_level=6-distance/250.0;
+
+    for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
+    {
+        Pattern*p=(Pattern*)*pattern;
+        if(!p->isHit())
+        {
+            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
+            {
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                if(p->collides_opponent && player->collides(h,0,0,0))
+                {
+                    p->hit();
+                    player->hit(p->getDamage());
+                    painter->shakeScreen(30,10);
+                    if(this->sonido->soundExists(player->getName()+".hit"))
+                        this->sonido->playSound(player->getName()+".hit");
+                    if(player->getHP()==0)
+                    {
+                        sonido->playSound("you lose");
+                    }
+                }
+            }
+        }
+    }
+
+    for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
+    {
+        Pattern*p=(Pattern*)*pattern;
+        if(!p->isHit())
+        {
+            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
+            {
+                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                if(p->collides_opponent && enemy->collides(h,0,0,0))
+                {
+                    p->hit();
+                    enemy->hit(p->getDamage()+damage_level);
+                    enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
+                    if(this->sonido->soundExists(enemy->getName()+".hit"))
+                        this->sonido->playSound(enemy->getName()+".hit");
+                    if(enemy->getHP()==0)
+                    {
+                        painter->shakeScreen(50,20);
+                        sonido->playSound("you win");
+                        enemy->deleteActivePatterns();
+                    }
+                }
+            }
+        }
+    }
+
+    //BulletxBullet Collision
+    for (std::list<Pattern*>::iterator enemy_pattern_iterator = enemy->getActivePatterns()->begin(); enemy_pattern_iterator != enemy->getActivePatterns()->end(); enemy_pattern_iterator++)
+    {
+        Pattern*enemy_pattern=(Pattern*)*enemy_pattern_iterator;
+        if(!enemy_pattern->isHit())
+        {
+            for (std::list<Pattern*>::iterator player_pattern_iterator = player->getActivePatterns()->begin(); player_pattern_iterator != player->getActivePatterns()->end(); player_pattern_iterator++)
+            {
+                Pattern*player_pattern=(Pattern*)*player_pattern_iterator;
+                if(player_pattern->collides_bullets||enemy_pattern->collides_bullets)
+                {
+                    if(!player_pattern->isHit())
+                    {
+                        vector<Hitbox*>enemy_hitboxes=enemy_pattern->getBullet()->getHitboxes();
+                        for(int i=0;i<(int)enemy_hitboxes.size();i++)
+                        {
+                            Hitbox enemy_hitbox=enemy_hitboxes[i]->getPlacedHitbox(enemy_pattern->getX(),enemy_pattern->getY(),enemy_pattern->getBulletAngle());
+                            vector<Hitbox*>player_hitboxes=player_pattern->getBullet()->getHitboxes();
+                            for(int j=0;j<(int)player_hitboxes.size();j++)
+                            {
+                                Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->getX(),player_pattern->getY(),player_pattern->getBulletAngle());
+                                if(enemy_hitbox.collides(player_hitbox))
+                                {
+                                    enemy_pattern->hit();
+                                    player_pattern->hit();
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 //    if(receiver->isKeyPressed(SDLK_t))
 //    {
 //        //boss_fury_level+=1;
@@ -132,38 +222,6 @@ void STG::logic()
 //    if(receiver->isKeyPressed(SDLK_1))
 //    {
 //        player->setType("1");
-//    }
-//    if(receiver->isKeyPressed(SDLK_2))
-//    {
-//        player->setType("2");
-//    }
-//    if(receiver->isKeyPressed(SDLK_3))
-//    {
-//        player->setType("3");
-//    }
-//    if(receiver->isKeyPressed(SDLK_4))
-//    {
-//        player->setType("4");
-//    }
-//    if(receiver->isKeyPressed(SDLK_5))
-//    {
-//        player->setType("5");
-//    }
-//    if(receiver->isKeyPressed(SDLK_6))
-//    {
-//        player->setType("6");
-//    }
-//    if(receiver->isKeyPressed(SDLK_7))
-//    {
-//        player->setType("7");
-//    }
-//    if(receiver->isKeyPressed(SDLK_8))
-//    {
-//        player->setType("8");
-//    }
-//    if(receiver->isKeyPressed(SDLK_9))
-//    {
-//        player->setType("9");
 //    }
 
     int stage_displacement = stage->getVelocity();
@@ -199,63 +257,6 @@ void STG::render()
 
     stage->render();
     stage->dibujarFront();
-
-    float distance_x=enemy->x - player->x;
-    float distance_y=enemy->y - player->y;
-    float distance=sqrt(distance_x*distance_x+distance_y*distance_y);
-    float damage_level=6-distance/250.0;
-
-    for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
-    {
-        Pattern*p=(Pattern*)*pattern;
-        if(!p->isHit())
-        {
-            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
-            {
-                p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
-                if(player->collides(h,0,0,0))
-                {
-                    p->hit();
-                    player->hit(p->getDamage());
-                    painter->shakeScreen(30,10);
-                    if(this->sonido->soundExists(player->getName()+".hit"))
-                        this->sonido->playSound(player->getName()+".hit");
-                    if(player->getHP()==0)
-                    {
-                        sonido->playSound("you lose");
-                    }
-                }
-            }
-        }
-    }
-
-    for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
-    {
-        Pattern*p=(Pattern*)*pattern;
-        if(!p->isHit())
-        {
-            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
-            {
-                p->getBullet()->getHitboxes()[i];
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
-                if(enemy->collides(h,0,0,0))
-                {
-                    p->hit();
-                    enemy->hit(p->getDamage()+damage_level);
-                    enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
-                    if(this->sonido->soundExists(enemy->getName()+".hit"))
-                        this->sonido->playSound(enemy->getName()+".hit");
-                    if(enemy->getHP()==0)
-                    {
-                        painter->shakeScreen(50,20);
-                        sonido->playSound("you win");
-                        enemy->deleteActivePatterns();
-                    }
-                }
-            }
-        }
-    }
 
     if(enemy->getHP()==0)
         you_win.render();

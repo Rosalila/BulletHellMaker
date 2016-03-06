@@ -2,7 +2,7 @@
 
 
 Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity, double auto_scale,
-                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
+                 Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, bool collides_bullets, bool collides_opponent, bool undestructable, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -54,6 +54,11 @@ Pattern::Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int 
     //Modifiers
     this->modifiers=modifiers;
     this->bullets=bullets;
+
+    //Collision
+    this->collides_bullets=collides_bullets;
+    this->collides_opponent=collides_opponent;
+    this->undestructable=undestructable;
 }
 
 Pattern::Pattern(Pattern*pattern,int x,int y)
@@ -101,6 +106,11 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     //Modifiers
     this->modifiers=pattern->modifiers;
     this->bullets=pattern->bullets;
+
+    //Collision
+    this->collides_bullets=pattern->collides_bullets;
+    this->collides_opponent=pattern->collides_opponent;
+    this->undestructable=pattern->undestructable;
 
     //Keeping the parent for reasons
     this->pattern=pattern;
@@ -349,11 +359,14 @@ Pattern::~Pattern()
 void Pattern::hit()
 {
     bullet->playHitSound();
-    is_hit=true;
-    current_sprite=0;
-    velocity=0;
-    angle_change=0;
-    acceleration=0;
+    if(!undestructable)
+    {
+        is_hit=true;
+        current_sprite=0;
+        velocity=0;
+        angle_change=0;
+        acceleration=0;
+    }
 }
 
 bool Pattern::isHit()

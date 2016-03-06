@@ -197,6 +197,13 @@ void Player::inputControl()
        || receiver->isJoyDown(0,0))
     {
         this->shooting=true;
+        if(max_charge!=0 && current_charge==max_charge)
+        {
+            std::vector<Pattern*> patterns=type["bomb"];
+            patterns[0]->getBullet()->playSound(sound_channel_base);
+            this->addActivePattern(patterns[0]);
+        }
+        current_charge=0;
     }
     else
     {
@@ -260,6 +267,10 @@ void Player::logic(int stage_velocity)
     current_shield-=shield_fade;
     if(current_shield<0)
         current_shield=0;
+
+    current_charge+=charge_velocity;
+    if(current_charge>max_charge)
+        current_charge=max_charge;
     //current_color_effect_b = (255*hp)/max_hp;
 
     //Color effect
@@ -292,6 +303,25 @@ void Player::bottomRender()
                 false,
                 0,0,
                 Color(255,255,255,shield_transparency),
+                0,0,
+                true,
+                FlatShadow());
+    }
+
+    if(current_charge>0)
+    {
+        if(charge_image)
+        painter->draw2DImage
+            (   charge_image,
+                charge_image->getWidth(),charge_image->getHeight()*((double)current_charge/(double)max_charge),
+                this->x+charge_sprite_x,
+                this->y+charge_sprite_y-charge_image->getHeight()*
+                    ((double)current_charge/(double)max_charge)/2,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
                 0,0,
                 true,
                 FlatShadow());
@@ -396,6 +426,42 @@ void Player::loadFromXML()
         if(attributes->Attribute("sprite")!=NULL)
         {
             this->shield_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+        }
+    }
+
+    charge_image=NULL;
+    current_charge=0;
+    max_charge=0;
+    charge_velocity=0;
+    charge_sprite_x=0;
+    charge_sprite_y=0;
+
+    if(main_file->FirstChild("Charge"))
+    {
+        TiXmlElement *attributes=main_file->FirstChild("Charge")->ToElement();
+        if(attributes->Attribute("max_charge")!=NULL)
+        {
+            this->max_charge=atoi(attributes->Attribute("max_charge"));
+        }
+
+        if(attributes->Attribute("charge_velocity")!=NULL)
+        {
+            this->charge_velocity=atoi(attributes->Attribute("charge_velocity"));
+        }
+
+        if(attributes->Attribute("x")!=NULL)
+        {
+            this->charge_sprite_x=atoi(attributes->Attribute("x"));
+        }
+
+        if(attributes->Attribute("y")!=NULL)
+        {
+            this->charge_sprite_y=atoi(attributes->Attribute("y"));
+        }
+
+        if(attributes->Attribute("sprite")!=NULL)
+        {
+            this->charge_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
         }
     }
 }

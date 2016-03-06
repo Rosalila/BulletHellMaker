@@ -2114,7 +2114,7 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1456973670 source:/home/turupawn/Projects/STG/Character/Character.cpp
+1457296775 source:/home/turupawn/Projects/STG/Character/Character.cpp
 	"Character.h"
 
 1456166427 /home/turupawn/Projects/STG/Character/Character.h
@@ -2278,7 +2278,7 @@
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
 	"../Rosalila/RosalilaUtility/Hitbox.h"
 
-1454990198 /home/turupawn/Projects/STG/Spells/Pattern.h
+1457296785 /home/turupawn/Projects/STG/Spells/Pattern.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -2317,7 +2317,7 @@
 	"Character.h"
 	"Player.h"
 
-1457052843 /home/turupawn/Projects/STG/Character/Player.h
+1457283770 /home/turupawn/Projects/STG/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -2332,7 +2332,7 @@
 1448810538 source:/home/turupawn/Projects/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1457053438 source:/home/turupawn/Projects/STG/Character/Player.cpp
+1457304099 source:/home/turupawn/Projects/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -2372,7 +2372,7 @@
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1454991822 source:/home/turupawn/Projects/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1457301506 source:/home/turupawn/Projects/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -2466,7 +2466,7 @@
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Hitbox.cpp
 	"Hitbox.h"
 
-1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1457301737 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/TinyXml/tinystr.cpp
@@ -2487,7 +2487,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1456164076 source:/home/turupawn/Projects/STG/STG.cpp
+1457304337 source:/home/turupawn/Projects/STG/STG.cpp
 	"STG.h"
 
 1456160379 /home/turupawn/Projects/STG/STG.h
@@ -2540,7 +2540,7 @@
 1453848229 source:/home/turupawn/Projects/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1453765047 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
+1457296977 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1448810538 source:/home/turupawn/Projects/STG/Stage/Dialogue.cpp

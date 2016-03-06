@@ -420,6 +420,18 @@ Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
     if (pattern_element->Attribute("homing"))
          homing = strcmp(pattern_element->Attribute("homing"), "yes") == 0;
 
+    bool collides_bullets=false;
+    if(pattern_element->Attribute("collides_bullets"))
+        collides_bullets=strcmp(pattern_element->Attribute("collides_bullets"),"yes")==0;
+
+    bool collides_opponent=true;
+    if(pattern_element->Attribute("collides_opponent"))
+        collides_opponent=strcmp(pattern_element->Attribute("collides_opponent"),"yes")==0;
+
+    bool undestructable=false;
+    if(pattern_element->Attribute("undestructable"))
+        undestructable=strcmp(pattern_element->Attribute("undestructable"),"yes")==0;
+
     //Modifiers
     std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
 
@@ -434,7 +446,7 @@ Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
         }
     }
     return new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity, auto_scale,bullet,offset_x,offset_y,
-                                           startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,pattern_modifiers,&bullets);
+                                           startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,collides_bullets,collides_opponent,undestructable,pattern_modifiers,&bullets);
 }
 
 vector<Modifier*>* Character::loadModifierXML(TiXmlNode* modifier_node)
