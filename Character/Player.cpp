@@ -42,6 +42,9 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     loadPlayerFromXML();
 
     current_shield=max_shield;
+
+    //Parry
+    this->current_parry_frame=parry_duration+1;
 }
 
 void Player::loadPlayerFromXML()
@@ -196,6 +199,10 @@ void Player::inputControl()
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))
     {
+        if(!this->shooting)
+        {
+            current_parry_frame=0;
+        }
         this->shooting=true;
         if(max_charge!=0 && current_charge==max_charge)
         {
@@ -213,6 +220,8 @@ void Player::inputControl()
 
 void Player::logic(int stage_velocity)
 {
+    current_parry_frame++;
+
     animationControl();
     if(this->hp!=0)
     {
@@ -286,6 +295,7 @@ void Player::logic(int stage_velocity)
 
 void Player::bottomRender()
 {
+    if(!isParrying())
     Character::bottomRender();
 
     if(current_shield>0)
@@ -464,4 +474,21 @@ void Player::loadFromXML()
             this->charge_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
         }
     }
+
+
+    this->parry_duration=0;
+
+    if(main_file->FirstChild("Parry"))
+    {
+        TiXmlElement *attributes=main_file->FirstChild("Parry")->ToElement();
+        if(attributes->Attribute("duration")!=NULL)
+        {
+            this->parry_duration=atoi(attributes->Attribute("duration"));
+        }
+    }
+}
+
+bool Player::isParrying()
+{
+    return current_parry_frame<parry_duration;
 }

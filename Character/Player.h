@@ -47,6 +47,10 @@ class Player:public Character
     int charge_sprite_x;
     int charge_sprite_y;
     Image* charge_image;
+
+    //Parry
+    int current_parry_frame;
+    int parry_duration;
 public:
     Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     void logic(int stage_velocity);
@@ -56,6 +60,7 @@ public:
     void loadPlayerFromXML();
     void hit(int damage);
     void loadFromXML();
+    bool isParrying();
 };
 
 #endif

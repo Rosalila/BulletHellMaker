@@ -2317,7 +2317,7 @@
 	"Character.h"
 	"Player.h"
 
-1457283770 /home/turupawn/Projects/STG/Character/Player.h
+1457554104 /home/turupawn/Projects/STG/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -2332,7 +2332,7 @@
 1448810538 source:/home/turupawn/Projects/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1457304099 source:/home/turupawn/Projects/STG/Character/Player.cpp
+1457563260 source:/home/turupawn/Projects/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -2487,7 +2487,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1457304337 source:/home/turupawn/Projects/STG/STG.cpp
+1457557149 source:/home/turupawn/Projects/STG/STG.cpp
 	"STG.h"
 
 1456160379 /home/turupawn/Projects/STG/STG.h

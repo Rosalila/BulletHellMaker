@@ -139,13 +139,48 @@ void STG::logic()
                 if(p->collides_opponent && player->collides(h,0,0,0))
                 {
                     p->hit();
-                    player->hit(p->getDamage());
-                    painter->shakeScreen(30,10);
-                    if(this->sonido->soundExists(player->getName()+".hit"))
-                        this->sonido->playSound(player->getName()+".hit");
-                    if(player->getHP()==0)
+                    if(player->isParrying())
                     {
-                        sonido->playSound("you lose");
+
+                        if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
+                           || receiver->isJoyDown(-6,0))
+                        {
+                            player->setX(player->getX()+150);
+                        }
+                        if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
+                           || receiver->isJoyDown(-4,0))
+                        {
+                            player->setX(player->getX()-150);
+                        }
+                        if(receiver->isKeyDown(SDL_SCANCODE_UP)
+                           || receiver->isJoyDown(-2,0))
+                        {
+                            player->setY(player->getY()-150);
+                        }
+                        if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
+                           || receiver->isJoyDown(-8,0))
+                        {
+                            player->setY(player->getY()+150);
+                        }
+
+                        p->velocity=10;
+                        if(p->x>player->getX())
+                        {
+                            p->angle=135;
+                        }else
+                        {
+                            p->angle=-135;
+                        }
+                    }else
+                    {
+                        player->hit(p->getDamage());
+                        painter->shakeScreen(30,10);
+                        if(this->sonido->soundExists(player->getName()+".hit"))
+                            this->sonido->playSound(player->getName()+".hit");
+                        if(player->getHP()==0)
+                        {
+                            sonido->playSound("you lose");
+                        }
                     }
                 }
             }
