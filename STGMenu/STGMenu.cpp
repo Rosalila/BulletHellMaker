@@ -249,6 +249,8 @@ void Menu::loopMenu()
                             writeLogLine("Initializing arcade game.");
                             Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player,20);
                             enemy->x+=painter->camera_x;
+                            player->parries_left=3;
+                            player->current_charge=0;
                             stage->setName(arcade_paths["Easy"][i]);
                             STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
                             if(stg->enemyWon())

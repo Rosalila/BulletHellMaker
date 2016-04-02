@@ -2,7 +2,7 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="Character/Character.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="33697" topLine="911" />
+		<Cursor position="394" topLine="2" />
 	</File>
 	<File name="Character/Character.h" open="0" top="0" tabpos="1">
 		<Cursor position="2207" topLine="72" />
@@ -16,11 +16,11 @@
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Character/Player.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="6574" topLine="180" />
+	<File name="Character/Player.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="10817" topLine="352" />
 	</File>
-	<File name="Character/Player.h" open="0" top="0" tabpos="4">
-		<Cursor position="1113" topLine="30" />
+	<File name="Character/Player.h" open="1" top="0" tabpos="5">
+		<Cursor position="1204" topLine="40" />
 	</File>
 	<File name="Rosalila/RosalilaAI/Automata.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />
@@ -58,7 +58,7 @@
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="1">
 		<Cursor position="2463" topLine="134" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="1" top="0" tabpos="6">
+	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="2205" topLine="240" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="5">
@@ -85,14 +85,14 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.h" open="0" top="0" tabpos="6">
 		<Cursor position="185" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="2871" topLine="74" />
+	<File name="STG.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="5650" topLine="153" />
 	</File>
 	<File name="STG.h" open="1" top="0" tabpos="2">
-		<Cursor position="786" topLine="12" />
+		<Cursor position="786" topLine="5" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="9244" topLine="247" />
+	<File name="STGMenu/STGMenu.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="10662" topLine="241" />
 	</File>
 	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="6">
 		<Cursor position="841" topLine="18" />

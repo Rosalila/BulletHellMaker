@@ -45,6 +45,14 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
 
     //Parry
     this->current_parry_frame=parry_duration+1;
+
+    //Acceleration
+    this->invulnerable_frames_left=0;
+
+    parries_left=3;
+    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/1.png"));
+    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/2.png"));
+    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/3.png"));
 }
 
 void Player::loadPlayerFromXML()
@@ -175,31 +183,33 @@ void Player::inputControl()
         orientation="idle";
     }
 
+    int velocity_boost=invulnerable_frames_left;
+
     if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
     {
-        this->y+=velocity/getSlowdown();
+        this->y+=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_UP)
        || receiver->isJoyDown(-8,0))
     {
-        this->y-=velocity/getSlowdown();
+        this->y-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
        || receiver->isJoyDown(-4,0))
     {
-        this->x-=velocity/getSlowdown();
+        this->x-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
        || receiver->isJoyDown(-6,0))
     {
-       this->x+=velocity/getSlowdown();
+       this->x+=(velocity+velocity_boost)/getSlowdown();
     }
 
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))
     {
-        if(!this->shooting)
+        if(!this->shooting && !isParrying() && parries_left>0)
         {
             current_parry_frame=0;
         }
@@ -221,6 +231,23 @@ void Player::inputControl()
 void Player::logic(int stage_velocity)
 {
     current_parry_frame++;
+
+    invulnerable_frames_left-=1;
+    if(invulnerable_frames_left<0)
+        invulnerable_frames_left=0;
+
+    if(!shooting)
+    {
+        invulnerable_frames_left=0;
+    }
+
+    if(invulnerable_frames_left>0)
+    {
+        enableSlow();
+    }else
+    {
+        disableSlow();
+    }
 
     animationControl();
     if(this->hp!=0)
@@ -295,7 +322,6 @@ void Player::logic(int stage_velocity)
 
 void Player::bottomRender()
 {
-    if(!isParrying())
     Character::bottomRender();
 
     if(current_shield>0)
@@ -377,6 +403,66 @@ void Player::bottomRender()
 void Player::topRender()
 {
     Character::topRender();
+
+    if(isParrying() && parries_left>=1)
+    {
+        Image *image=parry_sprites[parries_left-1];
+        painter->draw2DImage
+            (   image,
+                image->getWidth(),image->getHeight(),
+                this->x+parrying_x,
+                this->y+parrying_y,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                true,
+                FlatShadow());
+    }
+
+if(parrying_image!=NULL && false)
+if(isParrying())
+    painter->draw2DImage
+        (   parrying_image,
+            parrying_image->getWidth(),parrying_image->getHeight(),
+            this->x+parrying_x,
+            this->y+parrying_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            true,
+            FlatShadow());
+
+if(parryed_image!=NULL)
+if(invulnerable_frames_left>0)
+    painter->draw2DImage
+        (   parryed_image,
+            parryed_image->getWidth(),parryed_image->getHeight(),
+            this->x+parryed_x,
+            this->y+parryed_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            true,
+            FlatShadow());
+
+        if(receiver->isKeyDown(SDLK_h))
+        for(int i=0;i<parry_hitboxes.size();i++)
+        {
+            painter->drawRectangle(parry_hitboxes[i]->getX()+x,
+                                   parry_hitboxes[i]->getY()+y,
+                                   parry_hitboxes[i]->getWidth(),parry_hitboxes[i]->getHeight(),
+                                   parry_hitboxes[i]->getAngle(),100,0,0,100,true);
+        }
+
 }
 
 void Player::hit(int damage)
@@ -478,17 +564,104 @@ void Player::loadFromXML()
 
     this->parry_duration=0;
 
-    if(main_file->FirstChild("Parry"))
+    this->parrying_image=NULL;
+    this->parrying_x=0;
+    this->parrying_y=0;
+    this->parryed_image=NULL;
+    this->parryed_x=0;
+    this->parryed_y=0;
+
+    TiXmlNode* parry_node=main_file->FirstChild("Parry");
+    if(parry_node)
     {
-        TiXmlElement *attributes=main_file->FirstChild("Parry")->ToElement();
+        TiXmlElement *attributes=parry_node->ToElement();
         if(attributes->Attribute("duration")!=NULL)
         {
             this->parry_duration=atoi(attributes->Attribute("duration"));
         }
+
+        TiXmlNode* parrying_node=parry_node->FirstChild("Parrying");
+        if(parrying_node)
+        {
+            TiXmlElement *parrying_attributes=parrying_node->ToElement();
+            if(parrying_attributes->Attribute("sprite")!=NULL)
+            {
+                this->parrying_image=painter->getTexture(assets_directory+directory+"/sprites/"+parrying_attributes->Attribute("sprite"));
+            }
+            if(parrying_attributes->Attribute("x")!=NULL)
+            {
+                this->parrying_x=atoi(parrying_attributes->Attribute("x"));
+            }
+            if(parrying_attributes->Attribute("y")!=NULL)
+            {
+                this->parrying_y=atoi(parrying_attributes->Attribute("y"));
+            }
+        }
+
+        TiXmlNode* parryed_node=parry_node->FirstChild("Parryed");
+        if(parryed_node)
+        {
+            TiXmlElement *parryed_attributes=parryed_node->ToElement();
+            if(parryed_attributes->Attribute("sprite")!=NULL)
+            {
+                this->parryed_image=painter->getTexture(assets_directory+directory+"/sprites/"+parryed_attributes->Attribute("sprite"));
+            }
+            if(parryed_attributes->Attribute("x")!=NULL)
+            {
+                this->parryed_x=atoi(parryed_attributes->Attribute("x"));
+            }
+            if(parryed_attributes->Attribute("y")!=NULL)
+            {
+                this->parryed_y=atoi(parryed_attributes->Attribute("y"));
+            }
+        }
+
+        TiXmlNode* hitboxes_node=parry_node->FirstChild("Hitboxes");
+        if(hitboxes_node)
+        {
+            for(TiXmlNode* hitbox_node=hitboxes_node->FirstChild("Hitbox");
+                    hitbox_node!=NULL;
+                    hitbox_node=hitbox_node->NextSibling("Hitbox"))
+            {
+                TiXmlElement *hitbox_element=hitbox_node->ToElement();
+                int hitbox_x=atoi(hitbox_element->Attribute("x"));
+                int hitbox_y=atoi(hitbox_element->Attribute("y"));
+                int hitbox_width=atoi(hitbox_element->Attribute("width"));
+                int hitbox_height=atoi(hitbox_element->Attribute("height"));
+                int hitbox_angle=atoi(hitbox_element->Attribute("angle"));
+                Hitbox* hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+                this->parry_hitboxes.push_back(hitbox);
+            }
+        }
     }
+
 }
 
 bool Player::isParrying()
 {
     return current_parry_frame<parry_duration;
+}
+
+bool Player::isInvulnerable()
+{
+    return invulnerable_frames_left>0;
+}
+
+void Player::parry()
+{
+    if(invulnerable_frames_left==0)
+    {
+        parries_left-=1;
+    }
+    invulnerable_frames_left=15;
+}
+
+bool Player::collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
+{
+    if(!visible)
+        return false;
+    for(int i=0;i<parry_hitboxes.size();i++)
+        if(parry_hitboxes[i]->getPlacedHitbox(this->x,this->y).collides(hitbox))
+            return true;
+    return false;
 }

@@ -41,7 +41,6 @@ class Player:public Character
     double getShieldPercentage();
 
     //Charge
-    int current_charge;
     int max_charge;
     int charge_velocity;
     int charge_sprite_x;
@@ -51,7 +50,20 @@ class Player:public Character
     //Parry
     int current_parry_frame;
     int parry_duration;
+    Image *parrying_image;
+    int parrying_x,parrying_y;
+    Image *parryed_image;
+    int parryed_x,parryed_y;
+    vector<Hitbox*>parry_hitboxes;
+
+    //Velocity
+    //int acceleration;
+
+    vector<Image*>parry_sprites;
 public:
+int parries_left;
+int invulnerable_frames_left;
+int current_charge;
     Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     void logic(int stage_velocity);
     void inputControl();
@@ -61,6 +73,9 @@ public:
     void hit(int damage);
     void loadFromXML();
     bool isParrying();
+    bool isInvulnerable();
+    void parry();
+    bool collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
 };
 
 #endif

@@ -136,34 +136,15 @@ void STG::logic()
             for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
             {
                 Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
-                if(p->collides_opponent && player->collides(h,0,0,0))
+                if(player->isParrying() || player->isInvulnerable())
                 {
-                    p->hit();
-                    if(player->isParrying())
+                    if(p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
-
-                        if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
-                           || receiver->isJoyDown(-6,0))
+                        p->hit();
+                        if(player->isParrying())
                         {
-                            player->setX(player->getX()+150);
+                            player->parry();
                         }
-                        if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
-                           || receiver->isJoyDown(-4,0))
-                        {
-                            player->setX(player->getX()-150);
-                        }
-                        if(receiver->isKeyDown(SDL_SCANCODE_UP)
-                           || receiver->isJoyDown(-2,0))
-                        {
-                            player->setY(player->getY()-150);
-                        }
-                        if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
-                           || receiver->isJoyDown(-8,0))
-                        {
-                            player->setY(player->getY()+150);
-                        }
-
-                        p->velocity=10;
                         if(p->x>player->getX())
                         {
                             p->angle=135;
@@ -171,16 +152,17 @@ void STG::logic()
                         {
                             p->angle=-135;
                         }
-                    }else
+                    }
+                }else if(p->collides_opponent && player->collides(h,0,0,0))
+                {
+                    p->hit();
+                    player->hit(p->getDamage());
+                    painter->shakeScreen(30,10);
+                    if(this->sonido->soundExists(player->getName()+".hit"))
+                        this->sonido->playSound(player->getName()+".hit");
+                    if(player->getHP()==0)
                     {
-                        player->hit(p->getDamage());
-                        painter->shakeScreen(30,10);
-                        if(this->sonido->soundExists(player->getName()+".hit"))
-                            this->sonido->playSound(player->getName()+".hit");
-                        if(player->getHP()==0)
-                        {
-                            sonido->playSound("you lose");
-                        }
+                        sonido->playSound("you lose");
                     }
                 }
             }
