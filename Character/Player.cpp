@@ -580,6 +580,12 @@ void Player::loadFromXML()
             this->parry_duration=atoi(attributes->Attribute("duration"));
         }
 
+        if(attributes->Attribute("sound")!=NULL)
+        {
+            std::string sprites_sound=attributes->Attribute("sound");
+            this->sonido->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
+        }
+
         TiXmlNode* parrying_node=parry_node->FirstChild("Parrying");
         if(parrying_node)
         {
@@ -654,6 +660,10 @@ void Player::parry()
         parries_left-=1;
     }
     invulnerable_frames_left=15;
+    if(this->sonido->soundExists(this->getName()+".parry"))
+    {
+        this->sonido->playSound(this->getName()+".parry");
+    }
 }
 
 bool Player::collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
