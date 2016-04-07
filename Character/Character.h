@@ -68,9 +68,12 @@ protected:
     int shake_time;
     int shake_magnitude;
 
-    int sound_channel_base;
+
 
 public:
+    int sound_channel_base;
+
+
     vector<Hitbox*> hitboxes;
 
     Image* flat_shadow_texture;

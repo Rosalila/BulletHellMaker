@@ -662,7 +662,7 @@ void Player::parry()
     invulnerable_frames_left=15;
     if(this->sonido->soundExists(this->getName()+".parry"))
     {
-        this->sonido->playSound(this->getName()+".parry");
+        this->sonido->playSound(this->getName()+".parry",sound_channel_base+1);
     }
 }
 

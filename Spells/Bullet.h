@@ -26,7 +26,7 @@ public:
     vector<Hitbox*> getHitboxes();
     int getDamage();
     void playSound(int channel);
-    void playHitSound();
+    void playHitSound(int channel);
     Image*getImage(int position);
     Image*getOnHitImage(int position);
     int spritesSize();

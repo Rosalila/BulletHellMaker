@@ -64,10 +64,10 @@ void Bullet::playSound(int channel)
     }
 }
 
-void Bullet::playHitSound()
+void Bullet::playHitSound(int channel)
 {
     if(sonido->soundExists("bullet_hit."+name))
     {
-        sonido->playSound("bullet_hit."+name);
+        sonido->playSound("bullet_hit."+name,channel);
     }
 }
