@@ -2207,14 +2207,15 @@
 	<sstream>
 	<string>
 
-1448811848 /home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
+1460310168 /home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
 	<vector>
 	"Hitbox.h"
 
-1448811848 /home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Hitbox.h
+1460310774 /home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Hitbox.h
+	"Line.h"
 	"../TinyXml/tinyxml.h"
 	"../RosalilaGraphics/RosalilaGraphics.h"
 	"../RosalilaSound/RosalilaSound.h"
@@ -2453,7 +2454,7 @@
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 
-1457635714 source:/home/turupawn/Projects/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1460310154 source:/home/turupawn/Projects/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Font.cpp
@@ -2463,10 +2464,10 @@
 	<iostream>
 	"../RosalilaGraphics/RosalilaGraphics.h"
 
-1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Hitbox.cpp
+1460310919 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Hitbox.cpp
 	"Hitbox.h"
 
-1457301737 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1460310139 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/TinyXml/tinystr.cpp
@@ -2487,7 +2488,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1460054784 source:/home/turupawn/Projects/STG/STG.cpp
+1460309300 source:/home/turupawn/Projects/STG/STG.cpp
 	"STG.h"
 
 1456160379 /home/turupawn/Projects/STG/STG.h
@@ -2540,7 +2541,7 @@
 1460054556 source:/home/turupawn/Projects/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1459893982 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
+1460054795 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1448810538 source:/home/turupawn/Projects/STG/Stage/Dialogue.cpp
@@ -2572,4 +2573,8 @@
 
 1452814382 source:/home/turupawn/Projects/STG/Rosalila/RosalilaGraphics/FlatShadow.cpp
 	"FlatShadow.h"
+
+1460310580 /home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Line.h
+
+1460309858 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Line.cpp
 
