@@ -105,8 +105,8 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
     {
         Pattern* p =  (Pattern*)*pattern;
-        double distance_x= player->hitboxes[0]->getX() - p->getX();
-        double distance_y= player->hitboxes[0]->getY() - p->getY();
+        double distance_x= player->hitboxes[0]->getX() + player->x + - p->getX();
+        double distance_y= player->hitboxes[0]->getY() + player->y + - p->getY();
         //.getPlacedHitbox(this->x,this->y)
 
         if (p->getHoming() != 0)

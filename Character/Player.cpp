@@ -185,26 +185,35 @@ void Player::inputControl()
 
     int velocity_boost=invulnerable_frames_left;
 
+    bool up_pressed,down_pressed,left_pressed,right_pressed;
+    up_pressed=down_pressed=left_pressed=right_pressed=false;
+
     if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
     {
+        down_pressed=true;
         this->y+=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_UP)
        || receiver->isJoyDown(-8,0))
     {
+        up_pressed=true;
         this->y-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
        || receiver->isJoyDown(-4,0))
     {
+        left_pressed=true;
         this->x-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
        || receiver->isJoyDown(-6,0))
     {
-       this->x+=(velocity+velocity_boost)/getSlowdown();
+        right_pressed=true;
+        this->x+=(velocity+velocity_boost)/getSlowdown();
     }
+
+
 
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))

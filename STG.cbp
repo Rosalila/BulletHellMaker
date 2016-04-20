@@ -99,6 +99,8 @@
 		<Unit filename="Rosalila/RosalilaUtility/Font.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Hitbox.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/Hitbox.h" />
+		<Unit filename="Rosalila/RosalilaUtility/Line.cpp" />
+		<Unit filename="Rosalila/RosalilaUtility/Line.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.h" />
 		<Unit filename="Rosalila/TinyXml/tinystr.cpp" />

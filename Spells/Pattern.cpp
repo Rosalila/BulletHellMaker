@@ -329,11 +329,15 @@ int Pattern::getHoming() {
     return this->homing;
 }
 
-void aimTo(int x,int y)
+void Pattern::aimTo(int x,int y)
 {
 //    double distance_x=player->x-this->x-pattern->y;
 //    double distance_y=player->y-this->y+pattern->x;
 //    angle-=atan2(distance_y,distance_x)*180/PI;
+
+    double distance_x=10;
+    double distance_y=20;
+    angle-=atan2(distance_y,distance_x)*180/PI;
 }
 
 Bullet* Pattern::getBullet()
