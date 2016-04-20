@@ -97,7 +97,7 @@ void STG::mainLoop()
 
         if(!Mix_PlayingMusic())
         {
-            Mix_PlayMusic(music,0);
+            //Mix_PlayMusic(music,0);
         }
 
         render();

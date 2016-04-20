@@ -192,28 +192,84 @@ void Player::inputControl()
        || receiver->isJoyDown(-2,0))
     {
         down_pressed=true;
-        this->y+=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_UP)
        || receiver->isJoyDown(-8,0))
     {
         up_pressed=true;
-        this->y-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
        || receiver->isJoyDown(-4,0))
     {
         left_pressed=true;
-        this->x-=(velocity+velocity_boost)/getSlowdown();
     }
     if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
        || receiver->isJoyDown(-6,0))
     {
         right_pressed=true;
-        this->x+=(velocity+velocity_boost)/getSlowdown();
     }
 
+    bool diagonal_slowdown=2;
 
+    if(true)
+    {
+        if(up_pressed && !down_pressed && !left_pressed && !right_pressed)//8
+        {
+            this->y-=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(!up_pressed && down_pressed && !left_pressed && !right_pressed)//2
+        {
+            this->y+=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(!up_pressed && !down_pressed && left_pressed && !right_pressed)//4
+        {
+            this->x-=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(!up_pressed && !down_pressed && !left_pressed && right_pressed)//6
+        {
+            this->x+=(velocity+velocity_boost)/getSlowdown();
+        }
+
+        if(!up_pressed && down_pressed && left_pressed && !right_pressed)//1
+        {
+            this->x += cos (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+            this->y -= sin (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+
+        }
+        if(!up_pressed && down_pressed && !left_pressed && right_pressed)//3
+        {
+            this->x += cos (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+            this->y -= sin (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        }
+        if(up_pressed && !down_pressed && left_pressed && !right_pressed)//7
+        {
+            this->x += cos (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+            this->y -= sin (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        }
+        if(up_pressed && !down_pressed && !left_pressed && right_pressed)//9
+        {
+            this->x += cos (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+            this->y -= sin (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        }
+    }else
+    {
+        if(up_pressed)
+        {
+            this->y-=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(down_pressed)
+        {
+            this->y+=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(left_pressed)
+        {
+            this->x-=(velocity+velocity_boost)/getSlowdown();
+        }
+        if(right_pressed)
+        {
+            this->x+=(velocity+velocity_boost)/getSlowdown();
+        }
+    }
 
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))
