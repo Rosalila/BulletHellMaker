@@ -2,7 +2,7 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="Character/Character.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="15803" topLine="408" />
+		<Cursor position="16035" topLine="408" />
 	</File>
 	<File name="Character/Character.h" open="0" top="0" tabpos="1">
 		<Cursor position="2207" topLine="72" />
@@ -88,8 +88,8 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.h" open="0" top="0" tabpos="5">
 		<Cursor position="17" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="3140" topLine="72" />
+	<File name="STG.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="9955" topLine="260" />
 	</File>
 	<File name="STG.h" open="0" top="0" tabpos="2">
 		<Cursor position="786" topLine="5" />
@@ -130,8 +130,8 @@
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="8">
 		<Cursor position="209" topLine="0" />
 	</File>
-	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="12225" topLine="381" />
+	<File name="Stage/Stage.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="2675" topLine="132" />
 	</File>
 	<File name="Stage/Stage.h" open="0" top="0" tabpos="3">
 		<Cursor position="457" topLine="6" />

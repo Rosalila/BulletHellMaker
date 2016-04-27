@@ -360,10 +360,10 @@ Pattern::~Pattern()
 
 }
 
-void Pattern::hit(int channel)
+void Pattern::hit(int channel,bool hit_undestructable)
 {
     bullet->playHitSound(channel);
-    if(!undestructable)
+    if(!undestructable || hit_undestructable)
     {
         is_hit=true;
         current_sprite=0;

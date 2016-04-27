@@ -97,7 +97,7 @@ int offset_x,offset_y;
     void updateStateShouting();
     void updateStateNotShouting();
     bool destroyFlag();
-    void hit(int channel);
+    void hit(int channel,bool hit_undestructable);
     bool isHit();
     int getHoming();
 };

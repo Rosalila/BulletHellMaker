@@ -943,7 +943,7 @@ void Character::deleteActivePatterns()
     while (i != getActivePatterns()->end())
     {
         Pattern*p=(Pattern*)*i;
-        p->hit(sound_channel_base+1);
+        p->hit(sound_channel_base+1,true);
         i++;
     }
 }

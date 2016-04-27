@@ -140,7 +140,7 @@ void STG::logic()
                 {
                     if(p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
-                        p->hit(player->sound_channel_base+1);
+                        p->hit(player->sound_channel_base+1,false);
                         if(player->isParrying())
                         {
                             player->parry();
@@ -155,7 +155,7 @@ void STG::logic()
                     }
                 }else if(p->collides_opponent && player->collides(h,0,0,0))
                 {
-                    p->hit(enemy->sound_channel_base+1);
+                    p->hit(enemy->sound_channel_base+1,false);
                     player->hit(p->getDamage());
                     painter->shakeScreen(30,10);
                     if(this->sonido->soundExists(player->getName()+".hit"))
@@ -179,7 +179,7 @@ void STG::logic()
                 Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(p->collides_opponent && enemy->collides(h,0,0,0))
                 {
-                    p->hit(player->sound_channel_base+1);
+                    p->hit(player->sound_channel_base+1,false);
                     enemy->hit(p->getDamage()+damage_level);
                     enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
                     if(this->sonido->soundExists(enemy->getName()+".hit"))
@@ -218,8 +218,8 @@ void STG::logic()
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->getX(),player_pattern->getY(),player_pattern->getBulletAngle());
                                 if(enemy_hitbox.collides(player_hitbox))
                                 {
-                                    enemy_pattern->hit(enemy->sound_channel_base+1);
-                                    player_pattern->hit(player->sound_channel_base+1);
+                                    enemy_pattern->hit(enemy->sound_channel_base+1,false);
+                                    player_pattern->hit(player->sound_channel_base+1,false);
                                 }
                             }
 
