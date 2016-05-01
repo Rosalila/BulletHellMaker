@@ -411,6 +411,10 @@ void Player::bottomRender()
 
     if(current_charge>0)
     {
+        int transparency_divider=1;
+        if(getGameOver())
+            transparency_divider=8;
+
         if(charge_image)
         painter->draw2DImage
             (   charge_image,
@@ -422,7 +426,7 @@ void Player::bottomRender()
                 0.0,
                 false,
                 0,0,
-                Color(255,255,255,255),
+                Color(255,255,255,255/transparency_divider),
                 0,0,
                 true,
                 FlatShadow());

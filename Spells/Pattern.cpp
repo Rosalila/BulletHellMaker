@@ -246,6 +246,9 @@ void Pattern::render()
     }
     if(image!=NULL)
     {
+        int transparency_divider=1;
+        if(getGameOver())
+            transparency_divider=8;
         painter->draw2DImage
         (   image,
             image->getWidth(),image->getHeight(),
@@ -254,7 +257,7 @@ void Pattern::render()
             getBulletAngle(),
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,255/transparency_divider),
             0,0,
             true,
             FlatShadow());

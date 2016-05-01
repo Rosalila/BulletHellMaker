@@ -4,6 +4,17 @@ int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
 bool slow_enabled=false;
 Receiver* receiver = new Receiver();
+bool game_over;
+
+bool getGameOver()
+{
+    return game_over;
+}
+
+void setGameOver(bool game_over_param)
+{
+    game_over=game_over_param;
+}
 
 bool getIterateSlowdownFlag()
 {

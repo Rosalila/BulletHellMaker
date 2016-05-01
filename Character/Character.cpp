@@ -778,6 +778,10 @@ void Character::bottomRender()
         }
     }
 
+    int transparency_divider=1;
+    if(getGameOver())
+        transparency_divider=8;
+
     painter->draw2DImage
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
@@ -787,7 +791,7 @@ void Character::bottomRender()
         0.0,
         false,
         0,0,
-        Color(current_color_effect_r,current_color_effect_g,current_color_effect_b,current_color_effect_a),
+        Color(current_color_effect_r,current_color_effect_g,current_color_effect_b,current_color_effect_a/transparency_divider),
         0,0,
         true,
         FlatShadow(flat_shadow_texture,2,60,0,700,-500,

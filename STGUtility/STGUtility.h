@@ -19,5 +19,7 @@ Receiver* getReceiver();
 void disableSlow();
 void enableSlow();
 double getSlowdown();
+bool getGameOver();
+void setGameOver(bool game_over_param);
 
 #endif

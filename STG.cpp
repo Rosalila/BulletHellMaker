@@ -71,7 +71,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     {
         stageSelectModeInit();
     }
-
+    setGameOver(false);
     mainLoop();
 }
 
@@ -163,6 +163,7 @@ void STG::logic()
                     if(player->getHP()==0)
                     {
                         sonido->playSound("you lose",4);
+                        setGameOver(true);
                     }
                 }
             }
@@ -189,6 +190,7 @@ void STG::logic()
                         painter->shakeScreen(50,20);
                         sonido->playSound("you win",2);
                         enemy->deleteActivePatterns();
+                        setGameOver(true);
                     }
                 }
             }

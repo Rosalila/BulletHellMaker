@@ -2114,10 +2114,10 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1461730037 source:/home/turupawn/Projects/STG/Character/Character.cpp
+1462079058 source:/home/turupawn/Projects/STG/Character/Character.cpp
 	"Character.h"
 
-1460054713 /home/turupawn/Projects/STG/Character/Character.h
+1462078854 /home/turupawn/Projects/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -2279,7 +2279,7 @@
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
 	"../Rosalila/RosalilaUtility/Hitbox.h"
 
-1461729976 /home/turupawn/Projects/STG/Spells/Pattern.h
+1462078857 /home/turupawn/Projects/STG/Spells/Pattern.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -2293,7 +2293,7 @@
 1448810538 /home/turupawn/Projects/STG/Character/Modifier.h
 	<iostream>
 
-1448810538 /home/turupawn/Projects/STG/STGUtility/STGUtility.h
+1462078938 /home/turupawn/Projects/STG/STGUtility/STGUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
@@ -2333,7 +2333,7 @@
 1448810538 source:/home/turupawn/Projects/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1461166087 source:/home/turupawn/Projects/STG/Character/Player.cpp
+1462079036 source:/home/turupawn/Projects/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -2488,7 +2488,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1461730066 source:/home/turupawn/Projects/STG/STG.cpp
+1462079114 source:/home/turupawn/Projects/STG/STG.cpp
 	"STG.h"
 
 1456160379 /home/turupawn/Projects/STG/STG.h
@@ -2535,13 +2535,13 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
-1448810538 source:/home/turupawn/Projects/STG/STGUtility/STGUtility.cpp
+1462078927 source:/home/turupawn/Projects/STG/STGUtility/STGUtility.cpp
 	"STGUtility.h"
 
 1460054556 source:/home/turupawn/Projects/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1461730012 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
+1462078959 source:/home/turupawn/Projects/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1448810538 source:/home/turupawn/Projects/STG/Stage/Dialogue.cpp
