@@ -13,12 +13,18 @@ public:
     std::vector <int> textures_size_x;
     std::vector <int> textures_size_y;
 
+    //Flat color generator
+    int random_color_r;
+    int random_color_g;
+    int random_color_b;
+
     //External logic
     int frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y;
     int separation_x;
     //Internal logic
     int current_frame,time_elapsed;
-    Layer(vector<Image*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y,int separation_x)
+    Layer(vector<Image*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y,int separation_x,
+            int random_color_r,int random_color_g,int random_color_b)
     {
         this->textures=textures;
         this->textures_size_x=textures_size_x;
@@ -31,6 +37,9 @@ public:
         this->alignment_x=alignment_x;
         this->alignment_y=alignment_y;
         this->separation_x=separation_x;
+        this->random_color_r=random_color_r;
+        this->random_color_g=random_color_g;
+        this->random_color_b=random_color_b;
     }
 
     ~Layer()

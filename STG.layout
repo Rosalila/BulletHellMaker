@@ -2,13 +2,13 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="Character/Character.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="16035" topLine="408" />
+		<Cursor position="15313" topLine="384" />
 	</File>
 	<File name="Character/Character.h" open="0" top="0" tabpos="1">
 		<Cursor position="2207" topLine="72" />
 	</File>
 	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="3296" topLine="101" />
+		<Cursor position="3296" topLine="98" />
 	</File>
 	<File name="Character/Enemy.h" open="0" top="0" tabpos="6">
 		<Cursor position="757" topLine="15" />
@@ -89,7 +89,7 @@
 		<Cursor position="17" topLine="0" />
 	</File>
 	<File name="STG.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="9955" topLine="260" />
+		<Cursor position="8717" topLine="60" />
 	</File>
 	<File name="STG.h" open="0" top="0" tabpos="2">
 		<Cursor position="786" topLine="5" />
@@ -113,7 +113,7 @@
 		<Cursor position="875" topLine="12" />
 	</File>
 	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="4941" topLine="173" />
+		<Cursor position="11542" topLine="445" />
 	</File>
 	<File name="Spells/Pattern.h" open="0" top="0" tabpos="3">
 		<Cursor position="1399" topLine="55" />
@@ -128,10 +128,10 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="8">
-		<Cursor position="209" topLine="0" />
+		<Cursor position="1462" topLine="25" />
 	</File>
 	<File name="Stage/Stage.cpp" open="1" top="1" tabpos="6">
-		<Cursor position="2675" topLine="132" />
+		<Cursor position="5944" topLine="182" />
 	</File>
 	<File name="Stage/Stage.h" open="0" top="0" tabpos="3">
 		<Cursor position="457" topLine="6" />
