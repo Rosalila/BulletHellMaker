@@ -89,10 +89,14 @@ void STG::mainLoop()
     Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
     for (;;)
     {
-        if(receiver->isKeyDown(SDLK_ESCAPE))
+        if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
-            exit(0);
             break;
+        }
+
+        if(receiver->isKeyPressed(SDLK_s))
+        {
+            painter->screenshot(0,0, 1366, 768, "/home/turupawn/Projects/STG/x.bmp");
         }
 
         if(!Mix_PlayingMusic())
