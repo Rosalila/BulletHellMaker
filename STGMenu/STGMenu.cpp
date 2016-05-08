@@ -394,11 +394,19 @@ void Menu::dibujarMenu()
     {
         if(char_select==NULL)
         {
-            elementos[i]->dibujar();
+            //elementos[i]->dibujar();
+            if(elementos[i]->getTipo()!="Contenedor")
+                elementos[i]->dibujar();
+
         }else if(elementos[i]->getTipo()!="Contenedor" || char_select->listoPA())
         {
-            elementos[i]->dibujar();
+            if(elementos[i]->getTipo()!="CharSelect")
+                elementos[i]->dibujar();
         }
+
+        if(char_select && !char_select->listoPA() && elementos[i]->getTipo()=="CharSelect")
+            elementos[i]->dibujar();
+
     }
 
     receiver->updateInputs();
