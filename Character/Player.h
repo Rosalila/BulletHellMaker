@@ -15,8 +15,6 @@
 
 class Player:public Character
 {
-    Image*life_bar;
-
     //Slow bar variables
     Image*slow_bar;
     int slow_decrement;

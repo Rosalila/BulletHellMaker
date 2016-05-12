@@ -20,7 +20,6 @@ class Enemy : public Character
     double angle;
     double angle_change;
     Player*player;
-    Image*life_bar;
 
     string score_upload_message;
     bool flag_begin_upload;

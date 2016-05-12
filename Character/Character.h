@@ -72,6 +72,7 @@ protected:
 
 public:
     int sound_channel_base;
+    Image*life_bar;
 
 
     vector<Hitbox*> hitboxes;

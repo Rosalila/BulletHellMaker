@@ -132,6 +132,8 @@ void Character::loadMainXML()
             this->life_bar_rect_height=atoi(life_bar->Attribute("rect_height"));
         if(life_bar->Attribute("rect_width")!=NULL)
             this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
+        if(life_bar->Attribute("image")!=NULL)
+            this->life_bar=painter->getTexture(assets_directory+directory+life_bar->Attribute("image"));
     }
 
     TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");

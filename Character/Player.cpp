@@ -35,8 +35,6 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
 
     this->slow_in_cooldown=false;
 
-    life_bar=painter->getTexture(assets_directory+directory+"life_bar.png");
-
     this->sound_channel_base=sound_channel_base;
 
     loadPlayerFromXML();
