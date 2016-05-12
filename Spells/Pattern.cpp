@@ -365,7 +365,7 @@ Pattern::~Pattern()
 
 void Pattern::hit(int channel,bool hit_undestructable)
 {
-    bullet->playHitSound(channel);
+    bullet->playHitSound();
     if(!undestructable || hit_undestructable)
     {
         is_hit=true;

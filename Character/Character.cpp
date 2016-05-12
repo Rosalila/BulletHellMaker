@@ -268,6 +268,12 @@ void Character::loadBulletsXML()
             sonido->addSound("bullet_hit."+node_name,sound_hit);
         }
 
+        int sound_channel=0;
+        if(bullet_node->ToElement()->Attribute("sound_channel")!=NULL)
+        {
+            sound_channel=atoi(bullet_node->ToElement()->Attribute("sound_channel"));
+        }
+
         int damage=0;
         if(bullet_node->ToElement()->Attribute("damage")!=NULL)
         {
@@ -322,7 +328,7 @@ void Character::loadBulletsXML()
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage,sound_channel_base);
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage,sound_channel_base+sound_channel);
     }
 }
 
@@ -745,7 +751,7 @@ void Character::spellControl(int stage_velocity)
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
             {
-                patterns[i]->getBullet()->playSound(sound_channel_base);
+                patterns[i]->getBullet()->playSound();
                 this->addActivePattern(patterns[i]);
             }
         }else

@@ -282,7 +282,7 @@ void Player::inputControl()
         if(max_charge!=0 && current_charge==max_charge)
         {
             std::vector<Pattern*> patterns=type["bomb"];
-            patterns[0]->getBullet()->playSound(sound_channel_base);
+            patterns[0]->getBullet()->playSound();
             this->addActivePattern(patterns[0]);
         }
         current_charge=0;
