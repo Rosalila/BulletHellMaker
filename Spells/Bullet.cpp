@@ -62,8 +62,15 @@ int Bullet::getDamage()
 
 void Bullet::playSound()
 {
-    if(count_sound_plays%randomize_sound_frequency==0)
-        current_random_sound=getRandomSound();
+    if(random_sounds.size()>1 && count_sound_plays%randomize_sound_frequency==0)
+    {
+        int new_sound=getRandomSound();
+        while(current_random_sound==new_sound)
+        {
+            new_sound=getRandomSound();
+        }
+        current_random_sound=new_sound;
+    }
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
