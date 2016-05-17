@@ -259,15 +259,24 @@ void Character::loadBulletsXML()
             bullet_node=bullet_node->NextSibling("Bullet"))
     {
         std::string node_name=bullet_node->ToElement()->Attribute("name");
+        vector<string> random_sounds;
+
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sound=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
             sonido->addSound("bullet."+node_name,sound);
+            random_sounds.push_back("bullet."+node_name);
         }
         if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
         {
             std::string sound_hit=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
             sonido->addSound("bullet_hit."+node_name,sound_hit);
+        }
+
+        int randomize_sound_frequency=1;
+        if(bullet_node->ToElement()->Attribute("randomize_sound_frequency")!=NULL)
+        {
+            randomize_sound_frequency=atoi(bullet_node->ToElement()->Attribute("randomize_sound_frequency"));
         }
 
         int sound_channel=0;
@@ -330,7 +339,20 @@ void Character::loadBulletsXML()
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,damage,sound_channel_base+sound_channel);
+        TiXmlNode* random_sound_node=bullet_node->FirstChild("RandomSound");
+        if(random_sound_node!=NULL)
+        {
+            for(TiXmlNode* sound_node=random_sound_node->FirstChild("Sound");
+                    sound_node!=NULL;
+                    sound_node=sound_node->NextSibling("Sound"))
+            {
+                std::string sound=assets_directory+directory+"sounds/"+sound_node->ToElement()->Attribute("path");
+                sonido->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
+                random_sounds.push_back("bullet."+node_name+sound_node->ToElement()->Attribute("path"));
+            }
+        }
+
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,damage,sound_channel_base+sound_channel);
     }
 }
 

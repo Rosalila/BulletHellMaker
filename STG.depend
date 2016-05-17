@@ -2578,7 +2578,7 @@
 
 1460309858 source:/home/turupawn/Projects/STG/Rosalila/RosalilaUtility/Line.cpp
 
-1461094302 source:/home/turupawn/Projects/Flatshot/STG/Character/Enemy.cpp
+1463080878 source:/home/turupawn/Projects/Flatshot/STG/Character/Enemy.cpp
 	"Enemy.h"
 
 1463080890 /home/turupawn/Projects/Flatshot/STG/Character/Enemy.h
@@ -2742,7 +2742,7 @@
 	<sstream>
 	<string>
 
-1462839761 /home/turupawn/Projects/Flatshot/STG/Spells/Bullet.h
+1463462897 /home/turupawn/Projects/Flatshot/STG/Spells/Bullet.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -2922,7 +2922,7 @@
 
 1448811848 source:/home/turupawn/Projects/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 
-1460310154 source:/home/turupawn/Projects/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1463263989 source:/home/turupawn/Projects/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1448811848 source:/home/turupawn/Projects/Flatshot/STG/Rosalila/RosalilaUtility/Font.cpp
@@ -3008,7 +3008,7 @@
 1462078927 source:/home/turupawn/Projects/Flatshot/STG/STGUtility/STGUtility.cpp
 	"STGUtility.h"
 
-1462840149 source:/home/turupawn/Projects/Flatshot/STG/Spells/Bullet.cpp
+1463457988 source:/home/turupawn/Projects/Flatshot/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
 1462839786 source:/home/turupawn/Projects/Flatshot/STG/Spells/Pattern.cpp
@@ -3035,4 +3035,10 @@
 	"Rosalila/RosalilaUtility/RosalilaUtility.h"
 	"STGUtility/STGUtility.h"
 	<iostream>
+
+1463455431 source:/home/turupawn/Projects/Flatshot/STG/Character/Character.cpp
+	"Character.h"
+
+1463080819 source:/home/turupawn/Projects/Flatshot/STG/Character/Player.cpp
+	"Player.h"
 

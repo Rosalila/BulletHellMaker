@@ -2,25 +2,25 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="Character/Character.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="29201" topLine="745" />
+		<Cursor position="3998" topLine="123" />
 	</File>
-	<File name="Character/Character.h" open="0" top="0" tabpos="8">
-		<Cursor position="2678" topLine="93" />
+	<File name="Character/Character.h" open="1" top="1" tabpos="11">
+		<Cursor position="1718" topLine="66" />
 	</File>
-	<File name="Character/Enemy.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="5787" topLine="180" />
+	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="1181" topLine="42" />
 	</File>
-	<File name="Character/Enemy.h" open="0" top="0" tabpos="6">
-		<Cursor position="757" topLine="15" />
+	<File name="Character/Enemy.h" open="1" top="0" tabpos="9">
+		<Cursor position="540" topLine="9" />
 	</File>
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="Character/Player.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="9708" topLine="276" />
+		<Cursor position="912" topLine="25" />
 	</File>
-	<File name="Character/Player.h" open="0" top="0" tabpos="5">
-		<Cursor position="1204" topLine="40" />
+	<File name="Character/Player.h" open="1" top="0" tabpos="10">
+		<Cursor position="410" topLine="4" />
 	</File>
 	<File name="Rosalila/RosalilaAI/Automata.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="0" topLine="0" />
@@ -97,7 +97,7 @@
 	<File name="STG.h" open="0" top="0" tabpos="2">
 		<Cursor position="786" topLine="5" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="1" top="1" tabpos="2">
+	<File name="STGMenu/STGMenu.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="2627" topLine="59" />
 	</File>
 	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="6">
@@ -113,7 +113,7 @@
 		<Cursor position="217" topLine="0" />
 	</File>
 	<File name="Spells/Bullet.h" open="1" top="0" tabpos="5">
-		<Cursor position="562" topLine="19" />
+		<Cursor position="562" topLine="7" />
 	</File>
 	<File name="Spells/Pattern.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="8863" topLine="359" />

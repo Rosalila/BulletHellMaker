@@ -18,9 +18,13 @@ class Bullet
     int damage;
     std::string name;
     int sound_channel;
+    vector<string>random_sounds;
+    int count_sound_plays;
+    int current_random_sound;
+    int randomize_sound_frequency;
 public:
     Bullet(){};
-    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,int damage,int sound_channel);
+    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency,int damage,int sound_channel);
     void logic();
     void render();
     vector<Hitbox*> getHitboxes();
@@ -31,6 +35,7 @@ public:
     Image*getOnHitImage(int position);
     int spritesSize();
     int spritesOnHitSize();
+    int getRandomSound();
 };
 
 #endif
