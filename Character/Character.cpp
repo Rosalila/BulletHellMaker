@@ -279,6 +279,12 @@ void Character::loadBulletsXML()
             randomize_sound_frequency=atoi(bullet_node->ToElement()->Attribute("randomize_sound_frequency"));
         }
 
+        int arpeggio_length=1;
+        if(bullet_node->ToElement()->Attribute("arpeggio_length")!=NULL)
+        {
+            arpeggio_length=atoi(bullet_node->ToElement()->Attribute("arpeggio_length"));
+        }
+
         int sound_channel=0;
         if(bullet_node->ToElement()->Attribute("sound_channel")!=NULL)
         {
@@ -352,7 +358,7 @@ void Character::loadBulletsXML()
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,damage,sound_channel_base+sound_channel);
+        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel_base+sound_channel);
     }
 }
 
