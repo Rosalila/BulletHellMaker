@@ -32,6 +32,15 @@ public:
 
     //Misc
     Image* loading_screen;
+    Image* white_background;
+    int white_image_current_r;
+    int white_image_current_g;
+    int white_image_current_b;
+    int white_image_target_r;
+    int white_image_target_g;
+    int white_image_target_b;
+
+    bool color_changing_background;
 
     Menu(){}
     Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo);
@@ -46,6 +55,7 @@ public:
     int toKeyCode(std::string str);
     void printLoadingScreen();
     void playMusic();
+    void backgroundTargetUpdate(int current_selection);
 };
 
 #endif

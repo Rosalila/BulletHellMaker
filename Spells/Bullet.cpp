@@ -18,6 +18,7 @@ Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     current_random_sound=getRandomSound();
     current_arrpegio_sound=0;
     randomizeArpeggio(arpeggio_length);
+    current_channel=-1;
 }
 
 void Bullet::logic()
@@ -83,7 +84,9 @@ void Bullet::playSound()
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
-        sonido->playSound(random_sounds[current_random_sound],sound_channel);
+//        if(current_channel!=-1)
+//            Mix_HaltChannel(current_channel);
+        current_channel=sonido->playSound(random_sounds[current_random_sound],sound_channel);
     }
 }
 

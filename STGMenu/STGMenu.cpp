@@ -9,7 +9,13 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
     this->char_select=NULL;
     this->selectables_container=NULL;
 
+    white_image_current_r = 255;
+    white_image_current_g = 255;
+    white_image_current_b = 255;
+    backgroundTargetUpdate(0);
+
     loading_screen=painter->getTexture(assets_directory+"misc/loading_screen.png");
+    white_background=painter->getTexture(assets_directory+"menu/white_background.png");
 
     string config_directory = assets_directory+"config.xml";
     TiXmlDocument doc_t((char*)config_directory.c_str());
@@ -57,6 +63,11 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
             path_stages.push_back(node_stage->ToElement()->Attribute("name"));
         }
         arcade_paths[node_path->ToElement()->Attribute("name")]=path_stages;
+    }
+    color_changing_background=false;
+    if(strcmp(archivo,"assets/menu/selection_menu.svg")==0)
+    {
+        color_changing_background=true;
     }
     cargarDesdeXml(archivo,chars,stages);
 }
@@ -187,6 +198,7 @@ void Menu::loopMenu()
                     {
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->avanzar();
+                        backgroundTargetUpdate(ml->getActual());
                     }
                 }
             }
@@ -206,6 +218,7 @@ void Menu::loopMenu()
                     {
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->retroceder();
+                        backgroundTargetUpdate(ml->getActual());
                     }
                 }
             }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyPressed(SDLK_z) || receiver->isJoyPressed(0,0))
@@ -390,6 +403,35 @@ void Menu::loopMenu()
 
 void Menu::dibujarMenu()
 {
+    if(color_changing_background)
+    {
+        painter->draw2DImage
+        (   white_background,
+            painter->screen_width,painter->screen_height,
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(white_image_current_r,white_image_current_g,white_image_current_b,255),
+            0,0,
+            false,
+            FlatShadow());
+
+        if(white_image_current_r<white_image_target_r)
+            white_image_current_r++;
+        if(white_image_current_r>white_image_target_r)
+            white_image_current_r--;
+        if(white_image_current_g<white_image_target_g)
+            white_image_current_g++;
+        if(white_image_current_g>white_image_target_g)
+            white_image_current_g--;
+        if(white_image_current_b<white_image_target_b)
+            white_image_current_b++;
+        if(white_image_current_b>white_image_target_b)
+            white_image_current_b--;
+    }
+
     for(int i=0;i<(int)elementos.size();i++)
     {
         if(char_select==NULL)
@@ -1196,4 +1238,38 @@ void Menu::printLoadingScreen()
 void Menu::playMusic()
 {
     sonido->playMusic(this->music_path);
+}
+
+void Menu::backgroundTargetUpdate(int current_selection)
+{
+    if(current_selection==0)
+    {
+        white_image_target_r=33;
+        white_image_target_g=150;
+        white_image_target_b=243;
+    }
+    if(current_selection==4)
+    {
+        white_image_target_r=139;
+        white_image_target_g=195;
+        white_image_target_b=74;
+    }
+    if(current_selection==9)
+    {
+        white_image_target_r=103;
+        white_image_target_g=58;
+        white_image_target_b=183;
+    }
+    if(current_selection==14)
+    {
+        white_image_target_r=255;
+        white_image_target_g=152;
+        white_image_target_b=0;
+    }
+    if(current_selection==19)
+    {
+        white_image_target_r=244;
+        white_image_target_g=67;
+        white_image_target_b=54;
+    }
 }
