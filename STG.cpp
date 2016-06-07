@@ -77,7 +77,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
 
 void STG::stageSelectModeInit()
 {
-    stage->playMusic();
+    //stage->playMusic();
     painter->camera_x=0;
 }
 
@@ -96,12 +96,13 @@ void STG::mainLoop()
 
         if(receiver->isKeyPressed(SDLK_s))
         {
-            painter->screenshot(0,0, 1366, 768, "/home/turupawn/Projects/STG/x.bmp");
+            string random_number = toString((rand()*999999)%1000);
+            painter->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
         }
 
         if(!Mix_PlayingMusic())
         {
-            //Mix_PlayMusic(music,0);
+            Mix_PlayMusic(music,0);
         }
 
         render();

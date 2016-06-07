@@ -12,7 +12,9 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
     white_image_current_r = 255;
     white_image_current_g = 255;
     white_image_current_b = 255;
-    backgroundTargetUpdate(0);
+
+    if(strcmp(archivo,"assets/menu/selection_menu.svg")==0)
+        backgroundTargetUpdate(0);
 
     loading_screen=painter->getTexture(assets_directory+"misc/loading_screen.png");
     white_background=painter->getTexture(assets_directory+"menu/white_background.png");
@@ -86,7 +88,7 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
 //        iniciarJuego(character_name,"StageAhmedB");
 //    if(stg->enemyWon())
 //        iniciarJuego(character_name,stage_name);
-    this->playMusic();
+    //this->playMusic();
     char_select->clearLocks();
 }
 
@@ -1242,32 +1244,42 @@ void Menu::playMusic()
 
 void Menu::backgroundTargetUpdate(int current_selection)
 {
-    if(current_selection==0)
+    if(current_selection>=0 && current_selection<=4)
     {
+        if(sonido->getCurrentMusic()!=assets_directory+"1.ogg")
+            sonido->playMusic(assets_directory+"1.ogg");
         white_image_target_r=33;
         white_image_target_g=150;
         white_image_target_b=243;
     }
-    if(current_selection==4)
+    if(current_selection>=5 && current_selection<=9)
     {
+        if(sonido->getCurrentMusic()!=assets_directory+"2.ogg")
+            sonido->playMusic(assets_directory+"2.ogg");
         white_image_target_r=139;
         white_image_target_g=195;
         white_image_target_b=74;
     }
-    if(current_selection==9)
+    if(current_selection>=10 && current_selection<=14)
     {
+        if(sonido->getCurrentMusic()!=assets_directory+"3.ogg")
+            sonido->playMusic(assets_directory+"3.ogg");
         white_image_target_r=103;
         white_image_target_g=58;
         white_image_target_b=183;
     }
-    if(current_selection==14)
+    if(current_selection>=15 && current_selection<=19)
     {
+        if(sonido->getCurrentMusic()!=assets_directory+"4.ogg")
+            sonido->playMusic(assets_directory+"4.ogg");
         white_image_target_r=255;
         white_image_target_g=152;
         white_image_target_b=0;
     }
-    if(current_selection==19)
+    if(current_selection>=20 && current_selection<=24)
     {
+        if(sonido->getCurrentMusic()!=assets_directory+"5.ogg")
+            sonido->playMusic(assets_directory+"5.ogg");
         white_image_target_r=244;
         white_image_target_g=67;
         white_image_target_b=54;
