@@ -119,22 +119,19 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     }
 
 
-    if(this->hp>0)
+    if(!getGameOver())
         modifiersControl();
     else
     {
         if(orientation!="destroyed" && flag_begin_upload)
         {
+            //current_type="";
             orientation="destroyed";
             if(this->sonido->soundExists(name+".destroyed"))
                 this->sonido->playSound(name+".destroyed");
 
             for(int i=0;i<hitboxes.size();i++)
                 this->hitboxes[i]->setValues(0,0,0,0,0);
-
-//            RosalilaNetwork network(painter);
-//            //score_upload_message = network.runTcpClientSendScore(31716, "108.59.1.187",stage_name, username, global_iteration);
-//            score_upload_message = network.runTcpClientSendScore(31716, "localhost",stage_name, username, global_iteration);
         }
     }
 
@@ -145,19 +142,7 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
 
     getIterateSlowdownFlag();
 
-    //Color effect
-//    if(current_color_effect_r<255)
-//        current_color_effect_r++;
-//    if(current_color_effect_g<255)
-//        current_color_effect_g++;
-//    if(current_color_effect_b<255)
-//        current_color_effect_b++;
-//    if(current_color_effect_a<255)
-//        current_color_effect_a++;
-
-
     current_color_effect_a = (255*hp)/max_hp;
-    //current_color_effect_b = (255*hp)/max_hp;
 }
 
 void Enemy::bottomRender()
@@ -259,6 +244,8 @@ void Enemy::loadModifiersFromXML()
 
 void Enemy::addActivePattern(Pattern* pattern)
 {
+    if(getGameOver())
+        return;
     Pattern* pattern_temp=new Pattern(pattern,this->x,this->y);
     float angle=pattern_temp->getAngle();
     angle+=pattern_temp->getRandomAngle();

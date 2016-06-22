@@ -72,7 +72,7 @@ int current_charge;
     void loadFromXML();
     bool isParrying();
     bool isInvulnerable();
-    void parry();
+    void parry(bool infinite_parries);
     bool collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
 };
 

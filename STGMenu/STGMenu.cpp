@@ -80,6 +80,10 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     writeLogLine("Initializing game.");
     Stage*stage=new Stage(painter,sonido,receiver);
     stage->loadFromXML(stage_name);
+    if(stage_name=="Training3")
+    {
+        game_mode="parry training";
+    }
     Player*player=new Player(sonido,painter,receiver,character_name,10);
     Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player,20);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode);
@@ -94,14 +98,11 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
 
 void Menu::loopMenu()
 {
-    bool tecla_arriba=false;
     llenarRosalilaInputssBotones();
     inputa=new RosalilaInputs();
     inputb=new RosalilaInputs();
     inputa->loadFromXML(1,receiver);
     inputb->loadFromXML(2,receiver);
-    bool tecla_arriba_p1=true;
-    bool tecla_arriba_p2=true;
     //inicio
 	for (;;)
 	{
@@ -133,7 +134,6 @@ void Menu::loopMenu()
         }
         if(selectables_container!=NULL)
         {
-            tecla_arriba=false;
             if(receiver->isKeyPressed(SDLK_ESCAPE) || receiver->isKeyPressed(SDLK_x) || receiver->isJoyPressed(5,0))
             {
                 sonido->playSound(std::string("Menu.back"));
@@ -395,9 +395,6 @@ void Menu::loopMenu()
                         llenarRosalilaInputssBotones();
                     }
                 }
-            }else
-            {
-                tecla_arriba=true;
             }
         }
 	}

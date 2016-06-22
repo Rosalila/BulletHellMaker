@@ -14,6 +14,8 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     iteration=0;
     boss_fury_level=0;
 
+    parry_count=0;
+
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
     TiXmlDocument doc_t( (char*)config_directory.c_str() );
@@ -67,10 +69,18 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         you_win.addImage(painter->getTexture(assets_directory+path));
     }
 
-    if(game_mode=="Stage select")
+    if(game_mode=="Stage select" || game_mode=="parry training")
     {
         stageSelectModeInit();
     }
+
+    if(game_mode=="parry training")
+    {
+        training_box=painter->getTexture(assets_directory+"misc/training/box.png");;
+        training_x=painter->getTexture(assets_directory+"misc/training/x.png");
+        parry_count_objective=3;
+    }
+
     setGameOver(false);
     mainLoop();
 }
@@ -106,23 +116,25 @@ void STG::mainLoop()
         }
 
         render();
+
         logic();
-        if(player->getHP()==0
-           || enemy->getHP()==0)
+
+//        receiver->isKeyDown(SDLK_z)
+        receiver->updateInputs();
+        if(getGameOver())
         {
             if(receiver->isKeyPressed(SDLK_RETURN))
                 break;
-            if(receiver->isKeyPressed(SDLK_z) && end_key_up_keyboard)
+            if(receiver->isKeyDown(SDLK_z) && end_key_up_keyboard)
                 break;
             if(receiver->isJoyDown(0,0) && end_key_up_joystick)
                 break;
-            if(!receiver->isKeyPressed(SDLK_z))
+            if(!receiver->isKeyDown(SDLK_z))
                 end_key_up_keyboard=true;
             if(!receiver->isJoyPressed(0,0))
                 end_key_up_joystick=true;
 
         }
-        receiver->updateInputs();
     }
 }
 
@@ -148,7 +160,18 @@ void STG::logic()
                         p->hit(player->sound_channel_base+1,false);
                         if(player->isParrying())
                         {
-                            player->parry();
+                            parry_count++;
+                            if(game_mode=="parry training")
+                            {
+                                player->parry(true);
+                                if(parry_count==parry_count_objective)
+                                {
+                                    win();
+                                }
+                            }else
+                            {
+                                player->parry(false);
+                            }
                         }
                         if(p->x>player->getX())
                         {
@@ -162,13 +185,13 @@ void STG::logic()
                 {
                     p->hit(enemy->sound_channel_base+1,false);
                     player->hit(p->getDamage());
+                    parry_count = 0;
                     painter->shakeScreen(30,10);
                     if(this->sonido->soundExists(player->getName()+".hit"))
                         this->sonido->playSound(player->getName()+".hit",3);
                     if(player->getHP()==0)
                     {
-                        sonido->playSound("you lose",4);
-                        setGameOver(true);
+                        lose();
                     }
                 }
             }
@@ -192,10 +215,7 @@ void STG::logic()
                         this->sonido->playSound(enemy->getName()+".hit",1);
                     if(enemy->getHP()==0)
                     {
-                        painter->shakeScreen(50,20);
-                        sonido->playSound("you win",2);
-                        enemy->deleteActivePatterns();
-                        setGameOver(true);
+                        win();
                     }
                 }
             }
@@ -237,17 +257,6 @@ void STG::logic()
         }
     }
 
-//    if(receiver->isKeyPressed(SDLK_t))
-//    {
-//        //boss_fury_level+=1;
-//        //player->deleteActivePatterns();
-//        //enemy->deleteActivePatterns();
-//    }
-//    if(receiver->isKeyPressed(SDLK_1))
-//    {
-//        player->setType("1");
-//    }
-
     int stage_displacement = stage->getVelocity();
     if(isSlowActive())
         stage_displacement/=3;
@@ -267,7 +276,7 @@ void STG::logic()
     checkCharacterOutOfBounds();
     slowExtraControl();
 
-    if(enemy->getHP()>0)
+    if(!getGameOver())
         iteration++;
 }
 
@@ -290,7 +299,39 @@ void STG::render()
 //    painter->drawText("Time: "+toString(iteration),25,70);
 //    painter->drawText(enemy->getName(),25,110);
 //    painter->drawText("Damage level: "+toString(damage_level),25,170);
-
+    if(game_mode=="parry training")
+    {
+        for(int i=0;i<parry_count_objective;i++)
+        {
+            painter->draw2DImage
+            (   training_box,
+                training_box->getWidth(),training_box->getHeight(),
+                0+i*(training_box->getWidth()+10),0,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false,
+                FlatShadow());
+            if(i<parry_count)
+            {
+                painter->draw2DImage
+                (   training_x,
+                    training_x->getWidth(),training_x->getHeight(),
+                    0+i*(training_x->getWidth()+10),0,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+        }
+    }
 
     painter->updateScreen();
 }
@@ -366,4 +407,19 @@ bool STG::playerWon()
 bool STG::enemyWon()
 {
     return player->getHP()==0;
+}
+
+void STG::win()
+{
+    enemy->setHP(0);
+    painter->shakeScreen(50,20);
+    sonido->playSound("you win",2);
+    enemy->deleteActivePatterns();
+    setGameOver(true);
+}
+
+void STG::lose()
+{
+    sonido->playSound("you lose",4);
+    setGameOver(true);
 }

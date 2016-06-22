@@ -720,9 +720,9 @@ bool Player::isInvulnerable()
     return invulnerable_frames_left>0;
 }
 
-void Player::parry()
+void Player::parry(bool infinite_parries)
 {
-    if(invulnerable_frames_left==0)
+    if(!infinite_parries && invulnerable_frames_left==0)
     {
         parries_left-=1;
     }

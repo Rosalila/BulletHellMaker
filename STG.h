@@ -20,6 +20,9 @@ class STG
     Enemy*enemy;
     Stage*stage;
 
+    Image*training_box;
+    Image*training_x;
+
     string game_mode;
 
     string username;
@@ -28,6 +31,8 @@ class STG
     int iteration;
     int boss_fury_level;
 
+    int parry_count;
+    int parry_count_objective;
 
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
@@ -39,6 +44,8 @@ public:
     bool playerWon();
     bool enemyWon();
     void stageSelectModeInit();
+    void win();
+    void lose();
     STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode);
 };
 
