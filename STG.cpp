@@ -16,6 +16,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
 
     parry_count=0;
     charge_destroy_count=0;
+    parry_dash_count=0;
 
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
@@ -70,23 +71,30 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         you_win.addImage(painter->getTexture(assets_directory+path));
     }
 
-    if(game_mode=="Stage select" || game_mode=="parry training" || game_mode=="charge training")
+    if(game_mode=="Stage select" || game_mode=="charge training" || game_mode=="parry training" || game_mode=="parry dash training")
     {
         stageSelectModeInit();
     }
 
-    if(game_mode=="parry training")
-    {
-        image_training_box=painter->getTexture(assets_directory+"misc/training/box.png");
-        image_training_x=painter->getTexture(assets_directory+"misc/training/x.png");
-        parry_count_objective=3;
-    }
     if(game_mode=="charge training")
     {
         image_training_bar=painter->getTexture(assets_directory+"misc/training/bar.png");
         image_training_bar_fill=painter->getTexture(assets_directory+"misc/training/bar_fill.png");
         charge_destroy_count_objective=300;
     }
+    if(game_mode=="parry training")
+    {
+        image_training_box=painter->getTexture(assets_directory+"misc/training/box.png");
+        image_training_x=painter->getTexture(assets_directory+"misc/training/x.png");
+        parry_count_objective=3;
+    }
+    if(game_mode=="parry dash training")
+    {
+        image_training_bar=painter->getTexture(assets_directory+"misc/training/bar.png");
+        image_training_bar_fill=painter->getTexture(assets_directory+"misc/training/bar_fill.png");
+        parry_dash_count_objective=15;
+    }
+
 
     setGameOver(false);
     mainLoop();
@@ -162,22 +170,30 @@ void STG::logic()
                 Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(player->isParrying() || player->isInvulnerable())
                 {
-                    if(p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
+                    if(!p->isHit() && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
                         p->hit(player->sound_channel_base+1,false);
+                        if(player->isInvulnerable())
+                        {
+                            parry_dash_count++;
+                            if(game_mode=="parry dash training" && parry_dash_count==parry_dash_count_objective)
+                            {
+                                win();
+                            }
+                        }
+                        if(game_mode=="parry training" || game_mode=="parry dash training")
+                        {
+                            player->parry(true);
+                        }else
+                        {
+                            player->parry(false);
+                        }
                         if(player->isParrying())
                         {
                             parry_count++;
-                            if(game_mode=="parry training")
+                            if(game_mode=="parry training" && parry_count==parry_count_objective)
                             {
-                                player->parry(true);
-                                if(parry_count==parry_count_objective)
-                                {
-                                    win();
-                                }
-                            }else
-                            {
-                                player->parry(false);
+                                win();
                             }
                         }
                         if(p->x>player->getX())
@@ -371,6 +387,33 @@ void STG::render()
                     FlatShadow());
             }
         }
+    }
+    if(game_mode=="parry dash training")
+    {
+        painter->draw2DImage
+        (   image_training_bar_fill,
+            image_training_bar_fill->getWidth()*(parry_dash_count/parry_dash_count_objective),image_training_bar_fill->getHeight(),
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+        painter->draw2DImage
+        (   image_training_bar,
+            image_training_bar->getWidth(),image_training_bar->getHeight(),
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
     }
 
     painter->updateScreen();

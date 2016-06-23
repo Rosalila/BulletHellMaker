@@ -88,6 +88,10 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     {
         game_mode="parry training";
     }
+    if(stage_name=="Training5")
+    {
+        game_mode="parry dash training";
+    }
     Player*player=new Player(sonido,painter,receiver,character_name,10);
     Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player,20);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode);

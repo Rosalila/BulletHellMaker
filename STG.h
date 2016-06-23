@@ -33,10 +33,12 @@ class STG
     int iteration;
     int boss_fury_level;
 
-    int parry_count;
-    int parry_count_objective;
+    double parry_count;
+    double parry_count_objective;
     double charge_destroy_count;
     double charge_destroy_count_objective;
+    double parry_dash_count;
+    double parry_dash_count_objective;
 
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
