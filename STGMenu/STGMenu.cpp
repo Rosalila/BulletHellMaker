@@ -82,6 +82,10 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     stage->loadFromXML(stage_name);
     if(stage_name=="Training3")
     {
+        game_mode="charge training";
+    }
+    if(stage_name=="Training4")
+    {
         game_mode="parry training";
     }
     Player*player=new Player(sonido,painter,receiver,character_name,10);

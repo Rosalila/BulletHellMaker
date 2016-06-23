@@ -15,6 +15,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     boss_fury_level=0;
 
     parry_count=0;
+    charge_destroy_count=0;
 
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
@@ -69,16 +70,22 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         you_win.addImage(painter->getTexture(assets_directory+path));
     }
 
-    if(game_mode=="Stage select" || game_mode=="parry training")
+    if(game_mode=="Stage select" || game_mode=="parry training" || game_mode=="charge training")
     {
         stageSelectModeInit();
     }
 
     if(game_mode=="parry training")
     {
-        training_box=painter->getTexture(assets_directory+"misc/training/box.png");;
-        training_x=painter->getTexture(assets_directory+"misc/training/x.png");
+        image_training_box=painter->getTexture(assets_directory+"misc/training/box.png");
+        image_training_x=painter->getTexture(assets_directory+"misc/training/x.png");
         parry_count_objective=3;
+    }
+    if(game_mode=="charge training")
+    {
+        image_training_bar=painter->getTexture(assets_directory+"misc/training/bar.png");
+        image_training_bar_fill=painter->getTexture(assets_directory+"misc/training/bar_fill.png");
+        charge_destroy_count_objective=300;
     }
 
     setGameOver(false);
@@ -243,8 +250,13 @@ void STG::logic()
                             for(int j=0;j<(int)player_hitboxes.size();j++)
                             {
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->getX(),player_pattern->getY(),player_pattern->getBulletAngle());
-                                if(enemy_hitbox.collides(player_hitbox))
+                                if(!enemy_pattern->isHit()&&!player_pattern->isHit()&&enemy_hitbox.collides(player_hitbox))
                                 {
+                                    charge_destroy_count++;
+                                    if(game_mode=="charge training" && charge_destroy_count==charge_destroy_count_objective)
+                                    {
+                                        win();
+                                    }
                                     enemy_pattern->hit(enemy->sound_channel_base+1,false);
                                     player_pattern->hit(player->sound_channel_base+1,false);
                                 }
@@ -299,14 +311,42 @@ void STG::render()
 //    painter->drawText("Time: "+toString(iteration),25,70);
 //    painter->drawText(enemy->getName(),25,110);
 //    painter->drawText("Damage level: "+toString(damage_level),25,170);
+
+    if(game_mode=="charge training")
+    {
+        painter->draw2DImage
+        (   image_training_bar_fill,
+            image_training_bar_fill->getWidth()*(charge_destroy_count/charge_destroy_count_objective),image_training_bar_fill->getHeight(),
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+        painter->draw2DImage
+        (   image_training_bar,
+            image_training_bar->getWidth(),image_training_bar->getHeight(),
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+    }
     if(game_mode=="parry training")
     {
         for(int i=0;i<parry_count_objective;i++)
         {
             painter->draw2DImage
-            (   training_box,
-                training_box->getWidth(),training_box->getHeight(),
-                0+i*(training_box->getWidth()+10),0,
+            (   image_training_box,
+                image_training_box->getWidth(),image_training_box->getHeight(),
+                0+i*(image_training_box->getWidth()+10),0,
                 1.0,
                 0.0,
                 false,
@@ -318,9 +358,9 @@ void STG::render()
             if(i<parry_count)
             {
                 painter->draw2DImage
-                (   training_x,
-                    training_x->getWidth(),training_x->getHeight(),
-                    0+i*(training_x->getWidth()+10),0,
+                (   image_training_x,
+                    image_training_x->getWidth(),image_training_x->getHeight(),
+                    0+i*(image_training_x->getWidth()+10),0,
                     1.0,
                     0.0,
                     false,

@@ -20,8 +20,10 @@ class STG
     Enemy*enemy;
     Stage*stage;
 
-    Image*training_box;
-    Image*training_x;
+    Image*image_training_box;
+    Image*image_training_x;
+    Image*image_training_bar;
+    Image*image_training_bar_fill;
 
     string game_mode;
 
@@ -33,6 +35,8 @@ class STG
 
     int parry_count;
     int parry_count_objective;
+    double charge_destroy_count;
+    double charge_destroy_count_objective;
 
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
