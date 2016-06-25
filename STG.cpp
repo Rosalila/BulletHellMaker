@@ -18,6 +18,11 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     charge_destroy_count=0;
     parry_dash_count=0;
 
+    image_training_text=NULL;
+    image_training_text_final=NULL;
+    current_training_transparency=0;
+    current_training_final_transparency=0;
+
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
     TiXmlDocument doc_t( (char*)config_directory.c_str() );
@@ -95,6 +100,17 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         parry_dash_count_objective=15;
     }
 
+    if(stage->getName()=="Training1"
+       ||stage->getName()=="Training2"
+       ||stage->getName()=="Training3"
+       ||stage->getName()=="Training4"
+       ||stage->getName()=="Training5"
+       )
+    {
+        image_training_text=painter->getTexture(assets_directory+"misc/training/"+stage->getName()+".png");
+        image_training_text_final=painter->getTexture(assets_directory+"misc/training/"+stage->getName()+"_final.png");
+    }
+
 
     setGameOver(false);
     mainLoop();
@@ -104,6 +120,7 @@ void STG::stageSelectModeInit()
 {
     //stage->playMusic();
     painter->camera_x=0;
+    current_training_transparency=0;
 }
 
 void STG::mainLoop()
@@ -328,29 +345,34 @@ void STG::render()
 //    painter->drawText(enemy->getName(),25,110);
 //    painter->drawText("Damage level: "+toString(damage_level),25,170);
 
+    int tutorial_text_spacing_y=10;
+    int tutorial_control_spacing_y=100;
+    current_training_transparency+=2;
+    if(current_training_transparency>255)
+        current_training_transparency=255;
     if(game_mode=="charge training")
     {
         painter->draw2DImage
         (   image_training_bar_fill,
             image_training_bar_fill->getWidth()*(charge_destroy_count/charge_destroy_count_objective),image_training_bar_fill->getHeight(),
-            0,0,
+            painter->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_training_transparency),
             0,0,
             false,
             FlatShadow());
         painter->draw2DImage
         (   image_training_bar,
             image_training_bar->getWidth(),image_training_bar->getHeight(),
-            0,0,
+            painter->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_training_transparency),
             0,0,
             false,
             FlatShadow());
@@ -362,12 +384,12 @@ void STG::render()
             painter->draw2DImage
             (   image_training_box,
                 image_training_box->getWidth(),image_training_box->getHeight(),
-                0+i*(image_training_box->getWidth()+10),0,
+                painter->screen_width/2-(image_training_box->getWidth()/2)*3+i*(image_training_box->getWidth()+10),tutorial_control_spacing_y,
                 1.0,
                 0.0,
                 false,
                 0,0,
-                Color(255,255,255,255),
+                Color(255,255,255,current_training_transparency),
                 0,0,
                 false,
                 FlatShadow());
@@ -376,12 +398,12 @@ void STG::render()
                 painter->draw2DImage
                 (   image_training_x,
                     image_training_x->getWidth(),image_training_x->getHeight(),
-                    0+i*(image_training_x->getWidth()+10),0,
+                    painter->screen_width/2-(image_training_x->getWidth()/2)*3+i*(image_training_x->getWidth()+10),tutorial_control_spacing_y,
                     1.0,
                     0.0,
                     false,
                     0,0,
-                    Color(255,255,255,255),
+                    Color(255,255,255,current_training_transparency),
                     0,0,
                     false,
                     FlatShadow());
@@ -393,24 +415,60 @@ void STG::render()
         painter->draw2DImage
         (   image_training_bar_fill,
             image_training_bar_fill->getWidth()*(parry_dash_count/parry_dash_count_objective),image_training_bar_fill->getHeight(),
-            0,0,
+            painter->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_training_transparency),
             0,0,
             false,
             FlatShadow());
         painter->draw2DImage
         (   image_training_bar,
             image_training_bar->getWidth(),image_training_bar->getHeight(),
-            0,0,
+            painter->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_training_transparency),
+            0,0,
+            false,
+            FlatShadow());
+    }
+    if(image_training_text)
+    {
+        painter->draw2DImage
+        (   image_training_text,
+            image_training_text->getWidth(),image_training_text->getHeight(),
+            painter->screen_width/2-image_training_text->getWidth()/2,tutorial_text_spacing_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,current_training_transparency),
+            0,0,
+            false,
+            FlatShadow());
+    }
+    if(getGameOver())
+    {
+        current_training_final_transparency+=2;
+        if(current_training_final_transparency>255)
+            current_training_final_transparency=255;
+    }
+    if(image_training_text_final)
+    {
+        painter->draw2DImage
+        (   image_training_text_final,
+            image_training_text_final->getWidth(),image_training_text_final->getHeight(),
+            painter->screen_width/2-image_training_text_final->getWidth()/2,600,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,current_training_final_transparency),
             0,0,
             false,
             FlatShadow());

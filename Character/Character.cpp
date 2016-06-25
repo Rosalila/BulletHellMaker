@@ -798,8 +798,8 @@ void Character::spellControl(int stage_velocity)
 
 void Character::bottomRender()
 {
-    if(!visible)
-        return;
+    //if(!visible)
+    //    return;
 
     //Shake
     if(shake_time>0)

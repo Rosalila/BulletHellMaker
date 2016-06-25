@@ -24,6 +24,10 @@ class STG
     Image*image_training_x;
     Image*image_training_bar;
     Image*image_training_bar_fill;
+    Image*image_training_text;
+    Image*image_training_text_final;
+    int current_training_transparency;
+    int current_training_final_transparency;
 
     string game_mode;
 
