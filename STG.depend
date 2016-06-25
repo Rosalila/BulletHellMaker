@@ -3346,7 +3346,7 @@
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuBoton.h
 	"Elemento.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
+1466880806 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuCharSelect.cpp
 	"MenuCharSelect.h"
 
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuCharSelect.h
@@ -3364,7 +3364,7 @@
 	"MenuImagen.h"
 	"MenuTexto.h"
 
-1464894617 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuLista.h
+1466889102 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuLista.h
 	<vector>
 	"Elemento.h"
 
@@ -3384,7 +3384,7 @@
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuImagen.cpp
 	"MenuImagen.h"
 
-1464894649 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuLista.cpp
+1466889480 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuLista.cpp
 	"MenuLista.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/MenuTexto.cpp
@@ -3428,7 +3428,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1466693846 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
+1466888778 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
 1465335491 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.h
@@ -3503,6 +3503,6 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1466878076 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
+1466879574 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
 	"STG.h"
 

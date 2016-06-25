@@ -101,7 +101,7 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
 //    if(stg->enemyWon())
 //        iniciarJuego(character_name,stage_name);
     //this->playMusic();
-    char_select->clearLocks();
+    //char_select->clearLocks(); //Hardcode do not clear locks
 }
 
 void Menu::loopMenu()
@@ -111,9 +111,14 @@ void Menu::loopMenu()
     inputb=new RosalilaInputs();
     inputa->loadFromXML(1,receiver);
     inputb->loadFromXML(2,receiver);
+    bool key_up=true;
     //inicio
 	for (;;)
 	{
+	    if(!receiver->isKeyDown(SDLK_z))
+	    {
+	        key_up=true;
+	    }
         dibujarMenu();
         //Move Elements
         for(int i=0;i<(int)elementos.size();i++)
@@ -231,176 +236,181 @@ void Menu::loopMenu()
                         backgroundTargetUpdate(ml->getActual());
                     }
                 }
-            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyPressed(SDLK_z) || receiver->isJoyPressed(0,0))
+            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyDown(SDLK_z) || receiver->isJoyPressed(0,0))
             {
-                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
+                if(key_up)
                 {
-                    if(!char_select->listoPA())
+                    key_up=false;
+                    if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                     {
-                        sonido->playSound(std::string("Menu.select_char"));
-                        char_select->lockPA(0);
-                    }
-                    else
-                    {
-                        sonido->playSound(std::string("Menu.select"));
-                        iniciarJuego(char_select->getLockedNamesPA()[0],getStage(),"Stage select");
-                    }
-                }
-
-                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
-                {
-                    MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-                    if(mb->getAccion()=="Start")
-                    {
-//                        iniciarJuego();
-                    }
-                    if(mb->getAccion()=="Arcade")
-                    {
-                        this->printLoadingScreen();
-                        writeLogLine("Initializing arcade game initializer.");
-                        Stage*stage=new Stage(painter,sonido,receiver);
-                        stage->loadFromXML(arcade_paths["Easy"][0]);
-                        Player*player=new Player(sonido,painter,receiver,"Demo",10);
-                        player->x+=painter->camera_x;
-                        int last_cammera=0;
-                        //stage->playMusic();
-                        Mix_HaltMusic();
-                        for(int i=0;i<arcade_paths["Easy"].size();i++)
+                        if(!char_select->listoPA())
                         {
-
-                            //this->printLoadingScreen();
-                            writeLogLine("Initializing arcade game.");
-                            Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player,20);
-                            enemy->x+=painter->camera_x;
-                            player->parries_left=3;
-                            player->current_charge=0;
-                            stage->setName(arcade_paths["Easy"][i]);
-                            STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
-                            if(stg->enemyWon())
-                            {
-                                player->setHP(500);
-                                player->setVisible(true);
-                                player->setOrientation("up");
-                                i--;
-                            }
-                            if(i==arcade_paths["Easy"].size()-1 && stg->playerWon())
-                            {
-                                this->playMusic();
-                                string menu_directory = assets_directory+"/menu/ending.svg";
-                                Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
-                                temp->loopMenu();
-                            }
-                            delete enemy;
-//                            last_cammera
-                            //painter->camera_x=last_cammera;
-                            delete stg;
-
+                            sonido->playSound(std::string("Menu.select_char"));
+                            char_select->lockPA(0);
                         }
-                        //this->playMusic();
-                    }
-                    if(mb->getAccion()=="Continue")
-                    {
-                        break;
-                    }
-                    if(mb->getAccion()=="Exit")
-                    {
-                        exit_signal=true;
-                        break;
-                    }
-                    if(mb->getAccion()=="load")
-                    {
-                        string menu_directory = assets_directory+mb->load_menu;
-                        Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
-                        temp->loopMenu();
-                    }
-                    if(mb->getAccion().substr(0,6)=="Player")
-                    {
-                        int player;
-                        std::string mapeo="";
-                        std::string accion=mb->getAccion();
-                        if(accion.substr(0,7)=="Player1")
-                            player=1;
                         else
-                            player=2;
-                        RosalilaInputs* temp=new RosalilaInputs();
-                        RosalilaInputs* temp2=new RosalilaInputs();
-                        if(player==1)
                         {
-                            temp->loadFromXML(1,receiver);
-                            temp2->loadFromXML(2,receiver);
-                        }else
-                        {
-                            temp->loadFromXML(2,receiver);
-                            temp2->loadFromXML(1,receiver);
+                            sonido->playSound(std::string("Menu.select"));
+                            iniciarJuego(char_select->getLockedNamesPA()[0],getStage(),"Stage select");
+                            continue;
                         }
-                        if(accion=="Player1.KeyConfig:up"||accion=="Player2.KeyConfig:up")mapeo="8";
-                        if(accion=="Player1.KeyConfig:down"||accion=="Player2.KeyConfig:down")mapeo="2";
-                        if(accion=="Player1.KeyConfig:left"||accion=="Player2.KeyConfig:left")mapeo="4";
-                        if(accion=="Player1.KeyConfig:right"||accion=="Player2.KeyConfig:right")mapeo="6";
-                        if(accion=="Player1.KeyConfig:a"||accion=="Player2.KeyConfig:a")mapeo="a";
-                        if(accion=="Player1.KeyConfig:b"||accion=="Player2.KeyConfig:b")mapeo="b";
-                        if(accion=="Player1.KeyConfig:c"||accion=="Player2.KeyConfig:c")mapeo="c";
-                        if(accion=="Player1.KeyConfig:d"||accion=="Player2.KeyConfig:d")mapeo="d";
-                        if(accion=="Player1.KeyConfig:e"||accion=="Player2.KeyConfig:e")mapeo="e";
-                        if(accion=="Player1.KeyConfig:f"||accion=="Player2.KeyConfig:f")mapeo="f";
+                    }
 
-                        mb->input_config="";
-                        std::string str_input=getRosalilaInputsPressed();
-                        //key
-                        if((char)str_input[0]!='j')
+                    if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
+                    {
+                        MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                        if(mb->getAccion()=="Start")
                         {
-                            int pos=-1,posc=-1;
-                            for(int j=0;j<(int)temp->botones.size();j++)
-                                if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
-                                    pos=j;
+    //                        iniciarJuego();
+                        }
+                        if(mb->getAccion()=="Arcade")
+                        {
+                            this->printLoadingScreen();
+                            writeLogLine("Initializing arcade game initializer.");
+                            Stage*stage=new Stage(painter,sonido,receiver);
+                            stage->loadFromXML(arcade_paths["Easy"][0]);
+                            Player*player=new Player(sonido,painter,receiver,"Demo",10);
+                            player->x+=painter->camera_x;
+                            int last_cammera=0;
+                            //stage->playMusic();
+                            Mix_HaltMusic();
+                            for(int i=0;i<arcade_paths["Easy"].size();i++)
+                            {
 
-                            for(int j=0;j<(int)temp->cruz.size();j++)
-                                if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
-                                    posc=j;
+                                //this->printLoadingScreen();
+                                writeLogLine("Initializing arcade game.");
+                                Enemy*enemy=new Enemy(sonido,painter,receiver,arcade_paths["Easy"][i],player,20);
+                                enemy->x+=painter->camera_x;
+                                player->parries_left=3;
+                                player->current_charge=0;
+                                stage->setName(arcade_paths["Easy"][i]);
+                                STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
+                                if(stg->enemyWon())
+                                {
+                                    player->setHP(500);
+                                    player->setVisible(true);
+                                    player->setOrientation("up");
+                                    i--;
+                                }
+                                if(i==arcade_paths["Easy"].size()-1 && stg->playerWon())
+                                {
+                                    this->playMusic();
+                                    string menu_directory = assets_directory+"/menu/ending.svg";
+                                    Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
+                                    temp->loopMenu();
+                                }
+                                delete enemy;
+    //                            last_cammera
+                                //painter->camera_x=last_cammera;
+                                delete stg;
 
-                            Boton b(receiver,toKeyCode(str_input),mapeo);
-                            if(pos!=-1)
-                                temp->botones[pos]=b;
-                            else if (posc!=-1)
-                                temp->cruz[posc]=b;
+                            }
+                            //this->playMusic();
+                        }
+                        if(mb->getAccion()=="Continue")
+                        {
+                            break;
+                        }
+                        if(mb->getAccion()=="Exit")
+                        {
+                            exit_signal=true;
+                            break;
+                        }
+                        if(mb->getAccion()=="load")
+                        {
+                            string menu_directory = assets_directory+mb->load_menu;
+                            Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
+                            temp->loopMenu();
+                        }
+                        if(mb->getAccion().substr(0,6)=="Player")
+                        {
+                            int player;
+                            std::string mapeo="";
+                            std::string accion=mb->getAccion();
+                            if(accion.substr(0,7)=="Player1")
+                                player=1;
                             else
-                                temp->botones.push_back(b);
-                        }else//joy
-                        {
-                            int pos=-1,posc=-1;
-                            for(int j=0;j<(int)temp->botones.size();j++)
-                                if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
-                                    pos=j;
-
-                            for(int j=0;j<(int)temp->cruz.size();j++)
-                                if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
-                                    posc=j;
-
-                            int int_input=((int)(str_input[3]))-48;
-                            if((char)str_input[3]=='u')
-                                int_input=-8;
-                            if((char)str_input[3]=='d')
-                                int_input=-2;
-                            if((char)str_input[3]=='l')
-                                int_input=-4;
-                            if((char)str_input[3]=='r')
-                                int_input=-6;
-                            Boton b(receiver,int_input,((int)str_input[1])-48,mapeo);
-                            if(pos!=-1)
+                                player=2;
+                            RosalilaInputs* temp=new RosalilaInputs();
+                            RosalilaInputs* temp2=new RosalilaInputs();
+                            if(player==1)
                             {
-                                temp->botones[pos]=b;
-                            }else if(posc!=-1)
-                            {
-                                temp->cruz[posc]=b;
+                                temp->loadFromXML(1,receiver);
+                                temp2->loadFromXML(2,receiver);
                             }else
                             {
-                                temp->botones.push_back(b);
+                                temp->loadFromXML(2,receiver);
+                                temp2->loadFromXML(1,receiver);
                             }
-                        }
+                            if(accion=="Player1.KeyConfig:up"||accion=="Player2.KeyConfig:up")mapeo="8";
+                            if(accion=="Player1.KeyConfig:down"||accion=="Player2.KeyConfig:down")mapeo="2";
+                            if(accion=="Player1.KeyConfig:left"||accion=="Player2.KeyConfig:left")mapeo="4";
+                            if(accion=="Player1.KeyConfig:right"||accion=="Player2.KeyConfig:right")mapeo="6";
+                            if(accion=="Player1.KeyConfig:a"||accion=="Player2.KeyConfig:a")mapeo="a";
+                            if(accion=="Player1.KeyConfig:b"||accion=="Player2.KeyConfig:b")mapeo="b";
+                            if(accion=="Player1.KeyConfig:c"||accion=="Player2.KeyConfig:c")mapeo="c";
+                            if(accion=="Player1.KeyConfig:d"||accion=="Player2.KeyConfig:d")mapeo="d";
+                            if(accion=="Player1.KeyConfig:e"||accion=="Player2.KeyConfig:e")mapeo="e";
+                            if(accion=="Player1.KeyConfig:f"||accion=="Player2.KeyConfig:f")mapeo="f";
 
-                        escribirRosalilaInputssXML(temp,temp2);
-                        //mb->input_config=b.keyToString();
-                        llenarRosalilaInputssBotones();
+                            mb->input_config="";
+                            std::string str_input=getRosalilaInputsPressed();
+                            //key
+                            if((char)str_input[0]!='j')
+                            {
+                                int pos=-1,posc=-1;
+                                for(int j=0;j<(int)temp->botones.size();j++)
+                                    if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
+                                        pos=j;
+
+                                for(int j=0;j<(int)temp->cruz.size();j++)
+                                    if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
+                                        posc=j;
+
+                                Boton b(receiver,toKeyCode(str_input),mapeo);
+                                if(pos!=-1)
+                                    temp->botones[pos]=b;
+                                else if (posc!=-1)
+                                    temp->cruz[posc]=b;
+                                else
+                                    temp->botones.push_back(b);
+                            }else//joy
+                            {
+                                int pos=-1,posc=-1;
+                                for(int j=0;j<(int)temp->botones.size();j++)
+                                    if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
+                                        pos=j;
+
+                                for(int j=0;j<(int)temp->cruz.size();j++)
+                                    if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
+                                        posc=j;
+
+                                int int_input=((int)(str_input[3]))-48;
+                                if((char)str_input[3]=='u')
+                                    int_input=-8;
+                                if((char)str_input[3]=='d')
+                                    int_input=-2;
+                                if((char)str_input[3]=='l')
+                                    int_input=-4;
+                                if((char)str_input[3]=='r')
+                                    int_input=-6;
+                                Boton b(receiver,int_input,((int)str_input[1])-48,mapeo);
+                                if(pos!=-1)
+                                {
+                                    temp->botones[pos]=b;
+                                }else if(posc!=-1)
+                                {
+                                    temp->cruz[posc]=b;
+                                }else
+                                {
+                                    temp->botones.push_back(b);
+                                }
+                            }
+
+                            escribirRosalilaInputssXML(temp,temp2);
+                            //mb->input_config=b.keyToString();
+                            llenarRosalilaInputssBotones();
+                        }
                     }
                 }
             }
@@ -767,6 +777,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                                player1_cursor_x,player1_cursor_y,
                                                player2_cursor_x,player2_cursor_y
                                                );
+                char_select->lockPA(0);//Hardcode auto select first char
                 elementos.push_back((Elemento*)char_select);
 
             }else if(strcmp(e->Attribute("type"),"stage_select")==0)
@@ -815,47 +826,47 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
                 int arrow_left_x=x;
                 if(e->Attribute("arrow_left_x"))
-                    atoi(e->Attribute("arrow_left_x"));
+                    arrow_left_x=atoi(e->Attribute("arrow_left_x"));
 
                 int arrow_left_y=y;
                 if(e->Attribute("arrow_left_y"))
-                    atoi(e->Attribute("arrow_left_y"));
+                    arrow_left_y=atoi(e->Attribute("arrow_left_y"));
 
                 Image*path_left=NULL;
                 if(e->Attribute("path_left")!=NULL)
-                    path_left=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left")));
+                    path_left=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_left")));
 
                 int arrow_right_x=x;
                 if(e->Attribute("arrow_right_x"))
-                    atoi(e->Attribute("arrow_right_x"));
+                    arrow_right_x=atoi(e->Attribute("arrow_right_x"));
 
                 int arrow_right_y=y;
                 if(e->Attribute("arrow_right_y"))
-                    atoi(e->Attribute("arrow_right_y"));
+                    arrow_right_y=atoi(e->Attribute("arrow_right_y"));
 
                 Image*path_right=NULL;
                 if(e->Attribute("path_right")!=NULL)
                     path_right=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_right")));
 
-                int arrow_left_x_selected=x;
+                int arrow_left_x_selected=arrow_left_x;
                 if(e->Attribute("arrow_left_x_selected"))
-                    atoi(e->Attribute("arrow_left_x_selected"));
+                    arrow_left_x_selected=atoi(e->Attribute("arrow_left_x_selected"));
 
-                int arrow_left_y_selected=y;
+                int arrow_left_y_selected=arrow_left_y;
                 if(e->Attribute("arrow_left_y_selected"))
-                    atoi(e->Attribute("arrow_left_y_selected"));
+                    arrow_left_y_selected=atoi(e->Attribute("arrow_left_y_selected"));
 
                 Image*path_left_selected=path_left;
                 if(e->Attribute("path_left_selected")!=NULL)
                     path_left_selected=painter->getTexture(assets_directory+std::string("menu/")+std::string(e->Attribute("path_left_selected")));
 
-                int arrow_right_x_selected=x;
+                int arrow_right_x_selected=arrow_right_x;
                 if(e->Attribute("arrow_right_x_selected"))
-                    atoi(e->Attribute("arrow_right_x_selected"));
+                    arrow_right_x_selected=atoi(e->Attribute("arrow_right_x_selected"));
 
-                int arrow_right_y_selected=y;
+                int arrow_right_y_selected=arrow_right_y;
                 if(e->Attribute("arrow_right_y_selected"))
-                    atoi(e->Attribute("arrow_right_y_selected"));
+                    arrow_right_y_selected=atoi(e->Attribute("arrow_right_y_selected"));
 
                 Image*path_right_selected=path_right;
                 if(e->Attribute("path_right_selected")!=NULL)
