@@ -13,6 +13,9 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->orientation="idle";
     this->current_type="1";
     this->visible=true;
+    this->charge_ready=false;
+    this->frame=0;
+    this->charging_sound_channel=-1;
 
     //Sprites animation
     this->animation_velocity=4;
@@ -51,6 +54,20 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/1.png"));
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/2.png"));
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/3.png"));
+
+    //Move sound
+    move_sound_channel=-1;
+    string move_sound_path = assets_directory+directory+"/sounds/move.wav";
+    this->sonido->addSound("move init",assets_directory+directory+"/sounds/move_init.wav");
+    this->sonido->addSound("move",assets_directory+directory+"/sounds/move.wav");
+    move_sound_channel = this->sonido->playSound("move",20, -1);
+    Mix_Volume(move_sound_channel, 0);
+    move_sound_volume=0;
+
+    //Charge
+    this->sonido->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
+    this->sonido->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
+    charging_sound_channel=this->sonido->playSound("charging",21,-1);
 }
 
 void Player::loadPlayerFromXML()
@@ -146,6 +163,50 @@ void Player::loadPlayerFromXML()
 
 void Player::inputControl()
 {
+    bool up_pressed,down_pressed,left_pressed,right_pressed;
+    up_pressed=down_pressed=left_pressed=right_pressed=false;
+
+    bool started_moving = false;
+
+    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
+       || receiver->isJoyDown(-2,0))
+    {
+        if(orientation!="down")
+            started_moving=true;
+        down_pressed=true;
+    }
+    if(receiver->isKeyDown(SDL_SCANCODE_UP)
+       || receiver->isJoyDown(-8,0))
+    {
+        if(orientation!="up")
+            started_moving=true;
+        up_pressed=true;
+    }
+    if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
+       || receiver->isJoyDown(-4,0))
+    {
+        if(orientation!="left")
+            started_moving=true;
+        left_pressed=true;
+    }
+    if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
+       || receiver->isJoyDown(-6,0))
+    {
+        if(orientation!="right")
+            started_moving=true;
+        right_pressed=true;
+    }
+
+    if(down_pressed||up_pressed||left_pressed||right_pressed)
+    {
+        move_sound_volume+=50;
+        if(move_sound_volume>128)
+            move_sound_volume=128;
+    }else
+    {
+        //move_sound_volume=0;
+    }
+
     if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
     {
@@ -183,91 +244,66 @@ void Player::inputControl()
 
     int velocity_boost=invulnerable_frames_left;
 
-    bool up_pressed,down_pressed,left_pressed,right_pressed;
-    up_pressed=down_pressed=left_pressed=right_pressed=false;
-
-    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
-       || receiver->isJoyDown(-2,0))
-    {
-        down_pressed=true;
-    }
-    if(receiver->isKeyDown(SDL_SCANCODE_UP)
-       || receiver->isJoyDown(-8,0))
-    {
-        up_pressed=true;
-    }
-    if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
-       || receiver->isJoyDown(-4,0))
-    {
-        left_pressed=true;
-    }
-    if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
-       || receiver->isJoyDown(-6,0))
-    {
-        right_pressed=true;
-    }
+    Mix_Volume(move_sound_channel, move_sound_volume);
+    move_sound_volume-=20;
+    if(move_sound_volume<0)
+        move_sound_volume=0;
 
     bool diagonal_slowdown=2;
 
-    if(true)
-    {
-        if(up_pressed && !down_pressed && !left_pressed && !right_pressed)//8
-        {
-            this->y-=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(!up_pressed && down_pressed && !left_pressed && !right_pressed)//2
-        {
-            this->y+=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(!up_pressed && !down_pressed && left_pressed && !right_pressed)//4
-        {
-            this->x-=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(!up_pressed && !down_pressed && !left_pressed && right_pressed)//6
-        {
-            this->x+=(velocity+velocity_boost)/getSlowdown();
-        }
+    double delta_y=0;
+    double delta_x=0;
 
-        if(!up_pressed && down_pressed && left_pressed && !right_pressed)//1
-        {
-            this->x += cos (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-            this->y -= sin (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-
-        }
-        if(!up_pressed && down_pressed && !left_pressed && right_pressed)//3
-        {
-            this->x += cos (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-            this->y -= sin (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-        }
-        if(up_pressed && !down_pressed && left_pressed && !right_pressed)//7
-        {
-            this->x += cos (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-            this->y -= sin (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-        }
-        if(up_pressed && !down_pressed && !left_pressed && right_pressed)//9
-        {
-            this->x += cos (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-            this->y -= sin (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
-        }
-    }else
+    if(up_pressed && !down_pressed && !left_pressed && !right_pressed)//8
     {
-        if(up_pressed)
-        {
-            this->y-=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(down_pressed)
-        {
-            this->y+=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(left_pressed)
-        {
-            this->x-=(velocity+velocity_boost)/getSlowdown();
-        }
-        if(right_pressed)
-        {
-            this->x+=(velocity+velocity_boost)/getSlowdown();
-        }
+        delta_y = -(velocity+velocity_boost)/getSlowdown();
     }
+    if(!up_pressed && down_pressed && !left_pressed && !right_pressed)//2
+    {
+        delta_y = (velocity+velocity_boost)/getSlowdown();
+    }
+    if(!up_pressed && !down_pressed && left_pressed && !right_pressed)//4
+    {
+        delta_x = -(velocity+velocity_boost)/getSlowdown();
+    }
+    if(!up_pressed && !down_pressed && !left_pressed && right_pressed)//6
+    {
+        delta_x = (velocity+velocity_boost)/getSlowdown();
+    }
+
+    if(!up_pressed && down_pressed && left_pressed && !right_pressed)//1
+    {
+        delta_x = cos (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        delta_y = - sin (225 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+
+    }
+    if(!up_pressed && down_pressed && !left_pressed && right_pressed)//3
+    {
+        delta_x = cos (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        delta_y = - sin (315 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+    }
+    if(up_pressed && !down_pressed && left_pressed && !right_pressed)//7
+    {
+        delta_x = cos (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        delta_y = - sin (135 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+    }
+    if(up_pressed && !down_pressed && !left_pressed && right_pressed)//9
+    {
+        delta_x = cos (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+        delta_y = - sin (45 * PI / 180) * (velocity+velocity_boost) / getSlowdown();
+    }
+
+    this->x+=delta_x;
+    this->y+=delta_y;
+
+    if(delta_x!=last_delta_x || delta_y!=last_delta_y)
+    {
+        if(delta_x!=0 || delta_y!=0)
+            this->sonido->playSound("move init",-1,0);
+    }
+
+    last_delta_x=delta_x;
+    last_delta_y=delta_y;
 
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))
@@ -368,8 +404,23 @@ void Player::logic(int stage_velocity)
         current_shield=0;
 
     current_charge+=charge_velocity;
-    if(current_charge>max_charge)
+    if(current_charge>=max_charge)
+    {
         current_charge=max_charge;
+        if(!charge_ready)
+        {
+            this->sonido->playSound("charge ready",-1, 0);
+        }
+        charge_ready=true;
+    }else
+    {
+        charge_ready=false;
+    }
+
+    if(!charge_ready && !shooting)
+        Mix_Volume(charging_sound_channel, 128);
+    else
+        Mix_Volume(charging_sound_channel, 0);
     //current_color_effect_b = (255*hp)/max_hp;
 
     //Color effect
@@ -381,6 +432,7 @@ void Player::logic(int stage_velocity)
 //        current_color_effect_b++;
 //    if(current_color_effect_a<255)
 //        current_color_effect_a++;
+    frame++;
 }
 
 void Player::bottomRender()
@@ -413,6 +465,10 @@ void Player::bottomRender()
         if(getGameOver())
             transparency_divider=8;
 
+        int charge_transparency_effect=255;
+        if(charge_ready)
+            charge_transparency_effect=(frame*10)%255;
+
         if(charge_image)
         painter->draw2DImage
             (   charge_image,
@@ -424,7 +480,7 @@ void Player::bottomRender()
                 0.0,
                 false,
                 0,0,
-                Color(255,255,255,255/transparency_divider),
+                Color(255,255,255,charge_transparency_effect/transparency_divider),
                 0,0,
                 true,
                 FlatShadow());
@@ -729,7 +785,7 @@ void Player::parry(bool infinite_parries)
     invulnerable_frames_left=15;
     if(this->sonido->soundExists(this->getName()+".parry"))
     {
-        this->sonido->playSound(this->getName()+".parry",sound_channel_base+1);
+        this->sonido->playSound(this->getName()+".parry",sound_channel_base+1,0);
     }
 }
 
@@ -741,4 +797,9 @@ bool Player::collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_
         if(parry_hitboxes[i]->getPlacedHitbox(this->x,this->y).collides(hitbox))
             return true;
     return false;
+}
+
+void Player::exit()
+{
+    Mix_Volume(charging_sound_channel, 0);
 }

@@ -86,7 +86,7 @@ void Bullet::playSound()
     {
 //        if(current_channel!=-1)
 //            Mix_HaltChannel(current_channel);
-        current_channel=sonido->playSound(random_sounds[current_random_sound],sound_channel);
+        current_channel=sonido->playSound(random_sounds[current_random_sound],sound_channel,0);
     }
 }
 
@@ -94,7 +94,7 @@ void Bullet::playHitSound()
 {
     if(sonido->soundExists("bullet_hit."+name))
     {
-        sonido->playSound("bullet_hit."+name,sound_channel+5);
+        sonido->playSound("bullet_hit."+name,sound_channel+5,0);
     }
 }
 

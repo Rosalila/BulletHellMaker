@@ -129,10 +129,12 @@ void STG::mainLoop()
     bool end_key_up_joystick=false;
     string music_path_temp = assets_directory+"stages/"+stage->getName()+"/music.ogg";
     Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
+
     for (;;)
     {
         if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
+            player->exit();
             break;
         }
 
@@ -159,11 +161,11 @@ void STG::mainLoop()
                 break;
             if(receiver->isKeyDown(SDLK_z) && end_key_up_keyboard)
                 break;
-            if(receiver->isJoyDown(0,0) && end_key_up_joystick)
+            if(receiver->isJoyPressed(0,0) && end_key_up_joystick)
                 break;
             if(!receiver->isKeyDown(SDLK_z))
                 end_key_up_keyboard=true;
-            if(!receiver->isJoyPressed(0,0))
+            if(!receiver->isJoyDown(0,0))
                 end_key_up_joystick=true;
 
         }
@@ -228,7 +230,7 @@ void STG::logic()
                     parry_count = 0;
                     painter->shakeScreen(30,10);
                     if(this->sonido->soundExists(player->getName()+".hit"))
-                        this->sonido->playSound(player->getName()+".hit",3);
+                        this->sonido->playSound(player->getName()+".hit",3,0);
                     if(player->getHP()==0)
                     {
                         lose();
@@ -252,7 +254,7 @@ void STG::logic()
                     enemy->hit(p->getDamage()+damage_level);
                     enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
                     if(this->sonido->soundExists(enemy->getName()+".hit"))
-                        this->sonido->playSound(enemy->getName()+".hit",1);
+                        this->sonido->playSound(enemy->getName()+".hit",1,0);
                     if(enemy->getHP()==0)
                     {
                         win();
@@ -554,13 +556,13 @@ void STG::win()
 {
     enemy->setHP(0);
     painter->shakeScreen(50,20);
-    sonido->playSound("you win",2);
+    sonido->playSound("you win",2,0);
     enemy->deleteActivePatterns();
     setGameOver(true);
 }
 
 void STG::lose()
 {
-    sonido->playSound("you lose",4);
+    sonido->playSound("you lose",4,0);
     setGameOver(true);
 }

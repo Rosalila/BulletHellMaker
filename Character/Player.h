@@ -30,6 +30,12 @@ class Player:public Character
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
 
+    //Move sound
+    int move_sound_channel;
+    int move_sound_volume;
+    double last_delta_x;
+    double last_delta_y;
+
     //Shield
     int current_shield;
     int max_shield;
@@ -44,6 +50,8 @@ class Player:public Character
     int charge_sprite_x;
     int charge_sprite_y;
     Image* charge_image;
+    bool charge_ready;
+    int charging_sound_channel;
 
     //Parry
     int current_parry_frame;
@@ -58,6 +66,8 @@ class Player:public Character
     //int acceleration;
 
     vector<Image*>parry_sprites;
+
+    int frame;
 public:
 int parries_left;
 int invulnerable_frames_left;
@@ -74,6 +84,7 @@ int current_charge;
     bool isInvulnerable();
     void parry(bool infinite_parries);
     bool collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
+    void exit();
 };
 
 #endif
