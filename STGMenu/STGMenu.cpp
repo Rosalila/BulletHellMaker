@@ -156,7 +156,7 @@ void Menu::loopMenu()
             else if(receiver->isKeyPressed(SDL_SCANCODE_DOWN)
                     || receiver->isJoyPressed(-2,0))
             {
-                sonido->playSound(std::string("Menu.move"));
+                //sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->avanzar();
 
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -178,7 +178,7 @@ void Menu::loopMenu()
             else if(receiver->isKeyPressed(SDL_SCANCODE_UP)
                     || receiver->isJoyPressed(-8,0))
             {
-                sonido->playSound(std::string("Menu.move"));
+                //sonido->playSound(std::string("Menu.move"));
                 ((MenuContenedor*)selectables_container)->retroceder();
 
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -211,6 +211,7 @@ void Menu::loopMenu()
                     }
                     else
                     {
+                        sonido->playSound(std::string("Menu.move"));
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->avanzar();
                         backgroundTargetUpdate(ml->getActual());
@@ -231,6 +232,7 @@ void Menu::loopMenu()
                     }
                     else
                     {
+                        sonido->playSound(std::string("Menu.move"));
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->retroceder();
                         backgroundTargetUpdate(ml->getActual());
@@ -318,6 +320,7 @@ void Menu::loopMenu()
                         }
                         if(mb->getAccion()=="load")
                         {
+                            sonido->playSound(std::string("Menu.select"));
                             string menu_directory = assets_directory+mb->load_menu;
                             Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
                             temp->loopMenu();

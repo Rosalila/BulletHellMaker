@@ -135,6 +135,7 @@ void STG::mainLoop()
         if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
             player->exit();
+            sonido->playSound(std::string("Menu.back"));
             break;
         }
 
@@ -157,12 +158,14 @@ void STG::mainLoop()
         receiver->updateInputs();
         if(getGameOver())
         {
-            if(receiver->isKeyPressed(SDLK_RETURN))
+            if(receiver->isKeyPressed(SDLK_RETURN)
+               || (receiver->isKeyDown(SDLK_z) && end_key_up_keyboard)
+               || (receiver->isJoyPressed(0,0) && end_key_up_joystick)
+               )
+            {
+                sonido->playSound(std::string("Menu.select"));
                 break;
-            if(receiver->isKeyDown(SDLK_z) && end_key_up_keyboard)
-                break;
-            if(receiver->isJoyPressed(0,0) && end_key_up_joystick)
-                break;
+            }
             if(!receiver->isKeyDown(SDLK_z))
                 end_key_up_keyboard=true;
             if(!receiver->isJoyDown(0,0))

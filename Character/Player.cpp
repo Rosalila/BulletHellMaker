@@ -55,14 +55,14 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/2.png"));
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/3.png"));
 
-    //Move sound
-    move_sound_channel=-1;
-    string move_sound_path = assets_directory+directory+"/sounds/move.wav";
-    this->sonido->addSound("move init",assets_directory+directory+"/sounds/move_init.wav");
-    this->sonido->addSound("move",assets_directory+directory+"/sounds/move.wav");
-    move_sound_channel = this->sonido->playSound("move",20, -1);
-    Mix_Volume(move_sound_channel, 0);
-    move_sound_volume=0;
+//    //Move sound
+//    move_sound_channel=-1;
+//    string move_sound_path = assets_directory+directory+"/sounds/move.wav";
+//    this->sonido->addSound("move init",assets_directory+directory+"/sounds/move_init.wav");
+//    this->sonido->addSound("move",assets_directory+directory+"/sounds/move.wav");
+//    move_sound_channel = this->sonido->playSound("move",20, -1);
+//    Mix_Volume(move_sound_channel, 0);
+//    move_sound_volume=0;
 
     //Charge
     this->sonido->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
@@ -197,15 +197,16 @@ void Player::inputControl()
         right_pressed=true;
     }
 
-    if(down_pressed||up_pressed||left_pressed||right_pressed)
-    {
-        move_sound_volume+=50;
-        if(move_sound_volume>128)
-            move_sound_volume=128;
-    }else
-    {
-        //move_sound_volume=0;
-    }
+    //Move sound
+//    if(down_pressed||up_pressed||left_pressed||right_pressed)
+//    {
+//        move_sound_volume+=50;
+//        if(move_sound_volume>128)
+//            move_sound_volume=128;
+//    }else
+//    {
+//        move_sound_volume=0;
+//    }
 
     if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
        || receiver->isJoyDown(-2,0))
@@ -244,10 +245,11 @@ void Player::inputControl()
 
     int velocity_boost=invulnerable_frames_left;
 
-    Mix_Volume(move_sound_channel, move_sound_volume);
-    move_sound_volume-=20;
-    if(move_sound_volume<0)
-        move_sound_volume=0;
+    //Move sound
+//    Mix_Volume(move_sound_channel, move_sound_volume);
+//    move_sound_volume-=20;
+//    if(move_sound_volume<0)
+//        move_sound_volume=0;
 
     bool diagonal_slowdown=2;
 
@@ -296,14 +298,14 @@ void Player::inputControl()
     this->x+=delta_x;
     this->y+=delta_y;
 
-    if(delta_x!=last_delta_x || delta_y!=last_delta_y)
-    {
-        if(delta_x!=0 || delta_y!=0)
-            this->sonido->playSound("move init",-1,0);
-    }
-
-    last_delta_x=delta_x;
-    last_delta_y=delta_y;
+    //MoveSound
+//    if(delta_x!=last_delta_x || delta_y!=last_delta_y)
+//    {
+//        if(delta_x!=0 || delta_y!=0)
+//            this->sonido->playSound("move init",-1,0);
+//    }
+//    last_delta_x=delta_x;
+//    last_delta_y=delta_y;
 
     if(receiver->isKeyDown(SDLK_z)
        || receiver->isJoyDown(0,0))
@@ -417,7 +419,7 @@ void Player::logic(int stage_velocity)
         charge_ready=false;
     }
 
-    if(!charge_ready && !shooting)
+    if(!charge_ready && !shooting && !getGameOver())
         Mix_Volume(charging_sound_channel, 128);
     else
         Mix_Volume(charging_sound_channel, 0);
