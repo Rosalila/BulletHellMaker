@@ -30,7 +30,7 @@ class Player:public Character
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
 
-//    //Move sound
+    //Move sound
 //    int move_sound_channel;
 //    int move_sound_volume;
 //    double last_delta_x;

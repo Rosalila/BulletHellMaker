@@ -298,7 +298,7 @@ void Player::inputControl()
     this->x+=delta_x;
     this->y+=delta_y;
 
-    //MoveSound
+    //Move Sound
 //    if(delta_x!=last_delta_x || delta_y!=last_delta_y)
 //    {
 //        if(delta_x!=0 || delta_y!=0)
