@@ -13,6 +13,11 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
     white_image_current_g = 255;
     white_image_current_b = 255;
 
+    frame=0;
+    skip_frame=9999999;
+    if(strcmp(archivo,"assets/menu/main_menu.svg")==0)
+        skip_frame=180;
+
     if(strcmp(archivo,"assets/menu/selection_menu.svg")==0)
         backgroundTargetUpdate(0);
 
@@ -238,7 +243,7 @@ void Menu::loopMenu()
                         backgroundTargetUpdate(ml->getActual());
                     }
                 }
-            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyDown(SDLK_z) || receiver->isJoyPressed(0,0))
+            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyDown(SDLK_z) || receiver->isJoyPressed(0,0) || frame>=skip_frame)
             {
                 if(key_up)
                 {
@@ -320,7 +325,8 @@ void Menu::loopMenu()
                         }
                         if(mb->getAccion()=="load")
                         {
-                            sonido->playSound(std::string("Menu.select"));
+                            if(frame<skip_frame)
+                                sonido->playSound(std::string("Menu.select"));
                             string menu_directory = assets_directory+mb->load_menu;
                             Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
                             temp->loopMenu();
@@ -416,8 +422,10 @@ void Menu::loopMenu()
                         }
                     }
                 }
+                frame=0;
             }
         }
+        frame++;
 	}
 }
 

@@ -3268,7 +3268,7 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1467233884 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
+1467387805 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -3428,10 +3428,10 @@
 	"tinyxml.h"
 	<windows.h>
 
-1467233999 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
+1467440385 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
-1465335491 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.h
+1467440059 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.h
 	"../Stage/Stage.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaMenus/MenuContenedor.h"

@@ -24,6 +24,9 @@ private:
     MenuCharSelect* char_select;
     map<string,vector<string> >arcade_paths;
 
+    int frame;
+    int skip_frame;
+
     void iniciarJuego(std::string character_name,std::string stage_name,string game_mode);
 public:
     std::string music_path;
