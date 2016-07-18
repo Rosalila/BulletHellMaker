@@ -780,10 +780,13 @@ bool Player::isInvulnerable()
 
 void Player::parry(bool infinite_parries)
 {
-    if(!infinite_parries && invulnerable_frames_left==0)
+    if(invulnerable_frames_left==0)
     {
-        parries_left-=1;
         invulnerable_frames_left=15;
+        if(!infinite_parries)
+        {
+            parries_left-=1;
+        }
     }
     if(this->sonido->soundExists(this->getName()+".parry"))
     {
