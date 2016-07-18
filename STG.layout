@@ -7,7 +7,7 @@
 	<File name="Character/Character.h" open="0" top="0" tabpos="3">
 		<Cursor position="1059" topLine="31" />
 	</File>
-	<File name="Character/Enemy.cpp" open="1" top="0" tabpos="5">
+	<File name="Character/Enemy.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="4720" topLine="141" />
 	</File>
 	<File name="Character/Enemy.h" open="0" top="0" tabpos="4">
@@ -16,10 +16,10 @@
 	<File name="Character/Modifier.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="Character/Player.cpp" open="1" top="0" tabpos="3">
+	<File name="Character/Player.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="1563" topLine="46" />
 	</File>
-	<File name="Character/Player.h" open="1" top="0" tabpos="4">
+	<File name="Character/Player.h" open="0" top="0" tabpos="4">
 		<Cursor position="793" topLine="20" />
 	</File>
 	<File name="Rosalila/RosalilaAI/Automata.cpp" open="0" top="0" tabpos="4">
@@ -53,7 +53,7 @@
 		<Cursor position="298" topLine="2" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="30997" topLine="1031" />
+		<Cursor position="30997" topLine="1029" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="6">
 		<Cursor position="3457" topLine="146" />
@@ -61,8 +61,11 @@
 	<File name="Rosalila/RosalilaGraphics/Timer.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="1062" topLine="27" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="2205" topLine="240" />
+	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="15927" topLine="461" />
+	</File>
+	<File name="Rosalila/RosalilaInputs/Receiver.h" open="1" top="0" tabpos="2">
+		<Cursor position="885" topLine="20" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="5">
 		<Cursor position="150" topLine="0" />
@@ -103,16 +106,16 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.h" open="0" top="0" tabpos="5">
 		<Cursor position="17" topLine="0" />
 	</File>
-	<File name="STG.cpp" open="1" top="0" tabpos="1">
+	<File name="STG.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="6640" topLine="182" />
 	</File>
-	<File name="STG.h" open="1" top="0" tabpos="2">
+	<File name="STG.h" open="0" top="0" tabpos="2">
 		<Cursor position="807" topLine="19" />
 	</File>
-	<File name="STGMenu/STGMenu.cpp" open="1" top="1" tabpos="6">
-		<Cursor position="534" topLine="0" />
+	<File name="STGMenu/STGMenu.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="53621" topLine="1291" />
 	</File>
-	<File name="STGMenu/STGMenu.h" open="1" top="0" tabpos="7">
+	<File name="STGMenu/STGMenu.h" open="0" top="0" tabpos="7">
 		<Cursor position="715" topLine="8" />
 	</File>
 	<File name="STGUtility/STGUtility.cpp" open="0" top="0" tabpos="9">

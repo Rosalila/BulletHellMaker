@@ -783,8 +783,8 @@ void Player::parry(bool infinite_parries)
     if(!infinite_parries && invulnerable_frames_left==0)
     {
         parries_left-=1;
+        invulnerable_frames_left=15;
     }
-    invulnerable_frames_left=15;
     if(this->sonido->soundExists(this->getName()+".parry"))
     {
         this->sonido->playSound(this->getName()+".parry",sound_channel_base+1,0);
