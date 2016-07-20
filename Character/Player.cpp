@@ -420,7 +420,7 @@ void Player::logic(int stage_velocity)
     }
 
     if(!charge_ready && !shooting && !getGameOver())
-        Mix_Volume(charging_sound_channel, 128);
+            Mix_Volume(charging_sound_channel, 128);
     else
         Mix_Volume(charging_sound_channel, 0);
     //current_color_effect_b = (255*hp)/max_hp;
