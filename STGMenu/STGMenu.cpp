@@ -376,7 +376,7 @@ void Menu::loopMenu()
                                     if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
                                         posc=j;
 
-                                Boton b(receiver,toKeyCode(str_input),mapeo);
+                                Button b(receiver,toKeyCode(str_input),mapeo);
                                 if(pos!=-1)
                                     temp->botones[pos]=b;
                                 else if (posc!=-1)
@@ -403,7 +403,7 @@ void Menu::loopMenu()
                                     int_input=-4;
                                 if((char)str_input[3]=='r')
                                     int_input=-6;
-                                Boton b(receiver,int_input,((int)str_input[1])-48,mapeo);
+                                Button b(receiver,int_input,((int)str_input[1])-48,mapeo);
                                 if(pos!=-1)
                                 {
                                     temp->botones[pos]=b;
