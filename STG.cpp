@@ -1,6 +1,6 @@
 #include "STG.h"
 
-STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode)
+STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls)
 {
     this->sonido=sonido;
     this->painter=painter;
@@ -9,6 +9,7 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
     this->enemy=enemy;
     this->stage=stage;
     this->game_mode=game_mode;
+    this->controls=controls;
 
     painter->camera_y=0;
     iteration=0;
@@ -139,11 +140,11 @@ void STG::mainLoop()
             break;
         }
 
-        if(receiver->isKeyPressed(SDLK_s))
-        {
-            string random_number = toString((rand()*999999)%1000);
-            painter->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
-        }
+//        if(receiver->isKeyPressed(SDLK_s))
+//        {
+//            string random_number = toString((rand()*999999)%1000);
+//            painter->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
+//        }
 
         if(!Mix_PlayingMusic())
         {

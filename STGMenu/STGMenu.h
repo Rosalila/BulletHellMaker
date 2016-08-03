@@ -31,6 +31,7 @@ private:
 public:
     std::string music_path;
     RosalilaInputs *inputa,*inputb;
+    map<string,Button*>controls;
     Stage* stage;
 
     //Misc
@@ -46,7 +47,7 @@ public:
     bool color_changing_background;
 
     Menu(){}
-    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo);
+    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo,map<string,Button*>controls);
     void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
     void loopMenu();
     std::string getStage();

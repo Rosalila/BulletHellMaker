@@ -30,6 +30,8 @@ class Player:public Character
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
 
+    map<string,Button*>controls;
+
     //Move sound
 //    int move_sound_channel;
 //    int move_sound_volume;
@@ -72,7 +74,7 @@ public:
 int parries_left;
 int invulnerable_frames_left;
 int current_charge;
-    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
+    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls);
     void logic(int stage_velocity);
     void inputControl();
     void bottomRender();

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
+Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls)
 {
     //Setting up the other variables
     this->name=name;
@@ -16,6 +16,7 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     this->charge_ready=false;
     this->frame=0;
     this->charging_sound_channel=-1;
+    this->controls=controls;
 
     //Sprites animation
     this->animation_velocity=4;
@@ -168,28 +169,28 @@ void Player::inputControl()
 
     bool started_moving = false;
 
-    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
+    if(controls["2"]->isDown()
        || receiver->isJoyDown(-2,0))
     {
         if(orientation!="down")
             started_moving=true;
         down_pressed=true;
     }
-    if(receiver->isKeyDown(SDL_SCANCODE_UP)
+    if(controls["7"]->isDown()
        || receiver->isJoyDown(-8,0))
     {
         if(orientation!="up")
             started_moving=true;
         up_pressed=true;
     }
-    if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
+    if(controls["4"]->isDown()
        || receiver->isJoyDown(-4,0))
     {
         if(orientation!="left")
             started_moving=true;
         left_pressed=true;
     }
-    if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
+    if(controls["6"]->isDown()
        || receiver->isJoyDown(-6,0))
     {
         if(orientation!="right")
@@ -307,8 +308,8 @@ void Player::inputControl()
 //    last_delta_x=delta_x;
 //    last_delta_y=delta_y;
 
-    if(receiver->isKeyDown(SDLK_z)
-       || receiver->isJoyDown(0,0))
+    if(receiver->isJoyDown(0,0)
+       || controls["a"]->isDown())
     {
         if(!this->shooting && !isParrying() && parries_left>0)
         {

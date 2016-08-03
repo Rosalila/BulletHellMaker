@@ -20,6 +20,8 @@ class STG
     Enemy*enemy;
     Stage*stage;
 
+    map<string,Button*>controls;
+
     Image*image_training_box;
     Image*image_training_x;
     Image*image_training_bar;
@@ -56,7 +58,7 @@ public:
     void stageSelectModeInit();
     void win();
     void lose();
-    STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode);
+    STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
 };
 
 #endif

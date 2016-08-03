@@ -1,5 +1,5 @@
 #include "STGMenu.h"
-Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo)
+Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo,map<string,Button*>controls)
 {
     this->painter=painter;
     this->receiver=receiver;
@@ -8,6 +8,7 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* arch
     this->save_inputs_signal=false;
     this->char_select=NULL;
     this->selectables_container=NULL;
+    this->controls=controls;
 
     white_image_current_r = 255;
     white_image_current_g = 255;
@@ -97,9 +98,9 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     {
         game_mode="parry dash training";
     }
-    Player*player=new Player(sonido,painter,receiver,character_name,10);
+    Player*player=new Player(sonido,painter,receiver,character_name,10,controls);
     Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player,20);
-    STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode);
+    STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode,controls);
     delete stg;
 //    if(stg->playerWon())
 //        iniciarJuego(character_name,"StageAhmedB");
@@ -120,7 +121,7 @@ void Menu::loopMenu()
     //inicio
 	for (;;)
 	{
-	    if(!receiver->isKeyDown(SDLK_z))
+	    if(!controls["a"]->isDown())
 	    {
 	        key_up=true;
 	    }
@@ -203,7 +204,8 @@ void Menu::loopMenu()
                 }
             }
             else if(receiver->isKeyPressed(SDL_SCANCODE_RIGHT)
-                    || receiver->isJoyPressed(-6,0))
+                    || receiver->isJoyPressed(-6,0)
+                    || controls["6"]->isPressed())
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -224,7 +226,8 @@ void Menu::loopMenu()
                 }
             }
             else if(receiver->isKeyPressed(SDL_SCANCODE_LEFT)
-                    || receiver->isJoyPressed(-4,0))
+                    || receiver->isJoyPressed(-4,0)
+                    || controls["4"]->isPressed())
             {
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
@@ -243,7 +246,7 @@ void Menu::loopMenu()
                         backgroundTargetUpdate(ml->getActual());
                     }
                 }
-            }else if(receiver->isKeyPressed(SDLK_RETURN) || receiver->isKeyDown(SDLK_z) || receiver->isJoyPressed(0,0) || frame>=skip_frame)
+            }else if(receiver->isKeyPressed(SDLK_RETURN) || controls["a"]->isDown() || receiver->isJoyPressed(0,0) || frame>=skip_frame)
             {
                 if(key_up)
                 {
@@ -276,7 +279,7 @@ void Menu::loopMenu()
                             writeLogLine("Initializing arcade game initializer.");
                             Stage*stage=new Stage(painter,sonido,receiver);
                             stage->loadFromXML(arcade_paths["Easy"][0]);
-                            Player*player=new Player(sonido,painter,receiver,"Demo",10);
+                            Player*player=new Player(sonido,painter,receiver,"Demo",10,controls);
                             player->x+=painter->camera_x;
                             int last_cammera=0;
                             //stage->playMusic();
@@ -291,7 +294,7 @@ void Menu::loopMenu()
                                 player->parries_left=3;
                                 player->current_charge=0;
                                 stage->setName(arcade_paths["Easy"][i]);
-                                STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade");
+                                STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade",controls);
                                 if(stg->enemyWon())
                                 {
                                     player->setHP(500);
@@ -303,7 +306,7 @@ void Menu::loopMenu()
                                 {
                                     this->playMusic();
                                     string menu_directory = assets_directory+"/menu/ending.svg";
-                                    Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
+                                    Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str(),controls);
                                     temp->loopMenu();
                                 }
                                 delete enemy;
@@ -328,7 +331,7 @@ void Menu::loopMenu()
                             if(frame<skip_frame)
                                 sonido->playSound(std::string("Menu.select"));
                             string menu_directory = assets_directory+mb->load_menu;
-                            Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str());
+                            Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str(),controls);
                             temp->loopMenu();
                         }
                         if(mb->getAccion().substr(0,6)=="Player")

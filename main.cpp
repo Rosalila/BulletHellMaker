@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     controls_config_press_images.push_back(painter->getTexture(assets_directory+"misc/controls configuration/press_shoot.png"));
     Receiver* receiver = getReceiver();
     int current_button=0;
-    map<string,Button*>configured_controls;
+    map<string,Button*>controls;
 
     while(true)
     {
@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
         if(key_pressed!=-1)
         {
             string current_button_map = controls_config_map_name[current_button];
-            configured_controls[current_button_map]=new Button(receiver,key_pressed,current_button_map);
+            controls[current_button_map]=new Button(receiver,key_pressed,current_button_map);
             current_button++;
             if(current_button>=controls_config_press_images.size())
                 break;
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 
     Sound*sonido = new Sound();
     string path_menu = assets_directory+"menu/main_menu.svg";
-    Menu* menu=new Menu(painter,getReceiver(),sonido,(char*)path_menu.c_str());
+    Menu* menu=new Menu(painter,getReceiver(),sonido,(char*)path_menu.c_str(),controls);
     menu->playMusic();
 
     menu->loopMenu();
