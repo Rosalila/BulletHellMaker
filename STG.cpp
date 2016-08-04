@@ -127,7 +127,6 @@ void STG::stageSelectModeInit()
 void STG::mainLoop()
 {
     bool end_key_up_keyboard=false;
-    bool end_key_up_joystick=false;
     string music_path_temp = assets_directory+"stages/"+stage->getName()+"/music.ogg";
     Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
 
@@ -160,17 +159,14 @@ void STG::mainLoop()
         if(getGameOver())
         {
             if(receiver->isKeyPressed(SDLK_RETURN)
-               || (receiver->isKeyDown(SDLK_z) && end_key_up_keyboard)
-               || (receiver->isJoyPressed(0,0) && end_key_up_joystick)
+               || (controls["a"]->isDown() && end_key_up_keyboard)
                )
             {
                 sonido->playSound(std::string("Menu.select"));
                 break;
             }
-            if(!receiver->isKeyDown(SDLK_z))
+            if(!controls["a"]->isDown())
                 end_key_up_keyboard=true;
-            if(!receiver->isJoyDown(0,0))
-                end_key_up_joystick=true;
 
         }
     }

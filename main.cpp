@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 //painter->fps.start();
     Image* controls_config_backgound = painter->getTexture(assets_directory+"misc/controls configuration/background.png");
     vector<string> controls_config_map_name;
-    controls_config_map_name.push_back("7");
+    controls_config_map_name.push_back("8");
     controls_config_map_name.push_back("2");
     controls_config_map_name.push_back("4");
     controls_config_map_name.push_back("6");
@@ -50,13 +50,30 @@ int main(int argc, char *argv[])
     while(true)
     {
         int key_pressed = -1;
-        for(int i=SDLK_a;i<=SDLK_z;i++)
+        int joy_pressed = -1;
+        for(int i=0/*SDLK_a*/;i<=255/*SDLK_z*/;i++)
         {
             if(receiver->isKeyPressed(i))
             {
                 key_pressed=i;
             }
         }
+        for(int i=0;i<20;i++)
+        {
+            if(receiver->isJoyPressed(i,0))
+            {
+                joy_pressed=i;
+            }
+        }
+        if(receiver->isJoyPressed(-2,0))
+            joy_pressed=-2;
+        if(receiver->isJoyPressed(-8,0))
+            joy_pressed=-8;
+        if(receiver->isJoyPressed(-4,0))
+            joy_pressed=-4;
+        if(receiver->isJoyPressed(-6,0))
+            joy_pressed=-6;
+
         if(key_pressed!=-1)
         {
             string current_button_map = controls_config_map_name[current_button];
@@ -65,6 +82,15 @@ int main(int argc, char *argv[])
             if(current_button>=controls_config_press_images.size())
                 break;
         }
+        if(joy_pressed!=-1)
+        {
+            string current_button_map = controls_config_map_name[current_button];
+            controls[current_button_map]=new Button(receiver,joy_pressed,0,current_button_map);
+            current_button++;
+            if(current_button>=controls_config_press_images.size())
+                break;
+        }
+
         painter->draw2DImage
         (   controls_config_backgound,
             controls_config_backgound->getWidth(),controls_config_backgound->getHeight(),

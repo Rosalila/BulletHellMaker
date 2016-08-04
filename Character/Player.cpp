@@ -169,29 +169,25 @@ void Player::inputControl()
 
     bool started_moving = false;
 
-    if(controls["2"]->isDown()
-       || receiver->isJoyDown(-2,0))
+    if(controls["2"]->isDown())
     {
         if(orientation!="down")
             started_moving=true;
         down_pressed=true;
     }
-    if(controls["7"]->isDown()
-       || receiver->isJoyDown(-8,0))
+    if(controls["8"]->isDown())
     {
         if(orientation!="up")
             started_moving=true;
         up_pressed=true;
     }
-    if(controls["4"]->isDown()
-       || receiver->isJoyDown(-4,0))
+    if(controls["4"]->isDown())
     {
         if(orientation!="left")
             started_moving=true;
         left_pressed=true;
     }
-    if(controls["6"]->isDown()
-       || receiver->isJoyDown(-6,0))
+    if(controls["6"]->isDown())
     {
         if(orientation!="right")
             started_moving=true;
@@ -209,29 +205,25 @@ void Player::inputControl()
 //        move_sound_volume=0;
 //    }
 
-    if(receiver->isKeyDown(SDL_SCANCODE_DOWN)
-       || receiver->isJoyDown(-2,0))
+    if(controls["2"]->isDown())
     {
         if(orientation!="down" && this->sonido->soundExists(name+".down"))
             this->sonido->playSound(name+".down");
         orientation="down";
     }
-    else if(receiver->isKeyDown(SDL_SCANCODE_UP)
-       || receiver->isJoyDown(-8,0))
+    else if(controls["8"]->isDown())
     {
         if(orientation!="up" && this->sonido->soundExists(name+".up"))
             this->sonido->playSound(name+".up");
         orientation="up";
     }
-    else if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
-       || receiver->isJoyDown(-4,0))
+    else if(controls["4"]->isDown())
     {
         if(orientation!="left" && this->sonido->soundExists(name+".left"))
             this->sonido->playSound(name+".left");
         orientation="left";
     }
-    else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
-       || receiver->isJoyDown(-6,0))
+    else if(controls["6"]->isDown())
     {
         if(orientation!="right" && this->sonido->soundExists(name+".right"))
             this->sonido->playSound(name+".right");
@@ -308,8 +300,7 @@ void Player::inputControl()
 //    last_delta_x=delta_x;
 //    last_delta_y=delta_y;
 
-    if(receiver->isJoyDown(0,0)
-       || controls["a"]->isDown())
+    if(controls["a"]->isDown())
     {
         if(!this->shooting && !isParrying() && parries_left>0)
         {
