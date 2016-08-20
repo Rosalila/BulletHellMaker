@@ -9,9 +9,9 @@
 #include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
-#include "../Spells/Bullet.h"
-#include "../Spells/Pattern.h"
 #include "../Rosalila/RosalilaUtility/RosalilaUtility.h"
+#include "Bullet.h"
+#include "Pattern.h"
 #include "Modifier.h"
 
 class Character
