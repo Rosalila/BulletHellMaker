@@ -16,6 +16,8 @@ bool isSlowActive();
 void slowExtraControl();
 void setReceiver(Receiver*receiver_param);
 Receiver* getReceiver();
+void setRosalilaGraphics(RosalilaGraphics*graphics_param);
+RosalilaGraphics* getRosalilaGraphics();
 void disableSlow();
 void enableSlow();
 double getSlowdown();

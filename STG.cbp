@@ -104,8 +104,14 @@
 		<Unit filename="Rosalila/TinyXml/tinyxmlparser.cpp" />
 		<Unit filename="STG.cpp" />
 		<Unit filename="STG.h" />
+		<Unit filename="STGMenu/ControllerConfig.cpp" />
+		<Unit filename="STGMenu/ControllerConfig.h" />
+		<Unit filename="STGMenu/Intro.cpp" />
+		<Unit filename="STGMenu/Intro.h" />
 		<Unit filename="STGMenu/STGMenu.cpp" />
 		<Unit filename="STGMenu/STGMenu.h" />
+		<Unit filename="STGMenu/StageSelect.cpp" />
+		<Unit filename="STGMenu/StageSelect.h" />
 		<Unit filename="STGUtility/STGUtility.cpp" />
 		<Unit filename="STGUtility/STGUtility.h" />
 		<Unit filename="Stage/Layer.cpp" />

@@ -3,7 +3,8 @@
 int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
 bool slow_enabled=false;
-Receiver* receiver = new Receiver();
+Receiver* receiver;
+RosalilaGraphics* graphics;
 bool game_over;
 
 bool getGameOver()
@@ -38,12 +39,22 @@ void slowExtraControl()
 
 void setReceiver(Receiver*receiver_param)
 {
-    receiver=receiver;
+    receiver=receiver_param;
 }
 
 Receiver* getReceiver()
 {
     return receiver;
+}
+
+void setRosalilaGraphics(RosalilaGraphics*graphics_param)
+{
+    graphics=graphics_param;
+}
+
+RosalilaGraphics* getRosalilaGraphics()
+{
+    return graphics;
 }
 
 bool isSlowPressed()

@@ -56,7 +56,6 @@ public:
     void escribirRosalilaInputssXML(RosalilaInputs* ia,RosalilaInputs* ib);
     std::string getRosalilaInputsPressed();
     void llenarRosalilaInputssBotones();
-    int toKeyCode(std::string str);
     void printLoadingScreen();
     void playMusic();
     void backgroundTargetUpdate(int current_selection);

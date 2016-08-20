@@ -102,12 +102,6 @@ void Menu::iniciarJuego(std::string character_name,std::string stage_name,string
     Enemy*enemy=new Enemy(sonido,painter,receiver,stage_name,player,20);
     STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,game_mode,controls);
     delete stg;
-//    if(stg->playerWon())
-//        iniciarJuego(character_name,"StageAhmedB");
-//    if(stg->enemyWon())
-//        iniciarJuego(character_name,stage_name);
-    //this->playMusic();
-    //char_select->clearLocks(); //Hardcode do not clear locks
 }
 
 void Menu::loopMenu()
@@ -374,7 +368,7 @@ void Menu::loopMenu()
                                     if(temp->cruz[j].map==mapeo && !temp->cruz[j].uses_joystick)
                                         posc=j;
 
-                                Button b(receiver,toKeyCode(str_input),mapeo);
+                                Button b(receiver,-1,mapeo);
                                 if(pos!=-1)
                                     temp->botones[pos]=b;
                                 else if (posc!=-1)
@@ -623,74 +617,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                                                     ));
 
         }
-//        else if(strcmp(e->Attribute("type"),"bar")==0)
-//        {
-//            int accion=-1;
-//            int default_value=0;
-//            if(e->Attribute("default_value")!=NULL)
-//                atoi(e->Attribute("default_value"));
-//            if(e->Attribute("action")!=NULL)
-//            {
-//                if(strcmp(e->Attribute("action"),"AI level")==0)
-//                {
-//                    accion=0;
-//                    default_value=ai_level;
-//                }
-//                accion=atoi(e->Attribute("action"));
-//            }
-//
-//            int x=atoi(e->Attribute("x"));
-//            int y=atoi(e->Attribute("y"));
-//            int width=atoi(e->Attribute("width"));
-//            int height=atoi(e->Attribute("height"));
-//
-//            std::string path(e->Attribute("xlink:href"));
-//
-//            std::string background=path;
-//            if(e->Attribute("background")!=NULL)
-//                background=e->Attribute("background");
-//
-//            int bar_x=x;
-//            if(e->Attribute("bar_x")!=NULL)
-//                bar_x=atoi(e->Attribute("bar_x"));
-//
-//            int bar_y=y;
-//            if(e->Attribute("bar_y")!=NULL)
-//                bar_y=atoi(e->Attribute("bar_y"));
-//
-//            std::string background_selected=background;
-//            if(e->Attribute("background_selected")!=NULL)
-//                background_selected=e->Attribute("background_selected");
-//
-//            int bar_x_selected=bar_x;
-//            if(e->Attribute("bar_x_selected")!=NULL)
-//                bar_x_selected=atoi(e->Attribute("bar_x_selected"));
-//
-//            int bar_y_selected=bar_y;
-//            if(e->Attribute("bar_y_selected")!=NULL)
-//                bar_y_selected=atoi(e->Attribute("bar_y_selected"));
-//
-//            std::string image_selected=path;
-//            if(e->Attribute("image_selected")!=NULL)
-//                image_selected=e->Attribute("image_selected");
-//
-//            int max=9999;
-//            if(e->Attribute("max")!=NULL)
-//                max=atoi(e->Attribute("max"));
-//
-//            elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,
-//                                                                    x,y,
-//                                                                    width,height,
-//                                                                    painter->getTexture(std::string("menu/")+background),
-//                                                                    bar_x,bar_y,
-//                                                                    painter->getTexture(std::string("menu/")+path),
-//                                                                    painter->getTexture(std::string("menu/")+background_selected),
-//                                                                    bar_x_selected,bar_y_selected,
-//                                                                    painter->getTexture(std::string("menu/")+image_selected),
-//                                                                    max,default_value,accion
-//                                                                    )
-//                                           );
-//        }
     }
 
     if(g_node->FirstChild("rect")!=NULL)
@@ -801,18 +727,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                     int stop_displacement_y_at=0;
                     int fade_in_initial=-1;
                     int fade_in_speed=0;
-//                    if(e->Attribute("displacement_x")!=NULL)
-//                        displacement_x=atoi(e->Attribute("displacement_x"));
-//                    if(e->Attribute("displacement_y")!=NULL)
-//                        displacement_y=atoi(e->Attribute("displacement_y"));
-//                    if(e->Attribute("stop_displacement_x_at")!=NULL)
-//                        stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
-//                    if(e->Attribute("stop_displacement_y_at")!=NULL)
-//                        stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-//                    if(e->Attribute("fade_in_initial")!=NULL)
-//                        fade_in_initial=atoi(e->Attribute("fade_in_initial"));
-//                    if(e->Attribute("fade_in_speed")!=NULL)
-//                        fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
                     Image*image=painter->getTexture(assets_directory+std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
@@ -973,58 +887,6 @@ std::string Menu::getRosalilaInputsPressed()
     {
 
         dibujarMenu();
-//        if(receiver->isKeyDown(irr::KEY_KEY_Q))
-//            return "Q";
-//        if(receiver->isKeyDown(SDLK_w))
-//            return "W";
-//        if(receiver->isKeyDown(irr::KEY_KEY_E))
-//            return "E";
-//        if(receiver->isKeyDown(irr::KEY_KEY_R))
-//            return "R";
-//        if(receiver->isKeyDown(irr::KEY_KEY_T))
-//            return "T";
-//        if(receiver->isKeyDown(irr::KEY_KEY_Y))
-//            return "Y";
-//        if(receiver->isKeyDown(irr::KEY_KEY_U))
-//            return "U";
-//        if(receiver->isKeyDown(irr::KEY_KEY_I))
-//            return "I";
-//        if(receiver->isKeyDown(irr::KEY_KEY_O))
-//            return "O";
-//        if(receiver->isKeyDown(irr::KEY_KEY_P))
-//            return "P";
-//        if(receiver->isKeyDown(irr::KEY_KEY_A))
-//            return "A";
-//        if(receiver->isKeyDown(irr::KEY_KEY_S))
-//            return "S";
-//        if(receiver->isKeyDown(irr::KEY_KEY_D))
-//            return "D";
-//        if(receiver->isKeyDown(irr::KEY_KEY_F))
-//            return "F";
-//        if(receiver->isKeyDown(irr::KEY_KEY_G))
-//            return "G";
-//        if(receiver->isKeyDown(irr::KEY_KEY_H))
-//            return "H";
-//        if(receiver->isKeyDown(irr::KEY_KEY_J))
-//            return "J";
-//        if(receiver->isKeyDown(irr::KEY_KEY_K))
-//            return "K";
-//        if(receiver->isKeyDown(irr::KEY_KEY_L))
-//            return "L";
-//        if(receiver->isKeyDown(irr::KEY_KEY_Z))
-//            return "Z";
-//        if(receiver->isKeyDown(irr::KEY_KEY_X))
-//            return "X";
-//        if(receiver->isKeyDown(irr::KEY_KEY_C))
-//            return "C";
-//        if(receiver->isKeyDown(irr::KEY_KEY_V))
-//            return "V";
-//        if(receiver->isKeyDown(irr::KEY_KEY_B))
-//            return "B";
-//        if(receiver->isKeyDown(irr::KEY_KEY_N))
-//            return "N";
-//        if(receiver->isKeyDown(irr::KEY_KEY_M))
-//            return "M";
 
         if(receiver->isJoyDown(0,0))
             return "j0-0";
@@ -1089,65 +951,6 @@ std::string Menu::getRosalilaInputsPressed()
             return "j1-u";
     }
 }
-
-int Menu::toKeyCode(std::string str)
-{
-    return -1;
-//    if(str==std::string("Q"))
-//        return irr::KEY_KEY_Q;
-//    if(str==std::string("W"))
-//        return SDLK_w;
-//    if(str==std::string("E"))
-//        return irr::KEY_KEY_E;
-//    if(str==std::string("R"))
-//        return irr::KEY_KEY_R;
-//    if(str==std::string("T"))
-//        return irr::KEY_KEY_T;
-//    if(str==std::string("Y"))
-//        return irr::KEY_KEY_Y;
-//    if(str==std::string("U"))
-//        return irr::KEY_KEY_U;
-//    if(str==std::string("I"))
-//        return irr::KEY_KEY_I;
-//    if(str==std::string("O"))
-//        return irr::KEY_KEY_O;
-//    if(str==std::string("P"))
-//        return irr::KEY_KEY_P;
-//    if(str==std::string("A"))
-//        return irr::KEY_KEY_A;
-//    if(str==std::string("S"))
-//        return irr::KEY_KEY_S;
-//    if(str==std::string("D"))
-//        return irr::KEY_KEY_D;
-//    if(str==std::string("F"))
-//        return irr::KEY_KEY_F;
-//    if(str==std::string("G"))
-//        return irr::KEY_KEY_G;
-//    if(str==std::string("H"))
-//        return irr::KEY_KEY_H;
-//    if(str==std::string("J"))
-//        return irr::KEY_KEY_J;
-//    if(str==std::string("K"))
-//        return irr::KEY_KEY_K;
-//    if(str==std::string("L"))
-//        return irr::KEY_KEY_L;
-//    if(str==std::string("Z"))
-//        return irr::KEY_KEY_Z;
-//    if(str==std::string("X"))
-//        return irr::KEY_KEY_X;
-//    if(str==std::string("C"))
-//        return irr::KEY_KEY_C;
-//    if(str==std::string("V"))
-//        return irr::KEY_KEY_V;
-//    if(str==std::string("B"))
-//        return irr::KEY_KEY_B;
-//    if(str==std::string("N"))
-//        return irr::KEY_KEY_N;
-//    if(str==std::string("M"))
-//        return irr::KEY_KEY_M;
-//    return irr::KEY_ESCAPE;
-}
-
 
 void Menu::llenarRosalilaInputssBotones()
 {
