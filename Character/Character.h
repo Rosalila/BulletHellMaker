@@ -16,7 +16,7 @@
 
 class Character
 {
-protected:
+public:
     Sound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
@@ -67,12 +67,8 @@ protected:
     int shake_time;
     int shake_magnitude;
 
-
-
-public:
     int sound_channel_base;
     Image*life_bar;
-
 
     vector<Hitbox*> hitboxes;
 
@@ -85,7 +81,8 @@ public:
     vector<Point*>inbetween_shadow_align_points_right;
     vector<Point*>inbetween_shadow_align_points_top;
 
-double x,y;
+    double x,y;
+
     Character(){}
     Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     virtual ~Character();
@@ -95,26 +92,15 @@ double x,y;
     void loadPatternsXML();
     vector<Modifier*>* loadModifierXML(TiXmlNode* modifier_node);
     Pattern* loadPatternXML(TiXmlNode* pattern_node);
+
     void logic(int stage_velocity);
-    //logic sub functions
     void animationControl();
     void spellControl(int stage_velocity);
     virtual void addActivePattern(Pattern* pattern);
 
     void bottomRender();
     void topRender();
-    void setX(int x);
-    void setY(int y);
-    int getX();
-    int getY();
-    int getHP();
-    string getName();
-    void setHP(int hp);
-    void setVisible(bool visible);
     void setOrientation(string orientation);
-    int getIteration();
-    void setType(std::string new_current_type);
-    std::list<Pattern*>* getActivePatterns();
     bool collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
     void hit(int damage);
     void shakeScreen(int shake_magnitude, int shake_time);

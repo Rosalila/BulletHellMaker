@@ -101,17 +101,17 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
     {
         Pattern* p =  (Pattern*)*pattern;
-        double distance_x= player->hitboxes[0]->getX() + player->x + - p->getX();
-        double distance_y= player->hitboxes[0]->getY() + player->y + - p->getY();
+        double distance_x= player->hitboxes[0]->x + player->x + - p->x;
+        double distance_y= player->hitboxes[0]->y + player->y + - p->y;
         //.getPlacedHitbox(this->x,this->y)
 
-        if (p->getHoming() != 0)
+        if (p->homing != 0)
         {
-            p->setAngle(-atan2(distance_y,distance_x)*180/PI);
+            p->angle=-atan2(distance_y,distance_x)*180/PI;
         }
         else if(p->getAimPlayer())
         {
-            p->setAngle(p->getAngle()-atan2(distance_y,distance_x)*180/PI);
+            p->angle=p->angle-atan2(distance_y,distance_x)*180/PI;
         }
     }
 
@@ -145,29 +145,6 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
 void Enemy::bottomRender()
 {
     Character::bottomRender();
-//    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
-    //parrentRender();
-//
-//    painter->draw2DImage
-//    (   life_bar,
-//        life_bar->getWidth(),life_bar->getHeight(),
-//        painter->camera_x+life_bar_x,life_bar_y,
-//        1.0,
-//        0.0,
-//        false,
-//        0,0,
-//        Color(255,255,255,255),
-//        0,0,
-//        true,
-//        FlatShadow());
-
-
-//    if(this->hp<=0)
-//    {
-//        painter->drawText("Uploading score.",0,80);
-//        painter->drawText(score_upload_message,0,95);
-//        flag_begin_upload = true;
-//    }
 }
 
 void Enemy::topRender()
@@ -244,16 +221,16 @@ void Enemy::addActivePattern(Pattern* pattern)
     if(getGameOver())
         return;
     Pattern* pattern_temp=new Pattern(pattern,this->x,this->y);
-    float angle=pattern_temp->getAngle();
+    float angle=pattern_temp->angle;
     angle+=pattern_temp->getRandomAngle();
 
-    pattern_temp->setAngle(angle);
+    pattern_temp->angle=angle;
 
     if(pattern_temp->getAimPlayer())
     {
-        double distance_x=player->x-pattern_temp->getX();
-        double distance_y=player->y-pattern_temp->getY();
-        pattern_temp->setAngle(pattern_temp->getAngle()-atan2(distance_y,distance_x)*180/PI);
+        double distance_x=player->x-pattern_temp->x;
+        double distance_y=player->y-pattern_temp->y;
+        pattern_temp->angle=pattern_temp->angle-atan2(distance_y,distance_x)*180/PI;
     }
 
     active_patterns->push_back(pattern_temp);

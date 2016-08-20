@@ -3042,10 +3042,10 @@
 1463080819 source:/home/turupawn/Projects/Flatshot/STG/Character/Player.cpp
 	"Player.h"
 
-1471653057 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Character.cpp
+1471661532 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Character.cpp
 	"Character.h"
 
-1471654867 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
+1471656767 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -3195,7 +3195,7 @@
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
 	"../Rosalila/RosalilaUtility/Hitbox.h"
 
-1462078857 /home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.h
+1471661603 /home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -3218,10 +3218,10 @@
 
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.h
 
-1471654883 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.cpp
+1471661564 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.cpp
 	"Enemy.h"
 
-1471654871 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
+1471657283 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
@@ -3234,7 +3234,7 @@
 	"Character.h"
 	"Player.h"
 
-1470183848 /home/turupawn/Projects/C++/Flatshot/STG/Character/Player.h
+1471657357 /home/turupawn/Projects/C++/Flatshot/STG/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -3249,7 +3249,7 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1471653622 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
+1471660491 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -3407,7 +3407,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1471653774 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
+1471656348 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
 1470183094 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.h
@@ -3418,7 +3418,7 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
-1471654834 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
+1471655984 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -3427,7 +3427,7 @@
 	"../STGUtility/STGUtility.h"
 	<map>
 
-1461882797 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.h
+1471655508 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -3453,19 +3453,19 @@
 1462078927 source:/home/turupawn/Projects/C++/Flatshot/STG/STGUtility/STGUtility.cpp
 	"STGUtility.h"
 
-1471655072 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.cpp
+1471655155 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1471652777 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.cpp
+1471660054 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Dialogue.cpp
 	"Dialogue.h"
 
-1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.cpp
+1471655427 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.cpp
 	"Layer.h"
 
-1471654830 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
+1471655850 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
 1471653722 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
@@ -3481,7 +3481,7 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1471654804 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
+1471660856 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
 	"STG.h"
 
 1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/steam_api.h

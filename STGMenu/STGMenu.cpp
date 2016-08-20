@@ -288,12 +288,12 @@ void Menu::loopMenu()
                                 enemy->x+=painter->camera_x;
                                 player->parries_left=3;
                                 player->current_charge=0;
-                                stage->setName(arcade_paths["Easy"][i]);
+                                stage->name = arcade_paths["Easy"][i];
                                 STG*stg=new STG(sonido,painter,receiver,player,enemy,stage,"Arcade",controls);
                                 if(stg->enemyWon())
                                 {
-                                    player->setHP(500);
-                                    player->setVisible(true);
+                                    player->hp=500;
+                                    player->visible=true;
                                     player->setOrientation("up");
                                     i--;
                                 }

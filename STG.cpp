@@ -101,15 +101,15 @@ STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*playe
         parry_dash_count_objective=15;
     }
 
-    if(stage->getName()=="Training1"
-       ||stage->getName()=="Training2"
-       ||stage->getName()=="Training3"
-       ||stage->getName()=="Training4"
-       ||stage->getName()=="Training5"
+    if(stage->name=="Training1"
+       ||stage->name=="Training2"
+       ||stage->name=="Training3"
+       ||stage->name=="Training4"
+       ||stage->name=="Training5"
        )
     {
-        image_training_text=painter->getTexture(assets_directory+"misc/training/"+stage->getName()+".png");
-        image_training_text_final=painter->getTexture(assets_directory+"misc/training/"+stage->getName()+"_final.png");
+        image_training_text=painter->getTexture(assets_directory+"misc/training/"+stage->name+".png");
+        image_training_text_final=painter->getTexture(assets_directory+"misc/training/"+stage->name+"_final.png");
     }
 
 
@@ -127,7 +127,7 @@ void STG::stageSelectModeInit()
 void STG::mainLoop()
 {
     bool end_key_up_keyboard=false;
-    string music_path_temp = assets_directory+"stages/"+stage->getName()+"/music.ogg";
+    string music_path_temp = assets_directory+"stages/"+stage->name+"/music.ogg";
     Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
 
     for (;;)
@@ -179,17 +179,17 @@ void STG::logic()
     float distance=sqrt(distance_x*distance_x+distance_y*distance_y);
     float damage_level=6-distance/250.0;
 
-    for (std::list<Pattern*>::iterator pattern = enemy->getActivePatterns()->begin(); pattern != enemy->getActivePatterns()->end(); pattern++)
+    for (std::list<Pattern*>::iterator pattern = enemy->active_patterns->begin(); pattern != enemy->active_patterns->end(); pattern++)
     {
         Pattern*p=(Pattern*)*pattern;
-        if(!p->isHit())
+        if(!p->is_hit)
         {
-            for(int i=0;i<(int)p->getBullet()->hitboxes.size();i++)
+            for(int i=0;i<(int)p->bullet->hitboxes.size();i++)
             {
-                Hitbox h=p->getBullet()->hitboxes[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                Hitbox h=p->bullet->hitboxes[i]->getPlacedHitbox(p->x,p->y,p->getBulletAngle());
                 if(player->isParrying() || player->isInvulnerable())
                 {
-                    if(!p->isHit() && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
+                    if(!p->is_hit && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
                         p->hit(player->sound_channel_base+1,false);
                         if(player->isInvulnerable())
@@ -215,7 +215,7 @@ void STG::logic()
                                 win();
                             }
                         }
-                        if(p->x>player->getX())
+                        if(p->x>player->x)
                         {
                             p->angle=135;
                         }else
@@ -226,12 +226,12 @@ void STG::logic()
                 }else if(p->collides_opponent && player->collides(h,0,0,0))
                 {
                     p->hit(enemy->sound_channel_base+1,false);
-                    player->hit(p->getDamage());
+                    player->hit(p->bullet->damage);
                     parry_count = 0;
                     painter->shakeScreen(30,10);
-                    if(this->sonido->soundExists(player->getName()+".hit"))
-                        this->sonido->playSound(player->getName()+".hit",3,0);
-                    if(player->getHP()==0)
+                    if(this->sonido->soundExists(player->name+".hit"))
+                        this->sonido->playSound(player->name+".hit",3,0);
+                    if(player->hp==0)
                     {
                         lose();
                     }
@@ -240,22 +240,22 @@ void STG::logic()
         }
     }
 
-    for (std::list<Pattern*>::iterator pattern = player->getActivePatterns()->begin(); pattern != player->getActivePatterns()->end(); pattern++)
+    for (std::list<Pattern*>::iterator pattern = player->active_patterns->begin(); pattern != player->active_patterns->end(); pattern++)
     {
         Pattern*p=(Pattern*)*pattern;
-        if(!p->isHit())
+        if(!p->is_hit)
         {
-            for(int i=0;i<(int)p->getBullet()->hitboxes.size();i++)
+            for(int i=0;i<(int)p->bullet->hitboxes.size();i++)
             {
-                Hitbox h=p->getBullet()->hitboxes[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                Hitbox h=p->bullet->hitboxes[i]->getPlacedHitbox(p->x,p->y,p->getBulletAngle());
                 if(p->collides_opponent && enemy->collides(h,0,0,0))
                 {
                     p->hit(player->sound_channel_base+1,false);
-                    enemy->hit(p->getDamage()+damage_level);
-                    enemy->shakeScreen(p->getDamage()+damage_level*3,p->getDamage()+damage_level*2);
-                    if(this->sonido->soundExists(enemy->getName()+".hit"))
-                        this->sonido->playSound(enemy->getName()+".hit",1,0);
-                    if(enemy->getHP()==0)
+                    enemy->hit(p->bullet->damage+damage_level);
+                    enemy->shakeScreen(p->bullet->damage+damage_level*3,p->bullet->damage+damage_level*2);
+                    if(this->sonido->soundExists(enemy->name+".hit"))
+                        this->sonido->playSound(enemy->name+".hit",1,0);
+                    if(enemy->hp==0)
                     {
                         win();
                     }
@@ -265,27 +265,27 @@ void STG::logic()
     }
 
     //BulletxBullet Collision
-    for (std::list<Pattern*>::iterator enemy_pattern_iterator = enemy->getActivePatterns()->begin(); enemy_pattern_iterator != enemy->getActivePatterns()->end(); enemy_pattern_iterator++)
+    for (std::list<Pattern*>::iterator enemy_pattern_iterator = enemy->active_patterns->begin(); enemy_pattern_iterator != enemy->active_patterns->end(); enemy_pattern_iterator++)
     {
         Pattern*enemy_pattern=(Pattern*)*enemy_pattern_iterator;
-        if(!enemy_pattern->isHit())
+        if(!enemy_pattern->is_hit)
         {
-            for (std::list<Pattern*>::iterator player_pattern_iterator = player->getActivePatterns()->begin(); player_pattern_iterator != player->getActivePatterns()->end(); player_pattern_iterator++)
+            for (std::list<Pattern*>::iterator player_pattern_iterator = player->active_patterns->begin(); player_pattern_iterator != player->active_patterns->end(); player_pattern_iterator++)
             {
                 Pattern*player_pattern=(Pattern*)*player_pattern_iterator;
                 if(player_pattern->collides_bullets||enemy_pattern->collides_bullets)
                 {
-                    if(!player_pattern->isHit())
+                    if(!player_pattern->is_hit)
                     {
-                        vector<Hitbox*>enemy_hitboxes=enemy_pattern->getBullet()->hitboxes;
+                        vector<Hitbox*>enemy_hitboxes=enemy_pattern->bullet->hitboxes;
                         for(int i=0;i<(int)enemy_hitboxes.size();i++)
                         {
-                            Hitbox enemy_hitbox=enemy_hitboxes[i]->getPlacedHitbox(enemy_pattern->getX(),enemy_pattern->getY(),enemy_pattern->getBulletAngle());
-                            vector<Hitbox*>player_hitboxes=player_pattern->getBullet()->hitboxes;
+                            Hitbox enemy_hitbox=enemy_hitboxes[i]->getPlacedHitbox(enemy_pattern->x,enemy_pattern->y,enemy_pattern->getBulletAngle());
+                            vector<Hitbox*>player_hitboxes=player_pattern->bullet->hitboxes;
                             for(int j=0;j<(int)player_hitboxes.size();j++)
                             {
-                                Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->getX(),player_pattern->getY(),player_pattern->getBulletAngle());
-                                if(!enemy_pattern->isHit()&&!player_pattern->isHit()&&enemy_hitbox.collides(player_hitbox))
+                                Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->x,player_pattern->y,player_pattern->getBulletAngle());
+                                if(!enemy_pattern->is_hit&&!player_pattern->is_hit&&enemy_hitbox.collides(player_hitbox))
                                 {
                                     charge_destroy_count++;
                                     if(game_mode=="charge training" && charge_destroy_count==charge_destroy_count_objective)
@@ -304,19 +304,19 @@ void STG::logic()
         }
     }
 
-    int stage_displacement = stage->getVelocity();
+    int stage_displacement = stage->velocity;
     if(isSlowActive())
         stage_displacement/=3;
     painter->camera_x+=stage_displacement;
     player->logic(stage_displacement);
-    player->setX(player->getX()+stage_displacement);
-    enemy->logic(stage_displacement,stage->getName(),iteration,username);
+    player->x=player->x+stage_displacement;
+    enemy->logic(stage_displacement,stage->name,iteration,username);
     for(int i=0;i<boss_fury_level;i++)
     {
         iteration++;
-        enemy->logic(0,stage->getName(),iteration,username);
+        enemy->logic(0,stage->name,iteration,username);
     }
-    //enemy->setX(enemy->getX()+stage_displacement);
+    //enemy->setX(enemy->x+stage_displacement);
     stage->logic();
 
     deletePatterns();
@@ -337,13 +337,13 @@ void STG::render()
 
     stage->dibujarFront();
 
-    if(enemy->getHP()==0)
+    if(enemy->hp==0)
         you_win.render();
-    if(player->getHP()==0)
+    if(player->hp==0)
         you_loose.render();
 
 //    painter->drawText("Time: "+toString(iteration),25,70);
-//    painter->drawText(enemy->getName(),25,110);
+//    painter->drawText(enemy->name,25,110);
 //    painter->drawText("Damage level: "+toString(damage_level),25,170);
 
     int tutorial_text_spacing_y=10;
@@ -480,12 +480,12 @@ void STG::render()
 
 bool STG::isOutOfBounds(int pos_x,int pos_y)
 {
-    int bullet_bound_addition_x = (stage->getBoundX2()-stage->getBoundX1())/2;
-    int bullet_bound_addition_y = (stage->getBoundY2()-stage->getBoundY1())/2;
-    if(pos_x<stage->getBoundX1()+painter->camera_x-bullet_bound_addition_x
-       ||pos_x>stage->getBoundX2()+painter->camera_x+bullet_bound_addition_x
-       ||pos_y<stage->getBoundY1()-bullet_bound_addition_y
-       ||pos_y>stage->getBoundY2()+bullet_bound_addition_y
+    int bullet_bound_addition_x = (stage->bound_x2-stage->bound_x1)/2;
+    int bullet_bound_addition_y = (stage->bound_y2-stage->bound_y1)/2;
+    if(pos_x<stage->bound_x1+painter->camera_x-bullet_bound_addition_x
+       ||pos_x>stage->bound_x2+painter->camera_x+bullet_bound_addition_x
+       ||pos_y<stage->bound_y1-bullet_bound_addition_y
+       ||pos_y>stage->bound_y2+bullet_bound_addition_y
        )
     {
         return true;
@@ -495,12 +495,12 @@ bool STG::isOutOfBounds(int pos_x,int pos_y)
 
 void STG::deletePatterns()
 {
-    std::list<Pattern*>* active_patterns=player->getActivePatterns();
+    std::list<Pattern*>* active_patterns=player->active_patterns;
     std::list<Pattern*>::iterator i = active_patterns->begin();
     while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
-        if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
+        if (isOutOfBounds(p->x,p->y) || p->destroyFlag())
         {
             active_patterns->erase(i++);
             delete p;
@@ -511,13 +511,12 @@ void STG::deletePatterns()
         }
     }
 
-
-    active_patterns=enemy->getActivePatterns();
+    active_patterns=enemy->active_patterns;
     i = active_patterns->begin();
     while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
-        if (isOutOfBounds(p->getX(),p->getY()) || p->destroyFlag())
+        if (isOutOfBounds(p->x,p->y) || p->destroyFlag())
         {
             active_patterns->erase(i++);
             delete p;
@@ -531,29 +530,29 @@ void STG::deletePatterns()
 
 void STG::checkCharacterOutOfBounds()
 {
-    if(player->getX()<stage->getBoundX1()+painter->camera_x)
-        player->setX(stage->getBoundX1()+painter->camera_x);
-    if(player->getX()>stage->getBoundX2()+painter->camera_x)
-        player->setX(stage->getBoundX2()+painter->camera_x);
-    if(player->getY()<stage->getBoundY1())
-        player->setY(stage->getBoundY1());
-    if(player->getY()>stage->getBoundY2())
-        player->setY(stage->getBoundY2());
+    if(player->x<stage->bound_x1+painter->camera_x)
+        player->x=stage->bound_x1+painter->camera_x;
+    if(player->x>stage->bound_x2+painter->camera_x)
+        player->x=stage->bound_x2+painter->camera_x;
+    if(player->y<stage->bound_y1)
+        player->y=stage->bound_y1;
+    if(player->y>stage->bound_y2)
+        player->y=stage->bound_y2;
 }
 
 bool STG::playerWon()
 {
-    return enemy->getHP()==0;
+    return enemy->hp==0;
 }
 
 bool STG::enemyWon()
 {
-    return player->getHP()==0;
+    return player->hp==0;
 }
 
 void STG::win()
 {
-    enemy->setHP(0);
+    enemy->hp=0;
     painter->shakeScreen(50,20);
     sonido->playSound("you win",2,0);
     enemy->deleteActivePatterns();

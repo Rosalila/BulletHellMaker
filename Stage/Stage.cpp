@@ -490,36 +490,6 @@ Stage::~Stage()
     }
 }
 
-int Stage::getBoundX1()
-{
-    return bound_x1;
-}
-int Stage::getBoundY1()
-{
-    return bound_y1;
-}
-int Stage::getBoundX2()
-{
-    return bound_x2;
-}
-int Stage::getBoundY2()
-{
-    return bound_y2;
-}
-int Stage::getVelocity()
-{
-    return velocity;
-}
-string Stage::getName()
-{
-    return name;
-}
-
-void Stage::setName(string name)
-{
-    this->name=name;
-}
-
 void Stage::logic()
 {
     if(getIterateSlowdownFlag())

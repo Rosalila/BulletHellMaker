@@ -775,7 +775,6 @@ void Character::animationControl()
 void Character::spellControl(int stage_velocity)
 {
     std::vector<Pattern*> patterns=type[current_type];
-    //cout<<patterns.size()<<endl;
     for(int i=0;i<(int)patterns.size();i++)
     {
         if(shooting && this->hp!=0)
@@ -783,7 +782,7 @@ void Character::spellControl(int stage_velocity)
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
             {
-                patterns[i]->getBullet()->playSound();
+                patterns[i]->bullet->playSound();
                 this->addActivePattern(patterns[i]);
             }
         }else
@@ -798,10 +797,6 @@ void Character::spellControl(int stage_velocity)
 
 void Character::bottomRender()
 {
-    //if(!visible)
-    //    return;
-
-    //Shake
     if(shake_time>0)
     {
         shake_time--;
@@ -843,7 +838,7 @@ void Character::bottomRender()
             painter->drawRectangle(hitboxes[i]->getX()+x,
                                    hitboxes[i]->getY()+y,
                                    hitboxes[i]->getWidth(),hitboxes[i]->getHeight(),
-                                   hitboxes[i]->getAngle(),100,0,0,100,true);
+                                   hitboxes[i]->angle,100,0,0,100,true);
         }
     }
 }
@@ -852,95 +847,12 @@ void Character::topRender()
 {
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
         ((Pattern*)*pattern)->render();
-
-//    vector<int>position_x;
-//    vector<int>position_y;
-//    vector<float>angle;
-//    Image* image=NULL;
-//    for (std::list<Pattern*>::iterator pattern_iterator = active_patterns->begin(); pattern_iterator != active_patterns->end(); pattern_iterator++)
-//    {
-//        Pattern*pattern = ((Pattern*)*pattern_iterator);
-//        image=pattern->bullet->getImage(current_sprite);
-//
-//        position_x.push_back(pattern->x-image->getWidth()/2);
-//        position_y.push_back(pattern->y-image->getHeight()/2);
-//        angle.push_back(pattern->getBulletAngle());
-//    }
-//
-//    if(image!=NULL)
-//    painter->draw2DImageBatch
-//    (   image,
-//        image->getWidth(),image->getHeight(),
-//        position_x,position_y,
-//        1.0,//-(pattern->frame*pattern->auto_scale),
-//        angle,
-//        false,
-//        0,0,
-//        Color(255,255,255,255),
-//        0,0,
-//        true,
-//        FlatShadow());
-}
-
-int Character::getX()
-{
-    return this->x;
-}
-
-int Character::getY()
-{
-    return this->y;
-}
-
-int Character::getHP()
-{
-    return this->hp;
-}
-
-string Character::getName()
-{
-    return name;
-}
-
-void Character::setHP(int hp)
-{
-    this->hp=hp;
-}
-
-void Character::setVisible(bool visible)
-{
-    this->visible=visible;
 }
 
 void Character::setOrientation(string orientation)
 {
     this->orientation=orientation;
     this->current_sprite=0;
-}
-
-int Character::getIteration()
-{
-    return iteration;
-}
-
-void Character::setX(int x)
-{
-    this->x=x;
-}
-
-void Character::setY(int y)
-{
-    this->y=y;
-}
-
-std::list<Pattern*>* Character::getActivePatterns()
-{
-    return active_patterns;
-}
-
-void Character::setType(std::string new_current_type)
-{
-    this->current_type=new_current_type;
 }
 
 bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle)
@@ -958,15 +870,14 @@ void Character::hit(int damage)
     this->hp-=damage;
     if(hp<0)
         hp=0;
-    //current_color_effect_r = 0;
 }
 
 void Character::addActivePattern(Pattern* pattern)
 {
     Pattern* pattern_temp=new Pattern(pattern,this->x,this->y);
-    float angle=pattern_temp->getAngle();
+    float angle=pattern_temp->angle;
     angle+=pattern_temp->getRandomAngle();
-    pattern_temp->setAngle(angle);
+    pattern_temp->angle=angle;
 
     active_patterns->push_back(pattern_temp);
 }
@@ -979,8 +890,8 @@ void Character::shakeScreen(int shake_magnitude, int shake_time)
 
 void Character::deleteActivePatterns()
 {
-    std::list<Pattern*>::iterator i = getActivePatterns()->begin();
-    while (i != getActivePatterns()->end())
+    std::list<Pattern*>::iterator i = active_patterns->begin();
+    while (i != active_patterns->end())
     {
         Pattern*p=(Pattern*)*i;
         p->hit(sound_channel_base+1,true);

@@ -167,9 +167,7 @@ void Pattern::updateStateShouting()
 void Pattern::updateStateNotShouting()
 {
     current_startup=0;
-    //current_cooldown=0;
     current_cooldown++;
-    //state="startup";
 }
 
 
@@ -267,22 +265,13 @@ void Pattern::render()
     {
         for(int i=0;i<(int)bullet->hitboxes.size();i++)
         {
-            Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->getX(),this->getY(),this->getBulletAngle());
+            Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->x,this->y,this->getBulletAngle());
             painter->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->hitboxes[i]->getWidth(),this->bullet->hitboxes[i]->getHeight(),
                                    h.getAngle(),100,0,0,100,true);
         }
     }
-}
-
-int Pattern::getX()
-{
-    return this->x;
-}
-int Pattern::getY()
-{
-    return this->y;
 }
 
 bool Pattern::destroyFlag()
@@ -292,11 +281,6 @@ bool Pattern::destroyFlag()
     if(duration<0)
         return false;
     return iteration>duration;
-}
-
-float Pattern::getAngle()
-{
-    return angle;
 }
 
 float Pattern::getBulletAngle()
@@ -328,34 +312,11 @@ bool Pattern::getAimPlayer()
     return true;
 }
 
-int Pattern::getHoming() {
-    return this->homing;
-}
-
 void Pattern::aimTo(int x,int y)
 {
-//    double distance_x=player->x-this->x-pattern->y;
-//    double distance_y=player->y-this->y+pattern->x;
-//    angle-=atan2(distance_y,distance_x)*180/PI;
-
     double distance_x=10;
     double distance_y=20;
     angle-=atan2(distance_y,distance_x)*180/PI;
-}
-
-Bullet* Pattern::getBullet()
-{
-    return this->bullet;
-}
-
-int Pattern::getDamage()
-{
-    return this->getBullet()->damage;
-}
-
-void Pattern::setAngle(float angle)
-{
-    this->angle=angle;
 }
 
 Pattern::~Pattern()
@@ -374,11 +335,6 @@ void Pattern::hit(int channel,bool hit_undestructable)
         angle_change=0;
         acceleration=0;
     }
-}
-
-bool Pattern::isHit()
-{
-    return is_hit;
 }
 
 void Pattern::modifiersControl()

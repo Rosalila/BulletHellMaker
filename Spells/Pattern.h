@@ -16,10 +16,11 @@
 
 class Pattern
 {
+public:
     Sound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
-public:
+
     double x,y;
     int velocity;
     int max_velocity;
@@ -68,38 +69,29 @@ public:
 
     //Modifiers
     std::map<int, vector<Modifier*>* >*modifiers;
-    void modifiersControl();
 
     //This is sooooo wierd
     Pattern* pattern;
 
-public:
-int offset_x,offset_y;
+    int offset_x,offset_y;
+
     Pattern(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity, double auto_scale,
             Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, bool collides_bullets, bool collides_opponent, bool undestructable, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets);
     ~Pattern();
     Pattern(Pattern*pattern,int x,int y);
     void logic(int stage_speed);
     void render();
-
-    int getX();
-    int getY();
-    float getAngle();
+    void modifiersControl();
     float getBulletAngle();
     float getRandomAngle();
     bool getAimPlayer();
     void aimTo(int x,int y);
-    Bullet* getBullet();
-    int getDamage();
     bool isReady();
-    void setAngle(float angle);
     void setState(std::string state);
     void updateStateShouting();
     void updateStateNotShouting();
     bool destroyFlag();
     void hit(int channel,bool hit_undestructable);
-    bool isHit();
-    int getHoming();
 };
 
 #endif

@@ -15,6 +15,7 @@
 
 class Player:public Character
 {
+public:
     //Slow bar variables
     Image*slow_bar;
     int slow_decrement;
@@ -31,12 +32,6 @@ class Player:public Character
     Color slow_bar_cooldown_color;
 
     map<string,Button*>controls;
-
-    //Move sound
-//    int move_sound_channel;
-//    int move_sound_volume;
-//    double last_delta_x;
-//    double last_delta_y;
 
     //Shield
     int current_shield;
@@ -64,16 +59,14 @@ class Player:public Character
     int parryed_x,parryed_y;
     vector<Hitbox*>parry_hitboxes;
 
-    //Velocity
-    //int acceleration;
-
     vector<Image*>parry_sprites;
 
     int frame;
-public:
-int parries_left;
-int invulnerable_frames_left;
-int current_charge;
+
+    int parries_left;
+    int invulnerable_frames_left;
+    int current_charge;
+
     Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls);
     void logic(int stage_velocity);
     void inputControl();

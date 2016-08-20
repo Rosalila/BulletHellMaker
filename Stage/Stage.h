@@ -12,17 +12,15 @@
 class Stage
 {
 public:
-    std::vector<Layer*> back,front;
-    std::string music_path;
     RosalilaGraphics* painter;
     Sound* sonido;
     Receiver*receiver;
+    std::vector<Layer*> back,front;
+    std::string music_path;
     int bound_x1,bound_y1,bound_x2,bound_y2;
     int velocity;
     int iterator;
     string name;
-
-    //slow extra control
     bool iterate_slowdown_flag;
     int current_slowdown_iteration;
 
@@ -31,13 +29,6 @@ public:
     void dibujarFront();
     void drawLayer(Layer*layer);
     void loadFromXML(std::string name);
-    int getBoundX1();
-    int getBoundY1();
-    int getBoundX2();
-    int getBoundY2();
-    int getVelocity();
-    string getName();
-    void setName(string name);
     void logic();
     void playMusic();
     ~Stage();

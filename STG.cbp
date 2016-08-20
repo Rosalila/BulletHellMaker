@@ -50,14 +50,14 @@
 		<Unit filename="Rosalila/RosalilaAI/Transicion.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Color.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/RosalilaGraphics.h" />
-		<Unit filename="Rosalila/RosalilaGraphics/Timer.cpp" />
-		<Unit filename="Rosalila/RosalilaGraphics/Timer.h" />
 		<Unit filename="Rosalila/RosalilaInputs/Boton.cpp" />
 		<Unit filename="Rosalila/RosalilaInputs/Boton.h" />
 		<Unit filename="Rosalila/RosalilaInputs/Receiver.cpp" />
@@ -82,8 +82,6 @@
 		<Unit filename="Rosalila/RosalilaMenus/MenuLista.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuTexto.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuTexto.h" />
-		<Unit filename="Rosalila/RosalilaNetwork/RosalilaNetwork.cpp" />
-		<Unit filename="Rosalila/RosalilaNetwork/RosalilaNetwork.h" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Font.cpp" />
@@ -110,8 +108,6 @@
 		<Unit filename="Spells/Bullet.h" />
 		<Unit filename="Spells/Pattern.cpp" />
 		<Unit filename="Spells/Pattern.h" />
-		<Unit filename="Stage/Dialogue.cpp" />
-		<Unit filename="Stage/Dialogue.h" />
 		<Unit filename="Stage/Layer.cpp" />
 		<Unit filename="Stage/Layer.h" />
 		<Unit filename="Stage/Stage.cpp" />

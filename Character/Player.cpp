@@ -55,16 +55,6 @@ Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/1.png"));
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/2.png"));
     parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/3.png"));
-
-//    //Move sound
-//    move_sound_channel=-1;
-//    string move_sound_path = assets_directory+directory+"/sounds/move.wav";
-//    this->sonido->addSound("move init",assets_directory+directory+"/sounds/move_init.wav");
-//    this->sonido->addSound("move",assets_directory+directory+"/sounds/move.wav");
-//    move_sound_channel = this->sonido->playSound("move",20, -1);
-//    Mix_Volume(move_sound_channel, 0);
-//    move_sound_volume=0;
-
     //Charge
     this->sonido->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
     this->sonido->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
@@ -184,17 +174,6 @@ void Player::inputControl()
         right_pressed=true;
     }
 
-    //Move sound
-//    if(down_pressed||up_pressed||left_pressed||right_pressed)
-//    {
-//        move_sound_volume+=50;
-//        if(move_sound_volume>128)
-//            move_sound_volume=128;
-//    }else
-//    {
-//        move_sound_volume=0;
-//    }
-
     if(controls["2"]->isDown())
     {
         if(orientation!="down" && this->sonido->soundExists(name+".down"))
@@ -273,15 +252,6 @@ void Player::inputControl()
     this->x+=delta_x;
     this->y+=delta_y;
 
-    //Move Sound
-//    if(delta_x!=last_delta_x || delta_y!=last_delta_y)
-//    {
-//        if(delta_x!=0 || delta_y!=0)
-//            this->sonido->playSound("move init",-1,0);
-//    }
-//    last_delta_x=delta_x;
-//    last_delta_y=delta_y;
-
     if(controls["a"]->isDown())
     {
         if(!this->shooting && !isParrying() && parries_left>0)
@@ -292,7 +262,7 @@ void Player::inputControl()
         if(max_charge!=0 && current_charge==max_charge)
         {
             std::vector<Pattern*> patterns=type["bomb"];
-            patterns[0]->getBullet()->playSound();
+            patterns[0]->bullet->playSound();
             this->addActivePattern(patterns[0]);
         }
         current_charge=0;
@@ -397,17 +367,7 @@ void Player::logic(int stage_velocity)
             Mix_Volume(charging_sound_channel, 128);
     else
         Mix_Volume(charging_sound_channel, 0);
-    //current_color_effect_b = (255*hp)/max_hp;
 
-    //Color effect
-//    if(current_color_effect_r<255)
-//        current_color_effect_r++;
-//    if(current_color_effect_g<255)
-//        current_color_effect_g++;
-//    if(current_color_effect_b<255)
-//        current_color_effect_b++;
-//    if(current_color_effect_a<255)
-//        current_color_effect_a++;
     frame++;
 }
 
@@ -726,9 +686,9 @@ void Player::parry(bool infinite_parries)
             parries_left-=1;
         }
     }
-    if(this->sonido->soundExists(this->getName()+".parry"))
+    if(this->sonido->soundExists(this->name+".parry"))
     {
-        this->sonido->playSound(this->getName()+".parry",sound_channel_base+1,0);
+        this->sonido->playSound(this->name+".parry",sound_channel_base+1,0);
     }
 }
 
