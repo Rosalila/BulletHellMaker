@@ -13,7 +13,6 @@
 #include "../Spells/Pattern.h"
 #include "../Rosalila/RosalilaUtility/RosalilaUtility.h"
 #include "Modifier.h"
-#include "../Rosalila/RosalilaNetwork/RosalilaNetwork.h"
 
 class Character
 {
@@ -89,7 +88,7 @@ public:
 double x,y;
     Character(){}
     Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
-    ~Character();
+    virtual ~Character();
     void loadFromXML();
     void loadMainXML();
     void loadBulletsXML();

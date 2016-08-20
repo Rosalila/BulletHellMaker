@@ -167,30 +167,20 @@ void Player::inputControl()
     bool up_pressed,down_pressed,left_pressed,right_pressed;
     up_pressed=down_pressed=left_pressed=right_pressed=false;
 
-    bool started_moving = false;
-
     if(controls["2"]->isDown())
     {
-        if(orientation!="down")
-            started_moving=true;
         down_pressed=true;
     }
     if(controls["8"]->isDown())
     {
-        if(orientation!="up")
-            started_moving=true;
         up_pressed=true;
     }
     if(controls["4"]->isDown())
     {
-        if(orientation!="left")
-            started_moving=true;
         left_pressed=true;
     }
     if(controls["6"]->isDown())
     {
-        if(orientation!="right")
-            started_moving=true;
         right_pressed=true;
     }
 
@@ -208,43 +198,35 @@ void Player::inputControl()
     if(controls["2"]->isDown())
     {
         if(orientation!="down" && this->sonido->soundExists(name+".down"))
-            this->sonido->playSound(name+".down");
+            this->sonido->playSound(name+".down",1,0);
         orientation="down";
     }
     else if(controls["8"]->isDown())
     {
         if(orientation!="up" && this->sonido->soundExists(name+".up"))
-            this->sonido->playSound(name+".up");
+            this->sonido->playSound(name+".up",1,0);
         orientation="up";
     }
     else if(controls["4"]->isDown())
     {
         if(orientation!="left" && this->sonido->soundExists(name+".left"))
-            this->sonido->playSound(name+".left");
+            this->sonido->playSound(name+".left",1,0);
         orientation="left";
     }
     else if(controls["6"]->isDown())
     {
         if(orientation!="right" && this->sonido->soundExists(name+".right"))
-            this->sonido->playSound(name+".right");
+            this->sonido->playSound(name+".right",1,0);
         orientation="right";
     }
     else
     {
         if(orientation!="idle" && this->sonido->soundExists(name+".idle"))
-            this->sonido->playSound(name+".idle");
+            this->sonido->playSound(name+".idle",1,0);
         orientation="idle";
     }
 
     int velocity_boost=invulnerable_frames_left;
-
-    //Move sound
-//    Mix_Volume(move_sound_channel, move_sound_volume);
-//    move_sound_volume-=20;
-//    if(move_sound_volume<0)
-//        move_sound_volume=0;
-
-    bool diagonal_slowdown=2;
 
     double delta_y=0;
     double delta_x=0;
@@ -349,7 +331,7 @@ void Player::logic(int stage_velocity)
     }else
     {
         if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
-            this->sonido->playSound(name+".destroyed");
+            this->sonido->playSound(name+".destroyed",1,0);
         orientation="destroyed";
         //this->hitbox.setValues(0,0,0,0,0);
     }
@@ -479,42 +461,6 @@ void Player::bottomRender()
                 true,
                 FlatShadow());
     }
-
-    //HP
-//    painter->drawRectangle(life_bar_x+life_bar_rect_offset_x,life_bar_y+life_bar_rect_offset_y,(life_bar_rect_width*hp)/max_hp,life_bar_rect_height,0,this->color.getRed(),this->color.getGreen(),this->color.getBlue(),this->color.getAlpha(),false);
-//    if(!slow_in_cooldown)
-//        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_color.getRed(),this->slow_bar_color.getGreen(),this->slow_bar_color.getBlue(),this->slow_bar_color.getAlpha(),false);
-//    else
-//        painter->drawRectangle(slow_bar_x+slow_bar_rect_offset_x,slow_bar_y+slow_bar_rect_offset_y,(slow_bar_rect_width*current_slow)/max_slow,slow_bar_rect_height,0,this->slow_bar_cooldown_color.getRed(),this->slow_bar_cooldown_color.getGreen(),this->slow_bar_cooldown_color.getBlue(),this->slow_bar_cooldown_color.getAlpha(),false);
-    //parrentRender();
-//
-//    painter->draw2DImage
-//    (   life_bar,
-//        life_bar->getWidth(),life_bar->getHeight(),
-//        painter->camera_x+life_bar_x,life_bar_y,
-//        1.0,
-//        0.0,
-//        false,
-//        0,0,
-//        Color(255,255,255,255),
-//        0,0,
-//        true,
-//        FlatShadow());
-//
-//    if(isSlowActive())
-//    {
-//        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,180));
-//    }else
-//    {
-//        painter->draw3DCube(this->getHitbox().getX(),this->getHitbox().getY(),2.0,Color(255,0,0,100));
-//    }
-
-//    if(shooting)
-//    {
-//        if(iteration%10==0)
-//            painter->addExplosion(this->x,this->y);
-//    }
-    painter->draw3D();
 }
 
 void Player::topRender()
@@ -572,7 +518,7 @@ if(invulnerable_frames_left>0)
             FlatShadow());
 
         if(receiver->isKeyDown(SDLK_h))
-        for(int i=0;i<parry_hitboxes.size();i++)
+        for(int i=0;i<(int)parry_hitboxes.size();i++)
         {
             painter->drawRectangle(parry_hitboxes[i]->getX()+x,
                                    parry_hitboxes[i]->getY()+y,
@@ -790,7 +736,7 @@ bool Player::collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_
 {
     if(!visible)
         return false;
-    for(int i=0;i<parry_hitboxes.size();i++)
+    for(int i=0;i<(int)parry_hitboxes.size();i++)
         if(parry_hitboxes[i]->getPlacedHitbox(this->x,this->y).collides(hitbox))
             return true;
     return false;

@@ -189,14 +189,14 @@ void Pattern::logic(int stage_speed)
         current_sprite++;
         if(is_hit)
         {
-            if(current_sprite>=bullet->spritesOnHitSize())
+            if(current_sprite>=(int)bullet->sprites_on_hit.size())
             {
                 delete_flag=true;
                 current_sprite=0;
             }
         }else
         {
-            if(current_sprite>=bullet->spritesSize())
+            if(current_sprite>=(int)bullet->sprites.size())
                 current_sprite=0;
         }
 
@@ -265,12 +265,12 @@ void Pattern::render()
 
     if(receiver->isKeyDown(SDLK_h))
     {
-        for(int i=0;i<(int)bullet->getHitboxes().size();i++)
+        for(int i=0;i<(int)bullet->hitboxes.size();i++)
         {
-            Hitbox h=this->bullet->getHitboxes()[i]->getPlacedHitbox(this->getX(),this->getY(),this->getBulletAngle());
+            Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->getX(),this->getY(),this->getBulletAngle());
             painter->drawRectangle(h.getX(),
                                    h.getY(),
-                                   this->bullet->getHitboxes()[i]->getWidth(),this->bullet->getHitboxes()[i]->getHeight(),
+                                   this->bullet->hitboxes[i]->getWidth(),this->bullet->hitboxes[i]->getHeight(),
                                    h.getAngle(),100,0,0,100,true);
         }
     }
@@ -350,7 +350,7 @@ Bullet* Pattern::getBullet()
 
 int Pattern::getDamage()
 {
-    return this->getBullet()->getDamage();
+    return this->getBullet()->damage;
 }
 
 void Pattern::setAngle(float angle)

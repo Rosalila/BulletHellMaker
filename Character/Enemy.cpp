@@ -28,9 +28,6 @@ Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::str
 
     this->iteration=0;
 
-    this->score_upload_message="";
-    bool flag_begin_upload=false;
-
     //Color effect
     current_color_effect_r=255;
     current_color_effect_g=255;
@@ -80,7 +77,7 @@ void Enemy::modifiersControl()
             if(modifier->variable=="pattern_type")
             {
                 //Reset cooldowns
-                for(int i=0;i<type[current_type].size();i++)
+                for(int i=0;i<(int)type[current_type].size();i++)
                 {
                     type[current_type][i]->current_cooldown=0;
                     type[current_type][i]->current_startup=0;
@@ -128,9 +125,9 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
             //current_type="";
             orientation="destroyed";
             if(this->sonido->soundExists(name+".destroyed"))
-                this->sonido->playSound(name+".destroyed");
+                this->sonido->playSound(name+".destroyed",1,0);
 
-            for(int i=0;i<hitboxes.size();i++)
+            for(int i=0;i<(int)hitboxes.size();i++)
                 this->hitboxes[i]->setValues(0,0,0,0,0);
         }
     }

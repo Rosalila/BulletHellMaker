@@ -17,19 +17,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-//  glutInit (&argc, argv);
-//  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
-
     clearLog();
-    //Creadas abierto
+
     setReceiver(new Receiver());
 
     RosalilaGraphics*painter=new RosalilaGraphics();
 
-    painter->video(painter);
-
-//painter->update.start();
-//painter->fps.start();
     Image* controls_config_backgound = painter->getTexture(assets_directory+"misc/controls configuration/background.png");
     vector<string> controls_config_map_name;
     controls_config_map_name.push_back("8");
@@ -47,10 +40,18 @@ int main(int argc, char *argv[])
     int current_button=0;
     map<string,Button*>controls;
 
+    int frame=0;
     while(true)
     {
         int key_pressed = -1;
         int joy_pressed = -1;
+        if(receiver->isKeyPressed(SDLK_ESCAPE))
+        {
+            current_button--;
+            if(current_button<0)
+                exit(0);
+            continue;
+        }
         for(int i=0/*SDLK_a*/;i<=255/*SDLK_z*/;i++)
         {
             if(receiver->isKeyPressed(i))
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
             string current_button_map = controls_config_map_name[current_button];
             controls[current_button_map]=new Button(receiver,key_pressed,current_button_map);
             current_button++;
-            if(current_button>=controls_config_press_images.size())
+            if(current_button>=(int)controls_config_press_images.size())
                 break;
         }
         if(joy_pressed!=-1)
@@ -87,7 +88,7 @@ int main(int argc, char *argv[])
             string current_button_map = controls_config_map_name[current_button];
             controls[current_button_map]=new Button(receiver,joy_pressed,0,current_button_map);
             current_button++;
-            if(current_button>=controls_config_press_images.size())
+            if(current_button>=(int)controls_config_press_images.size())
                 break;
         }
 
@@ -104,6 +105,7 @@ int main(int argc, char *argv[])
             false,
             FlatShadow());
 
+        if(frame%60>=0 && frame%60<30)
         painter->draw2DImage
         (   controls_config_press_images[current_button],
             controls_config_press_images[current_button]->getWidth(),
@@ -120,7 +122,10 @@ int main(int argc, char *argv[])
             FlatShadow());
 
         receiver->updateInputs();
+        writeLogLine("ttt");
         painter->updateScreen();
+        writeLogLine("aaa");
+        frame++;
     }
 
     Sound*sonido = new Sound();

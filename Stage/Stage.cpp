@@ -88,50 +88,6 @@ void Stage::dibujarFront()
         Layer* layer=front[i];
         drawLayer(layer);
     }
-
-    for (std::list<Dialogue*>::iterator dialogue = active_dialogues.begin(); dialogue != active_dialogues.end(); dialogue++)
-    {
-        painter->draw2DImage
-        (   dialogue_bg,
-            dialogue_bg->getWidth(),dialogue_bg->getHeight(),
-            dialogue_x,dialogue_y,
-            1.0,
-            0.0,
-            false,
-            0,0,
-            Color(255,255,255,255),
-            0,0,
-            false,
-            FlatShadow());
-        ((Dialogue*)*dialogue)->render(this->dialogue_x+this->dialogue_padding_x,this->dialogue_y+this->dialogue_padding_y);
-    }
-}
-
-void Stage::loadDialogues(std::string file)
-{
-    writeLogLine("Loading dialogues from XML.");
-
-    string dialogues_path = assets_directory+"stages/"+file+"/dialogues.xml";
-    TiXmlDocument doc_t((char*)dialogues_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-
-    TiXmlNode *dialogues_file=doc->FirstChild("DialoguesFile");
-
-    if(dialogues_file==NULL)
-        return;
-
-    for(TiXmlNode *dialogue_node=dialogues_file->FirstChild("dialogue");
-            dialogue_node!=NULL;
-            dialogue_node=dialogue_node->NextSibling("dialogue"))
-    {
-        int frame=atoi(dialogue_node->ToElement()->Attribute("frame"));
-        std::string text=dialogue_node->ToElement()->Attribute("text");
-        std::string path=dialogue_node->ToElement()->Attribute("path");
-
-        dialogues[frame]=new Dialogue(painter,sonido,receiver,text,painter->getTexture(assets_directory+"stages/"+file+"/"+path));
-    }
 }
 
 void Stage::loadFromXML(std::string name)
@@ -150,19 +106,6 @@ void Stage::loadFromXML(std::string name)
 
     //Load settings
     music_path = assets_directory+"stages/"+name+"/music.ogg";
-
-    this->dialogue_x=0;
-    this->dialogue_y=0;
-    this->dialogue_padding_x=0;
-    this->dialogue_padding_y=0;
-//    if(stage_file->FirstChild("DialoguePosition")!=NULL)
-//    {
-//        TiXmlNode *dialogue_pos_node=stage_file->FirstChild("DialoguePosition");
-//        this->dialogue_x=atoi(dialogue_pos_node->ToElement()->Attribute("x"));
-//        this->dialogue_y=atoi(dialogue_pos_node->ToElement()->Attribute("y"));
-//        this->dialogue_padding_x=atoi(dialogue_pos_node->ToElement()->Attribute("padding_x"));
-//        this->dialogue_padding_y=atoi(dialogue_pos_node->ToElement()->Attribute("padding_y"));
-//    }
 
     TiXmlNode *nodo_bounds=stage_file->FirstChild("Bounds");
     this->bound_x1=0;
@@ -315,7 +258,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
     randomized_appereance_iterator++)
 {
     list<int>current_list=(*randomized_appereance_iterator).second;
-    while(current_list.size()>max_layers[(*randomized_appereance_iterator).first])
+    while((int)current_list.size()>max_layers[(*randomized_appereance_iterator).first])
     {
         int random_to_remove = rand()%current_list.size();
         list<int>::iterator remove_iterator = current_list.begin();
@@ -528,8 +471,6 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
                                   ));
     }
     writeLogLine("Stage loaded succesfully from XML.");
-
-    loadDialogues(name);
 }
 
 Stage::~Stage()
@@ -579,49 +520,13 @@ void Stage::setName(string name)
     this->name=name;
 }
 
-void Stage::setVelocity(int velocity)
-{
-    this->velocity=velocity;
-}
-
-void Stage::render()
-{
-//    for (std::list<Character*>::iterator character = active_enemies->begin(); character != active_enemies->end(); character++)
-//        ((Character*)*character)->render();
-}
-
 void Stage::logic()
 {
     if(getIterateSlowdownFlag())
         iterator++;
-
-    if(dialogues.find(iterator)!=dialogues.end())
-    {
-        active_dialogues.push_back(dialogues[iterator]);
-    }
-
-    std::list<Dialogue*>::iterator i = active_dialogues.begin();
-    while (i != active_dialogues.end())
-    {
-        Dialogue*d=(Dialogue*)*i;
-        d->logic();
-        if (d->destroyFlag())
-        {
-            active_dialogues.erase(i++);
-        }
-        else
-        {
-            ++i;
-        }
-    }
 }
 
 void Stage::playMusic()
 {
-    sonido->playMusic(this->music_path);
-}
-
-string Stage::getMusicPath()
-{
-    return music_path;
+    sonido->playMusic(this->music_path,-1);
 }

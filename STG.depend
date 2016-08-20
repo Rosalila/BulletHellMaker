@@ -3042,10 +3042,10 @@
 1463080819 source:/home/turupawn/Projects/Flatshot/STG/Character/Player.cpp
 	"Player.h"
 
-1470183816 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Character.cpp
+1471653057 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Character.cpp
 	"Character.h"
 
-1470183819 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
+1471654867 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
@@ -3057,7 +3057,6 @@
 	"../Spells/Pattern.h"
 	"../Rosalila/RosalilaUtility/RosalilaUtility.h"
 	"Modifier.h"
-	"../Rosalila/RosalilaNetwork/RosalilaNetwork.h"
 
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/TinyXml/tinyxml.h
 	<ctype.h>
@@ -3074,7 +3073,7 @@
 	<assert.h>
 	<string.h>
 
-1465231617 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1471649255 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../system.h"
@@ -3087,12 +3086,10 @@
 	"../TinyXml/tinyxml.h"
 	<SDL2/SDL_opengl.h>
 	<stdio.h>
+	"../RosalilaGraphics/Color.h"
 	"../RosalilaGraphics/FlatShadow.h"
 	"../RosalilaGraphics/Image.h"
 	"../RosalilaGraphics/Timer.h"
-	"../RosalilaGraphics/Explosion.h"
-	"../RosalilaGraphics/Cube.h"
-	"../RosalilaGraphics/Object3D.h"
 	"../RosalilaUtility/RosalilaUtility.h"
 	<iostream>
 	<fstream>
@@ -3100,7 +3097,7 @@
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/system.h
 	<iostream>
 
-1452814348 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/FlatShadow.h
+1471652937 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/FlatShadow.h
 	<vector>
 	"../RosalilaUtility/RosalilaUtility.h"
 	"../RosalilaGraphics/Image.h"
@@ -3121,7 +3118,7 @@
 
 1460310580 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Line.h
 
-1467146646 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.h
+1471649732 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.h
 	"../system.h"
 	<string>
 	<vector>
@@ -3133,15 +3130,15 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	<map>
 
-1470086907 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
+1471651806 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
 	"../system.h"
 	"../RosalilaInputs/Boton.h"
 	"../RosalilaAI/RosalilaAI.h"
 
-1470090156 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Boton.h
+1471651337 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Boton.h
 	"../RosalilaInputs/Receiver.h"
 
-1467571737 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.h
+1471652190 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3178,36 +3175,20 @@
 	<SDL2/SDL_opengl.h>
 	<stdio.h>
 
-1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.h
+1471648585 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.h
 
-1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Explosion.h
-	<SDL2/SDL_image.h>
-	<SDL2/SDL_image.h>
-	<SDL2_image/SDL_image.h>
-	<GL/gl.h>
-	<stdio.h>
-	<math.h>
+1471551428 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Explosion.h
 
-1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Cube.h
+1471554617 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Cube.h
 	<SDL2/SDL_image.h>
 	<SDL2_image/SDL_image.h>
 	<SDL2/SDL_opengl.h>
 	<stdio.h>
 	<math.h>
 
-1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.h
-	<SDL2/SDL_image.h>
-	<SDL2_image/SDL_image.h>
-	<SDL2/SDL_opengl.h>
-	<stdio.h>
-	<math.h>
-	<vector>
-	<iostream>
-	<fstream>
-	<sstream>
-	<string>
+1471550773 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.h
 
-1463932111 /home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.h
+1471655164 /home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
@@ -3237,10 +3218,10 @@
 
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.h
 
-1466698135 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.cpp
+1471654883 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.cpp
 	"Enemy.h"
 
-1463080890 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
+1471654871 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
@@ -3268,7 +3249,7 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Modifier.cpp
 	"Modifier.h"
 
-1470274837 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
+1471653622 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Player.cpp
 	"Player.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaAI/Automata.cpp
@@ -3296,10 +3277,10 @@
 	"../RosalilaSound/RosalilaSound.h"
 	"../RosalilaInputs/RosalilaInputs.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Cube.cpp
+1471549601 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Cube.cpp
 	"Cube.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Explosion.cpp
+1471550914 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Explosion.cpp
 	"Explosion.h"
 
 1452814382 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/FlatShadow.cpp
@@ -3308,23 +3289,21 @@
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Image.cpp
 	"RosalilaGraphics.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
+1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1468989719 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1471653665 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
-	"SDL2/SDL.h"
-	"Timer.h"
+1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
 
-1470090179 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Boton.cpp
+1471651734 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Boton.cpp
 	"Boton.h"
 
-1467572561 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.cpp
+1471652262 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs.h"
 
-1470090224 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+1471651474 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
 	"RosalilaInputs.h"
 	<sstream>
 
@@ -3392,13 +3371,13 @@
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 
-1467229033 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1471653396 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
-1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.cpp
+1471653152 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.cpp
 	"Font.h"
 
-1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.h
+1471653148 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.h
 	<iostream>
 	"../RosalilaGraphics/RosalilaGraphics.h"
 
@@ -3428,7 +3407,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1470183882 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
+1471653774 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.cpp
 	"STGMenu.h"
 
 1470183094 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/STGMenu.h
@@ -3439,13 +3418,12 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
-1454005932 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
+1471654834 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../Character/Character.h"
 	"Layer.h"
-	"Dialogue.h"
 	"../STGUtility/STGUtility.h"
 	<map>
 
@@ -3475,10 +3453,10 @@
 1462078927 source:/home/turupawn/Projects/C++/Flatshot/STG/STGUtility/STGUtility.cpp
 	"STGUtility.h"
 
-1467146724 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.cpp
+1471655072 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Bullet.cpp
 	"Bullet.h"
 
-1462839786 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.cpp
+1471652777 source:/home/turupawn/Projects/C++/Flatshot/STG/Spells/Pattern.cpp
 	"Pattern.h"
 
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Dialogue.cpp
@@ -3487,10 +3465,10 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.cpp
 	"Layer.h"
 
-1462074751 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
+1471654830 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1470274870 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1471653722 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3503,6 +3481,130 @@
 	"STGUtility/STGUtility.h"
 	<iostream>
 
-1470235809 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
+1471654804 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
 	"STG.h"
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/steam_api.h
+	"isteamclient.h"
+	"isteamuser.h"
+	"isteamfriends.h"
+	"isteamutils.h"
+	"isteammatchmaking.h"
+	"isteamuserstats.h"
+	"isteamapps.h"
+	"isteamnetworking.h"
+	"isteamremotestorage.h"
+	"isteamscreenshots.h"
+	"isteammusic.h"
+	"isteammusicremote.h"
+	"isteamhttp.h"
+	"isteamunifiedmessages.h"
+	"isteamcontroller.h"
+	"isteamugc.h"
+	"isteamapplist.h"
+	"isteamhtmlsurface.h"
+	"isteaminventory.h"
+	"isteamvideo.h"
+	"steam_api_internal.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/isteamclient.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/steamtypes.h
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/steamclientpublic.h
+	"steamtypes.h"
+	"steamuniverse.h"
+
+1426027857 /home/turupawn/Software/SteamworksSDK/public/steam/steamuniverse.h
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/isteamuser.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteamfriends.h
+	"isteamclient.h"
+	"steamclientpublic.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/isteamutils.h
+	"isteamclient.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/isteammatchmaking.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+	"matchmakingtypes.h"
+	"isteamclient.h"
+	"isteamfriends.h"
+
+1438034887 /home/turupawn/Software/SteamworksSDK/public/steam/matchmakingtypes.h
+	<stdio.h>
+	<string.h>
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteamuserstats.h
+	"isteamclient.h"
+	"isteamremotestorage.h"
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/isteamremotestorage.h
+	"isteamclient.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/isteamapps.h
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteamnetworking.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteamscreenshots.h
+	"isteamclient.h"
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteammusic.h
+	"isteamclient.h"
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteammusicremote.h
+	"isteamclient.h"
+	"isteammusic.h"
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteamhttp.h
+	"isteamclient.h"
+	"steamhttpenums.h"
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/steamhttpenums.h
+
+1426027856 /home/turupawn/Software/SteamworksSDK/public/steam/isteamunifiedmessages.h
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/isteamcontroller.h
+	"isteamclient.h"
+
+1460674237 /home/turupawn/Software/SteamworksSDK/public/steam/isteamugc.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteamapplist.h
+	"isteamclient.h"
+	"steamtypes.h"
+
+1460674531 /home/turupawn/Software/SteamworksSDK/public/steam/isteamhtmlsurface.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteaminventory.h
+	"isteamclient.h"
+
+1429206172 /home/turupawn/Software/SteamworksSDK/public/steam/isteamvideo.h
+	"isteamclient.h"
+
+1463097229 /home/turupawn/Software/SteamworksSDK/public/steam/steam_api_internal.h
+
+1463097229 /home/turupawn/Software/SteamworksSDK/public/steam/steam_gameserver.h
+	"steam_api.h"
+	"isteamgameserver.h"
+	"isteamgameserverstats.h"
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteamgameserver.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Software/SteamworksSDK/public/steam/isteamgameserverstats.h
+	"isteamclient.h"
+
+1471649336 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Color.cpp
+	"Color.h"
+
+1471649357 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Color.h
 

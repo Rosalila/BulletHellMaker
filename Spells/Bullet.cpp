@@ -21,15 +21,6 @@ Bullet::Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::s
     current_channel=-1;
 }
 
-void Bullet::logic()
-{
-}
-
-void Bullet::render()
-{
-
-}
-
 Image* Bullet::getImage(int position)
 {
     if(position>=(int)sprites.size())
@@ -44,26 +35,6 @@ Image* Bullet::getOnHitImage(int position)
     return sprites_on_hit[position];
 }
 
-int Bullet::spritesSize()
-{
-    return sprites.size();
-}
-
-int Bullet::spritesOnHitSize()
-{
-    return sprites_on_hit.size();
-}
-
-vector<Hitbox*> Bullet::getHitboxes()
-{
-    return hitboxes;
-}
-
-int Bullet::getDamage()
-{
-    return damage;
-}
-
 void Bullet::playSound()
 {
     if(random_sounds.size()<1)
@@ -76,7 +47,7 @@ void Bullet::playSound()
         randomizeArpeggio(arpeggio_length);
     }
 
-    if(current_arrpegio_sound>=current_arpeggio.size())
+    if(current_arrpegio_sound>=(int)current_arpeggio.size())
         current_arrpegio_sound=0;
     current_random_sound=current_arpeggio[current_arrpegio_sound];
     current_arrpegio_sound++;
@@ -84,8 +55,6 @@ void Bullet::playSound()
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
-//        if(current_channel!=-1)
-//            Mix_HaltChannel(current_channel);
         current_channel=sonido->playSound(random_sounds[current_random_sound],sound_channel,0);
     }
 }

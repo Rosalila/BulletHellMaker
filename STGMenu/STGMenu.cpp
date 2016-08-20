@@ -155,7 +155,7 @@ void Menu::loopMenu()
         {
             if(receiver->isKeyPressed(SDLK_ESCAPE) || receiver->isKeyPressed(SDLK_x) || receiver->isJoyPressed(5,0))
             {
-                sonido->playSound(std::string("Menu.back"));
+                sonido->playSound(std::string("Menu.back"),1,0);
                 exit_signal=true;
                 break;
             }
@@ -167,11 +167,9 @@ void Menu::loopMenu()
 
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
-                    MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-
                     if(!char_select->listoPA())
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),1,0);
                         char_select->select_p1_y++;
                         if(char_select->select_p1_y>=char_select->size_y)
                             char_select->select_p1_y=0;
@@ -189,11 +187,9 @@ void Menu::loopMenu()
 
                 if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
                 {
-                    MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-
                     if(!char_select->listoPA())
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),1,0);
                         char_select->select_p1_y--;
                         if(char_select->select_p1_y<0)
                             char_select->select_p1_y=char_select->size_y-1;
@@ -211,14 +207,14 @@ void Menu::loopMenu()
                 {
                     if(!char_select->listoPA())
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),1,0);
                         char_select->select_p1_x++;
                         if(char_select->select_p1_x>=char_select->size_x)
                             char_select->select_p1_x=0;
                     }
                     else
                     {
-                        sonido->playSound(std::string("Menu.move"));
+                        sonido->playSound(std::string("Menu.move"),1,0);
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->avanzar();
                         backgroundTargetUpdate(ml->getActual());
@@ -233,14 +229,14 @@ void Menu::loopMenu()
                 {
                     if(!char_select->listoPA())
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),1,0);
                         char_select->select_p1_x--;
                         if(char_select->select_p1_x<0)
                             char_select->select_p1_x=char_select->size_x-1;
                     }
                     else
                     {
-                        sonido->playSound(std::string("Menu.move"));
+                        sonido->playSound(std::string("Menu.move"),1,0);
                         MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                         ml->retroceder();
                         backgroundTargetUpdate(ml->getActual());
@@ -255,12 +251,12 @@ void Menu::loopMenu()
                     {
                         if(!char_select->listoPA())
                         {
-                            sonido->playSound(std::string("Menu.select_char"));
+                            sonido->playSound(std::string("Menu.select_char"),1,0);
                             char_select->lockPA(0);
                         }
                         else
                         {
-                            sonido->playSound(std::string("Menu.select"));
+                            sonido->playSound(std::string("Menu.select"),1,0);
                             iniciarJuego(char_select->getLockedNamesPA()[0],getStage(),"Stage select");
                             continue;
                         }
@@ -281,10 +277,9 @@ void Menu::loopMenu()
                             stage->loadFromXML(arcade_paths["Easy"][0]);
                             Player*player=new Player(sonido,painter,receiver,"Demo",10,controls);
                             player->x+=painter->camera_x;
-                            int last_cammera=0;
                             //stage->playMusic();
                             Mix_HaltMusic();
-                            for(int i=0;i<arcade_paths["Easy"].size();i++)
+                            for(int i=0;i<(int)arcade_paths["Easy"].size();i++)
                             {
 
                                 //this->printLoadingScreen();
@@ -302,7 +297,7 @@ void Menu::loopMenu()
                                     player->setOrientation("up");
                                     i--;
                                 }
-                                if(i==arcade_paths["Easy"].size()-1 && stg->playerWon())
+                                if(i==(int)arcade_paths["Easy"].size()-1 && stg->playerWon())
                                 {
                                     this->playMusic();
                                     string menu_directory = assets_directory+"/menu/ending.svg";
@@ -329,7 +324,7 @@ void Menu::loopMenu()
                         if(mb->getAccion()=="load")
                         {
                             if(frame<skip_frame)
-                                sonido->playSound(std::string("Menu.select"));
+                                sonido->playSound(std::string("Menu.select"),1,0);
                             string menu_directory = assets_directory+mb->load_menu;
                             Menu *temp=new Menu(painter,receiver,sonido,(char*)menu_directory.c_str(),controls);
                             temp->loopMenu();
@@ -372,11 +367,11 @@ void Menu::loopMenu()
                             {
                                 int pos=-1,posc=-1;
                                 for(int j=0;j<(int)temp->botones.size();j++)
-                                    if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
+                                    if(temp->botones[j].map==mapeo && !temp->botones[j].uses_joystick)
                                         pos=j;
 
                                 for(int j=0;j<(int)temp->cruz.size();j++)
-                                    if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
+                                    if(temp->cruz[j].map==mapeo && !temp->cruz[j].uses_joystick)
                                         posc=j;
 
                                 Button b(receiver,toKeyCode(str_input),mapeo);
@@ -390,11 +385,11 @@ void Menu::loopMenu()
                             {
                                 int pos=-1,posc=-1;
                                 for(int j=0;j<(int)temp->botones.size();j++)
-                                    if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
+                                    if(temp->botones[j].map==mapeo && temp->botones[j].uses_joystick)
                                         pos=j;
 
                                 for(int j=0;j<(int)temp->cruz.size();j++)
-                                    if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
+                                    if(temp->cruz[j].map==mapeo && temp->cruz[j].uses_joystick)
                                         posc=j;
 
                                 int int_input=((int)(str_input[3]))-48;
@@ -1198,11 +1193,11 @@ void Menu::llenarRosalilaInputssBotones()
                 mb->input_config="";
                 int pos=-1,posc=-1;
                 for(int j=0;j<(int)temp->botones.size();j++)
-                    if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
+                    if(temp->botones[j].map==mapeo && !temp->botones[j].uses_joystick)
                         pos=j;
 
                 for(int j=0;j<(int)temp->cruz.size();j++)
-                    if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
+                    if(temp->cruz[j].map==mapeo && !temp->cruz[j].uses_joystick)
                         posc=j;
 
                 if(pos!=-1)
@@ -1214,35 +1209,35 @@ void Menu::llenarRosalilaInputssBotones()
                 //joy
                 pos=-1;
                 for(int j=0;j<(int)temp->botones.size();j++)
-                    if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
+                    if(temp->botones[j].map==mapeo && temp->botones[j].uses_joystick)
                         pos=j;
                 posc=-1;
                 for(int j=0;j<(int)temp->cruz.size();j++)
-                    if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
+                    if(temp->cruz[j].map==mapeo && temp->cruz[j].uses_joystick)
                         posc=j;
 
                 if(pos!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=toString((int)temp->botones[pos].getNumJoystick());
-                    mb->input_config+=toString((int)temp->botones[pos].joystick);
+                    mb->input_config+=toString((int)temp->botones[pos].uses_joystick);
+                    mb->input_config+=toString((int)temp->botones[pos].joystick_button);
                 }
 
                 if(posc!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=toString((int)temp->cruz[posc].getNumJoystick());
+                    mb->input_config+=toString((int)temp->cruz[posc].joystick_num);
                     mb->input_config+="-";
-                    if(temp->cruz[posc].joystick==-8)
+                    if(temp->cruz[posc].joystick_button==-8)
                         mb->input_config+=std::string("up");
-                    else if(temp->cruz[posc].joystick==-2)
+                    else if(temp->cruz[posc].joystick_button==-2)
                         mb->input_config+=std::string("down");
-                    else if(temp->cruz[posc].joystick==-4)
+                    else if(temp->cruz[posc].joystick_button==-4)
                         mb->input_config+=std::string("left");
-                    else if(temp->cruz[posc].joystick==-6)
+                    else if(temp->cruz[posc].joystick_button==-6)
                         mb->input_config+=std::string("right");
                     else
-                        mb->input_config+=toString((int)temp->cruz[posc].joystick);
+                        mb->input_config+=toString((int)temp->cruz[posc].joystick_button);
                 }
             }
         }
@@ -1269,7 +1264,7 @@ void Menu::printLoadingScreen()
 
 void Menu::playMusic()
 {
-    sonido->playMusic(this->music_path);
+    sonido->playMusic(this->music_path,-1);
 }
 
 void Menu::backgroundTargetUpdate(int current_selection)
@@ -1277,7 +1272,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     if(current_selection>=0 && current_selection<=4)
     {
         if(sonido->getCurrentMusic()!=assets_directory+"1.ogg")
-            sonido->playMusic(assets_directory+"1.ogg");
+            sonido->playMusic(assets_directory+"1.ogg",-1);
         white_image_target_r=33;
         white_image_target_g=150;
         white_image_target_b=243;
@@ -1285,7 +1280,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     if(current_selection>=5 && current_selection<=9)
     {
         if(sonido->getCurrentMusic()!=assets_directory+"2.ogg")
-            sonido->playMusic(assets_directory+"2.ogg");
+            sonido->playMusic(assets_directory+"2.ogg",-1);
         white_image_target_r=139;
         white_image_target_g=195;
         white_image_target_b=74;
@@ -1293,7 +1288,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     if(current_selection>=10 && current_selection<=14)
     {
         if(sonido->getCurrentMusic()!=assets_directory+"3.ogg")
-            sonido->playMusic(assets_directory+"3.ogg");
+            sonido->playMusic(assets_directory+"3.ogg",-1);
         white_image_target_r=103;
         white_image_target_g=58;
         white_image_target_b=183;
@@ -1301,7 +1296,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     if(current_selection>=15 && current_selection<=19)
     {
         if(sonido->getCurrentMusic()!=assets_directory+"4.ogg")
-            sonido->playMusic(assets_directory+"4.ogg");
+            sonido->playMusic(assets_directory+"4.ogg",-1);
         white_image_target_r=255;
         white_image_target_g=152;
         white_image_target_b=0;
@@ -1309,7 +1304,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     if(current_selection>=20 && current_selection<=24)
     {
         if(sonido->getCurrentMusic()!=assets_directory+"5.ogg")
-            sonido->playMusic(assets_directory+"5.ogg");
+            sonido->playMusic(assets_directory+"5.ogg",-1);
         white_image_target_r=244;
         white_image_target_g=67;
         white_image_target_b=54;

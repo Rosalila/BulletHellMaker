@@ -665,71 +665,71 @@ void Character::loadPatternsXML()
                 {
                     Pattern* p = loadPatternXML(pattern_node);
 
-                    int velocity=0;
+                    p->velocity=0;
                     if(repeat_element->Attribute("velocity")!=NULL)
                         p->velocity+=atoi(repeat_element->Attribute("velocity"))*i;
 
-                    int max_velocity=9999999;
+                    p->max_velocity=9999999;
                     if(repeat_element->Attribute("max_velocity")!=NULL)
                         p->max_velocity+=atoi(repeat_element->Attribute("max_velocity"))*i;
 
-                    int acceleration=0;
+                    p->acceleration=0;
                     if(repeat_element->Attribute("acceleration")!=NULL)
                         p->acceleration+=atoi(repeat_element->Attribute("acceleration"))*i;
 
-                    int a_frequency=0;
+                    p->a_frequency=0;
                     if(repeat_element->Attribute("a_frequency")!=NULL)
                         p->a_frequency+=atoi(repeat_element->Attribute("a_frequency"))*i;
 
-                    int angle=0;
+                    p->angle=0;
                     if(repeat_element->Attribute("angle")!=NULL)
                         p->angle+=atoi(repeat_element->Attribute("angle"))*i;
 
-                    int angle_change=0;
+                    p->angle_change=0;
                     if(repeat_element->Attribute("angle_change")!=NULL)
                         p->angle_change+=atoi(repeat_element->Attribute("angle_change"))*i;
 
-                    int stop_ac_at=-1;
+                    p->stop_ac_at=-1;
                     if(repeat_element->Attribute("stop_ac_at")!=NULL)
                         p->stop_ac_at+=atoi(repeat_element->Attribute("stop_ac_at"))*i;
 
-                    int ac_frequency=0;
+                    p->ac_frequency=0;
                     if(repeat_element->Attribute("ac_frequency")!=NULL)
                         p->ac_frequency+=atoi(repeat_element->Attribute("ac_frequency"))*i;
 
-                    int offset_x=0;
+                    p->offset_x=0;
                     if(repeat_element->Attribute("offset_x")!=NULL)
                         p->offset_x+=atoi(repeat_element->Attribute("offset_x"))*i;
 
-                    int offset_y=0;
+                    p->offset_y=0;
                     if(repeat_element->Attribute("offset_y")!=NULL)
                         p->offset_y+=atoi(repeat_element->Attribute("offset_y"))*i;
 
-                    int startup=0;
+                    p->startup=0;
                     if(repeat_element->Attribute("startup")!=NULL)
                         p->startup+=atoi(repeat_element->Attribute("startup"))*i;
 
-                    int cooldown=0;
+                    p->cooldown=0;
                     if(repeat_element->Attribute("cooldown")!=NULL)
                         p->cooldown+=atoi(repeat_element->Attribute("cooldown"))*i;
 
-                    int animation_velocity=0;
+                    p->animation_velocity=0;
                     if(repeat_element->Attribute("animation_velocity")!=NULL)
                         p->animation_velocity+=atoi(repeat_element->Attribute("animation_velocity"))*i;
 
-                    int duration=-1;
+                    p->duration=-1;
                     if(repeat_element->Attribute("duration"))
                         p->duration+=atoi(repeat_element->Attribute("duration"))*i;
 
-                    int random_angle=0;
+                    p->random_angle=0;
                     if(repeat_element->Attribute("random_angle"))
                         p->random_angle+=atoi(repeat_element->Attribute("random_angle"))*i;
 
-                    int bullet_rotation=0;
+                    p->bullet_rotation=0;
                     if(repeat_element->Attribute("bullet_rotation"))
                         p->bullet_rotation+=atoi(repeat_element->Attribute("bullet_rotation"))*i;
 
-                    int br_change=0;
+                    p->br_change=0;
                     if(repeat_element->Attribute("br_change"))
                         p->br_change+=atoi(repeat_element->Attribute("br_change"))*i;
 
@@ -838,7 +838,7 @@ void Character::bottomRender()
 
     if(receiver->isKeyDown(SDLK_h))
     {
-        for(int i=0;i<hitboxes.size();i++)
+        for(int i=0;i<(int)hitboxes.size();i++)
         {
             painter->drawRectangle(hitboxes[i]->getX()+x,
                                    hitboxes[i]->getY()+y,
@@ -947,7 +947,7 @@ bool Character::collides(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_an
 {
     if(!visible)
         return false;
-    for(int i=0;i<hitboxes.size();i++)
+    for(int i=0;i<(int)hitboxes.size();i++)
         if(hitboxes[i]->getPlacedHitbox(this->x,this->y).collides(hitbox))
             return true;
     return false;
@@ -969,8 +969,6 @@ void Character::addActivePattern(Pattern* pattern)
     pattern_temp->setAngle(angle);
 
     active_patterns->push_back(pattern_temp);
-
-    painter->addExplosion(pattern_temp->getX()-pattern_temp->getBullet()->getImage(0)->getWidth()/2,pattern_temp->getY());
 }
 
 void Character::shakeScreen(int shake_magnitude, int shake_time)
@@ -992,7 +990,7 @@ void Character::deleteActivePatterns()
 
 Character::~Character()
 {
-    for(int i=0;i<hitboxes.size();i++)
+    for(int i=0;i<(int)hitboxes.size();i++)
     {
         delete hitboxes[i];
     }

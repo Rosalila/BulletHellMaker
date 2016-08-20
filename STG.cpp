@@ -135,7 +135,7 @@ void STG::mainLoop()
         if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
             player->exit();
-            sonido->playSound(std::string("Menu.back"));
+            sonido->playSound(std::string("Menu.back"),1,0);
             break;
         }
 
@@ -162,7 +162,7 @@ void STG::mainLoop()
                || (controls["a"]->isDown() && end_key_up_keyboard)
                )
             {
-                sonido->playSound(std::string("Menu.select"));
+                sonido->playSound(std::string("Menu.select"),1,0);
                 break;
             }
             if(!controls["a"]->isDown())
@@ -184,9 +184,9 @@ void STG::logic()
         Pattern*p=(Pattern*)*pattern;
         if(!p->isHit())
         {
-            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
+            for(int i=0;i<(int)p->getBullet()->hitboxes.size();i++)
             {
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                Hitbox h=p->getBullet()->hitboxes[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(player->isParrying() || player->isInvulnerable())
                 {
                     if(!p->isHit() && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
@@ -245,9 +245,9 @@ void STG::logic()
         Pattern*p=(Pattern*)*pattern;
         if(!p->isHit())
         {
-            for(int i=0;i<(int)p->getBullet()->getHitboxes().size();i++)
+            for(int i=0;i<(int)p->getBullet()->hitboxes.size();i++)
             {
-                Hitbox h=p->getBullet()->getHitboxes()[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
+                Hitbox h=p->getBullet()->hitboxes[i]->getPlacedHitbox(p->getX(),p->getY(),p->getBulletAngle());
                 if(p->collides_opponent && enemy->collides(h,0,0,0))
                 {
                     p->hit(player->sound_channel_base+1,false);
@@ -277,11 +277,11 @@ void STG::logic()
                 {
                     if(!player_pattern->isHit())
                     {
-                        vector<Hitbox*>enemy_hitboxes=enemy_pattern->getBullet()->getHitboxes();
+                        vector<Hitbox*>enemy_hitboxes=enemy_pattern->getBullet()->hitboxes;
                         for(int i=0;i<(int)enemy_hitboxes.size();i++)
                         {
                             Hitbox enemy_hitbox=enemy_hitboxes[i]->getPlacedHitbox(enemy_pattern->getX(),enemy_pattern->getY(),enemy_pattern->getBulletAngle());
-                            vector<Hitbox*>player_hitboxes=player_pattern->getBullet()->getHitboxes();
+                            vector<Hitbox*>player_hitboxes=player_pattern->getBullet()->hitboxes;
                             for(int j=0;j<(int)player_hitboxes.size();j++)
                             {
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->getX(),player_pattern->getY(),player_pattern->getBulletAngle());
@@ -335,7 +335,6 @@ void STG::render()
     player->topRender();
     enemy->topRender();
 
-    stage->render();
     stage->dibujarFront();
 
     if(enemy->getHP()==0)
