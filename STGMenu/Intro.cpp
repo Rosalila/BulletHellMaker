@@ -8,6 +8,8 @@ void intro(map<string,Button*> controls)
     Image* image=graphics->getTexture(assets_directory+"menu/startscreen.png");
     Image* image2=graphics->getTexture(assets_directory+"menu/instructions.png");
 
+    int current_background_transparency=0;
+
     while(true)
     {
         if(controls["a"]->isPressed())
@@ -22,14 +24,18 @@ void intro(map<string,Button*> controls)
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_background_transparency),
             0,0,
             false,
             FlatShadow());
 
+        current_background_transparency++;
+
         receiver->updateInputs();
         graphics->updateScreen();
     }
+
+    current_background_transparency=0;
 
     while(true)
     {
@@ -45,10 +51,12 @@ void intro(map<string,Button*> controls)
             0.0,
             false,
             0,0,
-            Color(255,255,255,255),
+            Color(255,255,255,current_background_transparency),
             0,0,
             false,
             FlatShadow());
+
+        current_background_transparency++;
 
         receiver->updateInputs();
         graphics->updateScreen();
