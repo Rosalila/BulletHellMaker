@@ -20,6 +20,59 @@ std::vector<std::string> getStageNames()
     return stage_names;
 }
 
+Color getBackgroundColor(int current_stage)
+{
+    if(current_stage>=0 && current_stage<=4)
+    {
+        return Color(33,150,243,255);
+    }
+    if(current_stage>=5 && current_stage<=9)
+    {
+        return Color(139,195,74,255);
+    }
+    if(current_stage>=10 && current_stage<=14)
+    {
+        return Color(103,58,183,255);
+    }
+    if(current_stage>=15 && current_stage<=19)
+    {
+        return Color(255,152,0,255);
+    }
+    if(current_stage>=20 && current_stage<=24)
+    {
+        return Color(244,67,54,255);
+    }
+}
+
+void updateMusic(int current_stage)
+{
+    if(current_stage>=0 && current_stage<=4)
+    {
+        if(getRosalilaSound()->current_music!=assets_directory+"1.ogg")
+            getRosalilaSound()->playMusic(assets_directory+"1.ogg",-1);
+    }
+    if(current_stage>=5 && current_stage<=9)
+    {
+        if(getRosalilaSound()->current_music!=assets_directory+"2.ogg")
+            getRosalilaSound()->playMusic(assets_directory+"2.ogg",-1);
+    }
+    if(current_stage>=10 && current_stage<=14)
+    {
+        if(getRosalilaSound()->current_music!=assets_directory+"3.ogg")
+            getRosalilaSound()->playMusic(assets_directory+"3.ogg",-1);
+    }
+    if(current_stage>=15 && current_stage<=19)
+    {
+        if(getRosalilaSound()->current_music!=assets_directory+"4.ogg")
+            getRosalilaSound()->playMusic(assets_directory+"4.ogg",-1);
+    }
+    if(current_stage>=20 && current_stage<=24)
+    {
+        if(getRosalilaSound()->current_music!=assets_directory+"5.ogg")
+            getRosalilaSound()->playMusic(assets_directory+"5.ogg",-1);
+    }
+}
+
 std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
 {
     std::vector<Image*> stage_images;
@@ -42,6 +95,8 @@ void stageSelect(map<string,Button*> controls)
     Image*background=graphics->getTexture(assets_directory+"menu/white_background.png");
     Image*left_arrow=graphics->getTexture(assets_directory+"menu/left_arrow.png");
     Image*right_arrow=graphics->getTexture(assets_directory+"menu/right_arrow.png");
+
+    Color background_color(255,255,255,255);
 
     int current_stage = 0;
     int frame = 0;
@@ -92,6 +147,25 @@ void stageSelect(map<string,Button*> controls)
                 current_stage=0;
         }
 
+        Color target_color = getBackgroundColor(current_stage);
+
+        if(background_color.red<target_color.red)
+            background_color.red++;
+        if(background_color.red>target_color.red)
+            background_color.red--;
+
+        if(background_color.green<target_color.green)
+            background_color.green++;
+        if(background_color.green>target_color.green)
+            background_color.green--;
+
+        if(background_color.blue<target_color.blue)
+            background_color.blue++;
+        if(background_color.blue>target_color.blue)
+            background_color.blue--;
+
+        updateMusic(current_stage);
+
         graphics->draw2DImage
         (   background,
             graphics->screen_width,graphics->screen_height,
@@ -100,7 +174,7 @@ void stageSelect(map<string,Button*> controls)
             0.0,
             false,
             0,0,
-            Color(0,0,0,255),
+            background_color,
             0,0,
             false,
             FlatShadow());

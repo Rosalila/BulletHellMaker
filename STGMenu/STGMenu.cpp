@@ -1074,7 +1074,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
 {
     if(current_selection>=0 && current_selection<=4)
     {
-        if(sonido->getCurrentMusic()!=assets_directory+"1.ogg")
+        if(sonido->current_music!=assets_directory+"1.ogg")
             sonido->playMusic(assets_directory+"1.ogg",-1);
         white_image_target_r=33;
         white_image_target_g=150;
@@ -1082,7 +1082,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     }
     if(current_selection>=5 && current_selection<=9)
     {
-        if(sonido->getCurrentMusic()!=assets_directory+"2.ogg")
+        if(sonido->current_music!=assets_directory+"2.ogg")
             sonido->playMusic(assets_directory+"2.ogg",-1);
         white_image_target_r=139;
         white_image_target_g=195;
@@ -1090,7 +1090,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     }
     if(current_selection>=10 && current_selection<=14)
     {
-        if(sonido->getCurrentMusic()!=assets_directory+"3.ogg")
+        if(sonido->current_music!=assets_directory+"3.ogg")
             sonido->playMusic(assets_directory+"3.ogg",-1);
         white_image_target_r=103;
         white_image_target_g=58;
@@ -1098,7 +1098,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     }
     if(current_selection>=15 && current_selection<=19)
     {
-        if(sonido->getCurrentMusic()!=assets_directory+"4.ogg")
+        if(sonido->current_music!=assets_directory+"4.ogg")
             sonido->playMusic(assets_directory+"4.ogg",-1);
         white_image_target_r=255;
         white_image_target_g=152;
@@ -1106,7 +1106,7 @@ void Menu::backgroundTargetUpdate(int current_selection)
     }
     if(current_selection>=20 && current_selection<=24)
     {
-        if(sonido->getCurrentMusic()!=assets_directory+"5.ogg")
+        if(sonido->current_music!=assets_directory+"5.ogg")
             sonido->playMusic(assets_directory+"5.ogg",-1);
         white_image_target_r=244;
         white_image_target_g=67;
