@@ -9,7 +9,6 @@
 #include "Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "Rosalila/RosalilaSound/RosalilaSound.h"
 #include "STGUtility/STGUtility.h"
-#include "STGMenu/STGMenu.h"
 #include "STGMenu/ControllerConfig.h"
 #include "STGMenu/Intro.h"
 #include "STGMenu/StageSelect.h"

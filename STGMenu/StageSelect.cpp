@@ -42,6 +42,8 @@ Color getBackgroundColor(int current_stage)
     {
         return Color(244,67,54,255);
     }
+
+    return Color();
 }
 
 void updateMusic(int current_stage)
@@ -76,7 +78,7 @@ void updateMusic(int current_stage)
 std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
 {
     std::vector<Image*> stage_images;
-    for(int i=0;i<stage_names.size();i++)
+    for(int i=0;i<(int)stage_names.size();i++)
     {
         Image*image=getRosalilaGraphics()->getTexture(assets_directory+std::string("stages/")+stage_names[i]+std::string("/images/preview.png"));
         stage_images.push_back(image);
@@ -136,7 +138,7 @@ void stageSelect(map<string,Button*> controls)
         if(controls["6"]->isPressed())
         {
             current_stage++;
-            if(current_stage>=stage_images.size())
+            if(current_stage>=(int)stage_images.size())
                 current_stage=stage_images.size()-1;
         }
 
@@ -212,7 +214,7 @@ void stageSelect(map<string,Button*> controls)
                     FlatShadow());
             }
 
-            if(current_stage<stage_images.size()-1)
+            if(current_stage<(int)stage_images.size()-1)
             {
                 graphics->draw2DImage
                 (   right_arrow,
