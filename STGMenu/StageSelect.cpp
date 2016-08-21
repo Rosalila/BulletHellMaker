@@ -40,8 +40,11 @@ void stageSelect(map<string,Button*> controls)
     std::vector<Image*> stage_images = getStageImages(getStageNames());
 
     Image*background=graphics->getTexture(assets_directory+"menu/white_background.png");
+    Image*left_arrow=graphics->getTexture(assets_directory+"menu/left_arrow.png");
+    Image*right_arrow=graphics->getTexture(assets_directory+"menu/right_arrow.png");
 
     int current_stage = 0;
+    int frame = 0;
 
     while(true)
     {
@@ -115,7 +118,47 @@ void stageSelect(map<string,Button*> controls)
             false,
             FlatShadow());
 
+
+        if(frame%60>=0 && frame%60<30)
+        {
+            if(current_stage>0)
+            {
+                graphics->draw2DImage
+                (   left_arrow,
+                    left_arrow->getWidth(),left_arrow->getHeight(),
+                    graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
+                    graphics->screen_height/2-left_arrow->getHeight()/2,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+
+            if(current_stage<stage_images.size()-1)
+            {
+                graphics->draw2DImage
+                (   right_arrow,
+                    right_arrow->getWidth(),right_arrow->getHeight(),
+                    graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
+                    graphics->screen_height/2-right_arrow->getHeight()/2,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+        }
+
         receiver->updateInputs();
         graphics->updateScreen();
+
+        frame++;
     }
 }
