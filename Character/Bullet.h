@@ -10,7 +10,7 @@
 class Bullet
 {
 public:
-    Sound* sonido;
+    RosalilaSound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
     vector<Image*>sprites;
@@ -29,7 +29,7 @@ public:
     int current_channel;
 
     Bullet(){};
-    Bullet(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage,int sound_channel);
+    Bullet(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage,int sound_channel);
     void playSound();
     void playHitSound();
     Image*getImage(int position);

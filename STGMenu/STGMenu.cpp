@@ -1,5 +1,5 @@
 #include "STGMenu.h"
-Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo,map<string,Button*>controls)
+Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,RosalilaSound* sonido,char* archivo,map<string,Button*>controls)
 {
     this->painter=painter;
     this->receiver=receiver;

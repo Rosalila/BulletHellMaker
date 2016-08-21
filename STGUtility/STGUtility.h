@@ -14,6 +14,8 @@ bool isSlowPressed();
 bool isSlowEnabled();
 bool isSlowActive();
 void slowExtraControl();
+void setRosalilaSound(RosalilaSound*graphics_param);
+RosalilaSound* getRosalilaSound();
 void setReceiver(Receiver*receiver_param);
 Receiver* getReceiver();
 void setRosalilaGraphics(RosalilaGraphics*graphics_param);

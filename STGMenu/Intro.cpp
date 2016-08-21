@@ -1,6 +1,6 @@
 #include "ControllerConfig.h"
 
-void intro()
+void intro(map<string,Button*> controls)
 {
     RosalilaGraphics* graphics=getRosalilaGraphics();
     Receiver* receiver=getReceiver();
@@ -10,7 +10,7 @@ void intro()
 
     while(true)
     {
-        if(receiver->isKeyPressed(SDLK_RETURN))
+        if(controls["a"]->isPressed())
         {
             break;
         }
@@ -33,7 +33,7 @@ void intro()
 
     while(true)
     {
-        if(receiver->isKeyPressed(SDLK_RETURN))
+        if(controls["a"]->isPressed())
         {
             break;
         }

@@ -17,7 +17,7 @@
 class Character
 {
 public:
-    Sound* sonido;
+    RosalilaSound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
 
@@ -84,7 +84,7 @@ public:
     double x,y;
 
     Character(){}
-    Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
+    Character(RosalilaSound* RosalilaSound,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base);
     virtual ~Character();
     void loadFromXML();
     void loadMainXML();

@@ -67,7 +67,7 @@ public:
     int invulnerable_frames_left;
     int current_charge;
 
-    Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls);
+    Player(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls);
     void logic(int stage_velocity);
     void inputControl();
     void bottomRender();

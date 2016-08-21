@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls)
+Player::Player(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls)
 {
     //Setting up the other variables
     this->name=name;

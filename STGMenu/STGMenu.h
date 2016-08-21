@@ -12,7 +12,7 @@ class Menu
 {
 private:
     //Engines
-    Sound* sonido;
+    RosalilaSound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
     std::vector<Elemento*> elementos;
@@ -47,7 +47,7 @@ public:
     bool color_changing_background;
 
     Menu(){}
-    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo,map<string,Button*>controls);
+    Menu(RosalilaGraphics* painter,Receiver* receiver,RosalilaSound* sonido,char* archivo,map<string,Button*>controls);
     void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
     void loopMenu();
     std::string getStage();

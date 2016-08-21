@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player,int sound_channel_base)
+Enemy::Enemy(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;

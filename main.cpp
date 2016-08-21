@@ -22,18 +22,14 @@ int main(int argc, char *argv[])
 {
     clearLog();
 
+    setRosalilaSound(new RosalilaSound());
     setReceiver(new Receiver());
     setRosalilaGraphics(new RosalilaGraphics());
 
-    Sound*sonido = new Sound();
     string path_menu = assets_directory+"menu/main_menu.svg";
     map<string,Button*> controls = ControllerConfig();
-    intro();
-    stageSelect();
+    intro(controls);
+    stageSelect(controls);
 
-    Menu* menu=new Menu(getRosalilaGraphics(),getReceiver(),sonido,(char*)path_menu.c_str(),controls);
-    menu->playMusic();
-
-    menu->loopMenu();
     return 0;
 }

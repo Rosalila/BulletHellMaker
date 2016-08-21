@@ -13,7 +13,7 @@
 
 class STG
 {
-    Sound* sonido;
+    RosalilaSound* sonido;
     RosalilaGraphics* painter;
     Receiver* receiver;
     Player*player;
@@ -58,7 +58,7 @@ public:
     void stageSelectModeInit();
     void win();
     void lose();
-    STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
+    STG(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
+Character::Character(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
@@ -665,71 +665,54 @@ void Character::loadPatternsXML()
                 {
                     Pattern* p = loadPatternXML(pattern_node);
 
-                    p->velocity=0;
                     if(repeat_element->Attribute("velocity")!=NULL)
                         p->velocity+=atoi(repeat_element->Attribute("velocity"))*i;
 
-                    p->max_velocity=9999999;
                     if(repeat_element->Attribute("max_velocity")!=NULL)
                         p->max_velocity+=atoi(repeat_element->Attribute("max_velocity"))*i;
 
-                    p->acceleration=0;
                     if(repeat_element->Attribute("acceleration")!=NULL)
                         p->acceleration+=atoi(repeat_element->Attribute("acceleration"))*i;
 
-                    p->a_frequency=0;
                     if(repeat_element->Attribute("a_frequency")!=NULL)
                         p->a_frequency+=atoi(repeat_element->Attribute("a_frequency"))*i;
 
-                    p->angle=0;
                     if(repeat_element->Attribute("angle")!=NULL)
                         p->angle+=atoi(repeat_element->Attribute("angle"))*i;
 
-                    p->angle_change=0;
                     if(repeat_element->Attribute("angle_change")!=NULL)
                         p->angle_change+=atoi(repeat_element->Attribute("angle_change"))*i;
 
-                    p->stop_ac_at=-1;
                     if(repeat_element->Attribute("stop_ac_at")!=NULL)
                         p->stop_ac_at+=atoi(repeat_element->Attribute("stop_ac_at"))*i;
 
-                    p->ac_frequency=0;
                     if(repeat_element->Attribute("ac_frequency")!=NULL)
                         p->ac_frequency+=atoi(repeat_element->Attribute("ac_frequency"))*i;
 
-                    p->offset_x=0;
                     if(repeat_element->Attribute("offset_x")!=NULL)
                         p->offset_x+=atoi(repeat_element->Attribute("offset_x"))*i;
 
-                    p->offset_y=0;
                     if(repeat_element->Attribute("offset_y")!=NULL)
                         p->offset_y+=atoi(repeat_element->Attribute("offset_y"))*i;
 
-                    p->startup=0;
                     if(repeat_element->Attribute("startup")!=NULL)
                         p->startup+=atoi(repeat_element->Attribute("startup"))*i;
 
-                    p->cooldown=0;
                     if(repeat_element->Attribute("cooldown")!=NULL)
                         p->cooldown+=atoi(repeat_element->Attribute("cooldown"))*i;
 
-                    p->animation_velocity=0;
                     if(repeat_element->Attribute("animation_velocity")!=NULL)
                         p->animation_velocity+=atoi(repeat_element->Attribute("animation_velocity"))*i;
 
-                    p->duration=-1;
                     if(repeat_element->Attribute("duration"))
                         p->duration+=atoi(repeat_element->Attribute("duration"))*i;
 
-                    p->random_angle=0;
                     if(repeat_element->Attribute("random_angle"))
                         p->random_angle+=atoi(repeat_element->Attribute("random_angle"))*i;
 
-                    p->bullet_rotation=0;
                     if(repeat_element->Attribute("bullet_rotation"))
                         p->bullet_rotation+=atoi(repeat_element->Attribute("bullet_rotation"))*i;
 
-                    p->br_change=0;
                     if(repeat_element->Attribute("br_change"))
                         p->br_change+=atoi(repeat_element->Attribute("br_change"))*i;
 

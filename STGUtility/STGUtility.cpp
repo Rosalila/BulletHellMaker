@@ -3,6 +3,7 @@
 int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
 bool slow_enabled=false;
+RosalilaSound* sound;
 Receiver* receiver;
 RosalilaGraphics* graphics;
 bool game_over;
@@ -35,6 +36,16 @@ void slowExtraControl()
             iterate_slowdown_flag=true;
         }
     }
+}
+
+void setRosalilaSound(RosalilaSound*sound_param)
+{
+    sound=sound_param;
+}
+
+RosalilaSound* getRosalilaSound()
+{
+    return sound;
 }
 
 void setReceiver(Receiver*receiver_param)

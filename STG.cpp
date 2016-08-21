@@ -1,6 +1,6 @@
 #include "STG.h"
 
-STG::STG(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls)
+STG::STG(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls)
 {
     this->sonido=sonido;
     this->painter=painter;

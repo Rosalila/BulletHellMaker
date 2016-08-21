@@ -3,6 +3,6 @@
 
 #include "../STGUtility/STGUtility.h"
 
-void intro();
+void intro(map<string,Button*> controls);
 
 #endif

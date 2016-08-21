@@ -1,6 +1,6 @@
 #include "Stage.h"
 
-Stage::Stage(RosalilaGraphics* painter,Sound* sonido,Receiver*receiver)
+Stage::Stage(RosalilaGraphics* painter,RosalilaSound* sonido,Receiver*receiver)
 {
     this->painter=painter;
     this->sonido=sonido;
