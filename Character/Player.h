@@ -39,7 +39,6 @@ public:
     int shield_fade;
     double proration;
     Image* shield_image;
-    double getShieldPercentage();
 
     //Charge
     int max_charge;
@@ -68,17 +67,18 @@ public:
     int current_charge;
 
     Player(std::string name,int sound_channel_base,map<string,Button*>controls);
-    void logic(int stage_velocity);
-    void inputControl();
-    void bottomRender();
-    void topRender();
-    void loadPlayerFromXML();
-    void hit(int damage);
     void loadFromXML();
+    void loadPlayerFromXML();
+    void inputControl();
+    void logic(int stage_velocity);
+    double getShieldPercentage();
+    void hit(int damage);
     bool isParrying();
     bool isInvulnerable();
     void parry(bool infinite_parries);
     bool collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_angle);
+    void bottomRender();
+    void topRender();
     void exit();
 };
 

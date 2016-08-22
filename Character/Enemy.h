@@ -17,22 +17,18 @@
 class Enemy : public Character
 {
 public:
+    Player*player;
     std::map<int, vector<Modifier*>* >modifiers;
     double angle;
     double angle_change;
-    Player*player;
-
-    string score_upload_message;
-    bool flag_begin_upload;
 
     Enemy(std::string name,Player*player,int sound_channel_base);
+    void loadModifiersFromXML();
     void logic(int stage_velocity, string stage_name);
     void modifiersControl();
+    virtual void addActivePattern(Pattern* pattern);
     void bottomRender();
     void topRender();
-    void loadModifiersFromXML();
-    virtual void addActivePattern(Pattern* pattern);
-    void aimPlayer(Pattern* pattern);
 };
 
 #endif

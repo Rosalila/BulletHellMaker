@@ -117,9 +117,8 @@ void Enemy::logic(int stage_velocity, string stage_name)
         modifiersControl();
     else
     {
-        if(orientation!="destroyed" && flag_begin_upload)
+        if(orientation!="destroyed")
         {
-            //current_type="";
             orientation="destroyed";
             if(getRosalilaSound()->soundExists(name+".destroyed"))
                 getRosalilaSound()->playSound(name+".destroyed",1,0);
