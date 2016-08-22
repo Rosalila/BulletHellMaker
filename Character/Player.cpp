@@ -1,13 +1,10 @@
 #include "Player.h"
 
-Player::Player(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base,map<string,Button*>controls)
+Player::Player(std::string name,int sound_channel_base,map<string,Button*>controls)
 {
     //Setting up the other variables
     this->name=name;
     this->directory="chars/"+name+"/";
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
     this->active_patterns=new std::list<Pattern*>;
     this->shooting=true;
     this->orientation="idle";
@@ -52,13 +49,13 @@ Player::Player(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receive
     this->invulnerable_frames_left=0;
 
     parries_left=3;
-    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/1.png"));
-    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/2.png"));
-    parry_sprites.push_back(painter->getTexture(assets_directory+directory+"sprites/parry/3.png"));
+    parry_sprites.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/parry/1.png"));
+    parry_sprites.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/parry/2.png"));
+    parry_sprites.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/parry/3.png"));
     //Charge
-    this->sonido->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
-    this->sonido->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
-    charging_sound_channel=this->sonido->playSound("charging",21,-1);
+    getRosalilaSound()->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
+    getRosalilaSound()->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
+    charging_sound_channel=getRosalilaSound()->playSound("charging",21,-1);
 }
 
 void Player::loadPlayerFromXML()
@@ -176,32 +173,32 @@ void Player::inputControl()
 
     if(controls["2"]->isDown())
     {
-        if(orientation!="down" && this->sonido->soundExists(name+".down"))
-            this->sonido->playSound(name+".down",1,0);
+        if(orientation!="down" && getRosalilaSound()->soundExists(name+".down"))
+            getRosalilaSound()->playSound(name+".down",1,0);
         orientation="down";
     }
     else if(controls["8"]->isDown())
     {
-        if(orientation!="up" && this->sonido->soundExists(name+".up"))
-            this->sonido->playSound(name+".up",1,0);
+        if(orientation!="up" && getRosalilaSound()->soundExists(name+".up"))
+            getRosalilaSound()->playSound(name+".up",1,0);
         orientation="up";
     }
     else if(controls["4"]->isDown())
     {
-        if(orientation!="left" && this->sonido->soundExists(name+".left"))
-            this->sonido->playSound(name+".left",1,0);
+        if(orientation!="left" && getRosalilaSound()->soundExists(name+".left"))
+            getRosalilaSound()->playSound(name+".left",1,0);
         orientation="left";
     }
     else if(controls["6"]->isDown())
     {
-        if(orientation!="right" && this->sonido->soundExists(name+".right"))
-            this->sonido->playSound(name+".right",1,0);
+        if(orientation!="right" && getRosalilaSound()->soundExists(name+".right"))
+            getRosalilaSound()->playSound(name+".right",1,0);
         orientation="right";
     }
     else
     {
-        if(orientation!="idle" && this->sonido->soundExists(name+".idle"))
-            this->sonido->playSound(name+".idle",1,0);
+        if(orientation!="idle" && getRosalilaSound()->soundExists(name+".idle"))
+            getRosalilaSound()->playSound(name+".idle",1,0);
         orientation="idle";
     }
 
@@ -300,8 +297,8 @@ void Player::logic(int stage_velocity)
         inputControl();
     }else
     {
-        if(orientation!="destroyed" && this->sonido->soundExists(name+".destroyed"))
-            this->sonido->playSound(name+".destroyed",1,0);
+        if(orientation!="destroyed" && getRosalilaSound()->soundExists(name+".destroyed"))
+            getRosalilaSound()->playSound(name+".destroyed",1,0);
         orientation="destroyed";
         //this->hitbox.setValues(0,0,0,0,0);
     }
@@ -355,7 +352,7 @@ void Player::logic(int stage_velocity)
         current_charge=max_charge;
         if(!charge_ready)
         {
-            this->sonido->playSound("charge ready",-1, 0);
+            getRosalilaSound()->playSound("charge ready",-1, 0);
         }
         charge_ready=true;
     }else
@@ -380,7 +377,7 @@ void Player::bottomRender()
         double shield_transparency = 255.0*getShieldPercentage();
 
         if(shield_image)
-        painter->draw2DImage
+        getRosalilaGraphics()->draw2DImage
             (   shield_image,
                 shield_image->getWidth(),shield_image->getHeight(),
                 this->x-shield_image->getWidth()/2+current_screen_shake_x,
@@ -406,7 +403,7 @@ void Player::bottomRender()
             charge_transparency_effect=(frame*10)%255;
 
         if(charge_image)
-        painter->draw2DImage
+        getRosalilaGraphics()->draw2DImage
             (   charge_image,
                 charge_image->getWidth(),charge_image->getHeight()*((double)current_charge/(double)max_charge),
                 this->x+charge_sprite_x,
@@ -430,7 +427,7 @@ void Player::topRender()
     if(isParrying() && parries_left>=1)
     {
         Image *image=parry_sprites[parries_left-1];
-        painter->draw2DImage
+        getRosalilaGraphics()->draw2DImage
             (   image,
                 image->getWidth(),image->getHeight(),
                 this->x+parrying_x,
@@ -447,7 +444,7 @@ void Player::topRender()
 
 if(parrying_image!=NULL && false)
 if(isParrying())
-    painter->draw2DImage
+    getRosalilaGraphics()->draw2DImage
         (   parrying_image,
             parrying_image->getWidth(),parrying_image->getHeight(),
             this->x+parrying_x,
@@ -463,7 +460,7 @@ if(isParrying())
 
 if(parryed_image!=NULL)
 if(invulnerable_frames_left>0)
-    painter->draw2DImage
+    getRosalilaGraphics()->draw2DImage
         (   parryed_image,
             parryed_image->getWidth(),parryed_image->getHeight(),
             this->x+parryed_x,
@@ -477,10 +474,10 @@ if(invulnerable_frames_left>0)
             true,
             FlatShadow());
 
-        if(receiver->isKeyDown(SDLK_h))
+        if(getReceiver()->isKeyDown(SDLK_h))
         for(int i=0;i<(int)parry_hitboxes.size();i++)
         {
-            painter->drawRectangle(parry_hitboxes[i]->getX()+x,
+            getRosalilaGraphics()->drawRectangle(parry_hitboxes[i]->getX()+x,
                                    parry_hitboxes[i]->getY()+y,
                                    parry_hitboxes[i]->getWidth(),parry_hitboxes[i]->getHeight(),
                                    parry_hitboxes[i]->getAngle(),100,0,0,100,true);
@@ -544,7 +541,7 @@ void Player::loadFromXML()
 
         if(attributes->Attribute("sprite")!=NULL)
         {
-            this->shield_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+            this->shield_image=getRosalilaGraphics()->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
         }
     }
 
@@ -580,7 +577,7 @@ void Player::loadFromXML()
 
         if(attributes->Attribute("sprite")!=NULL)
         {
-            this->charge_image=painter->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+            this->charge_image=getRosalilaGraphics()->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
         }
     }
 
@@ -606,7 +603,7 @@ void Player::loadFromXML()
         if(attributes->Attribute("sound")!=NULL)
         {
             std::string sprites_sound=attributes->Attribute("sound");
-            this->sonido->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
+            getRosalilaSound()->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
         }
 
         TiXmlNode* parrying_node=parry_node->FirstChild("Parrying");
@@ -615,7 +612,7 @@ void Player::loadFromXML()
             TiXmlElement *parrying_attributes=parrying_node->ToElement();
             if(parrying_attributes->Attribute("sprite")!=NULL)
             {
-                this->parrying_image=painter->getTexture(assets_directory+directory+"/sprites/"+parrying_attributes->Attribute("sprite"));
+                this->parrying_image=getRosalilaGraphics()->getTexture(assets_directory+directory+"/sprites/"+parrying_attributes->Attribute("sprite"));
             }
             if(parrying_attributes->Attribute("x")!=NULL)
             {
@@ -633,7 +630,7 @@ void Player::loadFromXML()
             TiXmlElement *parryed_attributes=parryed_node->ToElement();
             if(parryed_attributes->Attribute("sprite")!=NULL)
             {
-                this->parryed_image=painter->getTexture(assets_directory+directory+"/sprites/"+parryed_attributes->Attribute("sprite"));
+                this->parryed_image=getRosalilaGraphics()->getTexture(assets_directory+directory+"/sprites/"+parryed_attributes->Attribute("sprite"));
             }
             if(parryed_attributes->Attribute("x")!=NULL)
             {
@@ -686,9 +683,9 @@ void Player::parry(bool infinite_parries)
             parries_left-=1;
         }
     }
-    if(this->sonido->soundExists(this->name+".parry"))
+    if(getRosalilaSound()->soundExists(this->name+".parry"))
     {
-        this->sonido->playSound(this->name+".parry",sound_channel_base+1,0);
+        getRosalilaSound()->playSound(this->name+".parry",sound_channel_base+1,0);
     }
 }
 

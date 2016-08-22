@@ -1,10 +1,7 @@
 #include "Bullet.h"
 
-Bullet::Bullet(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage, int sound_channel)
+Bullet::Bullet(std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage, int sound_channel)
 {
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
     this->sprites=sprites;
     this->sprites_on_hit=sprites_on_hit;
     this->hitboxes=hitboxes;
@@ -55,15 +52,15 @@ void Bullet::playSound()
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
-        current_channel=sonido->playSound(random_sounds[current_random_sound],sound_channel,0);
+        current_channel=getRosalilaSound()->playSound(random_sounds[current_random_sound],sound_channel,0);
     }
 }
 
 void Bullet::playHitSound()
 {
-    if(sonido->soundExists("bullet_hit."+name))
+    if(getRosalilaSound()->soundExists("bullet_hit."+name))
     {
-        sonido->playSound("bullet_hit."+name,sound_channel+5,0);
+        getRosalilaSound()->playSound("bullet_hit."+name,sound_channel+5,0);
     }
 }
 

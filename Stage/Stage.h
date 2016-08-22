@@ -12,9 +12,6 @@
 class Stage
 {
 public:
-    RosalilaGraphics* painter;
-    RosalilaSound* sonido;
-    Receiver*receiver;
     std::vector<Layer*> back,front;
     std::string music_path;
     int bound_x1,bound_y1,bound_x2,bound_y2;
@@ -24,7 +21,7 @@ public:
     bool iterate_slowdown_flag;
     int current_slowdown_iteration;
 
-    Stage(RosalilaGraphics* painter,RosalilaSound* sonido,Receiver*receiver);
+    Stage();
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);

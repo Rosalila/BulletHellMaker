@@ -1,13 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,Player*player,int sound_channel_base)
+Enemy::Enemy(std::string name,Player*player,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
     this->directory="stages/"+name+"/Enemy/";
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
     this->player=player;
     this->active_patterns=new std::list<Pattern*>;
     this->shooting=true;
@@ -93,7 +90,7 @@ void Enemy::modifiersControl()
         iteration++;
 }
 
-void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, string username)
+void Enemy::logic(int stage_velocity, string stage_name)
 {
     animationControl();
     spellControl(stage_velocity);
@@ -124,8 +121,8 @@ void Enemy::logic(int stage_velocity, string stage_name, int global_iteration, s
         {
             //current_type="";
             orientation="destroyed";
-            if(this->sonido->soundExists(name+".destroyed"))
-                this->sonido->playSound(name+".destroyed",1,0);
+            if(getRosalilaSound()->soundExists(name+".destroyed"))
+                getRosalilaSound()->playSound(name+".destroyed",1,0);
 
             for(int i=0;i<(int)hitboxes.size();i++)
                 this->hitboxes[i]->setValues(0,0,0,0,0);

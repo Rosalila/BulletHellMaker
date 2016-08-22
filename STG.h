@@ -13,12 +13,15 @@
 
 class STG
 {
-    RosalilaSound* sonido;
-    RosalilaGraphics* painter;
-    Receiver* receiver;
+public:
     Player*player;
     Enemy*enemy;
     Stage*stage;
+
+    string game_mode;
+
+    Animation you_win,you_loose;
+    int frame;
 
     map<string,Button*>controls;
 
@@ -31,14 +34,6 @@ class STG
     int current_training_transparency;
     int current_training_final_transparency;
 
-    string game_mode;
-
-    string username;
-
-    Animation you_win,you_loose;
-    int iteration;
-    int boss_fury_level;
-
     double parry_count;
     double parry_count_objective;
     double charge_destroy_count;
@@ -46,19 +41,18 @@ class STG
     double parry_dash_count;
     double parry_dash_count_objective;
 
+    STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
     void logic();
     void render();
     void deletePatterns();
     void checkCharacterOutOfBounds();
-public:
     bool playerWon();
     bool enemyWon();
     void stageSelectModeInit();
     void win();
     void lose();
-    STG(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
 };
 
 #endif

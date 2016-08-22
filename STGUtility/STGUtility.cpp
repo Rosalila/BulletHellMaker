@@ -3,9 +3,6 @@
 int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
 bool slow_enabled=false;
-RosalilaSound* sound;
-Receiver* receiver;
-RosalilaGraphics* graphics;
 bool game_over;
 
 bool getGameOver()
@@ -38,39 +35,9 @@ void slowExtraControl()
     }
 }
 
-void setRosalilaSound(RosalilaSound*sound_param)
-{
-    sound=sound_param;
-}
-
-RosalilaSound* getRosalilaSound()
-{
-    return sound;
-}
-
-void setReceiver(Receiver*receiver_param)
-{
-    receiver=receiver_param;
-}
-
-Receiver* getReceiver()
-{
-    return receiver;
-}
-
-void setRosalilaGraphics(RosalilaGraphics*graphics_param)
-{
-    graphics=graphics_param;
-}
-
-RosalilaGraphics* getRosalilaGraphics()
-{
-    return graphics;
-}
-
 bool isSlowPressed()
 {
-    return receiver->isKeyDown(SDLK_x) || receiver->isJoyDown(5,0);
+    return getReceiver()->isKeyDown(SDLK_x) || getReceiver()->isJoyDown(5,0);
 }
 
 void disableSlow()

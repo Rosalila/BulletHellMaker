@@ -5,8 +5,8 @@ void intro(map<string,Button*> controls)
     RosalilaGraphics* graphics=getRosalilaGraphics();
     Receiver* receiver=getReceiver();
 
-    Image* image=graphics->getTexture(assets_directory+"menu/startscreen.png");
-    Image* image2=graphics->getTexture(assets_directory+"menu/instructions.png");
+    Image* image=graphics->getTexture(assets_directory+"menu/rosalila.png");
+    Image* image2=graphics->getTexture(assets_directory+"menu/flatshot.png");
 
     int current_background_transparency=0;
 

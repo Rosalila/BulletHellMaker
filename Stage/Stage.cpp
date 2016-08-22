@@ -1,14 +1,8 @@
 #include "Stage.h"
 
-Stage::Stage(RosalilaGraphics* painter,RosalilaSound* sonido,Receiver*receiver)
+Stage::Stage()
 {
-    this->painter=painter;
-    this->sonido=sonido;
-    this->receiver=receiver;
     this->iterator=0;
-    //this->dialogue_bg=painter->getTexture("misc/dialogue_bg.png");
-
-    //slow extra control
     this->iterate_slowdown_flag=false;
     this->current_slowdown_iteration=0;
 }
@@ -37,11 +31,11 @@ void Stage::drawLayer(Layer* layer)
     int size_y=layer->textures_size_y[layer->current_frame];
 
     int pos_x=layer->alignment_x;
-    int pos_y=painter->screen_height-size_y-layer->alignment_y;
+    int pos_y=getRosalilaGraphics()->screen_height-size_y-layer->alignment_y;
 
-    for(int i=0;i<painter->screen_width/(size_x+layer->separation_x)+2;i++)
+    for(int i=0;i<getRosalilaGraphics()->screen_width/(size_x+layer->separation_x)+2;i++)
     {
-        painter->draw2DImage
+        getRosalilaGraphics()->draw2DImage
         (   texture,
             size_x,size_y,
             pos_x+i*(size_x+layer->separation_x),pos_y,
@@ -58,13 +52,13 @@ void Stage::drawLayer(Layer* layer)
 
     if(layer->depth_effect_x>0)
     {
-        if(painter->camera_x/layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
+        if(getRosalilaGraphics()->camera_x/layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
         {
             layer->alignment_x+=size_x+layer->separation_x;
         }
     }else if(layer->depth_effect_x<0)
     {
-        if(painter->camera_x*-layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
+        if(getRosalilaGraphics()->camera_x*-layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
         {
             layer->alignment_x+=size_x+layer->separation_x;
         }
@@ -110,8 +104,8 @@ void Stage::loadFromXML(std::string name)
     TiXmlNode *nodo_bounds=stage_file->FirstChild("Bounds");
     this->bound_x1=0;
     this->bound_y1=0;
-    this->bound_x2=painter->screen_width;
-    this->bound_y2=painter->screen_height;
+    this->bound_x2=getRosalilaGraphics()->screen_width;
+    this->bound_y2=getRosalilaGraphics()->screen_height;
 
     if(nodo_bounds->ToElement()->Attribute("x1")!=NULL)
         this->bound_x1=atoi(nodo_bounds->ToElement()->Attribute("x1"));
@@ -368,7 +362,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
 
-            Image *image_temp=painter->getTexture(assets_directory+image);
+            Image *image_temp=getRosalilaGraphics()->getTexture(assets_directory+image);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();
@@ -439,7 +433,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         {
             string image_path = assets_directory+"stages/"+name+"/images/"+layer->ToElement()->Attribute("image_path");
 
-            Image *image_temp=painter->getTexture(image_path);
+            Image *image_temp=getRosalilaGraphics()->getTexture(image_path);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();
@@ -498,5 +492,5 @@ void Stage::logic()
 
 void Stage::playMusic()
 {
-    sonido->playMusic(this->music_path,-1);
+    getRosalilaSound()->playMusic(this->music_path,-1);
 }

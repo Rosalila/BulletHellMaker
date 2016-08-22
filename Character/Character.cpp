@@ -1,13 +1,10 @@
 #include "Character.h"
 
-Character::Character(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,std::string name,int sound_channel_base)
+Character::Character(std::string name,int sound_channel_base)
 {
     //Setting up the other variables
     this->name=name;
     this->directory="";
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
     this->active_patterns=new std::list<Pattern*>;
     this->x=500;
     this->y=500;
@@ -133,7 +130,7 @@ void Character::loadMainXML()
         if(life_bar->Attribute("rect_width")!=NULL)
             this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
         if(life_bar->Attribute("image")!=NULL)
-            this->life_bar=painter->getTexture(assets_directory+directory+life_bar->Attribute("image"));
+            this->life_bar=getRosalilaGraphics()->getTexture(assets_directory+directory+life_bar->Attribute("image"));
     }
 
     TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
@@ -158,7 +155,7 @@ void Character::loadMainXML()
         TiXmlElement *sounds_element=main_file->FirstChild("Sounds")->ToElement();
         if(sounds_element->Attribute("hit"))
         {
-            sonido->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
+            getRosalilaSound()->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
         }
     }
 
@@ -172,20 +169,20 @@ void Character::loadMainXML()
         if(sprites_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sprites_sound=sprites_node->ToElement()->Attribute("sound");
-            this->sonido->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
+            getRosalilaSound()->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
         }
         for(TiXmlNode* sprite_node=sprites_node->FirstChild("Sprite");
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_vector.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_vector.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
         sprites[sprites_orientation]=sprites_vector;
     }
 
     if(main_file->FirstChild("FlatShadow")!=NULL)
     {
-        flat_shadow_texture = painter->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
+        flat_shadow_texture = getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
         for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Point");
                 point_node!=NULL;
                 point_node=point_node->NextSibling("Point"))
@@ -264,13 +261,13 @@ void Character::loadBulletsXML()
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sound=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
-            sonido->addSound("bullet."+node_name,sound);
+            getRosalilaSound()->addSound("bullet."+node_name,sound);
             random_sounds.push_back("bullet."+node_name);
         }
         if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
         {
             std::string sound_hit=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
-            sonido->addSound("bullet_hit."+node_name,sound_hit);
+            getRosalilaSound()->addSound("bullet_hit."+node_name,sound_hit);
         }
 
         int randomize_sound_frequency=1;
@@ -304,7 +301,7 @@ void Character::loadBulletsXML()
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_temp.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_temp.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
 
         vector<Hitbox*>hitboxes_temp;
@@ -343,7 +340,7 @@ void Character::loadBulletsXML()
                     sprite_node!=NULL;
                     sprite_node=sprite_node->NextSibling("Sprite"))
             {
-                sprites_onhit_temp.push_back(painter->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+                sprites_onhit_temp.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
             }
         }
 
@@ -355,12 +352,12 @@ void Character::loadBulletsXML()
                     sound_node=sound_node->NextSibling("Sound"))
             {
                 std::string sound=assets_directory+directory+"sounds/"+sound_node->ToElement()->Attribute("path");
-                sonido->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
+                getRosalilaSound()->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
                 random_sounds.push_back("bullet."+node_name+sound_node->ToElement()->Attribute("path"));
             }
         }
 
-        bullets[node_name]=new Bullet(sonido,painter,receiver,node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
+        bullets[node_name]=new Bullet(node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
     }
 }
 
@@ -483,7 +480,7 @@ Pattern* Character::loadPatternXML(TiXmlNode* pattern_node)
             (*pattern_modifiers)[at]=loadModifierXML(pattern_modifier_node);
         }
     }
-    return new Pattern(sonido,painter,receiver,velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity, auto_scale,bullet,offset_x,offset_y,
+    return new Pattern(velocity,max_velocity,acceleration,a_frequency,angle,angle_change,stop_ac_at,ac_frequency,animation_velocity, auto_scale,bullet,offset_x,offset_y,
                                            startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,collides_bullets,collides_opponent,undestructable,pattern_modifiers,&bullets);
 }
 
@@ -798,7 +795,7 @@ void Character::bottomRender()
     if(getGameOver())
         transparency_divider=8;
 
-    painter->draw2DImage
+    getRosalilaGraphics()->draw2DImage
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
         this->x-sprites[orientation][current_sprite]->getWidth()/2+current_screen_shake_x,
@@ -814,11 +811,11 @@ void Character::bottomRender()
                    shadow_align_points_left,shadow_align_points_right,shadow_align_points_top,
                    inbetween_shadow_align_points_left,inbetween_shadow_align_points_right,inbetween_shadow_align_points_top));
 
-    if(receiver->isKeyDown(SDLK_h))
+    if(getReceiver()->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)hitboxes.size();i++)
         {
-            painter->drawRectangle(hitboxes[i]->getX()+x,
+            getRosalilaGraphics()->drawRectangle(hitboxes[i]->getX()+x,
                                    hitboxes[i]->getY()+y,
                                    hitboxes[i]->getWidth(),hitboxes[i]->getHeight(),
                                    hitboxes[i]->angle,100,0,0,100,true);

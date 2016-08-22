@@ -89,8 +89,6 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
 void stageSelect(map<string,Button*> controls)
 {
     RosalilaGraphics* graphics=getRosalilaGraphics();
-    Receiver* receiver=getReceiver();
-
     std::vector<std::string> stage_names = getStageNames();
     std::vector<Image*> stage_images = getStageImages(getStageNames());
 
@@ -105,7 +103,7 @@ void stageSelect(map<string,Button*> controls)
 
     while(true)
     {
-        if(receiver->isKeyPressed(SDLK_ESCAPE))
+        if(getReceiver()->isKeyPressed(SDLK_ESCAPE))
         {
             break;
         }
@@ -113,7 +111,7 @@ void stageSelect(map<string,Button*> controls)
         if(controls["a"]->isPressed())
         {
             writeLogLine("Initializing game.");
-            Stage*stage=new Stage(graphics,getRosalilaSound(),receiver);
+            Stage*stage=new Stage();
             stage->loadFromXML(stage_names[current_stage]);
             string game_mode="Stage select";
             if(stage_names[current_stage]=="Training3")
@@ -128,9 +126,9 @@ void stageSelect(map<string,Button*> controls)
             {
                 game_mode="parry dash training";
             }
-            Player*player=new Player(getRosalilaSound(),graphics,receiver,"Triangle",10,controls);
-            Enemy*enemy=new Enemy(getRosalilaSound(),graphics,receiver,stage_names[current_stage],player,20);
-            STG*stg=new STG(getRosalilaSound(),graphics,receiver,player,enemy,stage,game_mode,controls);
+            Player*player=new Player("Triangle",10,controls);
+            Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
+            STG*stg=new STG(player,enemy,stage,game_mode,controls);
             delete stg;
         }
 
@@ -232,7 +230,7 @@ void stageSelect(map<string,Button*> controls)
             }
         }
 
-        receiver->updateInputs();
+        getReceiver()->updateInputs();
         graphics->updateScreen();
 
         frame++;

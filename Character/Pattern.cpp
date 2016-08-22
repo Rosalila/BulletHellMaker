@@ -1,13 +1,9 @@
 #include "Pattern.h"
 
 
-Pattern::Pattern(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* receiver,int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity, double auto_scale,
+Pattern::Pattern(int velocity,int max_velocity,int acceleration,int a_frequency,float angle,int angle_change,int stop_ac_at,int ac_frequency,int animation_velocity, double auto_scale,
                  Bullet* bullet,int offset_x,int offset_y,int startup,int cooldown,int duration,int random_angle,bool aim_player,int bullet_rotation,int br_change,int independent_br,bool freeze, bool homing, bool collides_bullets, bool collides_opponent, bool undestructable, std::map<int, vector<Modifier*>* >*modifiers,std::map<std::string,Bullet*> *bullets)
 {
-    this->sonido=sonido;
-    this->painter=painter;
-    this->receiver=receiver;
-
     this->freeze=freeze;
     this->velocity=velocity;
     this->max_velocity=max_velocity;
@@ -63,10 +59,6 @@ Pattern::Pattern(RosalilaSound* sonido,RosalilaGraphics* painter,Receiver* recei
 
 Pattern::Pattern(Pattern*pattern,int x,int y)
 {
-    this->sonido=pattern->sonido;
-    this->painter=pattern->painter;
-    this->receiver=pattern->receiver;
-
     this->velocity=pattern->velocity;
     this->max_velocity=pattern->max_velocity;
     this->acceleration=pattern->acceleration;
@@ -247,7 +239,7 @@ void Pattern::render()
         int transparency_divider=1;
         if(getGameOver())
             transparency_divider=8;
-        painter->draw2DImage
+        getRosalilaGraphics()->draw2DImage
         (   image,
             image->getWidth(),image->getHeight(),
             this->x-image->getWidth()/2,this->y-image->getHeight()/2,
@@ -261,12 +253,12 @@ void Pattern::render()
             FlatShadow());
     }
 
-    if(receiver->isKeyDown(SDLK_h))
+    if(getReceiver()->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)bullet->hitboxes.size();i++)
         {
             Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->x,this->y,this->getBulletAngle());
-            painter->drawRectangle(h.getX(),
+            getRosalilaGraphics()->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->hitboxes[i]->getWidth(),this->bullet->hitboxes[i]->getHeight(),
                                    h.getAngle(),100,0,0,100,true);
