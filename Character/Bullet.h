@@ -1,11 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "../Rosalila/TinyXml/tinyxml.h"
-#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-#include "../Rosalila/RosalilaSound/RosalilaSound.h"
-#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
-#include "../Rosalila/RosalilaUtility/Hitbox.h"
+#include "../Rosalila/Rosalila.h"
 
 class Bullet
 {

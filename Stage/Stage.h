@@ -1,9 +1,6 @@
 #ifndef STAGE_H
 #define STAGE_H
 
-#include "../Rosalila/TinyXml/tinyxml.h"
-#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-#include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Character/Character.h"
 #include "Layer.h"
 #include "../STGUtility/STGUtility.h"

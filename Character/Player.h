@@ -6,9 +6,6 @@
 #include <vector>
 
 #include "../Rosalila/TinyXml/tinyxml.h"
-#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-#include "../Rosalila/RosalilaSound/RosalilaSound.h"
-#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include "Bullet.h"
 #include "Pattern.h"
 #include "Character.h"

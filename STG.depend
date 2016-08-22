@@ -3045,15 +3045,11 @@
 1471837739 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Character.cpp
 	"Character.h"
 
-1471832970 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
+1471840465 /home/turupawn/Projects/C++/Flatshot/STG/Character/Character.h
 	<map>
 	<list>
 	<vector>
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
-	"../Rosalila/RosalilaUtility/RosalilaUtility.h"
+	"../Rosalila/Rosalila.h"
 	"Bullet.h"
 	"Pattern.h"
 	"Modifier.h"
@@ -3210,39 +3206,33 @@
 1448810538 /home/turupawn/Projects/C++/Flatshot/STG/Character/Modifier.h
 	<iostream>
 
-1471831943 /home/turupawn/Projects/C++/Flatshot/STG/STGUtility/STGUtility.h
+1471840223 /home/turupawn/Projects/C++/Flatshot/STG/STGUtility/STGUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
 	<vector>
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
+	"../Rosalila/Rosalila.h"
 
 1448811848 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.h
 
 1471837760 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.cpp
 	"Enemy.h"
 
-1471834574 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
+1471840456 /home/turupawn/Projects/C++/Flatshot/STG/Character/Enemy.h
 	<map>
 	<list>
 	<vector>
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
+	"../Rosalila/Rosalila.h"
 	"Bullet.h"
 	"Pattern.h"
 	"Character.h"
 	"Player.h"
 
-1471834732 /home/turupawn/Projects/C++/Flatshot/STG/Character/Player.h
+1471840349 /home/turupawn/Projects/C++/Flatshot/STG/Character/Player.h
 	<map>
 	<list>
 	<vector>
 	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
 	"Bullet.h"
 	"Pattern.h"
 	"Character.h"
@@ -3419,20 +3409,15 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../STG.h"
 
-1471832644 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
+1471840267 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.h
 	"../Character/Character.h"
 	"Layer.h"
 	"../STGUtility/STGUtility.h"
 	<map>
 
-1471655508 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.h
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
+1471840399 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Layer.h
+	<vector>
+	"../Rosalila/Rosalila.h"
 
 1448810538 /home/turupawn/Projects/C++/Flatshot/STG/Stage/Dialogue.h
 	"../Rosalila/TinyXml/tinyxml.h"
@@ -3469,20 +3454,16 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1471839262 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1471840104 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
 	<string>
 	"Rosalila/Rosalila.h"
-	"Rosalila/RosalilaInputs/RosalilaInputs.h"
-	"Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"Rosalila/RosalilaSound/RosalilaSound.h"
 	"STGUtility/STGUtility.h"
 	"STGMenu/ControllerConfig.h"
 	"STGMenu/Intro.h"
 	"STGMenu/StageSelect.h"
-	"Rosalila/RosalilaUtility/RosalilaUtility.h"
 	<iostream>
 
 1471838293 source:/home/turupawn/Projects/C++/Flatshot/STG/STG.cpp
@@ -3615,20 +3596,12 @@
 1471837691 source:/home/turupawn/Projects/C++/Flatshot/STG/Character/Bullet.cpp
 	"Bullet.h"
 
-1471834878 /home/turupawn/Projects/C++/Flatshot/STG/Character/Bullet.h
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
-	"../Rosalila/RosalilaUtility/Hitbox.h"
+1471840542 /home/turupawn/Projects/C++/Flatshot/STG/Character/Bullet.h
+	"../Rosalila/Rosalila.h"
 
-1471834856 /home/turupawn/Projects/C++/Flatshot/STG/Character/Pattern.h
-	"../Rosalila/TinyXml/tinyxml.h"
-	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-	"../Rosalila/RosalilaSound/RosalilaSound.h"
-	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
+1471840426 /home/turupawn/Projects/C++/Flatshot/STG/Character/Pattern.h
+	"../Rosalila/Rosalila.h"
 	"Bullet.h"
-	"../Rosalila/RosalilaUtility/Hitbox.h"
 	"../Character/Modifier.h"
 	"../STGUtility/STGUtility.h"
 	<cmath>
@@ -3639,7 +3612,8 @@
 1471838342 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/ControllerConfig.cpp
 	"ControllerConfig.h"
 
-1471727323 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/ControllerConfig.h
+1471840250 /home/turupawn/Projects/C++/Flatshot/STG/STGMenu/ControllerConfig.h
+	<map>
 	"../STGUtility/STGUtility.h"
 
 1471838349 source:/home/turupawn/Projects/C++/Flatshot/STG/STGMenu/Intro.cpp

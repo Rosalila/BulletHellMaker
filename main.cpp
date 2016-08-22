@@ -6,14 +6,10 @@
 #include <string>
 
 #include "Rosalila/Rosalila.h"
-#include "Rosalila/RosalilaInputs/RosalilaInputs.h"
-#include "Rosalila/RosalilaGraphics/RosalilaGraphics.h"
-#include "Rosalila/RosalilaSound/RosalilaSound.h"
 #include "STGUtility/STGUtility.h"
 #include "STGMenu/ControllerConfig.h"
 #include "STGMenu/Intro.h"
 #include "STGMenu/StageSelect.h"
-#include "Rosalila/RosalilaUtility/RosalilaUtility.h"
 
 #include <iostream>
 using namespace std;
