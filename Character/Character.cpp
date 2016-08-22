@@ -130,7 +130,7 @@ void Character::loadMainXML()
         if(life_bar->Attribute("rect_width")!=NULL)
             this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
         if(life_bar->Attribute("image")!=NULL)
-            this->life_bar=getRosalilaGraphics()->getTexture(assets_directory+directory+life_bar->Attribute("image"));
+            this->life_bar=Rosalila()->Graphics->getTexture(assets_directory+directory+life_bar->Attribute("image"));
     }
 
     TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
@@ -155,7 +155,7 @@ void Character::loadMainXML()
         TiXmlElement *sounds_element=main_file->FirstChild("Sounds")->ToElement();
         if(sounds_element->Attribute("hit"))
         {
-            getRosalilaSound()->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
+            Rosalila()->Sound->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
         }
     }
 
@@ -169,20 +169,20 @@ void Character::loadMainXML()
         if(sprites_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sprites_sound=sprites_node->ToElement()->Attribute("sound");
-            getRosalilaSound()->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
+            Rosalila()->Sound->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
         }
         for(TiXmlNode* sprite_node=sprites_node->FirstChild("Sprite");
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_vector.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_vector.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
         sprites[sprites_orientation]=sprites_vector;
     }
 
     if(main_file->FirstChild("FlatShadow")!=NULL)
     {
-        flat_shadow_texture = getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
+        flat_shadow_texture = Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
         for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Point");
                 point_node!=NULL;
                 point_node=point_node->NextSibling("Point"))
@@ -261,13 +261,13 @@ void Character::loadBulletsXML()
         if(bullet_node->ToElement()->Attribute("sound")!=NULL)
         {
             std::string sound=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
-            getRosalilaSound()->addSound("bullet."+node_name,sound);
+            Rosalila()->Sound->addSound("bullet."+node_name,sound);
             random_sounds.push_back("bullet."+node_name);
         }
         if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
         {
             std::string sound_hit=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
-            getRosalilaSound()->addSound("bullet_hit."+node_name,sound_hit);
+            Rosalila()->Sound->addSound("bullet_hit."+node_name,sound_hit);
         }
 
         int randomize_sound_frequency=1;
@@ -301,7 +301,7 @@ void Character::loadBulletsXML()
                 sprite_node!=NULL;
                 sprite_node=sprite_node->NextSibling("Sprite"))
         {
-            sprites_temp.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
         }
 
         vector<Hitbox*>hitboxes_temp;
@@ -340,7 +340,7 @@ void Character::loadBulletsXML()
                     sprite_node!=NULL;
                     sprite_node=sprite_node->NextSibling("Sprite"))
             {
-                sprites_onhit_temp.push_back(getRosalilaGraphics()->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+                sprites_onhit_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
             }
         }
 
@@ -352,7 +352,7 @@ void Character::loadBulletsXML()
                     sound_node=sound_node->NextSibling("Sound"))
             {
                 std::string sound=assets_directory+directory+"sounds/"+sound_node->ToElement()->Attribute("path");
-                getRosalilaSound()->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
+                Rosalila()->Sound->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
                 random_sounds.push_back("bullet."+node_name+sound_node->ToElement()->Attribute("path"));
             }
         }
@@ -795,7 +795,7 @@ void Character::bottomRender()
     if(getGameOver())
         transparency_divider=8;
 
-    getRosalilaGraphics()->draw2DImage
+    Rosalila()->Graphics->draw2DImage
     (   sprites[orientation][current_sprite],
         sprites[orientation][current_sprite]->getWidth(),sprites[orientation][current_sprite]->getHeight(),
         this->x-sprites[orientation][current_sprite]->getWidth()/2+current_screen_shake_x,
@@ -811,11 +811,11 @@ void Character::bottomRender()
                    shadow_align_points_left,shadow_align_points_right,shadow_align_points_top,
                    inbetween_shadow_align_points_left,inbetween_shadow_align_points_right,inbetween_shadow_align_points_top));
 
-    if(getReceiver()->isKeyDown(SDLK_h))
+    if(Rosalila()->Receiver->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)hitboxes.size();i++)
         {
-            getRosalilaGraphics()->drawRectangle(hitboxes[i]->getX()+x,
+            Rosalila()->Graphics->drawRectangle(hitboxes[i]->getX()+x,
                                    hitboxes[i]->getY()+y,
                                    hitboxes[i]->getWidth(),hitboxes[i]->getHeight(),
                                    hitboxes[i]->angle,100,0,0,100,true);

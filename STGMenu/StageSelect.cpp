@@ -50,28 +50,28 @@ void updateMusic(int current_stage)
 {
     if(current_stage>=0 && current_stage<=4)
     {
-        if(getRosalilaSound()->current_music!=assets_directory+"1.ogg")
-            getRosalilaSound()->playMusic(assets_directory+"1.ogg",-1);
+        if(Rosalila()->Sound->current_music!=assets_directory+"1.ogg")
+            Rosalila()->Sound->playMusic(assets_directory+"1.ogg",-1);
     }
     if(current_stage>=5 && current_stage<=9)
     {
-        if(getRosalilaSound()->current_music!=assets_directory+"2.ogg")
-            getRosalilaSound()->playMusic(assets_directory+"2.ogg",-1);
+        if(Rosalila()->Sound->current_music!=assets_directory+"2.ogg")
+            Rosalila()->Sound->playMusic(assets_directory+"2.ogg",-1);
     }
     if(current_stage>=10 && current_stage<=14)
     {
-        if(getRosalilaSound()->current_music!=assets_directory+"3.ogg")
-            getRosalilaSound()->playMusic(assets_directory+"3.ogg",-1);
+        if(Rosalila()->Sound->current_music!=assets_directory+"3.ogg")
+            Rosalila()->Sound->playMusic(assets_directory+"3.ogg",-1);
     }
     if(current_stage>=15 && current_stage<=19)
     {
-        if(getRosalilaSound()->current_music!=assets_directory+"4.ogg")
-            getRosalilaSound()->playMusic(assets_directory+"4.ogg",-1);
+        if(Rosalila()->Sound->current_music!=assets_directory+"4.ogg")
+            Rosalila()->Sound->playMusic(assets_directory+"4.ogg",-1);
     }
     if(current_stage>=20 && current_stage<=24)
     {
-        if(getRosalilaSound()->current_music!=assets_directory+"5.ogg")
-            getRosalilaSound()->playMusic(assets_directory+"5.ogg",-1);
+        if(Rosalila()->Sound->current_music!=assets_directory+"5.ogg")
+            Rosalila()->Sound->playMusic(assets_directory+"5.ogg",-1);
     }
 }
 
@@ -80,7 +80,7 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
     std::vector<Image*> stage_images;
     for(int i=0;i<(int)stage_names.size();i++)
     {
-        Image*image=getRosalilaGraphics()->getTexture(assets_directory+std::string("stages/")+stage_names[i]+std::string("/images/preview.png"));
+        Image*image=Rosalila()->Graphics->getTexture(assets_directory+std::string("stages/")+stage_names[i]+std::string("/images/preview.png"));
         stage_images.push_back(image);
     }
     return stage_images;
@@ -88,7 +88,7 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
 
 void stageSelect(map<string,Button*> controls)
 {
-    RosalilaGraphics* graphics=getRosalilaGraphics();
+    RosalilaGraphics* graphics=Rosalila()->Graphics;
     std::vector<std::string> stage_names = getStageNames();
     std::vector<Image*> stage_images = getStageImages(getStageNames());
 
@@ -103,7 +103,7 @@ void stageSelect(map<string,Button*> controls)
 
     while(true)
     {
-        if(getReceiver()->isKeyPressed(SDLK_ESCAPE))
+        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
         {
             break;
         }
@@ -230,7 +230,7 @@ void stageSelect(map<string,Button*> controls)
             }
         }
 
-        getReceiver()->updateInputs();
+        Rosalila()->Receiver->updateInputs();
         graphics->updateScreen();
 
         frame++;

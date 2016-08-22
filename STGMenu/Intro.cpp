@@ -2,8 +2,8 @@
 
 void intro(map<string,Button*> controls)
 {
-    RosalilaGraphics* graphics=getRosalilaGraphics();
-    Receiver* receiver=getReceiver();
+    RosalilaGraphics* graphics=Rosalila()->Graphics;
+    RosalilaReceiver* receiver=Rosalila()->Receiver;
 
     Image* image=graphics->getTexture(assets_directory+"menu/rosalila.png");
     Image* image2=graphics->getTexture(assets_directory+"menu/flatshot.png");

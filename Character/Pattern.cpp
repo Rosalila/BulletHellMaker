@@ -239,7 +239,7 @@ void Pattern::render()
         int transparency_divider=1;
         if(getGameOver())
             transparency_divider=8;
-        getRosalilaGraphics()->draw2DImage
+        Rosalila()->Graphics->draw2DImage
         (   image,
             image->getWidth(),image->getHeight(),
             this->x-image->getWidth()/2,this->y-image->getHeight()/2,
@@ -253,12 +253,12 @@ void Pattern::render()
             FlatShadow());
     }
 
-    if(getReceiver()->isKeyDown(SDLK_h))
+    if(Rosalila()->Receiver->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)bullet->hitboxes.size();i++)
         {
             Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->x,this->y,this->getBulletAngle());
-            getRosalilaGraphics()->drawRectangle(h.getX(),
+            Rosalila()->Graphics->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->hitboxes[i]->getWidth(),this->bullet->hitboxes[i]->getHeight(),
                                    h.getAngle(),100,0,0,100,true);

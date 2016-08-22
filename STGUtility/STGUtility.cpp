@@ -37,7 +37,7 @@ void slowExtraControl()
 
 bool isSlowPressed()
 {
-    return getReceiver()->isKeyDown(SDLK_x) || getReceiver()->isJoyDown(5,0);
+    return Rosalila()->Receiver->isKeyDown(SDLK_x) || Rosalila()->Receiver->isJoyDown(5,0);
 }
 
 void disableSlow()

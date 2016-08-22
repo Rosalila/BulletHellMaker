@@ -5,6 +5,7 @@
 //SDL
 #include <string>
 
+#include "Rosalila/Rosalila.h"
 #include "Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include "Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "Rosalila/RosalilaSound/RosalilaSound.h"
@@ -21,9 +22,7 @@ int main(int argc, char *argv[])
 {
     clearLog();
 
-    setRosalilaSound(new RosalilaSound());
-    setReceiver(new Receiver());
-    setRosalilaGraphics(new RosalilaGraphics());
+    RosalilaInit();
 
     string path_menu = assets_directory+"menu/main_menu.svg";
     map<string,Button*> controls = ControllerConfig();

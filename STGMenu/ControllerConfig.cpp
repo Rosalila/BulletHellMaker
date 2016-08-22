@@ -2,7 +2,7 @@
 
 map<string,Button*> ControllerConfig()
 {
-    RosalilaGraphics* graphics=getRosalilaGraphics();
+    RosalilaGraphics* graphics=Rosalila()->Graphics;
     Image* controls_config_backgound = graphics->getTexture(assets_directory+"misc/controls configuration/background.png");
     vector<string> controls_config_map_name;
     controls_config_map_name.push_back("8");
@@ -16,7 +16,7 @@ map<string,Button*> ControllerConfig()
     controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_left.png"));
     controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_right.png"));
     controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_shoot.png"));
-    Receiver* receiver = getReceiver();
+    RosalilaReceiver* receiver = Rosalila()->Receiver;
     int current_button=0;
     map<string,Button*>controls;
 
@@ -58,7 +58,7 @@ map<string,Button*> ControllerConfig()
         if(key_pressed!=-1)
         {
             string current_button_map = controls_config_map_name[current_button];
-            controls[current_button_map]=new Button(receiver,key_pressed,current_button_map);
+            controls[current_button_map]=new Button(key_pressed,current_button_map);
             current_button++;
             if(current_button>=(int)controls_config_press_images.size())
                 break;
@@ -66,7 +66,7 @@ map<string,Button*> ControllerConfig()
         if(joy_pressed!=-1)
         {
             string current_button_map = controls_config_map_name[current_button];
-            controls[current_button_map]=new Button(receiver,joy_pressed,0,current_button_map);
+            controls[current_button_map]=new Button(joy_pressed,0,current_button_map);
             current_button++;
             if(current_button>=(int)controls_config_press_images.size())
                 break;

@@ -120,8 +120,8 @@ void Enemy::logic(int stage_velocity, string stage_name)
         if(orientation!="destroyed")
         {
             orientation="destroyed";
-            if(getRosalilaSound()->soundExists(name+".destroyed"))
-                getRosalilaSound()->playSound(name+".destroyed",1,0);
+            if(Rosalila()->Sound->soundExists(name+".destroyed"))
+                Rosalila()->Sound->playSound(name+".destroyed",1,0);
 
             for(int i=0;i<(int)hitboxes.size();i++)
                 this->hitboxes[i]->setValues(0,0,0,0,0);

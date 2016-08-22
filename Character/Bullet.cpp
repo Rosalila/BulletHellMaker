@@ -52,15 +52,15 @@ void Bullet::playSound()
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
-        current_channel=getRosalilaSound()->playSound(random_sounds[current_random_sound],sound_channel,0);
+        current_channel=Rosalila()->Sound->playSound(random_sounds[current_random_sound],sound_channel,0);
     }
 }
 
 void Bullet::playHitSound()
 {
-    if(getRosalilaSound()->soundExists("bullet_hit."+name))
+    if(Rosalila()->Sound->soundExists("bullet_hit."+name))
     {
-        getRosalilaSound()->playSound("bullet_hit."+name,sound_channel+5,0);
+        Rosalila()->Sound->playSound("bullet_hit."+name,sound_channel+5,0);
     }
 }
 

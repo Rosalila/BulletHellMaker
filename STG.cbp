@@ -44,6 +44,8 @@
 		<Unit filename="Character/Pattern.h" />
 		<Unit filename="Character/Player.cpp" />
 		<Unit filename="Character/Player.h" />
+		<Unit filename="Rosalila/Rosalila.cpp" />
+		<Unit filename="Rosalila/Rosalila.h" />
 		<Unit filename="Rosalila/RosalilaAI/Automata.cpp" />
 		<Unit filename="Rosalila/RosalilaAI/Automata.h" />
 		<Unit filename="Rosalila/RosalilaAI/Estado.cpp" />
@@ -70,8 +72,6 @@
 		<Unit filename="Rosalila/RosalilaInputs/RosalilaInputs.h" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.h" />
-		<Unit filename="Rosalila/RosalilaUtility/Font.cpp" />
-		<Unit filename="Rosalila/RosalilaUtility/Font.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Hitbox.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/Hitbox.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Line.cpp" />
