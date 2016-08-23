@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 #define PI 3.14159265
-#include "../Rosalila/Rosalila.h"
+#include "../../Rosalila/Rosalila.h"
 
 bool getIterateSlowdownFlag();
 bool isSlowPressed();

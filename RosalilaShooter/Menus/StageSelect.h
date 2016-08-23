@@ -1,7 +1,7 @@
 #ifndef STAGE_SELECT_H
 #define STAGE_SELECT_H
 
-#include "../STGUtility/STGUtility.h"
+#include "../Utility/Utility.h"
 #include "../Character/Player.h"
 #include "../Character/Enemy.h"
 #include "../STG.h"

@@ -5,7 +5,7 @@
 #include <list>
 #include <vector>
 
-#include "../Rosalila/Rosalila.h"
+#include "../../Rosalila/Rosalila.h"
 #include "Bullet.h"
 #include "Pattern.h"
 #include "Modifier.h"

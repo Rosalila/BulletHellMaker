@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <sstream>
 
-//SDL
 #include <string>
 
 #include "Rosalila/Rosalila.h"
-#include "STGUtility/STGUtility.h"
-#include "STGMenu/ControllerConfig.h"
-#include "STGMenu/Intro.h"
-#include "STGMenu/StageSelect.h"
+#include "RosalilaShooter/Utility/Utility.h"
+#include "RosalilaShooter/Menus/ControllerConfig.h"
+#include "RosalilaShooter/Menus/Intro.h"
+#include "RosalilaShooter/Menus/StageSelect.h"
 
 #include <iostream>
 using namespace std;

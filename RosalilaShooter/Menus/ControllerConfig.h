@@ -2,7 +2,9 @@
 #define CONTROLLERCONFIG_H
 
 #include <map>
-#include "../STGUtility/STGUtility.h"
+#include "../Utility/Utility.h"
+#include "../../Rosalila/RosalilaInputs/Button.h"
+
 using namespace std;
 
 map<string,Button*> ControllerConfig();

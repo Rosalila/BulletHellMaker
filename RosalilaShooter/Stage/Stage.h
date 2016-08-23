@@ -3,7 +3,7 @@
 
 #include "../Character/Character.h"
 #include "Layer.h"
-#include "../STGUtility/STGUtility.h"
+#include "../Utility/Utility.h"
 #include <map>
 
 class Stage

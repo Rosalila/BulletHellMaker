@@ -1,7 +1,7 @@
 #ifndef INTRO_H
 #define INTRO_H
 
-#include "../STGUtility/STGUtility.h"
+#include "../Utility/Utility.h"
 
 void intro(map<string,Button*> controls);
 

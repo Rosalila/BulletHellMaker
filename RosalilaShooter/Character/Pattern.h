@@ -1,10 +1,10 @@
 #ifndef PATTERN_H
 #define PATTERN_H
 
-#include "../Rosalila/Rosalila.h"
+#include "../../Rosalila/Rosalila.h"
 #include "Bullet.h"
 #include "../Character/Modifier.h"
-#include "../STGUtility/STGUtility.h"
+#include "../Utility/Utility.h"
 
 #include <cmath>
 

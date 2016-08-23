@@ -1,7 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "../Rosalila/Rosalila.h"
+#include "../../Rosalila/Rosalila.h"
 
 class Bullet
 {

@@ -5,7 +5,8 @@
 #include <list>
 #include <vector>
 
-#include "../Rosalila/TinyXml/tinyxml.h"
+#include "../../Rosalila/TinyXml/tinyxml.h"
+#include "../../Rosalila/RosalilaInputs/Button.h"
 #include "Bullet.h"
 #include "Pattern.h"
 #include "Character.h"
