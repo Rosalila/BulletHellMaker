@@ -53,6 +53,7 @@ void Character::loadFromXML()
 
 void Character::loadMainXML()
 {
+    map<string,Node*>main_nodes = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
     //Loading file
     std::string main_path=assets_directory+directory+"main.xml";
     TiXmlDocument doc_t(main_path.c_str());
@@ -64,9 +65,9 @@ void Character::loadMainXML()
     //Loading attributes
     TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
     this->velocity=5;
-    if(attributes->Attribute("velocity")!=NULL)
+    if(main_nodes["MainFile"]->nodes["Attributes"]->hasAttribute("velocity"))
     {
-        this->velocity=atoi(attributes->Attribute("velocity"));
+        this->velocity=atoi(main_nodes["MainFile"]->nodes["Attributes"]->attributes["velocity"].c_str());
     }
 
     this->animation_velocity=5;

@@ -3069,7 +3069,7 @@
 	<assert.h>
 	<string.h>
 
-1471836161 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1471972131 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../Rosalila.h"
@@ -3098,7 +3098,7 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	"../RosalilaGraphics/Image.h"
 
-1471969899 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
+1471972099 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
@@ -3115,7 +3115,7 @@
 1471969660 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Line.h
 	"Point.h"
 
-1471836150 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.h
+1471972151 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.h
 	"../Rosalila.h"
 	<string>
 	<vector>
@@ -3127,7 +3127,7 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	<map>
 
-1471965507 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
+1471972140 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -3289,7 +3289,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1471970615 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1471972181 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -3300,7 +3300,7 @@
 1471838217 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs.h"
 
-1471969968 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+1471972192 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
 	"RosalilaInputs.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/Elemento.cpp
@@ -3367,7 +3367,7 @@
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 
-1471970502 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1471972210 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1471653152 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.cpp
@@ -3383,7 +3383,7 @@
 1471969502 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Line.cpp
 	"Line.h"
 
-1471970017 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1471972224 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/TinyXml/tinystr.cpp
@@ -3460,7 +3460,7 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1471970413 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1471970864 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3639,15 +3639,16 @@
 	"../STG.h"
 	"../Stage/Stage.h"
 
-1471969836 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
+1471972353 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
 	<iostream>
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
 	"RosalilaUtility/RosalilaUtility.h"
+	"RosalilaParser/RosalilaParser.h"
 	"RosalilaApiIntegrator/RosalilaApiIntegrator.h"
 
-1471970634 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
+1471972313 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
 	"Rosalila.h"
 
 1471965330 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.h
@@ -3663,7 +3664,7 @@
 1471965715 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.h
 	"../../Rosalila/Rosalila.h"
 
-1471837739 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
+1471982518 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
 	"Character.h"
 
 1471965727 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.h
@@ -3815,14 +3816,29 @@
 1471966300 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
 	"../Utility/Utility.h"
 
-1471968749 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
+1471972164 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
 	"RosalilaApiIntegrator.h"
 
-1471968725 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
+1471972120 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
 	<iostream>
 
 1471969466 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Point.h
 
 1471969426 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Point.cpp
 	"Point.h"
+
+1471982176 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaParser/RosalilaParser.cpp
+	"RosalilaParser.h"
+
+1471982195 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaParser/RosalilaParser.h
+	"Node.h"
+	"../Rosalila.h"
+	"../RosalilaUtility/RosalilaUtility.h"
+
+1471982564 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaParser/Node.h
+	<iostream>
+	<map>
+
+1471982700 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaParser/Node.cpp
+	"Node.h"
 
