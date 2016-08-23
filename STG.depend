@@ -3637,13 +3637,14 @@
 	"../STG.h"
 	"../Stage/Stage.h"
 
-1471965294 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
+1471968167 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
 	<iostream>
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 	"RosalilaInputs/RosalilaInputs.h"
+	"RosalilaApiIntegrator/RosalilaApiIntegrator.h"
 
-1471839609 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
+1471968127 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
 	"Rosalila.h"
 
 1471965330 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.h
@@ -3810,4 +3811,10 @@
 
 1471966300 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
 	"../Utility/Utility.h"
+
+1471968017 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
+	"RosalilaApiIntegrator.h"
+
+1471968725 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
+	<iostream>
 
