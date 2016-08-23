@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Rosalila/Rosalila.cpp" />
 		<Unit filename="Rosalila/Rosalila.h" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />
@@ -76,20 +78,20 @@
 		<Unit filename="RosalilaShooter/Character/Pattern.h" />
 		<Unit filename="RosalilaShooter/Character/Player.cpp" />
 		<Unit filename="RosalilaShooter/Character/Player.h" />
+		<Unit filename="RosalilaShooter/Menus/ControllerConfig.cpp" />
+		<Unit filename="RosalilaShooter/Menus/ControllerConfig.h" />
+		<Unit filename="RosalilaShooter/Menus/Intro.cpp" />
+		<Unit filename="RosalilaShooter/Menus/Intro.h" />
+		<Unit filename="RosalilaShooter/Menus/StageSelect.cpp" />
+		<Unit filename="RosalilaShooter/Menus/StageSelect.h" />
 		<Unit filename="RosalilaShooter/STG.cpp" />
 		<Unit filename="RosalilaShooter/STG.h" />
-		<Unit filename="RosalilaShooter/STGMenu/ControllerConfig.cpp" />
-		<Unit filename="RosalilaShooter/STGMenu/ControllerConfig.h" />
-		<Unit filename="RosalilaShooter/STGMenu/Intro.cpp" />
-		<Unit filename="RosalilaShooter/STGMenu/Intro.h" />
-		<Unit filename="RosalilaShooter/STGMenu/StageSelect.cpp" />
-		<Unit filename="RosalilaShooter/STGMenu/StageSelect.h" />
-		<Unit filename="RosalilaShooter/STGUtility/STGUtility.cpp" />
-		<Unit filename="RosalilaShooter/STGUtility/STGUtility.h" />
 		<Unit filename="RosalilaShooter/Stage/Layer.cpp" />
 		<Unit filename="RosalilaShooter/Stage/Layer.h" />
 		<Unit filename="RosalilaShooter/Stage/Stage.cpp" />
 		<Unit filename="RosalilaShooter/Stage/Stage.h" />
+		<Unit filename="RosalilaShooter/Utility/Utility.cpp" />
+		<Unit filename="RosalilaShooter/Utility/Utility.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
