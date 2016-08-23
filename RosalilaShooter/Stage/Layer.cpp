@@ -21,7 +21,7 @@ Layer::Layer(vector<Image*> textures,vector <int> textures_size_x,vector <int> t
 
 Layer::~Layer()
 {
-    writeLogLine("Deleting layer.");
+    Rosalila()->Utility->writeLogLine("Deleting layer.");
     for(;!textures.empty();)
     {
         Image*image=textures.back();

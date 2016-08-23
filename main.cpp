@@ -15,11 +15,9 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    clearLog();
-
     RosalilaInit();
+    Rosalila()->Utility->clearLog();
 
-    string path_menu = assets_directory+"menu/main_menu.svg";
     map<string,Button*> controls = ControllerConfig();
     intro(controls);
     stageSelect(controls);

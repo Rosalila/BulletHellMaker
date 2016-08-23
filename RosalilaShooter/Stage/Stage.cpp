@@ -88,7 +88,7 @@ void Stage::loadFromXML(std::string name)
 {
     this->name=name;
 
-    writeLogLine("Loading stage from XML.");
+    Rosalila()->Utility->writeLogLine("Loading stage from XML.");
 
     string main_path = assets_directory+"stages/"+name+"/main.xml";
     TiXmlDocument doc_t((char*)main_path.c_str());
@@ -126,7 +126,7 @@ void Stage::loadFromXML(std::string name)
     if(nodo_misc->ToElement()->Attribute("velocity")!=NULL)
         this->velocity=atoi(nodo_misc->ToElement()->Attribute("velocity"));
 
-    writeLogLine("Loading stage's BackLayers.");
+    Rosalila()->Utility->writeLogLine("Loading stage's BackLayers.");
 
 
 vector<int>random_colors_r;
@@ -392,7 +392,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,random_color_r,random_color_g,random_color_b));
     }
 
-    writeLogLine("Loading stage's FrontLayers.");
+    Rosalila()->Utility->writeLogLine("Loading stage's FrontLayers.");
 
     //Load front layer
     for(TiXmlNode *nodo_back=stage_file->FirstChild("FrontLayer");
@@ -464,12 +464,12 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
                                   random_color_r,random_color_g,random_color_b
                                   ));
     }
-    writeLogLine("Stage loaded succesfully from XML.");
+    Rosalila()->Utility->writeLogLine("Stage loaded succesfully from XML.");
 }
 
 Stage::~Stage()
 {
-    writeLogLine("Deleting stage.");
+    Rosalila()->Utility->writeLogLine("Deleting stage.");
     for(;!back.empty();)
     {
         Layer*layer=back.back();

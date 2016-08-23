@@ -110,7 +110,7 @@ void stageSelect(map<string,Button*> controls)
 
         if(controls["a"]->isPressed())
         {
-            writeLogLine("Initializing game.");
+            Rosalila()->Utility->writeLogLine("Initializing game.");
             Stage*stage=new Stage();
             stage->loadFromXML(stage_names[current_stage]);
             string game_mode="Stage select";
