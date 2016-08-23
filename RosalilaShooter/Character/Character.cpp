@@ -53,7 +53,7 @@ void Character::loadFromXML()
 
 void Character::loadMainXML()
 {
-    map<string,Node*>main_nodes = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
     //Loading file
     std::string main_path=assets_directory+directory+"main.xml";
     TiXmlDocument doc_t(main_path.c_str());
@@ -62,38 +62,39 @@ void Character::loadMainXML()
     doc=&doc_t;
     TiXmlNode *main_file=doc->FirstChild("MainFile");
 
-    //Loading attributes
-    TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
     this->velocity=5;
-    if(main_nodes["MainFile"]->nodes["Attributes"]->hasAttribute("velocity"))
+
+    Node* attributes_node = root_node->getNodeByName("Attributes");
+
+    if(attributes_node->hasAttribute("velocity"))
     {
-        this->velocity=atoi(main_nodes["MainFile"]->nodes["Attributes"]->attributes["velocity"].c_str());
+        this->velocity=atoi(attributes_node->attributes["velocity"].c_str());
     }
 
     this->animation_velocity=5;
-    if(attributes->Attribute("animation_velocity")!=NULL)
+    if(attributes_node->hasAttribute("animation_velocity"))
     {
-        this->animation_velocity=atoi(attributes->Attribute("animation_velocity"));
+        this->animation_velocity=atoi(attributes_node->attributes["animation_velocity"].c_str());
     }
 
     this->max_hp=100;
     this->hp=100;
-    if(attributes->Attribute("hp")!=NULL)
+    if(attributes_node->hasAttribute("hp"))
     {
-        this->max_hp=atoi(attributes->Attribute("hp"));
+        this->max_hp=atoi(attributes_node->attributes["hp"].c_str());
     }
     this->hp=this->max_hp;
 
     this->x=100;
-    if(attributes->Attribute("initial_x")!=NULL)
+    if(attributes_node->hasAttribute("initial_x"))
     {
-        this->x=atoi(attributes->Attribute("initial_x"));
+        this->x=atoi(attributes_node->attributes["initial_x"].c_str());
     }
 
     this->y=500;
-    if(attributes->Attribute("initial_y")!=NULL)
+    if(attributes_node->hasAttribute("initial_y"))
     {
-        this->y=atoi(attributes->Attribute("initial_y"));
+        this->y=atoi(attributes_node->attributes["initial_y"].c_str());
     }
 
     this->life_bar_x=0;
@@ -107,60 +108,78 @@ void Character::loadMainXML()
     this->color.blue=0;
     this->color.alpha=255;
 
+    Node* life_bar_node = root_node->getNodeByName("LifeBar");
+
     if(main_file->FirstChild("LifeBar")!=NULL)
     {
-        TiXmlElement *life_bar=main_file->FirstChild("LifeBar")->ToElement();
-        if(life_bar->Attribute("x")!=NULL)
-            this->life_bar_x=atoi(life_bar->Attribute("x"));
-        if(life_bar->Attribute("y")!=NULL)
-            this->life_bar_y=atoi(life_bar->Attribute("y"));
-        if(life_bar->Attribute("color_r")!=NULL)
-            this->color.red=atoi(life_bar->Attribute("color_r"));
-        if(life_bar->Attribute("color_g")!=NULL)
-            this->color.green=atoi(life_bar->Attribute("color_g"));
-        if(life_bar->Attribute("color_b")!=NULL)
-            this->color.blue=atoi(life_bar->Attribute("color_b"));
-        if(life_bar->Attribute("color_a")!=NULL)
-            this->color.alpha=atoi(life_bar->Attribute("color_a"));
-        if(life_bar->Attribute("rect_offset_x")!=NULL)
-            this->life_bar_rect_offset_x=atoi(life_bar->Attribute("rect_offset_x"));
-        if(life_bar->Attribute("rect_offset_y")!=NULL)
-            this->life_bar_rect_offset_y=atoi(life_bar->Attribute("rect_offset_y"));
-        if(life_bar->Attribute("rect_height")!=NULL)
-            this->life_bar_rect_height=atoi(life_bar->Attribute("rect_height"));
-        if(life_bar->Attribute("rect_width")!=NULL)
-            this->life_bar_rect_width=atoi(life_bar->Attribute("rect_width"));
-        if(life_bar->Attribute("image")!=NULL)
-            this->life_bar=Rosalila()->Graphics->getTexture(assets_directory+directory+life_bar->Attribute("image"));
+        if(life_bar_node->hasAttribute("x"))
+            this->life_bar_x=atoi(life_bar_node->attributes["x"].c_str());
+
+        if(life_bar_node->hasAttribute("y"))
+            this->life_bar_y=atoi(life_bar_node->attributes["y"].c_str());
+
+        if(life_bar_node->hasAttribute("color_r"))
+            this->color.red=atoi(life_bar_node->attributes["color_r"].c_str());
+
+        if(life_bar_node->hasAttribute("color_g"))
+            this->color.green=atoi(life_bar_node->attributes["color_g"].c_str());
+
+        if(life_bar_node->hasAttribute("color_b"))
+            this->color.blue=atoi(life_bar_node->attributes["color_b"].c_str());
+
+        if(life_bar_node->hasAttribute("color_a"))
+            this->color.alpha=atoi(life_bar_node->attributes["color_a"].c_str());
+
+        if(life_bar_node->hasAttribute("rect_offset_x"))
+            this->life_bar_rect_offset_x=atoi(life_bar_node->attributes["color_offset_x"].c_str());
+
+        if(life_bar_node->hasAttribute("rect_offset_y"))
+            this->life_bar_rect_offset_y==atoi(life_bar_node->attributes["color_offset_y"].c_str());
+
+        if(life_bar_node->hasAttribute("rect_height"))
+            this->life_bar_rect_height=atoi(life_bar_node->attributes["rect_height"].c_str());
+
+        if(life_bar_node->hasAttribute("rect_width"))
+            this->life_bar_rect_width=atoi(life_bar_node->attributes["rect_width"].c_str());
+
+        if(life_bar_node->hasAttribute("image"))
+            this->life_bar=Rosalila()->Graphics->getTexture(assets_directory+directory+life_bar_node->attributes["image"]);
     }
 
-    TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
+    //TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
 
-    if(hitboxes_node->FirstChild("Hitbox"))
-    for(TiXmlNode* hitbox_node=hitboxes_node->FirstChild("Hitbox");
-            hitbox_node!=NULL;
-            hitbox_node=hitbox_node->NextSibling("Hitbox"))
+    Node* hitboxes_node = root_node->getNodeByName("Hitboxes");
+
+    for(map<string,Node*>::iterator hitbox_iterator=hitboxes_node->nodes.begin();
+        hitbox_iterator!=hitboxes_node->nodes.end();
+        hitbox_iterator++)
     {
-        TiXmlElement *hitbox_element=hitbox_node->ToElement();
-        int hitbox_x=atoi(hitbox_element->Attribute("x"));
-        int hitbox_y=atoi(hitbox_element->Attribute("y"));
-        int hitbox_width=atoi(hitbox_element->Attribute("width"));
-        int hitbox_height=atoi(hitbox_element->Attribute("height"));
-        int hitbox_angle=atoi(hitbox_element->Attribute("angle"));
+        Node* hitbox_node=hitbox_iterator->second;
+
+        int hitbox_x=atoi(hitbox_node->attributes["x"].c_str());
+        int hitbox_y=atoi(hitbox_node->attributes["y"].c_str());
+        int hitbox_width=atoi(hitbox_node->attributes["width"].c_str());
+        int hitbox_height=atoi(hitbox_node->attributes["height"].c_str());
+        int hitbox_angle=atoi(hitbox_node->attributes["angle"].c_str());
+
         Hitbox* hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
         this->hitboxes.push_back(hitbox);
+
     }
 
-    if(main_file->FirstChild("Sounds"))
+
+    Node* sounds_node = root_node->getNodeByName("Sounds");
+
+    if(sounds_node)
     {
-        TiXmlElement *sounds_element=main_file->FirstChild("Sounds")->ToElement();
-        if(sounds_element->Attribute("hit"))
+        if(sounds_node->hasAttribute("hit"))
         {
-            Rosalila()->Sound->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_element->Attribute("hit"));
+            Rosalila()->Sound->addSound(this->name+".hit",assets_directory+directory+"/sounds/"+sounds_node->attributes["hit"]);
         }
     }
 
-    //Loading sprites
+    Node* sprites_node = root_node->getNodeByName("Sprites");
+
     for(TiXmlNode* sprites_node=main_file->FirstChild("Sprites");
             sprites_node!=NULL;
             sprites_node=sprites_node->NextSibling("Sprites"))
