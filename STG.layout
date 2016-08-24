@@ -88,11 +88,14 @@
 	<File name="RosalilaShooter/Character/Bullet.h" open="0" top="0" tabpos="1">
 		<Cursor position="49" topLine="0" />
 	</File>
-	<File name="RosalilaShooter/Character/Character.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="5487" topLine="175" />
+	<File name="RosalilaShooter/Character/Character.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="24581" topLine="684" />
 	</File>
 	<File name="RosalilaShooter/Character/Character.h" open="0" top="0" tabpos="2">
 		<Cursor position="108" topLine="0" />
+	</File>
+	<File name="RosalilaShooter/Character/Enemy.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="4132" topLine="138" />
 	</File>
 	<File name="RosalilaShooter/Character/Enemy.h" open="0" top="0" tabpos="5">
 		<Cursor position="100" topLine="0" />
@@ -103,8 +106,14 @@
 	<File name="RosalilaShooter/Character/Pattern.h" open="0" top="0" tabpos="3">
 		<Cursor position="143" topLine="0" />
 	</File>
+	<File name="RosalilaShooter/Character/Player.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="15217" topLine="496" />
+	</File>
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="146" topLine="0" />
+	</File>
+	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="5148" topLine="133" />
 	</File>
 	<File name="RosalilaShooter/STG.h" open="0" top="0" tabpos="7">
 		<Cursor position="289" topLine="0" />
