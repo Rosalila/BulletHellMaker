@@ -288,121 +288,119 @@ void Character::loadMainXML()
 
 void Character::loadBulletsXML()
 {
-    //Loading bullets
-    std::string bullets_path=assets_directory+directory+"bullets.xml";
-    TiXmlDocument doc_bullets_t(bullets_path.c_str());
-    doc_bullets_t.LoadFile();
-    TiXmlDocument *doc_bullets;
-    doc_bullets=&doc_bullets_t;
-    TiXmlNode *bullet_file=doc_bullets->FirstChild("BulletsFile");
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"bullets.xml");
 
-    //Loading bullets
-    for(TiXmlNode* bullet_node=bullet_file->FirstChild("Bullet");
-            bullet_node!=NULL;
-            bullet_node=bullet_node->NextSibling("Bullet"))
+    vector<Node*> bullet_nodes = root_node->getNodesByName("Bullet");
+
+    for(int i=0;i<bullet_nodes.size();i++)
     {
-        std::string node_name=bullet_node->ToElement()->Attribute("name");
+        std::string node_name=bullet_nodes[i]->attributes["name"];
         vector<string> random_sounds;
 
-        if(bullet_node->ToElement()->Attribute("sound")!=NULL)
+        if(bullet_nodes[i]->hasAttribute("sound"))
         {
-            std::string sound=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound");
+            std::string sound=assets_directory+directory+"sounds/"+bullet_nodes[i]->attributes["sound"];
             Rosalila()->Sound->addSound("bullet."+node_name,sound);
             random_sounds.push_back("bullet."+node_name);
         }
-        if(bullet_node->ToElement()->Attribute("sound_hit")!=NULL)
+
+        if(bullet_nodes[i]->hasAttribute("sound_hit"))
         {
-            std::string sound_hit=assets_directory+directory+"sounds/"+bullet_node->ToElement()->Attribute("sound_hit");
+            std::string sound_hit=assets_directory+directory+"sounds/"+bullet_nodes[i]->attributes["sound_hit"];
             Rosalila()->Sound->addSound("bullet_hit."+node_name,sound_hit);
         }
 
         int randomize_sound_frequency=1;
-        if(bullet_node->ToElement()->Attribute("randomize_sound_frequency")!=NULL)
+        if(bullet_nodes[i]->hasAttribute("randomize_sound_frequency"))
         {
-            randomize_sound_frequency=atoi(bullet_node->ToElement()->Attribute("randomize_sound_frequency"));
+            randomize_sound_frequency=atoi(bullet_nodes[i]->attributes["randomize_sound_frequency"].c_str());
         }
 
         int arpeggio_length=1;
-        if(bullet_node->ToElement()->Attribute("arpeggio_length")!=NULL)
+        if(bullet_nodes[i]->hasAttribute("arpeggio_length"))
         {
-            arpeggio_length=atoi(bullet_node->ToElement()->Attribute("arpeggio_length"));
+            arpeggio_length=atoi(bullet_nodes[i]->attributes["arpeggio_length"].c_str());
         }
 
         int sound_channel=0;
-        if(bullet_node->ToElement()->Attribute("sound_channel")!=NULL)
+        if(bullet_nodes[i]->hasAttribute("sound_channel"))
         {
-            sound_channel=atoi(bullet_node->ToElement()->Attribute("sound_channel"));
+            sound_channel=atoi(bullet_nodes[i]->attributes["sound_channel"].c_str());
             if(sound_channel!=-1)
                 sound_channel+=sound_channel_base;
         }
 
-        int damage=0;
-        if(bullet_node->ToElement()->Attribute("damage")!=NULL)
+        int damage=1;
+        if(bullet_nodes[i]->hasAttribute("damage"))
         {
-            damage=atoi(bullet_node->ToElement()->Attribute("damage"));
+            damage=atoi(bullet_nodes[i]->attributes["damage"].c_str());
         }
-
+        vector<Node*> sprite_nodes = bullet_nodes[i]->getNodesByName("Sprite");
         vector<Image*>sprites_temp;
-        for(TiXmlNode* sprite_node=bullet_node->FirstChild("Sprite");
-                sprite_node!=NULL;
-                sprite_node=sprite_node->NextSibling("Sprite"))
+        for(int j=0;j<sprite_nodes.size();j++)
         {
-            sprites_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            sprites_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_nodes[j]->attributes["path"]));
         }
-
+        vector<Node*> hitbox_nodes = bullet_nodes[i]->getNodesByName("Hitbox");
         vector<Hitbox*>hitboxes_temp;
-        for(TiXmlNode* hitbox_node=bullet_node->FirstChild("Hitbox");
-                hitbox_node!=NULL;
-                hitbox_node=hitbox_node->NextSibling("Hitbox"))
+        for(int j=0;j<hitbox_nodes.size();j++)
         {
             int x=0;
-            if(hitbox_node->ToElement()->Attribute("x")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("x")!=NULL)
             {
-                x=atoi(hitbox_node->ToElement()->Attribute("x"));
-            }
-            int y=0;
-            if(hitbox_node->ToElement()->Attribute("y")!=NULL)
-            {
-                y=atoi(hitbox_node->ToElement()->Attribute("y"));
+                x=atoi(hitbox_nodes[j]->attributes["x"].c_str());
             }
 
-            int width=atoi(hitbox_node->ToElement()->Attribute("width"));
-            int height=atoi(hitbox_node->ToElement()->Attribute("height"));
+            int y=0;
+            if(hitbox_nodes[j]->hasAttribute("y")!=NULL)
+            {
+                y=atoi(hitbox_nodes[j]->attributes["y"].c_str());
+            }
+
+            int width=0;
+            if(hitbox_nodes[j]->hasAttribute("width")!=NULL)
+            {
+                width=atoi(hitbox_nodes[j]->attributes["width"].c_str());
+            }
+
+            int height=0;
+            if(hitbox_nodes[j]->hasAttribute("height")!=NULL)
+            {
+                height=atoi(hitbox_nodes[j]->attributes["height"].c_str());
+            }
 
             int angle=0;
-            if(hitbox_node->ToElement()->Attribute("angle")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("angle")!=NULL)
             {
-                angle=atoi(hitbox_node->ToElement()->Attribute("angle"));
+                angle=atoi(hitbox_nodes[j]->attributes["angle"].c_str());
             }
 
             hitboxes_temp.push_back(new Hitbox(x,y,width,height,angle));
         }
 
-        TiXmlNode* onhit_node=bullet_node->FirstChild("OnHit");
+        Node* onhit_node = bullet_nodes[i]->getNodeByName("OnHit");
         vector<Image*>sprites_onhit_temp;
-        if(onhit_node!=NULL)
+        if(onhit_node)
         {
-            for(TiXmlNode* sprite_node=onhit_node->FirstChild("Sprite");
-                    sprite_node!=NULL;
-                    sprite_node=sprite_node->NextSibling("Sprite"))
+            vector<Node*> sprite_node = onhit_node->getNodesByName("Sprite");
+            for(int j=0;j<sprite_node.size();j++)
             {
-                sprites_onhit_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+                sprites_onhit_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node[j]->attributes["path"]));
             }
         }
+        Node* random_sound_node = bullet_nodes[i]->getNodeByName("RandomSound");
 
-        TiXmlNode* random_sound_node=bullet_node->FirstChild("RandomSound");
-        if(random_sound_node!=NULL)
+        if(random_sound_node)
         {
-            for(TiXmlNode* sound_node=random_sound_node->FirstChild("Sound");
-                    sound_node!=NULL;
-                    sound_node=sound_node->NextSibling("Sound"))
+            vector<Node*> sound_nodes = random_sound_node->getNodesByName("Sound");
+
+            for(int j=0;j<sound_nodes.size();j++)
             {
-                std::string sound=assets_directory+directory+"sounds/"+sound_node->ToElement()->Attribute("path");
-                Rosalila()->Sound->addSound("bullet."+node_name+sound_node->ToElement()->Attribute("path"),sound);
-                random_sounds.push_back("bullet."+node_name+sound_node->ToElement()->Attribute("path"));
+                std::string sound=assets_directory+directory+"sounds/"+sound_nodes[j]->attributes["path"];
+                Rosalila()->Sound->addSound("bullet."+node_name+sound_nodes[j]->attributes["path"],sound);
+                random_sounds.push_back("bullet."+node_name+sound_nodes[j]->attributes["path"]);
             }
         }
-
         bullets[node_name]=new Bullet(node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
     }
 }
