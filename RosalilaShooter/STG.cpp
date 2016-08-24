@@ -120,8 +120,6 @@ void STG::stageSelectModeInit()
 void STG::mainLoop()
 {
     bool end_key_up_keyboard=false;
-    string music_path_temp = assets_directory+"stages/"+stage->name+"/music.ogg";
-    Mix_Music *music=Mix_LoadMUS(music_path_temp.c_str());
 
     for (;;)
     {
@@ -137,11 +135,6 @@ void STG::mainLoop()
 //            string random_number = toString((rand()*999999)%1000);
 //            Rosalila()->Graphics->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
 //        }
-
-        if(!Mix_PlayingMusic())
-        {
-            Mix_PlayMusic(music,0);
-        }
 
         render();
 

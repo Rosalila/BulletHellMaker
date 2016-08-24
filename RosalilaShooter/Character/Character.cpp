@@ -54,13 +54,6 @@ void Character::loadFromXML()
 void Character::loadMainXML()
 {
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
-    //Loading file
-    std::string main_path=assets_directory+directory+"main.xml";
-    TiXmlDocument doc_t(main_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    TiXmlNode *main_file=doc->FirstChild("MainFile");
 
     this->velocity=5;
 
@@ -110,7 +103,7 @@ void Character::loadMainXML()
 
     Node* life_bar_node = root_node->getNodeByName("LifeBar");
 
-    if(main_file->FirstChild("LifeBar")!=NULL)
+    if(life_bar_node!=NULL)
     {
         if(life_bar_node->hasAttribute("x"))
             this->life_bar_x=atoi(life_bar_node->attributes["x"].c_str());
@@ -146,8 +139,6 @@ void Character::loadMainXML()
             this->life_bar=Rosalila()->Graphics->getTexture(assets_directory+directory+life_bar_node->attributes["image"]);
     }
 
-    //TiXmlNode*hitboxes_node = main_file->FirstChild("Hitboxes");
-
     Node* hitboxes_node = root_node->getNodeByName("Hitboxes");
 
     for(map<string,Node*>::iterator hitbox_iterator=hitboxes_node->nodes.begin();
@@ -178,84 +169,119 @@ void Character::loadMainXML()
         }
     }
 
-    Node* sprites_node = root_node->getNodeByName("Sprites");
+    vector<Node*> sprites_nodes = root_node->getNodesByName("Sprites");
 
-    for(TiXmlNode* sprites_node=main_file->FirstChild("Sprites");
-            sprites_node!=NULL;
-            sprites_node=sprites_node->NextSibling("Sprites"))
+    for(int i=0;i<sprites_nodes.size();i++)
     {
         std::vector<Image*>sprites_vector;
-        std::string sprites_orientation=sprites_node->ToElement()->Attribute("orientation");
-        if(sprites_node->ToElement()->Attribute("sound")!=NULL)
+
+        std::string sprites_orientation=sprites_nodes[i]->attributes["orientation"];
+
+        if(sprites_nodes[i]->hasAttribute("sound"))
         {
-            std::string sprites_sound=sprites_node->ToElement()->Attribute("sound");
+            std::string sprites_sound=sprites_nodes[i]->attributes["sound"];
             Rosalila()->Sound->addSound(name+"."+sprites_orientation,assets_directory+directory+"sounds/"+sprites_sound);
         }
-        for(TiXmlNode* sprite_node=sprites_node->FirstChild("Sprite");
-                sprite_node!=NULL;
-                sprite_node=sprite_node->NextSibling("Sprite"))
+
+        vector<Node*> sprite_nodes = sprites_nodes[i]->getNodesByName("Sprite");
+
+        for(int j=0;j<sprite_nodes.size();j++)
         {
-            sprites_vector.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node->ToElement()->Attribute("path")));
+            string sprite_path = sprite_nodes[j]->attributes["path"];
+            sprites_vector.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_path));
         }
+
         sprites[sprites_orientation]=sprites_vector;
     }
 
-    if(main_file->FirstChild("FlatShadow")!=NULL)
+    Node* flat_shadow_node = root_node->getNodeByName("FlatShadow");
+
+    if(flat_shadow_node)
     {
-        flat_shadow_texture = Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+main_file->FirstChild("FlatShadow")->ToElement()->Attribute("image_path"));
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
+        flat_shadow_texture = Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+flat_shadow_node->attributes["image_path"]);
+
+        Node* case_right_node = flat_shadow_node->getNodeByName("CaseRight");
+
+        if(case_right_node)
         {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            shadow_align_points_right.push_back(new Point(x,y));
-        }
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
-        {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            shadow_align_points_left.push_back(new Point(x,y));
-        }
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
-        {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            shadow_align_points_top.push_back(new Point(x,y));
+            vector<Node*> case_right_point_nodes = case_right_node->getNodesByName("Point");
+
+            for(int i=0;i<case_right_point_nodes.size();i++)
+            {
+                int x=atoi(case_right_point_nodes[i]->attributes["x"].c_str());
+                int y=atoi(case_right_point_nodes[i]->attributes["y"].c_str());
+                shadow_align_points_right.push_back(new Point(x,y));
+            }
+
+            Node* case_right_inbetween_node = case_right_node->getNodeByName("Inbetween");
+
+            if(case_right_inbetween_node)
+            {
+                vector<Node*> case_right_inbetween_point_nodes = case_right_inbetween_node->getNodesByName("Point");
+
+                for(int i=0;i<case_right_inbetween_point_nodes.size();i++)
+                {
+                    int x=atoi(case_right_inbetween_point_nodes[i]->attributes["x"].c_str());
+                    int y=atoi(case_right_inbetween_point_nodes[i]->attributes["y"].c_str());
+                    inbetween_shadow_align_points_right.push_back(new Point(x,y));
+                }
+            }
         }
 
+        Node* case_left_node = flat_shadow_node->getNodeByName("CaseLeft");
 
+        if(case_left_node)
+        {
+            vector<Node*> case_left_point_nodes = case_left_node->getNodesByName("Point");
 
-        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Inbetween"))
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseRight")->FirstChild("Inbetween")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
-        {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            inbetween_shadow_align_points_right.push_back(new Point(x,y));
+            for(int i=0;i<case_left_point_nodes.size();i++)
+            {
+                int x=atoi(case_left_point_nodes[i]->attributes["x"].c_str());
+                int y=atoi(case_left_point_nodes[i]->attributes["y"].c_str());
+                shadow_align_points_left.push_back(new Point(x,y));
+            }
+
+            Node* case_left_inbetween_node = case_left_node->getNodeByName("Inbetween");
+
+            if(case_left_inbetween_node)
+            {
+                vector<Node*> case_left_inbetween_point_nodes = case_left_inbetween_node->getNodesByName("Point");
+
+                for(int i=0;i<case_left_inbetween_point_nodes.size();i++)
+                {
+                    int x=atoi(case_left_inbetween_point_nodes[i]->attributes["x"].c_str());
+                    int y=atoi(case_left_inbetween_point_nodes[i]->attributes["y"].c_str());
+                    inbetween_shadow_align_points_left.push_back(new Point(x,y));
+                }
+            }
         }
-        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Inbetween"))
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseLeft")->FirstChild("Inbetween")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
+
+        Node* case_top_node = flat_shadow_node->getNodeByName("CaseTop");
+
+        if(case_top_node)
         {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            inbetween_shadow_align_points_left.push_back(new Point(x,y));
-        }
-        if(main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Inbetween"))
-        for(TiXmlNode* point_node=main_file->FirstChild("FlatShadow")->FirstChild("CaseTop")->FirstChild("Inbetween")->FirstChild("Point");
-                point_node!=NULL;
-                point_node=point_node->NextSibling("Point"))
-        {
-            int x=atoi(point_node->ToElement()->Attribute("x"));
-            int y=atoi(point_node->ToElement()->Attribute("y"));
-            inbetween_shadow_align_points_top.push_back(new Point(x,y));
+            vector<Node*> case_top_point_nodes = case_top_node->getNodesByName("Point");
+
+            for(int i=0;i<case_top_point_nodes.size();i++)
+            {
+                int x=atoi(case_top_point_nodes[i]->attributes["x"].c_str());
+                int y=atoi(case_top_point_nodes[i]->attributes["y"].c_str());
+                shadow_align_points_top.push_back(new Point(x,y));
+            }
+
+            Node* case_top_inbetween_node = case_top_node->getNodeByName("Inbetween");
+
+            if(case_top_inbetween_node)
+            {
+                vector<Node*> case_top_inbetween_point_nodes = case_top_node->getNodeByName("Inbetween")->getNodesByName("Point");
+
+                for(int i=0;i<case_top_inbetween_point_nodes.size();i++)
+                {
+                    int x=atoi(case_top_inbetween_point_nodes[i]->attributes["x"].c_str());
+                    int y=atoi(case_top_inbetween_point_nodes[i]->attributes["y"].c_str());
+                    inbetween_shadow_align_points_top.push_back(new Point(x,y));
+                }
+            }
         }
     }
 }
