@@ -695,7 +695,7 @@ void Character::loadPatternsXML()
         {
             int amount = atoi(repeat_nodes[j]->attributes["amount"].c_str());
 
-            vector<Node*> pattern_nodes = repeat_nodes[i]->getNodesByName("Pattern");
+            vector<Node*> pattern_nodes = repeat_nodes[j]->getNodesByName("Pattern");
 
             for(int k=0;k<pattern_nodes.size();k++)
             {
@@ -704,54 +704,54 @@ void Character::loadPatternsXML()
                     Pattern* p = loadPatternXML(pattern_nodes[k]);
 
                     if(repeat_nodes[j]->hasAttribute("velocity"))
-                        p->velocity+=atoi(repeat_nodes[i]->attributes["velocity"].c_str())*i;
+                        p->velocity+=atoi(repeat_nodes[j]->attributes["velocity"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("max_velocity"))
-                        p->max_velocity+=atoi(repeat_nodes[i]->attributes["max_velocity"].c_str())*i;
+                        p->max_velocity+=atoi(repeat_nodes[j]->attributes["max_velocity"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("acceleration"))
-                        p->acceleration+=atoi(repeat_nodes[i]->attributes["acceleration"].c_str())*i;
+                        p->acceleration+=atoi(repeat_nodes[j]->attributes["acceleration"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("a_frequency"))
-                        p->a_frequency+=atoi(repeat_nodes[i]->attributes["a_frequency"].c_str())*i;
+                        p->a_frequency+=atoi(repeat_nodes[j]->attributes["a_frequency"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("angle"))
-                        p->angle+=atoi(repeat_nodes[i]->attributes["angle"].c_str())*i;
+                        p->angle+=atoi(repeat_nodes[j]->attributes["angle"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("angle_change"))
-                        p->angle_change+=atoi(repeat_nodes[i]->attributes["angle_change"].c_str())*i;
+                        p->angle_change+=atoi(repeat_nodes[j]->attributes["angle_change"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("stop_ac_at"))
-                        p->stop_ac_at+=atoi(repeat_nodes[i]->attributes["stop_ac_at"].c_str())*i;
+                        p->stop_ac_at+=atoi(repeat_nodes[j]->attributes["stop_ac_at"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("ac_frequency"))
-                        p->ac_frequency+=atoi(repeat_nodes[i]->attributes["ac_frequency"].c_str())*i;
+                        p->ac_frequency+=atoi(repeat_nodes[j]->attributes["ac_frequency"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("offset_x"))
-                        p->offset_x+=atoi(repeat_nodes[i]->attributes["offset_x"].c_str())*i;
+                        p->offset_x+=atoi(repeat_nodes[j]->attributes["offset_x"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("offset_y"))
-                        p->offset_y+=atoi(repeat_nodes[i]->attributes["offset_y"].c_str())*i;
+                        p->offset_y+=atoi(repeat_nodes[j]->attributes["offset_y"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("startup"))
-                        p->startup+=atoi(repeat_nodes[i]->attributes["startup"].c_str())*i;
+                        p->startup+=atoi(repeat_nodes[j]->attributes["startup"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("cooldown"))
-                        p->cooldown+=atoi(repeat_nodes[i]->attributes["cooldown"].c_str())*i;
+                        p->cooldown+=atoi(repeat_nodes[j]->attributes["cooldown"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("animation_velocity"))
-                        p->animation_velocity+=atoi(repeat_nodes[i]->attributes["animation_velocity"].c_str())*i;
+                        p->animation_velocity+=atoi(repeat_nodes[j]->attributes["animation_velocity"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("random_angle"))
-                        p->random_angle+=atoi(repeat_nodes[i]->attributes["random_angle"].c_str())*i;
+                        p->random_angle+=atoi(repeat_nodes[j]->attributes["random_angle"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("bullet_rotation"))
-                        p->bullet_rotation+=atoi(repeat_nodes[i]->attributes["bullet_rotation"].c_str())*i;
+                        p->bullet_rotation+=atoi(repeat_nodes[j]->attributes["bullet_rotation"].c_str())*l;
 
                     if(repeat_nodes[j]->hasAttribute("br_change"))
-                        p->br_change+=atoi(repeat_nodes[i]->attributes["br_change"].c_str())*i;
+                        p->br_change+=atoi(repeat_nodes[j]->attributes["br_change"].c_str())*l;
 
-                        patterns.push_back(p);
+                    patterns.push_back(p);
 
                 }
             }
