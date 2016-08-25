@@ -63,38 +63,33 @@ void Player::loadPlayerFromXML()
     loadFromXML();
 
     //Loading file
-    std::string main_path=assets_directory+directory+"main.xml";
-    TiXmlDocument doc_t(main_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    TiXmlNode *main_file=doc->FirstChild("MainFile");
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
 
     this->current_slow=0;
     this->max_slow=-1;
-    TiXmlElement *attributes=main_file->FirstChild("Attributes")->ToElement();
-    if(attributes->Attribute("slow")!=NULL)
+    Node* attributes_node = root_node->getNodeByName("Attributes");
+    if(attributes_node->hasAttribute("slow"))
     {
-        this->current_slow=atoi(attributes->Attribute("slow"));
-        this->max_slow=atoi(attributes->Attribute("slow"));
+        this->current_slow=atoi(attributes_node->attributes["slow"].c_str());
+        this->max_slow=atoi(attributes_node->attributes["slow"].c_str());
     }
 
     this->slow_decrement=3;
-    if(attributes->Attribute("slow_decrement")!=NULL)
+    if(attributes_node->hasAttribute("slow_decrement"))
     {
-        this->slow_decrement=atoi(attributes->Attribute("slow_decrement"));
+        this->slow_decrement=atoi(attributes_node->attributes["slow_decrement"].c_str());
     }
 
     this->slow_increment=1;
-    if(attributes->Attribute("slow_increment")!=NULL)
+    if(attributes_node->hasAttribute("slow_increment"))
     {
-        this->slow_increment=atoi(attributes->Attribute("slow_increment"));
+        this->slow_increment=atoi(attributes_node->attributes["slow_increment"].c_str());
     }
 
     this->slow_cooldown_increment=2;
-    if(attributes->Attribute("slow_cooldown_increment")!=NULL)
+    if(attributes_node->hasAttribute("slow_cooldown_increment"))
     {
-        this->slow_cooldown_increment=atoi(attributes->Attribute("slow_cooldown_increment"));
+        this->slow_cooldown_increment=atoi(attributes_node->attributes["slow_cooldown_increment"].c_str());
     }
 
     this->slow_bar_x=0;
@@ -112,40 +107,39 @@ void Player::loadPlayerFromXML()
     this->slow_bar_cooldown_color.blue=0;
     this->slow_bar_cooldown_color.alpha=128;
 
-    if(main_file->FirstChild("SlowBar")!=NULL)
+    Node* slow_bar_node = root_node->getNodeByName("SlowBar");
+    if(slow_bar_node)
     {
-        TiXmlElement *slow_bar=main_file->FirstChild("SlowBar")->ToElement();
-        if(slow_bar->Attribute("x")!=NULL)
-            this->slow_bar_x=atoi(slow_bar->Attribute("x"));
-        if(slow_bar->Attribute("y")!=NULL)
+        if(slow_bar_node->hasAttribute("x"))
+            this->slow_bar_x=atoi(slow_bar_node->attributes["x"].c_str());
+        if(slow_bar_node->hasAttribute("y"))
+            this->slow_bar_y=atoi(slow_bar_node->attributes["y"].c_str());
+        if(slow_bar_node->hasAttribute("color_r"))
+            this->slow_bar_color.red=atoi(slow_bar_node->attributes["color_r"].c_str());
+        if(slow_bar_node->hasAttribute("color_g"))
+            this->slow_bar_color.green=atoi(slow_bar_node->attributes["color_g"].c_str());
+        if(slow_bar_node->hasAttribute("color_b"))
+            this->slow_bar_color.blue=atoi(slow_bar_node->attributes["color_b"].c_str());
+        if(slow_bar_node->hasAttribute("color_a"))
+            this->slow_bar_color.alpha=atoi(slow_bar_node->attributes["color_a"].c_str());
 
-            this->slow_bar_y=atoi(slow_bar->Attribute("y"));
-        if(slow_bar->Attribute("color_r")!=NULL)
-            this->slow_bar_color.red=atoi(slow_bar->Attribute("color_r"));
-        if(slow_bar->Attribute("color_g")!=NULL)
-            this->slow_bar_color.green=atoi(slow_bar->Attribute("color_g"));
-        if(slow_bar->Attribute("color_b")!=NULL)
-            this->slow_bar_color.blue=atoi(slow_bar->Attribute("color_b"));
-        if(slow_bar->Attribute("color_a")!=NULL)
-            this->slow_bar_color.alpha=atoi(slow_bar->Attribute("color_a"));
+        if(slow_bar_node->hasAttribute("cooldown_color_r"))
+            this->slow_bar_cooldown_color.red=atoi(slow_bar_node->attributes["cooldown_color_r"].c_str());
+        if(slow_bar_node->hasAttribute("cooldown_color_g"))
+            this->slow_bar_cooldown_color.green=atoi(slow_bar_node->attributes["cooldown_color_g"].c_str());
+        if(slow_bar_node->hasAttribute("cooldown_color_b"))
+            this->slow_bar_cooldown_color.blue=atoi(slow_bar_node->attributes["cooldown_color_b"].c_str());
+        if(slow_bar_node->hasAttribute("cooldown_color_a"))
+            this->slow_bar_cooldown_color.alpha=atoi(slow_bar_node->attributes["cooldown_color_a"].c_str());
 
-        if(slow_bar->Attribute("cooldown_color_r")!=NULL)
-            this->slow_bar_cooldown_color.red=atoi(slow_bar->Attribute("cooldown_color_r"));
-        if(slow_bar->Attribute("cooldown_color_g")!=NULL)
-            this->slow_bar_cooldown_color.green=atoi(slow_bar->Attribute("cooldown_color_g"));
-        if(slow_bar->Attribute("cooldown_color_b")!=NULL)
-            this->slow_bar_cooldown_color.blue=atoi(slow_bar->Attribute("cooldown_color_b"));
-        if(slow_bar->Attribute("cooldown_color_a")!=NULL)
-            this->slow_bar_cooldown_color.alpha=atoi(slow_bar->Attribute("cooldown_color_a"));
-
-        if(slow_bar->Attribute("rect_offset_x")!=NULL)
-            this->slow_bar_rect_offset_x=atoi(slow_bar->Attribute("rect_offset_x"));
-        if(slow_bar->Attribute("rect_offset_y")!=NULL)
-            this->slow_bar_rect_offset_y=atoi(slow_bar->Attribute("rect_offset_y"));
-        if(slow_bar->Attribute("rect_height")!=NULL)
-            this->slow_bar_rect_height=atoi(slow_bar->Attribute("rect_height"));
-        if(slow_bar->Attribute("rect_width")!=NULL)
-            this->slow_bar_rect_width=atoi(slow_bar->Attribute("rect_width"));
+        if(slow_bar_node->hasAttribute("rect_offset_x"))
+            this->slow_bar_rect_offset_x=atoi(slow_bar_node->attributes["rect_offset_x"].c_str());
+        if(slow_bar_node->hasAttribute("rect_offset_y"))
+            this->slow_bar_rect_offset_y=atoi(slow_bar_node->attributes["rect_offset_y"].c_str());
+        if(slow_bar_node->hasAttribute("rect_height"))
+            this->slow_bar_rect_height=atoi(slow_bar_node->attributes["rect_height"].c_str());
+        if(slow_bar_node->hasAttribute("rect_width"))
+            this->slow_bar_rect_width=atoi(slow_bar_node->attributes["rect_width"].c_str());
     }
 }
 
