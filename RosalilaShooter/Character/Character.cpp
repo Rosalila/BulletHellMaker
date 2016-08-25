@@ -127,7 +127,7 @@ void Character::loadMainXML()
             this->life_bar_rect_offset_x=atoi(life_bar_node->attributes["color_offset_x"].c_str());
 
         if(life_bar_node->hasAttribute("rect_offset_y"))
-            this->life_bar_rect_offset_y==atoi(life_bar_node->attributes["color_offset_y"].c_str());
+            this->life_bar_rect_offset_y=atoi(life_bar_node->attributes["color_offset_y"].c_str());
 
         if(life_bar_node->hasAttribute("rect_height"))
             this->life_bar_rect_height=atoi(life_bar_node->attributes["rect_height"].c_str());
@@ -171,7 +171,7 @@ void Character::loadMainXML()
 
     vector<Node*> sprites_nodes = root_node->getNodesByName("Sprites");
 
-    for(int i=0;i<sprites_nodes.size();i++)
+    for(int i=0;i<(int)sprites_nodes.size();i++)
     {
         std::vector<Image*>sprites_vector;
 
@@ -185,7 +185,7 @@ void Character::loadMainXML()
 
         vector<Node*> sprite_nodes = sprites_nodes[i]->getNodesByName("Sprite");
 
-        for(int j=0;j<sprite_nodes.size();j++)
+        for(int j=0;j<(int)sprite_nodes.size();j++)
         {
             string sprite_path = sprite_nodes[j]->attributes["path"];
             sprites_vector.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_path));
@@ -206,7 +206,7 @@ void Character::loadMainXML()
         {
             vector<Node*> case_right_point_nodes = case_right_node->getNodesByName("Point");
 
-            for(int i=0;i<case_right_point_nodes.size();i++)
+            for(int i=0;i<(int)case_right_point_nodes.size();i++)
             {
                 int x=atoi(case_right_point_nodes[i]->attributes["x"].c_str());
                 int y=atoi(case_right_point_nodes[i]->attributes["y"].c_str());
@@ -219,7 +219,7 @@ void Character::loadMainXML()
             {
                 vector<Node*> case_right_inbetween_point_nodes = case_right_inbetween_node->getNodesByName("Point");
 
-                for(int i=0;i<case_right_inbetween_point_nodes.size();i++)
+                for(int i=0;i<(int)case_right_inbetween_point_nodes.size();i++)
                 {
                     int x=atoi(case_right_inbetween_point_nodes[i]->attributes["x"].c_str());
                     int y=atoi(case_right_inbetween_point_nodes[i]->attributes["y"].c_str());
@@ -234,7 +234,7 @@ void Character::loadMainXML()
         {
             vector<Node*> case_left_point_nodes = case_left_node->getNodesByName("Point");
 
-            for(int i=0;i<case_left_point_nodes.size();i++)
+            for(int i=0;i<(int)case_left_point_nodes.size();i++)
             {
                 int x=atoi(case_left_point_nodes[i]->attributes["x"].c_str());
                 int y=atoi(case_left_point_nodes[i]->attributes["y"].c_str());
@@ -247,7 +247,7 @@ void Character::loadMainXML()
             {
                 vector<Node*> case_left_inbetween_point_nodes = case_left_inbetween_node->getNodesByName("Point");
 
-                for(int i=0;i<case_left_inbetween_point_nodes.size();i++)
+                for(int i=0;i<(int)case_left_inbetween_point_nodes.size();i++)
                 {
                     int x=atoi(case_left_inbetween_point_nodes[i]->attributes["x"].c_str());
                     int y=atoi(case_left_inbetween_point_nodes[i]->attributes["y"].c_str());
@@ -262,7 +262,7 @@ void Character::loadMainXML()
         {
             vector<Node*> case_top_point_nodes = case_top_node->getNodesByName("Point");
 
-            for(int i=0;i<case_top_point_nodes.size();i++)
+            for(int i=0;i<(int)case_top_point_nodes.size();i++)
             {
                 int x=atoi(case_top_point_nodes[i]->attributes["x"].c_str());
                 int y=atoi(case_top_point_nodes[i]->attributes["y"].c_str());
@@ -275,7 +275,7 @@ void Character::loadMainXML()
             {
                 vector<Node*> case_top_inbetween_point_nodes = case_top_node->getNodeByName("Inbetween")->getNodesByName("Point");
 
-                for(int i=0;i<case_top_inbetween_point_nodes.size();i++)
+                for(int i=0;i<(int)case_top_inbetween_point_nodes.size();i++)
                 {
                     int x=atoi(case_top_inbetween_point_nodes[i]->attributes["x"].c_str());
                     int y=atoi(case_top_inbetween_point_nodes[i]->attributes["y"].c_str());
@@ -292,7 +292,7 @@ void Character::loadBulletsXML()
 
     vector<Node*> bullet_nodes = root_node->getNodesByName("Bullet");
 
-    for(int i=0;i<bullet_nodes.size();i++)
+    for(int i=0;i<(int)bullet_nodes.size();i++)
     {
         std::string node_name=bullet_nodes[i]->attributes["name"];
         vector<string> random_sounds;
@@ -337,40 +337,40 @@ void Character::loadBulletsXML()
         }
         vector<Node*> sprite_nodes = bullet_nodes[i]->getNodesByName("Sprite");
         vector<Image*>sprites_temp;
-        for(int j=0;j<sprite_nodes.size();j++)
+        for(int j=0;j<(int)sprite_nodes.size();j++)
         {
             sprites_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_nodes[j]->attributes["path"]));
         }
         vector<Node*> hitbox_nodes = bullet_nodes[i]->getNodesByName("Hitbox");
         vector<Hitbox*>hitboxes_temp;
-        for(int j=0;j<hitbox_nodes.size();j++)
+        for(int j=0;j<(int)hitbox_nodes.size();j++)
         {
             int x=0;
-            if(hitbox_nodes[j]->hasAttribute("x")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("x"))
             {
                 x=atoi(hitbox_nodes[j]->attributes["x"].c_str());
             }
 
             int y=0;
-            if(hitbox_nodes[j]->hasAttribute("y")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("y"))
             {
                 y=atoi(hitbox_nodes[j]->attributes["y"].c_str());
             }
 
             int width=0;
-            if(hitbox_nodes[j]->hasAttribute("width")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("width"))
             {
                 width=atoi(hitbox_nodes[j]->attributes["width"].c_str());
             }
 
             int height=0;
-            if(hitbox_nodes[j]->hasAttribute("height")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("height"))
             {
                 height=atoi(hitbox_nodes[j]->attributes["height"].c_str());
             }
 
             int angle=0;
-            if(hitbox_nodes[j]->hasAttribute("angle")!=NULL)
+            if(hitbox_nodes[j]->hasAttribute("angle"))
             {
                 angle=atoi(hitbox_nodes[j]->attributes["angle"].c_str());
             }
@@ -383,7 +383,7 @@ void Character::loadBulletsXML()
         if(onhit_node)
         {
             vector<Node*> sprite_node = onhit_node->getNodesByName("Sprite");
-            for(int j=0;j<sprite_node.size();j++)
+            for(int j=0;j<(int)sprite_node.size();j++)
             {
                 sprites_onhit_temp.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/"+sprite_node[j]->attributes["path"]));
             }
@@ -394,7 +394,7 @@ void Character::loadBulletsXML()
         {
             vector<Node*> sound_nodes = random_sound_node->getNodesByName("Sound");
 
-            for(int j=0;j<sound_nodes.size();j++)
+            for(int j=0;j<(int)sound_nodes.size();j++)
             {
                 std::string sound=assets_directory+directory+"sounds/"+sound_nodes[j]->attributes["path"];
                 Rosalila()->Sound->addSound("bullet."+node_name+sound_nodes[j]->attributes["path"],sound);
@@ -415,51 +415,51 @@ Pattern* Character::loadPatternXML(Node* pattern_node)
         velocity=atoi(pattern_node->attributes["velocity"].c_str());
 
     int max_velocity=9999999;
-    if(pattern_node->hasAttribute("max_velocity")!=NULL)
+    if(pattern_node->hasAttribute("max_velocity"))
         max_velocity=atoi(pattern_node->attributes["max_velocity"].c_str());
 
     int acceleration=0;
-    if(pattern_node->hasAttribute("acceleration")!=NULL)
+    if(pattern_node->hasAttribute("acceleration"))
         acceleration=atoi(pattern_node->attributes["acceleration"].c_str());
 
     int a_frequency=0;
-    if(pattern_node->hasAttribute("a_frequency")!=NULL)
+    if(pattern_node->hasAttribute("a_frequency"))
         a_frequency=atoi(pattern_node->attributes["a_frequency"].c_str());
 
     int angle=0;
-    if(pattern_node->hasAttribute("angle")!=NULL)
+    if(pattern_node->hasAttribute("angle"))
         angle=atoi(pattern_node->attributes["angle"].c_str());
 
     int angle_change=0;
-    if(pattern_node->hasAttribute("angle_change")!=NULL)
+    if(pattern_node->hasAttribute("angle_change"))
         angle_change=atoi(pattern_node->attributes["angle_change"].c_str());
 
     int stop_ac_at=-1;
-    if(pattern_node->hasAttribute("stop_ac_at")!=NULL)
+    if(pattern_node->hasAttribute("stop_ac_at"))
         stop_ac_at=atoi(pattern_node->attributes["stop_ac_at"].c_str());
 
     int ac_frequency=0;
-    if(pattern_node->hasAttribute("ac_frequency")!=NULL)
+    if(pattern_node->hasAttribute("ac_frequency"))
         ac_frequency=atoi(pattern_node->attributes["ac_frequency"].c_str());
 
     int offset_x=0;
-    if(pattern_node->hasAttribute("offset_x")!=NULL)
+    if(pattern_node->hasAttribute("offset_x"))
         offset_x=atoi(pattern_node->attributes["offset_x"].c_str());
 
     int offset_y=0;
-    if(pattern_node->hasAttribute("offset_y")!=NULL)
+    if(pattern_node->hasAttribute("offset_y"))
         offset_y=atoi(pattern_node->attributes["offset_y"].c_str());
 
     int startup=0;
-    if(pattern_node->hasAttribute("startup")!=NULL)
+    if(pattern_node->hasAttribute("startup"))
         startup=atoi(pattern_node->attributes["startup"].c_str());
 
     int cooldown=0;
-    if(pattern_node->hasAttribute("cooldown")!=NULL)
+    if(pattern_node->hasAttribute("cooldown"))
         cooldown=atoi(pattern_node->attributes["cooldown"].c_str());
 
     int animation_velocity=0;
-    if(pattern_node->hasAttribute("animation_velocity")!=NULL)
+    if(pattern_node->hasAttribute("animation_velocity"))
         animation_velocity=atoi(pattern_node->attributes["animation_velocity"].c_str());
 
     double auto_scale=0;
@@ -513,7 +513,7 @@ Pattern* Character::loadPatternXML(Node* pattern_node)
     std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
 
     vector<Node*> modifier_nodes = pattern_node->getNodesByName("Modifier");
-    for(int i=0;i<modifier_nodes.size();i++)
+    for(int i=0;i<(int)modifier_nodes.size();i++)
     {
         int at=atoi(modifier_nodes[i]->attributes["at"].c_str());
         (*pattern_modifiers)[at]=loadModifierXML(modifier_nodes[i]);
@@ -533,126 +533,126 @@ vector<Modifier*>* Character::loadModifierXML(Node* modifier_node)
         temp_modifiers->push_back(new Modifier("bullet",value));
     }
 
-    if(modifier_node->hasAttribute("velocity")!=NULL)
+    if(modifier_node->hasAttribute("velocity"))
     {
         std::string value=modifier_node->attributes["velocity"];
         temp_modifiers->push_back(new Modifier("velocity",value));
     }
 
-    if(modifier_node->hasAttribute("max_velocity")!=NULL)
+    if(modifier_node->hasAttribute("max_velocity"))
     {
         std::string value=modifier_node->attributes["max_velocity"];
         temp_modifiers->push_back(new Modifier("max_velocity",value));
     }
 
-    if(modifier_node->hasAttribute("acceleration")!=NULL)
+    if(modifier_node->hasAttribute("acceleration"))
     {
         std::string value=modifier_node->attributes["acceleration"];
         temp_modifiers->push_back(new Modifier("acceleration",value));
     }
 
-    if(modifier_node->hasAttribute("a_frequency")!=NULL)
+    if(modifier_node->hasAttribute("a_frequency"))
     {
         std::string value=modifier_node->attributes["a_frequency"];
         temp_modifiers->push_back(new Modifier("a_frequency",value));
     }
 
-    if(modifier_node->hasAttribute("angle")!=NULL)
+    if(modifier_node->hasAttribute("angle"))
     {
         std::string value=modifier_node->attributes["angle"];
         temp_modifiers->push_back(new Modifier("angle",value));
     }
 
-    if(modifier_node->hasAttribute("angle_change")!=NULL)
+    if(modifier_node->hasAttribute("angle_change"))
     {
         std::string value=modifier_node->attributes["angle_change"];
         temp_modifiers->push_back(new Modifier("angle_change",value));
     }
 
-    if(modifier_node->hasAttribute("stop_ac_at")!=NULL)
+    if(modifier_node->hasAttribute("stop_ac_at"))
     {
         std::string value=modifier_node->attributes["stop_ac_at"];
         temp_modifiers->push_back(new Modifier("stop_ac_at",value));
     }
 
-    if(modifier_node->hasAttribute("ac_frequency")!=NULL)
+    if(modifier_node->hasAttribute("ac_frequency"))
     {
         std::string value=modifier_node->attributes["ac_frequency"];
         temp_modifiers->push_back(new Modifier("ac_frequency",value));
     }
 
-    if(modifier_node->hasAttribute("animation_velocity")!=NULL)
+    if(modifier_node->hasAttribute("animation_velocity"))
     {
         std::string value=modifier_node->attributes["animation_velocity"];
         temp_modifiers->push_back(new Modifier("animation_velocity",value));
     }
 
-    if(modifier_node->hasAttribute("offset_x")!=NULL)
+    if(modifier_node->hasAttribute("offset_x"))
     {
         std::string value=modifier_node->attributes["offset_x"];
         temp_modifiers->push_back(new Modifier("offset_x",value));
     }
 
-    if(modifier_node->hasAttribute("offset_y")!=NULL)
+    if(modifier_node->hasAttribute("offset_y"))
     {
         std::string value=modifier_node->attributes["offset_y"];
         temp_modifiers->push_back(new Modifier("offset_y",value));
     }
 
-    if(modifier_node->hasAttribute("startup")!=NULL)
+    if(modifier_node->hasAttribute("startup"))
     {
         std::string value=modifier_node->attributes["startup"];
         temp_modifiers->push_back(new Modifier("startup",value));
     }
 
-    if(modifier_node->hasAttribute("cooldown")!=NULL)
+    if(modifier_node->hasAttribute("cooldown"))
     {
         std::string value=modifier_node->attributes["cooldown"];
         temp_modifiers->push_back(new Modifier("cooldown",value));
     }
 
-    if(modifier_node->hasAttribute("duration")!=NULL)
+    if(modifier_node->hasAttribute("duration"))
     {
         std::string value=modifier_node->attributes["duration"];
         temp_modifiers->push_back(new Modifier("duration",value));
     }
 
-    if(modifier_node->hasAttribute("random_angle")!=NULL)
+    if(modifier_node->hasAttribute("random_angle"))
     {
         std::string value=modifier_node->attributes["random_angle"];
         temp_modifiers->push_back(new Modifier("random_angle",value));
     }
 
-    if(modifier_node->hasAttribute("aim_player")!=NULL)
+    if(modifier_node->hasAttribute("aim_player"))
     {
         std::string value=modifier_node->attributes["aim_player"];
         temp_modifiers->push_back(new Modifier("aim_player",value));
     }
 
-    if(modifier_node->hasAttribute("bullet_rotation")!=NULL)
+    if(modifier_node->hasAttribute("bullet_rotation"))
     {
         std::string value=modifier_node->attributes["bullet_rotation"];
         temp_modifiers->push_back(new Modifier("bullet_rotation",value));
     }
 
-    if(modifier_node->hasAttribute("br_change")!=NULL)
+    if(modifier_node->hasAttribute("br_change"))
     {
         std::string value=modifier_node->attributes["br_change"];
         temp_modifiers->push_back(new Modifier("br_change",value));
     }
 
-    if(modifier_node->hasAttribute("independent_br")!=NULL)
+    if(modifier_node->hasAttribute("independent_br"))
     {
         std::string value=modifier_node->attributes["independent_br"];
         temp_modifiers->push_back(new Modifier("independent_br",value));
     }
-    if(modifier_node->hasAttribute("freeze")!=NULL)
+    if(modifier_node->hasAttribute("freeze"))
     {
         std::string value=modifier_node->attributes["freeze"];
         temp_modifiers->push_back(new Modifier("freeze",value));
     }
 
-    if(modifier_node->hasAttribute("homing")!=NULL)
+    if(modifier_node->hasAttribute("homing"))
     {
         std::string value=modifier_node->attributes["homing"];
         temp_modifiers->push_back(new Modifier("homing",value));
@@ -667,16 +667,9 @@ void Character::loadPatternsXML()
 //Loading file
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"patterns.xml");
 
-    std::string pattern_path=assets_directory+directory+"patterns.xml";
-    TiXmlDocument doc_pattern_t(pattern_path.c_str());
-    doc_pattern_t.LoadFile();
-    TiXmlDocument *doc_pattern;
-    doc_pattern=&doc_pattern_t;
-    TiXmlNode *patterns_file=doc_pattern->FirstChild("PatternsFile");
-
     vector<Node*> type_nodes = root_node->getNodesByName("Type");
 
-    for(int i=0;i<type_nodes.size();i++)
+    for(int i=0;i<(int)type_nodes.size();i++)
     {
         std::string type_name=type_nodes[i]->attributes["name"];
 
@@ -684,20 +677,20 @@ void Character::loadPatternsXML()
 
         vector<Node*> pattern_nodes = type_nodes[i]->getNodesByName("Pattern");
 
-        for(int j=0;j<pattern_nodes.size();j++)
+        for(int j=0;j<(int)pattern_nodes.size();j++)
         {
             patterns.push_back(loadPatternXML(pattern_nodes[j]));
         }
 
         vector<Node*> repeat_nodes = type_nodes[i]->getNodesByName("Repeat");
 
-        for(int j=0;j<repeat_nodes.size();j++)
+        for(int j=0;j<(int)repeat_nodes.size();j++)
         {
             int amount = atoi(repeat_nodes[j]->attributes["amount"].c_str());
 
             vector<Node*> pattern_nodes = repeat_nodes[j]->getNodesByName("Pattern");
 
-            for(int k=0;k<pattern_nodes.size();k++)
+            for(int k=0;k<(int)pattern_nodes.size();k++)
             {
                 for(int l=0;l<amount;l++)
                 {

@@ -154,7 +154,7 @@ void Enemy::loadModifiersFromXML()
 
     vector<Node*> modifier_nodes = root_node->getNodesByName("Modifier");
 
-    for(int i=0;i<modifier_nodes.size();i++)
+    for(int i=0;i<(int)modifier_nodes.size();i++)
     {
         vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
 

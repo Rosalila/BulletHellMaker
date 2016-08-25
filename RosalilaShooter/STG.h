@@ -1,7 +1,6 @@
 #ifndef STG_H
 #define STG_H
 
-#include "../Rosalila/TinyXml/tinyxml.h"
 #include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Rosalila/RosalilaInputs/RosalilaInputs.h"

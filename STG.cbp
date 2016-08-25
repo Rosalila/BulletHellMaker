@@ -56,6 +56,12 @@
 		<Unit filename="Rosalila/RosalilaParser/Node.h" />
 		<Unit filename="Rosalila/RosalilaParser/RosalilaParser.cpp" />
 		<Unit filename="Rosalila/RosalilaParser/RosalilaParser.h" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinystr.cpp" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinystr.h" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinyxml.cpp" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinyxml.h" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinyxmlerror.cpp" />
+		<Unit filename="Rosalila/RosalilaParser/TinyXml/tinyxmlparser.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.cpp" />
 		<Unit filename="Rosalila/RosalilaSound/RosalilaSound.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Hitbox.cpp" />
@@ -66,12 +72,6 @@
 		<Unit filename="Rosalila/RosalilaUtility/Point.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.h" />
-		<Unit filename="Rosalila/TinyXml/tinystr.cpp" />
-		<Unit filename="Rosalila/TinyXml/tinystr.h" />
-		<Unit filename="Rosalila/TinyXml/tinyxml.cpp" />
-		<Unit filename="Rosalila/TinyXml/tinyxml.h" />
-		<Unit filename="Rosalila/TinyXml/tinyxmlerror.cpp" />
-		<Unit filename="Rosalila/TinyXml/tinyxmlparser.cpp" />
 		<Unit filename="RosalilaShooter/Character/Bullet.cpp" />
 		<Unit filename="RosalilaShooter/Character/Bullet.h" />
 		<Unit filename="RosalilaShooter/Character/Character.cpp" />

@@ -634,7 +634,7 @@ void Player::loadFromXML()
 
         vector<Node*> hitboxes_nodes = parry_node->getNodesByName("Hitboxes");
 
-        for(int i=0;i<hitboxes_nodes.size();i++)
+        for(int i=0;i<(int)hitboxes_nodes.size();i++)
         {
             int hitbox_x=atoi(hitboxes_nodes[i]->attributes["x"].c_str());
             int hitbox_y=atoi(hitboxes_nodes[i]->attributes["y"].c_str());
