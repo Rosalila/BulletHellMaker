@@ -3,18 +3,13 @@
 std::vector<std::string> getStageNames()
 {
     std::vector<std::string> stage_names;
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
 
-    string config_directory = assets_directory+"config.xml";
-    TiXmlDocument config_ducment((char*)config_directory.c_str());
-    config_ducment.LoadFile();
+    vector<Node*> stage_nodes = root_node->getNodeByName("Stages")->getNodesByName("stage");
 
-    TiXmlNode *node_stages=config_ducment.FirstChild("ConfigFile")->FirstChild("Stages");
-
-    for(TiXmlNode* node_stage=node_stages->FirstChild("stage");
-            node_stage!=NULL;
-            node_stage=node_stage->NextSibling("stage"))
+    for(int i=0;i<(int)stage_nodes.size();i++)
     {
-        stage_names.push_back(std::string(node_stage->ToElement()->Attribute("name")));
+        stage_names.push_back(stage_nodes[i]->attributes["name"]);
     }
 
     return stage_names;
