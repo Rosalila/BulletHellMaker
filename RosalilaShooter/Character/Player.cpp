@@ -62,7 +62,6 @@ void Player::loadPlayerFromXML()
 {
     loadFromXML();
 
-    //Loading file
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
 
     this->current_slow=0;
@@ -502,40 +501,36 @@ double Player::getShieldPercentage()
 void Player::loadFromXML()
 {
     Character::loadFromXML();
-    //Loading file
-    std::string main_path=assets_directory+directory+"main.xml";
-    TiXmlDocument doc_t(main_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    TiXmlNode *main_file=doc->FirstChild("MainFile");
 
-    //Loading attributes
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
+
     this->max_shield=0;
     this->shield_fade=0;
     this->proration=0;
     this->shield_image=NULL;
-    if(main_file->FirstChild("Shield"))
+
+    Node* shield_node = root_node->getNodeByName("Shield");
+
+    if(shield_node)
     {
-        TiXmlElement *attributes=main_file->FirstChild("Shield")->ToElement();
-        if(attributes->Attribute("max_shield")!=NULL)
+        if(shield_node->hasAttribute("max_shield"))
         {
-            this->max_shield=atoi(attributes->Attribute("max_shield"));
+            this->max_shield=atoi(shield_node->attributes["max_shield"].c_str());
         }
 
-        if(attributes->Attribute("shield_fade")!=NULL)
+        if(shield_node->hasAttribute("shield_fade"))
         {
-            this->shield_fade=atoi(attributes->Attribute("shield_fade"));
+            this->shield_fade=atoi(shield_node->attributes["shield_fade"].c_str());
         }
 
-        if(attributes->Attribute("shield_fade")!=NULL)
+        if(shield_node->hasAttribute("shield_fade"))
         {
-            this->proration=((double)atoi(attributes->Attribute("shield_fade")))/100.0;
+            this->proration=((double)atoi(shield_node->attributes["shield_fade"].c_str()))/100.0;
         }
 
-        if(attributes->Attribute("sprite")!=NULL)
+        if(shield_node->hasAttribute("sprite"))
         {
-            this->shield_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+            this->shield_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+shield_node->attributes["sprite"]);
         }
     }
 
@@ -546,32 +541,33 @@ void Player::loadFromXML()
     charge_sprite_x=0;
     charge_sprite_y=0;
 
-    if(main_file->FirstChild("Charge"))
+    Node* charge_node = root_node->getNodeByName("Charge");
+
+    if(charge_node)
     {
-        TiXmlElement *attributes=main_file->FirstChild("Charge")->ToElement();
-        if(attributes->Attribute("max_charge")!=NULL)
+        if(charge_node->hasAttribute("max_charge"))
         {
-            this->max_charge=atoi(attributes->Attribute("max_charge"));
+            this->max_charge=atoi(charge_node->attributes["max_charge"].c_str());
         }
 
-        if(attributes->Attribute("charge_velocity")!=NULL)
+        if(charge_node->hasAttribute("charge_velocity"))
         {
-            this->charge_velocity=atoi(attributes->Attribute("charge_velocity"));
+            this->charge_velocity=atoi(charge_node->attributes["charge_velocity"].c_str());
         }
 
-        if(attributes->Attribute("x")!=NULL)
+        if(charge_node->hasAttribute("x"))
         {
-            this->charge_sprite_x=atoi(attributes->Attribute("x"));
+            this->charge_sprite_x=atoi(charge_node->attributes["x"].c_str());
         }
 
-        if(attributes->Attribute("y")!=NULL)
+        if(charge_node->hasAttribute("y"))
         {
-            this->charge_sprite_y=atoi(attributes->Attribute("y"));
+            this->charge_sprite_y=atoi(charge_node->attributes["y"].c_str());
         }
 
-        if(attributes->Attribute("sprite")!=NULL)
+        if(charge_node->hasAttribute("sprite"))
         {
-            this->charge_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+attributes->Attribute("sprite"));
+            this->charge_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+charge_node->attributes["sprite"]);
         }
     }
 
@@ -585,73 +581,68 @@ void Player::loadFromXML()
     this->parryed_x=0;
     this->parryed_y=0;
 
-    TiXmlNode* parry_node=main_file->FirstChild("Parry");
+    Node* parry_node = root_node->getNodeByName("Parry");
+
     if(parry_node)
     {
-        TiXmlElement *attributes=parry_node->ToElement();
-        if(attributes->Attribute("duration")!=NULL)
+        if(parry_node->hasAttribute("duration"))
         {
-            this->parry_duration=atoi(attributes->Attribute("duration"));
+            this->parry_duration=atoi(parry_node->attributes["duration"].c_str());
         }
 
-        if(attributes->Attribute("sound")!=NULL)
+        if(parry_node->hasAttribute("sound"))
         {
-            std::string sprites_sound=attributes->Attribute("sound");
+            std::string sprites_sound=parry_node->attributes["sound"];
             Rosalila()->Sound->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
         }
 
-        TiXmlNode* parrying_node=parry_node->FirstChild("Parrying");
+        Node* parrying_node = parry_node->getNodeByName("Parrying");
+
         if(parrying_node)
         {
-            TiXmlElement *parrying_attributes=parrying_node->ToElement();
-            if(parrying_attributes->Attribute("sprite")!=NULL)
+            if(parrying_node->hasAttribute("sprite"))
             {
-                this->parrying_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parrying_attributes->Attribute("sprite"));
+                this->parrying_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parrying_node->attributes["sprite"]);
             }
-            if(parrying_attributes->Attribute("x")!=NULL)
+            if(parrying_node->hasAttribute("x"))
             {
-                this->parrying_x=atoi(parrying_attributes->Attribute("x"));
+                this->parrying_x=atoi(parrying_node->attributes["x"].c_str());
             }
-            if(parrying_attributes->Attribute("y")!=NULL)
+            if(parrying_node->hasAttribute("y"))
             {
-                this->parrying_y=atoi(parrying_attributes->Attribute("y"));
+                this->parrying_y=atoi(parrying_node->attributes["y"].c_str());
             }
         }
 
-        TiXmlNode* parryed_node=parry_node->FirstChild("Parryed");
+        Node* parryed_node = parry_node->getNodeByName("Parryed");
+
         if(parryed_node)
         {
-            TiXmlElement *parryed_attributes=parryed_node->ToElement();
-            if(parryed_attributes->Attribute("sprite")!=NULL)
+            if(parryed_node->hasAttribute("sprite"))
             {
-                this->parryed_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parryed_attributes->Attribute("sprite"));
+                this->parryed_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parryed_node->attributes["sprite"]);
             }
-            if(parryed_attributes->Attribute("x")!=NULL)
+            if(parryed_node->hasAttribute("x"))
             {
-                this->parryed_x=atoi(parryed_attributes->Attribute("x"));
+                this->parryed_x=atoi(parryed_node->attributes["x"].c_str());
             }
-            if(parryed_attributes->Attribute("y")!=NULL)
+            if(parryed_node->hasAttribute("y"))
             {
-                this->parryed_y=atoi(parryed_attributes->Attribute("y"));
+                this->parryed_y=atoi(parryed_node->attributes["y"].c_str());
             }
         }
 
-        TiXmlNode* hitboxes_node=parry_node->FirstChild("Hitboxes");
-        if(hitboxes_node)
+        vector<Node*> hitboxes_nodes = parry_node->getNodesByName("Hitboxes");
+
+        for(int i=0;i<hitboxes_nodes.size();i++)
         {
-            for(TiXmlNode* hitbox_node=hitboxes_node->FirstChild("Hitbox");
-                    hitbox_node!=NULL;
-                    hitbox_node=hitbox_node->NextSibling("Hitbox"))
-            {
-                TiXmlElement *hitbox_element=hitbox_node->ToElement();
-                int hitbox_x=atoi(hitbox_element->Attribute("x"));
-                int hitbox_y=atoi(hitbox_element->Attribute("y"));
-                int hitbox_width=atoi(hitbox_element->Attribute("width"));
-                int hitbox_height=atoi(hitbox_element->Attribute("height"));
-                int hitbox_angle=atoi(hitbox_element->Attribute("angle"));
-                Hitbox* hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
-                this->parry_hitboxes.push_back(hitbox);
-            }
+            int hitbox_x=atoi(hitboxes_nodes[i]->attributes["x"].c_str());
+            int hitbox_y=atoi(hitboxes_nodes[i]->attributes["y"].c_str());
+            int hitbox_width=atoi(hitboxes_nodes[i]->attributes["width"].c_str());
+            int hitbox_height=atoi(hitboxes_nodes[i]->attributes["height"].c_str());
+            int hitbox_angle=atoi(hitboxes_nodes[i]->attributes["angle"].c_str());
+            Hitbox* hitbox=new Hitbox(hitbox_x,hitbox_y,hitbox_width,hitbox_height,hitbox_angle);
+            this->parry_hitboxes.push_back(hitbox);
         }
     }
 
