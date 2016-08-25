@@ -150,60 +150,55 @@ void Enemy::topRender()
 
 void Enemy::loadModifiersFromXML()
 {
-    //Loading file
-    std::string main_path=assets_directory+directory+"modifiers.xml";
-    TiXmlDocument doc_t(main_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    TiXmlNode *modifiers_file=doc->FirstChild("ModifiersFile");
-    //Loading sprites
-    for(TiXmlNode* modifier_node=modifiers_file->FirstChild("Modifier");
-            modifier_node!=NULL;
-            modifier_node=modifier_node->NextSibling("Modifier"))
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"modifiers.xml");
+
+    vector<Node*> modifier_nodes = root_node->getNodesByName("Modifier");
+
+    for(int i=0;i<modifier_nodes.size();i++)
     {
         vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
 
-        int at=atoi(modifier_node->ToElement()->Attribute("at"));
+        int at=atoi(modifier_nodes[i]->attributes["at"].c_str());
 
-        if(modifier_node->ToElement()->Attribute("velocity")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("velocity"))
         {
-            std::string value=modifier_node->ToElement()->Attribute("velocity");
+            std::string value=modifier_nodes[i]->attributes["velocity"];
             temp_modifiers->push_back(new Modifier("velocity",value));
         }
 
-        if(modifier_node->ToElement()->Attribute("angle")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("angle"))
         {
-            std::string value=modifier_node->ToElement()->Attribute("angle");
+            std::string value=modifier_nodes[i]->attributes["angle"];
             temp_modifiers->push_back(new Modifier("angle",value));
         }
 
-        if(modifier_node->ToElement()->Attribute("pattern_type")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("pattern_type"))
         {
-            std::string value=modifier_node->ToElement()->Attribute("pattern_type");
+            std::string value=modifier_nodes[i]->attributes["pattern_type"];
             temp_modifiers->push_back(new Modifier("pattern_type",value));
         }
 
-        if(modifier_node->ToElement()->Attribute("angle_change")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("angle_change"))
         {
-            std::string value=modifier_node->ToElement()->Attribute("angle_change");
+            std::string value=modifier_nodes[i]->attributes["angle_change"];
             temp_modifiers->push_back(new Modifier("angle_change",value));
         }
 
-        if(modifier_node->ToElement()->Attribute("iterator")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("iterator"))
         {
-            std::string value=modifier_node->ToElement()->Attribute("iterator");
+            std::string value=modifier_nodes[i]->attributes["iterator"];
             temp_modifiers->push_back(new Modifier("iterator",value));
         }
 
         this->modifiers[at]=temp_modifiers;
 
-        if(modifier_node->ToElement()->Attribute("repeat")!=NULL)
+        if(modifier_nodes[i]->hasAttribute("repeat"))
         {
-            int repeats = atoi(modifier_node->ToElement()->Attribute("repeat"));
+            int repeats = atoi(modifier_nodes[i]->attributes["repeat"].c_str());
             int frequency = 1;
-            if(modifier_node->ToElement()->Attribute("repeat_frequency")!=NULL)
-                frequency = atoi(modifier_node->ToElement()->Attribute("repeat_frequency"));
+            if(modifier_nodes[i]->hasAttribute("repeat_frequency"))
+                frequency = atoi(modifier_nodes[i]->attributes["repeat_frequency"].c_str());
+
             for(int i=0;i<repeats;i++)
             {
                 this->modifiers[at+frequency*(i+1)]=temp_modifiers;
