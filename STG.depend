@@ -3456,7 +3456,7 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1471970864 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1472503112 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3791,10 +3791,10 @@
 	"../Utility/Utility.h"
 	"../../Rosalila/RosalilaInputs/Button.h"
 
-1471838349 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
+1472444548 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1472162139 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1472502200 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1471966261 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -3810,11 +3810,12 @@
 1471966300 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
 	"../Utility/Utility.h"
 
-1471972164 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
+1472501938 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
 	"RosalilaApiIntegrator.h"
 
-1471972120 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
+1472501718 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
 	<iostream>
+	"Steam/SteamIntegration.h"
 
 1471969466 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Point.h
 
@@ -3870,4 +3871,159 @@
 	<stddef.h>
 	"tinyxml.h"
 	<windows.h>
+
+1472501759 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h
+	<iostream>
+	<fstream>
+	"include/steam_api.h"
+	"include/isteamuserstats.h"
+	"include/isteamremotestorage.h"
+	"LeaderboardHandler.h"
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api.h
+	"isteamclient.h"
+	"isteamuser.h"
+	"isteamfriends.h"
+	"isteamutils.h"
+	"isteammatchmaking.h"
+	"isteamuserstats.h"
+	"isteamapps.h"
+	"isteamnetworking.h"
+	"isteamremotestorage.h"
+	"isteamscreenshots.h"
+	"isteammusic.h"
+	"isteammusicremote.h"
+	"isteamhttp.h"
+	"isteamunifiedmessages.h"
+	"isteamcontroller.h"
+	"isteamugc.h"
+	"isteamapplist.h"
+	"isteamhtmlsurface.h"
+	"isteaminventory.h"
+	"isteamvideo.h"
+	"steam_api_internal.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamclient.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steamtypes.h
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steamclientpublic.h
+	"steamtypes.h"
+	"steamuniverse.h"
+
+1426027857 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steamuniverse.h
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamuser.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamfriends.h
+	"isteamclient.h"
+	"steamclientpublic.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamutils.h
+	"isteamclient.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteammatchmaking.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+	"matchmakingtypes.h"
+	"isteamclient.h"
+	"isteamfriends.h"
+
+1438034887 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/matchmakingtypes.h
+	<stdio.h>
+	<string.h>
+
+1460674387 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamuserstats.h
+	"isteamclient.h"
+	"isteamremotestorage.h"
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamremotestorage.h
+	"isteamclient.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamapps.h
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamnetworking.h
+	"steamtypes.h"
+	"steamclientpublic.h"
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamscreenshots.h
+	"isteamclient.h"
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteammusic.h
+	"isteamclient.h"
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteammusicremote.h
+	"isteamclient.h"
+	"isteammusic.h"
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamhttp.h
+	"isteamclient.h"
+	"steamhttpenums.h"
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steamhttpenums.h
+
+1426027856 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamunifiedmessages.h
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamcontroller.h
+	"isteamclient.h"
+
+1460674237 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamugc.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamapplist.h
+	"isteamclient.h"
+	"steamtypes.h"
+
+1460674531 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamhtmlsurface.h
+	"isteamclient.h"
+
+1460674387 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteaminventory.h
+	"isteamclient.h"
+
+1429206172 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/isteamvideo.h
+	"isteamclient.h"
+
+1463097229 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api_internal.h
+
+1472501753 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
+	"SteamIntegration.h"
+
+1472501260 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h
+	<map>
+	<vector>
+	<string>
+	<iostream>
+	"include/steam_api.h"
+	"include/isteamuserstats.h"
+	"../Leaderboard.h"
+	"../LeaderboardEntry.h"
+
+1472503967 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
+	"LeaderboardHandler.h"
+
+1472500409 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp
+	"LeaderboardEntry.h"
+
+1472500343 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/LeaderboardEntry.h
+	<iostream>
+
+1472498336 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/FileHandler.cpp
+	"FileHandler.h"
+
+1472498362 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/FileHandler.h
+	<iostream>
+	"include/steam_api.h"
+	"SteamIntegration.h"
+
+1472490608 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/GlobalVariables.cpp
+
+1472499489 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Leaderboard.h
+	<vector>
+	"LeaderboardEntry.h"
+
+1472499399 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Leaderboard.cpp
+	"Leaderboard.h"
 

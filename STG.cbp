@@ -34,8 +34,16 @@
 		</Compiler>
 		<Unit filename="Rosalila/Rosalila.cpp" />
 		<Unit filename="Rosalila/Rosalila.h" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Leaderboard.cpp" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Leaderboard.h" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.h" />
 		<Unit filename="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" />
 		<Unit filename="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" />
+		<Unit filename="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />

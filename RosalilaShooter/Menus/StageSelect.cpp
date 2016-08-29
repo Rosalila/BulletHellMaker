@@ -227,6 +227,7 @@ void stageSelect(map<string,Button*> controls)
 
         Rosalila()->Receiver->updateInputs();
         graphics->updateScreen();
+        Rosalila()->ApiIntegrator->updateCallbacks();
 
         frame++;
     }

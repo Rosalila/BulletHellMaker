@@ -12,7 +12,7 @@ void intro(map<string,Button*> controls)
 
     while(true)
     {
-        if(controls["a"]->isPressed())
+        if(controls["a"]->isPressed() && Rosalila()->ApiIntegrator->getState()!="loading")
         {
             break;
         }
@@ -33,9 +33,20 @@ void intro(map<string,Button*> controls)
 
         receiver->updateInputs();
         graphics->updateScreen();
+        Rosalila()->ApiIntegrator->updateCallbacks();
     }
-
+Rosalila()->ApiIntegrator->getData("a");
     current_background_transparency=0;
+
+/*
+vector<LeaderboardEntry*>l = Rosalila()->ApiIntegrator->getLeaderboard("liditi");
+for(int i=0;i<l.size();i++)
+{
+    cout<<l[i]->name<<endl;
+    cout<<l[i]->rank<<endl;
+    cout<<l[i]->score<<endl;
+}*/
+
 
     while(true)
     {
@@ -60,5 +71,6 @@ void intro(map<string,Button*> controls)
 
         receiver->updateInputs();
         graphics->updateScreen();
+        Rosalila()->ApiIntegrator->updateCallbacks();
     }
 }
