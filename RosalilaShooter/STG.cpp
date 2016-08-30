@@ -148,6 +148,13 @@ void STG::mainLoop()
                || (controls["a"]->isDown() && end_key_up_keyboard)
                )
             {
+                ofstream out("last_replay");
+                out<<Rosalila()->Utility->random_seed<<"\n";
+                for(int i=0;i<player->replay_storage.size();i++)
+                {
+                    out<<player->replay_storage[i]<<"\n";
+                }
+                out.close();
                 Rosalila()->Sound->playSound(std::string("Menu.select"),1,0);
                 break;
             }

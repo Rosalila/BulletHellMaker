@@ -291,9 +291,9 @@ float Pattern::getRandomAngle()
         return 0;
     if(random_angle<0)
     {
-        return -(rand()%(-random_angle));
+        return -(Rosalila()->Utility->getRandomNumber()%(-random_angle));
     }
-    return rand()%random_angle;
+    return Rosalila()->Utility->getRandomNumber()%random_angle;
 }
 
 bool Pattern::getAimPlayer()

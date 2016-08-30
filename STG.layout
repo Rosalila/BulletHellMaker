@@ -20,7 +20,7 @@
 		<Cursor position="253" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="538" topLine="0" />
+		<Cursor position="1058" topLine="32" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" open="0" top="0" tabpos="0">
 		<Cursor position="483" topLine="8" />
@@ -32,7 +32,7 @@
 		<Cursor position="1105" topLine="12" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="152" topLine="0" />
+		<Cursor position="1896" topLine="48" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h" open="0" top="0" tabpos="3">
 		<Cursor position="527" topLine="4" />
@@ -65,7 +65,7 @@
 		<Cursor position="625" topLine="90" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Button.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="16" topLine="0" />
+		<Cursor position="322" topLine="9" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Button.h" open="0" top="0" tabpos="0">
 		<Cursor position="103" topLine="0" />
@@ -139,14 +139,17 @@
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="1511" topLine="52" />
 	</File>
+	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="641" topLine="18" />
+	</File>
 	<File name="RosalilaShooter/Menus/Intro.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="967" topLine="24" />
 	</File>
 	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="7216" topLine="159" />
+		<Cursor position="2030" topLine="9" />
 	</File>
 	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="5148" topLine="133" />
+		<Cursor position="5148" topLine="118" />
 	</File>
 	<File name="RosalilaShooter/STG.h" open="0" top="0" tabpos="7">
 		<Cursor position="289" topLine="0" />
@@ -155,6 +158,6 @@
 		<Cursor position="67" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1235" topLine="28" />
+		<Cursor position="738" topLine="24" />
 	</File>
 </CodeBlocks_layout_file>

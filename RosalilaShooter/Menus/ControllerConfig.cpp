@@ -26,6 +26,13 @@ map<string,Button*> getExistingConfiguration(string controls_file_retrived)
             int key_num = atoi(number_key.c_str());
             controls[maped_str]=new Button(key_num,maped_str);
         }
+        if(type=='J')
+        {
+            string maped_str = "";
+            maped_str+=maped;
+            int joy_button = atoi(number_key.c_str());
+            controls[maped_str]=new Button(joy_button,0,maped_str);
+        }
     }
     return controls;
 }

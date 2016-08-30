@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string name,int sound_channel_base,map<string,Button*>controls)
+Player::Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string> replay_input)
 {
     //Setting up the other variables
     this->name=name;
@@ -19,6 +19,7 @@ Player::Player(std::string name,int sound_channel_base,map<string,Button*>contro
     this->animation_velocity=4;
     this->animation_iteration=0;
     this->current_sprite=0;
+    this->replay_input=replay_input;
 
     //Color effect
     current_color_effect_r=255;
@@ -146,43 +147,48 @@ void Player::inputControl()
 {
     bool up_pressed,down_pressed,left_pressed,right_pressed;
     up_pressed=down_pressed=left_pressed=right_pressed=false;
+    string current_input_replay_store;
 
-    if(controls["2"]->isDown())
+    if(isDownWrapper("2"))
     {
         down_pressed=true;
+        current_input_replay_store+="2";
     }
-    if(controls["8"]->isDown())
+    if(isDownWrapper("8"))
     {
         up_pressed=true;
+        current_input_replay_store+="8";
     }
-    if(controls["4"]->isDown())
+    if(isDownWrapper("4"))
     {
         left_pressed=true;
+        current_input_replay_store+="4";
     }
-    if(controls["6"]->isDown())
+    if(isDownWrapper("6"))
     {
         right_pressed=true;
+        current_input_replay_store+="6";
     }
 
-    if(controls["2"]->isDown())
+    if(isDownWrapper("2"))
     {
         if(orientation!="down" && Rosalila()->Sound->soundExists(name+".down"))
             Rosalila()->Sound->playSound(name+".down",1,0);
         orientation="down";
     }
-    else if(controls["8"]->isDown())
+    else if(isDownWrapper("8"))
     {
         if(orientation!="up" && Rosalila()->Sound->soundExists(name+".up"))
             Rosalila()->Sound->playSound(name+".up",1,0);
         orientation="up";
     }
-    else if(controls["4"]->isDown())
+    else if(isDownWrapper("4"))
     {
         if(orientation!="left" && Rosalila()->Sound->soundExists(name+".left"))
             Rosalila()->Sound->playSound(name+".left",1,0);
         orientation="left";
     }
-    else if(controls["6"]->isDown())
+    else if(isDownWrapper("6"))
     {
         if(orientation!="right" && Rosalila()->Sound->soundExists(name+".right"))
             Rosalila()->Sound->playSound(name+".right",1,0);
@@ -242,8 +248,9 @@ void Player::inputControl()
     this->x+=delta_x;
     this->y+=delta_y;
 
-    if(controls["a"]->isDown())
+    if(isDownWrapper("a"))
     {
+        current_input_replay_store+="a";
         if(!this->shooting && !isParrying() && parries_left>0)
         {
             current_parry_frame=0;
@@ -261,6 +268,8 @@ void Player::inputControl()
     {
         this->shooting=false;
     }
+
+    replay_storage.push_back(current_input_replay_store);
 }
 
 void Player::logic(int stage_velocity)
@@ -687,4 +696,18 @@ bool Player::collidesParry(Hitbox hitbox,int hitbox_x,int hitbox_y,float hitbox_
 void Player::exit()
 {
     Mix_Volume(charging_sound_channel, 0);
+}
+
+bool Player::isDownWrapper(string button_map)
+{
+    if(replay_input.size()>0)
+    {
+        if(frame>=replay_input.size())
+            return false;
+        for(int i=0;i<replay_input[frame].size();i++)
+            if(replay_input[frame][i]==button_map[0])
+                return true;
+        return false;
+    }
+    return controls[button_map]->isDown();
 }

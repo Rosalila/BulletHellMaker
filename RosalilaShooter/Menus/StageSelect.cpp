@@ -121,7 +121,25 @@ void stageSelect(map<string,Button*> controls)
             {
                 game_mode="parry dash training";
             }
-            Player*player=new Player("Triangle",10,controls);
+
+            Rosalila()->Utility->setRandomSeed(rand());
+            vector<string>replay_input;
+            if(controls["2"]->isDown())
+            {
+                ifstream in("last_replay");
+                string random_seed_str;
+                if(getline( in, random_seed_str ))
+                {
+                    int random_seed = atoi(random_seed_str.c_str());
+                    Rosalila()->Utility->setRandomSeed(random_seed);
+                }
+                for( std::string line; getline( in, line ); )
+                {
+                    replay_input.push_back(line);
+                }
+                in.close();
+            }
+            Player*player=new Player("Triangle",10,controls,replay_input);
             Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
             STG*stg=new STG(player,enemy,stage,game_mode,controls);
             delete stg;
