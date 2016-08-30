@@ -1,7 +1,43 @@
 #include "ControllerConfig.h"
 
+map<string,Button*> getExistingConfiguration(string controls_file_retrived)
+{
+    map<string,Button*>controls;
+
+    int i=0;
+    while(i<controls_file_retrived.length())
+    {
+        char maped = controls_file_retrived[i];
+        i++;
+        char type = controls_file_retrived[i];
+        i++;
+        string number_key = "";
+        while(controls_file_retrived[i]!=',' && i<controls_file_retrived.length())
+        {
+            number_key+=controls_file_retrived[i];
+            i++;
+        }
+        i++;
+
+        if(type=='K')
+        {
+            string maped_str = "";
+            maped_str+=maped;
+            int key_num = atoi(number_key.c_str());
+            controls[maped_str]=new Button(key_num,maped_str);
+        }
+    }
+    return controls;
+}
+
 map<string,Button*> ControllerConfig()
 {
+    string controls_file_retrived = Rosalila()->ApiIntegrator->getData("controls");
+    if(controls_file_retrived!="")
+    {
+        return getExistingConfiguration(controls_file_retrived);
+    }
+
     RosalilaGraphics* graphics=Rosalila()->Graphics;
     Image* controls_config_backgound = graphics->getTexture(assets_directory+"misc/controls configuration/background.png");
     vector<string> controls_config_map_name;
@@ -17,8 +53,9 @@ map<string,Button*> ControllerConfig()
     controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_right.png"));
     controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_shoot.png"));
     RosalilaReceiver* receiver = Rosalila()->Receiver;
-    int current_button=0;
+
     map<string,Button*>controls;
+    int current_button=0;
 
     int frame=0;
     while(true)
@@ -105,5 +142,23 @@ map<string,Button*> ControllerConfig()
         graphics->updateScreen();
         frame++;
     }
+
+    string controls_file = "";
+
+    for(map<string,Button*>::iterator i=controls.begin();i!=controls.end();i++)
+    {
+        controls_file+=(*i).first;
+        if((*i).second->uses_joystick)
+        {
+            controls_file+="J";
+            controls_file+=Rosalila()->Utility->toString((*i).second->joystick_button)+"\n";
+        }else
+        {
+            controls_file+="K";
+            controls_file+=Rosalila()->Utility->toString((*i).second->key)+",";
+        }
+    }
+    Rosalila()->ApiIntegrator->storeData("controls",controls_file);
+
     return controls;
 }
