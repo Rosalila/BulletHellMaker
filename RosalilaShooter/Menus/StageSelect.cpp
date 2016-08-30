@@ -93,7 +93,7 @@ void stageSelect(map<string,Button*> controls)
 
     Color background_color(255,255,255,255);
 
-    int current_stage = 0;
+    int current_stage = Rosalila()->ApiIntegrator->getStat("current stage");
     int frame = 0;
 
     while(true)
@@ -133,6 +133,7 @@ void stageSelect(map<string,Button*> controls)
             current_stage++;
             if(current_stage>=(int)stage_images.size())
                 current_stage=stage_images.size()-1;
+            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
         }
 
         if(controls["4"]->isPressed())
@@ -140,6 +141,7 @@ void stageSelect(map<string,Button*> controls)
             current_stage--;
             if(current_stage<0)
                 current_stage=0;
+            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
         }
 
         Color target_color = getBackgroundColor(current_stage);

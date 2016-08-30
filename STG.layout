@@ -7,35 +7,35 @@
 	<File name="Rosalila/Rosalila.h" open="0" top="0" tabpos="0">
 		<Cursor position="442" topLine="19" />
 	</File>
+	<File name="Rosalila/RosalilaApiIntegrator/Leaderboard.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="321" topLine="0" />
+	</File>
+	<File name="Rosalila/RosalilaApiIntegrator/Leaderboard.h" open="0" top="0" tabpos="0">
+		<Cursor position="219" topLine="0" />
+	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="47" topLine="0" />
+		<Cursor position="306" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.h" open="0" top="0" tabpos="0">
-		<Cursor position="230" topLine="4" />
+		<Cursor position="253" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="320" topLine="7" />
+		<Cursor position="538" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" open="0" top="0" tabpos="0">
-		<Cursor position="338" topLine="6" />
-	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/FileHandler.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="2103" topLine="0" />
-	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/FileHandler.h" open="0" top="0" tabpos="0">
-		<Cursor position="380" topLine="0" />
+		<Cursor position="483" topLine="8" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="179" topLine="0" />
+		<Cursor position="3993" topLine="76" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h" open="0" top="0" tabpos="0">
-		<Cursor position="461" topLine="12" />
+		<Cursor position="1105" topLine="12" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="1519" topLine="32" />
+	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="152" topLine="0" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h" open="0" top="0" tabpos="3">
-		<Cursor position="421" topLine="7" />
+		<Cursor position="527" topLine="4" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/Animation.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="567" topLine="19" />
@@ -140,7 +140,10 @@
 		<Cursor position="1511" topLine="52" />
 	</File>
 	<File name="RosalilaShooter/Menus/Intro.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1046" topLine="16" />
+		<Cursor position="967" topLine="24" />
+	</File>
+	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="7216" topLine="159" />
 	</File>
 	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="5148" topLine="133" />
@@ -152,6 +155,6 @@
 		<Cursor position="67" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="683" topLine="15" />
+		<Cursor position="1235" topLine="28" />
 	</File>
 </CodeBlocks_layout_file>

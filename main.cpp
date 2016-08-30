@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 //
     Rosalila()->ApiIntegrator->setScore("liditi", 666,"this is a replay",13);
 
-
     //Rosalila()->ApiIntegrator->storeData("miau","tus");
 
     //cout<<Rosalila()->ApiIntegrator->getData("miau")<<endl;
