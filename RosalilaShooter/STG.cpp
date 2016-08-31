@@ -148,14 +148,6 @@ void STG::mainLoop()
                || (controls["a"]->isDown() && end_key_up_keyboard)
                )
             {
-                ofstream out("last_replay");
-                out<<Rosalila()->Utility->random_seed<<"\n";
-                for(int i=0;i<player->replay_storage.size();i++)
-                {
-                    out<<player->replay_storage[i]<<"\n";
-                }
-                out.close();
-                Rosalila()->Sound->playSound(std::string("Menu.select"),1,0);
                 break;
             }
             if(!controls["a"]->isDown())
@@ -545,6 +537,33 @@ void STG::win()
     Rosalila()->Sound->playSound("you win",2,0);
     enemy->deleteActivePatterns();
     setGameOver(true);
+
+
+
+    int replay_size=0;
+    string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+    replay_size+=seed_str.size()+1;
+    for(int i=0;i<player->replay_storage.size();i++)
+    {
+        replay_size+=player->replay_storage[i].size()+1;
+    }
+    replay_size+=1;
+
+    char*replay_data = new char[replay_size];
+
+    strcpy(replay_data,"");
+    strcat(replay_data,seed_str.c_str());
+    strcat(replay_data,"\n");
+
+    for(int i=0;i<player->replay_storage.size();i++)
+    {
+        strcat(replay_data,player->replay_storage[i].c_str());
+        strcat(replay_data,"\n");
+    }
+    strcat(replay_data,"\0");
+
+    Rosalila()->ApiIntegrator->setScore(stage->name, frame,replay_data,replay_size);
+//    Rosalila()->Sound->playSound(std::string("Menu.select"),1,0);
 }
 
 void STG::lose()
