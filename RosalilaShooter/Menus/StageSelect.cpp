@@ -95,12 +95,50 @@ void stageSelect(map<string,Button*> controls)
 
     int current_stage = Rosalila()->ApiIntegrator->getStat("current stage");
     int frame = 0;
+    int entry_selected = -1;
 
     while(true)
     {
         if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
         {
             break;
+        }
+
+        if(controls["6"]->isPressed())
+        {
+            current_stage++;
+            entry_selected=-1;
+            if(current_stage>=(int)stage_images.size())
+                current_stage=stage_images.size()-1;
+            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
+        }
+
+        if(controls["4"]->isPressed())
+        {
+            current_stage--;
+            entry_selected=-1;
+            if(current_stage<0)
+                current_stage=0;
+            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
+        }
+
+        Leaderboard* current_leaderboard = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage]);
+
+        if(controls["2"]->isPressed())
+        {
+            entry_selected++;
+            if(entry_selected >= current_leaderboard->entries.size())
+            {
+                entry_selected = current_leaderboard->entries.size()-1;
+            }
+        }
+        if(controls["8"]->isPressed())
+        {
+            entry_selected--;
+            if(entry_selected<-1)
+            {
+               entry_selected=-1;
+            }
         }
 
         if(controls["a"]->isPressed())
@@ -124,22 +162,22 @@ void stageSelect(map<string,Button*> controls)
 
             Rosalila()->Utility->setRandomSeed(rand());
             vector<string>replay_input;
-            if(controls["2"]->isDown())
+            if(entry_selected!=-1)
             {
-                LeaderboardEntry* le = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[0];
+                LeaderboardEntry* le = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected];
 
                 Rosalila()->ApiIntegrator->downloadEntryAttachment(
-                        Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[0]);
+                        Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]);
 
-                while(Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[0]->attachment_state!="loaded")
+                while(Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_state!="loaded")
                 {
                     Rosalila()->ApiIntegrator->updateCallbacks();
                     SDL_Delay(17);
                 }
 
-                char* replay_data = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[0]->attachment;
+                char* replay_data = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment;
 
-                int replay_size = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[0]->attachment_size;
+                int replay_size = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_size;
 
                 string random_seed_str;
 
@@ -174,23 +212,6 @@ void stageSelect(map<string,Button*> controls)
             Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
             STG*stg=new STG(player,enemy,stage,game_mode,controls);
             delete stg;
-        }
-
-
-        if(controls["6"]->isPressed())
-        {
-            current_stage++;
-            if(current_stage>=(int)stage_images.size())
-                current_stage=stage_images.size()-1;
-            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
-        }
-
-        if(controls["4"]->isPressed())
-        {
-            current_stage--;
-            if(current_stage<0)
-                current_stage=0;
-            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
         }
 
         Color target_color = getBackgroundColor(current_stage);
@@ -274,6 +295,24 @@ void stageSelect(map<string,Button*> controls)
                     false,
                     FlatShadow());
             }
+        }
+
+        for(int i=0;i<current_leaderboard->entries.size();i++)
+        {
+            int selecituu=0;
+            if(entry_selected==i)
+            {
+                selecituu=50;
+            }
+            graphics->drawText(Rosalila()->Utility->toString(current_leaderboard->entries[i]->rank)+".",
+                               selecituu+70,
+                               100-i*50);
+            graphics->drawText(current_leaderboard->entries[i]->name,
+                               selecituu+100,
+                               100-i*50);
+            graphics->drawText(Rosalila()->Utility->toString(current_leaderboard->entries[i]->score),
+                               selecituu+100+200,
+                               100-i*50);
         }
 
         Rosalila()->Receiver->updateInputs();
