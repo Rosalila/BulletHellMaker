@@ -40,7 +40,7 @@ public:
     double parry_dash_count;
     double parry_dash_count_objective;
 
-    uint initial_ticks;
+    int initial_ticks;
 
     int current_player_best_score;
 
