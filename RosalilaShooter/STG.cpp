@@ -535,7 +535,9 @@ bool STG::enemyWon()
 
 void STG::win()
 {
-    int score = SDL_GetTicks()-initial_ticks;
+    double milliseconds = SDL_GetTicks()-initial_ticks;
+    double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
+    double score = milliseconds * hp_penalty;
     enemy->hp=0;
     Rosalila()->Graphics->shakeScreen(50,20);
     Rosalila()->Sound->playSound("you win",2,0);
