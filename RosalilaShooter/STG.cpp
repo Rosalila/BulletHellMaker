@@ -535,6 +535,7 @@ bool STG::enemyWon()
 
 void STG::win()
 {
+    Rosalila()->ApiIntegrator->unlockAchievement("B");
     double milliseconds = SDL_GetTicks()-initial_ticks;
     double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
     double score = milliseconds * hp_penalty;
