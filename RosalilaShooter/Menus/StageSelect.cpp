@@ -97,11 +97,20 @@ void stageSelect(map<string,Button*> controls)
     int frame = 0;
     int entry_selected = -1;
 
+    bool select_button_was_up = false;
+
+    Rosalila()->Receiver->updateInputs();
+
     while(true)
     {
         if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
         {
             break;
+        }
+
+        if(!controls["a"]->isDown())
+        {
+            select_button_was_up = true;
         }
 
         if(controls["6"]->isPressed())
@@ -141,7 +150,7 @@ void stageSelect(map<string,Button*> controls)
             }
         }
 
-        if(controls["a"]->isPressed())
+        if(controls["a"]->isDown() && select_button_was_up)
         {
             Rosalila()->Utility->writeLogLine("Initializing game.");
             Stage*stage=new Stage();
@@ -218,6 +227,7 @@ void stageSelect(map<string,Button*> controls)
             Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
             STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
             delete stg;
+            select_button_was_up=false;
         }
 
         Color target_color = getBackgroundColor(current_stage);

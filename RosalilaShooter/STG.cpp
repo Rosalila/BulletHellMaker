@@ -545,8 +545,7 @@ void STG::win()
     enemy->deleteActivePatterns();
     setGameOver(true);
 
-
-    if(game_mode!="replay" && score<current_player_best_score)
+    if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
     {
         int replay_size=0;
         string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
