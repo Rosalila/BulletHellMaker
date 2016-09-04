@@ -37,10 +37,10 @@ map<string,Button*> getExistingConfiguration(string controls_file_retrived)
     return controls;
 }
 
-map<string,Button*> ControllerConfig()
+map<string,Button*> ControllerConfig(bool reconfigure)
 {
     string controls_file_retrived = Rosalila()->ApiIntegrator->getData("controls");
-    if(controls_file_retrived!="")
+    if(controls_file_retrived!="" && !reconfigure)
     {
         return getExistingConfiguration(controls_file_retrived);
     }

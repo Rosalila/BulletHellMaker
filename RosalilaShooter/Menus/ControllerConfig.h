@@ -7,6 +7,6 @@
 
 using namespace std;
 
-map<string,Button*> ControllerConfig();
+map<string,Button*> ControllerConfig(bool reconfigure);
 
 #endif

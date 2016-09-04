@@ -15,6 +15,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    bool input_config=false;
+    if(argc>1 && strcmp(argv[1],"config")==0)
+    {
+        input_config=true;
+    }
+
     RosalilaInit();
     Rosalila()->Utility->clearLog();
 
@@ -31,7 +37,7 @@ int main(int argc, char *argv[])
     //cout<<Rosalila()->ApiIntegrator->getData("miau")<<endl;
 
 
-    map<string,Button*> controls = ControllerConfig();
+    map<string,Button*> controls = ControllerConfig(input_config);
 
     intro(controls);
 
