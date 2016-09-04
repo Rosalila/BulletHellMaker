@@ -164,6 +164,7 @@ void stageSelect(map<string,Button*> controls)
             vector<string>replay_input;
             if(entry_selected!=-1)
             {
+                game_mode="replay";
                 LeaderboardEntry* le = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected];
 
                 Rosalila()->ApiIntegrator->downloadEntryAttachment(
@@ -208,9 +209,14 @@ void stageSelect(map<string,Button*> controls)
                     replay_input.push_back(line);
                 }
             }
+
+            int current_player_best_score = -1;
+            if(current_leaderboard->leaderboard_self_entry!=NULL)
+                current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
+
             Player*player=new Player("Triangle",10,controls,replay_input);
             Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
-            STG*stg=new STG(player,enemy,stage,game_mode,controls);
+            STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
             delete stg;
         }
 
@@ -248,8 +254,10 @@ void stageSelect(map<string,Button*> controls)
 
         graphics->draw2DImage
         (   stage_images[current_stage],
-            stage_images[current_stage]->getWidth(),stage_images[current_stage]->getHeight(),
-            graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,graphics->screen_height/2-stage_images[current_stage]->getHeight()/2,
+            stage_images[current_stage]->getWidth(),
+                stage_images[current_stage]->getHeight(),
+            graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
+                graphics->screen_height/2-stage_images[current_stage]->getHeight()/2-300,
             1.0,
             0.0,
             false,
@@ -268,7 +276,7 @@ void stageSelect(map<string,Button*> controls)
                 (   left_arrow,
                     left_arrow->getWidth(),left_arrow->getHeight(),
                     graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
-                    graphics->screen_height/2-left_arrow->getHeight()/2,
+                    graphics->screen_height/2-left_arrow->getHeight()/2-300,
                     1.0,
                     0.0,
                     false,
@@ -285,7 +293,7 @@ void stageSelect(map<string,Button*> controls)
                 (   right_arrow,
                     right_arrow->getWidth(),right_arrow->getHeight(),
                     graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
-                    graphics->screen_height/2-right_arrow->getHeight()/2,
+                    graphics->screen_height/2-right_arrow->getHeight()/2-300,
                     1.0,
                     0.0,
                     false,
@@ -299,20 +307,23 @@ void stageSelect(map<string,Button*> controls)
 
         for(int i=0;i<current_leaderboard->entries.size();i++)
         {
-            int selecituu=0;
+            int selecituu=400;
             if(entry_selected==i)
             {
-                selecituu=50;
+                selecituu=450;
+                graphics->drawText("-->",
+                                   450,
+                                   200+i*50);
             }
             graphics->drawText(Rosalila()->Utility->toString(current_leaderboard->entries[i]->rank)+".",
                                selecituu+70,
-                               100-i*50);
+                               200+i*50);
             graphics->drawText(current_leaderboard->entries[i]->name,
                                selecituu+100,
-                               100-i*50);
+                               200+i*50);
             graphics->drawText(Rosalila()->Utility->toString(current_leaderboard->entries[i]->score),
                                selecituu+100+200,
-                               100-i*50);
+                               200+i*50);
         }
 
         Rosalila()->Receiver->updateInputs();

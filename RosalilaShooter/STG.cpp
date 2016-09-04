@@ -1,12 +1,13 @@
 #include "STG.h"
 
-STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls)
+STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls, int current_player_best_score)
 {
     this->player=player;
     this->enemy=enemy;
     this->stage=stage;
     this->game_mode=game_mode;
     this->controls=controls;
+    this->current_player_best_score = current_player_best_score;
 
     Rosalila()->Graphics->camera_y=0;
     frame=0;
@@ -70,7 +71,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
         you_win.addImage(Rosalila()->Graphics->getTexture(assets_directory+path));
     }
 
-    if(game_mode=="Stage select" || game_mode=="charge training" || game_mode=="parry training" || game_mode=="parry dash training")
+    if(game_mode=="Stage select" || game_mode=="charge training" || game_mode=="parry training" || game_mode=="parry dash training" || "replay")
     {
         stageSelectModeInit();
     }
@@ -120,6 +121,8 @@ void STG::stageSelectModeInit()
 void STG::mainLoop()
 {
     bool end_key_up_keyboard=false;
+
+    initial_ticks=SDL_GetTicks();
 
     for (;;)
     {
@@ -532,6 +535,7 @@ bool STG::enemyWon()
 
 void STG::win()
 {
+    uint score = SDL_GetTicks()-initial_ticks;
     enemy->hp=0;
     Rosalila()->Graphics->shakeScreen(50,20);
     Rosalila()->Sound->playSound("you win",2,0);
@@ -539,31 +543,38 @@ void STG::win()
     setGameOver(true);
 
 
-
-    int replay_size=0;
-    string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
-    replay_size+=seed_str.size()+1;
-    for(int i=0;i<player->replay_storage.size();i++)
+    if(game_mode!="replay" && score<current_player_best_score)
     {
-        replay_size+=player->replay_storage[i].size()+1;
-    }
-    replay_size+=1;
+        int replay_size=0;
+        string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+        replay_size+=seed_str.size()+1;
+        for(int i=0;i<player->replay_storage.size();i++)
+        {
+            replay_size+=player->replay_storage[i].size()+1;
+        }
+        replay_size+=1;
 
-    char*replay_data = new char[replay_size];
+        char*replay_data = new char[replay_size];
 
-    strcpy(replay_data,"");
-    strcat(replay_data,seed_str.c_str());
-    strcat(replay_data,"\n");
-
-    for(int i=0;i<player->replay_storage.size();i++)
-    {
-        strcat(replay_data,player->replay_storage[i].c_str());
+        strcpy(replay_data,"");
+        strcat(replay_data,seed_str.c_str());
         strcat(replay_data,"\n");
-    }
-    strcat(replay_data,"\0");
 
-    Rosalila()->ApiIntegrator->setScore(stage->name, frame,replay_data,replay_size);
-//    Rosalila()->Sound->playSound(std::string("Menu.select"),1,0);
+        for(int i=0;i<player->replay_storage.size();i++)
+        {
+            strcat(replay_data,player->replay_storage[i].c_str());
+            strcat(replay_data,"\n");
+        }
+        strcat(replay_data,"\0");
+
+        Rosalila()->ApiIntegrator->setScore(stage->name, score,replay_data,replay_size);
+
+        while(Rosalila()->ApiIntegrator->getState()!="loading")
+        {
+            Rosalila()->ApiIntegrator->updateCallbacks();
+            SDL_Delay(17);
+        }
+    }
 }
 
 void STG::lose()

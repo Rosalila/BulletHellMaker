@@ -40,7 +40,11 @@ public:
     double parry_dash_count;
     double parry_dash_count_objective;
 
-    STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls);
+    uint initial_ticks;
+
+    int current_player_best_score;
+
+    STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls,int current_player_best_score);
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
     void logic();
