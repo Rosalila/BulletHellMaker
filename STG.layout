@@ -142,14 +142,14 @@
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="1287" topLine="55" />
 	</File>
-	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="4315" topLine="109" />
+	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="1090" topLine="24" />
 	</File>
 	<File name="RosalilaShooter/Menus/Intro.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="402" topLine="3" />
 	</File>
-	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="10688" topLine="301" />
+	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="10688" topLine="34" />
 	</File>
 	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="19695" topLine="544" />
