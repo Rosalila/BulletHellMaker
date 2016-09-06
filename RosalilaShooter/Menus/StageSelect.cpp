@@ -150,6 +150,8 @@ void stageSelect(map<string,Button*> controls)
             }
         }
 
+        bool error_found = false;
+
         if(controls["a"]->isDown() && select_button_was_up)
         {
             Rosalila()->Utility->writeLogLine("Initializing game.");
@@ -179,55 +181,65 @@ void stageSelect(map<string,Button*> controls)
                 Rosalila()->ApiIntegrator->downloadEntryAttachment(
                         Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]);
 
-                while(Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_state!="loaded")
+                while(Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_state!="loaded"
+                      && Rosalila()->ApiIntegrator->getState()=="loading")
                 {
                     Rosalila()->ApiIntegrator->updateCallbacks();
                     SDL_Delay(17);
                 }
-
-                char* replay_data = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment;
-
-                int replay_size = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_size;
-
-                string random_seed_str;
-
-                int replay_iterator=0;
-
-                for(;replay_iterator<replay_size
-                        && replay_data[replay_iterator]!='\n';
-                        replay_iterator++)
+                if(Rosalila()->ApiIntegrator->getState()!="error")
                 {
-                    random_seed_str+=replay_data[replay_iterator];
-                }
-                replay_iterator++;
-                if(random_seed_str!="")
-                {
-                    int random_seed = atoi(random_seed_str.c_str());
-                    Rosalila()->Utility->setRandomSeed(random_seed);
-                }
+                    char* replay_data = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment;
 
-                for(;replay_iterator<replay_size;replay_iterator++)
-                {
-                    string line="";
+                    int replay_size = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_size;
+
+                    string random_seed_str;
+
+                    int replay_iterator=0;
+
                     for(;replay_iterator<replay_size
                             && replay_data[replay_iterator]!='\n';
                             replay_iterator++)
                     {
-                        line+=replay_data[replay_iterator];
+                        random_seed_str+=replay_data[replay_iterator];
                     }
-                    replay_input.push_back(line);
+                    replay_iterator++;
+                    if(random_seed_str!="")
+                    {
+                        int random_seed = atoi(random_seed_str.c_str());
+                        Rosalila()->Utility->setRandomSeed(random_seed);
+                    }
+
+                    for(;replay_iterator<replay_size;replay_iterator++)
+                    {
+                        string line="";
+                        for(;replay_iterator<replay_size
+                                && replay_data[replay_iterator]!='\n';
+                                replay_iterator++)
+                        {
+                            line+=replay_data[replay_iterator];
+                        }
+                        replay_input.push_back(line);
+                    }
+                }else
+                {
+                    error_found=true;
+                    cout<<"Error"<<endl;
                 }
             }
 
-            int current_player_best_score = -1;
-            if(current_leaderboard->leaderboard_self_entry!=NULL)
-                current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
+            if(!error_found)
+            {
+                int current_player_best_score = -1;
+                if(current_leaderboard->leaderboard_self_entry!=NULL)
+                    current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 
-            Player*player=new Player("Triangle",10,controls,replay_input);
-            Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
-            STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
-            delete stg;
-            select_button_was_up=false;
+                Player*player=new Player("Triangle",10,controls,replay_input);
+                Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
+                STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
+                delete stg;
+                select_button_was_up=false;
+            }
         }
 
         Color target_color = getBackgroundColor(current_stage);
