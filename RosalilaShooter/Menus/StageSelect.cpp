@@ -171,7 +171,7 @@ void stageSelect(map<string,Button*> controls)
                 game_mode="parry dash training";
             }
 
-            Rosalila()->Utility->setRandomSeed(rand());
+            Rosalila()->Utility->setRandomSeed(time(NULL));
             vector<string>replay_input;
             if(entry_selected!=-1)
             {
@@ -207,6 +207,7 @@ void stageSelect(map<string,Button*> controls)
                     if(random_seed_str!="")
                     {
                         int random_seed = atoi(random_seed_str.c_str());
+                        cout<<random_seed<<endl;
                         Rosalila()->Utility->setRandomSeed(random_seed);
                     }
 

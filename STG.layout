@@ -19,20 +19,20 @@
 	<File name="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.h" open="0" top="0" tabpos="0">
 		<Cursor position="253" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="343" topLine="3" />
+	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="511" topLine="5" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" open="0" top="0" tabpos="0">
 		<Cursor position="483" topLine="8" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="2184" topLine="44" />
+	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="7475" topLine="162" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h" open="0" top="0" tabpos="0">
 		<Cursor position="1177" topLine="9" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1733" topLine="33" />
+	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2375" topLine="40" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h" open="0" top="0" tabpos="3">
 		<Cursor position="527" topLine="4" />
@@ -142,14 +142,14 @@
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="1287" topLine="55" />
 	</File>
-	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="1090" topLine="24" />
+	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="1083" topLine="30" />
 	</File>
 	<File name="RosalilaShooter/Menus/Intro.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="402" topLine="3" />
 	</File>
-	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="10688" topLine="34" />
+	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="5609" topLine="174" />
 	</File>
 	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="19695" topLine="544" />
