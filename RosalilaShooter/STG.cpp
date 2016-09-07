@@ -139,7 +139,6 @@ void STG::mainLoop()
 //            out.write(replay_data,replay_size);
 //            out.close();
 
-
             player->exit();
             Rosalila()->Sound->playSound(std::string("Menu.back"),1,0);
             break;
