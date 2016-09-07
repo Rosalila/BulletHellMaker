@@ -16,10 +16,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
     charge_destroy_count=0;
     parry_dash_count=0;
 
-    image_training_text=NULL;
-    image_training_text_final=NULL;
     current_training_transparency=0;
-    current_training_final_transparency=0;
 
     //XML Initializations
     string config_directory = assets_directory+"config.xml";
@@ -94,18 +91,6 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
         image_training_bar_fill=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
         parry_dash_count_objective=15;
     }
-
-    if(stage->name=="Training1"
-       ||stage->name=="Training2"
-       ||stage->name=="Training3"
-       ||stage->name=="Training4"
-       ||stage->name=="Training5"
-       )
-    {
-        image_training_text=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/"+stage->name+".png");
-        image_training_text_final=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/"+stage->name+"_final.png");
-    }
-
 
     setGameOver(false);
     mainLoop();
@@ -209,10 +194,13 @@ void STG::logic()
                         p->hit(player->sound_channel_base+1,false);
                         if(player->isInvulnerable())
                         {
-                            parry_dash_count++;
-                            if(game_mode=="parry dash training" && parry_dash_count==parry_dash_count_objective)
+                            if(!player->isOnIntro())
                             {
-                                win();
+                                parry_dash_count++;
+                                if(game_mode=="parry dash training" && parry_dash_count==parry_dash_count_objective)
+                                {
+                                    win();
+                                }
                             }
                         }
                         if(game_mode=="parry training" || game_mode=="parry dash training")
@@ -224,10 +212,13 @@ void STG::logic()
                         }
                         if(player->isParrying())
                         {
-                            parry_count++;
-                            if(game_mode=="parry training" && parry_count==parry_count_objective)
+                            if(!player->isOnIntro())
                             {
-                                win();
+                                parry_count++;
+                                if(game_mode=="parry training" && parry_count==parry_count_objective)
+                                {
+                                    win();
+                                }
                             }
                         }
                         if(p->x>player->x)
@@ -302,10 +293,13 @@ void STG::logic()
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->x,player_pattern->y,player_pattern->getBulletAngle());
                                 if(!enemy_pattern->is_hit&&!player_pattern->is_hit&&enemy_hitbox.collides(player_hitbox))
                                 {
-                                    charge_destroy_count++;
-                                    if(game_mode=="charge training" && charge_destroy_count==charge_destroy_count_objective)
+                                    if(!player->isOnIntro())
                                     {
-                                        win();
+                                        charge_destroy_count++;
+                                        if(game_mode=="charge training" && charge_destroy_count==charge_destroy_count_objective)
+                                        {
+                                            win();
+                                        }
                                     }
                                     enemy_pattern->hit(enemy->sound_channel_base+1,false);
                                     player_pattern->hit(player->sound_channel_base+1,false);
@@ -358,7 +352,8 @@ void STG::render()
 
     int tutorial_text_spacing_y=10;
     int tutorial_control_spacing_y=100;
-    current_training_transparency+=2;
+    if(!player->isOnIntro())
+        current_training_transparency+=2;
     if(current_training_transparency>255)
         current_training_transparency=255;
     if(game_mode=="charge training")
@@ -444,42 +439,6 @@ void STG::render()
             false,
             0,0,
             Color(255,255,255,current_training_transparency),
-            0,0,
-            false,
-            FlatShadow());
-    }
-    if(image_training_text)
-    {
-        Rosalila()->Graphics->draw2DImage
-        (   image_training_text,
-            image_training_text->getWidth(),image_training_text->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_text->getWidth()/2,tutorial_text_spacing_y,
-            1.0,
-            0.0,
-            false,
-            0,0,
-            Color(255,255,255,current_training_transparency),
-            0,0,
-            false,
-            FlatShadow());
-    }
-    if(getGameOver())
-    {
-        current_training_final_transparency+=2;
-        if(current_training_final_transparency>255)
-            current_training_final_transparency=255;
-    }
-    if(image_training_text_final)
-    {
-        Rosalila()->Graphics->draw2DImage
-        (   image_training_text_final,
-            image_training_text_final->getWidth(),image_training_text_final->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_text_final->getWidth()/2,600,
-            1.0,
-            0.0,
-            false,
-            0,0,
-            Color(255,255,255,current_training_final_transparency),
             0,0,
             false,
             FlatShadow());

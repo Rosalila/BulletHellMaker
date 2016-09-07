@@ -82,6 +82,7 @@ public:
     void topRender();
     bool isDownWrapper(string button_map);
     void exit();
+    bool isOnIntro();
 };
 
 #endif

@@ -724,3 +724,8 @@ bool Player::isDownWrapper(string button_map)
     }
     return controls[button_map]->isDown();
 }
+
+bool Player::isOnIntro()
+{
+    return this->frame<this->intro_input.size();
+}
