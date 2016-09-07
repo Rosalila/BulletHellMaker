@@ -63,10 +63,11 @@ public:
     int invulnerable_frames_left;
     int current_charge;
 
+    vector<string> intro_input;
     vector<string> replay_input;
     vector<string> replay_storage;
 
-    Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string>replay_input);
+    Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string>intro_input,vector<string>replay_input);
     void loadFromXML();
     void loadPlayerFromXML();
     void inputControl();

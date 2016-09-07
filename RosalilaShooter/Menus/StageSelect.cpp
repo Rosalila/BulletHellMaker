@@ -1,5 +1,51 @@
 #include "StageSelect.h"
 
+vector<string> getReplayInput(char* replay_data, int replay_size)
+{
+    vector<string> replay_input;
+    string random_seed_str;
+
+    int replay_iterator=0;
+
+    for(;replay_iterator<replay_size
+            && replay_data[replay_iterator]!='\n';
+            replay_iterator++)
+    {
+        random_seed_str+=replay_data[replay_iterator];
+    }
+    replay_iterator++;
+    if(random_seed_str!="")
+    {
+        int random_seed = atoi(random_seed_str.c_str());
+        Rosalila()->Utility->setRandomSeed(random_seed);
+    }
+
+    for(;replay_iterator<replay_size;replay_iterator++)
+    {
+        string line="";
+        for(;replay_iterator<replay_size
+                && replay_data[replay_iterator]!='\n';
+                replay_iterator++)
+        {
+            line+=replay_data[replay_iterator];
+        }
+        replay_input.push_back(line);
+    }
+
+    return replay_input;
+}
+
+vector<string> getReplayInput(string file_name)
+{
+    ifstream in(file_name.c_str());
+    in.seekg(0,ios::end);
+    int replay_size = in.tellg();
+    in.seekg(0);
+    char* replay_data=new char[replay_size];
+    in.read(replay_data,replay_size);
+    return getReplayInput(replay_data, replay_size);
+}
+
 std::vector<std::string> getStageNames()
 {
     std::vector<std::string> stage_names;
@@ -155,24 +201,44 @@ void stageSelect(map<string,Button*> controls)
         if(controls["a"]->isDown() && select_button_was_up)
         {
             Rosalila()->Utility->writeLogLine("Initializing game.");
+            Rosalila()->Utility->setRandomSeed(time(NULL));
+            vector<string>replay_input;
+            vector<string>intro_input;
+
             Stage*stage=new Stage();
             stage->loadFromXML(stage_names[current_stage]);
+
             string game_mode="Stage select";
+
+            if(stage_names[current_stage]=="Training1")
+            {
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training1");
+                Rosalila()->Graphics->setGrayscale(0,255);
+            }
+            if(stage_names[current_stage]=="Training2")
+            {
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training2");
+                Rosalila()->Graphics->setGrayscale(0,255);
+            }
             if(stage_names[current_stage]=="Training3")
             {
                 game_mode="charge training";
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training3");
+                Rosalila()->Graphics->setGrayscale(0,255);
             }
             if(stage_names[current_stage]=="Training4")
             {
                 game_mode="parry training";
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training4");
+                Rosalila()->Graphics->setGrayscale(0,255);
             }
             if(stage_names[current_stage]=="Training5")
             {
                 game_mode="parry dash training";
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training5");
+                Rosalila()->Graphics->setGrayscale(0,255);
             }
 
-            Rosalila()->Utility->setRandomSeed(time(NULL));
-            vector<string>replay_input;
             if(entry_selected!=-1)
             {
                 game_mode="replay";
@@ -193,35 +259,8 @@ void stageSelect(map<string,Button*> controls)
 
                     int replay_size = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage])->entries[entry_selected]->attachment_size;
 
-                    string random_seed_str;
+                    replay_input = getReplayInput(replay_data, replay_size);
 
-                    int replay_iterator=0;
-
-                    for(;replay_iterator<replay_size
-                            && replay_data[replay_iterator]!='\n';
-                            replay_iterator++)
-                    {
-                        random_seed_str+=replay_data[replay_iterator];
-                    }
-                    replay_iterator++;
-                    if(random_seed_str!="")
-                    {
-                        int random_seed = atoi(random_seed_str.c_str());
-                        cout<<random_seed<<endl;
-                        Rosalila()->Utility->setRandomSeed(random_seed);
-                    }
-
-                    for(;replay_iterator<replay_size;replay_iterator++)
-                    {
-                        string line="";
-                        for(;replay_iterator<replay_size
-                                && replay_data[replay_iterator]!='\n';
-                                replay_iterator++)
-                        {
-                            line+=replay_data[replay_iterator];
-                        }
-                        replay_input.push_back(line);
-                    }
                 }else
                 {
                     error_found=true;
@@ -235,7 +274,7 @@ void stageSelect(map<string,Button*> controls)
                 if(current_leaderboard->leaderboard_self_entry!=NULL)
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 
-                Player*player=new Player("Triangle",10,controls,replay_input);
+                Player*player=new Player("Triangle",10,controls,intro_input,replay_input);
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
                 STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
                 delete stg;
