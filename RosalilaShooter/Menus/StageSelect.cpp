@@ -252,31 +252,34 @@ void stageSelect(map<string,Button*> controls)
             if(stage_names[current_stage]=="Training1")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training1");
-                Rosalila()->Graphics->grayscale_effect.set(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training2")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training2");
-                Rosalila()->Graphics->grayscale_effect.set(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training3")
             {
                 game_mode="charge training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training3");
-                Rosalila()->Graphics->grayscale_effect.set(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training4")
             {
                 game_mode="parry training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training4");
-                Rosalila()->Graphics->grayscale_effect.set(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training5")
             {
                 game_mode="parry dash training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training5");
-                Rosalila()->Graphics->grayscale_effect.set(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,1);
             }
+
+            Rosalila()->Graphics->transparency_effect.set(0,1);
+            Rosalila()->Graphics->transparency_effect.set(1,0.03);
 
             if(selected_entry!=NULL)
             {
@@ -316,6 +319,7 @@ void stageSelect(map<string,Button*> controls)
                 STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
                 delete stg;
                 select_button_was_up=false;
+                Rosalila()->Graphics->grayscale_effect.set(1,1);
             }
         }
 
