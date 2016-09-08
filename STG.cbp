@@ -48,6 +48,10 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.cpp" />

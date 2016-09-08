@@ -3069,7 +3069,7 @@
 	<assert.h>
 	<string.h>
 
-1473348541 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1473353050 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../Rosalila.h"
@@ -3087,6 +3087,7 @@
 	"../RosalilaGraphics/Timer.h"
 	"../RosalilaUtility/RosalilaUtility.h"
 	"../RosalilaGraphics/Effects/GrayscaleEffect.h"
+	"../RosalilaGraphics/Effects/ScreenShakeEffect.h"
 	<iostream>
 	<fstream>
 
@@ -3286,7 +3287,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1473348562 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1473352876 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -4032,4 +4033,9 @@
 
 1473348523 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp
 	"GrayscaleEffect.h"
+
+1473353109 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.h
+
+1473353087 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp
+	"ScreenShakeEffect.h"
 

@@ -233,7 +233,7 @@ void STG::logic()
                     p->hit(enemy->sound_channel_base+1,false);
                     player->hit(p->bullet->damage);
                     parry_count = 0;
-                    Rosalila()->Graphics->shakeScreen(30,10);
+                    Rosalila()->Graphics->screen_shake_effect.set(30,10,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
                     if(Rosalila()->Sound->soundExists(player->name+".hit"))
                         Rosalila()->Sound->playSound(player->name+".hit",3,0);
                     if(player->hp==0)
@@ -525,7 +525,7 @@ void STG::win()
     double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
     double score = milliseconds * hp_penalty;
     enemy->hp=0;
-    Rosalila()->Graphics->shakeScreen(50,20);
+    Rosalila()->Graphics->screen_shake_effect.set(50,20,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
     Rosalila()->Sound->playSound("you win",2,0);
     enemy->deleteActivePatterns();
     setGameOver(true);
