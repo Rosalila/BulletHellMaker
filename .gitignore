@@ -4,6 +4,7 @@ obj/
 log
 assets/
 STG
+Flatshot
 STG.layout
 lib/
 *.sav

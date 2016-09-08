@@ -5,6 +5,13 @@ int current_slowdown_iteration=0;
 bool slow_enabled=false;
 bool game_over;
 
+Image* loading_image;
+
+void initShooterUtility()
+{
+    loading_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/loading.png");
+}
+
 bool getGameOver()
 {
     return game_over;
@@ -63,4 +70,9 @@ double getSlowdown()
     if(isSlowPressed() && isSlowEnabled())
         slowdown = 3.0;
     return slowdown;
+}
+
+Image* getLoadingImage()
+{
+    return loading_image;
 }

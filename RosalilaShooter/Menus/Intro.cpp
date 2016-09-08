@@ -16,6 +16,12 @@ void intro(map<string,Button*> controls)
         {
             break;
         }
+
+        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        {
+            exit(0);
+        }
+
         graphics->draw2DImage
         (   image,
             image->getWidth(),image->getHeight(),
@@ -28,6 +34,22 @@ void intro(map<string,Button*> controls)
             0,0,
             false,
             FlatShadow());
+
+        if(Rosalila()->ApiIntegrator->getState()=="loading")
+        {
+            graphics->draw2DImage
+            (   getLoadingImage(),
+                getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
+                0,0,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,current_background_transparency),
+                0,0,
+                false,
+                FlatShadow());
+        }
 
         current_background_transparency++;
 
@@ -54,6 +76,12 @@ for(int i=0;i<l.size();i++)
         {
             break;
         }
+
+        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        {
+            exit(0);
+        }
+
         graphics->draw2DImage
         (   image2,
             image2->getWidth(),image2->getHeight(),
