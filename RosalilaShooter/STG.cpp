@@ -558,8 +558,22 @@ void STG::win()
 
         while(Rosalila()->ApiIntegrator->getState()!="loading")
         {
+            Rosalila()->Graphics->draw2DImage
+            (   getLoadingImage(),
+                getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
+                0,0,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false,
+                FlatShadow());
             Rosalila()->ApiIntegrator->updateCallbacks();
+
             SDL_Delay(17);
+            Rosalila()->Graphics->updateScreen();
         }
     }
 }

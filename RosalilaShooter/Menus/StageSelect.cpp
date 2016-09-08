@@ -320,6 +320,7 @@ void stageSelect(map<string,Button*> controls)
                 {
                     error_found=true;
                     cout<<"Error"<<endl;
+                    Rosalila()->Graphics->grayscale_effect.set(1,1);
                 }
             }
 
