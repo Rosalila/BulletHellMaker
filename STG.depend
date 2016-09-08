@@ -3069,7 +3069,7 @@
 	<assert.h>
 	<string.h>
 
-1473272858 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1473348541 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../Rosalila.h"
@@ -3086,6 +3086,7 @@
 	"../RosalilaGraphics/Image.h"
 	"../RosalilaGraphics/Timer.h"
 	"../RosalilaUtility/RosalilaUtility.h"
+	"../RosalilaGraphics/Effects/GrayscaleEffect.h"
 	<iostream>
 	<fstream>
 
@@ -3285,7 +3286,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1473272884 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1473348562 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -3717,7 +3718,7 @@
 1472582283 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
-1473274003 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
+1473348550 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
 1473286848 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
@@ -3794,7 +3795,7 @@
 1472444548 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1473297716 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1473348594 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1471966261 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -4026,4 +4027,9 @@
 
 1473285005 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Leaderboard.cpp
 	"Leaderboard.h"
+
+1473348407 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h
+
+1473348523 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp
+	"GrayscaleEffect.h"
 

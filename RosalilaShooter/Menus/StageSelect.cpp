@@ -127,6 +127,42 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
     return stage_images;
 }
 
+LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_navigator)
+{
+    if(entry_navigator==-6 && current_leaderboard->top_entries.size()>=1)
+    {
+        return current_leaderboard->top_entries[0];
+    }
+    if(entry_navigator==-5 && current_leaderboard->top_entries.size()>=2)
+    {
+        return current_leaderboard->top_entries[1];
+    }
+    if(entry_navigator==-4 && current_leaderboard->top_entries.size()>=3)
+    {
+        return current_leaderboard->top_entries[2];
+    }
+
+    if(entry_navigator==-3 && current_leaderboard->near_entries.size()>=1)
+    {
+        return current_leaderboard->near_entries[0];
+    }
+    if(entry_navigator==-2 && current_leaderboard->near_entries.size()>=2)
+    {
+        return current_leaderboard->near_entries[1];
+    }
+    if(entry_navigator==-1 && current_leaderboard->near_entries.size()>=3)
+    {
+        return current_leaderboard->near_entries[2];
+    }
+
+    if(entry_navigator>0 && entry_navigator<=current_leaderboard->near_entries.size()+1)
+    {
+        return current_leaderboard->friends_entries[entry_navigator-1];
+    }
+
+    return NULL;
+}
+
 void stageSelect(map<string,Button*> controls)
 {
     RosalilaGraphics* graphics=Rosalila()->Graphics;
@@ -141,7 +177,7 @@ void stageSelect(map<string,Button*> controls)
 
     int current_stage = Rosalila()->ApiIntegrator->getStat("current stage");
     int frame = 0;
-    int entry_selected = 0;
+    int entry_navigator = 0;
     LeaderboardEntry* selected_entry = NULL;
 
     bool select_button_was_up = false;
@@ -163,7 +199,7 @@ void stageSelect(map<string,Button*> controls)
         if(controls["6"]->isPressed())
         {
             current_stage++;
-            entry_selected=0;
+            entry_navigator=0;
             if(current_stage>=(int)stage_images.size())
                 current_stage=stage_images.size()-1;
             Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
@@ -172,7 +208,7 @@ void stageSelect(map<string,Button*> controls)
         if(controls["4"]->isPressed())
         {
             current_stage--;
-            entry_selected=0;
+            entry_navigator=0;
             if(current_stage<0)
                 current_stage=0;
             Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
@@ -182,56 +218,22 @@ void stageSelect(map<string,Button*> controls)
 
         if(controls["2"]->isPressed())
         {
-            entry_selected++;
-            if(entry_selected > (int)current_leaderboard->friends_entries.size())
+            entry_navigator++;
+            if(entry_navigator > (int)current_leaderboard->friends_entries.size())
             {
-                cout<<entry_selected<<endl;
-                cout<<current_leaderboard->friends_entries.size()<<endl;
-                entry_selected = current_leaderboard->friends_entries.size();
+                entry_navigator = current_leaderboard->friends_entries.size();
             }
         }
         if(controls["8"]->isPressed())
         {
-            entry_selected--;
-            if(entry_selected<-6)
+            entry_navigator--;
+            if(entry_navigator<-6)
             {
-               entry_selected=-6;
+               entry_navigator=-6;
             }
         }
 
-        selected_entry = NULL;
-
-        if(entry_selected==-6 && current_leaderboard->top_entries.size()>=1)
-        {
-            selected_entry = current_leaderboard->top_entries[0];
-        }
-        if(entry_selected==-5 && current_leaderboard->top_entries.size()>=2)
-        {
-            selected_entry = current_leaderboard->top_entries[1];
-        }
-        if(entry_selected==-4 && current_leaderboard->top_entries.size()>=3)
-        {
-            selected_entry = current_leaderboard->top_entries[2];
-        }
-
-        if(entry_selected==-3 && current_leaderboard->near_entries.size()>=1)
-        {
-            selected_entry = current_leaderboard->near_entries[0];
-        }
-        if(entry_selected==-2 && current_leaderboard->near_entries.size()>=2)
-        {
-            selected_entry = current_leaderboard->near_entries[1];
-        }
-        if(entry_selected==-1 && current_leaderboard->near_entries.size()>=3)
-        {
-            selected_entry = current_leaderboard->near_entries[2];
-        }
-
-        if(entry_selected>0 && entry_selected<=current_leaderboard->near_entries.size()+1)
-        {
-            selected_entry = current_leaderboard->friends_entries[entry_selected-1];
-        }
-
+        selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
 
         bool error_found = false;
 
@@ -250,30 +252,30 @@ void stageSelect(map<string,Button*> controls)
             if(stage_names[current_stage]=="Training1")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training1");
-                Rosalila()->Graphics->setGrayscale(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,255);
             }
             if(stage_names[current_stage]=="Training2")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training2");
-                Rosalila()->Graphics->setGrayscale(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,255);
             }
             if(stage_names[current_stage]=="Training3")
             {
                 game_mode="charge training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training3");
-                Rosalila()->Graphics->setGrayscale(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,255);
             }
             if(stage_names[current_stage]=="Training4")
             {
                 game_mode="parry training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training4");
-                Rosalila()->Graphics->setGrayscale(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,255);
             }
             if(stage_names[current_stage]=="Training5")
             {
                 game_mode="parry dash training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training5");
-                Rosalila()->Graphics->setGrayscale(0,255);
+                Rosalila()->Graphics->grayscale_effect.set(0,255);
             }
 
             if(selected_entry!=NULL)

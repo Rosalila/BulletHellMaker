@@ -713,7 +713,7 @@ bool Player::isDownWrapper(string button_map)
     {
         if(frame>=intro_input.size())
         {
-            Rosalila()->Graphics->setGrayscale(1,0.003);
+            Rosalila()->Graphics->grayscale_effect.set(1,0.003);
             return controls[button_map]->isDown();
         }
 
