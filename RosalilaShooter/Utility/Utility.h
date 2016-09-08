@@ -23,5 +23,6 @@ bool getGameOver();
 void setGameOver(bool game_over_param);
 
 Image* getLoadingImage();
+Image* getErrorImage();
 
 #endif

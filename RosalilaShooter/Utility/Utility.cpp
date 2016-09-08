@@ -6,10 +6,12 @@ bool slow_enabled=false;
 bool game_over;
 
 Image* loading_image;
+Image* error_image;
 
 void initShooterUtility()
 {
     loading_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/loading.png");
+    error_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/error.png");
 }
 
 bool getGameOver()
@@ -75,4 +77,9 @@ double getSlowdown()
 Image* getLoadingImage()
 {
     return loading_image;
+}
+
+Image* getErrorImage()
+{
+    return error_image;
 }

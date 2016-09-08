@@ -290,8 +290,23 @@ void stageSelect(map<string,Button*> controls)
                 while(selected_entry->attachment_state!="loaded"
                       && Rosalila()->ApiIntegrator->getState()=="loading")
                 {
+
+                    graphics->draw2DImage
+                    (   getLoadingImage(),
+                        getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
+                        0,0,
+                        1.0,
+                        0.0,
+                        false,
+                        0,0,
+                        Color(255,255,255,255),
+                        0,0,
+                        false,
+                        FlatShadow());
+
                     Rosalila()->ApiIntegrator->updateCallbacks();
                     SDL_Delay(17);
+                    graphics->updateScreen();
                 }
                 if(Rosalila()->ApiIntegrator->getState()!="error")
                 {
@@ -478,6 +493,22 @@ void stageSelect(map<string,Button*> controls)
             graphics->drawText(Rosalila()->Utility->toString(current_entry->score),
                                align_x+300,
                                align_y+i*separation);
+        }
+
+        if(Rosalila()->ApiIntegrator->getState()=="error")
+        {
+            graphics->draw2DImage
+            (   getErrorImage(),
+                getErrorImage()->getWidth(),getErrorImage()->getHeight(),
+                0,50,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false,
+                FlatShadow());
         }
 
         Rosalila()->Receiver->updateInputs();
