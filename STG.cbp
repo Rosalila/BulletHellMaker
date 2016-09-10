@@ -52,6 +52,8 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/TransparencyEffect.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/TransparencyEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/FlatShadow.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Image.cpp" />

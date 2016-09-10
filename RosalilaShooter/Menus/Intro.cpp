@@ -10,6 +10,12 @@ void intro(map<string,Button*> controls)
 
     int current_background_transparency=0;
 
+    Rosalila()->Graphics->notification_handler.notifications.push_back(
+        new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                            Rosalila()->Graphics->screen_height,
+                            Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+                            200));
+
     while(true)
     {
         if(controls["a"]->isPressed() && Rosalila()->ApiIntegrator->getState()!="loading")
