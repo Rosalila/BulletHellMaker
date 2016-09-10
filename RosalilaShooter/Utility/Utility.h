@@ -24,5 +24,8 @@ void setGameOver(bool game_over_param);
 
 Image* getLoadingImage();
 Image* getErrorImage();
+Image* getSuccessImage();
+
+int getNotificationDuration();
 
 #endif

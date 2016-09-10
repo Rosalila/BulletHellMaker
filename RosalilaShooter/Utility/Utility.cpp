@@ -7,11 +7,13 @@ bool game_over;
 
 Image* loading_image;
 Image* error_image;
+Image* sucess_image;
 
 void initShooterUtility()
 {
     loading_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/loading.png");
     error_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/error.png");
+    sucess_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/sucess.png");
 }
 
 bool getGameOver()
@@ -82,4 +84,14 @@ Image* getLoadingImage()
 Image* getErrorImage()
 {
     return error_image;
+}
+
+Image* getSuccessImage()
+{
+    return sucess_image;
+}
+
+int getNotificationDuration()
+{
+    return 50;
 }

@@ -287,27 +287,23 @@ void stageSelect(map<string,Button*> controls)
 
                 Rosalila()->ApiIntegrator->downloadEntryAttachment(selected_entry);
 
+                Rosalila()->Graphics->notification_handler.notifications.push_back(
+                    new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                                        Rosalila()->Graphics->screen_height,
+                                        Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+                                        999999));
+
                 while(selected_entry->attachment_state!="loaded"
                       && Rosalila()->ApiIntegrator->getState()=="loading")
                 {
-
-                    graphics->draw2DImage
-                    (   getLoadingImage(),
-                        getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
-                        0,0,
-                        1.0,
-                        0.0,
-                        false,
-                        0,0,
-                        Color(255,255,255,255),
-                        0,0,
-                        false,
-                        FlatShadow());
 
                     Rosalila()->ApiIntegrator->updateCallbacks();
                     SDL_Delay(17);
                     graphics->updateScreen();
                 }
+
+                Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+
                 if(Rosalila()->ApiIntegrator->getState()!="error")
                 {
                     char* replay_data = selected_entry->attachment;
@@ -318,6 +314,11 @@ void stageSelect(map<string,Button*> controls)
 
                 }else
                 {
+                    Rosalila()->Graphics->notification_handler.notifications.push_back(
+                        new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                            Rosalila()->Graphics->screen_height,
+                                            Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                                            getNotificationDuration()));
                     error_found=true;
                     cout<<"Error"<<endl;
                     Rosalila()->Graphics->grayscale_effect.set(1,1);
@@ -494,22 +495,6 @@ void stageSelect(map<string,Button*> controls)
             graphics->drawText(Rosalila()->Utility->toString(current_entry->score),
                                align_x+300,
                                align_y+i*separation);
-        }
-
-        if(Rosalila()->ApiIntegrator->getState()=="error")
-        {
-            graphics->draw2DImage
-            (   getErrorImage(),
-                getErrorImage()->getWidth(),getErrorImage()->getHeight(),
-                0,50,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                0,0,
-                false,
-                FlatShadow());
         }
 
         Rosalila()->Receiver->updateInputs();

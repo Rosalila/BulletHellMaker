@@ -14,7 +14,7 @@ void intro(map<string,Button*> controls)
         new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
                             Rosalila()->Graphics->screen_height,
                             Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
-                            200));
+                            999999));
 
     while(true)
     {
@@ -41,20 +41,9 @@ void intro(map<string,Button*> controls)
             false,
             FlatShadow());
 
-        if(Rosalila()->ApiIntegrator->getState()=="loading")
+        if(Rosalila()->ApiIntegrator->getState()!="loading")
         {
-            graphics->draw2DImage
-            (   getLoadingImage(),
-                getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
-                0,0,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,current_background_transparency),
-                0,0,
-                false,
-                FlatShadow());
+            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
         }
 
         current_background_transparency++;
@@ -63,18 +52,9 @@ void intro(map<string,Button*> controls)
         graphics->updateScreen();
         Rosalila()->ApiIntegrator->updateCallbacks();
     }
-Rosalila()->ApiIntegrator->getData("a");
+
+    Rosalila()->ApiIntegrator->getData("a");
     current_background_transparency=0;
-
-/*
-vector<LeaderboardEntry*>l = Rosalila()->ApiIntegrator->getLeaderboard("liditi");
-for(int i=0;i<l.size();i++)
-{
-    cout<<l[i]->name<<endl;
-    cout<<l[i]->rank<<endl;
-    cout<<l[i]->score<<endl;
-}*/
-
 
     while(true)
     {
