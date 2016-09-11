@@ -184,6 +184,16 @@ void stageSelect(map<string,Button*> controls)
 
     Rosalila()->Receiver->updateInputs();
 
+    double top_menu_y = 0;
+    double middle_menu_y = 0;
+    double bottom_menu_y = 0;
+
+    double target_top_menu_y = 0;
+    double target_middle_menu_y = 0;
+    double target_bottom_menu_y = 0;
+
+    double menu_displacement_velocity = 20;
+
     while(true)
     {
         if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
@@ -232,6 +242,67 @@ void stageSelect(map<string,Button*> controls)
                entry_navigator=-6;
             }
         }
+
+        if(entry_navigator<0)
+        {
+            if(top_menu_y<target_top_menu_y)
+            {
+                top_menu_y+=menu_displacement_velocity;
+                if(top_menu_y>target_top_menu_y)
+                    top_menu_y = target_top_menu_y;
+            }
+            if(top_menu_y>target_top_menu_y)
+            {
+                top_menu_y-=menu_displacement_velocity;
+                if(top_menu_y<target_top_menu_y)
+                    top_menu_y = target_top_menu_y;
+            }
+            middle_menu_y += menu_displacement_velocity;
+            bottom_menu_y += menu_displacement_velocity;
+        }
+        if(entry_navigator==0)
+        {
+            if(middle_menu_y<target_middle_menu_y)
+            {
+                middle_menu_y+=menu_displacement_velocity;
+                if(middle_menu_y>target_middle_menu_y)
+                    middle_menu_y = target_middle_menu_y;
+            }
+            if(middle_menu_y>target_middle_menu_y)
+            {
+                middle_menu_y-=menu_displacement_velocity;
+                if(middle_menu_y<target_middle_menu_y)
+                    middle_menu_y = target_middle_menu_y;
+            }
+            top_menu_y -= menu_displacement_velocity;
+            bottom_menu_y += menu_displacement_velocity;
+        }
+        if(entry_navigator>0)
+        {
+            if(bottom_menu_y<target_bottom_menu_y)
+            {
+                bottom_menu_y+=menu_displacement_velocity;
+                if(bottom_menu_y>target_bottom_menu_y)
+                    bottom_menu_y = target_bottom_menu_y;
+            }
+            if(bottom_menu_y>target_bottom_menu_y)
+            {
+                bottom_menu_y-=menu_displacement_velocity;
+                if(bottom_menu_y<target_bottom_menu_y)
+                    bottom_menu_y = target_bottom_menu_y;
+            }
+            top_menu_y -= menu_displacement_velocity;
+            middle_menu_y -= menu_displacement_velocity;
+        }
+
+        top_menu_y = std::max(top_menu_y,(double)-Rosalila()->Graphics->screen_height);
+        middle_menu_y = std::max(middle_menu_y,(double)-Rosalila()->Graphics->screen_height);
+        bottom_menu_y = std::max(bottom_menu_y,(double)-Rosalila()->Graphics->screen_height);
+
+        top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
+        middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
+        bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
+
 
         selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
 
@@ -372,63 +443,11 @@ void stageSelect(map<string,Button*> controls)
             false,
             FlatShadow());
 
-        graphics->draw2DImage
-        (   stage_images[current_stage],
-            stage_images[current_stage]->getWidth(),
-                stage_images[current_stage]->getHeight(),
-            graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
-                graphics->screen_height/2-stage_images[current_stage]->getHeight()/2,
-            1.0,
-            0.0,
-            false,
-            0,0,
-            Color(255,255,255,255),
-            0,0,
-            false,
-            FlatShadow());
-
-
-        if(frame%60>=0 && frame%60<30)
-        {
-            if(current_stage>0)
-            {
-                graphics->draw2DImage
-                (   left_arrow,
-                    left_arrow->getWidth(),left_arrow->getHeight(),
-                    graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
-                    graphics->screen_height/2-left_arrow->getHeight()/2,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-            }
-
-            if(current_stage<(int)stage_images.size()-1)
-            {
-                graphics->draw2DImage
-                (   right_arrow,
-                    right_arrow->getWidth(),right_arrow->getHeight(),
-                    graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
-                    graphics->screen_height/2-right_arrow->getHeight()/2,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-            }
-        }
-
+        //Top menu
         for(int i=0;i<current_leaderboard->top_entries.size();i++)
         {
             int align_x = 400;
-            int align_y = 10;
+            int align_y = top_menu_y;
             int separation = 50;
             LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
             if(selected_entry==current_entry)
@@ -452,7 +471,7 @@ void stageSelect(map<string,Button*> controls)
         for(int i=0;i<current_leaderboard->near_entries.size();i++)
         {
             int align_x = 400;
-            int align_y = 200;
+            int align_y = 200+top_menu_y;
             int separation = 50;
             LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
             if(selected_entry==current_entry)
@@ -473,10 +492,65 @@ void stageSelect(map<string,Button*> controls)
                                align_y+i*separation);
         }
 
+        //Middle menu
+        graphics->draw2DImage
+        (   stage_images[current_stage],
+            stage_images[current_stage]->getWidth(),
+                stage_images[current_stage]->getHeight(),
+            graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
+                graphics->screen_height/2-stage_images[current_stage]->getHeight()/2+middle_menu_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+
+
+        if(frame%60>=0 && frame%60<30)
+        {
+            if(current_stage>0)
+            {
+                graphics->draw2DImage
+                (   left_arrow,
+                    left_arrow->getWidth(),left_arrow->getHeight(),
+                    graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
+                    graphics->screen_height/2-left_arrow->getHeight()/2+middle_menu_y,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+
+            if(current_stage<(int)stage_images.size()-1)
+            {
+                graphics->draw2DImage
+                (   right_arrow,
+                    right_arrow->getWidth(),right_arrow->getHeight(),
+                    graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
+                    graphics->screen_height/2-right_arrow->getHeight()/2+middle_menu_y,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+        }
+
+        //Bottom menu
         for(int i=0;i<current_leaderboard->friends_entries.size();i++)
         {
             int align_x = 400;
-            int align_y = 500;
+            int align_y = bottom_menu_y;
             int separation = 50;
             LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
             if(selected_entry==current_entry)
