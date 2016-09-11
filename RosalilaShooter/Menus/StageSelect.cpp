@@ -299,13 +299,13 @@ void stageSelect(map<string,Button*> controls)
             middle_menu_y -= menu_displacement_velocity;
         }
 
-        top_menu_y = std::max(top_menu_y,(double)-Rosalila()->Graphics->screen_height);
-        middle_menu_y = std::max(middle_menu_y,(double)-Rosalila()->Graphics->screen_height);
+        top_menu_y = std::max(top_menu_y,(double)-7*entry_height);
+        middle_menu_y = std::max(middle_menu_y,(double)-stage_images[current_stage]->getHeight());
         bottom_menu_y = std::max(bottom_menu_y,(double)-Rosalila()->Graphics->screen_height);
 
-        top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
-        middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
-        bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height*2.0);
+        top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height);
+        middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height);
+        bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height);
 
 
         selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
@@ -488,9 +488,7 @@ void stageSelect(map<string,Button*> controls)
             }
             string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text ,
-                               align_x+70,
-                               align_y+i*separation);
+            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
         }
 
         for(int i=0;i<current_leaderboard->near_entries.size();i++)
@@ -531,9 +529,7 @@ void stageSelect(map<string,Button*> controls)
             }
             string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text ,
-                               align_x+70,
-                               align_y+i*separation);
+            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
         }
 
         //Middle menu
@@ -631,9 +627,7 @@ void stageSelect(map<string,Button*> controls)
 
             string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text ,
-                               align_x+70,
-                               align_y+i*separation);
+            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
         }
 
         Rosalila()->Receiver->updateInputs();
