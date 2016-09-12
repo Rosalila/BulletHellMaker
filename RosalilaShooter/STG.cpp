@@ -554,27 +554,92 @@ void STG::win()
         }
         strcat(replay_data,"\0");
 
-        Rosalila()->ApiIntegrator->setScore(stage->name, score,replay_data,replay_size);
+        Rosalila()->ApiIntegrator->setScore(stage->name, score);
 
-        while(Rosalila()->ApiIntegrator->getState()!="loading")
+        do
         {
-            Rosalila()->Graphics->draw2DImage
-            (   getLoadingImage(),
-                getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
-                0,0,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                0,0,
-                false,
-                FlatShadow());
-            Rosalila()->ApiIntegrator->updateCallbacks();
+            while(Rosalila()->ApiIntegrator->getState()!="loading")
+            {
+                Rosalila()->Graphics->draw2DImage
+                (   getLoadingImage(),
+                    getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
+                    0,0,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+                Rosalila()->ApiIntegrator->updateCallbacks();
 
-            SDL_Delay(17);
-            Rosalila()->Graphics->updateScreen();
-        }
+                SDL_Delay(17);
+                Rosalila()->Graphics->updateScreen();
+            }
+
+            if(Rosalila()->ApiIntegrator->getState()=="error")
+            {
+                Rosalila()->Graphics->notification_handler.notifications.push_back(
+                    new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                        Rosalila()->Graphics->screen_height,
+                                        Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                                        getNotificationDuration()));
+            }else
+            {
+                Rosalila()->Graphics->notification_handler.notifications.push_back(
+                    new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
+                                        Rosalila()->Graphics->screen_height,
+                                        Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
+                                        getNotificationDuration()));
+            }
+
+            break;
+
+        }while(Rosalila()->ApiIntegrator->getState()!="finished");
+
+
+        Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
+
+        do
+        {
+            while(Rosalila()->ApiIntegrator->getState()!="loading")
+            {
+                Rosalila()->Graphics->draw2DImage
+                (   getLoadingImage(),
+                    getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
+                    0,0,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+                Rosalila()->ApiIntegrator->updateCallbacks();
+
+                SDL_Delay(17);
+                Rosalila()->Graphics->updateScreen();
+            }
+
+            if(Rosalila()->ApiIntegrator->getState()=="error")
+            {
+                Rosalila()->Graphics->notification_handler.notifications.push_back(
+                    new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                        Rosalila()->Graphics->screen_height,
+                                        Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                                        getNotificationDuration()));
+            }else
+            {
+                Rosalila()->Graphics->notification_handler.notifications.push_back(
+                    new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
+                                        Rosalila()->Graphics->screen_height,
+                                        Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
+                                        getNotificationDuration()));
+            }
+
+        }while(Rosalila()->ApiIntegrator->getState()!="finished");
     }
 }
 

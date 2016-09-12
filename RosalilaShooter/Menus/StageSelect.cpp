@@ -188,13 +188,13 @@ void stageSelect(map<string,Button*> controls)
     double menu_displacement_velocity = 20;
     double entry_height = 50;
 
-    double top_menu_y = 0;
+    double top_menu_y = -6*entry_height/2 - 200;
     double middle_menu_y = 0;
-    double bottom_menu_y = 0;
+    double bottom_menu_y = Rosalila()->Graphics->screen_height;
 
     double target_top_menu_y = Rosalila()->Graphics->screen_height/2 - 6*entry_height/2;
     double target_middle_menu_y = 0;
-    double target_bottom_menu_y = 0;
+    double target_bottom_menu_y = Rosalila()->Graphics->screen_height;
 
     while(true)
     {
