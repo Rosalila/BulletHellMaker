@@ -18,6 +18,24 @@ Bullet::Bullet(std::string name,vector<Image*>sprites,vector<Image*>sprites_on_h
     current_channel=-1;
 }
 
+Bullet::~Bullet()
+{
+    for(int i=0;i<sprites.size();i++)
+    {
+        delete sprites[i];
+    }
+
+    for(int i=0;i<sprites_on_hit.size();i++)
+    {
+        delete sprites_on_hit[i];
+    }
+
+    for(int i=0;i<hitboxes.size();i++)
+    {
+        delete hitboxes[i];
+    }
+}
+
 Image* Bullet::getImage(int position)
 {
     if(position>=(int)sprites.size())

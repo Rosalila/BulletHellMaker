@@ -56,9 +56,9 @@ public:
     bool collides_opponent;
     bool undestructable;
 
-    std::map<std::string,Bullet*> *bullets;
+    map<string,Bullet*> *bullets;
 
-    std::map<int, vector<Modifier*>* >*modifiers;
+    map<int, vector<Modifier*>* >*modifiers;
 
     //This is sooooo wierd
     Pattern* pattern;

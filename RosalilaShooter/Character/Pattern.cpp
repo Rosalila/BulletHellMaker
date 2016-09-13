@@ -108,6 +108,20 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->pattern=pattern;
 }
 
+Pattern::~Pattern()
+{
+//    if(pattern==NULL)
+//    {
+//        for(map<int, vector<Modifier*>* >::iterator i= (*modifiers).begin(); i!=(*modifiers).end(); i++)
+//        {
+//            for(int j=0; j<(*i).second->size();j++)
+//            {
+//                delete (*(*i).second)[j];
+//            }
+//        }
+//    }
+}
+
 bool Pattern::isReady()
 {
     if(state=="ready")
@@ -309,11 +323,6 @@ void Pattern::aimTo(int x,int y)
     double distance_x=10;
     double distance_y=20;
     angle-=atan2(distance_y,distance_x)*180/PI;
-}
-
-Pattern::~Pattern()
-{
-
 }
 
 void Pattern::hit(int channel,bool hit_undestructable)
