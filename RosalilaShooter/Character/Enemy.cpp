@@ -216,6 +216,8 @@ void Enemy::loadModifiersFromXML()
             }
         }
     }
+
+    delete root_node;
 }
 
 void Enemy::addActivePattern(Pattern* pattern)

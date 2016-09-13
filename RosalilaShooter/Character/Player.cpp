@@ -174,6 +174,8 @@ void Player::loadPlayerFromXML()
         if(slow_bar_node->hasAttribute("rect_width"))
             this->slow_bar_rect_width=atoi(slow_bar_node->attributes["rect_width"].c_str());
     }
+
+    delete root_node;
 }
 
 void Player::inputControl()
@@ -687,6 +689,8 @@ void Player::loadFromXML()
             this->parry_hitboxes.push_back(hitbox);
         }
     }
+
+    delete root_node;
 
 }
 

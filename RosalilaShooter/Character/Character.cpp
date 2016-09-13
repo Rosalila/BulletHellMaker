@@ -72,6 +72,8 @@ Character::~Character()
         delete (*i);
     }
 
+    delete active_patterns;
+
     if(this->life_bar)
         delete this->life_bar;
 
@@ -358,6 +360,8 @@ void Character::loadMainXML()
             }
         }
     }
+
+    delete root_node;
 }
 
 void Character::loadBulletsXML()
@@ -477,6 +481,8 @@ void Character::loadBulletsXML()
         }
         bullets[node_name]=new Bullet(node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
     }
+
+    delete root_node;
 }
 
 Pattern* Character::loadPatternXML(Node* pattern_node)
@@ -737,8 +743,6 @@ vector<Modifier*> Character::loadModifierXML(Node* modifier_node)
 
 void Character::loadPatternsXML()
 {
-
-//Loading file
     Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"patterns.xml");
 
     vector<Node*> type_nodes = root_node->getNodesByName("Type");
@@ -826,6 +830,8 @@ void Character::loadPatternsXML()
 
         type[type_name]=patterns;
     }
+
+    delete root_node;
 }
 
 void Character::logic(int stage_velocity)
