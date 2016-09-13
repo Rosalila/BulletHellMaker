@@ -20,6 +20,9 @@ Player::Player(std::string name,int sound_channel_base,map<string,Button*>contro
     this->parrying_image = NULL;
     this->parryed_image = NULL;
 
+    this->life_bar = NULL;
+    this->flat_shadow_texture = NULL;
+
     //Sprites animation
     this->animation_velocity=4;
     this->animation_iteration=0;

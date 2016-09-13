@@ -82,7 +82,7 @@ public:
     void loadMainXML();
     void loadBulletsXML();
     void loadPatternsXML();
-    vector<Modifier*>* loadModifierXML(Node* modifier_node);
+    vector<Modifier*> loadModifierXML(Node* modifier_node);
     Pattern* loadPatternXML(Node* pattern_node);
 
     void logic(int stage_velocity);

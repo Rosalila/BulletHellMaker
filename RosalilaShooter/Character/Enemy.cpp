@@ -12,6 +12,9 @@ Enemy::Enemy(std::string name,Player*player,int sound_channel_base)
     this->current_type="";
     this->visible=true;
 
+    this->life_bar = NULL;
+    this->flat_shadow_texture = NULL;
+
     //Enemy variables
     this->angle=180;
     this->velocity=0;

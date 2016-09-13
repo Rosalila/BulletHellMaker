@@ -12,6 +12,8 @@ Character::Character(std::string name,int sound_channel_base)
     this->orientation="idle";
     this->current_type="1";
     this->visible=true;
+    this->life_bar = NULL;
+    this->flat_shadow_texture = NULL;
 
     //Sprites animation
     this->animation_iteration=0;
@@ -70,10 +72,16 @@ Character::~Character()
         delete (*i);
     }
 
+    if(this->life_bar)
+        delete this->life_bar;
+
     for(int i=0;i<(int)hitboxes.size();i++)
     {
         delete hitboxes[i];
     }
+
+    if(this->flat_shadow_texture)
+        delete this->flat_shadow_texture;
 
     for(int i=0;i<(int)shadow_align_points_left.size();i++)
     {
@@ -200,7 +208,9 @@ void Character::loadMainXML()
             this->life_bar_rect_width=atoi(life_bar_node->attributes["rect_width"].c_str());
 
         if(life_bar_node->hasAttribute("image"))
+        {
             this->life_bar=Rosalila()->Graphics->getTexture(assets_directory+directory+life_bar_node->attributes["image"]);
+        }
     }
 
     Node* hitboxes_node = root_node->getNodeByName("Hitboxes");
@@ -574,7 +584,7 @@ Pattern* Character::loadPatternXML(Node* pattern_node)
     if(pattern_node->hasAttribute("undestructable"))
         undestructable=pattern_node->attributes["undestructable"]=="yes";
 
-    std::map<int, vector<Modifier*>* >*pattern_modifiers=new std::map<int, vector<Modifier*>* >();
+    std::map<int, vector<Modifier*> >*pattern_modifiers=new std::map<int, vector<Modifier*> >();
 
     vector<Node*> modifier_nodes = pattern_node->getNodesByName("Modifier");
     for(int i=0;i<(int)modifier_nodes.size();i++)
@@ -587,139 +597,139 @@ Pattern* Character::loadPatternXML(Node* pattern_node)
                                            startup,cooldown,duration,random_angle,aim_player,bullet_rotation,br_change,independent_br,freeze, homing,collides_bullets,collides_opponent,undestructable,pattern_modifiers,&bullets);
 }
 
-vector<Modifier*>* Character::loadModifierXML(Node* modifier_node)
+vector<Modifier*> Character::loadModifierXML(Node* modifier_node)
 {
-    vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
+    vector<Modifier*> temp_modifiers;
 
     if(modifier_node->hasAttribute("bullet"))
     {
         std::string value=modifier_node->attributes["bullet"];
-        temp_modifiers->push_back(new Modifier("bullet",value));
+        temp_modifiers.push_back(new Modifier("bullet",value));
     }
 
     if(modifier_node->hasAttribute("velocity"))
     {
         std::string value=modifier_node->attributes["velocity"];
-        temp_modifiers->push_back(new Modifier("velocity",value));
+        temp_modifiers.push_back(new Modifier("velocity",value));
     }
 
     if(modifier_node->hasAttribute("max_velocity"))
     {
         std::string value=modifier_node->attributes["max_velocity"];
-        temp_modifiers->push_back(new Modifier("max_velocity",value));
+        temp_modifiers.push_back(new Modifier("max_velocity",value));
     }
 
     if(modifier_node->hasAttribute("acceleration"))
     {
         std::string value=modifier_node->attributes["acceleration"];
-        temp_modifiers->push_back(new Modifier("acceleration",value));
+        temp_modifiers.push_back(new Modifier("acceleration",value));
     }
 
     if(modifier_node->hasAttribute("a_frequency"))
     {
         std::string value=modifier_node->attributes["a_frequency"];
-        temp_modifiers->push_back(new Modifier("a_frequency",value));
+        temp_modifiers.push_back(new Modifier("a_frequency",value));
     }
 
     if(modifier_node->hasAttribute("angle"))
     {
         std::string value=modifier_node->attributes["angle"];
-        temp_modifiers->push_back(new Modifier("angle",value));
+        temp_modifiers.push_back(new Modifier("angle",value));
     }
 
     if(modifier_node->hasAttribute("angle_change"))
     {
         std::string value=modifier_node->attributes["angle_change"];
-        temp_modifiers->push_back(new Modifier("angle_change",value));
+        temp_modifiers.push_back(new Modifier("angle_change",value));
     }
 
     if(modifier_node->hasAttribute("stop_ac_at"))
     {
         std::string value=modifier_node->attributes["stop_ac_at"];
-        temp_modifiers->push_back(new Modifier("stop_ac_at",value));
+        temp_modifiers.push_back(new Modifier("stop_ac_at",value));
     }
 
     if(modifier_node->hasAttribute("ac_frequency"))
     {
         std::string value=modifier_node->attributes["ac_frequency"];
-        temp_modifiers->push_back(new Modifier("ac_frequency",value));
+        temp_modifiers.push_back(new Modifier("ac_frequency",value));
     }
 
     if(modifier_node->hasAttribute("animation_velocity"))
     {
         std::string value=modifier_node->attributes["animation_velocity"];
-        temp_modifiers->push_back(new Modifier("animation_velocity",value));
+        temp_modifiers.push_back(new Modifier("animation_velocity",value));
     }
 
     if(modifier_node->hasAttribute("offset_x"))
     {
         std::string value=modifier_node->attributes["offset_x"];
-        temp_modifiers->push_back(new Modifier("offset_x",value));
+        temp_modifiers.push_back(new Modifier("offset_x",value));
     }
 
     if(modifier_node->hasAttribute("offset_y"))
     {
         std::string value=modifier_node->attributes["offset_y"];
-        temp_modifiers->push_back(new Modifier("offset_y",value));
+        temp_modifiers.push_back(new Modifier("offset_y",value));
     }
 
     if(modifier_node->hasAttribute("startup"))
     {
         std::string value=modifier_node->attributes["startup"];
-        temp_modifiers->push_back(new Modifier("startup",value));
+        temp_modifiers.push_back(new Modifier("startup",value));
     }
 
     if(modifier_node->hasAttribute("cooldown"))
     {
         std::string value=modifier_node->attributes["cooldown"];
-        temp_modifiers->push_back(new Modifier("cooldown",value));
+        temp_modifiers.push_back(new Modifier("cooldown",value));
     }
 
     if(modifier_node->hasAttribute("duration"))
     {
         std::string value=modifier_node->attributes["duration"];
-        temp_modifiers->push_back(new Modifier("duration",value));
+        temp_modifiers.push_back(new Modifier("duration",value));
     }
 
     if(modifier_node->hasAttribute("random_angle"))
     {
         std::string value=modifier_node->attributes["random_angle"];
-        temp_modifiers->push_back(new Modifier("random_angle",value));
+        temp_modifiers.push_back(new Modifier("random_angle",value));
     }
 
     if(modifier_node->hasAttribute("aim_player"))
     {
         std::string value=modifier_node->attributes["aim_player"];
-        temp_modifiers->push_back(new Modifier("aim_player",value));
+        temp_modifiers.push_back(new Modifier("aim_player",value));
     }
 
     if(modifier_node->hasAttribute("bullet_rotation"))
     {
         std::string value=modifier_node->attributes["bullet_rotation"];
-        temp_modifiers->push_back(new Modifier("bullet_rotation",value));
+        temp_modifiers.push_back(new Modifier("bullet_rotation",value));
     }
 
     if(modifier_node->hasAttribute("br_change"))
     {
         std::string value=modifier_node->attributes["br_change"];
-        temp_modifiers->push_back(new Modifier("br_change",value));
+        temp_modifiers.push_back(new Modifier("br_change",value));
     }
 
     if(modifier_node->hasAttribute("independent_br"))
     {
         std::string value=modifier_node->attributes["independent_br"];
-        temp_modifiers->push_back(new Modifier("independent_br",value));
+        temp_modifiers.push_back(new Modifier("independent_br",value));
     }
     if(modifier_node->hasAttribute("freeze"))
     {
         std::string value=modifier_node->attributes["freeze"];
-        temp_modifiers->push_back(new Modifier("freeze",value));
+        temp_modifiers.push_back(new Modifier("freeze",value));
     }
 
     if(modifier_node->hasAttribute("homing"))
     {
         std::string value=modifier_node->attributes["homing"];
-        temp_modifiers->push_back(new Modifier("homing",value));
+        temp_modifiers.push_back(new Modifier("homing",value));
     }
 
     return temp_modifiers;
