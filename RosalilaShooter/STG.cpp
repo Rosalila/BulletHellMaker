@@ -9,6 +9,8 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
     this->controls=controls;
     this->current_player_best_score = current_player_best_score;
 
+    this->api_state = "";
+
     Rosalila()->Graphics->camera_y=0;
     frame=0;
 
@@ -111,7 +113,7 @@ void STG::mainLoop()
 
     for (;;)
     {
-        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE) && api_state == "")
         {
 //            int replay_size=0;
 //            string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
@@ -155,8 +157,11 @@ void STG::mainLoop()
         logic();
 
 //        Rosalila()->Receiver->isKeyDown(SDLK_z)
+
         Rosalila()->Receiver->updateInputs();
-        if(getGameOver())
+        Rosalila()->ApiIntegrator->updateCallbacks();
+
+        if(getGameOver() && api_state == "")
         {
             if(Rosalila()->Receiver->isKeyPressed(SDLK_RETURN)
                || (controls["a"]->isDown() && end_key_up_keyboard)
@@ -325,6 +330,74 @@ void STG::logic()
     deletePatterns();
     checkCharacterOutOfBounds();
     slowExtraControl();
+
+    if(api_state == "uploading score")
+    {
+        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        {
+            int replay_size=0;
+            string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+            replay_size+=seed_str.size()+1;
+            for(int i=0;i<player->replay_storage.size();i++)
+            {
+                replay_size+=player->replay_storage[i].size()+1;
+            }
+            replay_size+=1;
+
+            char*replay_data = new char[replay_size];
+
+            strcpy(replay_data,"");
+            strcat(replay_data,seed_str.c_str());
+            strcat(replay_data,"\n");
+
+            for(int i=0;i<player->replay_storage.size();i++)
+            {
+                strcat(replay_data,player->replay_storage[i].c_str());
+                strcat(replay_data,"\n");
+            }
+            strcat(replay_data,"\0");            Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
+
+            api_state = "uploading replay";
+        }
+
+        if(Rosalila()->ApiIntegrator->getState()=="error")
+        {
+            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+            Rosalila()->Graphics->notification_handler.notifications.push_back(
+                new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                    Rosalila()->Graphics->screen_height,
+                                    Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                                    getNotificationDuration()));
+            api_state = "error";
+        }
+    }
+
+
+    if(api_state == "uploading replay")
+    {
+        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        {
+            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+            Rosalila()->Graphics->notification_handler.notifications.push_back(
+                new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
+                                    Rosalila()->Graphics->screen_height,
+                                    Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
+                                    getNotificationDuration()));
+
+            api_state = "";
+        }
+
+        if(Rosalila()->ApiIntegrator->getState()=="error")
+        {
+            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+            Rosalila()->Graphics->notification_handler.notifications.push_back(
+                new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                    Rosalila()->Graphics->screen_height,
+                                    Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                                    getNotificationDuration()));
+            api_state = "error";
+        }
+    }
 
     if(!getGameOver())
         frame++;
@@ -532,112 +605,15 @@ void STG::win()
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
     {
-        int replay_size=0;
-        string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
-        replay_size+=seed_str.size()+1;
-        for(int i=0;i<player->replay_storage.size();i++)
-        {
-            replay_size+=player->replay_storage[i].size()+1;
-        }
-        replay_size+=1;
-
-        char*replay_data = new char[replay_size];
-
-        strcpy(replay_data,"");
-        strcat(replay_data,seed_str.c_str());
-        strcat(replay_data,"\n");
-
-        for(int i=0;i<player->replay_storage.size();i++)
-        {
-            strcat(replay_data,player->replay_storage[i].c_str());
-            strcat(replay_data,"\n");
-        }
-        strcat(replay_data,"\0");
-
         Rosalila()->ApiIntegrator->setScore(stage->name, score);
 
-        do
-        {
-            while(Rosalila()->ApiIntegrator->getState()=="loading")
-            {
-                Rosalila()->Graphics->draw2DImage
-                (   getLoadingImage(),
-                    getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
-                    0,0,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-                Rosalila()->ApiIntegrator->updateCallbacks();
+        api_state = "uploading score";
 
-                SDL_Delay(17);
-                Rosalila()->Graphics->updateScreen();
-            }
-
-            if(Rosalila()->ApiIntegrator->getState()=="error")
-            {
-                Rosalila()->Graphics->notification_handler.notifications.push_back(
-                    new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                        Rosalila()->Graphics->screen_height,
-                                        Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
-                                        getNotificationDuration()));
-            }else
-            {
-                Rosalila()->Graphics->notification_handler.notifications.push_back(
-                    new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
-                                        Rosalila()->Graphics->screen_height,
-                                        Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
-                                        getNotificationDuration()));
-            }
-
-        }while(Rosalila()->ApiIntegrator->getState()!="finished");
-
-
-        Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
-
-        do
-        {
-            while(Rosalila()->ApiIntegrator->getState()=="loading")
-            {
-                Rosalila()->Graphics->draw2DImage
-                (   getLoadingImage(),
-                    getLoadingImage()->getWidth(),getLoadingImage()->getHeight(),
-                    0,0,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-                Rosalila()->ApiIntegrator->updateCallbacks();
-
-                SDL_Delay(17);
-                Rosalila()->Graphics->updateScreen();
-            }
-
-            if(Rosalila()->ApiIntegrator->getState()=="error")
-            {
-                Rosalila()->Graphics->notification_handler.notifications.push_back(
-                    new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                        Rosalila()->Graphics->screen_height,
-                                        Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
-                                        getNotificationDuration()));
-            }else
-            {
-                Rosalila()->Graphics->notification_handler.notifications.push_back(
-                    new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
-                                        Rosalila()->Graphics->screen_height,
-                                        Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
-                                        getNotificationDuration()));
-            }
-
-        }while(Rosalila()->ApiIntegrator->getState()!="finished");
+        Rosalila()->Graphics->notification_handler.notifications.push_back(
+            new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                                Rosalila()->Graphics->screen_height,
+                                Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+                                999999));
     }
 }
 
