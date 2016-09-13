@@ -7,6 +7,23 @@ Stage::Stage()
     this->current_slowdown_iteration=0;
 }
 
+Stage::~Stage()
+{
+    Rosalila()->Utility->writeLogLine("Deleting stage.");
+    for(;!back.empty();)
+    {
+        Layer*layer=back.back();
+        back.pop_back();
+        delete layer;
+    }
+    for(;!front.empty();)
+    {
+        Layer*layer=front.back();
+        front.pop_back();
+        delete layer;
+    }
+}
+
 void Stage::drawLayer(Layer* layer)
 {
     //Animation speed
@@ -465,23 +482,6 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
                                   ));
     }
     Rosalila()->Utility->writeLogLine("Stage loaded succesfully from XML.");
-}
-
-Stage::~Stage()
-{
-    Rosalila()->Utility->writeLogLine("Deleting stage.");
-    for(;!back.empty();)
-    {
-        Layer*layer=back.back();
-        back.pop_back();
-        delete layer;
-    }
-    for(;!front.empty();)
-    {
-        Layer*layer=front.back();
-        front.pop_back();
-        delete layer;
-    }
 }
 
 void Stage::logic()

@@ -19,13 +19,13 @@ public:
     int current_slowdown_iteration;
 
     Stage();
+    ~Stage();
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);
     void loadFromXML(std::string name);
     void logic();
     void playMusic();
-    ~Stage();
 };
 
 #endif

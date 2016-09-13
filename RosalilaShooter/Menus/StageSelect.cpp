@@ -319,9 +319,6 @@ void stageSelect(map<string,Button*> controls)
             vector<string>replay_input;
             vector<string>intro_input;
 
-            Stage*stage=new Stage();
-            stage->loadFromXML(stage_names[current_stage]);
-
             string game_mode="Stage select";
 
             if(stage_names[current_stage]=="Training1")
@@ -406,10 +403,15 @@ void stageSelect(map<string,Button*> controls)
                 if(current_leaderboard->leaderboard_self_entry!=NULL)
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 
+                Stage*stage=new Stage();
+                stage->loadFromXML(stage_names[current_stage]);
                 Player*player=new Player("Triangle",10,controls,intro_input,replay_input);
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
                 STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
                 delete stg;
+                delete player;
+                delete enemy;
+                delete stage;
                 select_button_was_up=false;
                 Rosalila()->Graphics->grayscale_effect.set(1,1);
             }

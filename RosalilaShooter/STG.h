@@ -44,6 +44,7 @@ public:
     string api_state;
 
     STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls,int current_player_best_score);
+    ~STG();
     bool isOutOfBounds(int pos_x,int pos_y);
     void mainLoop();
     void logic();

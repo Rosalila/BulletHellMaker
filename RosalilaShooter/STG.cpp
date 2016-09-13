@@ -11,6 +11,11 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
 
     this->api_state = "";
 
+    this->image_training_box = NULL;
+    this->image_training_x = NULL;
+    this->image_training_bar = NULL;
+    this->image_training_bar_fill = NULL;
+
     Rosalila()->Graphics->camera_y=0;
     frame=0;
 
@@ -96,6 +101,21 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
 
     setGameOver(false);
     mainLoop();
+}
+
+STG::~STG()
+{
+    if(image_training_box)
+        delete image_training_box;
+
+    if(image_training_x)
+        delete image_training_x;
+
+    if(image_training_bar)
+        delete image_training_bar;
+
+    if(image_training_bar_fill)
+        delete image_training_bar_fill;
 }
 
 void STG::stageSelectModeInit()
@@ -355,7 +375,9 @@ void STG::logic()
                 strcat(replay_data,player->replay_storage[i].c_str());
                 strcat(replay_data,"\n");
             }
-            strcat(replay_data,"\0");            Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
+            strcat(replay_data,"\0");
+
+            Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
 
             api_state = "uploading replay";
         }

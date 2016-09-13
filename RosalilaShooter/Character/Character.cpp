@@ -42,6 +42,70 @@ Character::Character(std::string name,int sound_channel_base)
     loadFromXML();
 }
 
+Character::~Character()
+{
+    for(map< string,vector<Image*> >::iterator i = sprites.begin(); i!=sprites.end(); i++)
+    {
+        for(int j=0;j<(*i).second.size();j++)
+        {
+            delete (*i).second[j];
+        }
+    }
+
+    for(map<string,Bullet*>::iterator i = bullets.begin(); i!=bullets.end(); i++)
+    {
+        delete (*i).second;
+    }
+
+    for(map<string, vector<Pattern*> >::iterator i = type.begin(); i!=type.end(); i++)
+    {
+        for(int j=0;j<(*i).second.size();j++)
+        {
+            delete (*i).second[j];
+        }
+    }
+
+    for(std::list<Pattern*>::iterator i = (*active_patterns).begin(); i!=(*active_patterns).end(); i++)
+    {
+        delete (*i);
+    }
+
+    for(int i=0;i<(int)hitboxes.size();i++)
+    {
+        delete hitboxes[i];
+    }
+
+    for(int i=0;i<(int)shadow_align_points_left.size();i++)
+    {
+        delete shadow_align_points_left[i];
+    }
+
+    for(int i=0;i<(int)shadow_align_points_right.size();i++)
+    {
+        delete shadow_align_points_right[i];
+    }
+
+    for(int i=0;i<(int)shadow_align_points_top.size();i++)
+    {
+        delete shadow_align_points_top[i];
+    }
+
+    for(int i=0;i<(int)inbetween_shadow_align_points_left.size();i++)
+    {
+        delete inbetween_shadow_align_points_left[i];
+    }
+
+    for(int i=0;i<(int)inbetween_shadow_align_points_right.size();i++)
+    {
+        delete inbetween_shadow_align_points_right[i];
+    }
+
+    for(int i=0;i<(int)inbetween_shadow_align_points_top.size();i++)
+    {
+        delete inbetween_shadow_align_points_top[i];
+    }
+}
+
 void Character::loadFromXML()
 {
     loadMainXML();
@@ -909,13 +973,5 @@ void Character::deleteActivePatterns()
         Pattern*p=(Pattern*)*i;
         p->hit(sound_channel_base+1,true);
         i++;
-    }
-}
-
-Character::~Character()
-{
-    for(int i=0;i<(int)hitboxes.size();i++)
-    {
-        delete hitboxes[i];
     }
 }
