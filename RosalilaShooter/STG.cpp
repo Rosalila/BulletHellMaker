@@ -558,7 +558,7 @@ void STG::win()
 
         do
         {
-            while(Rosalila()->ApiIntegrator->getState()!="loading")
+            while(Rosalila()->ApiIntegrator->getState()=="loading")
             {
                 Rosalila()->Graphics->draw2DImage
                 (   getLoadingImage(),
@@ -594,8 +594,6 @@ void STG::win()
                                         getNotificationDuration()));
             }
 
-            break;
-
         }while(Rosalila()->ApiIntegrator->getState()!="finished");
 
 
@@ -603,7 +601,7 @@ void STG::win()
 
         do
         {
-            while(Rosalila()->ApiIntegrator->getState()!="loading")
+            while(Rosalila()->ApiIntegrator->getState()=="loading")
             {
                 Rosalila()->Graphics->draw2DImage
                 (   getLoadingImage(),
