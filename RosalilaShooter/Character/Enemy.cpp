@@ -44,45 +44,53 @@ Enemy::Enemy(std::string name,Player*player,int sound_channel_base)
     loadModifiersFromXML();
 }
 
+Enemy::~Enemy()
+{
+    for(map<int, vector<Modifier*> >::iterator i = modifiers.begin(); i!= modifiers.end();i++)
+    {
+        for(int j=0; j<(*i).second.size();j++)
+        {
+            delete (*i).second[j];
+        }
+    }
+}
+
 void Enemy::modifiersControl()
 {
     bool flag_iterator_change=false;
 
-    vector<Modifier*>* current_modifiers = this->modifiers[iteration];
-    if(current_modifiers!=NULL)
+    vector<Modifier*> current_modifiers = this->modifiers[iteration];
+    for(int i=0;i<(int)current_modifiers.size();i++)
     {
-        for(int i=0;i<(int)current_modifiers->size();i++)
+        Modifier* modifier=current_modifiers[i];
+        if(modifier->variable=="velocity")
         {
-            Modifier* modifier=(*current_modifiers)[i];
-            if(modifier->variable=="velocity")
+            this->velocity=atoi(modifier->value.c_str());
+        }
+        if(modifier->variable=="angle")
+        {
+            this->angle=atoi(modifier->value.c_str());
+        }
+        if(modifier->variable=="angle_change")
+        {
+            this->angle_change=atoi(modifier->value.c_str());
+        }
+        if(modifier->variable=="iterator")
+        {
+            this->iteration=atoi(modifier->value.c_str());
+            flag_iterator_change=true;
+        }
+        if(modifier->variable=="pattern_type")
+        {
+            //Reset cooldowns
+            for(int i=0;i<(int)type[current_type].size();i++)
             {
-                this->velocity=atoi(modifier->value.c_str());
+                type[current_type][i]->current_cooldown=0;
+                type[current_type][i]->current_startup=0;
+                type[current_type][i]->iteration=0;
+                type[current_type][i]->state="startup";
             }
-            if(modifier->variable=="angle")
-            {
-                this->angle=atoi(modifier->value.c_str());
-            }
-            if(modifier->variable=="angle_change")
-            {
-                this->angle_change=atoi(modifier->value.c_str());
-            }
-            if(modifier->variable=="iterator")
-            {
-                this->iteration=atoi(modifier->value.c_str());
-                flag_iterator_change=true;
-            }
-            if(modifier->variable=="pattern_type")
-            {
-                //Reset cooldowns
-                for(int i=0;i<(int)type[current_type].size();i++)
-                {
-                    type[current_type][i]->current_cooldown=0;
-                    type[current_type][i]->current_startup=0;
-                    type[current_type][i]->iteration=0;
-                    type[current_type][i]->state="startup";
-                }
-                this->current_type=modifier->value;
-            }
+            this->current_type=modifier->value;
         }
     }
 
@@ -156,38 +164,38 @@ void Enemy::loadModifiersFromXML()
 
     for(int i=0;i<(int)modifier_nodes.size();i++)
     {
-        vector<Modifier*>* temp_modifiers=new vector<Modifier*>();
+        vector<Modifier*> temp_modifiers;
 
         int at=atoi(modifier_nodes[i]->attributes["at"].c_str());
 
         if(modifier_nodes[i]->hasAttribute("velocity"))
         {
             std::string value=modifier_nodes[i]->attributes["velocity"];
-            temp_modifiers->push_back(new Modifier("velocity",value));
+            temp_modifiers.push_back(new Modifier("velocity",value));
         }
 
         if(modifier_nodes[i]->hasAttribute("angle"))
         {
             std::string value=modifier_nodes[i]->attributes["angle"];
-            temp_modifiers->push_back(new Modifier("angle",value));
+            temp_modifiers.push_back(new Modifier("angle",value));
         }
 
         if(modifier_nodes[i]->hasAttribute("pattern_type"))
         {
             std::string value=modifier_nodes[i]->attributes["pattern_type"];
-            temp_modifiers->push_back(new Modifier("pattern_type",value));
+            temp_modifiers.push_back(new Modifier("pattern_type",value));
         }
 
         if(modifier_nodes[i]->hasAttribute("angle_change"))
         {
             std::string value=modifier_nodes[i]->attributes["angle_change"];
-            temp_modifiers->push_back(new Modifier("angle_change",value));
+            temp_modifiers.push_back(new Modifier("angle_change",value));
         }
 
         if(modifier_nodes[i]->hasAttribute("iterator"))
         {
             std::string value=modifier_nodes[i]->attributes["iterator"];
-            temp_modifiers->push_back(new Modifier("iterator",value));
+            temp_modifiers.push_back(new Modifier("iterator",value));
         }
 
         this->modifiers[at]=temp_modifiers;

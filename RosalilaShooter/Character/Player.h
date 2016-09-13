@@ -68,6 +68,7 @@ public:
     vector<string> replay_storage;
 
     Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string>intro_input,vector<string>replay_input);
+    ~Player();
     void loadFromXML();
     void loadPlayerFromXML();
     void inputControl();

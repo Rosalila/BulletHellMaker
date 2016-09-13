@@ -15,11 +15,12 @@ class Enemy : public Character
 {
 public:
     Player*player;
-    std::map<int, vector<Modifier*>* >modifiers;
+    map<int, vector<Modifier*> >modifiers;
     double angle;
     double angle_change;
 
-    Enemy(std::string name,Player*player,int sound_channel_base);
+    Enemy(string name,Player*player,int sound_channel_base);
+    ~Enemy();
     void loadModifiersFromXML();
     void logic(int stage_velocity, string stage_name);
     void modifiersControl();

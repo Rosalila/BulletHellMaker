@@ -14,6 +14,11 @@ Player::Player(std::string name,int sound_channel_base,map<string,Button*>contro
     this->frame=0;
     this->charging_sound_channel=-1;
     this->controls=controls;
+    this->slow_bar = NULL;
+    this->shield_image = NULL;
+    this->charge_image = NULL;
+    this->parrying_image = NULL;
+    this->parryed_image = NULL;
 
     //Sprites animation
     this->animation_velocity=4;
@@ -58,6 +63,30 @@ Player::Player(std::string name,int sound_channel_base,map<string,Button*>contro
     Rosalila()->Sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
     Rosalila()->Sound->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
     charging_sound_channel=Rosalila()->Sound->playSound("charging",21,-1);
+}
+
+Player::~Player()
+{
+    if(this->slow_bar)
+        delete this->slow_bar;
+    if(this->shield_image)
+        delete this->shield_image;
+    if(this->charge_image)
+        delete this->charge_image;
+    if(this->parrying_image)
+        delete this->parrying_image;
+    if(this->parryed_image)
+        delete this->parryed_image;
+
+    for(int i=0; i<parry_hitboxes.size();i++)
+    {
+        delete parry_hitboxes[i];
+    }
+
+    for(int i=0; i<parry_sprites.size();i++)
+    {
+        delete parry_sprites[i];
+    }
 }
 
 void Player::loadPlayerFromXML()
