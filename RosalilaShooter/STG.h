@@ -22,7 +22,11 @@ public:
     Animation you_win,you_loose;
     int frame;
 
+    int score;
+
     map<string,Button*>controls;
+
+    Image*image_upload_error;
 
     Image*image_training_box;
     Image*image_training_x;
@@ -56,6 +60,9 @@ public:
     void stageSelectModeInit();
     void win();
     void lose();
+    void uploadScore();
+    void uploadReplay();
+    void uploadErrorLoop();
 };
 
 #endif

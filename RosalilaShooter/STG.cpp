@@ -11,6 +11,10 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Butto
 
     this->api_state = "";
 
+    this->score = -1;
+
+    this->image_upload_error = Rosalila()->Graphics->getTexture(assets_directory+"misc/upload_error.png");
+
     this->image_training_box = NULL;
     this->image_training_x = NULL;
     this->image_training_bar = NULL;
@@ -355,46 +359,15 @@ void STG::logic()
     {
         if(Rosalila()->ApiIntegrator->getState()=="finished")
         {
-            int replay_size=0;
-            string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
-            replay_size+=seed_str.size()+1;
-            for(int i=0;i<player->replay_storage.size();i++)
-            {
-                replay_size+=player->replay_storage[i].size()+1;
-            }
-            replay_size+=1;
-
-            char*replay_data = new char[replay_size];
-
-            strcpy(replay_data,"");
-            strcat(replay_data,seed_str.c_str());
-            strcat(replay_data,"\n");
-
-            for(int i=0;i<player->replay_storage.size();i++)
-            {
-                strcat(replay_data,player->replay_storage[i].c_str());
-                strcat(replay_data,"\n");
-            }
-            strcat(replay_data,"\0");
-
-            Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
-
-            api_state = "uploading replay";
+            uploadReplay();
         }
 
         if(Rosalila()->ApiIntegrator->getState()=="error")
         {
-            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
-            Rosalila()->Graphics->notification_handler.notifications.push_back(
-                new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                    Rosalila()->Graphics->screen_height,
-                                    Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
-                                    getNotificationDuration()));
-            api_state = "error";
+            uploadErrorLoop();
+            uploadScore();
         }
     }
-
-
     if(api_state == "uploading replay")
     {
         if(Rosalila()->ApiIntegrator->getState()=="finished")
@@ -411,13 +384,8 @@ void STG::logic()
 
         if(Rosalila()->ApiIntegrator->getState()=="error")
         {
-            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
-            Rosalila()->Graphics->notification_handler.notifications.push_back(
-                new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                    Rosalila()->Graphics->screen_height,
-                                    Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
-                                    getNotificationDuration()));
-            api_state = "error";
+            uploadErrorLoop();
+            uploadReplay();
         }
     }
 
@@ -428,12 +396,35 @@ void STG::logic()
 void STG::render()
 {
     stage->dibujarBack();
-    player->bottomRender();
-    enemy->bottomRender();
-    player->topRender();
-    enemy->topRender();
+    if(player->hp>0)
+        player->bottomRender();
+    if(enemy->hp>0)
+        enemy->bottomRender();
+    if(player->hp>0)
+        player->topRender();
+    if(enemy->hp>0)
+        enemy->topRender();
 
     stage->dibujarFront();
+
+    if(getGameOver() && score!=-1)
+    {
+        if(current_player_best_score==-1)
+        {
+            Rosalila()->Graphics->drawText(Rosalila()->Utility->toString(score), 0, 0, true, true);
+        }
+        else
+        {
+            int difference = score - current_player_best_score;
+            string score_text = Rosalila()->Utility->toString(score);
+            score_text += " (";
+            if(difference>0)
+                score_text += "+";
+            score_text += Rosalila()->Utility->toString(difference);
+            score_text += ")";
+            Rosalila()->Graphics->drawText(score_text,0, 0, true, true);
+        }
+    }
 
     if(enemy->hp==0)
         you_win.render();
@@ -618,7 +609,7 @@ void STG::win()
     Rosalila()->ApiIntegrator->unlockAchievement("B");
     double milliseconds = SDL_GetTicks()-initial_ticks;
     double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
-    double score = milliseconds * hp_penalty;
+    score = milliseconds * hp_penalty;
     enemy->hp=0;
     Rosalila()->Graphics->screen_shake_effect.set(50,20,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
     Rosalila()->Sound->playSound("you win",2,0);
@@ -627,15 +618,7 @@ void STG::win()
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
     {
-        Rosalila()->ApiIntegrator->setScore(stage->name, score);
-
-        api_state = "uploading score";
-
-        Rosalila()->Graphics->notification_handler.notifications.push_back(
-            new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
-                                Rosalila()->Graphics->screen_height,
-                                Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
-                                999999));
+        uploadScore();
     }
 }
 
@@ -643,4 +626,82 @@ void STG::lose()
 {
     Rosalila()->Sound->playSound("you lose",4,0);
     setGameOver(true);
+}
+
+void STG::uploadScore()
+{
+    api_state = "uploading score";
+
+    Rosalila()->ApiIntegrator->setScore(stage->name, score);
+
+    Rosalila()->Graphics->notification_handler.notifications.push_back(
+        new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                            Rosalila()->Graphics->screen_height,
+                            Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+                            999999));
+}
+
+void STG::uploadReplay()
+{
+    int replay_size=0;
+    string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+    replay_size+=seed_str.size()+1;
+    for(int i=0;i<player->replay_storage.size();i++)
+    {
+        replay_size+=player->replay_storage[i].size()+1;
+    }
+    replay_size+=1;
+
+    char*replay_data = new char[replay_size];
+
+    strcpy(replay_data,"");
+    strcat(replay_data,seed_str.c_str());
+    strcat(replay_data,"\n");
+
+    for(int i=0;i<player->replay_storage.size();i++)
+    {
+        strcat(replay_data,player->replay_storage[i].c_str());
+        strcat(replay_data,"\n");
+    }
+    strcat(replay_data,"\0");
+
+    Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
+
+    api_state = "uploading replay";
+}
+
+void STG::uploadErrorLoop()
+{
+    Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+    Rosalila()->Graphics->notification_handler.notifications.push_back(
+        new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                            Rosalila()->Graphics->screen_height,
+                            Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                            getNotificationDuration()));
+
+    api_state = "error";
+
+    while(true)
+    {
+        if(controls["a"]->isPressed())
+        {
+            break;
+        }
+        Rosalila()->Graphics->draw2DImage
+        (   image_upload_error,
+            image_upload_error->getWidth(),image_upload_error->getHeight(),
+            0,0,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,current_training_transparency),
+            0,0,
+            false,
+            FlatShadow());
+
+        Rosalila()->Receiver->updateInputs();
+        Rosalila()->ApiIntegrator->updateCallbacks();
+        Rosalila()->Graphics->updateScreen();
+    }
 }

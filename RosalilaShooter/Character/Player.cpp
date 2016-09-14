@@ -304,7 +304,8 @@ void Player::inputControl()
         this->shooting=false;
     }
 
-    replay_storage.push_back(current_input_replay_store);
+    if(!getGameOver())
+        replay_storage.push_back(current_input_replay_store);
 }
 
 void Player::logic(int stage_velocity)
