@@ -63,6 +63,7 @@ public:
     void uploadScore();
     void uploadReplay();
     void uploadErrorLoop();
+    void findLeaderboard();
 };
 
 #endif

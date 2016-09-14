@@ -409,9 +409,9 @@ void stageSelect(map<string,Button*> controls)
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
                 STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
 
-//                for(int i=0;i<1000;i++)
+//                for(int i=0;i<100000;i++)
 //                {
-//                    Player*x=new Player("Triangle",10,controls,intro_input,replay_input);
+//                    Stage*x=new Stage();
 //                    delete x;
 //                }
 

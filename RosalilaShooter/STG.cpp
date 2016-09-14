@@ -372,6 +372,20 @@ void STG::logic()
     {
         if(Rosalila()->ApiIntegrator->getState()=="finished")
         {
+            findLeaderboard();
+        }
+
+        if(Rosalila()->ApiIntegrator->getState()=="error")
+        {
+            uploadErrorLoop();
+            uploadReplay();
+        }
+    }
+
+    if(api_state == "finding leaderboard")
+    {
+        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        {
             Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
             Rosalila()->Graphics->notification_handler.notifications.push_back(
                 new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
@@ -379,13 +393,13 @@ void STG::logic()
                                     Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
                                     getNotificationDuration()));
 
-            api_state = "";
+            api_state="";
         }
 
         if(Rosalila()->ApiIntegrator->getState()=="error")
         {
             uploadErrorLoop();
-            uploadReplay();
+            findLeaderboard();
         }
     }
 
@@ -704,4 +718,10 @@ void STG::uploadErrorLoop()
         Rosalila()->ApiIntegrator->updateCallbacks();
         Rosalila()->Graphics->updateScreen();
     }
+}
+
+void STG::findLeaderboard()
+{
+    Rosalila()->ApiIntegrator->findLeaderboard(stage->name);
+    api_state = "finding leaderboard";
 }

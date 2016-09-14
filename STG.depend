@@ -3289,7 +3289,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1473622667 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1473883882 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -3721,13 +3721,13 @@
 1473788402 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
-1473876699 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
+1473883877 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1473879339 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1473891246 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
-1473879188 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
+1473891195 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
@@ -3787,7 +3787,7 @@
 	<vector>
 	"../../Rosalila/Rosalila.h"
 
-1473123494 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.cpp
+1473880531 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.cpp
 	"ControllerConfig.h"
 
 1473021883 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.h
@@ -3798,7 +3798,7 @@
 1473547660 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1473879236 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1473890444 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1471966261 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -3814,10 +3814,10 @@
 1471966300 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
 	"../Utility/Utility.h"
 
-1473707646 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
+1473890905 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
 	"RosalilaApiIntegrator.h"
 
-1473707636 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
+1473890779 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h
 	<iostream>
 	"Steam/SteamIntegration.h"
 
@@ -3876,7 +3876,7 @@
 	"tinyxml.h"
 	<windows.h>
 
-1473707567 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h
+1473890865 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h
 	<iostream>
 	<fstream>
 	"include/steam_api.h"
@@ -3992,7 +3992,7 @@
 
 1463097229 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api_internal.h
 
-1473707549 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
+1473890989 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
 	"SteamIntegration.h"
 
 1473707463 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h
@@ -4006,7 +4006,7 @@
 	"../LeaderboardEntry.h"
 	"../../RosalilaUtility/RosalilaUtility.h"
 
-1473729386 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
+1473890608 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
 	"LeaderboardHandler.h"
 
 1472500409 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp
