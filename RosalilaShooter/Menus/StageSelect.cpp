@@ -172,6 +172,8 @@ void stageSelect(map<string,Button*> controls)
     Image*background=graphics->getTexture(assets_directory+"menu/white_background.png");
     Image*left_arrow=graphics->getTexture(assets_directory+"menu/left_arrow.png");
     Image*right_arrow=graphics->getTexture(assets_directory+"menu/right_arrow.png");
+    Image*up_arrow=graphics->getTexture(assets_directory+"menu/up_arrow.png");
+    Image*down_arrow=graphics->getTexture(assets_directory+"menu/down_arrow.png");
     Image*line=graphics->getTexture(assets_directory+"menu/line.png");
 
     Color background_color(255,255,255,255);
@@ -459,83 +461,55 @@ void stageSelect(map<string,Button*> controls)
         int line_separation = 35;
 
         //Top menu
+        int separation = 50;
+        int line_y = -100;
+        if(entry_navigator<0)
+            line_y = top_menu_y+(entry_navigator+7)*separation;
+        if(entry_navigator<-3)
+            line_y -= 50;
+        if(entry_navigator>=1)
+            line_y = bottom_menu_y+(entry_navigator-1)*separation;
+
+        graphics->draw2DImage
+        (   line,
+            line->getWidth(),line->getHeight(),
+            graphics->screen_width/2-line->getWidth()/2,
+            line_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+
+        graphics->draw2DImage
+        (   line,
+            line->getWidth(),line->getHeight(),
+            graphics->screen_width/2-line->getWidth()/2,
+            line_y+line_separation,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+
         for(int i=0;i<current_leaderboard->top_entries.size();i++)
         {
-            int align_x = 400;
-            int align_y = top_menu_y;
-            int separation = 50;
             LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
-            if(selected_entry==current_entry)
-            {
-                graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    top_menu_y+i*separation,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-
-                graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    top_menu_y+i*separation+line_separation,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-            }
             string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
+            graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
         }
 
         for(int i=0;i<current_leaderboard->near_entries.size();i++)
         {
-            int align_x = 400;
             int align_y = 200+top_menu_y;
-            int separation = 50;
             LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
-            if(selected_entry==current_entry)
-            {
-                graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    align_y+i*separation,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-
-                graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    align_y+i*separation+line_separation,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-            }
             string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
             graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
@@ -593,37 +567,14 @@ void stageSelect(map<string,Button*> controls)
                     false,
                     FlatShadow());
             }
-        }
 
-        //Bottom menu
-        for(int i=0;i<current_leaderboard->friends_entries.size();i++)
-        {
-            int align_x = 400;
-            int align_y = bottom_menu_y;
-            int separation = 50;
-            LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
-            if(selected_entry==current_entry)
+            if(current_stage<(int)stage_images.size()-1)
             {
-                align_x=450;
                 graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    bottom_menu_y+i*separation,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-
-                graphics->draw2DImage
-                (   line,
-                    line->getWidth(),line->getHeight(),
-                    graphics->screen_width/2-line->getWidth()/2,
-                    bottom_menu_y+i*separation+line_separation,
+                (   up_arrow,
+                    up_arrow->getWidth(),up_arrow->getHeight(),
+                    graphics->screen_width/2-up_arrow->getWidth()/2,
+                    0,
                     1.0,
                     0.0,
                     false,
@@ -634,9 +585,30 @@ void stageSelect(map<string,Button*> controls)
                     FlatShadow());
             }
 
-            string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+            if(current_stage<(int)stage_images.size()-1)
+            {
+                graphics->draw2DImage
+                (   down_arrow,
+                    down_arrow->getWidth(),down_arrow->getHeight(),
+                    graphics->screen_width/2-down_arrow->getWidth()/2,
+                    graphics->screen_height-down_arrow->getHeight(),
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
+        }
 
-            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
+        //Bottom menu
+        for(int i=0;i<current_leaderboard->friends_entries.size();i++)
+        {
+            LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
+            string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+            graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
         }
 
         Rosalila()->Receiver->updateInputs();

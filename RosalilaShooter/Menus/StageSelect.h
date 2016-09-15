@@ -6,6 +6,8 @@
 #include "../Character/Enemy.h"
 #include "../STG.h"
 #include "../Stage/Stage.h"
+#include <algorithm>
+#include <time.h>
 
 std::vector<std::string> getStageNames();
 std::vector<Image*> getStageImages(std::vector<std::string> stage_names);
