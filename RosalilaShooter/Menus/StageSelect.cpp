@@ -230,87 +230,91 @@ void stageSelect(map<string,Button*> controls)
 
         Leaderboard* current_leaderboard = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage]);
 
-        if(controls["2"]->isPressed())
-        {
-            entry_navigator++;
-            if(entry_navigator > (int)current_leaderboard->friends_entries.size())
-            {
-                entry_navigator = current_leaderboard->friends_entries.size();
-            }
-        }
-        if(controls["8"]->isPressed())
-        {
-            entry_navigator--;
-            if(entry_navigator<-6)
-            {
-               entry_navigator=-6;
-            }
-        }
 
-        target_bottom_menu_y = Rosalila()->Graphics->screen_height/2 - current_leaderboard->friends_entries.size()*entry_height/2;
-
-        if(entry_navigator<0)
+        if(current_leaderboard)
         {
-            if(top_menu_y<target_top_menu_y)
+            if(controls["2"]->isPressed())
             {
-                top_menu_y+=menu_displacement_velocity;
-                if(top_menu_y>target_top_menu_y)
-                    top_menu_y = target_top_menu_y;
+                entry_navigator++;
+                if(entry_navigator > (int)current_leaderboard->friends_entries.size())
+                {
+                    entry_navigator = current_leaderboard->friends_entries.size();
+                }
             }
-            if(top_menu_y>target_top_menu_y)
+            if(controls["8"]->isPressed())
             {
-                top_menu_y-=menu_displacement_velocity;
+                entry_navigator--;
+                if(entry_navigator<-6)
+                {
+                   entry_navigator=-6;
+                }
+            }
+
+            target_bottom_menu_y = Rosalila()->Graphics->screen_height/2 - current_leaderboard->friends_entries.size()*entry_height/2;
+
+            if(entry_navigator<0)
+            {
                 if(top_menu_y<target_top_menu_y)
-                    top_menu_y = target_top_menu_y;
+                {
+                    top_menu_y+=menu_displacement_velocity;
+                    if(top_menu_y>target_top_menu_y)
+                        top_menu_y = target_top_menu_y;
+                }
+                if(top_menu_y>target_top_menu_y)
+                {
+                    top_menu_y-=menu_displacement_velocity;
+                    if(top_menu_y<target_top_menu_y)
+                        top_menu_y = target_top_menu_y;
+                }
+                middle_menu_y += menu_displacement_velocity;
+                bottom_menu_y += menu_displacement_velocity;
             }
-            middle_menu_y += menu_displacement_velocity;
-            bottom_menu_y += menu_displacement_velocity;
-        }
-        if(entry_navigator==0)
-        {
-            if(middle_menu_y<target_middle_menu_y)
+            if(entry_navigator==0)
             {
-                middle_menu_y+=menu_displacement_velocity;
-                if(middle_menu_y>target_middle_menu_y)
-                    middle_menu_y = target_middle_menu_y;
-            }
-            if(middle_menu_y>target_middle_menu_y)
-            {
-                middle_menu_y-=menu_displacement_velocity;
                 if(middle_menu_y<target_middle_menu_y)
-                    middle_menu_y = target_middle_menu_y;
+                {
+                    middle_menu_y+=menu_displacement_velocity;
+                    if(middle_menu_y>target_middle_menu_y)
+                        middle_menu_y = target_middle_menu_y;
+                }
+                if(middle_menu_y>target_middle_menu_y)
+                {
+                    middle_menu_y-=menu_displacement_velocity;
+                    if(middle_menu_y<target_middle_menu_y)
+                        middle_menu_y = target_middle_menu_y;
+                }
+                top_menu_y -= menu_displacement_velocity;
+                bottom_menu_y += menu_displacement_velocity;
             }
-            top_menu_y -= menu_displacement_velocity;
-            bottom_menu_y += menu_displacement_velocity;
-        }
-        if(entry_navigator>0)
-        {
-            if(bottom_menu_y<target_bottom_menu_y)
+            if(entry_navigator>0)
             {
-                bottom_menu_y+=menu_displacement_velocity;
-                if(bottom_menu_y>target_bottom_menu_y)
-                    bottom_menu_y = target_bottom_menu_y;
-            }
-            if(bottom_menu_y>target_bottom_menu_y)
-            {
-                bottom_menu_y-=menu_displacement_velocity;
                 if(bottom_menu_y<target_bottom_menu_y)
-                    bottom_menu_y = target_bottom_menu_y;
+                {
+                    bottom_menu_y+=menu_displacement_velocity;
+                    if(bottom_menu_y>target_bottom_menu_y)
+                        bottom_menu_y = target_bottom_menu_y;
+                }
+                if(bottom_menu_y>target_bottom_menu_y)
+                {
+                    bottom_menu_y-=menu_displacement_velocity;
+                    if(bottom_menu_y<target_bottom_menu_y)
+                        bottom_menu_y = target_bottom_menu_y;
+                }
+                top_menu_y -= menu_displacement_velocity;
+                middle_menu_y -= menu_displacement_velocity;
             }
-            top_menu_y -= menu_displacement_velocity;
-            middle_menu_y -= menu_displacement_velocity;
+
+            top_menu_y = std::max(top_menu_y,(double)-7*entry_height);
+            middle_menu_y = std::max(middle_menu_y,(double)-stage_images[current_stage]->getHeight());
+            bottom_menu_y = std::max(bottom_menu_y,(double)-Rosalila()->Graphics->screen_height);
+
+            top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height);
+            middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height);
+            bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height);
+
+
+            selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
         }
-
-        top_menu_y = std::max(top_menu_y,(double)-7*entry_height);
-        middle_menu_y = std::max(middle_menu_y,(double)-stage_images[current_stage]->getHeight());
-        bottom_menu_y = std::max(bottom_menu_y,(double)-Rosalila()->Graphics->screen_height);
-
-        top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height);
-        middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height);
-        bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height);
-
-
-        selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
 
         bool error_found = false;
 
@@ -402,7 +406,7 @@ void stageSelect(map<string,Button*> controls)
             if(!error_found)
             {
                 int current_player_best_score = -1;
-                if(current_leaderboard->leaderboard_self_entry!=NULL)
+                if(current_leaderboard && current_leaderboard->leaderboard_self_entry!=NULL)
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 
                 Stage*stage=new Stage();
@@ -499,21 +503,24 @@ void stageSelect(map<string,Button*> controls)
             false,
             FlatShadow());
 
-        for(int i=0;i<current_leaderboard->top_entries.size();i++)
+        if(current_leaderboard)
         {
-            LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
-            string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+            for(int i=0;i<current_leaderboard->top_entries.size();i++)
+            {
+                LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
+                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
-        }
+                graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
+            }
 
-        for(int i=0;i<current_leaderboard->near_entries.size();i++)
-        {
-            int align_y = 200+top_menu_y;
-            LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
-            string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+            for(int i=0;i<current_leaderboard->near_entries.size();i++)
+            {
+                int align_y = 200+top_menu_y;
+                LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
+                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
 
-            graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
+                graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
+            }
         }
 
         //Middle menu
@@ -604,12 +611,15 @@ void stageSelect(map<string,Button*> controls)
             }
         }
 
-        //Bottom menu
-        for(int i=0;i<current_leaderboard->friends_entries.size();i++)
+        if(current_leaderboard)
         {
-            LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
-            string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
-            graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
+            //Bottom menu
+            for(int i=0;i<current_leaderboard->friends_entries.size();i++)
+            {
+                LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
+                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+                graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
+            }
         }
 
         Rosalila()->Receiver->updateInputs();
