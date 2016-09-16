@@ -411,9 +411,10 @@ void stageSelect(map<string,Button*> controls)
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
                 STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
 
-//                for(int i=0;i<100000;i++)
+//                for(int i=0;i<1000;i++)
 //                {
 //                    Stage*x=new Stage();
+//                    stage->loadFromXML(stage_names[current_stage]);
 //                    delete x;
 //                }
 
