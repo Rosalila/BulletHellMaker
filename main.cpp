@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
     }
 
     RosalilaInit();
-    Rosalila()->Utility->clearLog();
     initShooterUtility();
 
     Rosalila()->ApiIntegrator->unlockAchievement("A");
