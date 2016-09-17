@@ -107,41 +107,35 @@ void Stage::loadFromXML(std::string name)
 
     Rosalila()->Utility->writeLogLine("Loading stage from XML.");
 
-    string main_path = assets_directory+"stages/"+name+"/main.xml";
-    TiXmlDocument doc_t((char*)main_path.c_str());
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-
-    TiXmlNode *stage_file=doc->FirstChild("StageFile");
+    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"stages/"+name+"/main.xml");
 
     //Load settings
     music_path = assets_directory+"stages/"+name+"/music.ogg";
 
-    TiXmlNode *nodo_bounds=stage_file->FirstChild("Bounds");
+    Node* nodo_bounds = root_node->getNodeByName("Bounds");
     this->bound_x1=0;
     this->bound_y1=0;
     this->bound_x2=Rosalila()->Graphics->screen_width;
     this->bound_y2=Rosalila()->Graphics->screen_height;
 
-    if(nodo_bounds->ToElement()->Attribute("x1")!=NULL)
-        this->bound_x1=atoi(nodo_bounds->ToElement()->Attribute("x1"));
+    if(nodo_bounds->hasAttribute("x1"))
+        this->bound_x1=atoi(nodo_bounds->attributes["x1"].c_str());
 
-    if(nodo_bounds->ToElement()->Attribute("y1")!=NULL)
-        this->bound_y1=atoi(nodo_bounds->ToElement()->Attribute("y1"));
+    if(nodo_bounds->hasAttribute("y1"))
+        this->bound_y1=atoi(nodo_bounds->attributes["y1"].c_str());
 
-    if(nodo_bounds->ToElement()->Attribute("x2")!=NULL)
-        this->bound_x2=atoi(nodo_bounds->ToElement()->Attribute("x2"));
+    if(nodo_bounds->hasAttribute("x2"))
+        this->bound_x2=atoi(nodo_bounds->attributes["x2"].c_str());
 
-    if(nodo_bounds->ToElement()->Attribute("y2")!=NULL)
-        this->bound_y2=atoi(nodo_bounds->ToElement()->Attribute("y2"));
+    if(nodo_bounds->hasAttribute("y2"))
+        this->bound_y2=atoi(nodo_bounds->attributes["y2"].c_str());
 
 
-    TiXmlNode *nodo_misc=stage_file->FirstChild("Misc");
+    Node* nodo_misc=root_node->getNodeByName("Misc");
 
     this->velocity=0;
-    if(nodo_misc->ToElement()->Attribute("velocity")!=NULL)
-        this->velocity=atoi(nodo_misc->ToElement()->Attribute("velocity"));
+    if(nodo_misc->hasAttribute("velocity"))
+        this->velocity=atoi(nodo_misc->attributes["velocity"].c_str());
 
     Rosalila()->Utility->writeLogLine("Loading stage's BackLayers.");
 
@@ -242,22 +236,24 @@ random_colors_b.push_back(random_color_b);
 map<string,list<int> >randomized_appereance;
 map<string,int>max_layers;
 int current_layer=0;
-for(TiXmlNode *nodo_back=stage_file->FirstChild("BackLayer");
-        nodo_back!=NULL;
-        nodo_back=nodo_back->NextSibling("BackLayer"))
+
+vector<Node*> backlayer_nodes = root_node->getNodesByName("BackLayer");
+
+for(int i=0;i<backlayer_nodes.size();i++)
 {
-    if(nodo_back->ToElement()->Attribute("randomize_appereance")!=NULL
-       && strcmp(nodo_back->ToElement()->Attribute("randomize_appereance"),"yes")==0)
+    if(backlayer_nodes[i]->hasAttribute("randomize_appereance")
+       && backlayer_nodes[i]->attributes["randomize_appereance"]=="yes")
    {
        string random_group="";
-       if(nodo_back->ToElement()->Attribute("random_group")!=NULL)
+       if(backlayer_nodes[i]->hasAttribute("random_group"))
        {
-           random_group=nodo_back->ToElement()->Attribute("random_group");
+           random_group=backlayer_nodes[i]->attributes["random_group"];
        }
        randomized_appereance[random_group].push_back(current_layer);
    }
    current_layer++;
 }
+
 //int max_layers=rand()%3+1;
 //max_layer["a"]=rand()%3+1;
 //max_layer["b"]=rand()%3+1;
@@ -284,15 +280,13 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
 current_layer=0;
 
-    //Load back layer
-    for(TiXmlNode *nodo_back=stage_file->FirstChild("BackLayer");
-            nodo_back!=NULL;
-            nodo_back=nodo_back->NextSibling("BackLayer"))
-    {
+
+for(int i=0;i<backlayer_nodes.size();i++)
+{
         bool included=false;
 
-        if(nodo_back->ToElement()->Attribute("randomize_appereance")==NULL
-            || strcmp(nodo_back->ToElement()->Attribute("randomize_appereance"),"yes")!=0)
+        if(!backlayer_nodes[i]->hasAttribute("randomize_appereance")
+            || backlayer_nodes[i]->attributes["randomize_appereance"]!="yes")
         {
             included=true;
         }else
@@ -324,70 +318,66 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         }
 
         int frame_duration=0;
-        if(nodo_back->ToElement()->Attribute("frame_duration")!=NULL)
-            frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+        if(backlayer_nodes[i]->hasAttribute("frame_duration"))
+            frame_duration=atoi(backlayer_nodes[i]->attributes["frame_duration"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_frame_duration")!=NULL)
-            frame_duration+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_frame_duration"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_frame_duration"))
+            frame_duration+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_frame_duration"].c_str());
 
         int depth_effect_x=0;
-        if(nodo_back->ToElement()->Attribute("depth_effect_x")!=NULL)
-            depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+        if(backlayer_nodes[i]->hasAttribute("depth_effect_x"))
+            depth_effect_x=atoi(backlayer_nodes[i]->attributes["depth_effect_x"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_depth_effect_x")!=NULL)
-            depth_effect_x+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_depth_effect_x"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_depth_effect_x"))
+            depth_effect_x+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_x"].c_str());
 
         int depth_effect_y=0;
-        if(nodo_back->ToElement()->Attribute("depth_effect_y")!=NULL)
-            depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+        if(backlayer_nodes[i]->hasAttribute("depth_effect_y"))
+            depth_effect_y=atoi(backlayer_nodes[i]->attributes["depth_effect_y"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_depth_effect_y")!=NULL)
-            depth_effect_y+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_depth_effect_y"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_depth_effect_y"))
+            depth_effect_y+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_y"].c_str());
 
         int align_x=0;
-        if(nodo_back->ToElement()->Attribute("align_x")!=NULL)
-            align_x=atoi(nodo_back->ToElement()->Attribute("align_x"));
+        if(backlayer_nodes[i]->hasAttribute("align_x"))
+            align_x=atoi(backlayer_nodes[i]->attributes["align_x"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_align_x")!=NULL)
-            align_x+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_align_x"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_align_x"))
+            align_x+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_align_x"].c_str());
 
         int align_y=0;
-        if(nodo_back->ToElement()->Attribute("align_y")!=NULL)
-            align_y=atoi(nodo_back->ToElement()->Attribute("align_y"));
+        if(backlayer_nodes[i]->hasAttribute("align_y"))
+            align_y=atoi(backlayer_nodes[i]->attributes["align_y"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_align_y")!=NULL)
-            align_y+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_align_y"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_align_y"))
+            align_y+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_align_y"].c_str());
 
         int separation_x=0;
-        if(nodo_back->ToElement()->Attribute("separation_x")!=NULL)
-            separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
+        if(backlayer_nodes[i]->hasAttribute("separation_x"))
+            separation_x=atoi(backlayer_nodes[i]->attributes["separation_x"].c_str());
 
-        if(nodo_back->ToElement()->Attribute("randomize_separation_x")!=NULL)
-            separation_x+=rand()%atoi(nodo_back->ToElement()->Attribute("randomize_separation_x"));
+        if(backlayer_nodes[i]->hasAttribute("randomize_separation_x"))
+            separation_x+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_separation_x"].c_str());
 
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
 
-        for(TiXmlNode* layer=nodo_back->FirstChild("frame");
-                layer!=NULL;
-                layer=layer->NextSibling("frame"))
-        {
-            char *image=new char[255];
-            strcpy(image,"stages/");
-            strcat(image,name.c_str());
-            strcat(image,"/images/");
-            strcat(image,layer->ToElement()->Attribute("image_path"));
+        vector<Node*> frame_nodes = backlayer_nodes[i]->getNodesByName("frame");
 
-            Image *image_temp=Rosalila()->Graphics->getTexture(assets_directory+image);
+        for(int i=0;i<frame_nodes.size();i++)
+        {
+            string image_path = "stages/"+name+"/images/"+frame_nodes[i]->attributes["image_path"];
+
+            Image *image_temp=Rosalila()->Graphics->getTexture(assets_directory+image_path);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();
 
-            if(layer->ToElement()->Attribute("width")!=NULL)
-                size_x=atoi(layer->ToElement()->Attribute("width"));
-            if(layer->ToElement()->Attribute("height")!=NULL)
-                size_y=atoi(layer->ToElement()->Attribute("height"));
+            if(frame_nodes[i]->hasAttribute("width"))
+                size_x=atoi(frame_nodes[i]->attributes["width"].c_str());
+            if(frame_nodes[i]->hasAttribute("height"))
+                size_y=atoi(frame_nodes[i]->attributes["height"].c_str());
 
             textures.push_back(image_temp);
             textures_size_x.push_back(size_x);
@@ -397,8 +387,8 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         int random_color_r=255;
         int random_color_g=255;
         int random_color_b=255;
-        if(nodo_back->ToElement()->Attribute("randomize_color")
-           && strcmp(nodo_back->ToElement()->Attribute("randomize_color"),"yes")==0)
+        if(backlayer_nodes[i]->hasAttribute("randomize_color")
+           && backlayer_nodes[i]->attributes["randomize_color"]=="yes")
         {
             int random_number_pos=rand()%random_colors_r.size();
             random_color_r=random_colors_r[random_number_pos];
@@ -411,54 +401,54 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
     Rosalila()->Utility->writeLogLine("Loading stage's FrontLayers.");
 
+
+    vector<Node*> frontlayer_nodes = root_node->getNodesByName("FrontLayer");
     //Load front layer
-    for(TiXmlNode *nodo_back=stage_file->FirstChild("FrontLayer");
-            nodo_back!=NULL;
-            nodo_back=nodo_back->NextSibling("FrontLayer"))
+    for(int i=0;i<frontlayer_nodes.size();i++)
     {
         int frame_duration=0;
-        if(nodo_back->ToElement()->Attribute("frame_duration")!=NULL)
-            frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+        if(frontlayer_nodes[i]->hasAttribute("frame_duration"))
+            frame_duration=atoi(frontlayer_nodes[i]->attributes["frame_duration"].c_str());
 
         int depth_effect_x=0;
-        if(nodo_back->ToElement()->Attribute("depth_effect_x")!=NULL)
-            depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+        if(frontlayer_nodes[i]->hasAttribute("depth_effect_x"))
+            depth_effect_x=atoi(frontlayer_nodes[i]->attributes["depth_effect_x"].c_str());
 
         int depth_effect_y=0;
-        if(nodo_back->ToElement()->Attribute("depth_effect_y")!=NULL)
-            depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+        if(frontlayer_nodes[i]->hasAttribute("depth_effect_y"))
+            depth_effect_y=atoi(frontlayer_nodes[i]->attributes["depth_effect_y"].c_str());
 
         int align_x=0;
-        if(nodo_back->ToElement()->Attribute("align_x")!=NULL)
-            align_x=atoi(nodo_back->ToElement()->Attribute("align_x"));
+        if(frontlayer_nodes[i]->hasAttribute("align_x"))
+            align_x=atoi(frontlayer_nodes[i]->attributes["align_x"].c_str());
 
         int align_y=0;
-        if(nodo_back->ToElement()->Attribute("align_y")!=NULL)
-            align_y=atoi(nodo_back->ToElement()->Attribute("align_y"));
+        if(frontlayer_nodes[i]->hasAttribute("align_y"))
+            align_y=atoi(frontlayer_nodes[i]->attributes["align_y"].c_str());
 
         int separation_x=0;
-        if(nodo_back->ToElement()->Attribute("separation_x")!=NULL)
-            separation_x=atoi(nodo_back->ToElement()->Attribute("separation_x"));
+        if(frontlayer_nodes[i]->hasAttribute("separation_x"))
+            separation_x=atoi(frontlayer_nodes[i]->attributes["separation_x"].c_str());
 
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
 
-        for(TiXmlNode* layer=nodo_back->FirstChild("frame");
-                layer!=NULL;
-                layer=layer->NextSibling("frame"))
+        vector<Node*> frame_nodes = frontlayer_nodes[i]->getNodesByName("frame");
+
+        for(int i=0;i<frame_nodes.size();i++)
         {
-            string image_path = assets_directory+"stages/"+name+"/images/"+layer->ToElement()->Attribute("image_path");
+            string image_path = assets_directory+"stages/"+name+"/images/"+frame_nodes[i]->attributes["image_path"];
 
             Image *image_temp=Rosalila()->Graphics->getTexture(image_path);
 
             int size_x=image_temp->getWidth();
             int size_y=image_temp->getHeight();
 
-            if(layer->ToElement()->Attribute("width")!=NULL)
-                size_x=atoi(layer->ToElement()->Attribute("width"));
-            if(layer->ToElement()->Attribute("height")!=NULL)
-                size_y=atoi(layer->ToElement()->Attribute("height"));
+            if(frame_nodes[i]->hasAttribute("width"))
+                size_x=atoi(frame_nodes[i]->attributes["width"].c_str());
+            if(frame_nodes[i]->hasAttribute("height"))
+                size_y=atoi(frame_nodes[i]->attributes["height"].c_str());
 
             textures.push_back(image_temp);
             textures_size_x.push_back(size_x);
@@ -466,21 +456,23 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         }
 
         int random_color_r=255;
-        if(nodo_back->ToElement()->Attribute("random_color_r")!=NULL)
-            random_color_r=atoi(nodo_back->ToElement()->Attribute("random_color_r"));
+        if(frontlayer_nodes[i]->hasAttribute("random_color_r"))
+            random_color_r=atoi(frontlayer_nodes[i]->attributes["random_color_r"].c_str());
 
         int random_color_g=255;
-        if(nodo_back->ToElement()->Attribute("random_color_g")!=NULL)
-            random_color_g=atoi(nodo_back->ToElement()->Attribute("random_color_g"));
+        if(frontlayer_nodes[i]->hasAttribute("random_color_g"))
+            random_color_g=atoi(frontlayer_nodes[i]->attributes["random_color_g"].c_str());
 
         int random_color_b=255;
-        if(nodo_back->ToElement()->Attribute("random_color_b")!=NULL)
-            random_color_b=atoi(nodo_back->ToElement()->Attribute("random_color_b"));
+        if(frontlayer_nodes[i]->hasAttribute("random_color_b"))
+            random_color_b=atoi(frontlayer_nodes[i]->attributes["random_color_b"].c_str());
 
         front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,
                                   random_color_r,random_color_g,random_color_b
                                   ));
     }
+
+    delete root_node;
     Rosalila()->Utility->writeLogLine("Stage loaded succesfully from XML.");
 }
 
