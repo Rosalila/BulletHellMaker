@@ -1,12 +1,11 @@
 #include "STG.h"
 
-STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,map<string,Button*>controls, int current_player_best_score)
+STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_player_best_score)
 {
     this->player=player;
     this->enemy=enemy;
     this->stage=stage;
     this->game_mode=game_mode;
-    this->controls=controls;
     this->current_player_best_score = current_player_best_score;
 
     this->api_state = "";
@@ -188,12 +187,12 @@ void STG::mainLoop()
         if(getGameOver() && api_state == "")
         {
             if(Rosalila()->Receiver->isKeyPressed(SDLK_RETURN)
-               || (controls["a"]->isDown() && end_key_up_keyboard)
+               || (Rosalila()->Receiver->isDown("a") && end_key_up_keyboard)
                )
             {
                 break;
             }
-            if(!controls["a"]->isDown())
+            if(!Rosalila()->Receiver->isDown("a"))
                 end_key_up_keyboard=true;
 
         }
@@ -697,7 +696,7 @@ void STG::uploadErrorLoop()
 
     while(true)
     {
-        if(controls["a"]->isPressed())
+        if(Rosalila()->Receiver->isPressed("a"))
         {
             break;
         }

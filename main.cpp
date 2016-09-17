@@ -26,11 +26,13 @@ int main(int argc, char *argv[])
 
     Rosalila()->ApiIntegrator->unlockAchievement("A");
 
-    map<string,Button*> controls = ControllerConfig(input_config);
+    Rosalila()->ApiIntegrator->setCurrentControllerActionSet("MenuControls");
 
-    intro(controls);
+    Rosalila()->Receiver->controls = ControllerConfig(input_config);
 
-    stageSelect(controls);
+    intro();
+
+    stageSelect();
 
     return 0;
 }

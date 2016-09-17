@@ -11,6 +11,6 @@
 
 std::vector<std::string> getStageNames();
 std::vector<Image*> getStageImages(std::vector<std::string> stage_names);
-void stageSelect(map<string,Button*> controls);
+void stageSelect();
 
 #endif

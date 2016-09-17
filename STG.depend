@@ -3129,13 +3129,15 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	<map>
 
-1472162999 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
+1474089263 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.h
 	<iostream>
 	<fstream>
 	<vector>
+	<map>
 	<stdarg.h>
 	"SDL2/SDL.h"
 	"../RosalilaUtility/RosalilaUtility.h"
+	"Button.h"
 
 1471838145 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Boton.h
 	"../Rosalila.h"
@@ -3300,7 +3302,7 @@
 1471838217 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs.h"
 
-1471972192 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+1474089344 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
 	"RosalilaInputs.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/Elemento.cpp
@@ -3460,7 +3462,7 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1474082522 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1474089991 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3655,7 +3657,7 @@
 	"../Rosalila.h"
 	"../RosalilaInputs/RosalilaInputs.h"
 
-1471965287 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.cpp
+1474087846 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.cpp
 	"Button.h"
 
 1473786634 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.cpp
@@ -3706,7 +3708,7 @@
 	"Character.h"
 	"Player.h"
 
-1473783789 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.h
+1474089568 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.h
 	<map>
 	<list>
 	<vector>
@@ -3721,13 +3723,13 @@
 1473788402 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
-1473883877 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
+1474089607 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1473891382 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1474089672 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
-1473891195 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
+1474089629 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
@@ -3795,13 +3797,13 @@
 	"../Utility/Utility.h"
 	"../../Rosalila/RosalilaInputs/Button.h"
 
-1473995944 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
+1474089383 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1474065492 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1474089457 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
-1473968310 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
+1474088992 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
 	"../Utility/Utility.h"
 	"../Character/Player.h"
 	"../Character/Enemy.h"
@@ -3813,10 +3815,10 @@
 1473547154 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Utility/Utility.cpp
 	"Utility.h"
 
-1471966300 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
+1474088984 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
 	"../Utility/Utility.h"
 
-1473890905 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
+1474087386 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp
 	"RosalilaApiIntegrator.h"
 
 1474087343 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h

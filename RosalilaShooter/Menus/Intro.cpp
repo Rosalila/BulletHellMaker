@@ -1,6 +1,6 @@
 #include "ControllerConfig.h"
 
-void intro(map<string,Button*> controls)
+void intro()
 {
     RosalilaGraphics* graphics=Rosalila()->Graphics;
     RosalilaReceiver* receiver=Rosalila()->Receiver;
@@ -18,7 +18,7 @@ void intro(map<string,Button*> controls)
 
     while(true)
     {
-        if(controls["a"]->isPressed() && Rosalila()->ApiIntegrator->getState()!="loading")
+        if(Rosalila()->Receiver->isPressed("a") && Rosalila()->ApiIntegrator->getState()!="loading")
         {
             break;
         }
@@ -58,7 +58,7 @@ void intro(map<string,Button*> controls)
 
     while(true)
     {
-        if(controls["a"]->isPressed())
+        if(Rosalila()->Receiver->isPressed("a"))
         {
             break;
         }

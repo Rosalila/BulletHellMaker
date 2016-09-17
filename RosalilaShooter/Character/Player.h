@@ -28,8 +28,6 @@ public:
     Color slow_bar_color;
     Color slow_bar_cooldown_color;
 
-    map<string,Button*>controls;
-
     //Shield
     int current_shield;
     int max_shield;
@@ -67,7 +65,7 @@ public:
     vector<string> replay_input;
     vector<string> replay_storage;
 
-    Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string>intro_input,vector<string>replay_input);
+    Player(std::string name,int sound_channel_base,vector<string>intro_input,vector<string>replay_input);
     ~Player();
     void loadFromXML();
     void loadPlayerFromXML();

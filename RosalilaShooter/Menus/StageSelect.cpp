@@ -163,7 +163,7 @@ LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_n
     return NULL;
 }
 
-void stageSelect(map<string,Button*> controls)
+void stageSelect()
 {
     RosalilaGraphics* graphics=Rosalila()->Graphics;
     std::vector<std::string> stage_names = getStageNames();
@@ -205,12 +205,12 @@ void stageSelect(map<string,Button*> controls)
             break;
         }
 
-        if(!controls["a"]->isDown())
+        if(!Rosalila()->Receiver->isDown("a"))
         {
             select_button_was_up = true;
         }
 
-        if(controls["6"]->isPressed())
+        if(Rosalila()->Receiver->isPressed("6"))
         {
             current_stage++;
             entry_navigator=0;
@@ -219,7 +219,7 @@ void stageSelect(map<string,Button*> controls)
             Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
         }
 
-        if(controls["4"]->isPressed())
+        if(Rosalila()->Receiver->isPressed("4"))
         {
             current_stage--;
             entry_navigator=0;
@@ -233,7 +233,7 @@ void stageSelect(map<string,Button*> controls)
 
         if(current_leaderboard)
         {
-            if(controls["2"]->isPressed())
+            if(Rosalila()->Receiver->isPressed("2"))
             {
                 entry_navigator++;
                 if(entry_navigator > (int)current_leaderboard->friends_entries.size())
@@ -241,7 +241,7 @@ void stageSelect(map<string,Button*> controls)
                     entry_navigator = current_leaderboard->friends_entries.size();
                 }
             }
-            if(controls["8"]->isPressed())
+            if(Rosalila()->Receiver->isPressed("8"))
             {
                 entry_navigator--;
                 if(entry_navigator<-6)
@@ -318,7 +318,7 @@ void stageSelect(map<string,Button*> controls)
 
         bool error_found = false;
 
-        if(controls["a"]->isDown() && select_button_was_up)
+        if(Rosalila()->Receiver->isDown("a") && select_button_was_up)
         {
             Rosalila()->Utility->writeLogLine("Initializing game.");
             Rosalila()->Utility->setRandomSeed(time(NULL));
@@ -411,9 +411,9 @@ void stageSelect(map<string,Button*> controls)
 
                 Stage*stage=new Stage();
                 stage->loadFromXML(stage_names[current_stage]);
-                Player*player=new Player("Triangle",10,controls,intro_input,replay_input);
+                Player*player=new Player("Triangle",10,intro_input,replay_input);
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
-                STG*stg=new STG(player,enemy,stage,game_mode,controls,current_player_best_score);
+                STG*stg=new STG(player,enemy,stage,game_mode,current_player_best_score);
 
 //                for(int i=0;i<1000;i++)
 //                {

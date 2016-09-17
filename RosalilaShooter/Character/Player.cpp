@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(std::string name,int sound_channel_base,map<string,Button*>controls,vector<string> intro_input, vector<string> replay_input)
+Player::Player(std::string name,int sound_channel_base,vector<string> intro_input, vector<string> replay_input)
 {
     //Setting up the other variables
     this->name=name;
@@ -13,7 +13,6 @@ Player::Player(std::string name,int sound_channel_base,map<string,Button*>contro
     this->charge_ready=false;
     this->frame=0;
     this->charging_sound_channel=-1;
-    this->controls=controls;
     this->slow_bar = NULL;
     this->shield_image = NULL;
     this->charge_image = NULL;
@@ -751,7 +750,7 @@ bool Player::isDownWrapper(string button_map)
         if(frame>=intro_input.size())
         {
             Rosalila()->Graphics->grayscale_effect.set(1,0.003);
-            return controls[button_map]->isDown();
+            return Rosalila()->Receiver->isDown(button_map);
         }
 
         for(int i=0;i<intro_input[frame].size();i++)
@@ -759,7 +758,7 @@ bool Player::isDownWrapper(string button_map)
                 return true;
         return false;
     }
-    return controls[button_map]->isDown();
+    return Rosalila()->Receiver->isDown(button_map);
 }
 
 bool Player::isOnIntro()

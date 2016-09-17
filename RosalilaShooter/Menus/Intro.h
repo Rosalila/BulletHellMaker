@@ -3,6 +3,6 @@
 
 #include "../Utility/Utility.h"
 
-void intro(map<string,Button*> controls);
+void intro();
 
 #endif
