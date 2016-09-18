@@ -142,7 +142,6 @@ void Pattern::setState(std::string state)
 
 void Pattern::updateStateShouting()
 {
-    //cout<<state<<endl;
     if(getIterateSlowdownFlag())
     {
         if(state=="startup")

@@ -398,7 +398,6 @@ void stageSelect()
                                             Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
                                             getNotificationDuration()));
                     error_found=true;
-                    cout<<"Error"<<endl;
                     Rosalila()->Graphics->grayscale_effect.set(1,1);
                 }
             }
@@ -413,7 +412,9 @@ void stageSelect()
                 stage->loadFromXML(stage_names[current_stage]);
                 Player*player=new Player("Triangle",10,intro_input,replay_input);
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
+                Rosalila()->ApiIntegrator->setCurrentControllerActionSet("InGameControls");
                 STG*stg=new STG(player,enemy,stage,game_mode,current_player_best_score);
+                Rosalila()->ApiIntegrator->setCurrentControllerActionSet("MenuControls");
 
 //                for(int i=0;i<1000;i++)
 //                {

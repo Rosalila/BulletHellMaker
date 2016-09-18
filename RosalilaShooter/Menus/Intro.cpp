@@ -8,7 +8,7 @@ void intro()
     Image* image=graphics->getTexture(assets_directory+"menu/rosalila.png");
     Image* image2=graphics->getTexture(assets_directory+"menu/flatshot.png");
 
-    int current_background_transparency=0;
+    int current_fade_in=0;
 
     Rosalila()->Graphics->notification_handler.notifications.push_back(
         new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
@@ -36,7 +36,7 @@ void intro()
             0.0,
             false,
             0,0,
-            Color(255,255,255,current_background_transparency),
+            Color(current_fade_in,current_fade_in,current_fade_in,255),
             0,0,
             false,
             FlatShadow());
@@ -46,15 +46,16 @@ void intro()
             Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
         }
 
-        current_background_transparency++;
+        current_fade_in++;
+        if(current_fade_in>255)
+            current_fade_in=255;
 
         receiver->updateInputs();
         graphics->updateScreen();
         Rosalila()->ApiIntegrator->updateCallbacks();
     }
 
-    Rosalila()->ApiIntegrator->getData("a");
-    current_background_transparency=0;
+    int current_background_transparency=0;
 
     while(true)
     {
@@ -82,6 +83,8 @@ void intro()
             FlatShadow());
 
         current_background_transparency++;
+        if(current_background_transparency>255)
+            current_background_transparency=255;
 
         receiver->updateInputs();
         graphics->updateScreen();
