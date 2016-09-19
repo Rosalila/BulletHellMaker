@@ -138,7 +138,7 @@ void STG::mainLoop()
 
     for (;;)
     {
-        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE) && api_state == "")
+        if(Rosalila()->Receiver->isPressed("b") && api_state == "")
         {
 //            int replay_size=0;
 //            string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);

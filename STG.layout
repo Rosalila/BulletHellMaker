@@ -19,7 +19,7 @@
 	<File name="Rosalila/RosalilaApiIntegrator/LeaderboardEntry.h" open="0" top="0" tabpos="0">
 		<Cursor position="253" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="1" top="0" tabpos="6">
+	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="1730" topLine="54" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/RosalilaApiIntegrator.h" open="0" top="0" tabpos="0">
@@ -31,7 +31,7 @@
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h" open="0" top="0" tabpos="1">
 		<Cursor position="907" topLine="14" />
 	</File>
-	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="1" top="1" tabpos="7">
+	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp" open="0" top="0" tabpos="7">
 		<Cursor position="4298" topLine="37" />
 	</File>
 	<File name="Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.h" open="0" top="0" tabpos="3">
@@ -85,10 +85,10 @@
 	<File name="Rosalila/RosalilaInputs/Button.h" open="0" top="0" tabpos="0">
 		<Cursor position="103" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="1" top="0" tabpos="2">
+	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="20599" topLine="575" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="1" top="0" tabpos="1">
+	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="1">
 		<Cursor position="350" topLine="6" />
 	</File>
 	<File name="Rosalila/RosalilaParser/Node.cpp" open="0" top="0" tabpos="0">
@@ -131,10 +131,10 @@
 		<Cursor position="97" topLine="0" />
 	</File>
 	<File name="RosalilaShooter/Character/Character.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="2921" topLine="258" />
+		<Cursor position="31611" topLine="915" />
 	</File>
 	<File name="RosalilaShooter/Character/Character.h" open="0" top="0" tabpos="3">
-		<Cursor position="1432" topLine="51" />
+		<Cursor position="1326" topLine="51" />
 	</File>
 	<File name="RosalilaShooter/Character/Enemy.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="4257" topLine="150" />
@@ -145,7 +145,7 @@
 	<File name="RosalilaShooter/Character/Modifier.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="137" topLine="0" />
 	</File>
-	<File name="RosalilaShooter/Character/Pattern.cpp" open="1" top="0" tabpos="4">
+	<File name="RosalilaShooter/Character/Pattern.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="4158" topLine="93" />
 	</File>
 	<File name="RosalilaShooter/Character/Pattern.h" open="0" top="0" tabpos="3">
@@ -157,26 +157,26 @@
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="1431" topLine="51" />
 	</File>
-	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="1839" topLine="48" />
+	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="2302" topLine="46" />
 	</File>
-	<File name="RosalilaShooter/Menus/Intro.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="1659" topLine="62" />
+	<File name="RosalilaShooter/Menus/Intro.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="1505" topLine="30" />
 	</File>
 	<File name="RosalilaShooter/Menus/Intro.h" open="0" top="0" tabpos="0">
 		<Cursor position="77" topLine="0" />
 	</File>
-	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="15102" topLine="401" />
+	<File name="RosalilaShooter/Menus/StageSelect.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="21176" topLine="575" />
 	</File>
 	<File name="RosalilaShooter/Menus/StageSelect.h" open="0" top="0" tabpos="0">
 		<Cursor position="365" topLine="0" />
 	</File>
-	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="24364" topLine="694" />
+	<File name="RosalilaShooter/STG.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="15642" topLine="420" />
 	</File>
-	<File name="RosalilaShooter/STG.h" open="0" top="0" tabpos="7">
-		<Cursor position="1071" topLine="31" />
+	<File name="RosalilaShooter/STG.h" open="1" top="0" tabpos="1">
+		<Cursor position="1017" topLine="31" />
 	</File>
 	<File name="RosalilaShooter/Stage/Layer.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="4" />
@@ -185,18 +185,18 @@
 		<Cursor position="67" topLine="5" />
 	</File>
 	<File name="RosalilaShooter/Stage/Stage.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="265" topLine="0" />
+		<Cursor position="1495" topLine="56" />
 	</File>
 	<File name="RosalilaShooter/Stage/Stage.h" open="0" top="0" tabpos="0">
-		<Cursor position="180" topLine="3" />
+		<Cursor position="389" topLine="9" />
 	</File>
 	<File name="RosalilaShooter/Utility/Utility.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1481" topLine="57" />
+		<Cursor position="741" topLine="10" />
 	</File>
 	<File name="RosalilaShooter/Utility/Utility.h" open="0" top="0" tabpos="0">
-		<Cursor position="20" topLine="0" />
+		<Cursor position="528" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3">
+	<File name="main.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="619" topLine="11" />
 	</File>
 </CodeBlocks_layout_file>

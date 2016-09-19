@@ -200,7 +200,7 @@ void stageSelect()
 
     while(true)
     {
-        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        if(Rosalila()->Receiver->isPressed("b"))
         {
             break;
         }
@@ -594,7 +594,7 @@ void stageSelect()
                     FlatShadow());
             }
 
-            if(entry_navigator<current_leaderboard->friends_entries.size())
+            if(entry_navigator<=0 || entry_navigator<current_leaderboard->friends_entries.size())
             {
                 graphics->draw2DImage
                 (   down_arrow,

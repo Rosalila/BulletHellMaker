@@ -23,7 +23,7 @@ void intro()
             break;
         }
 
-        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        if(Rosalila()->Receiver->isPressed("b"))
         {
             exit(0);
         }
@@ -64,7 +64,7 @@ void intro()
             break;
         }
 
-        if(Rosalila()->Receiver->isKeyPressed(SDLK_ESCAPE))
+        if(Rosalila()->Receiver->isPressed("b"))
         {
             exit(0);
         }

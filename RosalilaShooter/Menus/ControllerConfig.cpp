@@ -47,18 +47,30 @@ map<string,Button*> ControllerConfig(bool reconfigure)
 
     RosalilaGraphics* graphics=Rosalila()->Graphics;
     Image* controls_config_backgound = graphics->getTexture(assets_directory+"misc/controls configuration/background.png");
+    Image* player_image = graphics->getTexture(assets_directory+"misc/controls configuration/player.png");
+    Image* bullet_image = graphics->getTexture(assets_directory+"misc/controls configuration/bullet.png");
+    vector<Image*> icon_images;
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/up_arrow.png"));
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/down_arrow.png"));
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/left_arrow.png"));
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/right_arrow.png"));
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/player.png"));
+    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/back.png"));
+    int player_image_initial_x = graphics->screen_width/2-player_image->getWidth()/2;
+    int player_image_initial_y = graphics->screen_height/2-player_image->getHeight()/2;
+    int player_image_x = player_image_initial_x;
+    int player_image_y = player_image_initial_y;
+    int bullet_initial_x = graphics->screen_width/2-bullet_image->getWidth()/2 + 25;
+    int bullet_image_x = bullet_initial_x;
+    int bullet_image_y = graphics->screen_height/2-bullet_image->getHeight()/2;
     vector<string> controls_config_map_name;
     controls_config_map_name.push_back("8");
     controls_config_map_name.push_back("2");
     controls_config_map_name.push_back("4");
     controls_config_map_name.push_back("6");
     controls_config_map_name.push_back("a");
-    vector<Image*> controls_config_press_images;
-    controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_up.png"));
-    controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_down.png"));
-    controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_left.png"));
-    controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_right.png"));
-    controls_config_press_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/press_shoot.png"));
+    controls_config_map_name.push_back("b");
+
     RosalilaReceiver* receiver = Rosalila()->Receiver;
 
     map<string,Button*>controls;
@@ -69,8 +81,11 @@ map<string,Button*> ControllerConfig(bool reconfigure)
     {
         int key_pressed = -1;
         int joy_pressed = -1;
+
         if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
+            player_image_x = player_image_initial_x;
+            player_image_y = player_image_initial_y;
             current_button--;
             if(current_button<0)
                 exit(0);
@@ -81,13 +96,18 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             if(receiver->isKeyPressed(i))
             {
                 key_pressed=i;
+                player_image_x = player_image_initial_x;
+                player_image_y = player_image_initial_y;
             }
         }
+
         for(int i=0;i<100;i++)
         {
             if(receiver->isJoyPressed(i,0))
             {
                 joy_pressed=i;
+                player_image_x = player_image_initial_x;
+                player_image_y = player_image_initial_y;
             }
         }
         if(receiver->isJoyPressed(-2,0))
@@ -104,7 +124,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             string current_button_map = controls_config_map_name[current_button];
             controls[current_button_map]=new Button(key_pressed,current_button_map);
             current_button++;
-            if(current_button>=(int)controls_config_press_images.size())
+            if(current_button>=(int)controls_config_map_name.size())
                 break;
         }
         if(joy_pressed!=-1)
@@ -112,7 +132,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             string current_button_map = controls_config_map_name[current_button];
             controls[current_button_map]=new Button(joy_pressed,0,current_button_map);
             current_button++;
-            if(current_button>=(int)controls_config_press_images.size())
+            if(current_button>=(int)controls_config_map_name.size())
                 break;
         }
 
@@ -129,13 +149,77 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             false,
             FlatShadow());
 
-        if(frame%60>=0 && frame%60<30)
+        int animation_max_distance = 150;
+        int center_separation_x = 0;
+        int center_separation_y = 0;
+
+        if(current_button==0)
+        {
+            player_image_y -= 3;
+            center_separation_y = -50;
+            if(player_image_y<player_image_initial_y-animation_max_distance)
+                player_image_y = player_image_initial_y;
+        }
+        if(current_button==1)
+        {
+            player_image_y += 3;
+            center_separation_y = 50;
+            if(player_image_y>player_image_initial_y+animation_max_distance)
+                player_image_y = player_image_initial_y;
+        }
+        if(current_button==2)
+        {
+            player_image_x -= 3;
+            center_separation_x = -50;
+            if(player_image_x<player_image_initial_x-animation_max_distance)
+                player_image_x = player_image_initial_x;
+        }
+        if(current_button==3)
+        {
+            player_image_x += 3;
+            center_separation_x = 50;
+            if(player_image_x>player_image_initial_x+animation_max_distance)
+                player_image_x = player_image_initial_x;
+        }
+
+        if(current_button<4)
         graphics->draw2DImage
-        (   controls_config_press_images[current_button],
-            controls_config_press_images[current_button]->getWidth(),
-              controls_config_press_images[current_button]->getHeight(),
-            graphics->screen_width/2-controls_config_press_images[current_button]->getWidth()/2,
-              graphics->screen_height/2-controls_config_press_images[current_button]->getHeight(),
+        (   player_image,
+            player_image->getWidth(),player_image->getHeight(),
+            player_image_x+center_separation_x,player_image_y+center_separation_y,
+            1.0,
+            0.0,
+            false,
+            0,0,
+            Color(255,255,255,255),
+            0,0,
+            false,
+            FlatShadow());
+
+        if(current_button==4)
+        {
+            bullet_image_x+=3;
+            if(bullet_image_x>bullet_initial_x + animation_max_distance)
+                bullet_image_x = bullet_initial_x;
+            graphics->draw2DImage
+            (   bullet_image,
+                bullet_image->getWidth(),bullet_image->getHeight(),
+                bullet_image_x,bullet_image_y,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false,
+                FlatShadow());
+        }
+
+        graphics->draw2DImage
+        (   icon_images[current_button],
+            icon_images[current_button]->getWidth(),icon_images[current_button]->getHeight(),
+            graphics->screen_width/2-icon_images[current_button]->getWidth()/2,
+                graphics->screen_height/2-icon_images[current_button]->getHeight()/2,
             1.0,
             0.0,
             false,
