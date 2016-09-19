@@ -18,6 +18,8 @@ public:
     bool iterate_slowdown_flag;
     int current_slowdown_iteration;
 
+    int layer_transparency;
+
     Stage();
     ~Stage();
     void dibujarBack();

@@ -45,6 +45,8 @@ public:
 
     string api_state;
 
+    int game_over_timeout;
+
     STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,int current_player_best_score);
     ~STG();
     bool isOutOfBounds(int pos_x,int pos_y);

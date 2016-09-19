@@ -46,7 +46,7 @@ void intro()
             Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
         }
 
-        current_fade_in++;
+        current_fade_in+=2;
         if(current_fade_in>255)
             current_fade_in=255;
 
@@ -82,7 +82,7 @@ void intro()
             false,
             FlatShadow());
 
-        current_background_transparency++;
+        current_background_transparency+=2;
         if(current_background_transparency>255)
             current_background_transparency=255;
 

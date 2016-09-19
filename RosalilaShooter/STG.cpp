@@ -12,6 +12,8 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
 
     this->score = -1;
 
+    this->game_over_timeout = 128;
+
     this->image_upload_error = Rosalila()->Graphics->getTexture(assets_directory+"misc/upload_error.png");
 
     this->image_training_box = NULL;
@@ -186,15 +188,20 @@ void STG::mainLoop()
 
         if(getGameOver() && api_state == "")
         {
-            if(Rosalila()->Receiver->isKeyPressed(SDLK_RETURN)
-               || (Rosalila()->Receiver->isDown("a") && end_key_up_keyboard)
-               )
+            game_over_timeout--;
+            if(game_over_timeout<0)
+                game_over_timeout=0;
+            if(game_over_timeout==0)
             {
-                break;
+                if(Rosalila()->Receiver->isKeyPressed(SDLK_RETURN)
+                   || (Rosalila()->Receiver->isDown("a") && end_key_up_keyboard)
+                   )
+                {
+                    break;
+                }
+                if(!Rosalila()->Receiver->isDown("a"))
+                    end_key_up_keyboard=true;
             }
-            if(!Rosalila()->Receiver->isDown("a"))
-                end_key_up_keyboard=true;
-
         }
     }
 }
@@ -619,6 +626,9 @@ bool STG::enemyWon()
 
 void STG::win()
 {
+    setPlayerWon(true);
+    setGameOver(true);
+
     Rosalila()->ApiIntegrator->unlockAchievement("B");
     double milliseconds = SDL_GetTicks()-initial_ticks;
     double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
@@ -627,7 +637,6 @@ void STG::win()
     Rosalila()->Graphics->screen_shake_effect.set(50,20,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
     Rosalila()->Sound->playSound("you win",2,0);
     enemy->deleteActivePatterns();
-    setGameOver(true);
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
     {
@@ -637,8 +646,9 @@ void STG::win()
 
 void STG::lose()
 {
-    Rosalila()->Sound->playSound("you lose",4,0);
+    setPlayerWon(false);
     setGameOver(true);
+    Rosalila()->Sound->playSound("you lose",4,0);
 }
 
 void STG::uploadScore()

@@ -4,6 +4,7 @@ int iterate_slowdown_flag=0;
 int current_slowdown_iteration=0;
 bool slow_enabled=false;
 bool game_over;
+bool player_won;
 
 Image* loading_image;
 Image* error_image;
@@ -24,6 +25,16 @@ bool getGameOver()
 void setGameOver(bool game_over_param)
 {
     game_over=game_over_param;
+}
+
+bool getPlayerWon()
+{
+    return player_won;
+}
+
+void setPlayerWon(bool player_won_param)
+{
+    player_won=player_won_param;
 }
 
 bool getIterateSlowdownFlag()

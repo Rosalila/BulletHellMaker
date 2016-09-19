@@ -21,6 +21,8 @@ void enableSlow();
 double getSlowdown();
 bool getGameOver();
 void setGameOver(bool game_over_param);
+bool getPlayerWon();
+void setPlayerWon(bool player_won_param);
 
 Image* getLoadingImage();
 Image* getErrorImage();

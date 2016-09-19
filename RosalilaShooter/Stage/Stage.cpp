@@ -5,6 +5,7 @@ Stage::Stage()
     this->iterator=0;
     this->iterate_slowdown_flag=false;
     this->current_slowdown_iteration=0;
+    this->layer_transparency=255;
 }
 
 Stage::~Stage()
@@ -50,6 +51,25 @@ void Stage::drawLayer(Layer* layer)
     int pos_x=layer->alignment_x;
     int pos_y=Rosalila()->Graphics->screen_height-size_y-layer->alignment_y;
 
+    if(getGameOver())
+    {
+        if(getPlayerWon())
+        {
+            layer_transparency=128;
+        }else
+        {
+            layer->random_color_r-=3;
+            layer->random_color_g-=3;
+            layer->random_color_b-=3;
+            if(layer->random_color_r<0)
+                layer->random_color_r=0;
+            if(layer->random_color_g<0)
+                layer->random_color_g=0;
+            if(layer->random_color_b<0)
+                layer->random_color_b=0;
+        }
+    }
+
     for(int i=0;i<Rosalila()->Graphics->screen_width/(size_x+layer->separation_x)+2;i++)
     {
         Rosalila()->Graphics->draw2DImage
@@ -61,7 +81,7 @@ void Stage::drawLayer(Layer* layer)
             false,
             layer->depth_effect_x,
             layer->depth_effect_y,
-            Color(layer->random_color_r,layer->random_color_g,layer->random_color_b,255),
+            Color(layer->random_color_r,layer->random_color_g,layer->random_color_b,layer_transparency),
             0,0,
             false,
             FlatShadow());
