@@ -110,6 +110,7 @@ void Stage::dibujarBack()
         Layer* layer=back[i];
         drawLayer(layer);
     }
+//    Rosalila()->Graphics->clearScreen(Color(0,0,0,0));
 }
 
 void Stage::dibujarFront()

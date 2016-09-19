@@ -3069,7 +3069,7 @@
 	<assert.h>
 	<string.h>
 
-1473995678 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1474304572 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../Rosalila.h"
@@ -3086,6 +3086,7 @@
 	"Image.h"
 	"Timer.h"
 	"../RosalilaUtility/RosalilaUtility.h"
+	"../RosalilaUtility/Rectangle.h"
 	"Effects/GrayscaleEffect.h"
 	"Effects/TransparencyEffect.h"
 	"Effects/ScreenShakeEffect.h"
@@ -3101,7 +3102,7 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	"../RosalilaGraphics/Image.h"
 
-1473265963 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
+1474315909 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
@@ -3291,7 +3292,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1473995810 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1474316046 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -3385,7 +3386,7 @@
 1471969502 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Line.cpp
 	"Line.h"
 
-1474082538 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1474315961 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/TinyXml/tinystr.cpp
@@ -3666,7 +3667,7 @@
 1473786560 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.h
 	"../../Rosalila/Rosalila.h"
 
-1474245954 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
+1474315987 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
 	"Character.h"
 
 1473788069 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.h
@@ -3720,13 +3721,13 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Modifier.cpp
 	"Modifier.h"
 
-1474093630 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
+1474307391 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
 1474089607 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1474257166 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1474303644 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
 1474247901 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
@@ -3776,7 +3777,7 @@
 1471970038 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Layer.cpp
 	"Layer.h"
 
-1474246538 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
+1474307978 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
 	"Stage.h"
 
 1471809742 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STGMenu/Intro.h
@@ -3800,7 +3801,7 @@
 1474257178 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1474257178 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1474301319 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1474088992 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -4064,4 +4065,9 @@
 1473547357 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Notifications/NotificationHandler.h
 	<list>
 	"Notification.h"
+
+1474304551 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Rectangle.h
+
+1474304845 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Rectangle.cpp
+	"Rectangle.h"
 

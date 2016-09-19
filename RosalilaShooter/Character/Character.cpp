@@ -934,8 +934,28 @@ void Character::bottomRender()
 
 void Character::topRender()
 {
+//    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
+//        ((Pattern*)*pattern)->render();
+
+    vector<Rectangle*>rectangles;
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-        ((Pattern*)*pattern)->render();
+    {
+        for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
+        {
+            Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
+
+            Rectangle* rectangle = new Rectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
+                                                 hitbox->getWidth(),hitbox->getHeight(),
+                                                 (*pattern)->angle+hitbox->angle
+                                                 );
+            rectangles.push_back(rectangle);
+        }
+    }
+    Rosalila()->Graphics->drawRectangles(rectangles,Color(255,255,255,255),true);
+
+    for(int i=0;i<rectangles.size();i++)
+        delete rectangles[i];
+
 }
 
 void Character::setOrientation(string orientation)
