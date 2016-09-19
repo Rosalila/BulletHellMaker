@@ -427,7 +427,7 @@ void STG::render()
 
     stage->dibujarFront();
 
-    if(getGameOver() && score!=-1)
+    if(getGameOver() && score!=-1 && game_mode!="replay")
     {
         if(current_player_best_score==-1)
         {
