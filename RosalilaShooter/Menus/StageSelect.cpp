@@ -577,7 +577,7 @@ void stageSelect()
                     FlatShadow());
             }
 
-            if(current_stage<(int)stage_images.size()-1)
+            if(entry_navigator>-6)
             {
                 graphics->draw2DImage
                 (   up_arrow,
@@ -594,7 +594,7 @@ void stageSelect()
                     FlatShadow());
             }
 
-            if(current_stage<(int)stage_images.size()-1)
+            if(entry_navigator<current_leaderboard->friends_entries.size())
             {
                 graphics->draw2DImage
                 (   down_arrow,
