@@ -176,6 +176,8 @@ void stageSelect()
     Image*down_arrow=graphics->getTexture(assets_directory+"menu/down_arrow.png");
     Image*line=graphics->getTexture(assets_directory+"menu/line.png");
 
+    double line_width = 0;
+
     Color background_color(255,255,255,255);
 
     int current_stage = Rosalila()->ApiIntegrator->getStat("current stage");
@@ -236,6 +238,7 @@ void stageSelect()
             if(Rosalila()->Receiver->isPressed("2"))
             {
                 entry_navigator++;
+                line_width=0;
                 if(entry_navigator > (int)current_leaderboard->friends_entries.size())
                 {
                     entry_navigator = current_leaderboard->friends_entries.size();
@@ -244,6 +247,7 @@ void stageSelect()
             if(Rosalila()->Receiver->isPressed("8"))
             {
                 entry_navigator--;
+                line_width=0;
                 if(entry_navigator<-6)
                 {
                    entry_navigator=-6;
@@ -476,10 +480,13 @@ void stageSelect()
         if(entry_navigator>=1)
             line_y = bottom_menu_y+(entry_navigator-1)*separation;
 
+        line_width+=15;
+        if(line_width>line->getWidth())
+            line_width=line->getWidth();
         graphics->draw2DImage
         (   line,
-            line->getWidth(),line->getHeight(),
-            graphics->screen_width/2-line->getWidth()/2,
+            line_width,line->getHeight(),
+            graphics->screen_width/2-line_width/2,
             line_y,
             1.0,
             0.0,
@@ -492,8 +499,8 @@ void stageSelect()
 
         graphics->draw2DImage
         (   line,
-            line->getWidth(),line->getHeight(),
-            graphics->screen_width/2-line->getWidth()/2,
+            line_width,line->getHeight(),
+            graphics->screen_width/2-line_width/2,
             line_y+line_separation,
             1.0,
             0.0,
