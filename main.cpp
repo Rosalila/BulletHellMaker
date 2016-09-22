@@ -29,7 +29,9 @@ int main(int argc, char *argv[])
     Rosalila()->ApiIntegrator->setCurrentControllerActionSet("MenuControls");
 
 
-    if(!Rosalila()->ApiIntegrator->isUsingSteamController())
+    if(Rosalila()->ApiIntegrator->isUsingSteamController())
+        Rosalila()->ApiIntegrator->showControllerBindingPanel();
+    else
         Rosalila()->Receiver->controls = ControllerConfig(input_config);
 
     intro();
