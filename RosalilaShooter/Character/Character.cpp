@@ -937,21 +937,23 @@ void Character::topRender()
 //    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
 //        ((Pattern*)*pattern)->render();
 
-    vector<Rectangle*>rectangles;
+    vector<DrawableRectangle*>rectangles;
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
     {
         for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
         {
             Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
 
-            Rectangle* rectangle = new Rectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
+            DrawableRectangle* rectangle = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
                                                  hitbox->getWidth(),hitbox->getHeight(),
-                                                 (*pattern)->angle+hitbox->angle
+                                                 (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
+                                                 Color(255,255,255,255)
                                                  );
             rectangles.push_back(rectangle);
         }
     }
-    Rosalila()->Graphics->drawRectangles(rectangles,Color(255,255,255,255),true);
+
+    Rosalila()->Graphics->drawRectangles(rectangles,true);
 
     for(int i=0;i<rectangles.size();i++)
         delete rectangles[i];

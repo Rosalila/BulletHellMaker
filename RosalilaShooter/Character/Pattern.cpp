@@ -188,12 +188,19 @@ void Pattern::logic(int stage_speed)
     this->x += (cos (angle * PI / 180) * velocity ) / getSlowdown() + stage_speed;
     this->y -= sin (angle * PI / 180) * velocity / getSlowdown();
 
+    if(is_hit)
+    {
+//        this->y-=5;
+//        this->x-=5;
+//        this->angle+=25;
+    }
+
     if(animation_iteration>=animation_velocity)
     {
         current_sprite++;
         if(is_hit)
         {
-            if(current_sprite>=(int)bullet->sprites_on_hit.size())
+            if(current_sprite>=5)
             {
                 delete_flag=true;
                 current_sprite=0;
@@ -332,8 +339,10 @@ void Pattern::hit(int channel,bool hit_undestructable)
     {
         is_hit=true;
         current_sprite=0;
-        velocity=0;
-        angle_change=0;
+        velocity=-velocity/3;
+        angle=rand()%360;
+        br_change = 40;
+        angle_change=-5+rand()%10;
         acceleration=0;
     }
 }

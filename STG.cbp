@@ -88,6 +88,8 @@
 		<Unit filename="Rosalila/RosalilaUtility/Line.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Point.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/Point.h" />
+		<Unit filename="Rosalila/RosalilaUtility/Rectangle.cpp" />
+		<Unit filename="Rosalila/RosalilaUtility/Rectangle.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.h" />
 		<Unit filename="RosalilaShooter/Character/Bullet.cpp" />
