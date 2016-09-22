@@ -38,18 +38,8 @@ void Stage::drawLayer(Layer* layer)
     if(getIterateSlowdownFlag())
         layer->time_elapsed++;
 
-    if(layer->current_frame>=(int)layer->textures.size())
+    if(layer->current_frame>=(int)layer->layer_frames.size())
         layer->current_frame=0;
-
-    //Get current image
-    Image* texture=layer->textures[layer->current_frame];
-
-    //Paint
-    int size_x=layer->textures_size_x[layer->current_frame];
-    int size_y=layer->textures_size_y[layer->current_frame];
-
-    int pos_x=layer->alignment_x;
-    int pos_y=Rosalila()->Graphics->screen_height-size_y-layer->alignment_y;
 
     if(getGameOver())
     {
@@ -58,46 +48,75 @@ void Stage::drawLayer(Layer* layer)
             layer_transparency=128;
         }else
         {
-            layer->random_color_r-=3;
-            layer->random_color_g-=3;
-            layer->random_color_b-=3;
-            if(layer->random_color_r<0)
-                layer->random_color_r=0;
-            if(layer->random_color_g<0)
-                layer->random_color_g=0;
-            if(layer->random_color_b<0)
-                layer->random_color_b=0;
+            layer->color.red -= 3;
+            layer->color.green -= 3;
+            layer->color.blue -= 3;
+            if(layer->color.red < 0)
+                layer->color.red = 0;
+            if(layer->color.green < 0)
+                layer->color.green = 0;
+            if(layer->color.blue < 0)
+                layer->color.blue = 0;
         }
     }
 
-    for(int i=0;i<Rosalila()->Graphics->screen_width/(size_x+layer->separation_x)+2;i++)
+    //Paint
+
+    LayerFrame* current_layer_frame = layer->layer_frames[layer->current_frame];
+
+    int frame_width=current_layer_frame->width;
+    int frame_heigth=current_layer_frame->height;
+
+    vector<DrawableRectangle*>rectangles;
+
+    for(int i=0;i<Rosalila()->Graphics->screen_width/(frame_width+layer->separation_x)+2;i++)
     {
-        Rosalila()->Graphics->draw2DImage
-        (   texture,
-            size_x,size_y,
-            pos_x+i*(size_x+layer->separation_x),pos_y,
-            1.0,
-            0.0,
-            false,
-            layer->depth_effect_x,
-            layer->depth_effect_y,
-            Color(layer->random_color_r,layer->random_color_g,layer->random_color_b,layer_transparency),
-            0,0,
-            false,
-            FlatShadow());
+
+        int pos_x = layer->alignment_x + i*(frame_width+layer->separation_x);
+        int pos_y = Rosalila()->Graphics->screen_height - frame_heigth - layer->alignment_y;
+
+        if(current_layer_frame->type == "image")
+        {
+            Image* image = current_layer_frame->image;
+
+            Rosalila()->Graphics->draw2DImage
+            (   image,
+                frame_width,frame_heigth,
+                pos_x,pos_y,
+                1.0,
+                0.0,
+                false,
+                layer->depth_effect_x,
+                layer->depth_effect_y,
+                Color(layer->color.red,layer->color.green,layer->color.blue,layer->color.alpha),
+                0,0,
+                false,
+                FlatShadow());
+        }
+        if(current_layer_frame->type == "rectangle")
+        {
+            rectangles.push_back(new DrawableRectangle(pos_x,pos_y,frame_width,frame_heigth,0,Color(layer->color.red,layer->color.green,layer->color.blue,layer->color.alpha)));
+        }
+    }
+
+    Rosalila()->Graphics->drawRectangles(rectangles,layer->depth_effect_x,layer->depth_effect_y,true);
+
+    for(int i=0;i<rectangles.size();i++)
+    {
+        delete rectangles[i];
     }
 
     if(layer->depth_effect_x>0)
     {
-        if(Rosalila()->Graphics->camera_x/layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
+        if(Rosalila()->Graphics->camera_x/layer->depth_effect_x>frame_width+layer->separation_x+layer->alignment_x)
         {
-            layer->alignment_x+=size_x+layer->separation_x;
+            layer->alignment_x+=frame_width+layer->separation_x;
         }
     }else if(layer->depth_effect_x<0)
     {
-        if(Rosalila()->Graphics->camera_x*-layer->depth_effect_x>size_x+layer->separation_x+layer->alignment_x)
+        if(Rosalila()->Graphics->camera_x*-layer->depth_effect_x > frame_width+layer->separation_x+layer->alignment_x)
         {
-            layer->alignment_x+=size_x+layer->separation_x;
+            layer->alignment_x+=frame_width+layer->separation_x;
         }
     }
 
@@ -380,44 +399,30 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         if(backlayer_nodes[i]->hasAttribute("randomize_separation_x"))
             separation_x+=rand()%atoi(backlayer_nodes[i]->attributes["randomize_separation_x"].c_str());
 
-        std::vector <Image*> textures;
-        std::vector <int> textures_size_x;
-        std::vector <int> textures_size_y;
-
         vector<Node*> frame_nodes = backlayer_nodes[i]->getNodesByName("frame");
+
+        vector<LayerFrame*> layer_frames;
 
         for(int i=0;i<frame_nodes.size();i++)
         {
-            string image_path = "stages/"+name+"/images/"+frame_nodes[i]->attributes["image_path"];
-
-            Image *image_temp=Rosalila()->Graphics->getTexture(assets_directory+image_path);
-
-            int size_x=image_temp->getWidth();
-            int size_y=image_temp->getHeight();
-
-            if(frame_nodes[i]->hasAttribute("width"))
-                size_x=atoi(frame_nodes[i]->attributes["width"].c_str());
-            if(frame_nodes[i]->hasAttribute("height"))
-                size_y=atoi(frame_nodes[i]->attributes["height"].c_str());
-
-            textures.push_back(image_temp);
-            textures_size_x.push_back(size_x);
-            textures_size_y.push_back(size_y);
+            layer_frames.push_back(getFrameFromNode(frame_nodes[i]));
         }
 
-        int random_color_r=255;
-        int random_color_g=255;
-        int random_color_b=255;
+        Color color(255,255,255,255);
+
         if(backlayer_nodes[i]->hasAttribute("randomize_color")
            && backlayer_nodes[i]->attributes["randomize_color"]=="yes")
         {
             int random_number_pos=rand()%random_colors_r.size();
-            random_color_r=random_colors_r[random_number_pos];
-            random_color_g=random_colors_g[random_number_pos];
-            random_color_b=random_colors_b[random_number_pos];
+            color.red=random_colors_r[random_number_pos];
+            color.green=random_colors_g[random_number_pos];
+            color.blue=random_colors_b[random_number_pos];
         }
 
-        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,random_color_r,random_color_g,random_color_b));
+        if(backlayer_nodes[i]->hasAttribute("alpha"))
+            color.alpha=atoi(backlayer_nodes[i]->attributes["alpha"].c_str());
+
+        back.push_back(new Layer(layer_frames,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,color));
     }
 
     Rosalila()->Utility->writeLogLine("Loading stage's FrontLayers.");
@@ -457,44 +462,61 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
         vector<Node*> frame_nodes = frontlayer_nodes[i]->getNodesByName("frame");
 
+        vector<LayerFrame*> layer_frames;
+
         for(int i=0;i<frame_nodes.size();i++)
         {
-            string image_path = assets_directory+"stages/"+name+"/images/"+frame_nodes[i]->attributes["image_path"];
-
-            Image *image_temp=Rosalila()->Graphics->getTexture(image_path);
-
-            int size_x=image_temp->getWidth();
-            int size_y=image_temp->getHeight();
-
-            if(frame_nodes[i]->hasAttribute("width"))
-                size_x=atoi(frame_nodes[i]->attributes["width"].c_str());
-            if(frame_nodes[i]->hasAttribute("height"))
-                size_y=atoi(frame_nodes[i]->attributes["height"].c_str());
-
-            textures.push_back(image_temp);
-            textures_size_x.push_back(size_x);
-            textures_size_y.push_back(size_y);
+            layer_frames.push_back(getFrameFromNode(frame_nodes[i]));
         }
 
-        int random_color_r=255;
-        if(frontlayer_nodes[i]->hasAttribute("random_color_r"))
-            random_color_r=atoi(frontlayer_nodes[i]->attributes["random_color_r"].c_str());
+        Color color(255,255,255,255);
 
-        int random_color_g=255;
-        if(frontlayer_nodes[i]->hasAttribute("random_color_g"))
-            random_color_g=atoi(frontlayer_nodes[i]->attributes["random_color_g"].c_str());
+        if(backlayer_nodes[i]->hasAttribute("randomize_color")
+           && backlayer_nodes[i]->attributes["randomize_color"]=="yes")
+        {
+            int random_number_pos=rand()%random_colors_r.size();
+            color.red=random_colors_r[random_number_pos];
+            color.green=random_colors_g[random_number_pos];
+            color.blue=random_colors_b[random_number_pos];
+        }
 
-        int random_color_b=255;
-        if(frontlayer_nodes[i]->hasAttribute("random_color_b"))
-            random_color_b=atoi(frontlayer_nodes[i]->attributes["random_color_b"].c_str());
+        if(backlayer_nodes[i]->hasAttribute("alpha"))
+            color.alpha=atoi(frontlayer_nodes[i]->attributes["alpha"].c_str());
 
-        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,
-                                  random_color_r,random_color_g,random_color_b
+        front.push_back(new Layer(layer_frames,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,
+                                  color
                                   ));
     }
 
     delete root_node;
     Rosalila()->Utility->writeLogLine("Stage loaded succesfully from XML.");
+}
+
+LayerFrame* Stage::getFrameFromNode(Node* frame_node)
+{
+    Image *image_temp = NULL;
+    string type;
+    int width = 0;
+    int height = 0;
+
+    if(frame_node->hasAttribute("type"))
+        type = frame_node->attributes["type"];
+
+    if(frame_node->hasAttribute("image_path"))
+    {
+        string image_path = "stages/"+name+"/images/"+frame_node->attributes["image_path"];
+        image_temp=Rosalila()->Graphics->getTexture(assets_directory+image_path);
+
+        width = image_temp->getWidth();
+        height = image_temp->getHeight();
+    }
+
+    if(frame_node->hasAttribute("width"))
+        width = atoi(frame_node->attributes["width"].c_str());
+    if(frame_node->hasAttribute("height"))
+        height = atoi(frame_node->attributes["height"].c_str());
+
+    return new LayerFrame(image_temp,type,width,height);
 }
 
 void Stage::logic()

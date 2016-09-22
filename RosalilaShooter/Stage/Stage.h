@@ -26,6 +26,7 @@ public:
     void dibujarFront();
     void drawLayer(Layer*layer);
     void loadFromXML(std::string name);
+    LayerFrame* getFrameFromNode(Node* frame_node);
     void logic();
     void playMusic();
 };

@@ -48,6 +48,8 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp" />
@@ -88,8 +90,6 @@
 		<Unit filename="Rosalila/RosalilaUtility/Line.h" />
 		<Unit filename="Rosalila/RosalilaUtility/Point.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/Point.h" />
-		<Unit filename="Rosalila/RosalilaUtility/Rectangle.cpp" />
-		<Unit filename="Rosalila/RosalilaUtility/Rectangle.h" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.cpp" />
 		<Unit filename="Rosalila/RosalilaUtility/RosalilaUtility.h" />
 		<Unit filename="RosalilaShooter/Character/Bullet.cpp" />
@@ -114,6 +114,8 @@
 		<Unit filename="RosalilaShooter/STG.h" />
 		<Unit filename="RosalilaShooter/Stage/Layer.cpp" />
 		<Unit filename="RosalilaShooter/Stage/Layer.h" />
+		<Unit filename="RosalilaShooter/Stage/LayerFrame.cpp" />
+		<Unit filename="RosalilaShooter/Stage/LayerFrame.h" />
 		<Unit filename="RosalilaShooter/Stage/Stage.cpp" />
 		<Unit filename="RosalilaShooter/Stage/Stage.h" />
 		<Unit filename="RosalilaShooter/Utility/Utility.cpp" />

@@ -953,7 +953,7 @@ void Character::topRender()
         }
     }
 
-    Rosalila()->Graphics->drawRectangles(rectangles,true);
+    Rosalila()->Graphics->drawRectangles(rectangles,0,0,true);
 
     for(int i=0;i<rectangles.size();i++)
         delete rectangles[i];
