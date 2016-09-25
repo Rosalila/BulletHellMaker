@@ -183,8 +183,7 @@ void STG::mainLoop()
 
 //        Rosalila()->Receiver->isKeyDown(SDLK_z)
 
-        Rosalila()->Receiver->updateInputs();
-        Rosalila()->ApiIntegrator->updateCallbacks();
+        Rosalila()->update();
 
         if(getGameOver() && api_state == "")
         {
@@ -549,7 +548,7 @@ void STG::render()
             FlatShadow());
     }
 
-    Rosalila()->Graphics->updateScreen();
+    //Rosalila()->Graphics->updateScreen();
 }
 
 bool STG::isOutOfBounds(int pos_x,int pos_y)
@@ -723,9 +722,7 @@ void STG::uploadErrorLoop()
             false,
             FlatShadow());
 
-        Rosalila()->Receiver->updateInputs();
-        Rosalila()->ApiIntegrator->updateCallbacks();
-        Rosalila()->Graphics->updateScreen();
+        Rosalila()->update();
     }
 }
 

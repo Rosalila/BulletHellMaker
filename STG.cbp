@@ -50,6 +50,8 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Color.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableTriangle.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableTriangle.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp" />

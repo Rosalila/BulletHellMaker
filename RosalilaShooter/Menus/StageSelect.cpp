@@ -378,10 +378,8 @@ void stageSelect()
                 while(selected_entry->attachment_state!="loaded"
                       && Rosalila()->ApiIntegrator->getState()=="loading")
                 {
-
-                    Rosalila()->ApiIntegrator->updateCallbacks();
                     SDL_Delay(17);
-                    graphics->updateScreen();
+                    Rosalila()->update();
                 }
 
                 Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
@@ -630,9 +628,7 @@ void stageSelect()
             }
         }
 
-        Rosalila()->Receiver->updateInputs();
-        graphics->updateScreen();
-        Rosalila()->ApiIntegrator->updateCallbacks();
+        Rosalila()->update();
 
         frame++;
     }

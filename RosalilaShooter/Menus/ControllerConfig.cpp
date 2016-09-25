@@ -229,8 +229,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             false,
             FlatShadow());
 
-        receiver->updateInputs();
-        graphics->updateScreen();
+        Rosalila()->update();
         frame++;
     }
 

@@ -46,13 +46,18 @@ void intro()
             Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
         }
 
+//        vector<DrawableTriangle*>triangles;
+//
+//        triangles.push_back(new DrawableTriangle(100, 200,Point(10,15), Point(100,150), Point(10,150), 0, Color (255,255,0,255)));
+//        triangles.push_back(new DrawableTriangle(200, 200,Point(10,15), Point(100,150), Point(10,150), 30, Color (255,0,255,255)));
+//
+//        Rosalila()->Graphics->drawTriangles(triangles,2, 1,false);
+
         current_fade_in+=2;
         if(current_fade_in>255)
             current_fade_in=255;
 
-        receiver->updateInputs();
-        graphics->updateScreen();
-        Rosalila()->ApiIntegrator->updateCallbacks();
+        Rosalila()->update();
     }
 
     int current_background_transparency=0;
@@ -86,8 +91,6 @@ void intro()
         if(current_background_transparency>255)
             current_background_transparency=255;
 
-        receiver->updateInputs();
-        graphics->updateScreen();
-        Rosalila()->ApiIntegrator->updateCallbacks();
+        Rosalila()->update();
     }
 }
