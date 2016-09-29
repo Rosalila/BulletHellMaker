@@ -58,13 +58,13 @@ Player::Player(std::string name,int sound_channel_base,vector<string> intro_inpu
     this->invulnerable_frames_left=0;
 
     parries_left=3;
-    parry_sprites.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/parry/1.png"));
-    parry_sprites.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/parry/2.png"));
-    parry_sprites.push_back(Rosalila()->Graphics->getTexture(assets_directory+directory+"sprites/parry/3.png"));
+    parry_sprites.push_back(rosalila()->graphics->getTexture(assets_directory+directory+"sprites/parry/1.png"));
+    parry_sprites.push_back(rosalila()->graphics->getTexture(assets_directory+directory+"sprites/parry/2.png"));
+    parry_sprites.push_back(rosalila()->graphics->getTexture(assets_directory+directory+"sprites/parry/3.png"));
     //Charge
-    Rosalila()->Sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
-    Rosalila()->Sound->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
-    charging_sound_channel=Rosalila()->Sound->playSound("charging",21,-1);
+    rosalila()->sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
+    rosalila()->sound->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
+    charging_sound_channel=rosalila()->sound->playSound("charging",21,-1);
 }
 
 Player::~Player()
@@ -95,7 +95,7 @@ void Player::loadPlayerFromXML()
 {
     loadFromXML();
 
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+directory+"main.xml");
 
     this->current_slow=0;
     this->max_slow=-1;
@@ -206,32 +206,32 @@ void Player::inputControl()
 
     if(isDownWrapper("2"))
     {
-        if(orientation!="down" && Rosalila()->Sound->soundExists(name+".down"))
-            Rosalila()->Sound->playSound(name+".down",1,0);
+        if(orientation!="down" && rosalila()->sound->soundExists(name+".down"))
+            rosalila()->sound->playSound(name+".down",1,0);
         orientation="down";
     }
     else if(isDownWrapper("8"))
     {
-        if(orientation!="up" && Rosalila()->Sound->soundExists(name+".up"))
-            Rosalila()->Sound->playSound(name+".up",1,0);
+        if(orientation!="up" && rosalila()->sound->soundExists(name+".up"))
+            rosalila()->sound->playSound(name+".up",1,0);
         orientation="up";
     }
     else if(isDownWrapper("4"))
     {
-        if(orientation!="left" && Rosalila()->Sound->soundExists(name+".left"))
-            Rosalila()->Sound->playSound(name+".left",1,0);
+        if(orientation!="left" && rosalila()->sound->soundExists(name+".left"))
+            rosalila()->sound->playSound(name+".left",1,0);
         orientation="left";
     }
     else if(isDownWrapper("6"))
     {
-        if(orientation!="right" && Rosalila()->Sound->soundExists(name+".right"))
-            Rosalila()->Sound->playSound(name+".right",1,0);
+        if(orientation!="right" && rosalila()->sound->soundExists(name+".right"))
+            rosalila()->sound->playSound(name+".right",1,0);
         orientation="right";
     }
     else
     {
-        if(orientation!="idle" && Rosalila()->Sound->soundExists(name+".idle"))
-            Rosalila()->Sound->playSound(name+".idle",1,0);
+        if(orientation!="idle" && rosalila()->sound->soundExists(name+".idle"))
+            rosalila()->sound->playSound(name+".idle",1,0);
         orientation="idle";
     }
 
@@ -334,8 +334,8 @@ void Player::logic(int stage_velocity)
         inputControl();
     }else
     {
-        if(orientation!="destroyed" && Rosalila()->Sound->soundExists(name+".destroyed"))
-            Rosalila()->Sound->playSound(name+".destroyed",1,0);
+        if(orientation!="destroyed" && rosalila()->sound->soundExists(name+".destroyed"))
+            rosalila()->sound->playSound(name+".destroyed",1,0);
         orientation="destroyed";
         //this->hitbox.setValues(0,0,0,0,0);
     }
@@ -389,7 +389,7 @@ void Player::logic(int stage_velocity)
         current_charge=max_charge;
         if(!charge_ready)
         {
-            Rosalila()->Sound->playSound("charge ready",-1, 0);
+            rosalila()->sound->playSound("charge ready",-1, 0);
         }
         charge_ready=true;
     }else
@@ -414,7 +414,7 @@ void Player::bottomRender()
         double shield_transparency = 255.0*getShieldPercentage();
 
         if(shield_image)
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
             (   shield_image,
                 shield_image->getWidth(),shield_image->getHeight(),
                 this->x-shield_image->getWidth()/2+current_screen_shake_x,
@@ -440,7 +440,7 @@ void Player::bottomRender()
             charge_transparency_effect=(frame*10)%255;
 
         if(charge_image)
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
             (   charge_image,
                 charge_image->getWidth(),charge_image->getHeight()*((double)current_charge/(double)max_charge),
                 this->x+charge_sprite_x,
@@ -464,7 +464,7 @@ void Player::topRender()
     if(isParrying() && parries_left>=1)
     {
         Image *image=parry_sprites[parries_left-1];
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
             (   image,
                 image->getWidth(),image->getHeight(),
                 this->x+parrying_x,
@@ -481,7 +481,7 @@ void Player::topRender()
 
 if(parrying_image!=NULL && false)
 if(isParrying())
-    Rosalila()->Graphics->draw2DImage
+    rosalila()->graphics->draw2DImage
         (   parrying_image,
             parrying_image->getWidth(),parrying_image->getHeight(),
             this->x+parrying_x,
@@ -497,7 +497,7 @@ if(isParrying())
 
 if(parryed_image!=NULL)
 if(invulnerable_frames_left>0)
-    Rosalila()->Graphics->draw2DImage
+    rosalila()->graphics->draw2DImage
         (   parryed_image,
             parryed_image->getWidth(),parryed_image->getHeight(),
             this->x+parryed_x,
@@ -511,10 +511,10 @@ if(invulnerable_frames_left>0)
             true,
             FlatShadow());
 
-        if(Rosalila()->Receiver->isKeyDown(SDLK_h))
+        if(rosalila()->receiver->isKeyDown(SDLK_h))
         for(int i=0;i<(int)parry_hitboxes.size();i++)
         {
-            Rosalila()->Graphics->drawRectangle(parry_hitboxes[i]->getX()+x,
+            rosalila()->graphics->drawRectangle(parry_hitboxes[i]->getX()+x,
                                    parry_hitboxes[i]->getY()+y,
                                    parry_hitboxes[i]->getWidth(),parry_hitboxes[i]->getHeight(),
                                    parry_hitboxes[i]->getAngle(),100,0,0,100,true);
@@ -546,7 +546,7 @@ void Player::loadFromXML()
 {
     Character::loadFromXML();
 
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"main.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+directory+"main.xml");
 
     this->max_shield=0;
     this->shield_fade=0;
@@ -574,7 +574,7 @@ void Player::loadFromXML()
 
         if(shield_node->hasAttribute("sprite"))
         {
-            this->shield_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+shield_node->attributes["sprite"]);
+            this->shield_image=rosalila()->graphics->getTexture(assets_directory+directory+"/sprites/"+shield_node->attributes["sprite"]);
         }
     }
 
@@ -611,7 +611,7 @@ void Player::loadFromXML()
 
         if(charge_node->hasAttribute("sprite"))
         {
-            this->charge_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+charge_node->attributes["sprite"]);
+            this->charge_image=rosalila()->graphics->getTexture(assets_directory+directory+"/sprites/"+charge_node->attributes["sprite"]);
         }
     }
 
@@ -637,7 +637,7 @@ void Player::loadFromXML()
         if(parry_node->hasAttribute("sound"))
         {
             std::string sprites_sound=parry_node->attributes["sound"];
-            Rosalila()->Sound->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
+            rosalila()->sound->addSound(name+".parry",assets_directory+directory+"sounds/"+sprites_sound);
         }
 
         Node* parrying_node = parry_node->getNodeByName("Parrying");
@@ -646,7 +646,7 @@ void Player::loadFromXML()
         {
             if(parrying_node->hasAttribute("sprite"))
             {
-                this->parrying_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parrying_node->attributes["sprite"]);
+                this->parrying_image=rosalila()->graphics->getTexture(assets_directory+directory+"/sprites/"+parrying_node->attributes["sprite"]);
             }
             if(parrying_node->hasAttribute("x"))
             {
@@ -664,7 +664,7 @@ void Player::loadFromXML()
         {
             if(parryed_node->hasAttribute("sprite"))
             {
-                this->parryed_image=Rosalila()->Graphics->getTexture(assets_directory+directory+"/sprites/"+parryed_node->attributes["sprite"]);
+                this->parryed_image=rosalila()->graphics->getTexture(assets_directory+directory+"/sprites/"+parryed_node->attributes["sprite"]);
             }
             if(parryed_node->hasAttribute("x"))
             {
@@ -714,9 +714,9 @@ void Player::parry(bool infinite_parries)
             parries_left-=1;
         }
     }
-    if(Rosalila()->Sound->soundExists(this->name+".parry"))
+    if(rosalila()->sound->soundExists(this->name+".parry"))
     {
-        Rosalila()->Sound->playSound(this->name+".parry",sound_channel_base+1,0);
+        rosalila()->sound->playSound(this->name+".parry",sound_channel_base+1,0);
     }
 }
 
@@ -749,8 +749,8 @@ bool Player::isDownWrapper(string button_map)
     {
         if(frame>=intro_input.size())
         {
-            Rosalila()->Graphics->grayscale_effect.set(1,0.003);
-            return Rosalila()->Receiver->isDown(button_map);
+            rosalila()->graphics->grayscale_effect.set(1,0.003);
+            return rosalila()->receiver->isDown(button_map);
         }
 
         for(int i=0;i<intro_input[frame].size();i++)
@@ -758,7 +758,7 @@ bool Player::isDownWrapper(string button_map)
                 return true;
         return false;
     }
-    return Rosalila()->Receiver->isDown(button_map);
+    return rosalila()->receiver->isDown(button_map);
 }
 
 bool Player::isOnIntro()

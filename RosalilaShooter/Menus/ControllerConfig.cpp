@@ -39,30 +39,29 @@ map<string,Button*> getExistingConfiguration(string controls_file_retrived)
 
 map<string,Button*> ControllerConfig(bool reconfigure)
 {
-    string controls_file_retrived = Rosalila()->ApiIntegrator->getData("controls");
+    string controls_file_retrived = rosalila()->api_integrator->getData("controls");
     if(controls_file_retrived!="" && !reconfigure)
     {
         return getExistingConfiguration(controls_file_retrived);
     }
 
-    RosalilaGraphics* graphics=Rosalila()->Graphics;
-    Image* controls_config_backgound = graphics->getTexture(assets_directory+"misc/controls configuration/background.png");
-    Image* player_image = graphics->getTexture(assets_directory+"misc/controls configuration/player.png");
-    Image* bullet_image = graphics->getTexture(assets_directory+"misc/controls configuration/bullet.png");
+    Image* controls_config_backgound = rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/background.png");
+    Image* player_image = rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/player.png");
+    Image* bullet_image = rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/bullet.png");
     vector<Image*> icon_images;
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/up_arrow.png"));
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/down_arrow.png"));
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/left_arrow.png"));
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/right_arrow.png"));
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/player.png"));
-    icon_images.push_back(graphics->getTexture(assets_directory+"misc/controls configuration/icons/back.png"));
-    int player_image_initial_x = graphics->screen_width/2-player_image->getWidth()/2;
-    int player_image_initial_y = graphics->screen_height/2-player_image->getHeight()/2;
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/up_arrow.png"));
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/down_arrow.png"));
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/left_arrow.png"));
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/right_arrow.png"));
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/player.png"));
+    icon_images.push_back(rosalila()->graphics->getTexture(assets_directory+"misc/controls configuration/icons/back.png"));
+    int player_image_initial_x = rosalila()->graphics->screen_width/2-player_image->getWidth()/2;
+    int player_image_initial_y = rosalila()->graphics->screen_height/2-player_image->getHeight()/2;
     int player_image_x = player_image_initial_x;
     int player_image_y = player_image_initial_y;
-    int bullet_initial_x = graphics->screen_width/2-bullet_image->getWidth()/2 + 25;
+    int bullet_initial_x = rosalila()->graphics->screen_width/2-bullet_image->getWidth()/2 + 25;
     int bullet_image_x = bullet_initial_x;
-    int bullet_image_y = graphics->screen_height/2-bullet_image->getHeight()/2;
+    int bullet_image_y = rosalila()->graphics->screen_height/2-bullet_image->getHeight()/2;
     vector<string> controls_config_map_name;
     controls_config_map_name.push_back("8");
     controls_config_map_name.push_back("2");
@@ -70,8 +69,6 @@ map<string,Button*> ControllerConfig(bool reconfigure)
     controls_config_map_name.push_back("6");
     controls_config_map_name.push_back("a");
     controls_config_map_name.push_back("b");
-
-    RosalilaReceiver* receiver = Rosalila()->Receiver;
 
     map<string,Button*>controls;
     int current_button=0;
@@ -82,7 +79,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         int key_pressed = -1;
         int joy_pressed = -1;
 
-        if(receiver->isKeyPressed(SDLK_ESCAPE))
+        if(rosalila()->receiver->isKeyPressed(SDLK_ESCAPE))
         {
             player_image_x = player_image_initial_x;
             player_image_y = player_image_initial_y;
@@ -93,7 +90,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         }
         for(int i=0/*SDLK_a*/;i<=255/*SDLK_z*/;i++)
         {
-            if(receiver->isKeyPressed(i))
+            if(rosalila()->receiver->isKeyPressed(i))
             {
                 key_pressed=i;
                 player_image_x = player_image_initial_x;
@@ -103,20 +100,20 @@ map<string,Button*> ControllerConfig(bool reconfigure)
 
         for(int i=0;i<100;i++)
         {
-            if(receiver->isJoyPressed(i,0))
+            if(rosalila()->receiver->isJoyPressed(i,0))
             {
                 joy_pressed=i;
                 player_image_x = player_image_initial_x;
                 player_image_y = player_image_initial_y;
             }
         }
-        if(receiver->isJoyPressed(-2,0))
+        if(rosalila()->receiver->isJoyPressed(-2,0))
             joy_pressed=-2;
-        if(receiver->isJoyPressed(-8,0))
+        if(rosalila()->receiver->isJoyPressed(-8,0))
             joy_pressed=-8;
-        if(receiver->isJoyPressed(-4,0))
+        if(rosalila()->receiver->isJoyPressed(-4,0))
             joy_pressed=-4;
-        if(receiver->isJoyPressed(-6,0))
+        if(rosalila()->receiver->isJoyPressed(-6,0))
             joy_pressed=-6;
 
         if(key_pressed!=-1)
@@ -136,7 +133,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
                 break;
         }
 
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   controls_config_backgound,
             controls_config_backgound->getWidth(),controls_config_backgound->getHeight(),
             0,0,
@@ -183,7 +180,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         }
 
         if(current_button<4)
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   player_image,
             player_image->getWidth(),player_image->getHeight(),
             player_image_x+center_separation_x,player_image_y+center_separation_y,
@@ -201,7 +198,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             bullet_image_x+=3;
             if(bullet_image_x>bullet_initial_x + animation_max_distance)
                 bullet_image_x = bullet_initial_x;
-            graphics->draw2DImage
+            rosalila()->graphics->draw2DImage
             (   bullet_image,
                 bullet_image->getWidth(),bullet_image->getHeight(),
                 bullet_image_x,bullet_image_y,
@@ -215,11 +212,11 @@ map<string,Button*> ControllerConfig(bool reconfigure)
                 FlatShadow());
         }
 
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   icon_images[current_button],
             icon_images[current_button]->getWidth(),icon_images[current_button]->getHeight(),
-            graphics->screen_width/2-icon_images[current_button]->getWidth()/2,
-                graphics->screen_height/2-icon_images[current_button]->getHeight()/2,
+            rosalila()->graphics->screen_width/2-icon_images[current_button]->getWidth()/2,
+                rosalila()->graphics->screen_height/2-icon_images[current_button]->getHeight()/2,
             1.0,
             0.0,
             false,
@@ -229,7 +226,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             false,
             FlatShadow());
 
-        Rosalila()->update();
+        rosalila()->update();
         frame++;
     }
 
@@ -241,14 +238,14 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         if((*i).second->uses_joystick)
         {
             controls_file+="J";
-            controls_file+=Rosalila()->Utility->toString((*i).second->joystick_button)+",";
+            controls_file+=rosalila()->utility->toString((*i).second->joystick_button)+",";
         }else
         {
             controls_file+="K";
-            controls_file+=Rosalila()->Utility->toString((*i).second->key)+",";
+            controls_file+=rosalila()->utility->toString((*i).second->key)+",";
         }
     }
-    Rosalila()->ApiIntegrator->storeData("controls",controls_file);
+    rosalila()->api_integrator->storeData("controls",controls_file);
 
     return controls;
 }

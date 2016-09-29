@@ -21,18 +21,18 @@ int main(int argc, char *argv[])
         input_config=true;
     }
 
-    Rosalila()->init();
+    rosalila()->init();
     initShooterUtility();
 
-    Rosalila()->ApiIntegrator->unlockAchievement("A");
+    rosalila()->api_integrator->unlockAchievement("A");
 
-    Rosalila()->ApiIntegrator->setCurrentControllerActionSet("MenuControls");
+    rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
 
-    if(Rosalila()->ApiIntegrator->isUsingSteamController())
-        Rosalila()->ApiIntegrator->showControllerBindingPanel();
+    if(rosalila()->api_integrator->isUsingSteamController())
+        rosalila()->api_integrator->showControllerBindingPanel();
     else
-        Rosalila()->Receiver->controls = ControllerConfig(input_config);
+        rosalila()->receiver->controls = ControllerConfig(input_config);
 
     intro();
 

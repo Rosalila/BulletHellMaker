@@ -14,14 +14,14 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
 
     this->game_over_timeout = 128;
 
-    this->image_upload_error = Rosalila()->Graphics->getTexture(assets_directory+"misc/upload_error.png");
+    this->image_upload_error = rosalila()->graphics->getTexture(assets_directory+"misc/upload_error.png");
 
     this->image_training_box = NULL;
     this->image_training_x = NULL;
     this->image_training_bar = NULL;
     this->image_training_bar_fill = NULL;
 
-    Rosalila()->Graphics->camera_y=0;
+    rosalila()->graphics->camera_y=0;
     frame=0;
 
     parry_count=0;
@@ -48,7 +48,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
 
     if(you_loose_node->ToElement()->Attribute("sound"))
     {
-        Rosalila()->Sound->addSound("you lose",assets_directory+you_loose_node->ToElement()->Attribute("sound"));
+        rosalila()->sound->addSound("you lose",assets_directory+you_loose_node->ToElement()->Attribute("sound"));
     }
 
     for(TiXmlNode* sprites_node=you_loose_node->FirstChild("sprite");
@@ -56,7 +56,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
             sprites_node=sprites_node->NextSibling("sprite"))
     {
         std::string path=sprites_node->ToElement()->Attribute("path");
-        you_loose.addImage(Rosalila()->Graphics->getTexture(assets_directory+path));
+        you_loose.addImage(rosalila()->graphics->getTexture(assets_directory+path));
     }
 
 
@@ -69,7 +69,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
 
     if(you_win_node->ToElement()->Attribute("sound"))
     {
-        Rosalila()->Sound->addSound("you win",assets_directory+you_win_node->ToElement()->Attribute("sound"));
+        rosalila()->sound->addSound("you win",assets_directory+you_win_node->ToElement()->Attribute("sound"));
     }
 
     for(TiXmlNode* sprites_node=you_win_node->FirstChild("sprite");
@@ -77,7 +77,7 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
             sprites_node=sprites_node->NextSibling("sprite"))
     {
         std::string path=sprites_node->ToElement()->Attribute("path");
-        you_win.addImage(Rosalila()->Graphics->getTexture(assets_directory+path));
+        you_win.addImage(rosalila()->graphics->getTexture(assets_directory+path));
     }
 
     if(game_mode=="Stage select" || game_mode=="charge training" || game_mode=="parry training" || game_mode=="parry dash training" || "replay")
@@ -87,20 +87,20 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
 
     if(game_mode=="charge training")
     {
-        image_training_bar=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/bar.png");
-        image_training_bar_fill=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
+        image_training_bar=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar.png");
+        image_training_bar_fill=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
         charge_destroy_count_objective=300;
     }
     if(game_mode=="parry training")
     {
-        image_training_box=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/box.png");
-        image_training_x=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/x.png");
+        image_training_box=rosalila()->graphics->getTexture(assets_directory+"misc/training/box.png");
+        image_training_x=rosalila()->graphics->getTexture(assets_directory+"misc/training/x.png");
         parry_count_objective=3;
     }
     if(game_mode=="parry dash training")
     {
-        image_training_bar=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/bar.png");
-        image_training_bar_fill=Rosalila()->Graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
+        image_training_bar=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar.png");
+        image_training_bar_fill=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
         parry_dash_count_objective=15;
     }
 
@@ -126,7 +126,7 @@ STG::~STG()
 void STG::stageSelectModeInit()
 {
     //stage->playMusic();
-    Rosalila()->Graphics->camera_x=0;
+    rosalila()->graphics->camera_x=0;
     current_training_transparency=0;
 }
 
@@ -138,10 +138,10 @@ void STG::mainLoop()
 
     for (;;)
     {
-        if(Rosalila()->Receiver->isPressed("b") && api_state == "")
+        if(rosalila()->receiver->isPressed("b") && api_state == "")
         {
 //            int replay_size=0;
-//            string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+//            string seed_str = rosalila()->utility->toString(rosalila()->utility->random_seed);
 //            replay_size+=seed_str.size()+1;
 //            for(int i=0;i<player->replay_storage.size();i++)
 //            {
@@ -167,23 +167,23 @@ void STG::mainLoop()
 //            out.close();
 
             player->exit();
-            Rosalila()->Sound->playSound(std::string("Menu.back"),1,0);
+            rosalila()->sound->playSound(std::string("Menu.back"),1,0);
             break;
         }
 
-//        if(Rosalila()->Receiver->isKeyPressed(SDLK_s))
+//        if(rosalila()->receiver->isKeyPressed(SDLK_s))
 //        {
 //            string random_number = toString((rand()*999999)%1000);
-//            Rosalila()->Graphics->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
+//            rosalila()->graphics->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
 //        }
 
         render();
 
         logic();
 
-//        Rosalila()->Receiver->isKeyDown(SDLK_z)
+//        rosalila()->receiver->isKeyDown(SDLK_z)
 
-        Rosalila()->update();
+        rosalila()->update();
 
         if(getGameOver() && api_state == "")
         {
@@ -192,13 +192,13 @@ void STG::mainLoop()
                 game_over_timeout=0;
             if(game_over_timeout==0)
             {
-                if(Rosalila()->Receiver->isKeyPressed(SDLK_RETURN)
-                   || (Rosalila()->Receiver->isDown("a") && end_key_up_keyboard)
+                if(rosalila()->receiver->isKeyPressed(SDLK_RETURN)
+                   || (rosalila()->receiver->isDown("a") && end_key_up_keyboard)
                    )
                 {
                     break;
                 }
-                if(!Rosalila()->Receiver->isDown("a"))
+                if(!rosalila()->receiver->isDown("a"))
                     end_key_up_keyboard=true;
             }
         }
@@ -267,9 +267,9 @@ void STG::logic()
                     p->hit(enemy->sound_channel_base+1,false);
                     player->hit(p->bullet->damage);
                     parry_count = 0;
-                    Rosalila()->Graphics->screen_shake_effect.set(30,10,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
-                    if(Rosalila()->Sound->soundExists(player->name+".hit"))
-                        Rosalila()->Sound->playSound(player->name+".hit",3,0);
+                    rosalila()->graphics->screen_shake_effect.set(30,10,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
+                    if(rosalila()->sound->soundExists(player->name+".hit"))
+                        rosalila()->sound->playSound(player->name+".hit",3,0);
                     if(player->hp==0)
                     {
                         lose();
@@ -292,8 +292,8 @@ void STG::logic()
                     p->hit(player->sound_channel_base+1,false);
                     enemy->hit(p->bullet->damage+damage_level);
                     enemy->shakeScreen(p->bullet->damage+damage_level*3,p->bullet->damage+damage_level*2);
-                    if(Rosalila()->Sound->soundExists(enemy->name+".hit"))
-                        Rosalila()->Sound->playSound(enemy->name+".hit",1,0);
+                    if(rosalila()->sound->soundExists(enemy->name+".hit"))
+                        rosalila()->sound->playSound(enemy->name+".hit",1,0);
                     if(enemy->hp==0)
                     {
                         win();
@@ -349,7 +349,7 @@ void STG::logic()
     int stage_displacement = stage->velocity;
     if(isSlowActive())
         stage_displacement/=3;
-    Rosalila()->Graphics->camera_x+=stage_displacement;
+    rosalila()->graphics->camera_x+=stage_displacement;
     player->logic(stage_displacement);
     player->x=player->x+stage_displacement;
     enemy->logic(stage_displacement,stage->name);
@@ -362,12 +362,12 @@ void STG::logic()
 
     if(api_state == "uploading score")
     {
-        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        if(rosalila()->api_integrator->getState()=="finished")
         {
             uploadReplay();
         }
 
-        if(Rosalila()->ApiIntegrator->getState()=="error")
+        if(rosalila()->api_integrator->getState()=="error")
         {
             uploadErrorLoop();
             uploadScore();
@@ -375,12 +375,12 @@ void STG::logic()
     }
     if(api_state == "uploading replay")
     {
-        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        if(rosalila()->api_integrator->getState()=="finished")
         {
             findLeaderboard();
         }
 
-        if(Rosalila()->ApiIntegrator->getState()=="error")
+        if(rosalila()->api_integrator->getState()=="error")
         {
             uploadErrorLoop();
             uploadReplay();
@@ -389,19 +389,19 @@ void STG::logic()
 
     if(api_state == "finding leaderboard")
     {
-        if(Rosalila()->ApiIntegrator->getState()=="finished")
+        if(rosalila()->api_integrator->getState()=="finished")
         {
-            Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
-            Rosalila()->Graphics->notification_handler.notifications.push_back(
-                new Notification(getSuccessImage(), Rosalila()->Graphics->screen_width/2-getSuccessImage()->getWidth()/2,
-                                    Rosalila()->Graphics->screen_height,
-                                    Rosalila()->Graphics->screen_height-getSuccessImage()->getHeight(),
+            rosalila()->graphics->notification_handler.interruptCurrentNotification();
+            rosalila()->graphics->notification_handler.notifications.push_back(
+                new Notification(getSuccessImage(), rosalila()->graphics->screen_width/2-getSuccessImage()->getWidth()/2,
+                                    rosalila()->graphics->screen_height,
+                                    rosalila()->graphics->screen_height-getSuccessImage()->getHeight(),
                                     getNotificationDuration()));
 
             api_state="";
         }
 
-        if(Rosalila()->ApiIntegrator->getState()=="error")
+        if(rosalila()->api_integrator->getState()=="error")
         {
             uploadErrorLoop();
             findLeaderboard();
@@ -430,18 +430,18 @@ void STG::render()
     {
         if(current_player_best_score==-1)
         {
-            Rosalila()->Graphics->drawText(Rosalila()->Utility->toString(score), 0, 0, true, true);
+            rosalila()->graphics->drawText(rosalila()->utility->toString(score), 0, 0, true, true);
         }
         else
         {
             int difference = score - current_player_best_score;
-            string score_text = Rosalila()->Utility->toString(score);
+            string score_text = rosalila()->utility->toString(score);
             score_text += " (";
             if(difference>0)
                 score_text += "+";
-            score_text += Rosalila()->Utility->toString(difference);
+            score_text += rosalila()->utility->toString(difference);
             score_text += ")";
-            Rosalila()->Graphics->drawText(score_text,0, 0, true, true);
+            rosalila()->graphics->drawText(score_text,0, 0, true, true);
         }
     }
 
@@ -450,9 +450,9 @@ void STG::render()
     if(player->hp==0)
         you_loose.render();
 
-//    Rosalila()->Graphics->drawText("Time: "+toString(iteration),25,70);
-//    Rosalila()->Graphics->drawText(enemy->name,25,110);
-//    Rosalila()->Graphics->drawText("Damage level: "+toString(damage_level),25,170);
+//    rosalila()->graphics->drawText("Time: "+toString(iteration),25,70);
+//    rosalila()->graphics->drawText(enemy->name,25,110);
+//    rosalila()->graphics->drawText("Damage level: "+toString(damage_level),25,170);
 
     int tutorial_text_spacing_y=10;
     int tutorial_control_spacing_y=100;
@@ -462,10 +462,10 @@ void STG::render()
         current_training_transparency=255;
     if(game_mode=="charge training")
     {
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image_training_bar_fill,
             image_training_bar_fill->getWidth()*(charge_destroy_count/charge_destroy_count_objective),image_training_bar_fill->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
+            rosalila()->graphics->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
@@ -474,10 +474,10 @@ void STG::render()
             0,0,
             false,
             FlatShadow());
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image_training_bar,
             image_training_bar->getWidth(),image_training_bar->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
+            rosalila()->graphics->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
@@ -491,10 +491,10 @@ void STG::render()
     {
         for(int i=0;i<parry_count_objective;i++)
         {
-            Rosalila()->Graphics->draw2DImage
+            rosalila()->graphics->draw2DImage
             (   image_training_box,
                 image_training_box->getWidth(),image_training_box->getHeight(),
-                Rosalila()->Graphics->screen_width/2-(image_training_box->getWidth()/2)*3+i*(image_training_box->getWidth()+10),tutorial_control_spacing_y,
+                rosalila()->graphics->screen_width/2-(image_training_box->getWidth()/2)*3+i*(image_training_box->getWidth()+10),tutorial_control_spacing_y,
                 1.0,
                 0.0,
                 false,
@@ -505,10 +505,10 @@ void STG::render()
                 FlatShadow());
             if(i<parry_count)
             {
-                Rosalila()->Graphics->draw2DImage
+                rosalila()->graphics->draw2DImage
                 (   image_training_x,
                     image_training_x->getWidth(),image_training_x->getHeight(),
-                    Rosalila()->Graphics->screen_width/2-(image_training_x->getWidth()/2)*3+i*(image_training_x->getWidth()+10),tutorial_control_spacing_y,
+                    rosalila()->graphics->screen_width/2-(image_training_x->getWidth()/2)*3+i*(image_training_x->getWidth()+10),tutorial_control_spacing_y,
                     1.0,
                     0.0,
                     false,
@@ -522,10 +522,10 @@ void STG::render()
     }
     if(game_mode=="parry dash training")
     {
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image_training_bar_fill,
             image_training_bar_fill->getWidth()*(parry_dash_count/parry_dash_count_objective),image_training_bar_fill->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
+            rosalila()->graphics->screen_width/2-image_training_bar_fill->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
@@ -534,10 +534,10 @@ void STG::render()
             0,0,
             false,
             FlatShadow());
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image_training_bar,
             image_training_bar->getWidth(),image_training_bar->getHeight(),
-            Rosalila()->Graphics->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
+            rosalila()->graphics->screen_width/2-image_training_bar->getWidth()/2,tutorial_control_spacing_y,
             1.0,
             0.0,
             false,
@@ -548,15 +548,15 @@ void STG::render()
             FlatShadow());
     }
 
-    //Rosalila()->Graphics->updateScreen();
+    //rosalila()->graphics->updateScreen();
 }
 
 bool STG::isOutOfBounds(int pos_x,int pos_y)
 {
     int bullet_bound_addition_x = (stage->bound_x2-stage->bound_x1)/2;
     int bullet_bound_addition_y = (stage->bound_y2-stage->bound_y1)/2;
-    if(pos_x<stage->bound_x1+Rosalila()->Graphics->camera_x-bullet_bound_addition_x
-       ||pos_x>stage->bound_x2+Rosalila()->Graphics->camera_x+bullet_bound_addition_x
+    if(pos_x<stage->bound_x1+rosalila()->graphics->camera_x-bullet_bound_addition_x
+       ||pos_x>stage->bound_x2+rosalila()->graphics->camera_x+bullet_bound_addition_x
        ||pos_y<stage->bound_y1-bullet_bound_addition_y
        ||pos_y>stage->bound_y2+bullet_bound_addition_y
        )
@@ -603,10 +603,10 @@ void STG::deletePatterns()
 
 void STG::checkCharacterOutOfBounds()
 {
-    if(player->x<stage->bound_x1+Rosalila()->Graphics->camera_x)
-        player->x=stage->bound_x1+Rosalila()->Graphics->camera_x;
-    if(player->x>stage->bound_x2+Rosalila()->Graphics->camera_x)
-        player->x=stage->bound_x2+Rosalila()->Graphics->camera_x;
+    if(player->x<stage->bound_x1+rosalila()->graphics->camera_x)
+        player->x=stage->bound_x1+rosalila()->graphics->camera_x;
+    if(player->x>stage->bound_x2+rosalila()->graphics->camera_x)
+        player->x=stage->bound_x2+rosalila()->graphics->camera_x;
     if(player->y<stage->bound_y1)
         player->y=stage->bound_y1;
     if(player->y>stage->bound_y2)
@@ -628,13 +628,13 @@ void STG::win()
     setPlayerWon(true);
     setGameOver(true);
 
-    Rosalila()->ApiIntegrator->unlockAchievement("B");
+    rosalila()->api_integrator->unlockAchievement("B");
     double milliseconds = SDL_GetTicks()-initial_ticks;
     double hp_penalty = (1.0 + ((double)player->max_hp-(double)player->hp)/100.0);
     score = milliseconds * hp_penalty;
     enemy->hp=0;
-    Rosalila()->Graphics->screen_shake_effect.set(50,20,Rosalila()->Graphics->camera_x,Rosalila()->Graphics->camera_y);
-    Rosalila()->Sound->playSound("you win",2,0);
+    rosalila()->graphics->screen_shake_effect.set(50,20,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
+    rosalila()->sound->playSound("you win",2,0);
     enemy->deleteActivePatterns();
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
@@ -647,26 +647,26 @@ void STG::lose()
 {
     setPlayerWon(false);
     setGameOver(true);
-    Rosalila()->Sound->playSound("you lose",4,0);
+    rosalila()->sound->playSound("you lose",4,0);
 }
 
 void STG::uploadScore()
 {
     api_state = "uploading score";
 
-    Rosalila()->ApiIntegrator->setScore(stage->name, score);
+    rosalila()->api_integrator->setScore(stage->name, score);
 
-    Rosalila()->Graphics->notification_handler.notifications.push_back(
-        new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
-                            Rosalila()->Graphics->screen_height,
-                            Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+    rosalila()->graphics->notification_handler.notifications.push_back(
+        new Notification(getLoadingImage(), rosalila()->graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                            rosalila()->graphics->screen_height,
+                            rosalila()->graphics->screen_height-getLoadingImage()->getHeight(),
                             999999));
 }
 
 void STG::uploadReplay()
 {
     int replay_size=0;
-    string seed_str = Rosalila()->Utility->toString(Rosalila()->Utility->random_seed);
+    string seed_str = rosalila()->utility->toString(rosalila()->utility->random_seed);
     replay_size+=seed_str.size()+1;
     for(int i=0;i<player->replay_storage.size();i++)
     {
@@ -687,29 +687,29 @@ void STG::uploadReplay()
     }
     strcat(replay_data,"\0");
 
-    Rosalila()->ApiIntegrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
+    rosalila()->api_integrator->storeLeaderboardAttachment(stage->name,replay_data,replay_size);
 
     api_state = "uploading replay";
 }
 
 void STG::uploadErrorLoop()
 {
-    Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
-    Rosalila()->Graphics->notification_handler.notifications.push_back(
-        new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                            Rosalila()->Graphics->screen_height,
-                            Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+    rosalila()->graphics->notification_handler.interruptCurrentNotification();
+    rosalila()->graphics->notification_handler.notifications.push_back(
+        new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                            rosalila()->graphics->screen_height,
+                            rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
                             getNotificationDuration()));
 
     api_state = "error";
 
     while(true)
     {
-        if(Rosalila()->Receiver->isPressed("a"))
+        if(rosalila()->receiver->isPressed("a"))
         {
             break;
         }
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image_upload_error,
             image_upload_error->getWidth(),image_upload_error->getHeight(),
             0,0,
@@ -722,12 +722,12 @@ void STG::uploadErrorLoop()
             false,
             FlatShadow());
 
-        Rosalila()->update();
+        rosalila()->update();
     }
 }
 
 void STG::findLeaderboard()
 {
-    Rosalila()->ApiIntegrator->findLeaderboard(stage->name);
+    rosalila()->api_integrator->findLeaderboard(stage->name);
     api_state = "finding leaderboard";
 }

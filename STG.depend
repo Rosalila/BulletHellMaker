@@ -3069,7 +3069,7 @@
 	<assert.h>
 	<string.h>
 
-1474649121 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1475177365 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"../Rosalila.h"
@@ -3088,9 +3088,11 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	"Drawables/DrawableRectangle.h"
 	"Drawables/DrawableTriangle.h"
+	"Drawables/DrawablePoint.h"
 	"Effects/GrayscaleEffect.h"
 	"Effects/TransparencyEffect.h"
 	"Effects/ScreenShakeEffect.h"
+	"Effects/PointExplosionEffect.h"
 	"Notifications/NotificationHandler.h"
 	<iostream>
 	<fstream>
@@ -3103,7 +3105,7 @@
 	"../RosalilaUtility/RosalilaUtility.h"
 	"../RosalilaGraphics/Image.h"
 
-1474648005 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
+1475176985 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.h
 	<iostream>
 	<fstream>
 	<cmath>
@@ -3266,7 +3268,7 @@
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaAI/Transicion.cpp
 	"Transicion.h"
 
-1471838035 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Animation.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Animation.cpp
 	"Animation.h"
 
 1472163014 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Animation.h
@@ -3293,7 +3295,7 @@
 1471550732 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1474649434 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1475177386 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1471648585 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Timer.cpp
@@ -3304,7 +3306,7 @@
 1471838217 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs.h"
 
-1474582771 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/RosalilaInputs.cpp
 	"RosalilaInputs.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaMenus/Elemento.cpp
@@ -3371,7 +3373,7 @@
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaNetwork/RosalilaNetwork.cpp
 
-1473790350 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1471653152 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Font.cpp
@@ -3381,13 +3383,13 @@
 	<iostream>
 	"../RosalilaGraphics/RosalilaGraphics.h"
 
-1471970011 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Hitbox.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Hitbox.cpp
 	"Hitbox.h"
 
 1471969502 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/Line.cpp
 	"Line.h"
 
-1474648016 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1475177116 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility.h"
 
 1448811848 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/TinyXml/tinystr.cpp
@@ -3464,7 +3466,7 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1474782538 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3643,7 +3645,7 @@
 	"../STG.h"
 	"../Stage/Stage.h"
 
-1474782419 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
+1474784936 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.h
 	<iostream>
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
@@ -3652,23 +3654,23 @@
 	"RosalilaParser/RosalilaParser.h"
 	"RosalilaApiIntegrator/RosalilaApiIntegrator.h"
 
-1474782494 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
+1474784918 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/Rosalila.cpp
 	"Rosalila.h"
 
 1471965330 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.h
 	"../Rosalila.h"
 	"../RosalilaInputs/RosalilaInputs.h"
 
-1474087846 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaInputs/Button.cpp
 	"Button.h"
 
-1473786634 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.cpp
 	"Bullet.h"
 
 1473786560 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Bullet.h
 	"../../Rosalila/Rosalila.h"
 
-1474508570 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.cpp
 	"Character.h"
 
 1473788069 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Character.h
@@ -3697,7 +3699,7 @@
 	<vector>
 	"../../Rosalila/Rosalila.h"
 
-1473792597 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Enemy.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Enemy.cpp
 	"Enemy.h"
 
 1473784986 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Enemy.h
@@ -3722,13 +3724,13 @@
 1448810538 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Modifier.cpp
 	"Modifier.h"
 
-1474337681 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
+1475177403 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
-1474089607 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1474303644 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1475097351 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
 1474247901 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
@@ -3776,10 +3778,10 @@
 1471838367 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STGUtility/STGUtility.cpp
 	"STGUtility.h"
 
-1474567402 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Layer.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Layer.cpp
 	"Layer.h"
 
-1474647605 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
 	"Stage.h"
 
 1471809742 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STGMenu/Intro.h
@@ -3792,7 +3794,7 @@
 	<vector>
 	"../../Rosalila/Rosalila.h"
 
-1474257564 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.cpp
 	"ControllerConfig.h"
 
 1473021883 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/ControllerConfig.h
@@ -3800,10 +3802,10 @@
 	"../Utility/Utility.h"
 	"../../Rosalila/RosalilaInputs/Button.h"
 
-1474685566 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1474301319 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1474088992 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -3815,7 +3817,7 @@
 	<algorithm>
 	<time.h>
 
-1474244652 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Utility/Utility.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Utility/Utility.cpp
 	"Utility.h"
 
 1474088984 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.h
@@ -3999,7 +4001,7 @@
 
 1463097229 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api_internal.h
 
-1474644571 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
 	"SteamIntegration.h"
 
 1473707463 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h
@@ -4013,7 +4015,7 @@
 	"../LeaderboardEntry.h"
 	"../../RosalilaUtility/RosalilaUtility.h"
 
-1474064988 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
+1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
 	"LeaderboardHandler.h"
 
 1472500409 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp
@@ -4091,4 +4093,24 @@
 1474649182 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Drawables/DrawableTriangle.h
 	"../../RosalilaUtility/Point.h"
 	"../Color.h"
+
+1475098861 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Drawables/DrawablePoint.h
+	"../../RosalilaUtility/Point.h"
+	"../Color.h"
+
+1475095928 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Drawables/DrawablePoint.cpp
+	"DrawablePoint.h"
+
+1475177203 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/PointExplosionEffect.cpp
+	"PointExplosionEffect.h"
+
+1475095928 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Drawables/DrawablePoint.cpp
+	"DrawablePoint.h"
+
+1475177350 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaGraphics/Effects/PointExplosionEffect.h
+	<list>
+	<cmath>
+	<stdlib.h>
+	"../Drawables/DrawablePoint.cpp"
+	"../../Rosalila.h"
 

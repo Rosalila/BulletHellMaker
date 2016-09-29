@@ -12,9 +12,9 @@ Image* sucess_image;
 
 void initShooterUtility()
 {
-    loading_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/loading.png");
-    error_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/error.png");
-    sucess_image = Rosalila()->Graphics->getTexture(assets_directory+"misc/messages/sucess.png");
+    loading_image = rosalila()->graphics->getTexture(assets_directory+"misc/messages/loading.png");
+    error_image = rosalila()->graphics->getTexture(assets_directory+"misc/messages/error.png");
+    sucess_image = rosalila()->graphics->getTexture(assets_directory+"misc/messages/sucess.png");
 }
 
 bool getGameOver()
@@ -59,7 +59,7 @@ void slowExtraControl()
 
 bool isSlowPressed()
 {
-    return Rosalila()->Receiver->isKeyDown(SDLK_x) || Rosalila()->Receiver->isJoyDown(5,0);
+    return rosalila()->receiver->isKeyDown(SDLK_x) || rosalila()->receiver->isJoyDown(5,0);
 }
 
 void disableSlow()

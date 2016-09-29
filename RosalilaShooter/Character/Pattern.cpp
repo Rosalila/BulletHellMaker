@@ -260,7 +260,7 @@ void Pattern::render()
         int transparency_divider=1;
         if(getGameOver())
             transparency_divider=8;
-        Rosalila()->Graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   image,
             image->getWidth(),image->getHeight(),
             this->x-image->getWidth()/2,this->y-image->getHeight()/2,
@@ -274,12 +274,12 @@ void Pattern::render()
             FlatShadow());
     }
 
-    if(Rosalila()->Receiver->isKeyDown(SDLK_h))
+    if(rosalila()->receiver->isKeyDown(SDLK_h))
     {
         for(int i=0;i<(int)bullet->hitboxes.size();i++)
         {
             Hitbox h=this->bullet->hitboxes[i]->getPlacedHitbox(this->x,this->y,this->getBulletAngle());
-            Rosalila()->Graphics->drawRectangle(h.getX(),
+            rosalila()->graphics->drawRectangle(h.getX(),
                                    h.getY(),
                                    this->bullet->hitboxes[i]->getWidth(),this->bullet->hitboxes[i]->getHeight(),
                                    h.getAngle(),100,0,0,100,true);
@@ -312,9 +312,9 @@ float Pattern::getRandomAngle()
         return 0;
     if(random_angle<0)
     {
-        return -(Rosalila()->Utility->getRandomNumber()%(-random_angle));
+        return -(rosalila()->utility->getRandomNumber()%(-random_angle));
     }
-    return Rosalila()->Utility->getRandomNumber()%random_angle;
+    return rosalila()->utility->getRandomNumber()%random_angle;
 }
 
 bool Pattern::getAimPlayer()
@@ -334,16 +334,17 @@ void Pattern::aimTo(int x,int y)
 
 void Pattern::hit(int channel,bool hit_undestructable)
 {
+    rosalila()->graphics->point_explosion_effect->explode(this->x,this->y,Color(255,255,255,255));
     bullet->playHitSound();
     if(!undestructable || hit_undestructable)
     {
         is_hit=true;
         current_sprite=0;
-        velocity=-velocity/3;
-        angle=rand()%360;
-        br_change = 40;
-        angle_change=-5+rand()%10;
-        acceleration=0;
+//        velocity=-velocity/3;
+//        angle=rand()%360;
+//        br_change = 40;
+//        angle_change=-5+rand()%10;
+//        acceleration=0;
     }
 }
 

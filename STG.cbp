@@ -48,12 +48,16 @@
 		<Unit filename="Rosalila/RosalilaGraphics/Animation.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Color.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawablePoint.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawablePoint.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableRectangle.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableTriangle.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Drawables/DrawableTriangle.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/GrayscaleEffect.h" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/PointExplosionEffect.cpp" />
+		<Unit filename="Rosalila/RosalilaGraphics/Effects/PointExplosionEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.cpp" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/ScreenShakeEffect.h" />
 		<Unit filename="Rosalila/RosalilaGraphics/Effects/TransparencyEffect.cpp" />

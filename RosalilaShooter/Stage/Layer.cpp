@@ -17,7 +17,7 @@ Layer::Layer(vector<LayerFrame*> layer_frames,int frame_duration,int depth_effec
 
 Layer::~Layer()
 {
-    Rosalila()->Utility->writeLogLine("Deleting layer.");
+    rosalila()->utility->writeLogLine("Deleting layer.");
     for(int i=0;i<layer_frames.size();i++)
     {
         delete layer_frames[i];

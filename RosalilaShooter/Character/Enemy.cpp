@@ -131,8 +131,8 @@ void Enemy::logic(int stage_velocity, string stage_name)
         if(orientation!="destroyed")
         {
             orientation="destroyed";
-            if(Rosalila()->Sound->soundExists(name+".destroyed"))
-                Rosalila()->Sound->playSound(name+".destroyed",1,0);
+            if(rosalila()->sound->soundExists(name+".destroyed"))
+                rosalila()->sound->playSound(name+".destroyed",1,0);
 
             for(int i=0;i<(int)hitboxes.size();i++)
                 this->hitboxes[i]->setValues(0,0,0,0,0);
@@ -161,7 +161,7 @@ void Enemy::topRender()
 
 void Enemy::loadModifiersFromXML()
 {
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+directory+"modifiers.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+directory+"modifiers.xml");
 
     vector<Node*> modifier_nodes = root_node->getNodesByName("Modifier");
 

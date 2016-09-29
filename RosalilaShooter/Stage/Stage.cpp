@@ -6,12 +6,12 @@ Stage::Stage()
     this->iterate_slowdown_flag=false;
     this->current_slowdown_iteration=0;
     this->layer_transparency=255;
-    Rosalila()->Utility->setRandomSeed(time(NULL));
+    rosalila()->utility->setRandomSeed(time(NULL));
 }
 
 Stage::~Stage()
 {
-    Rosalila()->Utility->writeLogLine("Deleting stage.");
+    rosalila()->utility->writeLogLine("Deleting stage.");
     for(;!back.empty();)
     {
         Layer*layer=back.back();
@@ -70,17 +70,17 @@ void Stage::drawLayer(Layer* layer)
 
     vector<DrawableRectangle*>rectangles;
 
-    for(int i=0;i<Rosalila()->Graphics->screen_width/(frame_width+layer->separation_x)+2;i++)
+    for(int i=0;i<rosalila()->graphics->screen_width/(frame_width+layer->separation_x)+2;i++)
     {
 
         int pos_x = layer->alignment_x + i*(frame_width+layer->separation_x);
-        int pos_y = Rosalila()->Graphics->screen_height - frame_heigth - layer->alignment_y;
+        int pos_y = rosalila()->graphics->screen_height - frame_heigth - layer->alignment_y;
 
         if(current_layer_frame->type == "image")
         {
             Image* image = current_layer_frame->image;
 
-            Rosalila()->Graphics->draw2DImage
+            rosalila()->graphics->draw2DImage
             (   image,
                 frame_width,frame_heigth,
                 pos_x,pos_y,
@@ -100,7 +100,7 @@ void Stage::drawLayer(Layer* layer)
         }
     }
 
-    Rosalila()->Graphics->drawRectangles(rectangles,layer->depth_effect_x,layer->depth_effect_y,true);
+    rosalila()->graphics->drawRectangles(rectangles,layer->depth_effect_x,layer->depth_effect_y,true);
 
     for(int i=0;i<rectangles.size();i++)
     {
@@ -109,13 +109,13 @@ void Stage::drawLayer(Layer* layer)
 
     if(layer->depth_effect_x>0)
     {
-        if(Rosalila()->Graphics->camera_x/layer->depth_effect_x>frame_width+layer->separation_x+layer->alignment_x)
+        if(rosalila()->graphics->camera_x/layer->depth_effect_x>frame_width+layer->separation_x+layer->alignment_x)
         {
             layer->alignment_x+=frame_width+layer->separation_x;
         }
     }else if(layer->depth_effect_x<0)
     {
-        if(Rosalila()->Graphics->camera_x*-layer->depth_effect_x > frame_width+layer->separation_x+layer->alignment_x)
+        if(rosalila()->graphics->camera_x*-layer->depth_effect_x > frame_width+layer->separation_x+layer->alignment_x)
         {
             layer->alignment_x+=frame_width+layer->separation_x;
         }
@@ -130,7 +130,7 @@ void Stage::dibujarBack()
         Layer* layer=back[i];
         drawLayer(layer);
     }
-//    Rosalila()->Graphics->clearScreen(Color(0,0,0,0));
+//    rosalila()->graphics->clearScreen(Color(0,0,0,0));
 }
 
 void Stage::dibujarFront()
@@ -146,9 +146,9 @@ void Stage::loadFromXML(std::string name)
 {
     this->name=name;
 
-    Rosalila()->Utility->writeLogLine("Loading stage from XML.");
+    rosalila()->utility->writeLogLine("Loading stage from XML.");
 
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"stages/"+name+"/main.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+"stages/"+name+"/main.xml");
 
     //Load settings
     music_path = assets_directory+"stages/"+name+"/music.ogg";
@@ -156,8 +156,8 @@ void Stage::loadFromXML(std::string name)
     Node* nodo_bounds = root_node->getNodeByName("Bounds");
     this->bound_x1=0;
     this->bound_y1=0;
-    this->bound_x2=Rosalila()->Graphics->screen_width;
-    this->bound_y2=Rosalila()->Graphics->screen_height;
+    this->bound_x2=rosalila()->graphics->screen_width;
+    this->bound_y2=rosalila()->graphics->screen_height;
 
     if(nodo_bounds->hasAttribute("x1"))
         this->bound_x1=atoi(nodo_bounds->attributes["x1"].c_str());
@@ -178,17 +178,17 @@ void Stage::loadFromXML(std::string name)
     if(nodo_misc->hasAttribute("velocity"))
         this->velocity=atoi(nodo_misc->attributes["velocity"].c_str());
 
-    Rosalila()->Utility->writeLogLine("Loading stage's BackLayers.");
+    rosalila()->utility->writeLogLine("Loading stage's BackLayers.");
 
 
 vector<int>random_colors_r;
 vector<int>random_colors_g;
 vector<int>random_colors_b;
 
-int u=Rosalila()->Utility->getRandomNumber()%3+1;
+int u=rosalila()->utility->getRandomNumber()%3+1;
 for(int i=0;i<u;i++)
 {
-int random_number=Rosalila()->Utility->getRandomNumber()%19;
+int random_number=rosalila()->utility->getRandomNumber()%19;
 int random_color_r,random_color_g,random_color_b;
 if(random_number==0)
 {
@@ -295,11 +295,11 @@ for(int i=0;i<backlayer_nodes.size();i++)
    current_layer++;
 }
 
-//int max_layers=Rosalila()->Utility->getRandomNumber()%3+1;
-//max_layer["a"]=Rosalila()->Utility->getRandomNumber()%3+1;
-//max_layer["b"]=Rosalila()->Utility->getRandomNumber()%3+1;
-max_layers["a"]=1+Rosalila()->Utility->getRandomNumber()%2;
-max_layers["b"]=1+Rosalila()->Utility->getRandomNumber()%3;
+//int max_layers=rosalila()->utility->getRandomNumber()%3+1;
+//max_layer["a"]=rosalila()->utility->getRandomNumber()%3+1;
+//max_layer["b"]=rosalila()->utility->getRandomNumber()%3+1;
+max_layers["a"]=1+rosalila()->utility->getRandomNumber()%2;
+max_layers["b"]=1+rosalila()->utility->getRandomNumber()%3;
 
 for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_appereance.begin();
     randomized_appereance_iterator!=randomized_appereance.end();
@@ -308,7 +308,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
     list<int>current_list=(*randomized_appereance_iterator).second;
     while((int)current_list.size()>max_layers[(*randomized_appereance_iterator).first])
     {
-        int random_to_remove = Rosalila()->Utility->getRandomNumber()%current_list.size();
+        int random_to_remove = rosalila()->utility->getRandomNumber()%current_list.size();
         list<int>::iterator remove_iterator = current_list.begin();
         for(int i=0;i<random_to_remove;i++)
         {
@@ -363,42 +363,42 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
             frame_duration=atoi(backlayer_nodes[i]->attributes["frame_duration"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_frame_duration"))
-            frame_duration+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_frame_duration"].c_str());
+            frame_duration+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_frame_duration"].c_str());
 
         int depth_effect_x=0;
         if(backlayer_nodes[i]->hasAttribute("depth_effect_x"))
             depth_effect_x=atoi(backlayer_nodes[i]->attributes["depth_effect_x"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_depth_effect_x"))
-            depth_effect_x+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_x"].c_str());
+            depth_effect_x+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_x"].c_str());
 
         int depth_effect_y=0;
         if(backlayer_nodes[i]->hasAttribute("depth_effect_y"))
             depth_effect_y=atoi(backlayer_nodes[i]->attributes["depth_effect_y"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_depth_effect_y"))
-            depth_effect_y+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_y"].c_str());
+            depth_effect_y+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_depth_effect_y"].c_str());
 
         int align_x=0;
         if(backlayer_nodes[i]->hasAttribute("align_x"))
             align_x=atoi(backlayer_nodes[i]->attributes["align_x"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_align_x"))
-            align_x+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_align_x"].c_str());
+            align_x+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_align_x"].c_str());
 
         int align_y=0;
         if(backlayer_nodes[i]->hasAttribute("align_y"))
             align_y=atoi(backlayer_nodes[i]->attributes["align_y"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_align_y"))
-            align_y+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_align_y"].c_str());
+            align_y+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_align_y"].c_str());
 
         int separation_x=0;
         if(backlayer_nodes[i]->hasAttribute("separation_x"))
             separation_x=atoi(backlayer_nodes[i]->attributes["separation_x"].c_str());
 
         if(backlayer_nodes[i]->hasAttribute("randomize_separation_x"))
-            separation_x+=Rosalila()->Utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_separation_x"].c_str());
+            separation_x+=rosalila()->utility->getRandomNumber()%atoi(backlayer_nodes[i]->attributes["randomize_separation_x"].c_str());
 
         vector<Node*> frame_nodes = backlayer_nodes[i]->getNodesByName("frame");
 
@@ -414,7 +414,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         if(backlayer_nodes[i]->hasAttribute("randomize_color")
            && backlayer_nodes[i]->attributes["randomize_color"]=="yes")
         {
-            int random_number_pos=Rosalila()->Utility->getRandomNumber()%random_colors_r.size();
+            int random_number_pos=rosalila()->utility->getRandomNumber()%random_colors_r.size();
             color.red=random_colors_r[random_number_pos];
             color.green=random_colors_g[random_number_pos];
             color.blue=random_colors_b[random_number_pos];
@@ -426,7 +426,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         back.push_back(new Layer(layer_frames,frame_duration,depth_effect_x,depth_effect_y,align_x,align_y,separation_x,color));
     }
 
-    Rosalila()->Utility->writeLogLine("Loading stage's FrontLayers.");
+    rosalila()->utility->writeLogLine("Loading stage's FrontLayers.");
 
 
     vector<Node*> frontlayer_nodes = root_node->getNodesByName("FrontLayer");
@@ -475,7 +475,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
         if(backlayer_nodes[i]->hasAttribute("randomize_color")
            && backlayer_nodes[i]->attributes["randomize_color"]=="yes")
         {
-            int random_number_pos=Rosalila()->Utility->getRandomNumber()%random_colors_r.size();
+            int random_number_pos=rosalila()->utility->getRandomNumber()%random_colors_r.size();
             color.red=random_colors_r[random_number_pos];
             color.green=random_colors_g[random_number_pos];
             color.blue=random_colors_b[random_number_pos];
@@ -490,7 +490,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
     }
 
     delete root_node;
-    Rosalila()->Utility->writeLogLine("Stage loaded succesfully from XML.");
+    rosalila()->utility->writeLogLine("Stage loaded succesfully from XML.");
 }
 
 LayerFrame* Stage::getFrameFromNode(Node* frame_node)
@@ -506,7 +506,7 @@ LayerFrame* Stage::getFrameFromNode(Node* frame_node)
     if(frame_node->hasAttribute("image_path"))
     {
         string image_path = "stages/"+name+"/images/"+frame_node->attributes["image_path"];
-        image_temp=Rosalila()->Graphics->getTexture(assets_directory+image_path);
+        image_temp=rosalila()->graphics->getTexture(assets_directory+image_path);
 
         width = image_temp->getWidth();
         height = image_temp->getHeight();
@@ -528,5 +528,5 @@ void Stage::logic()
 
 void Stage::playMusic()
 {
-    Rosalila()->Sound->playMusic(this->music_path,-1);
+    rosalila()->sound->playMusic(this->music_path,-1);
 }

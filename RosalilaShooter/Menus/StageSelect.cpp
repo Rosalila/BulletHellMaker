@@ -17,7 +17,7 @@ vector<string> getReplayInput(char* replay_data, int replay_size)
     if(random_seed_str!="")
     {
         int random_seed = atoi(random_seed_str.c_str());
-        Rosalila()->Utility->setRandomSeed(random_seed);
+        rosalila()->utility->setRandomSeed(random_seed);
     }
 
     for(;replay_iterator<replay_size;replay_iterator++)
@@ -49,7 +49,7 @@ vector<string> getReplayInput(string file_name)
 std::vector<std::string> getStageNames()
 {
     std::vector<std::string> stage_names;
-    Node* root_node = Rosalila()->Parser->getNodes(assets_directory+"config.xml");
+    Node* root_node = rosalila()->parser->getNodes(assets_directory+"config.xml");
 
     vector<Node*> stage_nodes = root_node->getNodeByName("Stages")->getNodesByName("stage");
 
@@ -91,28 +91,28 @@ void updateMusic(int current_stage)
 {
     if(current_stage>=0 && current_stage<=4)
     {
-        if(Rosalila()->Sound->current_music!=assets_directory+"1.ogg")
-            Rosalila()->Sound->playMusic(assets_directory+"1.ogg",-1);
+        if(rosalila()->sound->current_music!=assets_directory+"1.ogg")
+            rosalila()->sound->playMusic(assets_directory+"1.ogg",-1);
     }
     if(current_stage>=5 && current_stage<=9)
     {
-        if(Rosalila()->Sound->current_music!=assets_directory+"2.ogg")
-            Rosalila()->Sound->playMusic(assets_directory+"2.ogg",-1);
+        if(rosalila()->sound->current_music!=assets_directory+"2.ogg")
+            rosalila()->sound->playMusic(assets_directory+"2.ogg",-1);
     }
     if(current_stage>=10 && current_stage<=14)
     {
-        if(Rosalila()->Sound->current_music!=assets_directory+"3.ogg")
-            Rosalila()->Sound->playMusic(assets_directory+"3.ogg",-1);
+        if(rosalila()->sound->current_music!=assets_directory+"3.ogg")
+            rosalila()->sound->playMusic(assets_directory+"3.ogg",-1);
     }
     if(current_stage>=15 && current_stage<=19)
     {
-        if(Rosalila()->Sound->current_music!=assets_directory+"4.ogg")
-            Rosalila()->Sound->playMusic(assets_directory+"4.ogg",-1);
+        if(rosalila()->sound->current_music!=assets_directory+"4.ogg")
+            rosalila()->sound->playMusic(assets_directory+"4.ogg",-1);
     }
     if(current_stage>=20 && current_stage<=24)
     {
-        if(Rosalila()->Sound->current_music!=assets_directory+"5.ogg")
-            Rosalila()->Sound->playMusic(assets_directory+"5.ogg",-1);
+        if(rosalila()->sound->current_music!=assets_directory+"5.ogg")
+            rosalila()->sound->playMusic(assets_directory+"5.ogg",-1);
     }
 }
 
@@ -121,7 +121,7 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
     std::vector<Image*> stage_images;
     for(int i=0;i<(int)stage_names.size();i++)
     {
-        Image*image=Rosalila()->Graphics->getTexture(assets_directory+std::string("stages/")+stage_names[i]+std::string("/images/preview.png"));
+        Image*image=rosalila()->graphics->getTexture(assets_directory+std::string("stages/")+stage_names[i]+std::string("/images/preview.png"));
         stage_images.push_back(image);
     }
     return stage_images;
@@ -165,77 +165,76 @@ LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_n
 
 void stageSelect()
 {
-    RosalilaGraphics* graphics=Rosalila()->Graphics;
     std::vector<std::string> stage_names = getStageNames();
     std::vector<Image*> stage_images = getStageImages(getStageNames());
 
-    Image*background=graphics->getTexture(assets_directory+"menu/white_background.png");
-    Image*left_arrow=graphics->getTexture(assets_directory+"menu/left_arrow.png");
-    Image*right_arrow=graphics->getTexture(assets_directory+"menu/right_arrow.png");
-    Image*up_arrow=graphics->getTexture(assets_directory+"menu/up_arrow.png");
-    Image*down_arrow=graphics->getTexture(assets_directory+"menu/down_arrow.png");
-    Image*line=graphics->getTexture(assets_directory+"menu/line.png");
+    Image*background = rosalila()->graphics->getTexture(assets_directory+"menu/white_background.png");
+    Image*left_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/left_arrow.png");
+    Image*right_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/right_arrow.png");
+    Image*up_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/up_arrow.png");
+    Image*down_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/down_arrow.png");
+    Image*line = rosalila()->graphics->getTexture(assets_directory+"menu/line.png");
 
     double line_width = 0;
 
     Color background_color(255,255,255,255);
 
-    int current_stage = Rosalila()->ApiIntegrator->getStat("current stage");
+    int current_stage = rosalila()->api_integrator->getStat("current stage");
     int frame = 0;
     int entry_navigator = 0;
     LeaderboardEntry* selected_entry = NULL;
 
     bool select_button_was_up = false;
 
-    Rosalila()->Receiver->updateInputs();
+    rosalila()->receiver->updateInputs();
 
     double menu_displacement_velocity = 20;
     double entry_height = 50;
 
     double top_menu_y = -6*entry_height/2 - 200;
     double middle_menu_y = 0;
-    double bottom_menu_y = Rosalila()->Graphics->screen_height;
+    double bottom_menu_y = rosalila()->graphics->screen_height;
 
-    double target_top_menu_y = Rosalila()->Graphics->screen_height/2 - 6*entry_height/2;
+    double target_top_menu_y = rosalila()->graphics->screen_height/2 - 6*entry_height/2;
     double target_middle_menu_y = 0;
-    double target_bottom_menu_y = Rosalila()->Graphics->screen_height;
+    double target_bottom_menu_y = rosalila()->graphics->screen_height;
 
     while(true)
     {
-        if(Rosalila()->Receiver->isPressed("b"))
+        if(rosalila()->receiver->isPressed("b"))
         {
             break;
         }
 
-        if(!Rosalila()->Receiver->isDown("a"))
+        if(!rosalila()->receiver->isDown("a"))
         {
             select_button_was_up = true;
         }
 
-        if(Rosalila()->Receiver->isPressed("6"))
+        if(rosalila()->receiver->isPressed("6"))
         {
             current_stage++;
             entry_navigator=0;
             if(current_stage>=(int)stage_images.size())
                 current_stage=stage_images.size()-1;
-            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
+            rosalila()->api_integrator->setStat("current stage",current_stage);
         }
 
-        if(Rosalila()->Receiver->isPressed("4"))
+        if(rosalila()->receiver->isPressed("4"))
         {
             current_stage--;
             entry_navigator=0;
             if(current_stage<0)
                 current_stage=0;
-            Rosalila()->ApiIntegrator->setStat("current stage",current_stage);
+            rosalila()->api_integrator->setStat("current stage",current_stage);
         }
 
-        Leaderboard* current_leaderboard = Rosalila()->ApiIntegrator->getLeaderboard(stage_names[current_stage]);
+        Leaderboard* current_leaderboard = rosalila()->api_integrator->getLeaderboard(stage_names[current_stage]);
 
 
         if(current_leaderboard)
         {
-            if(Rosalila()->Receiver->isPressed("2"))
+            if(rosalila()->receiver->isPressed("2"))
             {
                 entry_navigator++;
                 line_width=0;
@@ -244,7 +243,7 @@ void stageSelect()
                     entry_navigator = current_leaderboard->friends_entries.size();
                 }
             }
-            if(Rosalila()->Receiver->isPressed("8"))
+            if(rosalila()->receiver->isPressed("8"))
             {
                 entry_navigator--;
                 line_width=0;
@@ -254,7 +253,7 @@ void stageSelect()
                 }
             }
 
-            target_bottom_menu_y = Rosalila()->Graphics->screen_height/2 - current_leaderboard->friends_entries.size()*entry_height/2;
+            target_bottom_menu_y = rosalila()->graphics->screen_height/2 - current_leaderboard->friends_entries.size()*entry_height/2;
 
             if(entry_navigator<0)
             {
@@ -310,11 +309,11 @@ void stageSelect()
 
             top_menu_y = std::max(top_menu_y,(double)-7*entry_height);
             middle_menu_y = std::max(middle_menu_y,(double)-stage_images[current_stage]->getHeight());
-            bottom_menu_y = std::max(bottom_menu_y,(double)-Rosalila()->Graphics->screen_height);
+            bottom_menu_y = std::max(bottom_menu_y,(double)-rosalila()->graphics->screen_height);
 
-            top_menu_y = std::min(top_menu_y,(double)Rosalila()->Graphics->screen_height);
-            middle_menu_y = std::min(middle_menu_y,(double)Rosalila()->Graphics->screen_height);
-            bottom_menu_y = std::min(bottom_menu_y,(double)Rosalila()->Graphics->screen_height);
+            top_menu_y = std::min(top_menu_y,(double)rosalila()->graphics->screen_height);
+            middle_menu_y = std::min(middle_menu_y,(double)rosalila()->graphics->screen_height);
+            bottom_menu_y = std::min(bottom_menu_y,(double)rosalila()->graphics->screen_height);
 
 
             selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
@@ -322,10 +321,10 @@ void stageSelect()
 
         bool error_found = false;
 
-        if(Rosalila()->Receiver->isDown("a") && select_button_was_up)
+        if(rosalila()->receiver->isDown("a") && select_button_was_up)
         {
-            Rosalila()->Utility->writeLogLine("Initializing game.");
-            Rosalila()->Utility->setRandomSeed(time(NULL));
+            rosalila()->utility->writeLogLine("Initializing game.");
+            rosalila()->utility->setRandomSeed(time(NULL));
             vector<string>replay_input;
             vector<string>intro_input;
 
@@ -334,57 +333,57 @@ void stageSelect()
             if(stage_names[current_stage]=="Training1")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training1");
-                Rosalila()->Graphics->grayscale_effect.set(0,1);
+                rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training2")
             {
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training2");
-                Rosalila()->Graphics->grayscale_effect.set(0,1);
+                rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training3")
             {
                 game_mode="charge training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training3");
-                Rosalila()->Graphics->grayscale_effect.set(0,1);
+                rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training4")
             {
                 game_mode="parry training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training4");
-                Rosalila()->Graphics->grayscale_effect.set(0,1);
+                rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training5")
             {
                 game_mode="parry dash training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training5");
-                Rosalila()->Graphics->grayscale_effect.set(0,1);
+                rosalila()->graphics->grayscale_effect.set(0,1);
             }
 
-            Rosalila()->Graphics->transparency_effect.set(0,1);
-            Rosalila()->Graphics->transparency_effect.set(1,0.03);
+            rosalila()->graphics->transparency_effect.set(0,1);
+            rosalila()->graphics->transparency_effect.set(1,0.03);
 
             if(selected_entry!=NULL)
             {
                 game_mode="replay";
 
-                Rosalila()->ApiIntegrator->downloadEntryAttachment(selected_entry);
+                rosalila()->api_integrator->downloadEntryAttachment(selected_entry);
 
-                Rosalila()->Graphics->notification_handler.notifications.push_back(
-                    new Notification(getLoadingImage(), Rosalila()->Graphics->screen_width/2-getLoadingImage()->getWidth()/2,
-                                        Rosalila()->Graphics->screen_height,
-                                        Rosalila()->Graphics->screen_height-getLoadingImage()->getHeight(),
+                rosalila()->graphics->notification_handler.notifications.push_back(
+                    new Notification(getLoadingImage(), rosalila()->graphics->screen_width/2-getLoadingImage()->getWidth()/2,
+                                        rosalila()->graphics->screen_height,
+                                        rosalila()->graphics->screen_height-getLoadingImage()->getHeight(),
                                         999999));
 
                 while(selected_entry->attachment_state!="loaded"
-                      && Rosalila()->ApiIntegrator->getState()=="loading")
+                      && rosalila()->api_integrator->getState()=="loading")
                 {
                     SDL_Delay(17);
-                    Rosalila()->update();
+                    rosalila()->update();
                 }
 
-                Rosalila()->Graphics->notification_handler.interruptCurrentNotification();
+                rosalila()->graphics->notification_handler.interruptCurrentNotification();
 
-                if(Rosalila()->ApiIntegrator->getState()!="error")
+                if(rosalila()->api_integrator->getState()!="error")
                 {
                     char* replay_data = selected_entry->attachment;
 
@@ -394,13 +393,13 @@ void stageSelect()
 
                 }else
                 {
-                    Rosalila()->Graphics->notification_handler.notifications.push_back(
-                        new Notification(getErrorImage(), Rosalila()->Graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                            Rosalila()->Graphics->screen_height,
-                                            Rosalila()->Graphics->screen_height-getErrorImage()->getHeight(),
+                    rosalila()->graphics->notification_handler.notifications.push_back(
+                        new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                            rosalila()->graphics->screen_height,
+                                            rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
                                             getNotificationDuration()));
                     error_found=true;
-                    Rosalila()->Graphics->grayscale_effect.set(1,1);
+                    rosalila()->graphics->grayscale_effect.set(1,1);
                 }
             }
 
@@ -414,9 +413,9 @@ void stageSelect()
                 stage->loadFromXML(stage_names[current_stage]);
                 Player*player=new Player("Triangle",10,intro_input,replay_input);
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
-                Rosalila()->ApiIntegrator->setCurrentControllerActionSet("InGameControls");
+                rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
                 STG*stg=new STG(player,enemy,stage,game_mode,current_player_best_score);
-                Rosalila()->ApiIntegrator->setCurrentControllerActionSet("MenuControls");
+                rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
 //                for(int i=0;i<1000;i++)
 //                {
@@ -430,7 +429,7 @@ void stageSelect()
                 delete enemy;
                 delete stage;
                 select_button_was_up=false;
-                Rosalila()->Graphics->grayscale_effect.set(1,1);
+                rosalila()->graphics->grayscale_effect.set(1,1);
             }
         }
 
@@ -453,9 +452,9 @@ void stageSelect()
 
         updateMusic(current_stage);
 
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   background,
-            graphics->screen_width,graphics->screen_height,
+            rosalila()->graphics->screen_width,rosalila()->graphics->screen_height,
             0,0,
             1.0,
             0.0,
@@ -481,10 +480,11 @@ void stageSelect()
         line_width+=15;
         if(line_width>line->getWidth())
             line_width=line->getWidth();
-        graphics->draw2DImage
+
+        rosalila()->graphics->draw2DImage
         (   line,
             line_width,line->getHeight(),
-            graphics->screen_width/2-line_width/2,
+            rosalila()->graphics->screen_width/2-line_width/2,
             line_y,
             1.0,
             0.0,
@@ -495,10 +495,10 @@ void stageSelect()
             false,
             FlatShadow());
 
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   line,
             line_width,line->getHeight(),
-            graphics->screen_width/2-line_width/2,
+            rosalila()->graphics->screen_width/2-line_width/2,
             line_y+line_separation,
             1.0,
             0.0,
@@ -514,28 +514,28 @@ void stageSelect()
             for(int i=0;i<current_leaderboard->top_entries.size();i++)
             {
                 LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
-                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+                string entry_text = rosalila()->utility->toString(current_entry->rank)+"." + current_entry->name + " " +rosalila()->utility->toString(current_entry->score);
 
-                graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
+                rosalila()->graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
             }
 
             for(int i=0;i<current_leaderboard->near_entries.size();i++)
             {
                 int align_y = 200+top_menu_y;
                 LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
-                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
+                string entry_text = rosalila()->utility->toString(current_entry->rank)+"." + current_entry->name + " " +rosalila()->utility->toString(current_entry->score);
 
-                graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
+                rosalila()->graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
             }
         }
 
         //Middle menu
-        graphics->draw2DImage
+        rosalila()->graphics->draw2DImage
         (   stage_images[current_stage],
             stage_images[current_stage]->getWidth(),
                 stage_images[current_stage]->getHeight(),
-            graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
-                graphics->screen_height/2-stage_images[current_stage]->getHeight()/2+middle_menu_y,
+            rosalila()->graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
+                rosalila()->graphics->screen_height/2-stage_images[current_stage]->getHeight()/2+middle_menu_y,
             1.0,
             0.0,
             false,
@@ -550,11 +550,11 @@ void stageSelect()
         {
             if(current_stage>0)
             {
-                graphics->draw2DImage
+                rosalila()->graphics->draw2DImage
                 (   left_arrow,
                     left_arrow->getWidth(),left_arrow->getHeight(),
-                    graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
-                    graphics->screen_height/2-left_arrow->getHeight()/2+middle_menu_y,
+                    rosalila()->graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
+                    rosalila()->graphics->screen_height/2-left_arrow->getHeight()/2+middle_menu_y,
                     1.0,
                     0.0,
                     false,
@@ -567,11 +567,11 @@ void stageSelect()
 
             if(current_stage<(int)stage_images.size()-1)
             {
-                graphics->draw2DImage
+                rosalila()->graphics->draw2DImage
                 (   right_arrow,
                     right_arrow->getWidth(),right_arrow->getHeight(),
-                    graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
-                    graphics->screen_height/2-right_arrow->getHeight()/2+middle_menu_y,
+                    rosalila()->graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
+                    rosalila()->graphics->screen_height/2-right_arrow->getHeight()/2+middle_menu_y,
                     1.0,
                     0.0,
                     false,
@@ -584,10 +584,10 @@ void stageSelect()
 
             if(entry_navigator>-6)
             {
-                graphics->draw2DImage
+                rosalila()->graphics->draw2DImage
                 (   up_arrow,
                     up_arrow->getWidth(),up_arrow->getHeight(),
-                    graphics->screen_width/2-up_arrow->getWidth()/2,
+                    rosalila()->graphics->screen_width/2-up_arrow->getWidth()/2,
                     0,
                     1.0,
                     0.0,
@@ -601,11 +601,11 @@ void stageSelect()
 
             if(entry_navigator<=0 || entry_navigator<current_leaderboard->friends_entries.size())
             {
-                graphics->draw2DImage
+                rosalila()->graphics->draw2DImage
                 (   down_arrow,
                     down_arrow->getWidth(),down_arrow->getHeight(),
-                    graphics->screen_width/2-down_arrow->getWidth()/2,
-                    graphics->screen_height-down_arrow->getHeight(),
+                    rosalila()->graphics->screen_width/2-down_arrow->getWidth()/2,
+                    rosalila()->graphics->screen_height-down_arrow->getHeight(),
                     1.0,
                     0.0,
                     false,
@@ -623,12 +623,12 @@ void stageSelect()
             for(int i=0;i<current_leaderboard->friends_entries.size();i++)
             {
                 LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
-                string entry_text = Rosalila()->Utility->toString(current_entry->rank)+"." + current_entry->name + " " +Rosalila()->Utility->toString(current_entry->score);
-                graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
+                string entry_text = rosalila()->utility->toString(current_entry->rank)+"." + current_entry->name + " " +rosalila()->utility->toString(current_entry->score);
+                rosalila()->graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
             }
         }
 
-        Rosalila()->update();
+        rosalila()->update();
 
         frame++;
     }
