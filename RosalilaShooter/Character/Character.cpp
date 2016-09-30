@@ -972,29 +972,38 @@ void Character::topRender()
     vector<DrawableRectangle*>rectangles;
     for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
     {
-        for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
+        if(!(*pattern)->is_hit)
         {
-            if(!(*pattern)->is_hit)
-            {
-                Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
+            double bullet_width = (*pattern)->bullet->width;
+            bullet_width *= 1-((*pattern)->frame * (*pattern)->auto_scale);
 
-                DrawableRectangle* rectangle = new DrawableRectangle(
-                                                     (*pattern)->x - (*pattern)->bullet->width/2,
-                                                     (*pattern)->y - (*pattern)->bullet->height/2,
-                                                     (*pattern)->bullet->width,(*pattern)->bullet->height,
-                                                     (*pattern)->angle+(*pattern)->bullet_rotation,
-                                                     (*pattern)->bullet->color
-                                                     );
+            double bullet_heigth = (*pattern)->bullet->height;
 
-    //            DrawableRectangle* rectangle2 = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
-    //                                                 hitbox->getWidth(),hitbox->getHeight(),
-    //                                                 (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
-    //                                                 Color(255,255,255,255)
-    //                                                 );
-                rectangles.push_back(rectangle);
-    //            rectangles.push_back(rectangle2);
-            }
+            DrawableRectangle* rectangle = new DrawableRectangle(
+                                                 (*pattern)->x - bullet_width/2,
+                                                 (*pattern)->y - bullet_heigth/2,
+                                                 bullet_width,
+                                                 bullet_heigth,
+                                                 (*pattern)->angle+(*pattern)->bullet_rotation,
+                                                 (*pattern)->bullet->color
+                                                 );
+            rectangles.push_back(rectangle);
         }
+
+//        for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
+//        {
+//            if(!(*pattern)->is_hit)
+//            {
+//                Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
+//
+//                DrawableRectangle* rectangle2 = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
+//                                                     hitbox->getWidth(),hitbox->getHeight(),
+//                                                     (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
+//                                                     Color(255,255,255,255)
+//                                                     );
+//                rectangles.push_back(rectangle2);
+//            }
+//        }
     }
 
     rosalila()->graphics->drawRectangles(rectangles,0,0,true);
