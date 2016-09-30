@@ -334,7 +334,6 @@ void Pattern::aimTo(int x,int y)
 
 void Pattern::hit(int channel,bool hit_undestructable)
 {
-    rosalila()->graphics->point_explosion_effect->explode(this->x,this->y,Color(255,255,255,255));
     bullet->playHitSound();
     if(!undestructable || hit_undestructable)
     {

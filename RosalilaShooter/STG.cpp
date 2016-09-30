@@ -225,6 +225,7 @@ void STG::logic()
                     if(!p->is_hit && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
                         p->hit(player->sound_channel_base+1,false);
+                        rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,255),15);
                         if(player->isInvulnerable())
                         {
                             if(!player->isOnIntro())
@@ -264,6 +265,7 @@ void STG::logic()
                     }
                 }else if(p->collides_opponent && player->collides(h,0,0,0))
                 {
+                    rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,255),p->bullet->damage);
                     p->hit(enemy->sound_channel_base+1,false);
                     player->hit(p->bullet->damage);
                     parry_count = 0;
@@ -289,6 +291,7 @@ void STG::logic()
                 Hitbox h=p->bullet->hitboxes[i]->getPlacedHitbox(p->x,p->y,p->getBulletAngle());
                 if(p->collides_opponent && enemy->collides(h,0,0,0))
                 {
+                    rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,255),p->bullet->damage+damage_level*5);
                     p->hit(player->sound_channel_base+1,false);
                     enemy->hit(p->bullet->damage+damage_level);
                     enemy->shakeScreen(p->bullet->damage+damage_level*3,p->bullet->damage+damage_level*2);
@@ -336,6 +339,7 @@ void STG::logic()
                                     }
                                     enemy_pattern->hit(enemy->sound_channel_base+1,false);
                                     player_pattern->hit(player->sound_channel_base+1,false);
+                                    rosalila()->graphics->point_explosion_effect->explode(enemy_pattern->x,enemy_pattern->y,Color(255,255,255,255),15);
                                 }
                             }
 

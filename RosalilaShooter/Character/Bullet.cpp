@@ -1,21 +1,24 @@
 #include "Bullet.h"
 
-Bullet::Bullet(std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage, int sound_channel)
+Bullet::Bullet(std::string name,vector<Image*>sprites,vector<Image*>sprites_on_hit,double width, double height, Color color,vector<Hitbox*> hitboxes,vector<string>random_sounds, int randomize_sound_frequency, int arpeggio_length,int damage, int sound_channel)
 {
-    this->sprites=sprites;
-    this->sprites_on_hit=sprites_on_hit;
-    this->hitboxes=hitboxes;
-    this->damage=damage;
-    this->name=name;
-    this->sound_channel=sound_channel;
-    this->random_sounds=random_sounds;
+    this->sprites = sprites;
+    this->sprites_on_hit = sprites_on_hit;
+    this->width = width;
+    this->height = height;
+    this->color = color;
+    this->hitboxes = hitboxes;
+    this->damage = damage;
+    this->name = name;
+    this->sound_channel = sound_channel;
+    this->random_sounds = random_sounds;
     this->randomize_sound_frequency=randomize_sound_frequency;
-    this->arpeggio_length=arpeggio_length;
+    this->arpeggio_length = arpeggio_length;
     count_sound_plays=0;
-    current_random_sound=getRandomSound();
-    current_arrpegio_sound=0;
+    current_random_sound = getRandomSound();
+    current_arrpegio_sound = 0;
     randomizeArpeggio(arpeggio_length);
-    current_channel=-1;
+    current_channel = -1;
 }
 
 Bullet::~Bullet()

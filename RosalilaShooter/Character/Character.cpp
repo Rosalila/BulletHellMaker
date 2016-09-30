@@ -479,7 +479,39 @@ void Character::loadBulletsXML()
                 random_sounds.push_back("bullet."+node_name+sound_nodes[j]->attributes["path"]);
             }
         }
-        bullets[node_name]=new Bullet(node_name,sprites_temp,sprites_onhit_temp,hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
+
+        int width=0;
+        if(bullet_nodes[i]->hasAttribute("width"))
+        {
+            width=atoi(bullet_nodes[i]->attributes["width"].c_str());
+        }
+
+        int height=0;
+        if(bullet_nodes[i]->hasAttribute("height"))
+        {
+            height=atoi(bullet_nodes[i]->attributes["height"].c_str());
+        }
+
+        Node* color_node = bullet_nodes[i]->getNodeByName("Color");
+
+        int red=0;
+        int green=0;
+        int blue=0;
+        int alpha=255;
+        if(color_node)
+        {
+            if(color_node->hasAttribute("red"))
+                red=atoi(color_node->attributes["red"].c_str());
+            if(color_node->hasAttribute("green"))
+                green=atoi(color_node->attributes["green"].c_str());
+            if(color_node->hasAttribute("blue"))
+                blue=atoi(color_node->attributes["blue"].c_str());
+            if(color_node->hasAttribute("alpha"))
+                alpha=atoi(color_node->attributes["alpha"].c_str());
+        }
+
+
+        bullets[node_name]=new Bullet(node_name,sprites_temp,sprites_onhit_temp,width,height,Color(red,green,blue,alpha),hitboxes_temp,random_sounds,randomize_sound_frequency,arpeggio_length,damage,sound_channel);
     }
 
     delete root_node;
@@ -942,14 +974,26 @@ void Character::topRender()
     {
         for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
         {
-            Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
+            if(!(*pattern)->is_hit)
+            {
+                Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
 
-            DrawableRectangle* rectangle = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
-                                                 hitbox->getWidth(),hitbox->getHeight(),
-                                                 (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
-                                                 Color(255,255,255,255)
-                                                 );
-            rectangles.push_back(rectangle);
+                DrawableRectangle* rectangle = new DrawableRectangle(
+                                                     (*pattern)->x - (*pattern)->bullet->width/2,
+                                                     (*pattern)->y - (*pattern)->bullet->height/2,
+                                                     (*pattern)->bullet->width,(*pattern)->bullet->height,
+                                                     (*pattern)->angle+(*pattern)->bullet_rotation,
+                                                     (*pattern)->bullet->color
+                                                     );
+
+    //            DrawableRectangle* rectangle2 = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
+    //                                                 hitbox->getWidth(),hitbox->getHeight(),
+    //                                                 (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
+    //                                                 Color(255,255,255,255)
+    //                                                 );
+                rectangles.push_back(rectangle);
+    //            rectangles.push_back(rectangle2);
+            }
         }
     }
 
