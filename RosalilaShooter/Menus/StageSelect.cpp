@@ -63,26 +63,57 @@ std::vector<std::string> getStageNames()
 
 Color getBackgroundColor(int current_stage)
 {
-    if(current_stage>=0 && current_stage<=4)
-    {
-        return Color(33,150,243,255);
-    }
-    if(current_stage>=5 && current_stage<=9)
-    {
-        return Color(139,195,74,255);
-    }
-    if(current_stage>=10 && current_stage<=14)
-    {
-        return Color(103,58,183,255);
-    }
-    if(current_stage>=15 && current_stage<=19)
-    {
-        return Color(255,152,0,255);
-    }
-    if(current_stage>=20 && current_stage<=24)
-    {
-        return Color(244,67,54,255);
-    }
+    int training_begin = 0;
+    int training_end = 4;
+    Color training_color(33,150,255,255);
+
+    int stage_a = training_end + 1;
+    int stage_b = stage_a + 1;
+    int stage_c = stage_b + 1;
+    int stage_d = stage_c + 1;
+    int stage_e = stage_d + 1;
+    int stage_f = stage_e + 1;
+
+    Color stage_a_color(255,0,0,255);
+    Color stage_b_color(0,255,0,255);
+    Color stage_c_color(0,0,255,255);
+    Color stage_d_color(255,255,0,255);
+    Color stage_e_color(255,0,255,255);
+    Color stage_f_color(0,255,255,255);
+
+    int stage_a_stages = stage_f + 1;
+    int stage_b_stages = stage_a_stages + 5;
+    int stage_c_stages = stage_b_stages + 5;
+    int stage_d_stages = stage_c_stages + 5;
+    int stage_e_stages = stage_d_stages + 5;
+    int stage_f_stages = stage_e_stages + 5;
+
+    if(current_stage>=training_begin && current_stage<=training_end)
+        return training_color;
+
+    if(current_stage==stage_a
+       || (current_stage >= stage_a_stages && current_stage < stage_b_stages))
+        return stage_a_color;
+
+    if(current_stage==stage_b
+       || (current_stage >= stage_b_stages && current_stage < stage_c_stages))
+        return stage_b_color;
+
+    if(current_stage==stage_c
+       || (current_stage >= stage_c_stages && current_stage < stage_d_stages))
+        return stage_c_color;
+
+    if(current_stage==stage_d
+       || (current_stage >= stage_d_stages && current_stage < stage_e_stages))
+        return stage_d_color;
+
+    if(current_stage==stage_e
+       || (current_stage >= stage_e_stages && current_stage < stage_f_stages))
+        return stage_e_color;
+
+    if(current_stage==stage_f
+       || (current_stage >= stage_f_stages))
+        return stage_f_color;
 
     return Color();
 }
@@ -230,7 +261,6 @@ void stageSelect()
         }
 
         Leaderboard* current_leaderboard = rosalila()->api_integrator->getLeaderboard(stage_names[current_stage]);
-
 
         if(current_leaderboard)
         {
@@ -627,6 +657,9 @@ void stageSelect()
                 rosalila()->graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
             }
         }
+
+        rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
+
 
         rosalila()->update();
 

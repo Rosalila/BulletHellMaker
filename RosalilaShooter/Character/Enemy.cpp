@@ -113,9 +113,10 @@ void Enemy::logic(int stage_velocity, string stage_name)
         double distance_y= player->hitboxes[0]->y + player->y + - p->y;
         //.getPlacedHitbox(this->x,this->y)
 
-        if (p->homing != 0)
+        if (p->homing)
         {
             p->angle=-atan2(distance_y,distance_x)*180/PI;
+            p->angle+=p->pattern->angle;
         }
         else if(p->getAimPlayer())
         {
