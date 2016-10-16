@@ -64,7 +64,7 @@ Player::Player(std::string name,int sound_channel_base,vector<string> intro_inpu
     //Charge
     rosalila()->sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
     rosalila()->sound->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
-    charging_sound_channel=rosalila()->sound->playSound("charging",21,-1);
+    charging_sound_channel=rosalila()->sound->playSound("charging", 21, -1, this->x, true);
 }
 
 Player::~Player()
@@ -207,31 +207,31 @@ void Player::inputControl()
     if(isDownWrapper("2"))
     {
         if(orientation!="down" && rosalila()->sound->soundExists(name+".down"))
-            rosalila()->sound->playSound(name+".down",1,0);
+            rosalila()->sound->playSound(name+".down", 1, 0, this->x, true);
         orientation="down";
     }
     else if(isDownWrapper("8"))
     {
         if(orientation!="up" && rosalila()->sound->soundExists(name+".up"))
-            rosalila()->sound->playSound(name+".up",1,0);
+            rosalila()->sound->playSound(name+".up", 1, 0, this->x, true);
         orientation="up";
     }
     else if(isDownWrapper("4"))
     {
         if(orientation!="left" && rosalila()->sound->soundExists(name+".left"))
-            rosalila()->sound->playSound(name+".left",1,0);
+            rosalila()->sound->playSound(name+".left", 1, 0, this->x, true);
         orientation="left";
     }
     else if(isDownWrapper("6"))
     {
         if(orientation!="right" && rosalila()->sound->soundExists(name+".right"))
-            rosalila()->sound->playSound(name+".right",1,0);
+            rosalila()->sound->playSound(name+".right", 1, 0, this->x, true);
         orientation="right";
     }
     else
     {
         if(orientation!="idle" && rosalila()->sound->soundExists(name+".idle"))
-            rosalila()->sound->playSound(name+".idle",1,0);
+            rosalila()->sound->playSound(name+".idle", 1, 0, this->x, true);
         orientation="idle";
     }
 
@@ -293,7 +293,7 @@ void Player::inputControl()
         if(max_charge!=0 && current_charge==max_charge)
         {
             std::vector<Pattern*> patterns=type["bomb"];
-            patterns[0]->bullet->playSound();
+            patterns[0]->bullet->playSound(patterns[0]->x, true);
             this->addActivePattern(patterns[0]);
         }
         current_charge=0;
@@ -335,7 +335,7 @@ void Player::logic(int stage_velocity)
     }else
     {
         if(orientation!="destroyed" && rosalila()->sound->soundExists(name+".destroyed"))
-            rosalila()->sound->playSound(name+".destroyed",1,0);
+            rosalila()->sound->playSound(name+".destroyed", 1, 0, this->x, true);
         orientation="destroyed";
         //this->hitbox.setValues(0,0,0,0,0);
     }
@@ -389,7 +389,7 @@ void Player::logic(int stage_velocity)
         current_charge=max_charge;
         if(!charge_ready)
         {
-            rosalila()->sound->playSound("charge ready",-1, 0);
+            rosalila()->sound->playSound("charge ready", -1, 0, this->x, true);
         }
         charge_ready=true;
     }else
@@ -716,7 +716,7 @@ void Player::parry(bool infinite_parries)
     }
     if(rosalila()->sound->soundExists(this->name+".parry"))
     {
-        rosalila()->sound->playSound(this->name+".parry",sound_channel_base+1,0);
+        rosalila()->sound->playSound(this->name+".parry", sound_channel_base+1, 0, this->x, true);
     }
 }
 

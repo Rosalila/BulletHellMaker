@@ -167,7 +167,7 @@ void STG::mainLoop()
 //            out.close();
 
             player->exit();
-            rosalila()->sound->playSound(std::string("Menu.back"),1,0);
+            rosalila()->sound->playSound(std::string("Menu.back"), 1, 0, 0, false);
             break;
         }
 
@@ -271,7 +271,7 @@ void STG::logic()
                     parry_count = 0;
                     rosalila()->graphics->screen_shake_effect.set(30,10,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
                     if(rosalila()->sound->soundExists(player->name+".hit"))
-                        rosalila()->sound->playSound(player->name+".hit",3,0);
+                        rosalila()->sound->playSound(player->name+".hit", 3, 0, player->x, true);
                     if(player->hp==0)
                     {
                         lose();
@@ -296,7 +296,7 @@ void STG::logic()
                     enemy->hit(p->bullet->damage+damage_level);
                     enemy->shakeScreen(p->bullet->damage+damage_level*3,p->bullet->damage+damage_level*2);
                     if(rosalila()->sound->soundExists(enemy->name+".hit"))
-                        rosalila()->sound->playSound(enemy->name+".hit",1,0);
+                        rosalila()->sound->playSound(enemy->name+".hit", 1, 0, enemy->x, true);
                     if(enemy->hp==0)
                     {
                         win();
@@ -638,7 +638,7 @@ void STG::win()
     score = milliseconds * hp_penalty;
     enemy->hp=0;
     rosalila()->graphics->screen_shake_effect.set(50,20,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
-    rosalila()->sound->playSound("you win",2,0);
+    rosalila()->sound->playSound("you win", 2, 0, 0, false);
     enemy->deleteActivePatterns();
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
@@ -651,7 +651,7 @@ void STG::lose()
 {
     setPlayerWon(false);
     setGameOver(true);
-    rosalila()->sound->playSound("you lose",4,0);
+    rosalila()->sound->playSound("you lose", 4, 0, 0, false);
 }
 
 void STG::uploadScore()

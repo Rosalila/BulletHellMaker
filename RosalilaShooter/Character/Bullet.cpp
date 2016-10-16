@@ -53,7 +53,7 @@ Image* Bullet::getOnHitImage(int position)
     return sprites_on_hit[position];
 }
 
-void Bullet::playSound()
+void Bullet::playSound(int panning, bool uses_camera)
 {
     if(random_sounds.size()<1)
     {
@@ -73,15 +73,15 @@ void Bullet::playSound()
     count_sound_plays++;
     if(current_random_sound!=-1)
     {
-        current_channel = rosalila()->sound->playSound(random_sounds[current_random_sound],sound_channel,0);
+        current_channel = rosalila()->sound->playSound(random_sounds[current_random_sound], sound_channel, 0, panning, uses_camera);
     }
 }
 
-void Bullet::playHitSound()
+void Bullet::playHitSound(int panning, bool uses_camera)
 {
     if(rosalila()->sound->soundExists("bullet_hit."+name))
     {
-        rosalila()->sound->playSound("bullet_hit."+name,sound_channel+5,0);
+        rosalila()->sound->playSound("bullet_hit."+name, sound_channel+5 ,0 ,panning ,uses_camera);
     }
 }
 

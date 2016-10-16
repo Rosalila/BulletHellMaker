@@ -29,8 +29,8 @@ public:
     ~Bullet();
     int getRandomSound();
     void randomizeArpeggio(int size);
-    void playSound();
-    void playHitSound();
+    void playSound(int panning, bool uses_camera);
+    void playHitSound(int panning, bool uses_camera);
     Image*getImage(int position);
     Image*getOnHitImage(int position);
 };

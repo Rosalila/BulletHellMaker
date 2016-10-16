@@ -334,7 +334,7 @@ void Pattern::aimTo(int x,int y)
 
 void Pattern::hit(int channel,bool hit_undestructable)
 {
-    bullet->playHitSound();
+    bullet->playHitSound(this->x, true);
     if(!undestructable || hit_undestructable)
     {
         is_hit=true;
