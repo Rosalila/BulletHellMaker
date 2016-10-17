@@ -907,7 +907,7 @@ void Character::spellControl(int stage_velocity)
             patterns[i]->updateStateShouting();
             if(patterns[i]->isReady())
             {
-                patterns[i]->bullet->playSound(patterns[i]->x, true);
+                patterns[i]->bullet->playSound(patterns[i]->x+this->x, true);
                 this->addActivePattern(patterns[i]);
             }
         }else
