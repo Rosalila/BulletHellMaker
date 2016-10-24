@@ -108,29 +108,86 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             }
         }
         if(rosalila()->receiver->isJoyPressed(-2,0))
+        {
             joy_pressed=-2;
+            player_image_x = player_image_initial_x;
+            player_image_y = player_image_initial_y;
+        }
         if(rosalila()->receiver->isJoyPressed(-8,0))
+        {
             joy_pressed=-8;
+            player_image_x = player_image_initial_x;
+            player_image_y = player_image_initial_y;
+
+        }
         if(rosalila()->receiver->isJoyPressed(-4,0))
+        {
             joy_pressed=-4;
+            player_image_x = player_image_initial_x;
+            player_image_y = player_image_initial_y;
+
+        }
         if(rosalila()->receiver->isJoyPressed(-6,0))
+        {
             joy_pressed=-6;
+            player_image_x = player_image_initial_x;
+            player_image_y = player_image_initial_y;
+
+        }
 
         if(key_pressed!=-1)
         {
-            string current_button_map = controls_config_map_name[current_button];
-            controls[current_button_map]=new Button(key_pressed,current_button_map);
-            current_button++;
-            if(current_button>=(int)controls_config_map_name.size())
-                break;
+            bool key_exists = false;
+            for(map<string,Button*>::iterator i=controls.begin();
+                i!=controls.end();
+                i++)
+            {
+                if((*i).second->key==key_pressed)
+                {
+                    key_exists = true;
+                    rosalila()->graphics->notification_handler.notifications.push_back(
+                        new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                            rosalila()->graphics->screen_height,
+                                            rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
+                                            getNotificationDuration()));
+                    break;
+                }
+            }
+            if(!key_exists)
+            {
+                string current_button_map = controls_config_map_name[current_button];
+                controls[current_button_map]=new Button(key_pressed,current_button_map);
+                current_button++;
+                if(current_button>=(int)controls_config_map_name.size())
+                    break;
+            }
         }
         if(joy_pressed!=-1)
         {
-            string current_button_map = controls_config_map_name[current_button];
-            controls[current_button_map]=new Button(joy_pressed,0,current_button_map);
-            current_button++;
-            if(current_button>=(int)controls_config_map_name.size())
-                break;
+            bool key_exists = false;
+            for(map<string,Button*>::iterator i=controls.begin();
+                i!=controls.end();
+                i++)
+            {
+                if((*i).second->joystick_button==joy_pressed)
+                {
+                    key_exists = true;
+                    rosalila()->graphics->notification_handler.notifications.push_back(
+                        new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                            rosalila()->graphics->screen_height,
+                                            rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
+                                            getNotificationDuration()));
+                    break;
+                }
+            }
+            if(!key_exists)
+            {
+                string current_button_map = controls_config_map_name[current_button];
+                controls[current_button_map]=new Button(joy_pressed,0,current_button_map);
+                current_button++;
+                if(current_button>=(int)controls_config_map_name.size())
+                    break;
+            }
         }
 
         rosalila()->graphics->draw2DImage
