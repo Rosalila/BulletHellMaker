@@ -116,7 +116,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
         if (p->homing)
         {
             p->angle=-atan2(distance_y,distance_x)*180/PI;
-            p->angle+=p->pattern->angle;
+            p->angle+=p->homing_angle;
         }
         else if(p->getAimPlayer())
         {

@@ -81,11 +81,13 @@ map<string,Button*> ControllerConfig(bool reconfigure)
 
         if(rosalila()->receiver->isKeyPressed(SDLK_ESCAPE))
         {
+            if(current_button<=0)
+                exit(0);
+            current_button--;
+            controls.erase(controls.find(controls_config_map_name[current_button]));
             player_image_x = player_image_initial_x;
             player_image_y = player_image_initial_y;
-            current_button--;
-            if(current_button<0)
-                exit(0);
+
             continue;
         }
         for(int i=0/*SDLK_a*/;i<=255/*SDLK_z*/;i++)
@@ -138,11 +140,10 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         if(key_pressed!=-1)
         {
             bool key_exists = false;
-            for(map<string,Button*>::iterator i=controls.begin();
-                i!=controls.end();
-                i++)
+            map<string,Button*>::iterator control_iterator=controls.begin();
+            for(int i=0;i<current_button;i++)
             {
-                if((*i).second->key==key_pressed)
+                if((*control_iterator).second->key==key_pressed)
                 {
                     key_exists = true;
                     rosalila()->graphics->notification_handler.notifications.push_back(
@@ -152,6 +153,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
                                             getNotificationDuration()));
                     break;
                 }
+                control_iterator++;
             }
             if(!key_exists)
             {
@@ -165,11 +167,10 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         if(joy_pressed!=-1)
         {
             bool key_exists = false;
-            for(map<string,Button*>::iterator i=controls.begin();
-                i!=controls.end();
-                i++)
+            map<string,Button*>::iterator control_iterator=controls.begin();
+            for(int i=0;i<current_button;i++)
             {
-                if((*i).second->joystick_button==joy_pressed)
+                if((*control_iterator).second->joystick_button==joy_pressed)
                 {
                     key_exists = true;
                     rosalila()->graphics->notification_handler.notifications.push_back(
@@ -179,6 +180,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
                                             getNotificationDuration()));
                     break;
                 }
+                control_iterator++;
             }
             if(!key_exists)
             {

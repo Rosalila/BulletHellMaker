@@ -12,6 +12,7 @@ Pattern::Pattern(int velocity,int max_velocity,int acceleration,int a_frequency,
     this->a_frequency=a_frequency;
     this->current_a_frequency=0;
     this->angle=angle;
+    this->homing_angle = this->angle;
     this->angle_change=angle_change;
     this->stop_ac_at=stop_ac_at;
     this->current_stop_ac_at=0;
@@ -66,6 +67,7 @@ Pattern::Pattern(Pattern*pattern,int x,int y)
     this->a_frequency=pattern->a_frequency;
     this->current_a_frequency=0;
     this->angle=pattern->angle;
+    this->homing_angle=this->angle;
     this->angle_change=pattern->angle_change;
     this->stop_ac_at=pattern->stop_ac_at;
     this->current_stop_ac_at=0;
@@ -381,6 +383,7 @@ void Pattern::modifiersControl()
         if(modifier->variable=="angle")
         {
             this->angle=atoi(modifier->value.c_str());
+            this->homing_angle=this->angle;
         }
         if(modifier->variable=="angle_change")
         {

@@ -20,6 +20,7 @@ public:
     int a_frequency;
     int current_a_frequency;
     float angle;
+    float homing_angle;
     int angle_change;
     int stop_ac_at;
     int current_stop_ac_at;
