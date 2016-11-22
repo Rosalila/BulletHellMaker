@@ -224,11 +224,8 @@ void STG::logic()
                 {
                     if(!p->is_hit && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
-                        int old_parries = rosalila()->api_integrator->getStat("TotalParries");
-                        rosalila()->api_integrator->setStat("TotalParries",old_parries+1);
-
-int counter = rosalila()->api_integrator->getStat("TotalParryDashDestroys");
-rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter+1);
+                        int counter = rosalila()->api_integrator->getStat("TotalParryDashDestroys");
+                        rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter+1);
 
                         p->hit(player->sound_channel_base+1,true);
                         rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,200),15);
@@ -252,6 +249,11 @@ rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter+1);
                         }
                         if(player->isParrying())
                         {
+                            if(player->invulnerable_frames_left==15)
+                            {
+                                int old_parries = rosalila()->api_integrator->getStat("TotalParries");
+                                rosalila()->api_integrator->setStat("TotalParries",old_parries+1);
+                            }
                             if(!player->isOnIntro())
                             {
                                 parry_count++;
@@ -335,8 +337,9 @@ rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter+1);
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->x,player_pattern->y,player_pattern->getBulletAngle());
                                 if(!enemy_pattern->is_hit&&!player_pattern->is_hit&&enemy_hitbox.collides(player_hitbox))
                                 {
-int counter = rosalila()->api_integrator->getStat("TotalChargeBulletDestroys");
-rosalila()->api_integrator->setStat("TotalChargeBulletDestroys",counter+1);
+                                    int counter = rosalila()->api_integrator->getStat("TotalChargeBulletDestroys");
+                                    rosalila()->api_integrator->setStat("TotalChargeBulletDestroys",counter+1);
+
                                     if(!player->isOnIntro())
                                     {
                                         charge_destroy_count++;
