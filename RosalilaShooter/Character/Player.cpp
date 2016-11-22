@@ -292,6 +292,9 @@ void Player::inputControl()
         this->shooting=true;
         if(max_charge!=0 && current_charge==max_charge)
         {
+            int old_charges = rosalila()->api_integrator->getStat("TotalCharges");
+            rosalila()->api_integrator->setStat("TotalCharges",old_charges+1);
+
             std::vector<Pattern*> patterns=type["bomb"];
             patterns[0]->bullet->playSound(patterns[0]->x + this->x, true);
             this->addActivePattern(patterns[0]);

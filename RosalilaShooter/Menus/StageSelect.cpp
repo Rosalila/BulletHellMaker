@@ -242,19 +242,17 @@ void stageSelect()
             select_button_was_up = true;
         }
 
-        if(rosalila()->receiver->isPressed("6"))
+        if(rosalila()->receiver->isPressed("6") && entry_navigator==0)
         {
             current_stage++;
-            entry_navigator=0;
             if(current_stage>=(int)stage_images.size())
                 current_stage=stage_images.size()-1;
             rosalila()->api_integrator->setStat("current stage",current_stage);
         }
 
-        if(rosalila()->receiver->isPressed("4"))
+        if(rosalila()->receiver->isPressed("4") && entry_navigator==0)
         {
             current_stage--;
-            entry_navigator=0;
             if(current_stage<0)
                 current_stage=0;
             rosalila()->api_integrator->setStat("current stage",current_stage);
@@ -438,6 +436,10 @@ void stageSelect()
                     error_found=true;
                     rosalila()->graphics->grayscale_effect.set(1,1);
                 }
+            }else
+            {
+                int old_tries = rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries");
+                rosalila()->api_integrator->setStat(stage_names[current_stage]+"Tries",old_tries+1);
             }
 
             if(!error_found)
@@ -666,6 +668,13 @@ void stageSelect()
         }
 
         rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
+
+        rosalila()->graphics->drawText("Tries:" +
+                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")),
+                                       0, 0, false, false);
+        rosalila()->graphics->drawText("Clears:" +
+                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Clears")),
+                                       0, 50, false, false);
 
 
         rosalila()->update();
