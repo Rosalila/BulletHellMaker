@@ -171,10 +171,10 @@ void STG::mainLoop()
             break;
         }
 
-//        if(rosalila()->receiver->isKeyPressed(SDLK_s))
+//        if(rosalila()->receiver->isKeyPressed(SDLK_k))
 //        {
-//            string random_number = toString((rand()*999999)%1000);
-//            rosalila()->graphics->screenshot(0,0, 1366, 768, "screenshot"+ random_number +".bmp");
+////            string random_number = toString((rand()*999999)%1000);
+//            rosalila()->graphics->screenshot(0,0, 1366, 768, stage->name +".bmp");
 //        }
 
         render();
@@ -369,6 +369,7 @@ void STG::logic()
         if(rosalila()->api_integrator->getState()=="finished")
         {
             uploadReplay();
+            rosalila()->utility->writeLogLine("uploading replay");
         }
 
         if(rosalila()->api_integrator->getState()=="error")
@@ -382,6 +383,7 @@ void STG::logic()
         if(rosalila()->api_integrator->getState()=="finished")
         {
             findLeaderboard();
+            rosalila()->utility->writeLogLine("finding leaderboard");
         }
 
         if(rosalila()->api_integrator->getState()=="error")
@@ -403,6 +405,7 @@ void STG::logic()
                                     getNotificationDuration()));
 
             api_state="";
+            rosalila()->utility->writeLogLine("finished");
         }
 
         if(rosalila()->api_integrator->getState()=="error")
@@ -657,6 +660,7 @@ void STG::lose()
 void STG::uploadScore()
 {
     api_state = "uploading score";
+    rosalila()->utility->writeLogLine("uploading score");
 
     rosalila()->api_integrator->setScore(stage->name, score);
 

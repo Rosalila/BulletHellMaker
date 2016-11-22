@@ -372,25 +372,32 @@ void stageSelect()
             }
             if(stage_names[current_stage]=="Training3")
             {
-                game_mode="charge training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training3");
                 rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training4")
             {
-                game_mode="parry training";
+                game_mode="charge training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training4");
                 rosalila()->graphics->grayscale_effect.set(0,1);
             }
             if(stage_names[current_stage]=="Training5")
             {
-                game_mode="parry dash training";
+                game_mode="parry training";
                 intro_input = getReplayInput(assets_directory+"misc/training/intros/Training5");
+                rosalila()->graphics->grayscale_effect.set(0,1);
+            }
+            if(stage_names[current_stage]=="Training6")
+            {
+                game_mode="parry dash training";
+                intro_input = getReplayInput(assets_directory+"misc/training/intros/Training6");
                 rosalila()->graphics->grayscale_effect.set(0,1);
             }
 
             rosalila()->graphics->transparency_effect.set(0,1);
             rosalila()->graphics->transparency_effect.set(1,0.03);
+
+            rosalila()->utility->setRandomSeed(time(NULL));
 
             if(selected_entry!=NULL)
             {

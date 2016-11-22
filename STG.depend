@@ -3730,7 +3730,7 @@
 1476667908 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1476634240 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1479775178 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
 1474247901 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
@@ -3781,7 +3781,7 @@
 1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Layer.cpp
 	"Layer.h"
 
-1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
+1479830263 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Stage/Stage.cpp
 	"Stage.h"
 
 1471809742 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STGMenu/Intro.h
@@ -3805,7 +3805,7 @@
 1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1475715984 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1479829176 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1474088992 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -4001,10 +4001,10 @@
 
 1463097229 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api_internal.h
 
-1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
+1479775153 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
 	"SteamIntegration.h"
 
-1473707463 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h
+1479778692 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h
 	<map>
 	<vector>
 	<string>
@@ -4015,7 +4015,7 @@
 	"../LeaderboardEntry.h"
 	"../../RosalilaUtility/RosalilaUtility.h"
 
-1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
+1479779580 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.cpp
 	"LeaderboardHandler.h"
 
 1472500409 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/LeaderboardEntry.cpp
