@@ -566,20 +566,20 @@ void STG::render()
             FlatShadow());
     }
 
-    rosalila()->graphics->drawText("TotalParries:" +
-                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalParries")),
-                               0, 0, false, false);
-    rosalila()->graphics->drawText("TotalCharges:" +
-                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalCharges")),
-                               0, 50, false, false);
-
-    rosalila()->graphics->drawText("TotalParryDashDestroys:" +
-                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalParryDashDestroys")),
-                               0, 100, false, false);
-
-    rosalila()->graphics->drawText("TotalChargeBulletDestroys:" +
-                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalChargeBulletDestroys")),
-                               0, 150, false, false);
+//    rosalila()->graphics->drawText("TotalParries:" +
+//                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalParries")),
+//                               0, 0, false, false);
+//    rosalila()->graphics->drawText("TotalCharges:" +
+//                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalCharges")),
+//                               0, 50, false, false);
+//
+//    rosalila()->graphics->drawText("TotalParryDashDestroys:" +
+//                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalParryDashDestroys")),
+//                               0, 100, false, false);
+//
+//    rosalila()->graphics->drawText("TotalChargeBulletDestroys:" +
+//                               rosalila()->utility->toString(rosalila()->api_integrator->getStat("TotalChargeBulletDestroys")),
+//                               0, 150, false, false);
 
 
     //rosalila()->graphics->updateScreen();

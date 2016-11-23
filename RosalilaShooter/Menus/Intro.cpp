@@ -13,8 +13,14 @@ void intro()
                             rosalila()->graphics->screen_height-getLoadingImage()->getHeight(),
                             999999));
 
+    int frames = 0;
+
     while(true)
     {
+        if(rosalila()->api_integrator->getState()!="loading" && frames > 240)
+        {
+            break;
+        }
         if(rosalila()->receiver->isPressed("a") && rosalila()->api_integrator->getState()!="loading")
         {
             break;
@@ -43,24 +49,25 @@ void intro()
             rosalila()->graphics->notification_handler.interruptCurrentNotification();
         }
 
-//        vector<DrawableTriangle*>triangles;
-//
-//        triangles.push_back(new DrawableTriangle(100, 200,Point(10,15), Point(100,150), Point(10,150), 0, Color (255,255,0,255)));
-//        triangles.push_back(new DrawableTriangle(200, 200,Point(10,15), Point(100,150), Point(10,150), 30, Color (255,0,255,255)));
-//
-//        rosalila()->graphics->drawTriangles(triangles,2, 1,false);
-
         current_fade_in+=2;
         if(current_fade_in>255)
             current_fade_in=255;
+
+        frames++;
 
         rosalila()->update();
     }
 
     int current_background_transparency=0;
 
+    frames = 0;
+
     while(true)
     {
+        if(frames > 240)
+        {
+            break;
+        }
         if(rosalila()->receiver->isPressed("a"))
         {
             break;
@@ -87,6 +94,8 @@ void intro()
         current_background_transparency+=2;
         if(current_background_transparency>255)
             current_background_transparency=255;
+
+        frames++;
 
         rosalila()->update();
     }

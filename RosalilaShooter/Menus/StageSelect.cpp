@@ -205,6 +205,7 @@ void stageSelect()
     Image*up_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/up_arrow.png");
     Image*down_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/down_arrow.png");
     Image*line = rosalila()->graphics->getTexture(assets_directory+"menu/line.png");
+    Image*stage_clear = rosalila()->graphics->getTexture(assets_directory+"menu/stage_clear.png");
 
     double line_width = 0;
 
@@ -669,12 +670,29 @@ void stageSelect()
 
         rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
 
-        rosalila()->graphics->drawText("Tries:" +
-                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")),
-                                       0, 0, false, false);
-        rosalila()->graphics->drawText("Clears:" +
-                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Clears")),
-                                       0, 50, false, false);
+        if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")>0)
+        {
+            rosalila()->graphics->draw2DImage
+            (   stage_clear,
+                stage_clear->getWidth(),stage_clear->getHeight(),
+                rosalila()->graphics->screen_width/2-stage_clear->getWidth()/2,
+                500,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false,
+                FlatShadow());
+        }
+
+//        rosalila()->graphics->drawText("Tries:" +
+//                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")),
+//                                       0, 0, false, false);
+//        rosalila()->graphics->drawText("Clears:" +
+//                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Clears")),
+//                                       0, 50, false, false);
 
 
         rosalila()->update();
