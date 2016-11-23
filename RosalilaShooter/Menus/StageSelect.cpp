@@ -64,28 +64,28 @@ std::vector<std::string> getStageNames()
 Color getBackgroundColor(int current_stage)
 {
     int training_begin = 0;
-    int training_end = 4;
-    Color training_color(33,150,255,255);
+    int training_end = 5;
+    Color training_color(46, 204, 113,255);
 
-    int stage_a = training_end + 1;
-    int stage_b = stage_a + 1;
-    int stage_c = stage_b + 1;
-    int stage_d = stage_c + 1;
-    int stage_e = stage_d + 1;
-    int stage_f = stage_e + 1;
+    int stage_a = training_end + 6+666;
+    int stage_b = stage_a + 18+666;
+    int stage_c = stage_b + 24+666;
+    int stage_d = stage_c + 6+666;
+    int stage_e = stage_d + 1+666;
+    int stage_f = stage_e + 1+666;
 
-    Color stage_a_color(255,0,0,255);
-    Color stage_b_color(0,255,0,255);
-    Color stage_c_color(0,0,255,255);
-    Color stage_d_color(255,255,0,255);
-    Color stage_e_color(255,0,255,255);
+    Color stage_a_color(52, 152, 219,255);
+    Color stage_b_color(155, 89, 182,255);
+    Color stage_c_color(231, 76, 60,255);
+    Color stage_d_color(0, 0, 0,255);
+    Color stage_e_color(52, 73, 94,255);
     Color stage_f_color(0,255,255,255);
 
-    int stage_a_stages = stage_f + 1;
-    int stage_b_stages = stage_a_stages + 5;
-    int stage_c_stages = stage_b_stages + 5;
-    int stage_d_stages = stage_c_stages + 5;
-    int stage_e_stages = stage_d_stages + 5;
+    int stage_a_stages = training_end + 1;
+    int stage_b_stages = stage_a_stages + 6;
+    int stage_c_stages = stage_b_stages + 18;
+    int stage_d_stages = stage_c_stages + 24;
+    int stage_e_stages = stage_d_stages + 6;
     int stage_f_stages = stage_e_stages + 5;
 
     if(current_stage>=training_begin && current_stage<=training_end)
@@ -668,7 +668,7 @@ void stageSelect()
             }
         }
 
-        rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
+//        rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
 
         if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")>0)
         {
