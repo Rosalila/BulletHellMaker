@@ -63,59 +63,41 @@ std::vector<std::string> getStageNames()
 
 Color getBackgroundColor(int current_stage)
 {
-    int training_begin = 0;
-    int training_end = 5;
-    Color training_color(46, 204, 113,255);
+    Color stage_a_color(46, 204, 113, 255);
+    Color stage_b_color(52, 152, 219, 255);
+    Color stage_c_color(155, 89, 182, 255);
+    Color stage_d_color(241, 196, 15, 255);
+    Color stage_e_color(230, 126, 34, 255);
+    Color stage_f_color(231, 76, 60, 255);
+    Color stage_g_color(0,0,0,255);
 
-    int stage_a = training_end + 6+666;
-    int stage_b = stage_a + 18+666;
-    int stage_c = stage_b + 24+666;
-    int stage_d = stage_c + 6+666;
-    int stage_e = stage_d + 1+666;
-    int stage_f = stage_e + 1+666;
-
-    Color stage_a_color(52, 152, 219,255);
-    Color stage_b_color(155, 89, 182,255);
-    Color stage_c_color(231, 76, 60,255);
-    Color stage_d_color(0, 0, 0,255);
-    Color stage_e_color(52, 73, 94,255);
-    Color stage_f_color(0,255,255,255);
-
-    int stage_a_stages = training_end + 1;
+    int stage_a_stages = 6;
     int stage_b_stages = stage_a_stages + 6;
     int stage_c_stages = stage_b_stages + 18;
-    int stage_d_stages = stage_c_stages + 24;
-    int stage_e_stages = stage_d_stages + 6;
-    int stage_f_stages = stage_e_stages + 5;
+    int stage_d_stages = stage_c_stages + 8;
+    int stage_e_stages = stage_d_stages + 8;
+    int stage_f_stages = stage_e_stages + 8;
 
-    if(current_stage>=training_begin && current_stage<=training_end)
-        return training_color;
 
-    if(current_stage==stage_a
-       || (current_stage >= stage_a_stages && current_stage < stage_b_stages))
+    if(current_stage < stage_a_stages)
         return stage_a_color;
 
-    if(current_stage==stage_b
-       || (current_stage >= stage_b_stages && current_stage < stage_c_stages))
+    if(current_stage < stage_b_stages)
         return stage_b_color;
 
-    if(current_stage==stage_c
-       || (current_stage >= stage_c_stages && current_stage < stage_d_stages))
+    if(current_stage < stage_c_stages)
         return stage_c_color;
 
-    if(current_stage==stage_d
-       || (current_stage >= stage_d_stages && current_stage < stage_e_stages))
+    if(current_stage < stage_d_stages)
         return stage_d_color;
 
-    if(current_stage==stage_e
-       || (current_stage >= stage_e_stages && current_stage < stage_f_stages))
+    if(current_stage < stage_e_stages)
         return stage_e_color;
 
-    if(current_stage==stage_f
-       || (current_stage >= stage_f_stages))
+    if(current_stage < stage_f_stages)
         return stage_f_color;
 
-    return Color();
+    return stage_g_color;
 }
 
 void updateMusic(int current_stage)
