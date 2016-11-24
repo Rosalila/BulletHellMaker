@@ -19,6 +19,7 @@ void intro()
     {
         if(rosalila()->api_integrator->getState()!="loading" && frames > 180)
         {
+            rosalila()->graphics->notification_handler.interruptCurrentNotification();
             break;
         }
         if(rosalila()->receiver->isPressed("a") && rosalila()->api_integrator->getState()!="loading")
@@ -43,11 +44,6 @@ void intro()
             0,0,
             false,
             FlatShadow());
-
-        if(rosalila()->api_integrator->getState()!="loading")
-        {
-            rosalila()->graphics->notification_handler.interruptCurrentNotification();
-        }
 
         current_fade_in+=2;
         if(current_fade_in>255)
