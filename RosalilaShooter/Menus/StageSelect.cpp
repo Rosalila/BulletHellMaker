@@ -604,38 +604,41 @@ void stageSelect()
                     FlatShadow());
             }
 
-            if(entry_navigator>-6)
+            if(rosalila()->api_integrator->isUsingApi())
             {
-                rosalila()->graphics->draw2DImage
-                (   up_arrow,
-                    up_arrow->getWidth(),up_arrow->getHeight(),
-                    rosalila()->graphics->screen_width/2-up_arrow->getWidth()/2,
-                    0,
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
-            }
+                if(entry_navigator>-6)
+                {
+                    rosalila()->graphics->draw2DImage
+                    (   up_arrow,
+                        up_arrow->getWidth(),up_arrow->getHeight(),
+                        rosalila()->graphics->screen_width/2-up_arrow->getWidth()/2,
+                        0,
+                        1.0,
+                        0.0,
+                        false,
+                        0,0,
+                        Color(255,255,255,255),
+                        0,0,
+                        false,
+                        FlatShadow());
+                }
 
-            if(entry_navigator<=0 || entry_navigator<current_leaderboard->friends_entries.size())
-            {
-                rosalila()->graphics->draw2DImage
-                (   down_arrow,
-                    down_arrow->getWidth(),down_arrow->getHeight(),
-                    rosalila()->graphics->screen_width/2-down_arrow->getWidth()/2,
-                    rosalila()->graphics->screen_height-down_arrow->getHeight(),
-                    1.0,
-                    0.0,
-                    false,
-                    0,0,
-                    Color(255,255,255,255),
-                    0,0,
-                    false,
-                    FlatShadow());
+                if(entry_navigator<=0 || entry_navigator<current_leaderboard->friends_entries.size())
+                {
+                    rosalila()->graphics->draw2DImage
+                    (   down_arrow,
+                        down_arrow->getWidth(),down_arrow->getHeight(),
+                        rosalila()->graphics->screen_width/2-down_arrow->getWidth()/2,
+                        rosalila()->graphics->screen_height-down_arrow->getHeight(),
+                        1.0,
+                        0.0,
+                        false,
+                        0,0,
+                        Color(255,255,255,255),
+                        0,0,
+                        false,
+                        FlatShadow());
+                }
             }
         }
 

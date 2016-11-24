@@ -17,7 +17,7 @@ void intro()
 
     while(true)
     {
-        if(rosalila()->api_integrator->getState()!="loading" && frames > 240)
+        if(rosalila()->api_integrator->getState()!="loading" && frames > 180)
         {
             break;
         }
@@ -64,7 +64,7 @@ void intro()
 
     while(true)
     {
-        if(frames > 240)
+        if(frames > 180)
         {
             break;
         }
