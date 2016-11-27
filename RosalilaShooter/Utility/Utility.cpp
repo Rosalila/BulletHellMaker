@@ -5,6 +5,7 @@ int current_slowdown_iteration=0;
 bool slow_enabled=false;
 bool game_over;
 bool player_won;
+bool is_first_win=false;
 
 Image* loading_image;
 Image* error_image;
@@ -32,9 +33,19 @@ bool getPlayerWon()
     return player_won;
 }
 
+bool getIsFirstWin()
+{
+    return is_first_win;
+}
+
 void setPlayerWon(bool player_won_param)
 {
     player_won=player_won_param;
+}
+
+void setIsFirstWin(bool is_first_win_param)
+{
+    is_first_win=is_first_win_param;
 }
 
 bool getIterateSlowdownFlag()

@@ -662,8 +662,15 @@ void STG::win()
     int old_clears = rosalila()->api_integrator->getStat(stage->name+"Clears");
     rosalila()->api_integrator->setStat(stage->name+"Clears",old_clears+1);
 
+    if(player->hp == player->max_hp)
+    {
+        int old_perfects = rosalila()->api_integrator->getStat(stage->name+"Perfects");
+        rosalila()->api_integrator->setStat(stage->name+"Perfects",old_perfects+1);
+    }
+
     setPlayerWon(true);
     setGameOver(true);
+    setIsFirstWin(old_clears==0);
 
     rosalila()->api_integrator->unlockAchievement("B");
     double milliseconds = SDL_GetTicks()-initial_ticks;

@@ -188,6 +188,7 @@ void stageSelect()
     Image*down_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/down_arrow.png");
     Image*line = rosalila()->graphics->getTexture(assets_directory+"menu/line.png");
     Image*stage_clear = rosalila()->graphics->getTexture(assets_directory+"menu/stage_clear.png");
+    Image*stage_perfect = rosalila()->graphics->getTexture(assets_directory+"menu/stage_perfect.png");
 
     double line_width = 0;
 
@@ -437,6 +438,14 @@ void stageSelect()
                 Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
                 rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
                 STG*stg=new STG(player,enemy,stage,game_mode,current_player_best_score);
+
+                if(getIsFirstWin())
+                {
+                    current_stage++;
+                    if(current_stage>=(int)stage_images.size())
+                        current_stage=stage_images.size()-1;
+                }
+
                 rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
 //                for(int i=0;i<1000;i++)
@@ -655,21 +664,42 @@ void stageSelect()
 
 //        rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
 
-        if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")>0)
+        if(entry_navigator == 0)
         {
-            rosalila()->graphics->draw2DImage
-            (   stage_clear,
-                stage_clear->getWidth(),stage_clear->getHeight(),
-                rosalila()->graphics->screen_width/2-stage_clear->getWidth()/2,
-                500,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                0,0,
-                false,
-                FlatShadow());
+            if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Perfects")>0)
+            {
+
+
+
+                rosalila()->graphics->draw2DImage
+                (   stage_perfect,
+                    stage_perfect->getWidth(),stage_perfect->getHeight(),
+            rosalila()->graphics->screen_width/2-stage_perfect->getWidth()/2,
+                500+middle_menu_y,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }else if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Clears")>0)
+            {
+                rosalila()->graphics->draw2DImage
+                (   stage_clear,
+                    stage_clear->getWidth(),stage_clear->getHeight(),
+            rosalila()->graphics->screen_width/2-stage_perfect->getWidth()/2,
+                500+middle_menu_y,
+                    1.0,
+                    0.0,
+                    false,
+                    0,0,
+                    Color(255,255,255,255),
+                    0,0,
+                    false,
+                    FlatShadow());
+            }
         }
 
 //        rosalila()->graphics->drawText("Tries:" +
