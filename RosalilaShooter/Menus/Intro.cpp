@@ -15,6 +15,11 @@ void intro()
 
     int frames = 0;
 
+    if(!rosalila()->api_integrator->isUsingApi())
+    {
+        rosalila()->graphics->notification_handler.interruptCurrentNotification();
+    }
+
     while(true)
     {
         if(rosalila()->api_integrator->getState()!="loading" && frames > 180)
@@ -24,6 +29,7 @@ void intro()
         }
         if(rosalila()->receiver->isPressed("a") && rosalila()->api_integrator->getState()!="loading")
         {
+            rosalila()->graphics->notification_handler.interruptCurrentNotification();
             break;
         }
 
