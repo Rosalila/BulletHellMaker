@@ -292,8 +292,28 @@ void Player::inputControl()
         this->shooting=true;
         if(max_charge!=0 && current_charge==max_charge)
         {
-            int old_charges = rosalila()->api_integrator->getStat("TotalCharges");
-            rosalila()->api_integrator->setStat("TotalCharges",old_charges+1);
+            if(!isOnIntro())
+            {
+                int counter = rosalila()->api_integrator->getStat("TotalCharges") + 1;
+                rosalila()->api_integrator->setStat("TotalCharges",counter);
+
+                if(counter >= 3)
+                {
+                    rosalila()->api_integrator->unlockAchievement("Charge1");
+                }
+                if(counter >= 20)
+                {
+                    rosalila()->api_integrator->unlockAchievement("Charge2");
+                }
+                if(counter >= 100)
+                {
+                    rosalila()->api_integrator->unlockAchievement("Charge3");
+                }
+                if(counter >= 200)
+                {
+                    rosalila()->api_integrator->unlockAchievement("Charge4");
+                }
+            }
 
             std::vector<Pattern*> patterns=type["bomb"];
             patterns[0]->bullet->playSound(patterns[0]->x + this->x, true);

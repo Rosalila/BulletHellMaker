@@ -169,8 +169,8 @@
 	<File name="RosalilaShooter/Character/Bullet.h" open="0" top="0" tabpos="1">
 		<Cursor position="847" topLine="6" />
 	</File>
-	<File name="RosalilaShooter/Character/Character.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="27929" topLine="806" />
+	<File name="RosalilaShooter/Character/Character.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="28357" topLine="806" />
 	</File>
 	<File name="RosalilaShooter/Character/Character.h" open="0" top="0" tabpos="3">
 		<Cursor position="1326" topLine="51" />
@@ -190,8 +190,8 @@
 	<File name="RosalilaShooter/Character/Pattern.h" open="0" top="0" tabpos="3">
 		<Cursor position="395" topLine="68" />
 	</File>
-	<File name="RosalilaShooter/Character/Player.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="22503" topLine="742" />
+	<File name="RosalilaShooter/Character/Player.cpp" open="1" top="1" tabpos="6">
+		<Cursor position="10740" topLine="286" />
 	</File>
 	<File name="RosalilaShooter/Character/Player.h" open="0" top="0" tabpos="6">
 		<Cursor position="1846" topLine="10" />
@@ -199,8 +199,8 @@
 	<File name="RosalilaShooter/Menus/ControllerConfig.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="8791" topLine="194" />
 	</File>
-	<File name="RosalilaShooter/Menus/Intro.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="803" topLine="9" />
+	<File name="RosalilaShooter/Menus/Intro.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="547" topLine="0" />
 	</File>
 	<File name="RosalilaShooter/Menus/Intro.h" open="0" top="0" tabpos="0">
 		<Cursor position="77" topLine="0" />
@@ -211,8 +211,8 @@
 	<File name="RosalilaShooter/Menus/StageSelect.h" open="0" top="0" tabpos="0">
 		<Cursor position="365" topLine="0" />
 	</File>
-	<File name="RosalilaShooter/STG.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="24859" topLine="657" />
+	<File name="RosalilaShooter/STG.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="17595" topLine="416" />
 	</File>
 	<File name="RosalilaShooter/STG.h" open="0" top="0" tabpos="1">
 		<Cursor position="249" topLine="0" />
@@ -241,7 +241,7 @@
 	<File name="RosalilaShooter/Utility/Utility.h" open="0" top="0" tabpos="0">
 		<Cursor position="595" topLine="10" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="704" topLine="9" />
+	<File name="main.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="542" topLine="9" />
 	</File>
 </CodeBlocks_layout_file>

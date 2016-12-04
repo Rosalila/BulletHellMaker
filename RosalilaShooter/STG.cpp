@@ -224,15 +224,33 @@ void STG::logic()
                 {
                     if(!p->is_hit && p->collides_opponent && (player->collidesParry(h,0,0,0)||player->collides(h,0,0,0)))
                     {
-                        int counter = rosalila()->api_integrator->getStat("TotalParryDashDestroys");
-                        rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter+1);
-
                         p->hit(player->sound_channel_base+1,true);
                         rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,200),15);
                         if(player->isInvulnerable())
                         {
                             if(!player->isOnIntro())
                             {
+
+                                int counter = rosalila()->api_integrator->getStat("TotalParryDashDestroys") + 1;
+                                rosalila()->api_integrator->setStat("TotalParryDashDestroys",counter);
+
+                                if(counter >= 15)
+                                {
+                                    rosalila()->api_integrator->unlockAchievement("ParryDash1");
+                                }
+                                if(counter >= 50)
+                                {
+                                    rosalila()->api_integrator->unlockAchievement("ParryDash2");
+                                }
+                                if(counter >= 200)
+                                {
+                                    rosalila()->api_integrator->unlockAchievement("ParryDash3");
+                                }
+                                if(counter >= 500)
+                                {
+                                    rosalila()->api_integrator->unlockAchievement("ParryDash4");
+                                }
+
                                 parry_dash_count++;
                                 if(game_mode=="parry dash training" && parry_dash_count==parry_dash_count_objective)
                                 {
@@ -249,13 +267,30 @@ void STG::logic()
                         }
                         if(player->isParrying())
                         {
-                            if(player->invulnerable_frames_left==15)
-                            {
-                                int old_parries = rosalila()->api_integrator->getStat("TotalParries");
-                                rosalila()->api_integrator->setStat("TotalParries",old_parries+1);
-                            }
                             if(!player->isOnIntro())
                             {
+                                if(player->invulnerable_frames_left==15)
+                                {
+                                    int counter = rosalila()->api_integrator->getStat("TotalParries") + 1;
+                                    rosalila()->api_integrator->setStat("TotalParries",counter);
+
+                                    if(counter >= 3)
+                                    {
+                                        rosalila()->api_integrator->unlockAchievement("Parry1");
+                                    }
+                                    if(counter >= 20)
+                                    {
+                                        rosalila()->api_integrator->unlockAchievement("Parry2");
+                                    }
+                                    if(counter >= 100)
+                                    {
+                                        rosalila()->api_integrator->unlockAchievement("Parry3");
+                                    }
+                                    if(counter >= 250)
+                                    {
+                                        rosalila()->api_integrator->unlockAchievement("Parry4");
+                                    }
+                                }
                                 parry_count++;
                                 if(game_mode=="parry training" && parry_count==parry_count_objective)
                                 {
@@ -337,11 +372,28 @@ void STG::logic()
                                 Hitbox player_hitbox=player_hitboxes[j]->getPlacedHitbox(player_pattern->x,player_pattern->y,player_pattern->getBulletAngle());
                                 if(!enemy_pattern->is_hit&&!player_pattern->is_hit&&enemy_hitbox.collides(player_hitbox))
                                 {
-                                    int counter = rosalila()->api_integrator->getStat("TotalChargeBulletDestroys");
-                                    rosalila()->api_integrator->setStat("TotalChargeBulletDestroys",counter+1);
-
                                     if(!player->isOnIntro())
                                     {
+                                        int counter = rosalila()->api_integrator->getStat("TotalChargeBulletDestroys") + 1;
+                                        rosalila()->api_integrator->setStat("TotalChargeBulletDestroys",counter);
+
+                                        if(counter >= 300)
+                                        {
+                                            rosalila()->api_integrator->unlockAchievement("ChargeDestroy1");
+                                        }
+                                        if(counter >= 1000)
+                                        {
+                                            rosalila()->api_integrator->unlockAchievement("ChargeDestroy2");
+                                        }
+                                        if(counter >= 5000)
+                                        {
+                                            rosalila()->api_integrator->unlockAchievement("ChargeDestroy3");
+                                        }
+                                        if(counter >= 10000)
+                                        {
+                                            rosalila()->api_integrator->unlockAchievement("ChargeDestroy4");
+                                        }
+
                                         charge_destroy_count++;
                                         if(game_mode=="charge training" && charge_destroy_count==charge_destroy_count_objective)
                                         {
