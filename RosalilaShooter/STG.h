@@ -47,6 +47,8 @@ public:
 
     int game_over_timeout;
 
+    bool player_is_immortal;
+
     STG(Player*player,Enemy*enemy,Stage*stage,string game_mode,int current_player_best_score);
     ~STG();
     bool isOutOfBounds(int pos_x,int pos_y);

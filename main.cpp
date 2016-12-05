@@ -24,8 +24,6 @@ int main(int argc, char *argv[])
     rosalila()->init();
     initShooterUtility();
 
-    rosalila()->api_integrator->unlockAchievement("A");
-
     rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
 

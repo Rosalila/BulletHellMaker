@@ -214,6 +214,9 @@ void stageSelect()
     double target_middle_menu_y = 0;
     double target_bottom_menu_y = rosalila()->graphics->screen_height;
 
+    int current_long_press_left = 0;
+    int current_long_press_right = 0;
+
     while(true)
     {
         if(rosalila()->receiver->isPressed("b"))
@@ -226,27 +229,41 @@ void stageSelect()
             select_button_was_up = true;
         }
 
-        if(rosalila()->receiver->isPressed("6") && entry_navigator==0)
+        if(rosalila()->receiver->isDown("6") && entry_navigator==0)
         {
-            current_stage++;
-            if(current_stage>=(int)stage_images.size())
-                current_stage=stage_images.size()-1;
-            rosalila()->api_integrator->setStat("current stage",current_stage);
+            if(current_long_press_right  == 0 || (current_long_press_right  > 40 && current_long_press_right  % 5 ==0))
+            {
+                current_stage++;
+                if(current_stage>=(int)stage_images.size())
+                    current_stage=stage_images.size()-1;
+                rosalila()->api_integrator->setStat("current stage",current_stage);
+            }
+            current_long_press_right++;
+        }else
+        {
+            current_long_press_right = 0;
         }
 
-        if(rosalila()->receiver->isPressed("4") && entry_navigator==0)
+        if(rosalila()->receiver->isDown("4") && entry_navigator==0)
         {
-            current_stage--;
-            if(current_stage<0)
-                current_stage=0;
-            rosalila()->api_integrator->setStat("current stage",current_stage);
+            if(current_long_press_left == 0 || (current_long_press_left > 40 && current_long_press_left % 5 ==0))
+            {
+                current_stage--;
+                if(current_stage<0)
+                    current_stage=0;
+                rosalila()->api_integrator->setStat("current stage",current_stage);
+            }
+            current_long_press_left++;
+        }else
+        {
+            current_long_press_left = 0;
         }
 
         Leaderboard* current_leaderboard = rosalila()->api_integrator->getLeaderboard(stage_names[current_stage]);
 
         if(current_leaderboard)
         {
-            if(rosalila()->receiver->isPressed("2"))
+            if(rosalila()->receiver->isDown("2"))
             {
                 entry_navigator++;
                 line_width=0;
@@ -255,7 +272,7 @@ void stageSelect()
                     entry_navigator = current_leaderboard->friends_entries.size();
                 }
             }
-            if(rosalila()->receiver->isPressed("8"))
+            if(rosalila()->receiver->isDown("8"))
             {
                 entry_navigator--;
                 line_width=0;
@@ -444,6 +461,64 @@ void stageSelect()
                     current_stage++;
                     if(current_stage>=(int)stage_images.size())
                         current_stage=stage_images.size()-1;
+                }
+
+                if(rosalila()->api_integrator->isUsingApi())
+                {
+                    int total_clears = 0;
+                    for(int i=0;i<stage_names.size();i++)
+                    {
+                        if(rosalila()->api_integrator->getStat(stage_names[i]+"Clears")>0)
+                        {
+                            total_clears++;
+                        }
+                    }
+
+                    int total_perfects = 0;
+                    for(int i=0;i<stage_names.size();i++)
+                    {
+                        if(rosalila()->api_integrator->getStat(stage_names[i]+"Perfects")>0)
+                        {
+                            total_perfects++;
+                        }
+                    }
+
+                    rosalila()->api_integrator->setStat("TotalClears",total_clears);
+                    rosalila()->api_integrator->setStat("TotalPerfects",total_perfects);
+
+                    if(total_clears >= 1)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Clear1");
+                    }
+                    if(total_clears >= 10)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Clear2");
+                    }
+                    if(total_clears >= 25)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Clear3");
+                    }
+                    if(total_clears >= 59)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Clear4");
+                    }
+
+                    if(total_perfects >= 1)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Perfect1");
+                    }
+                    if(total_perfects >= 10)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Perfect2");
+                    }
+                    if(total_perfects >= 25)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Perfect3");
+                    }
+                    if(total_perfects >= 59)
+                    {
+                        rosalila()->api_integrator->unlockAchievement("Perfect4");
+                    }
                 }
 
                 rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");

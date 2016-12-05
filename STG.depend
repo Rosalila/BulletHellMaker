@@ -3467,7 +3467,7 @@
 1471838407 source:/home/turupawn/Projects/C++/Flatshot/STG/Stage/Stage.cpp
 	"Stage.h"
 
-1474784960 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
+1480957775 source:/home/turupawn/Projects/C++/Flatshot/STG/main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sstream>
@@ -3728,13 +3728,13 @@
 1477545327 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Pattern.cpp
 	"Pattern.h"
 
-1480808999 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
+1480883927 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Character/Player.cpp
 	"Player.h"
 
-1480808773 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
+1480958608 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.cpp
 	"STG.h"
 
-1474247901 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
+1480958493 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/STG.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
@@ -3806,7 +3806,7 @@
 1480279822 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/Intro.cpp
 	"ControllerConfig.h"
 
-1480272299 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
+1480959789 source:/home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.cpp
 	"StageSelect.h"
 
 1474088992 /home/turupawn/Projects/C++/Flatshot/STG/RosalilaShooter/Menus/StageSelect.h
@@ -4002,7 +4002,7 @@
 
 1463097229 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/include/steam_api_internal.h
 
-1480869014 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
+1480886399 source:/home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/SteamIntegration.cpp
 	"SteamIntegration.h"
 
 1479778692 /home/turupawn/Projects/C++/Flatshot/STG/Rosalila/RosalilaApiIntegrator/Steam/LeaderboardHandler.h

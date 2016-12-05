@@ -21,6 +21,8 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
     this->image_training_bar = NULL;
     this->image_training_bar_fill = NULL;
 
+    this->player_is_immortal = false;
+
     rosalila()->graphics->camera_y=0;
     frame=0;
 
@@ -90,21 +92,25 @@ STG::STG(Player*player,Enemy*enemy,Stage*stage,string game_mode, int current_pla
         image_training_bar=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar.png");
         image_training_bar_fill=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
         charge_destroy_count_objective=300;
+        player_is_immortal = true;
     }
     if(game_mode=="parry training")
     {
         image_training_box=rosalila()->graphics->getTexture(assets_directory+"misc/training/box.png");
         image_training_x=rosalila()->graphics->getTexture(assets_directory+"misc/training/x.png");
         parry_count_objective=3;
+        player_is_immortal = true;
     }
     if(game_mode=="parry dash training")
     {
         image_training_bar=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar.png");
         image_training_bar_fill=rosalila()->graphics->getTexture(assets_directory+"misc/training/bar_fill.png");
         parry_dash_count_objective=15;
+        player_is_immortal = true;
     }
 
     setGameOver(false);
+    setIsFirstWin(false);
     mainLoop();
 }
 
@@ -310,7 +316,8 @@ void STG::logic()
                 {
                     rosalila()->graphics->point_explosion_effect->explode(p->x,p->y,Color(255,255,255,200),p->bullet->damage);
                     p->hit(enemy->sound_channel_base+1,false);
-                    player->hit(p->bullet->damage);
+                    if(!player_is_immortal)
+                        player->hit(p->bullet->damage);
                     parry_count = 0;
                     rosalila()->graphics->screen_shake_effect.set(30,10,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
                     if(rosalila()->sound->soundExists(player->name+".hit"))
