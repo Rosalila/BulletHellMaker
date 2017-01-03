@@ -24,11 +24,13 @@ void intro()
     {
         if(rosalila()->api_integrator->getState()!="loading" && frames > 180)
         {
+            rosalila()->sound->playSound("Menu.confirm",1,0,0,0);
             rosalila()->graphics->notification_handler.interruptCurrentNotification();
             break;
         }
         if(rosalila()->receiver->isPressed("a") && rosalila()->api_integrator->getState()!="loading")
         {
+            rosalila()->sound->playSound("Menu.right",0,0,0,0);
             rosalila()->graphics->notification_handler.interruptCurrentNotification();
             break;
         }
@@ -72,6 +74,7 @@ void intro()
         }
         if(rosalila()->receiver->isPressed("a"))
         {
+            rosalila()->sound->playSound("Menu.right",0,0,0,0);
             break;
         }
 

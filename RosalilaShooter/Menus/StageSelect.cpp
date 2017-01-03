@@ -216,11 +216,14 @@ void stageSelect()
 
     int current_long_press_left = 0;
     int current_long_press_right = 0;
+    int current_long_press_up = 0;
+    int current_long_press_down = 0;
 
     while(true)
     {
         if(rosalila()->receiver->isPressed("b"))
         {
+            rosalila()->sound->playSound("Menu.back",0,0,0,0);
             break;
         }
 
@@ -233,6 +236,7 @@ void stageSelect()
         {
             if(current_long_press_right  == 0 || (current_long_press_right  > 40 && current_long_press_right  % 5 ==0))
             {
+                rosalila()->sound->playSound("Menu.right",0,0,0,0);
                 current_stage++;
                 if(current_stage>=(int)stage_images.size())
                     current_stage=stage_images.size()-1;
@@ -248,6 +252,7 @@ void stageSelect()
         {
             if(current_long_press_left == 0 || (current_long_press_left > 40 && current_long_press_left % 5 ==0))
             {
+                rosalila()->sound->playSound("Menu.left",0,0,0,0);
                 current_stage--;
                 if(current_stage<0)
                     current_stage=0;
@@ -265,21 +270,37 @@ void stageSelect()
         {
             if(rosalila()->receiver->isDown("2"))
             {
-                entry_navigator++;
-                line_width=0;
-                if(entry_navigator > (int)current_leaderboard->friends_entries.size())
+                if(current_long_press_down == 0 || (current_long_press_down > 40 && current_long_press_down % 5 ==0))
                 {
-                    entry_navigator = current_leaderboard->friends_entries.size();
+                    rosalila()->sound->playSound("Menu.down",0,0,0,0);
+                    entry_navigator++;
+                    line_width=0;
+                    if(entry_navigator > (int)current_leaderboard->friends_entries.size())
+                    {
+                        entry_navigator = current_leaderboard->friends_entries.size();
+                    }
                 }
+                current_long_press_down++;
+            }else
+            {
+                current_long_press_down = 0;
             }
             if(rosalila()->receiver->isDown("8"))
             {
-                entry_navigator--;
-                line_width=0;
-                if(entry_navigator<-6)
+                if(current_long_press_up == 0 || (current_long_press_up > 40 && current_long_press_up % 5 ==0))
                 {
-                   entry_navigator=-6;
+                    rosalila()->sound->playSound("Menu.up",0,0,0,0);
+                    entry_navigator--;
+                    line_width=0;
+                    if(entry_navigator<-6)
+                    {
+                       entry_navigator=-6;
+                    }
                 }
+                current_long_press_up++;
+            }else
+            {
+                current_long_press_up = 0;
             }
 
             target_bottom_menu_y = rosalila()->graphics->screen_height/2 - current_leaderboard->friends_entries.size()*entry_height/2;
@@ -352,6 +373,7 @@ void stageSelect()
 
         if(rosalila()->receiver->isDown("a") && select_button_was_up)
         {
+            rosalila()->sound->playSound("Menu.confirm",0,0,0,0);
             rosalila()->utility->writeLogLine("Initializing game.");
             rosalila()->utility->setRandomSeed(time(NULL));
             vector<string>replay_input;

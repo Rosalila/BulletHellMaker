@@ -24,6 +24,14 @@ int main(int argc, char *argv[])
     rosalila()->init();
     initShooterUtility();
 
+    rosalila()->sound->addSound("Menu.back",assets_directory+"menu/audio/back.ogg");
+    rosalila()->sound->addSound("Menu.confirm",assets_directory+"menu/audio/confirm.ogg");
+    rosalila()->sound->addSound("Menu.down",assets_directory+"menu/audio/down.ogg");
+    rosalila()->sound->addSound("Menu.left",assets_directory+"menu/audio/left.ogg");
+    rosalila()->sound->addSound("Menu.right",assets_directory+"menu/audio/right.ogg");
+    rosalila()->sound->addSound("Menu.up",assets_directory+"menu/audio/up.ogg");
+    rosalila()->sound->addSound("Menu.invalid",assets_directory+"menu/audio/invalid.ogg");
+
     rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
 

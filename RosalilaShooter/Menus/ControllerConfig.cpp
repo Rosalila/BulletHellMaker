@@ -81,6 +81,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
 
         if(rosalila()->receiver->isKeyPressed(SDLK_ESCAPE))
         {
+            rosalila()->sound->playSound("Menu.down",0,0,0,0);
             if(current_button<=0)
                 exit(0);
             current_button--;
@@ -145,6 +146,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             {
                 if((*control_iterator).second->key==key_pressed)
                 {
+                    rosalila()->sound->playSound("Menu.invalid",0,0,0,0);
                     key_exists = true;
                     rosalila()->graphics->notification_handler.notifications.push_back(
                         new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
@@ -157,6 +159,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             }
             if(!key_exists)
             {
+                rosalila()->sound->playSound("Menu.up",0,0,0,0);
                 string current_button_map = controls_config_map_name[current_button];
                 controls[current_button_map]=new Button(key_pressed,current_button_map);
                 current_button++;
@@ -184,6 +187,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
             }
             if(!key_exists)
             {
+                rosalila()->sound->playSound("Menu.up",0,0,0,0);
                 string current_button_map = controls_config_map_name[current_button];
                 controls[current_button_map]=new Button(joy_pressed,0,current_button_map);
                 current_button++;
@@ -288,6 +292,8 @@ map<string,Button*> ControllerConfig(bool reconfigure)
         rosalila()->update();
         frame++;
     }
+
+    rosalila()->sound->playSound("Menu.confirm",0,0,0,0);
 
     string controls_file = "";
 
