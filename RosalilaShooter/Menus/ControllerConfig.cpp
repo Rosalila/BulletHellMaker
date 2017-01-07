@@ -81,7 +81,7 @@ map<string,Button*> ControllerConfig(bool reconfigure)
 
         if(rosalila()->receiver->isKeyPressed(SDLK_ESCAPE))
         {
-            rosalila()->sound->playSound("Menu.down",0,0,0,0);
+            rosalila()->sound->playSound("Menu.down",0,0,0,false);
             if(current_button<=0)
                 exit(0);
             current_button--;

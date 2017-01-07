@@ -62,8 +62,8 @@ Player::Player(std::string name,int sound_channel_base,vector<string> intro_inpu
     parry_sprites.push_back(rosalila()->graphics->getTexture(assets_directory+directory+"sprites/parry/2.png"));
     parry_sprites.push_back(rosalila()->graphics->getTexture(assets_directory+directory+"sprites/parry/3.png"));
     //Charge
-    rosalila()->sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.wav");
-    rosalila()->sound->addSound("charging",assets_directory+directory+"/sounds/charging.wav");
+    rosalila()->sound->addSound("charge ready",assets_directory+directory+"/sounds/charge_ready.ogg");
+    rosalila()->sound->addSound("charging",assets_directory+directory+"/sounds/charging.ogg");
     charging_sound_channel=rosalila()->sound->playSound("charging", 21, -1, this->x, true);
 }
 
