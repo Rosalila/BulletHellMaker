@@ -23,17 +23,17 @@ Bullet::Bullet(std::string name,vector<Image*>sprites,vector<Image*>sprites_on_h
 
 Bullet::~Bullet()
 {
-    for(int i=0;i<sprites.size();i++)
+    for(int i=0;i<(int)sprites.size();i++)
     {
         delete sprites[i];
     }
 
-    for(int i=0;i<sprites_on_hit.size();i++)
+    for(int i=0;i<(int)sprites_on_hit.size();i++)
     {
         delete sprites_on_hit[i];
     }
 
-    for(int i=0;i<hitboxes.size();i++)
+    for(int i=0;i<(int)hitboxes.size();i++)
     {
         delete hitboxes[i];
     }

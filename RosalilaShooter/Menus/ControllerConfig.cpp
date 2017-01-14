@@ -5,14 +5,14 @@ map<string,Button*> getExistingConfiguration(string controls_file_retrived)
     map<string,Button*>controls;
 
     int i=0;
-    while(i<controls_file_retrived.length())
+    while(i<(int)controls_file_retrived.length())
     {
         char maped = controls_file_retrived[i];
         i++;
         char type = controls_file_retrived[i];
         i++;
         string number_key = "";
-        while(controls_file_retrived[i]!=',' && i<controls_file_retrived.length())
+        while(controls_file_retrived[i]!=',' && i<(int)controls_file_retrived.length())
         {
             number_key+=controls_file_retrived[i];
             i++;

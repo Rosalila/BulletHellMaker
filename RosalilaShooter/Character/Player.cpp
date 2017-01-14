@@ -80,12 +80,12 @@ Player::~Player()
     if(this->parryed_image)
         delete this->parryed_image;
 
-    for(int i=0; i<parry_hitboxes.size();i++)
+    for(int i=0; i<(int)parry_hitboxes.size();i++)
     {
         delete parry_hitboxes[i];
     }
 
-    for(int i=0; i<parry_sprites.size();i++)
+    for(int i=0; i<(int)parry_sprites.size();i++)
     {
         delete parry_sprites[i];
     }
@@ -762,21 +762,21 @@ bool Player::isDownWrapper(string button_map)
 {
     if(replay_input.size()>0)
     {
-        if(frame>=replay_input.size())
+        if(frame>=(int)replay_input.size())
             return false;
-        for(int i=0;i<replay_input[frame].size();i++)
+        for(int i=0;i<(int)replay_input[frame].size();i++)
             if(replay_input[frame][i]==button_map[0])
                 return true;
         return false;
     }else if(intro_input.size()>0)
     {
-        if(frame>=intro_input.size())
+        if(frame>= (int)intro_input.size())
         {
             rosalila()->graphics->grayscale_effect.set(1,0.003);
             return rosalila()->receiver->isDown(button_map);
         }
 
-        for(int i=0;i<intro_input[frame].size();i++)
+        for(int i=0;i<(int)intro_input[frame].size();i++)
             if(intro_input[frame][i]==button_map[0])
                 return true;
         return false;
@@ -786,5 +786,5 @@ bool Player::isDownWrapper(string button_map)
 
 bool Player::isOnIntro()
 {
-    return this->frame<this->intro_input.size();
+    return this->frame<(int)this->intro_input.size();
 }

@@ -48,7 +48,7 @@ Character::~Character()
 {
     for(map< string,vector<Image*> >::iterator i = sprites.begin(); i!=sprites.end(); i++)
     {
-        for(int j=0;j<(*i).second.size();j++)
+        for(int j=0;j<(int)(*i).second.size();j++)
         {
             delete (*i).second[j];
         }
@@ -61,7 +61,7 @@ Character::~Character()
 
     for(map<string, vector<Pattern*> >::iterator i = type.begin(); i!=type.end(); i++)
     {
-        for(int j=0;j<(*i).second.size();j++)
+        for(int j=0;j<(int)(*i).second.size();j++)
         {
             delete (*i).second[j];
         }
@@ -1008,7 +1008,7 @@ void Character::topRender()
 
     rosalila()->graphics->drawRectangles(rectangles,0,0,true);
 
-    for(int i=0;i<rectangles.size();i++)
+    for(int i=0;i<(int)rectangles.size();i++)
         delete rectangles[i];
 
 }

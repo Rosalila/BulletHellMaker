@@ -168,7 +168,7 @@ LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_n
         return current_leaderboard->near_entries[2];
     }
 
-    if(entry_navigator>0 && entry_navigator<=current_leaderboard->near_entries.size()+1)
+    if(entry_navigator>0 && entry_navigator<=(int)current_leaderboard->near_entries.size()+1)
     {
         return current_leaderboard->friends_entries[entry_navigator-1];
     }
@@ -488,7 +488,7 @@ void stageSelect()
                 if(rosalila()->api_integrator->isUsingApi())
                 {
                     int total_clears = 0;
-                    for(int i=0;i<stage_names.size();i++)
+                    for(int i=0;i<(int)stage_names.size();i++)
                     {
                         if(rosalila()->api_integrator->getStat(stage_names[i]+"Clears")>0)
                         {
@@ -497,7 +497,7 @@ void stageSelect()
                     }
 
                     int total_perfects = 0;
-                    for(int i=0;i<stage_names.size();i++)
+                    for(int i=0;i<(int)stage_names.size();i++)
                     {
                         if(rosalila()->api_integrator->getStat(stage_names[i]+"Perfects")>0)
                         {
@@ -639,7 +639,7 @@ void stageSelect()
 
         if(current_leaderboard)
         {
-            for(int i=0;i<current_leaderboard->top_entries.size();i++)
+            for(int i=0;i<(int)current_leaderboard->top_entries.size();i++)
             {
                 LeaderboardEntry* current_entry = current_leaderboard->top_entries[i];
                 string entry_text = rosalila()->utility->toString(current_entry->rank)+"." + current_entry->name + " " +rosalila()->utility->toString(current_entry->score);
@@ -647,7 +647,7 @@ void stageSelect()
                 rosalila()->graphics->drawText(entry_text, 0, top_menu_y+i*separation, true, false);
             }
 
-            for(int i=0;i<current_leaderboard->near_entries.size();i++)
+            for(int i=0;i<(int)current_leaderboard->near_entries.size();i++)
             {
                 int align_y = 200+top_menu_y;
                 LeaderboardEntry* current_entry = current_leaderboard->near_entries[i];
@@ -729,7 +729,7 @@ void stageSelect()
                         FlatShadow());
                 }
 
-                if(entry_navigator<=0 || entry_navigator<current_leaderboard->friends_entries.size())
+                if(entry_navigator<=0 || entry_navigator<(int)current_leaderboard->friends_entries.size())
                 {
                     rosalila()->graphics->draw2DImage
                     (   down_arrow,
@@ -751,7 +751,7 @@ void stageSelect()
         if(current_leaderboard)
         {
             //Bottom menu
-            for(int i=0;i<current_leaderboard->friends_entries.size();i++)
+            for(int i=0;i<(int)current_leaderboard->friends_entries.size();i++)
             {
                 LeaderboardEntry* current_entry = current_leaderboard->friends_entries[i];
                 string entry_text = rosalila()->utility->toString(current_entry->rank)+"." + current_entry->name + " " +rosalila()->utility->toString(current_entry->score);

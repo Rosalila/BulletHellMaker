@@ -531,7 +531,6 @@ void STG::render()
 //    rosalila()->graphics->drawText(enemy->name,25,110);
 //    rosalila()->graphics->drawText("Damage level: "+toString(damage_level),25,170);
 
-    int tutorial_text_spacing_y=10;
     int tutorial_control_spacing_y=100;
     if(!player->isOnIntro())
         current_training_transparency+=2;
@@ -772,7 +771,7 @@ void STG::uploadReplay()
     int replay_size=0;
     string seed_str = rosalila()->utility->toString(rosalila()->utility->random_seed);
     replay_size+=seed_str.size()+1;
-    for(int i=0;i<player->replay_storage.size();i++)
+    for(int i=0;i<(int)player->replay_storage.size();i++)
     {
         replay_size+=player->replay_storage[i].size()+1;
     }
@@ -784,7 +783,7 @@ void STG::uploadReplay()
     strcat(replay_data,seed_str.c_str());
     strcat(replay_data,"\n");
 
-    for(int i=0;i<player->replay_storage.size();i++)
+    for(int i=0;i<(int)player->replay_storage.size();i++)
     {
         strcat(replay_data,player->replay_storage[i].c_str());
         strcat(replay_data,"\n");

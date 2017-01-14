@@ -51,7 +51,7 @@ Enemy::~Enemy()
 {
     for(map<int, vector<Modifier*> >::iterator i = modifiers.begin(); i!= modifiers.end();i++)
     {
-        for(int j=0; j<(*i).second.size();j++)
+        for(int j=0;(int)j<(int)(*i).second.size();j++)
         {
             delete (*i).second[j];
         }

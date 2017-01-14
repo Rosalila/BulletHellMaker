@@ -101,7 +101,7 @@ void Stage::drawLayer(Layer* layer)
 
     rosalila()->graphics->drawRectangles(rectangles,layer->depth_effect_x,layer->depth_effect_y,true);
 
-    for(int i=0;i<rectangles.size();i++)
+    for(int i=0;i<(int)rectangles.size();i++)
     {
         delete rectangles[i];
     }
@@ -279,7 +279,7 @@ int current_layer=0;
 
 vector<Node*> backlayer_nodes = root_node->getNodesByName("BackLayer");
 
-for(int i=0;i<backlayer_nodes.size();i++)
+for(int i=0;i<(int)backlayer_nodes.size();i++)
 {
     if(backlayer_nodes[i]->hasAttribute("randomize_appereance")
        && backlayer_nodes[i]->attributes["randomize_appereance"]=="yes")
@@ -321,7 +321,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 current_layer=0;
 
 
-for(int i=0;i<backlayer_nodes.size();i++)
+for(int i=0;i<(int)backlayer_nodes.size();i++)
 {
         bool included=false;
 
@@ -403,9 +403,9 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
         vector<LayerFrame*> layer_frames;
 
-        for(int i=0;i<frame_nodes.size();i++)
+        for(int j=0;j<(int)frame_nodes.size();j++)
         {
-            layer_frames.push_back(getFrameFromNode(frame_nodes[i]));
+            layer_frames.push_back(getFrameFromNode(frame_nodes[j]));
         }
 
         Color color(255,255,255,255);
@@ -430,7 +430,7 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
     vector<Node*> frontlayer_nodes = root_node->getNodesByName("FrontLayer");
     //Load front layer
-    for(int i=0;i<frontlayer_nodes.size();i++)
+    for(int i=0;i<(int)frontlayer_nodes.size();i++)
     {
         int frame_duration=0;
         if(frontlayer_nodes[i]->hasAttribute("frame_duration"))
@@ -464,9 +464,9 @@ for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_a
 
         vector<LayerFrame*> layer_frames;
 
-        for(int i=0;i<frame_nodes.size();i++)
+        for(int j=0;j<(int)frame_nodes.size();j++)
         {
-            layer_frames.push_back(getFrameFromNode(frame_nodes[i]));
+            layer_frames.push_back(getFrameFromNode(frame_nodes[j]));
         }
 
         Color color(255,255,255,255);
