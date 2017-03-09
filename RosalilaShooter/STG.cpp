@@ -319,7 +319,7 @@ void STG::logic()
                     if(!player_is_immortal)
                         player->hit(p->bullet->damage);
                     parry_count = 0;
-                    rosalila()->graphics->screen_shake_effect.set(30,10,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
+                    rosalila()->graphics->screen_shake_effect.set(30,15,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
                     if(rosalila()->sound->soundExists(player->name+".hit"))
                         rosalila()->sound->playSound(player->name+".hit", 3, 0, player->x, true);
                     if(player->hp==0)
