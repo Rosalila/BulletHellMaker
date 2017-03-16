@@ -20,12 +20,15 @@ public:
 
     int layer_transparency;
 
+    bool is_mod;
+    string path;
+
     Stage();
     ~Stage();
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);
-    void loadFromXML(std::string name);
+    void loadFromXML(std::string name, bool is_mod);
     LayerFrame* getFrameFromNode(Node* frame_node);
     void logic();
     void playMusic();

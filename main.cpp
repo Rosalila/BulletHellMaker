@@ -9,6 +9,7 @@
 #include "RosalilaShooter/Menus/ControllerConfig.h"
 #include "RosalilaShooter/Menus/Intro.h"
 #include "RosalilaShooter/Menus/StageSelect.h"
+#include "RosalilaShooter/Menus/StageModsSelect.h"
 
 #include <iostream>
 using namespace std;

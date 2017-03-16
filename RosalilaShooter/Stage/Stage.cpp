@@ -6,6 +6,8 @@ Stage::Stage()
     this->iterate_slowdown_flag=false;
     this->current_slowdown_iteration=0;
     this->layer_transparency=255;
+    this->is_mod = false;
+    this->path = "";
 }
 
 Stage::~Stage()
@@ -141,16 +143,25 @@ void Stage::dibujarFront()
     }
 }
 
-void Stage::loadFromXML(std::string name)
+void Stage::loadFromXML(std::string name, bool is_mod)
 {
     this->name=name;
 
+    this->is_mod = is_mod;
+    if(!is_mod)
+    {
+      path = assets_directory+"stages/";
+    }else
+    {
+      path = assets_directory+"mods/stages/";
+    }
+
     rosalila()->utility->writeLogLine("Loading stage from XML.");
 
-    Node* root_node = rosalila()->parser->getNodes(assets_directory+"stages/"+name+"/main.xml");
+    Node* root_node = rosalila()->parser->getNodes(path+name+"/main.xml");
 
     //Load settings
-    music_path = assets_directory+"stages/"+name+"/music.ogg";
+    music_path = path+name+"/music.ogg";
 
     Node* nodo_bounds = root_node->getNodeByName("Bounds");
     this->bound_x1=0;
@@ -504,8 +515,8 @@ LayerFrame* Stage::getFrameFromNode(Node* frame_node)
 
     if(frame_node->hasAttribute("image_path"))
     {
-        string image_path = "stages/"+name+"/images/"+frame_node->attributes["image_path"];
-        image_temp=rosalila()->graphics->getTexture(assets_directory+image_path);
+        string image_path = path+name+"/images/"+frame_node->attributes["image_path"];
+        image_temp=rosalila()->graphics->getTexture(image_path);
 
         width = image_temp->getWidth();
         height = image_temp->getHeight();

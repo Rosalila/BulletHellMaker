@@ -179,6 +179,7 @@ LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_n
 void stageSelect()
 {
     std::vector<std::string> stage_names = getStageNames();
+    bool has_mods = getStageModsNames().size()>0;
     std::vector<Image*> stage_images = getStageImages(getStageNames());
 
     Image*background = rosalila()->graphics->getTexture(assets_directory+"menu/white_background.png");
@@ -255,7 +256,11 @@ void stageSelect()
                 rosalila()->sound->playSound("Menu.left",0,0,0,0);
                 current_stage--;
                 if(current_stage<0)
-                    current_stage=0;
+                {
+                  if(has_mods)
+                    stageModsSelect();
+                  current_stage=0;
+                }
                 rosalila()->api_integrator->setStat("current stage",current_stage);
             }
             current_long_press_left++;
@@ -472,9 +477,9 @@ void stageSelect()
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 
                 Stage*stage=new Stage();
-                stage->loadFromXML(stage_names[current_stage]);
+                stage->loadFromXML(stage_names[current_stage],false);
                 Player*player=new Player("Triangle",10,intro_input,replay_input);
-                Enemy*enemy=new Enemy(stage_names[current_stage],player,20);
+                Enemy*enemy=new Enemy(stage_names[current_stage],player,20,false);
                 rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
                 STG*stg=new STG(player,enemy,stage,game_mode,current_player_best_score);
 
@@ -544,13 +549,6 @@ void stageSelect()
                 }
 
                 rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
-
-//                for(int i=0;i<1000;i++)
-//                {
-//                    Stage*x=new Stage();
-//                    stage->loadFromXML(stage_names[current_stage]);
-//                    delete x;
-//                }
 
                 delete stg;
                 delete player;
@@ -657,13 +655,15 @@ void stageSelect()
             }
         }
 
+        Image* current_stage_image = stage_images[current_stage];
+
         //Middle menu
         rosalila()->graphics->draw2DImage
-        (   stage_images[current_stage],
-            stage_images[current_stage]->getWidth(),
-                stage_images[current_stage]->getHeight(),
-            rosalila()->graphics->screen_width/2-stage_images[current_stage]->getWidth()/2,
-                rosalila()->graphics->screen_height/2-stage_images[current_stage]->getHeight()/2+middle_menu_y,
+        (   current_stage_image,
+            current_stage_image->getWidth(),
+            current_stage_image->getHeight(),
+            rosalila()->graphics->screen_width/2-current_stage_image->getWidth()/2,
+                rosalila()->graphics->screen_height/2-current_stage_image->getHeight()/2+middle_menu_y,
             1.0,
             0.0,
             false,
@@ -681,7 +681,7 @@ void stageSelect()
                 rosalila()->graphics->draw2DImage
                 (   left_arrow,
                     left_arrow->getWidth(),left_arrow->getHeight(),
-                    rosalila()->graphics->screen_width/2-stage_images[current_stage]->getWidth()/2-left_arrow->getWidth(),
+                    rosalila()->graphics->screen_width/2-current_stage_image->getWidth()/2-left_arrow->getWidth(),
                     rosalila()->graphics->screen_height/2-left_arrow->getHeight()/2+middle_menu_y,
                     1.0,
                     0.0,
@@ -698,7 +698,7 @@ void stageSelect()
                 rosalila()->graphics->draw2DImage
                 (   right_arrow,
                     right_arrow->getWidth(),right_arrow->getHeight(),
-                    rosalila()->graphics->screen_width/2+stage_images[current_stage]->getWidth()/2,
+                    rosalila()->graphics->screen_width/2+current_stage_image->getWidth()/2,
                     rosalila()->graphics->screen_height/2-right_arrow->getHeight()/2+middle_menu_y,
                     1.0,
                     0.0,
@@ -759,8 +759,6 @@ void stageSelect()
             }
         }
 
-//        rosalila()->graphics->drawText(stage_names[current_stage], 0, 0, true, false);
-
         if(entry_navigator == 0)
         {
             if(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Perfects")>0)
@@ -798,14 +796,6 @@ void stageSelect()
                     FlatShadow());
             }
         }
-
-//        rosalila()->graphics->drawText("Tries:" +
-//                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries")),
-//                                       0, 0, false, false);
-//        rosalila()->graphics->drawText("Clears:" +
-//                                       rosalila()->utility->toString(rosalila()->api_integrator->getStat(stage_names[current_stage]+"Clears")),
-//                                       0, 50, false, false);
-
 
         rosalila()->update();
 

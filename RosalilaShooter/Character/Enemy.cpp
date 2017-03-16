@@ -1,10 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy(std::string name,Player*player,int sound_channel_base)
+Enemy::Enemy(std::string name,Player*player,int sound_channel_base,bool is_mod)
 {
     //Setting up the other variables
-    this->name=name;
-    this->directory="stages/"+name+"/Enemy/";
+    this->name = name;
+    this->is_mod = is_mod;
+    if(!is_mod)
+      this->directory="stages/"+name+"/Enemy/";
+		else
+      this->directory="mods/stages/"+name+"/Enemy/";
     this->player=player;
     this->active_patterns=new std::list<Pattern*>;
     this->shooting=true;

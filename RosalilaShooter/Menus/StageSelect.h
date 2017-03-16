@@ -6,6 +6,7 @@
 #include "../Character/Enemy.h"
 #include "../STG.h"
 #include "../Stage/Stage.h"
+#include "StageModsSelect.h"
 #include <algorithm>
 #include <time.h>
 
