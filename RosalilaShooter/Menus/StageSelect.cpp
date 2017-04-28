@@ -56,6 +56,12 @@ std::vector<std::string> getStageNames()
     for(int i=0;i<(int)stage_nodes.size();i++)
     {
         stage_names.push_back(stage_nodes[i]->attributes["name"]);
+
+string file_name = assets_directory+"stages/"+stage_nodes[i]->attributes["name"]+"/Enemy/patterns.xml";
+cout<<rosalila()->utility->checksumFileA(file_name)<<",";
+cout<<rosalila()->utility->checksumFileB(file_name)<<",";
+cout<<rosalila()->utility->checksumFileC(file_name)<<endl;
+
     }
 
     return stage_names;
@@ -102,30 +108,25 @@ Color getBackgroundColor(int current_stage)
 
 void updateMusic(int current_stage)
 {
-    if(current_stage>=0 && current_stage<=4)
+    if(current_stage>=0 && current_stage<=11)
     {
         if(rosalila()->sound->current_music!=assets_directory+"1.ogg")
             rosalila()->sound->playMusic(assets_directory+"1.ogg",-1);
     }
-    if(current_stage>=5 && current_stage<=9)
+    if(current_stage>=12 && current_stage<=29)
     {
         if(rosalila()->sound->current_music!=assets_directory+"2.ogg")
             rosalila()->sound->playMusic(assets_directory+"2.ogg",-1);
     }
-    if(current_stage>=10 && current_stage<=14)
+    if(current_stage>=30 && current_stage<=53)
     {
         if(rosalila()->sound->current_music!=assets_directory+"3.ogg")
             rosalila()->sound->playMusic(assets_directory+"3.ogg",-1);
     }
-    if(current_stage>=15 && current_stage<=19)
+    if(current_stage>=54 && current_stage<=58)
     {
         if(rosalila()->sound->current_music!=assets_directory+"4.ogg")
             rosalila()->sound->playMusic(assets_directory+"4.ogg",-1);
-    }
-    if(current_stage>=20 && current_stage<=24)
-    {
-        if(rosalila()->sound->current_music!=assets_directory+"5.ogg")
-            rosalila()->sound->playMusic(assets_directory+"5.ogg",-1);
     }
 }
 
