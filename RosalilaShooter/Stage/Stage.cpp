@@ -195,91 +195,106 @@ vector<int>random_colors_r;
 vector<int>random_colors_g;
 vector<int>random_colors_b;
 
+vector<int>color_palette_r;
+vector<int>color_palette_g;
+vector<int>color_palette_b;
+
+
+color_palette_r.push_back(244);
+color_palette_g.push_back(67);
+color_palette_b.push_back(54);
+
+
+color_palette_r.push_back(102);
+color_palette_g.push_back(58);
+color_palette_b.push_back(182);
+
+
+color_palette_r.push_back(3);
+color_palette_g.push_back(167);
+color_palette_b.push_back(244);
+
+
+color_palette_r.push_back(76);
+color_palette_g.push_back(175);
+color_palette_b.push_back(80);
+
+
+color_palette_r.push_back(255);
+color_palette_g.push_back(235);
+color_palette_b.push_back(59);
+
+
+color_palette_r.push_back(255);
+color_palette_g.push_back(87);
+color_palette_b.push_back(34);
+
+
+color_palette_r.push_back(233);
+color_palette_g.push_back(30);
+color_palette_b.push_back(99);
+
+
+color_palette_r.push_back(63);
+color_palette_g.push_back(81);
+color_palette_b.push_back(181);
+
+
+color_palette_r.push_back(0);
+color_palette_g.push_back(188);
+color_palette_b.push_back(212);
+
+
+color_palette_r.push_back(139);
+color_palette_g.push_back(195);
+color_palette_b.push_back(74);
+
+
+color_palette_r.push_back(255);
+color_palette_g.push_back(193);
+color_palette_b.push_back(7);
+
+
+color_palette_r.push_back(121);
+color_palette_g.push_back(85);
+color_palette_b.push_back(72);//Too brown?
+
+color_palette_r.push_back(156);
+color_palette_g.push_back(39);
+color_palette_b.push_back(176);
+
+
+color_palette_r.push_back(33);
+color_palette_g.push_back(150);
+color_palette_b.push_back(243);
+
+
+color_palette_r.push_back(0);
+color_palette_g.push_back(150);
+color_palette_b.push_back(136);
+
+
+color_palette_r.push_back(205);
+color_palette_g.push_back(220);
+color_palette_b.push_back(57);
+
+
+color_palette_r.push_back(255);
+color_palette_g.push_back(152);
+color_palette_b.push_back(0);
+
+
+
+
+
 int u=rosalila()->utility->getNonSeededRandomNumber()%3+1;
 for(int i=0;i<u;i++)
 {
-int random_number=rosalila()->utility->getNonSeededRandomNumber()%19;
-int random_color_r,random_color_g,random_color_b;
-if(random_number==0)
-{
-    random_color_r=244;random_color_g=67;random_color_b=54;
-}
-if(random_number==1)
-{
-    random_color_r=102;random_color_g=58;random_color_b=182;
-}
-if(random_number==2)
-{
-    random_color_r=3;random_color_g=167;random_color_b=244;
-}
-if(random_number==3)
-{
-    random_color_r=76;random_color_g=175;random_color_b=80;
-}
-if(random_number==4)
-{
-    random_color_r=255;random_color_g=235;random_color_b=59;
-}
-if(random_number==5)
-{
-    random_color_r=255;random_color_g=87;random_color_b=34;
-}
-if(random_number==6)
-{
-    random_color_r=96;random_color_g=125;random_color_b=139;
-}
-if(random_number==7)
-{
-    random_color_r=233;random_color_g=30;random_color_b=99;
-}
-if(random_number==8)
-{
-    random_color_r=63;random_color_g=81;random_color_b=181;
-}
-if(random_number==9)
-{
-    random_color_r=0;random_color_g=188;random_color_b=212;
-}
-if(random_number==10)
-{
-    random_color_r=139;random_color_g=195;random_color_b=74;
-}
-if(random_number==11)
-{
-    random_color_r=255;random_color_g=193;random_color_b=7;
-}
-if(random_number==12)
-{
-    random_color_r=121;random_color_g=85;random_color_b=72;
-}
-if(random_number==13)
-{
-    random_color_r=156;random_color_g=39;random_color_b=176;
-}
-if(random_number==14)
-{
-    random_color_r=33;random_color_g=150;random_color_b=243;
-}
-if(random_number==15)
-{
-    random_color_r=0;random_color_g=150;random_color_b=136;
-}
-if(random_number==16)
-{
-    random_color_r=205;random_color_g=220;random_color_b=57;
-}
-if(random_number==17)
-{
-    random_color_r=255;random_color_g=152;random_color_b=0;
-}
-if(random_number==18)
-{
-    random_color_r=158;random_color_g=158;random_color_b=158;
-}
+int random_number=rosalila()->utility->getNonSeededRandomNumber()%color_palette_r.size();
 
-random_colors_r.push_back(random_color_r);
-random_colors_g.push_back(random_color_g);
-random_colors_b.push_back(random_color_b);
+random_colors_r.push_back(color_palette_r[random_number]);
+random_colors_g.push_back(color_palette_g[random_number]);
+random_colors_b.push_back(color_palette_b[random_number]);
 
 }
 

@@ -325,6 +325,7 @@ void STG::logic()
                     if(player->hp==0)
                     {
                         lose();
+                        rosalila()->sound->fadeMusicVolume(0, 2);
                     }
                 }
             }

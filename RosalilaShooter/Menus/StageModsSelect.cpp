@@ -50,6 +50,8 @@ void stageModsSelect()
 
     while(true)
     {
+        rosalila()->sound->fadeMusicVolume(128, 2);
+
         if(rosalila()->receiver->isPressed("b"))
         {
             exit(0);

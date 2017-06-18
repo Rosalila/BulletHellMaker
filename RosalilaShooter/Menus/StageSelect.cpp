@@ -223,6 +223,8 @@ void stageSelect()
 
     while(true)
     {
+        rosalila()->sound->fadeMusicVolume(128, 2);
+
         if(rosalila()->receiver->isPressed("b"))
         {
             rosalila()->sound->playSound("Menu.back",0,0,0,0);
@@ -457,11 +459,6 @@ void stageSelect()
 
                 }else
                 {
-                    rosalila()->graphics->notification_handler.notifications.push_back(
-                        new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
-                                            rosalila()->graphics->screen_height,
-                                            rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
-                                            getNotificationDuration()));
                     error_found=true;
                     rosalila()->graphics->grayscale_effect.set(1,1);
                 }
@@ -471,7 +468,27 @@ void stageSelect()
                 rosalila()->api_integrator->setStat(stage_names[current_stage]+"Tries",old_tries+1);
             }
 
-            if(!error_found)
+            string bullets_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/bullets.xml";
+            string main_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/main.xml";
+            string modifiers_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/modifiers.xml";
+            string patterns_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/patterns.xml";
+
+            if(!rosalila()->utility->checkFile(bullets_file_path)
+                || !rosalila()->utility->checkFile(main_file_path)
+                || !rosalila()->utility->checkFile(modifiers_file_path)
+                || !rosalila()->utility->checkFile(patterns_file_path))
+            {
+                error_found = true;
+            }
+
+            if(error_found)
+            {
+                rosalila()->graphics->notification_handler.notifications.push_back(
+                    new Notification(getErrorImage(), rosalila()->graphics->screen_width/2-getErrorImage()->getWidth()/2,
+                                        rosalila()->graphics->screen_height,
+                                        rosalila()->graphics->screen_height-getErrorImage()->getHeight(),
+                                        getNotificationDuration()));
+            }else
             {
                 int current_player_best_score = -1;
                 if(current_leaderboard && current_leaderboard->leaderboard_self_entry!=NULL)
