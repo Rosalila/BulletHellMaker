@@ -32,4 +32,8 @@ Image* getSuccessImage();
 
 int getNotificationDuration();
 
+vector<int>* getColorPaletteR();
+vector<int>* getColorPaletteG();
+vector<int>* getColorPaletteB();
+
 #endif

@@ -325,7 +325,6 @@ void STG::logic()
                     if(player->hp==0)
                     {
                         lose();
-                        rosalila()->sound->fadeMusicVolume(0, 2);
                     }
                 }
             }
@@ -750,6 +749,7 @@ void STG::lose()
 {
     setPlayerWon(false);
     setGameOver(true);
+    rosalila()->sound->fadeMusicVolume(0, 2);
     rosalila()->sound->playSound("you lose", 4, 0, 0, false);
 }
 
