@@ -190,77 +190,67 @@ void Stage::loadFromXML(std::string name, bool is_mod)
 
     rosalila()->utility->writeLogLine("Loading stage's BackLayers.");
 
+    vector<int>random_colors_r;
+    vector<int>random_colors_g;
+    vector<int>random_colors_b;
 
-vector<int>random_colors_r;
-vector<int>random_colors_g;
-vector<int>random_colors_b;
-
-
-
-
-
-int u=rosalila()->utility->getNonSeededRandomNumber()%3+1;
-for(int i=0;i<u;i++)
-{
-int random_number=rosalila()->utility->getNonSeededRandomNumber()%(*getColorPaletteR()).size();
-
-random_colors_r.push_back((*getColorPaletteR())[random_number]);
-random_colors_g.push_back((*getColorPaletteG())[random_number]);
-random_colors_b.push_back((*getColorPaletteB())[random_number]);
-
-}
-
-
-map<string,list<int> >randomized_appereance;
-map<string,int>max_layers;
-int current_layer=0;
-
-vector<Node*> backlayer_nodes = root_node->getNodesByName("BackLayer");
-
-for(int i=0;i<(int)backlayer_nodes.size();i++)
-{
-    if(backlayer_nodes[i]->hasAttribute("randomize_appereance")
-       && backlayer_nodes[i]->attributes["randomize_appereance"]=="yes")
-   {
-       string random_group="";
-       if(backlayer_nodes[i]->hasAttribute("random_group"))
-       {
-           random_group=backlayer_nodes[i]->attributes["random_group"];
-       }
-       randomized_appereance[random_group].push_back(current_layer);
-   }
-   current_layer++;
-}
-
-//int max_layers=rosalila()->utility->getNonSeededRandomNumber()%3+1;
-//max_layer["a"]=rosalila()->utility->getNonSeededRandomNumber()%3+1;
-//max_layer["b"]=rosalila()->utility->getNonSeededRandomNumber()%3+1;
-max_layers["a"]=1+rosalila()->utility->getNonSeededRandomNumber()%2;
-max_layers["b"]=1+rosalila()->utility->getNonSeededRandomNumber()%3;
-
-for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_appereance.begin();
-    randomized_appereance_iterator!=randomized_appereance.end();
-    randomized_appereance_iterator++)
-{
-    list<int>current_list=(*randomized_appereance_iterator).second;
-    while((int)current_list.size()>max_layers[(*randomized_appereance_iterator).first])
+    int u=rosalila()->utility->getNonSeededRandomNumber()%3+1;
+    for(int i=0;i<u;i++)
     {
-        int random_to_remove = rosalila()->utility->getNonSeededRandomNumber()%current_list.size();
-        list<int>::iterator remove_iterator = current_list.begin();
-        for(int i=0;i<random_to_remove;i++)
-        {
-            remove_iterator++;
-        }
-        current_list.erase(remove_iterator);
+        int random_number=rosalila()->utility->getNonSeededRandomNumber()%(*getColorPaletteR()).size();
+
+        random_colors_r.push_back((*getColorPaletteR())[random_number]);
+        random_colors_g.push_back((*getColorPaletteG())[random_number]);
+        random_colors_b.push_back((*getColorPaletteB())[random_number]);
     }
-    randomized_appereance[(*randomized_appereance_iterator).first]=current_list;
-}
 
-current_layer=0;
+    map<string,list<int> >randomized_appereance;
+    map<string,int>max_layers;
+    int current_layer=0;
+
+    vector<Node*> backlayer_nodes = root_node->getNodesByName("BackLayer");
+
+    for(int i=0;i<(int)backlayer_nodes.size();i++)
+    {
+        if(backlayer_nodes[i]->hasAttribute("randomize_appereance")
+           && backlayer_nodes[i]->attributes["randomize_appereance"]=="yes")
+       {
+           string random_group="";
+           if(backlayer_nodes[i]->hasAttribute("random_group"))
+           {
+               random_group=backlayer_nodes[i]->attributes["random_group"];
+           }
+           randomized_appereance[random_group].push_back(current_layer);
+       }
+       current_layer++;
+    }
+
+    max_layers["a"]=1+rosalila()->utility->getNonSeededRandomNumber()%2;
+    max_layers["b"]=1+rosalila()->utility->getNonSeededRandomNumber()%3;
+
+    for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_appereance.begin();
+        randomized_appereance_iterator!=randomized_appereance.end();
+        randomized_appereance_iterator++)
+    {
+        list<int>current_list=(*randomized_appereance_iterator).second;
+        while((int)current_list.size()>max_layers[(*randomized_appereance_iterator).first])
+        {
+            int random_to_remove = rosalila()->utility->getNonSeededRandomNumber()%current_list.size();
+            list<int>::iterator remove_iterator = current_list.begin();
+            for(int i=0;i<random_to_remove;i++)
+            {
+                remove_iterator++;
+            }
+            current_list.erase(remove_iterator);
+        }
+        randomized_appereance[(*randomized_appereance_iterator).first]=current_list;
+    }
+
+    current_layer=0;
 
 
-for(int i=0;i<(int)backlayer_nodes.size();i++)
-{
+    for(int i=0;i<(int)backlayer_nodes.size();i++)
+    {
         bool included=false;
 
         if(!backlayer_nodes[i]->hasAttribute("randomize_appereance")
@@ -270,23 +260,22 @@ for(int i=0;i<(int)backlayer_nodes.size();i++)
         }else
         {
 
-for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_appereance.begin();
-    randomized_appereance_iterator!=randomized_appereance.end();
-    randomized_appereance_iterator++)
-{
-    list<int>current_list=(*randomized_appereance_iterator).second;
-    for(list<int>::iterator i=current_list.begin();
-        i!=current_list.end();
-        i++)
-    {
-        if(current_layer==(*i))
-        {
-            included=true;
-            break;
-        }
-    }
-}
-
+            for(map<string,list<int> >::iterator randomized_appereance_iterator=randomized_appereance.begin();
+                randomized_appereance_iterator!=randomized_appereance.end();
+                randomized_appereance_iterator++)
+            {
+                list<int>current_list=(*randomized_appereance_iterator).second;
+                for(list<int>::iterator i=current_list.begin();
+                    i!=current_list.end();
+                    i++)
+                {
+                    if(current_layer==(*i))
+                    {
+                        included=true;
+                        break;
+                    }
+                }
+            }
 
         }
         current_layer++;
