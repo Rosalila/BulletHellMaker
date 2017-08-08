@@ -3,17 +3,8 @@
 
 std::vector<std::string> getStageModsNames()
 {
-    std::vector<std::string> stage_names;
-    Node* root_node = rosalila()->parser->getNodes(assets_directory+"mods/config.xml");
-
-    vector<Node*> stage_nodes = root_node->getNodeByName("Stages")->getNodesByName("stage");
-
-    for(int i=0;i<(int)stage_nodes.size();i++)
-    {
-        stage_names.push_back(stage_nodes[i]->attributes["name"]);
-    }
-
-    return stage_names;
+    string path = assets_directory+"mods/stages/";
+    return rosalila()->utility->getDirectoryNames(path);
 }
 
 std::vector<Image*> getStageModsImages(std::vector<std::string> stage_names)
