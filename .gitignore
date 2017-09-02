@@ -9,6 +9,7 @@ STG.layout
 *.sav
 last_replay
 *.o
+*.obj
 
 #shhh this is  a secret
 Makefile.secret

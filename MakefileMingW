@@ -1,11 +1,10 @@
 include Sources.mk
-CC=g++
-CFLAGS=-c -Wall -std=c++11 -I ./include
-LDFLAGS=-L .
-SOURCES=main.cpp include/dirent.cpp $(ROSALILA_SHOOTER_SOURCES) $(ROSALILA_SOURCES)
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=Flatshot
-LIBRARIES=lib/SDL2main.a lib/SDL2.lib lib/SDL2_image.a lib/SDL2_mixer.a lib/SDL2_ttf.a lib/SDL2test.a
+CC = g++
+CFLAGS = -c -Wall -std=c++11 -I ./include
+LDFLAGS = -L .
+SOURCES = main.cpp include/dirent.cpp $(ROSALILA_SHOOTER_SOURCES) $(ROSALILA_SOURCES)
+OBJECTS = $(SOURCES:.cpp=.o)
+EXECUTABLE = Flatshot
 
 all: $(SOURCES) $(EXECUTABLE)
 
