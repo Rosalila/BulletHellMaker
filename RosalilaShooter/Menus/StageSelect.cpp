@@ -220,7 +220,7 @@ void stageSelect()
     int current_long_press_right = 0;
     int current_long_press_up = 0;
     int current_long_press_down = 0;
-
+    
     while(true)
     {
         rosalila()->sound->fadeMusicVolume(128, 2);
