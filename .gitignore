@@ -10,3 +10,9 @@ lib/
 *.sav
 last_replay
 *.o
+
+#shhh this is  a secret
+Makefile.secret
+RosalilaShooter/Menus/StageSecretSelect.*
+*.a
+secret_include/

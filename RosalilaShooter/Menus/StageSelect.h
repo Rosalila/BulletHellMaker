@@ -7,6 +7,7 @@
 #include "../STG.h"
 #include "../Stage/Stage.h"
 #include "StageModsSelect.h"
+#include "StageSecretSelect.h"
 #include <algorithm>
 #include <time.h>
 

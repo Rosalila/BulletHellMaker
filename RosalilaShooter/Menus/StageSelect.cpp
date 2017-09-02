@@ -220,7 +220,7 @@ void stageSelect()
     int current_long_press_right = 0;
     int current_long_press_up = 0;
     int current_long_press_down = 0;
-    
+
     while(true)
     {
         rosalila()->sound->fadeMusicVolume(128, 2);
@@ -260,8 +260,9 @@ void stageSelect()
                 current_stage--;
                 if(current_stage<0)
                 {
-                  if(has_mods)
-                    stageModsSelect();
+                  //if(has_mods)
+                    //stageModsSelect();
+                  stageSecretSelect();
                   current_stage=0;
                 }
                 rosalila()->api_integrator->setStat("current stage",current_stage);
