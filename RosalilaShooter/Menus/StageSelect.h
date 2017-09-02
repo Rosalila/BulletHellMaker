@@ -7,7 +7,9 @@
 #include "../STG.h"
 #include "../Stage/Stage.h"
 #include "StageModsSelect.h"
+#ifdef SECRET
 #include "StageSecretSelect.h"
+#endif
 #include <algorithm>
 #include <time.h>
 

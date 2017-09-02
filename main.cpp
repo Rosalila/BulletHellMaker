@@ -35,12 +35,11 @@ int main(int argc, char *argv[])
 
     rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
 
-
     if(rosalila()->api_integrator->isUsingSteamController())
         rosalila()->api_integrator->showControllerBindingPanel();
     else
         rosalila()->receiver->controls = ControllerConfig(input_config);
-
+	
     intro();
 
     stageSelect();

@@ -16,3 +16,6 @@ Makefile.secret
 RosalilaShooter/Menus/StageSecretSelect.*
 *.a
 secret_include/
+
+*.dll
+*.exe

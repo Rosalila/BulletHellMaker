@@ -141,6 +141,7 @@ std::vector<Image*> getStageImages(std::vector<std::string> stage_names)
     return stage_images;
 }
 
+#ifdef STEAM
 LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_navigator)
 {
     if(entry_navigator==-6 && current_leaderboard->top_entries.size()>=1)
@@ -176,6 +177,7 @@ LeaderboardEntry* getSelectedEntry(Leaderboard* current_leaderboard, int entry_n
 
     return NULL;
 }
+#endif
 
 void stageSelect()
 {
@@ -186,8 +188,10 @@ void stageSelect()
     Image*background = rosalila()->graphics->getTexture(assets_directory+"menu/white_background.png");
     Image*left_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/left_arrow.png");
     Image*right_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/right_arrow.png");
-    Image*up_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/up_arrow.png");
+	Image*up_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/up_arrow.png");
+	#ifdef STEAM
     Image*down_arrow = rosalila()->graphics->getTexture(assets_directory+"menu/down_arrow.png");
+	#endif
     Image*line = rosalila()->graphics->getTexture(assets_directory+"menu/line.png");
     Image*stage_clear = rosalila()->graphics->getTexture(assets_directory+"menu/stage_clear.png");
     Image*stage_perfect = rosalila()->graphics->getTexture(assets_directory+"menu/stage_perfect.png");
@@ -199,27 +203,37 @@ void stageSelect()
     int current_stage = rosalila()->api_integrator->getStat("current stage");
     int frame = 0;
     int entry_navigator = 0;
+	
+	#ifdef STEAM
     LeaderboardEntry* selected_entry = NULL;
+	#endif
 
     bool select_button_was_up = false;
 
     rosalila()->receiver->updateInputs();
 
+	#ifdef STEAM
     double menu_displacement_velocity = 20;
+	#endif
     double entry_height = 50;
 
     double top_menu_y = -6*entry_height/2 - 200;
     double middle_menu_y = 0;
     double bottom_menu_y = rosalila()->graphics->screen_height;
 
+	#ifdef STEAM
     double target_top_menu_y = rosalila()->graphics->screen_height/2 - 6*entry_height/2;
     double target_middle_menu_y = 0;
     double target_bottom_menu_y = rosalila()->graphics->screen_height;
+	#endif
 
     int current_long_press_left = 0;
     int current_long_press_right = 0;
+	
+	#ifdef STEAM
     int current_long_press_up = 0;
     int current_long_press_down = 0;
+	#endif
 
     while(true)
     {
@@ -260,9 +274,13 @@ void stageSelect()
                 current_stage--;
                 if(current_stage<0)
                 {
-                  //if(has_mods)
-                    //stageModsSelect();
+				  #ifndef SECRET
+                  if(has_mods)
+                    stageModsSelect();
+				  #endif
+				  #ifdef SECRET
                   stageSecretSelect();
+				  #endif
                   current_stage=0;
                 }
                 rosalila()->api_integrator->setStat("current stage",current_stage);
@@ -273,6 +291,7 @@ void stageSelect()
             current_long_press_left = 0;
         }
 
+		#ifdef STEAM
         Leaderboard* current_leaderboard = rosalila()->api_integrator->getLeaderboard(stage_names[current_stage]);
 
         if(current_leaderboard)
@@ -374,9 +393,11 @@ void stageSelect()
             middle_menu_y = std::min(middle_menu_y,(double)rosalila()->graphics->screen_height);
             bottom_menu_y = std::min(bottom_menu_y,(double)rosalila()->graphics->screen_height);
 
-
+			#ifdef STEAM
             selected_entry = getSelectedEntry(current_leaderboard, entry_navigator);
+			#endif
         }
+		#endif
 
         bool error_found = false;
 
@@ -429,6 +450,7 @@ void stageSelect()
 
             rosalila()->utility->setRandomSeed(time(NULL));
 
+			#ifdef STEAM
             if(selected_entry!=NULL)
             {
                 game_mode="replay";
@@ -468,6 +490,7 @@ void stageSelect()
                 int old_tries = rosalila()->api_integrator->getStat(stage_names[current_stage]+"Tries");
                 rosalila()->api_integrator->setStat(stage_names[current_stage]+"Tries",old_tries+1);
             }
+			#endif
 
             string bullets_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/bullets.xml";
             string main_file_path = assets_directory + "stages/" + stage_names[current_stage] + "/Enemy/main.xml";
@@ -492,8 +515,11 @@ void stageSelect()
             }else
             {
                 int current_player_best_score = -1;
+				
+				#ifdef STEAM
                 if(current_leaderboard && current_leaderboard->leaderboard_self_entry!=NULL)
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
+				#endif
 
                 Stage*stage=new Stage();
                 stage->loadFromXML(stage_names[current_stage],false);
@@ -654,6 +680,7 @@ void stageSelect()
             false,
             FlatShadow());
 
+		#ifdef STEAM
         if(current_leaderboard)
         {
             for(int i=0;i<(int)current_leaderboard->top_entries.size();i++)
@@ -673,6 +700,7 @@ void stageSelect()
                 rosalila()->graphics->drawText(entry_text, 0, align_y+i*separation, true, false);
             }
         }
+		#endif
 
         Image* current_stage_image = stage_images[current_stage];
 
@@ -748,6 +776,7 @@ void stageSelect()
                         FlatShadow());
                 }
 
+				#ifdef STEAM
                 if(entry_navigator<=0 || entry_navigator<(int)current_leaderboard->friends_entries.size())
                 {
                     rosalila()->graphics->draw2DImage
@@ -764,9 +793,11 @@ void stageSelect()
                         false,
                         FlatShadow());
                 }
+				#endif
             }
         }
 
+		#ifdef STEAM
         if(current_leaderboard)
         {
             //Bottom menu
@@ -777,6 +808,7 @@ void stageSelect()
                 rosalila()->graphics->drawText(entry_text, 0, bottom_menu_y+i*separation, true, false);
             }
         }
+		#endif
 
         if(entry_navigator == 0)
         {
