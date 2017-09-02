@@ -6,7 +6,6 @@ assets/
 STG
 Flatshot
 STG.layout
-lib/
 *.sav
 last_replay
 *.o

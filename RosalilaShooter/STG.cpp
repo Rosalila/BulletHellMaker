@@ -445,7 +445,7 @@ void STG::logic()
         if(rosalila()->api_integrator->getState()=="error")
         {
             uploadErrorLoop();
-            uploadScore();
+			uploadScore();
         }
     }
     if(api_state == "uploading replay")
@@ -741,7 +741,8 @@ void STG::win()
 
     if(game_mode!="replay" && (score<current_player_best_score || current_player_best_score==-1))
     {
-        uploadScore();
+		if(rosalila()->api_integrator->isUsingApi())
+			uploadScore();
     }
 }
 
