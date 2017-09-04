@@ -1,7 +1,10 @@
 include Sources.mk
 CC=g++
 CFLAGS=-c -Wall -std=c++11
-LDFLAGS=-lGL -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -L . -lsteam_api
+ifeq ($(API),steam)
+  CFLAGS += -DSTEAM
+endif
+LDFLAGS=-pthread -lGL -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -L . -lsteam_api
 SOURCES=main.cpp $(ROSALILA_SHOOTER_SOURCES) $(ROSALILA_SOURCES)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=Flatshot
