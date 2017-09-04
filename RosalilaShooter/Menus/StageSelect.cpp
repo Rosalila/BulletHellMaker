@@ -203,7 +203,7 @@ void stageSelect()
     int current_stage = rosalila()->api_integrator->getStat("current stage");
     int frame = 0;
     int entry_navigator = 0;
-	
+
 	#ifdef STEAM
     LeaderboardEntry* selected_entry = NULL;
 	#endif
@@ -229,7 +229,7 @@ void stageSelect()
 
     int current_long_press_left = 0;
     int current_long_press_right = 0;
-	
+
 	#ifdef STEAM
     int current_long_press_up = 0;
     int current_long_press_down = 0;
@@ -274,13 +274,13 @@ void stageSelect()
                 current_stage--;
                 if(current_stage<0)
                 {
-				  #ifndef SECRET
+                  #ifndef SECRET
                   if(has_mods)
                     stageModsSelect();
-				  #endif
-				  #ifdef SECRET
+                  #endif
+                  #ifdef SECRET
                   stageSecretSelect();
-				  #endif
+                  #endif
                   current_stage=0;
                 }
                 rosalila()->api_integrator->setStat("current stage",current_stage);
@@ -515,7 +515,7 @@ void stageSelect()
             }else
             {
                 int current_player_best_score = -1;
-				
+
 				#ifdef STEAM
                 if(current_leaderboard && current_leaderboard->leaderboard_self_entry!=NULL)
                     current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
