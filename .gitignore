@@ -1,8 +1,6 @@
 bin/
-Rosalila/
 obj/
 log
-assets/
 STG
 Flatshot
 STG.layout
@@ -19,3 +17,4 @@ secret_include/
 
 *.dll
 *.exe
+build/

@@ -1,0 +1,117 @@
+{
+  "Resolution": {
+    "x": "1920",
+    "y": "1080"
+  },
+  "ScreenSize": {
+    "x": "1920",
+    "y": "1080"
+  },
+  "Fullscreen": {
+    "enabled": "no"
+  },
+  "Font": {
+    "path": "assets/font.ttf",
+    "red": "255",
+    "green": "255",
+    "blue": "255",
+    "size": "30"
+  },
+  "Notifications": {
+    "background_path": "assets/notification_background.png"
+  },
+  "Network": {
+    "server_ip": "127.0.0.1",
+    "server_ipx": "165.227.107.214",
+    "server_port": "3069",
+    "packet_size": "512"
+  },
+  "Inputs": {
+    "Player": {
+      "number": "0",
+      "Type": [
+        {
+          "name": "keyboard",
+          "button": [
+            {
+              "name": "8",
+              "key": "up"
+            },
+            {
+              "name": "2",
+              "key": "down"
+            },
+            {
+              "name": "4",
+              "key": "left"
+            },
+            {
+              "name": "6",
+              "key": "right"
+            },
+            {
+              "name": "a",
+              "key": "z"
+            },
+            {
+              "name": "b",
+              "key": "q"
+            },
+            {
+              "name": "c",
+              "key": "x"
+            },
+            {
+              "name": "d",
+              "key": "c"
+            }
+          ]
+        },
+        {
+          "name": "gamepad",
+          "button": [
+            {
+              "name": "8",
+              "key": "up"
+            },
+            {
+              "name": "2",
+              "key": "down"
+            },
+            {
+              "name": "4",
+              "key": "left"
+            },
+            {
+              "name": "6",
+              "key": "right"
+            },
+            {
+              "name": "a",
+              "key": "1"
+            },
+            {
+              "name": "b",
+              "key": "2"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Chars": {
+    "char": {
+      "name": "player"
+    }
+  },
+  "Stages": {
+    "stage": [
+      {
+        "name": "DougiesEasy"
+      },
+      {
+        "name": "Aesthetic"
+      }
+    ]
+  }
+}

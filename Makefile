@@ -1,28 +1,12 @@
 include Sources.mk
-CC=g++
-CFLAGS=-c -Wall -std=c++11
-LDFLAGS=-lGL -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf -L . -lsteam_api
-SOURCES=main.cpp $(ROSALILA_SHOOTER_SOURCES) $(ROSALILA_SOURCES)
-OBJECTS=$(SOURCES:.cpp=.o) libsecret.a
-ifeq ($(API),secret)
-  LDFLAGS += -lcurl -pthread -lz -I secret_include
-  CFLAGS += -DSECRET
-  SOURCES += RosalilaShooter/Menus/StageSecretSelect.cpp
-  OBJECTS += libsecret.a
-endif
-ifeq ($(API),steam)
-  CFLAGS += -DSTEAM
-endif
-EXECUTABLE=Flatshot
+CC = cl.exe
+CFLAGS = /EHsc /MD
+SOURCES = main.cpp include/dirent.cpp $(ROSALILA_SHOOTER_SOURCES)
+LIBRARIES = rosalila.lib SDL2.lib SDL2main.lib SDL2_image.lib SDL2_mixer.lib SDL2_ttf.lib SDL2test.lib steam_api.lib opengl32.lib
 
-all: $(SOURCES) $(EXECUTABLE)
-
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
-
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@ -I secret_include
+build:
+ $(CC) $(CFLAGS) $(SOURCES) /I include /link /LIBPATH:lib $(LIBRARIES) /SUBSYSTEM:windows
 
 clean:
-	-find . -name '*.o' -exec rm -r {} \;
-	-rm -f $(EXECUTABLE)
+ del *.obj
+ del *.exe

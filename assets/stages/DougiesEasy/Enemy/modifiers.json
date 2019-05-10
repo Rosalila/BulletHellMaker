@@ -1,0 +1,31 @@
+{
+"Modifier":
+[
+  {
+    "at": "0",
+    "velocity": "0",
+    "angle": "180"
+  },
+  {
+    "at": "125",
+    "velocity": "0",
+    "angle_change": "0"
+  },
+  {
+    "at": "200",
+    "pattern_type": "A"
+  },
+  {
+    "life_at": "4000",
+    "pattern_type": "B"
+  },
+  {
+    "life_at": "3000",
+    "pattern_type": "C"
+  },
+  {
+    "life_at": "2000",
+    "pattern_type": "D"
+  }
+]
+}

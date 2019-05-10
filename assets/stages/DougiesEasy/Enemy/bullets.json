@@ -1,0 +1,83 @@
+{
+"Bullet":
+[
+  {
+    "name": "bullet a",
+    "damage": "1",
+    "sound_channel": "-1",
+    "sound": "sounds/basic.ogg",
+    "width": "20",
+    "height": "6",
+    "Color": {
+      "red": "255",
+      "green": "255",
+      "blue": "255",
+      "alpha": "255"
+    },
+    "Sprite": [
+      {
+        "path": "bullets/a/01.png"
+      }
+    ],
+    "Hitbox": {
+      "x": "-10",
+      "y": "-3",
+      "width": "20",
+      "height": "6",
+      "angle": "0"
+    },
+    "OnHit": [
+      {
+        "path": "kajira/1.png"
+      },
+      {
+        "path": "kajira/2.png"
+      },
+      {
+        "path": "kajira/3.png"
+      },
+      {
+        "path": "kajira/4.png"
+      }
+    ]
+  },
+  {
+    "name": "bullet b",
+    "damage": "1",
+    "sound_channel": "-1",
+    "sound": "sounds/large.ogg",
+    "width": "10",
+    "height": "100",
+    "Color": {
+      "red": "255",
+      "green": "255",
+      "blue": "255",
+      "alpha": "255"
+    },
+    "Sprite": {
+      "path": "bullets/b/01.png"
+    },
+    "Hitbox": {
+      "x": "-5",
+      "y": "-50",
+      "width": "10",
+      "height": "100",
+      "angle": "0"
+    },
+    "OnHit": [
+      {
+        "path": "kajira/1.png"
+      },
+      {
+        "path": "kajira/2.png"
+      },
+      {
+        "path": "kajira/3.png"
+      },
+      {
+        "path": "kajira/4.png"
+      }
+    ]
+  }
+]
+}

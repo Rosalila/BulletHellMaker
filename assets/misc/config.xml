@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<ConfigFile>
+    <AILevel level="4" />
+    <MatchTime seconds="30" />
+    <Rounds rounds="5" />
+</ConfigFile>

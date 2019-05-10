@@ -1,0 +1,234 @@
+{
+  "LifeBar": {
+    "color_r": "65",
+    "color_g": "255",
+    "color_b": "65",
+    "rect_offset_x": "60",
+    "rect_offset_y": "10",
+    "rect_width": "1280",
+    "rect_height": "8"
+  },
+  "Attributes": {
+    "velocity": "6",
+    "animation_velocity": "15",
+    "hp": "4",
+    "initial_x": "100",
+    "initial_y": "500"
+  },
+  "Shield": {
+    "sprite": "shield.png",
+    "max_shield": "500",
+    "shield_fade": "40",
+    "proration": "40"
+  },
+  "Charge": {
+    "sprite": "charge.png",
+    "max_charge": "300",
+    "charge_velocity": "1",
+    "x": "-40",
+    "y": "0"
+  },
+  "Parry": {
+    "duration": "60",
+    "sound": "sounds/parry.ogg",
+    "Parrying": {
+      "sprite": "parrying.png",
+      "x": "-40",
+      "y": "-35"
+    },
+    "Parryed": {
+      "sprite": "parryed.png",
+      "x": "-40",
+      "y": "-35"
+    },
+    "Hitboxes": [
+      {
+        "x": "-21",
+        "y": "-25",
+        "width": "5",
+        "height": "50",
+        "angle": "0"
+      },
+      {
+        "x": "-21",
+        "y": "-19",
+        "width": "5",
+        "height": "46",
+        "angle": "60"
+      },
+      {
+        "x": "19",
+        "y": "-3",
+        "width": "5",
+        "height": "46",
+        "angle": "-60"
+      }
+    ]
+  },
+  "Hitboxes": [
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "0"
+    },
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "60"
+    },
+    {
+      "x": "-1",
+      "y": "-0",
+      "width": "1",
+      "height": "10",
+      "angle": "-60"
+    }
+  ],
+  "Sounds": {
+    "hit": "sounds/hit.ogg"
+  },
+  "Sprites": [
+    {
+      "state": "start",
+      "Sprite": [
+        {
+          "path": "states/3_balloons/01.png"
+        },
+        {
+          "path": "states/3_balloons/02.png"
+        },
+        {
+          "path": "states/3_balloons/03.png"
+        },
+        {
+          "path": "states/3_balloons/04.png"
+        },
+        {
+          "path": "states/3_balloons/05.png"
+        }
+      ]
+    },
+    {
+      "state": "2 balloons",
+      "conditions" :
+      {
+        "hp": "3"
+      },
+      "Sprite": [
+        {
+          "path": "states/2_balloons/01.png"
+        },
+        {
+          "path": "states/2_balloons/02.png"
+        },
+        {
+          "path": "states/2_balloons/03.png"
+        },
+        {
+          "path": "states/2_balloons/04.png"
+        },
+        {
+          "path": "states/2_balloons/05.png"
+        }
+      ]
+    },
+    {
+      "state": "1 balloon",
+      "conditions" :
+      {
+        "hp": "2"
+      },
+      "Sprite": [
+        {
+          "path": "states/1_balloon/01.png"
+        },
+        {
+          "path": "states/1_balloon/02.png"
+        },
+        {
+          "path": "states/1_balloon/03.png"
+        },
+        {
+          "path": "states/1_balloon/04.png"
+        },
+        {
+          "path": "states/1_balloon/05.png"
+        }
+      ]
+    },
+    {
+      "state": "destroyed",
+      "Sprite": [
+        {
+          "path": "move/01.png"
+        },
+        {
+          "path": "move/02.png"
+        },
+        {
+          "path": "move/03.png"
+        },
+        {
+          "path": "move/04.png"
+        },
+        {
+          "path": "move/05.png"
+        },
+        {
+          "path": "move/06.png"
+        },
+        {
+          "path": "move/07.png"
+        },
+        {
+          "path": "move/08.png"
+        }
+      ]
+    }
+  ],
+  "FlatShadow": {
+    "image_path": "shadow.png",
+    "CaseRight": {
+      "Point": [
+        {
+          "x": "4",
+          "y": "0"
+        },
+        {
+          "x": "-3",
+          "y": "25"
+        }
+      ],
+      "Inbetween": {
+        "Point": {
+          "x": "0",
+          "y": "-50"
+        }
+      }
+    },
+    "CaseLeft": [
+      {
+        "x": "4",
+        "y": "0"
+      },
+      {
+        "x": "-3",
+        "y": "-25"
+      }
+    ],
+    "CaseTop": [
+      {
+        "x": "4",
+        "y": "0"
+      },
+      {
+        "x": "-3",
+        "y": "25"
+      }
+    ]
+  }
+}

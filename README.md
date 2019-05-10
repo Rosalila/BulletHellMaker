@@ -1,17 +1,26 @@
-Rosalila Shooter Engine
-=======================
+Create shoot em ups even if you’re not a programmer
 
-#Keywords
+# Keywords
 
-This game is being developed with the following values ordered by importance:
+1. **Fast and modern development**: Create playable characters, enemies and stages no sweat. Read more
+2. **No string attached**: Free as in freedom, available even for commercial projects. Read more
+3. **Easy from start to deploy**: Easy to get started and easy to publish your game on stores such as Steam and Epic.
 
-1. **X**: A
+# Features
 
-#Features
+* Keyboard and Gamepad support
+* Available on Linux, OS X and Windows
+* Free to play, pay for online features
+* Free as in freedom (LGPL license)
+* Continious boss fights
+* TODO: define art style
+* 10 diverse, unique and challenging stages
+* Normal and advanced difficulty modes
+* Interactive tutorial
+* TODO: define mechanics
+* Steam achievements and leaderboards
+* Store your top runs as replays
 
-* XML based
+# Showcase
 
-
-#Development
-
-Check out our [wiki](https://github.com/Rosalila/STG/wiki).
+[Flatshot](https://store.steampowered.com/app/517510/Flatshot/) is a game developed using the Rosalila Shmup engine.
