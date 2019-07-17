@@ -24,10 +24,10 @@ Character::Character(std::string name, int sound_channel_base)
   this->iteration = 0;
 
   //Color effect
-  current_color_effect_r = 255;
-  current_color_effect_g = 255;
-  current_color_effect_b = 255;
-  current_color_effect_a = 255;
+  color_filter_red = 255;
+  color_filter_green = 255;
+  color_filter_blue = 255;
+  color_filter_alpha = 255;
 
   //Shake
   current_screen_shake_x = 0;
@@ -174,7 +174,7 @@ void Character::loadMainXML()
 
     if (life_bar_node->hasAttribute("image"))
     {
-      this->life_bar = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + life_bar_node->attributes["image"]);
+      this->life_bar = rosalila()->graphics->getImage(std::string(assets_directory) + directory + life_bar_node->attributes["image"]);
     }
   }
 
@@ -236,7 +236,7 @@ void Character::loadMainXML()
     for (int j = 0; j < (int)sprite_nodes.size(); j++)
     {
       string sprite_path = sprite_nodes[j]->attributes["path"];
-      sprites_vector.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + sprite_path));
+      sprites_vector.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_path));
     }
 
     sprites[sprites_state] = sprites_vector;
@@ -298,7 +298,7 @@ void Character::loadBulletsXML()
     vector<Image *> sprites_temp;
     for (int j = 0; j < (int)sprite_nodes.size(); j++)
     {
-      sprites_temp.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + sprite_nodes[j]->attributes["path"]));
+      sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_nodes[j]->attributes["path"]));
     }
     vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("Hitbox");
     vector<Hitbox *> hitboxes_temp;
@@ -345,7 +345,7 @@ void Character::loadBulletsXML()
       vector<Node *> sprite_node = bullet_nodes[i]->getNodesByName("OnHit");
       for (int j = 0; j < (int)sprite_node.size(); j++)
       {
-        sprites_onhit_temp.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + sprite_node[j]->attributes["path"]));
+        sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_node[j]->attributes["path"]));
       }
     }
     Node *random_sound_node = bullet_nodes[i]->getNodeByName("RandomSound");
@@ -768,14 +768,14 @@ void Character::logic(int stage_velocity)
 {
   animationControl();
   spellControl(stage_velocity);
-  if (current_color_effect_r < 255)
-    current_color_effect_r++;
-  if (current_color_effect_g < 255)
-    current_color_effect_g++;
-  if (current_color_effect_b < 255)
-    current_color_effect_b++;
-  if (current_color_effect_a < 255)
-    current_color_effect_a++;
+  if (color_filter_red < 255)
+    color_filter_red++;
+  if (color_filter_green < 255)
+    color_filter_green++;
+  if (color_filter_blue < 255)
+    color_filter_blue++;
+  if (color_filter_alpha < 255)
+    color_filter_alpha++;
 }
 
 void Character::animationControl()
@@ -836,15 +836,15 @@ void Character::bottomRender()
     }
   }
 
-  rosalila()->graphics->draw2DImage(sprites[current_state][current_sprite],
-                                    sprites[current_state][current_sprite]->getWidth(), sprites[current_state][current_sprite]->getHeight(),
+  sprites[current_state][current_sprite]->color_filter.red = color_filter_red;
+  sprites[current_state][current_sprite]->color_filter.green = color_filter_green;
+  sprites[current_state][current_sprite]->color_filter.blue = color_filter_blue;
+  sprites[current_state][current_sprite]->color_filter.alpha = color_filter_alpha;
+
+  rosalila()->graphics->drawImage(sprites[current_state][current_sprite],
                                     this->x - sprites[current_state][current_sprite]->getWidth() / 2 + current_screen_shake_x,
-                                    this->y - sprites[current_state][current_sprite]->getHeight() / 2 + current_screen_shake_y,
-                                    1.0,
-                                    0.0,
-                                    false,
-                                    false,
-                                    Color(current_color_effect_r, current_color_effect_g, current_color_effect_b, current_color_effect_a));
+                                    this->y - sprites[current_state][current_sprite]->getHeight() / 2 + current_screen_shake_y);
+
 
 
   if (rosalila()->receiver->isKeyDown(SDLK_h))

@@ -49,10 +49,10 @@ public:
   std::list<Pattern *> *active_patterns;
 
   //Color effect
-  int current_color_effect_r;
-  int current_color_effect_g;
-  int current_color_effect_b;
-  int current_color_effect_a;
+  int color_filter_red;
+  int color_filter_green;
+  int color_filter_blue;
+  int color_filter_alpha;
 
   //Shake
   int current_screen_shake_x;

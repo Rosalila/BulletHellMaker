@@ -5,8 +5,8 @@ using namespace std;
 
 void intro()
 {
-  Image *image = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/studio.png");
-  Image *image2 = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/game_ilustration.png");
+  Image *image = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/studio.png");
+  Image *image2 = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/game_ilustration.png");
   int current_fade_in = 0;
 
   /*
@@ -41,14 +41,10 @@ void intro()
       exit(0);
     }
 
-    rosalila()->graphics->draw2DImage(image,
-                                      image->getWidth(), image->getHeight(),
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(current_fade_in, current_fade_in, current_fade_in, 255));
+    image->color_filter.red = current_fade_in;
+    image->color_filter.green = current_fade_in;
+    image->color_filter.blue = current_fade_in;
+    rosalila()->graphics->drawImage(image, 0, 0);
 
     /*
         if(rosalila()->api_integrator->isUsingApi())
@@ -87,14 +83,8 @@ void intro()
       exit(0);
     }
 
-    rosalila()->graphics->draw2DImage(image2,
-                                      image2->getWidth(), image2->getHeight(),
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_background_transparency));
+    image2->color_filter.alpha = current_background_transparency;
+    rosalila()->graphics->drawImage(image2, 0, 0);
 
     current_background_transparency += 2;
     if (current_background_transparency > 255)

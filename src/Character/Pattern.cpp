@@ -282,14 +282,13 @@ void Pattern::render()
     int transparency_divider = 1;
     if (getGameOver())
       transparency_divider = 8;
-    rosalila()->graphics->draw2DImage(image,
-                                      image->getWidth(), image->getHeight(),
-                                      this->x - image->getWidth() / 2, this->y - image->getHeight() / 2,
-                                      1.0 - (frame * auto_scale),
-                                      getBulletAngle(),
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255 / transparency_divider));
+    
+    image->scale = 1.0 - (frame * auto_scale);
+    image->rotation = getBulletAngle();
+    image->color_filter.alpha = 255 / transparency_divider;
+    rosalila()->graphics->drawImage(image,
+                                      this->x - image->getWidth() / 2,
+                                      this->y - image->getHeight() / 2);
   }
 
   if (rosalila()->receiver->isKeyDown(SDLK_h))

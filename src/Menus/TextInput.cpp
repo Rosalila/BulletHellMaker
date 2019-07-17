@@ -2,7 +2,13 @@
 
 string textInput(string label)
 {
-  Image *background = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/white_background.png");
+  Image *background = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/white_background.png");
+  background->color_filter.red = 0;
+  background->color_filter.green = 0;
+  background->color_filter.blue = 0;
+  background->width = rosalila()->graphics->screen_width;
+  background->height = rosalila()->graphics->screen_height;
+
   string input = "";
   SDL_StartTextInput();
   SDL_Event event;
@@ -40,14 +46,7 @@ string textInput(string label)
       }
     }
 
-    rosalila()->graphics->draw2DImage(background,
-                                      rosalila()->graphics->screen_width, rosalila()->graphics->screen_height,
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(0, 0, 0, 255));
+    rosalila()->graphics->drawImage(background, 0, 0);
 
     rosalila()->graphics->drawText(label, 0, rosalila()->graphics->screen_height / 2 - 200, true, false);
     rosalila()->graphics->drawText(input, 0, 0, true, true);

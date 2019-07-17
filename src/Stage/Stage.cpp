@@ -82,14 +82,15 @@ void Stage::drawLayer(Layer *layer)
     {
       Image *image = current_layer_frame->image;
       //TODO: Fix paralax
-      rosalila()->graphics->draw2DImage(image,
-                                        frame_width, frame_heigth,
-                                        pos_x, pos_y,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        layer->blend_effect,
-                                        Color(layer->color.red, layer->color.green, layer->color.blue, layer->color.alpha));
+      //TODO: Review Layer and LayerFrame name, variable names and stuff
+      image->width = frame_width;
+      image->height = frame_heigth;
+      image->blend_effect = layer->blend_effect;
+      image->color_filter.red =  layer->color.red;
+      image->color_filter.green =  layer->color.green;
+      image->color_filter.blue =  layer->color.blue;
+      image->color_filter.alpha =  layer->color.alpha;
+      rosalila()->graphics->drawImage(image,pos_x, pos_y);
     }
     if (current_layer_frame->type == "rectangle")
     {
@@ -468,7 +469,7 @@ LayerFrame *Stage::getFrameFromNode(Node *frame_node)
   if (frame_node->hasAttribute("image_path"))
   {
     string image_path = path + name + "/images/" + frame_node->attributes["image_path"];
-    image_temp = rosalila()->graphics->getTexture(image_path);
+    image_temp = rosalila()->graphics->getImage(image_path);
 
     width = image_temp->getWidth();
     height = image_temp->getHeight();

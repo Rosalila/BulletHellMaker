@@ -17,9 +17,9 @@ vector<int> *color_palette_b;
 
 void initShooterUtility()
 {
-  loading_image = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/messages/loading.png");
-  error_image = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/messages/error.png");
-  sucess_image = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/messages/sucess.png");
+  loading_image = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/messages/loading.png");
+  error_image = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/messages/error.png");
+  sucess_image = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/messages/sucess.png");
 
   color_palette_r = new vector<int>();
   color_palette_g = new vector<int>();

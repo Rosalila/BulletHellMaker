@@ -131,7 +131,7 @@ std::vector<Image *> getStageImages(std::vector<std::string> stage_names)
   std::vector<Image *> stage_images;
   for (int i = 0; i < (int)stage_names.size(); i++)
   {
-    Image *image = rosalila()->graphics->getTexture(std::string(assets_directory) + std::string("stages/") + stage_names[i] + std::string("/images/preview.png"));
+    Image *image = rosalila()->graphics->getImage(std::string(assets_directory) + std::string("stages/") + stage_names[i] + std::string("/images/preview.png"));
     stage_images.push_back(image);
   }
   return stage_images;
@@ -181,19 +181,20 @@ void stageSelect()
   bool has_mods = getStageModsNames().size() > 0;
   std::vector<Image *> stage_images = getStageImages(getStageNames());
 
-  Image *background = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/background.png");
-  Image *left_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/left_arrow.png");
-  Image *right_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/right_arrow.png");
-  Image *up_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/up_arrow.png");
+  Image *background = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/background.png");
+  Image *left_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/left_arrow.png");
+  Image *right_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/right_arrow.png");
+  Image *up_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/up_arrow.png");
 #ifdef STEAM
-  Image *down_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/down_arrow.png");
+  Image *down_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/down_arrow.png");
 #endif
-  Image *line = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/line.png");
-  Image *stage_clear = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/stage_clear.png");
-  Image *stage_perfect = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/stage_perfect.png");
+  Image *line = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/line.png");
+  Image *stage_clear = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/stage_clear.png");
+  Image *stage_perfect = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/stage_perfect.png");
 
-  double line_width = 0;
-
+  background->width = rosalila()->graphics->screen_width;
+  background->height = rosalila()->graphics->screen_height;
+  
   Color background_color(255, 255, 255, 255);
 
   int current_stage = rosalila()->api_integrator->getStat("current stage");
@@ -690,14 +691,7 @@ void stageSelect()
 
     updateMusic(current_stage);
 
-    rosalila()->graphics->draw2DImage(background,
-                                      rosalila()->graphics->screen_width, rosalila()->graphics->screen_height,
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
+    rosalila()->graphics->drawImage(background, 0, 0);
 
     int line_separation = 35;
 
@@ -711,29 +705,13 @@ void stageSelect()
     if (entry_navigator >= 1)
       line_y = bottom_menu_y + (entry_navigator - 1) * separation;
 
-    line_width += 15;
-    if (line_width > line->getWidth())
-      line_width = line->getWidth();
+    rosalila()->graphics->drawImage(line,
+                                      rosalila()->graphics->screen_width / 2 - line->getWidth() / 2,
+                                      line_y);
 
-    rosalila()->graphics->draw2DImage(line,
-                                      line_width, line->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - line_width / 2,
-                                      line_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
-
-    rosalila()->graphics->draw2DImage(line,
-                                      line_width, line->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - line_width / 2,
-                                      line_y + line_separation,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
+    rosalila()->graphics->drawImage(line,
+                                      rosalila()->graphics->screen_width / 2 - line->getWidth() / 2,
+                                      line_y + line_separation);
 
 #ifdef STEAM
     if (current_leaderboard)
@@ -760,58 +738,33 @@ void stageSelect()
     Image *current_stage_image = stage_images[current_stage];
 
     //Middle menu
-    rosalila()->graphics->draw2DImage(current_stage_image,
-                                      current_stage_image->getWidth(),
-                                      current_stage_image->getHeight(),
+    rosalila()->graphics->drawImage(current_stage_image,
                                       rosalila()->graphics->screen_width / 2 - current_stage_image->getWidth() / 2,
-                                      rosalila()->graphics->screen_height / 2 - current_stage_image->getHeight() / 2 + middle_menu_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
+                                      rosalila()->graphics->screen_height / 2 - current_stage_image->getHeight() / 2 + middle_menu_y);
 
     if (frame % 60 >= 0 && frame % 60 < 30)
     {
       if (current_stage > 0)
       {
-        rosalila()->graphics->draw2DImage(left_arrow,
-                                          left_arrow->getWidth(), left_arrow->getHeight(),
+        rosalila()->graphics->drawImage(left_arrow,
                                           rosalila()->graphics->screen_width / 2 - current_stage_image->getWidth() / 2 - left_arrow->getWidth(),
-                                          rosalila()->graphics->screen_height / 2 - left_arrow->getHeight() / 2 + middle_menu_y,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          rosalila()->graphics->screen_height / 2 - left_arrow->getHeight() / 2 + middle_menu_y);
       }
 
       if (current_stage < (int)stage_images.size() - 1)
       {
-        rosalila()->graphics->draw2DImage(right_arrow,
-                                          right_arrow->getWidth(), right_arrow->getHeight(),
+        rosalila()->graphics->drawImage(right_arrow,
                                           rosalila()->graphics->screen_width / 2 + current_stage_image->getWidth() / 2,
-                                          rosalila()->graphics->screen_height / 2 - right_arrow->getHeight() / 2 + middle_menu_y,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          rosalila()->graphics->screen_height / 2 - right_arrow->getHeight() / 2 + middle_menu_y);
       }
 
       if (rosalila()->api_integrator->isUsingApi())
       {
         if (entry_navigator > -6)
         {
-          rosalila()->graphics->draw2DImage(up_arrow,
-                                            up_arrow->getWidth(), up_arrow->getHeight(),
+          rosalila()->graphics->drawImage(up_arrow,
                                             rosalila()->graphics->screen_width / 2 - up_arrow->getWidth() / 2,
-                                            0,
-                                            1.0,
-                                            0.0,
-                                            false,
-                                            false,
-                                            Color(255, 255, 255, 255));
+                                            0);
         }
 
 #ifdef STEAM
@@ -849,27 +802,15 @@ void stageSelect()
       if (rosalila()->api_integrator->getStat(stage_names[current_stage] + "Perfects") > 0)
       {
 
-        rosalila()->graphics->draw2DImage(stage_perfect,
-                                          stage_perfect->getWidth(), stage_perfect->getHeight(),
+        rosalila()->graphics->drawImage(stage_perfect,
                                           rosalila()->graphics->screen_width / 2 - stage_perfect->getWidth() / 2,
-                                          500 + middle_menu_y,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          500 + middle_menu_y);
       }
       else if (rosalila()->api_integrator->getStat(stage_names[current_stage] + "Clears") > 0)
       {
-        rosalila()->graphics->draw2DImage(stage_clear,
-                                          stage_clear->getWidth(), stage_clear->getHeight(),
+        rosalila()->graphics->drawImage(stage_clear,
                                           rosalila()->graphics->screen_width / 2 - stage_perfect->getWidth() / 2,
-                                          500 + middle_menu_y,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          500 + middle_menu_y);
       }
     }
 

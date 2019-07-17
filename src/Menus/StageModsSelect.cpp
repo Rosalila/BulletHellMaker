@@ -11,7 +11,7 @@ std::vector<Image *> getStageModsImages(std::vector<std::string> stage_names)
   std::vector<Image *> stage_images;
   for (int i = 0; i < (int)stage_names.size(); i++)
   {
-    Image *image = rosalila()->graphics->getTexture(std::string(assets_directory) + std::string("mods/stages/") + stage_names[i] + std::string("/images/preview.png"));
+    Image *image = rosalila()->graphics->getImage(std::string(assets_directory) + std::string("mods/stages/") + stage_names[i] + std::string("/images/preview.png"));
     stage_images.push_back(image);
   }
   return stage_images;
@@ -22,11 +22,14 @@ void stageModsSelect()
   std::vector<std::string> stage_names = getStageModsNames();
   std::vector<Image *> stage_images = getStageModsImages(getStageModsNames());
 
-  Image *background = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/white_background.png");
-  Image *left_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/left_arrow.png");
-  Image *right_arrow = rosalila()->graphics->getTexture(std::string(assets_directory) + "menu/right_arrow.png");
+  Image *background = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/white_background.png");
+  Image *left_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/left_arrow.png");
+  Image *right_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/right_arrow.png");
 
-  Color background_color(255, 0, 0, 255);
+  background->color_filter.green = 0;
+  background->color_filter.blue = 0;
+  background->width = rosalila()->graphics->screen_width;
+  background->height = rosalila()->graphics->screen_height;
 
   int current_stage = stage_names.size() - 1;
   int frame = 0;
@@ -127,54 +130,28 @@ void stageModsSelect()
       }
     }
 
-    rosalila()->graphics->draw2DImage(background,
-                                      rosalila()->graphics->screen_width, rosalila()->graphics->screen_height,
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      background_color);
+    rosalila()->graphics->drawImage(background, 0, 0);
 
     Image *current_stage_image = stage_images[current_stage];
 
-    rosalila()->graphics->draw2DImage(current_stage_image,
-                                      current_stage_image->getWidth(),
-                                      current_stage_image->getHeight(),
+    rosalila()->graphics->drawImage(current_stage_image,
                                       rosalila()->graphics->screen_width / 2 - current_stage_image->getWidth() / 2,
-                                      rosalila()->graphics->screen_height / 2 - current_stage_image->getHeight() / 2,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
+                                      rosalila()->graphics->screen_height / 2 - current_stage_image->getHeight() / 2);
 
     if (frame % 60 >= 0 && frame % 60 < 30)
     {
       if (current_stage > 0)
       {
-        rosalila()->graphics->draw2DImage(left_arrow,
-                                          left_arrow->getWidth(), left_arrow->getHeight(),
+        rosalila()->graphics->drawImage(left_arrow,
                                           rosalila()->graphics->screen_width / 2 - current_stage_image->getWidth() / 2 - left_arrow->getWidth(),
-                                          rosalila()->graphics->screen_height / 2 - left_arrow->getHeight() / 2,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          rosalila()->graphics->screen_height / 2 - left_arrow->getHeight() / 2);
       }
 
       if (current_stage < (int)stage_images.size() - 1)
       {
-        rosalila()->graphics->draw2DImage(right_arrow,
-                                          right_arrow->getWidth(), right_arrow->getHeight(),
+        rosalila()->graphics->drawImage(right_arrow,
                                           rosalila()->graphics->screen_width / 2 + current_stage_image->getWidth() / 2,
-                                          rosalila()->graphics->screen_height / 2 - right_arrow->getHeight() / 2,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, 255));
+                                          rosalila()->graphics->screen_height / 2 - right_arrow->getHeight() / 2);
       }
     }
 

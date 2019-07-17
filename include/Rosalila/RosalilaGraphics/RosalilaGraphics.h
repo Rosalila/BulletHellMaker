@@ -85,16 +85,8 @@ class ROSALILA_DLL RosalilaGraphics
     RosalilaGraphics();
     ~RosalilaGraphics();
     void init();
-    Image* getTexture(std::string filename);
-    void draw2DImage(
-	             Image* texture,
-				 int size_x,int size_y,
-				 int position_x,int position_y,
-				 float scale,
-				 float rotation,
-				 bool flipHorizontally,
-                 bool blend_effect,
-				 Color color_effects);
+    Image* getImage(std::string filename);
+    void drawImage(Image* texture, int x, int y);
     void draw2DImageBatch(
 	             Image* texture,
 				 int size_x,int size_y,

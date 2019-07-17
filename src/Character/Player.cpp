@@ -30,10 +30,10 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->intro_input = intro_input;
 
   //Color effect
-  current_color_effect_r = 255;
-  current_color_effect_g = 255;
-  current_color_effect_b = 255;
-  current_color_effect_a = 255;
+  color_filter_red = 255;
+  color_filter_green = 255;
+  color_filter_blue = 255;
+  color_filter_alpha = 255;
 
   //Shake
   current_screen_shake_x = 0;
@@ -58,9 +58,9 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->invulnerable_frames_left = 0;
 
   parries_left = 3;
-  parry_sprites.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/parry/1.png"));
-  parry_sprites.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/parry/2.png"));
-  parry_sprites.push_back(rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/parry/3.png"));
+  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/1.png"));
+  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/2.png"));
+  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/3.png"));
   //Charge
   rosalila()->sound->addSound("charge ready", std::string(assets_directory) + directory + "sounds/charge_ready.ogg");
   rosalila()->sound->addSound("charging", std::string(assets_directory) + directory + "sounds/charging.ogg");
@@ -73,7 +73,7 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->velocity_override = 0;
 
   // Shadow
-  shadow_image = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/move/shadow.png");
+  shadow_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/move/shadow.png");
   for(int i=0; i<500; i++)
     shadow_positions.push_back(std::pair<int,int>(this->x, this->y));
 }
@@ -494,18 +494,13 @@ void Player::bottomRender()
 
   if (current_shield > 0)
   {
-    double shield_transparency = 255.0 * getShieldPercentage();
-
     if (shield_image)
-      rosalila()->graphics->draw2DImage(shield_image,
-                                        shield_image->getWidth(), shield_image->getHeight(),
+    {
+      shield_image->color_filter.alpha = 255.0 * getShieldPercentage();
+      rosalila()->graphics->drawImage(shield_image,
                                         this->x - shield_image->getWidth() / 2 + current_screen_shake_x,
-                                        this->y - shield_image->getHeight() / 2 + current_screen_shake_y,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        false,
-                                        Color(255, 255, 255, shield_transparency));
+                                        this->y - shield_image->getHeight() / 2 + current_screen_shake_y);
+    }
   }
 /*
   if (current_charge > 0)
@@ -538,40 +533,22 @@ void Player::topRender()
   if (isParrying() && parries_left >= 1)
   {
     Image *image = parry_sprites[parries_left - 1];
-    rosalila()->graphics->draw2DImage(image,
-                                      image->getWidth(), image->getHeight(),
+    rosalila()->graphics->drawImage(image,
                                       this->x + parrying_x,
-                                      this->y + parrying_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, 255));
+                                      this->y + parrying_y);
   }
 
   if (parrying_image != NULL && false)
     if (isParrying())
-      rosalila()->graphics->draw2DImage(parrying_image,
-                                        parrying_image->getWidth(), parrying_image->getHeight(),
+      rosalila()->graphics->drawImage(parrying_image,
                                         this->x + parrying_x,
-                                        this->y + parrying_y,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        false,
-                                        Color(255, 255, 255, 255));
+                                        this->y + parrying_y);
 
   if (parryed_image != NULL)
     if (invulnerable_frames_left > 0)
-      rosalila()->graphics->draw2DImage(parryed_image,
-                                        parryed_image->getWidth(), parryed_image->getHeight(),
+      rosalila()->graphics->drawImage(parryed_image,
                                         this->x + parryed_x,
-                                        this->y + parryed_y,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        false,
-                                        Color(255, 255, 255, 255));
+                                        this->y + parryed_y);
 
   if (rosalila()->receiver->isKeyDown(SDLK_h))
     for (int i = 0; i < (int)parry_hitboxes.size(); i++)
@@ -636,7 +613,7 @@ void Player::loadFromXML()
 
     if (shield_node->hasAttribute("sprite"))
     {
-      this->shield_image = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + shield_node->attributes["sprite"]);
+      this->shield_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + shield_node->attributes["sprite"]);
     }
   }
 
@@ -673,7 +650,7 @@ void Player::loadFromXML()
 
     if (charge_node->hasAttribute("sprite"))
     {
-      this->charge_image = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + charge_node->attributes["sprite"]);
+      this->charge_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + charge_node->attributes["sprite"]);
     }
   }
 
@@ -707,7 +684,7 @@ void Player::loadFromXML()
     {
       if (parrying_node->hasAttribute("sprite"))
       {
-        this->parrying_image = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + parrying_node->attributes["sprite"]);
+        this->parrying_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + parrying_node->attributes["sprite"]);
       }
       if (parrying_node->hasAttribute("x"))
       {
@@ -725,7 +702,7 @@ void Player::loadFromXML()
     {
       if (parryed_node->hasAttribute("sprite"))
       {
-        this->parryed_image = rosalila()->graphics->getTexture(std::string(assets_directory) + directory + "sprites/" + parryed_node->attributes["sprite"]);
+        this->parryed_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + parryed_node->attributes["sprite"]);
       }
       if (parryed_node->hasAttribute("x"))
       {

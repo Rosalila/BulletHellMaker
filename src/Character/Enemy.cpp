@@ -31,10 +31,10 @@ Enemy::Enemy(std::string name, Player *player, int sound_channel_base, bool is_m
   this->iteration = 0;
 
   //Color effect
-  current_color_effect_r = 255;
-  current_color_effect_g = 255;
-  current_color_effect_b = 255;
-  current_color_effect_a = 255;
+  color_filter_red = 255;
+  color_filter_green = 255;
+  color_filter_blue = 255;
+  color_filter_alpha = 255;
 
   //Shake
   current_screen_shake_x = 0;

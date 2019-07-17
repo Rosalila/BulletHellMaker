@@ -14,7 +14,7 @@ STG::STG(Player *player, Enemy *enemy, Stage *stage, string game_mode, int curre
 
   this->game_over_timeout = 128;
 
-  this->image_upload_error = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/upload_error.png");
+  this->image_upload_error = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/upload_error.png");
 
   this->image_training_box = NULL;
   this->image_training_x = NULL;
@@ -39,22 +39,22 @@ STG::STG(Player *player, Enemy *enemy, Stage *stage, string game_mode, int curre
 
   if (game_mode == "charge training")
   {
-    image_training_bar = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/bar.png");
-    image_training_bar_fill = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/bar_fill.png");
+    image_training_bar = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/bar.png");
+    image_training_bar_fill = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/bar_fill.png");
     charge_destroy_count_objective = 300;
     player_is_immortal = true;
   }
   if (game_mode == "parry training")
   {
-    image_training_box = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/box.png");
-    image_training_x = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/x.png");
+    image_training_box = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/box.png");
+    image_training_x = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/x.png");
     parry_count_objective = 3;
     player_is_immortal = true;
   }
   if (game_mode == "parry dash training")
   {
-    image_training_bar = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/bar.png");
-    image_training_bar_fill = rosalila()->graphics->getTexture(std::string(assets_directory) + "misc/training/bar_fill.png");
+    image_training_bar = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/bar.png");
+    image_training_bar_fill = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/training/bar_fill.png");
     parry_dash_count_objective = 15;
     player_is_immortal = true;
   }
@@ -519,66 +519,46 @@ void STG::render()
     current_training_transparency = 255;
   if (game_mode == "charge training")
   {
-    rosalila()->graphics->draw2DImage(image_training_bar_fill,
-                                      image_training_bar_fill->getWidth() * (charge_destroy_count / charge_destroy_count_objective), image_training_bar_fill->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - image_training_bar_fill->getWidth() / 2, tutorial_control_spacing_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_training_transparency));
-    rosalila()->graphics->draw2DImage(image_training_bar,
-                                      image_training_bar->getWidth(), image_training_bar->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - image_training_bar->getWidth() / 2, tutorial_control_spacing_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_training_transparency));
+    image_training_bar_fill->width = image_training_bar_fill->original_width * (charge_destroy_count / charge_destroy_count_objective);
+    image_training_bar_fill->color_filter.alpha = current_training_transparency;
+    rosalila()->graphics->drawImage(image_training_bar_fill,
+                                      rosalila()->graphics->screen_width / 2 - image_training_bar_fill->getWidth() / 2,
+                                      tutorial_control_spacing_y);
+
+    image_training_bar->color_filter.alpha = current_training_transparency;
+    rosalila()->graphics->drawImage(image_training_bar,
+                                      rosalila()->graphics->screen_width / 2 - image_training_bar->getWidth() / 2,
+                                      tutorial_control_spacing_y);
   }
   if (game_mode == "parry training")
   {
     for (int i = 0; i < parry_count_objective; i++)
     {
-      rosalila()->graphics->draw2DImage(image_training_box,
-                                        image_training_box->getWidth(), image_training_box->getHeight(),
-                                        rosalila()->graphics->screen_width / 2 - (image_training_box->getWidth() / 2) * 3 + i * (image_training_box->getWidth() + 10), tutorial_control_spacing_y,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        false,
-                                        Color(255, 255, 255, current_training_transparency));
+      image_training_box->color_filter.alpha = current_training_transparency;
+      rosalila()->graphics->drawImage(image_training_box,
+                                        rosalila()->graphics->screen_width / 2 - (image_training_box->getWidth() / 2) * 3 + i * (image_training_box->getWidth() + 10),
+                                        tutorial_control_spacing_y);
       if (i < parry_count)
       {
-        rosalila()->graphics->draw2DImage(image_training_x,
-                                          image_training_x->getWidth(), image_training_x->getHeight(),
-                                          rosalila()->graphics->screen_width / 2 - (image_training_x->getWidth() / 2) * 3 + i * (image_training_x->getWidth() + 10), tutorial_control_spacing_y,
-                                          1.0,
-                                          0.0,
-                                          false,
-                                          false,
-                                          Color(255, 255, 255, current_training_transparency));
+        image_training_x->color_filter.alpha = current_training_transparency;
+        rosalila()->graphics->drawImage(image_training_x,
+                                          rosalila()->graphics->screen_width / 2 - (image_training_x->getWidth() / 2) * 3 + i * (image_training_x->getWidth() + 10),
+                                          tutorial_control_spacing_y);
       }
     }
   }
   if (game_mode == "parry dash training")
   {
-    rosalila()->graphics->draw2DImage(image_training_bar_fill,
-                                      image_training_bar_fill->getWidth() * (parry_dash_count / parry_dash_count_objective), image_training_bar_fill->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - image_training_bar_fill->getWidth() / 2, tutorial_control_spacing_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_training_transparency));
-    rosalila()->graphics->draw2DImage(image_training_bar,
-                                      image_training_bar->getWidth(), image_training_bar->getHeight(),
-                                      rosalila()->graphics->screen_width / 2 - image_training_bar->getWidth() / 2, tutorial_control_spacing_y,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_training_transparency));
+    image_training_bar_fill->width = image_training_bar_fill->original_width * (parry_dash_count / parry_dash_count_objective),
+    image_training_bar_fill->color_filter.alpha = current_training_transparency;
+    rosalila()->graphics->drawImage(image_training_bar_fill,
+                                      rosalila()->graphics->screen_width / 2 - image_training_bar_fill->getWidth() / 2,
+                                      tutorial_control_spacing_y);
+    
+    image_training_bar->color_filter.alpha = current_training_transparency;
+    rosalila()->graphics->drawImage(image_training_bar,
+                                      rosalila()->graphics->screen_width / 2 - image_training_bar->getWidth() / 2,
+                                      tutorial_control_spacing_y);
   }
 
   //    rosalila()->graphics->drawText("TotalParries:" +
@@ -792,14 +772,8 @@ bool STG::uploadErrorLoop()
       return false;
     }
 
-    rosalila()->graphics->draw2DImage(image_upload_error,
-                                      image_upload_error->getWidth(), image_upload_error->getHeight(),
-                                      0, 0,
-                                      1.0,
-                                      0.0,
-                                      false,
-                                      false,
-                                      Color(255, 255, 255, current_training_transparency));
+    image_upload_error->color_filter.alpha = current_training_transparency;
+    rosalila()->graphics->drawImage(image_upload_error, 0, 0);
 
     rosalila()->update();
   }
