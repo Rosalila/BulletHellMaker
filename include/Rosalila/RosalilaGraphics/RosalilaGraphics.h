@@ -31,7 +31,6 @@
 #include <stdio.h>
 
 #include "Color.h"
-#include "FlatShadow.h"
 #include "Image.h"
 #include "Timer.h"
 #include "../RosalilaUtility/RosalilaUtility.h"
@@ -49,7 +48,6 @@
 
 using namespace std;
 
-class FlatShadow;
 class NotificationHandler;
 class PointExplosionEffect;
 

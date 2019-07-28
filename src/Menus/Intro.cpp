@@ -36,7 +36,7 @@ void intro()
       break;
     }
 
-    if (rosalila()->receiver->isPressed(0, "b"))
+    if (rosalila()->receiver->isPressed(0, "back"))
     {
       exit(0);
     }
@@ -78,7 +78,7 @@ void intro()
       break;
     }
 
-    if (rosalila()->receiver->isPressed(0, "b"))
+    if (rosalila()->receiver->isPressed(0, "back"))
     {
       exit(0);
     }

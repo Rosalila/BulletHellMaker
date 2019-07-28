@@ -71,10 +71,6 @@ public:
   double additional_hp_change;
   double velocity_override;
 
-  // Shadow
-  std::list< std::pair<int,int> > shadow_positions;
-  Image *shadow_image;
-
   Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode);
   ~Player();
   void loadFromXML();

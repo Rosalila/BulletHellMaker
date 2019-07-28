@@ -9,7 +9,7 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->active_patterns = new std::list<Pattern *>;
   this->shooting = true;
   this->current_state = "start";
-  this->current_type = "1";
+  this->current_type = "primary";
   this->visible = true;
   this->charge_ready = false;
   this->frame = 0;
@@ -58,9 +58,9 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->invulnerable_frames_left = 0;
 
   parries_left = 3;
-  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/1.png"));
-  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/2.png"));
-  parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/3.png"));
+  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/1.png"));
+  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/2.png"));
+  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/3.png"));
   //Charge
   rosalila()->sound->addSound("charge ready", std::string(assets_directory) + directory + "sounds/charge_ready.ogg");
   rosalila()->sound->addSound("charging", std::string(assets_directory) + directory + "sounds/charging.ogg");
@@ -71,11 +71,6 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->additional_velocity_y = 0;
   this->additional_hp_change = 0;
   this->velocity_override = 0;
-
-  // Shadow
-  shadow_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/move/shadow.png");
-  for(int i=0; i<500; i++)
-    shadow_positions.push_back(std::pair<int,int>(this->x, this->y));
 }
 
 Player::~Player()
@@ -110,29 +105,29 @@ void Player::loadPlayerFromXML()
 
   this->current_slow = 0;
   this->max_slow = -1;
-  Node *attributes_node = root_node->getNodeByName("Attributes");
-  if (attributes_node->hasAttribute("slow"))
+
+  if (root_node->hasAttribute("slow"))
   {
-    this->current_slow = atoi(attributes_node->attributes["slow"].c_str());
-    this->max_slow = atoi(attributes_node->attributes["slow"].c_str());
+    this->current_slow = atoi(root_node->attributes["slow"].c_str());
+    this->max_slow = atoi(root_node->attributes["slow"].c_str());
   }
 
   this->slow_decrement = 3;
-  if (attributes_node->hasAttribute("slow_decrement"))
+  if (root_node->hasAttribute("slow_decrement"))
   {
-    this->slow_decrement = atoi(attributes_node->attributes["slow_decrement"].c_str());
+    this->slow_decrement = atoi(root_node->attributes["slow_decrement"].c_str());
   }
 
   this->slow_increment = 1;
-  if (attributes_node->hasAttribute("slow_increment"))
+  if (root_node->hasAttribute("slow_increment"))
   {
-    this->slow_increment = atoi(attributes_node->attributes["slow_increment"].c_str());
+    this->slow_increment = atoi(root_node->attributes["slow_increment"].c_str());
   }
 
   this->slow_cooldown_increment = 2;
-  if (attributes_node->hasAttribute("slow_cooldown_increment"))
+  if (root_node->hasAttribute("slow_cooldown_increment"))
   {
-    this->slow_cooldown_increment = atoi(attributes_node->attributes["slow_cooldown_increment"].c_str());
+    this->slow_cooldown_increment = atoi(root_node->attributes["slow_cooldown_increment"].c_str());
   }
 
   this->slow_bar_x = 0;
@@ -271,7 +266,7 @@ void Player::inputControl()
   {
     current_input_replay_store += "a";
     this->shooting = true;
-    this->current_type = "1";
+    this->current_type = "primary";
     this->velocity = 6;
 
     /*
@@ -310,17 +305,16 @@ void Player::inputControl()
         }
         current_charge=0;
         */
+  }else if (isDownWrapper("b"))
+  {
+    current_input_replay_store += "b";
+    this->shooting = true;
+    this->current_type = "secondary";
+    this->velocity = 6;
   }
   else if (isDownWrapper("c"))
   {
     current_input_replay_store += "c";
-    this->shooting = true;
-    this->current_type = "2";
-    this->velocity = 3;
-  }
-  else if (isDownWrapper("d"))
-  {
-    current_input_replay_store += "d";
     this->shooting = true;
     this->current_type = "bomb";
     this->velocity = 6;
@@ -434,10 +428,6 @@ void Player::logic(int stage_velocity)
   else
     Mix_Volume(charging_sound_channel, 0);
   
-  //shadow
-  shadow_positions.push_front(std::pair<int,int>(this->x, this->y));
-  shadow_positions.pop_back();
-
   for(std::map < /*current state*/ std::string, /*trigger validation*/ std::map< std::string, std::string > >::iterator i = state_triggers.begin();
         i != state_triggers.end();
         i++)
@@ -454,42 +444,6 @@ void Player::logic(int stage_velocity)
 
 void Player::bottomRender()
 {
-  /*
-  auto shadow_1 = *(std::next(shadow_positions.begin(), 225));
-  auto shadow_2 = *(std::next(shadow_positions.begin(), 150));
-  auto shadow_3 = *(std::next(shadow_positions.begin(), 75));
-  
-  rosalila()->graphics->draw2DImage(shadow_image,
-                                    shadow_image->getWidth(), shadow_image->getHeight(),
-                                    shadow_1.first - shadow_image->getWidth() / 2 + current_screen_shake_x,
-                                    shadow_1.second - shadow_image->getHeight() / 2 + current_screen_shake_y,
-                                    1.0,
-                                    0.0,
-                                    false,
-                                    false,
-                                    Color(129, 127, 255, 40));
-
-  rosalila()->graphics->draw2DImage(shadow_image,
-                                    shadow_image->getWidth(), shadow_image->getHeight(),
-                                    shadow_2.first - shadow_image->getWidth() / 2 + current_screen_shake_x,
-                                    shadow_2.second - shadow_image->getHeight() / 2 + current_screen_shake_y,
-                                    1.0,
-                                    0.0,
-                                    false,
-                                    false,
-                                    Color(87, 94, 226, 80));
-  
-  rosalila()->graphics->draw2DImage(shadow_image,
-                                    shadow_image->getWidth(), shadow_image->getHeight(),
-                                    shadow_3.first - shadow_image->getWidth() / 2 + current_screen_shake_x,
-                                    shadow_3.second - shadow_image->getHeight() / 2 + current_screen_shake_y,
-                                    1.0,
-                                    0.0,
-                                    false,
-                                    false,
-                                    Color(36, 62, 188, 120));
-*/
-
   Character::bottomRender();
 
   if (current_shield > 0)

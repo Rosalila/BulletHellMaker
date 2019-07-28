@@ -1,34 +1,84 @@
 {
+  "velocity": "6",
+  "animation_velocity": "15",
+  "hp": "4",
+  "InitialPosition": {
+    "x": "100",
+    "y": "500"
+  },
+  "Sounds": {
+    "hit": "sounds/hit.ogg"
+  },
   "LifeBar": {
-    "color_r": "65",
-    "color_g": "255",
-    "color_b": "65",
-    "rect_offset_x": "60",
-    "rect_offset_y": "10",
-    "rect_width": "1280",
-    "rect_height": "8"
+    "x": "0",
+    "y": "0",
+    "width": "1920",
+    "height": "8",
+    "Color":
+    {
+      "red": "65",
+      "green": "255",
+      "blue": "65"
+    }
   },
-  "Attributes": {
-    "velocity": "6",
-    "animation_velocity": "15",
-    "hp": "4",
-    "initial_x": "100",
-    "initial_y": "500"
-  },
-  "Shield": {
+  "Sprites": [
+    {
+      "state": "start",
+      "Sprite": [
+        {
+          "path": "ship01.png"
+        },
+        {
+          "path": "ship02.png"
+        }
+      ]
+    },
+    {
+      "state": "destroyed",
+      "Sprite": [
+        {
+          "path": "ship01.png"
+        }
+      ]
+    }
+  ],
+  "Hitboxes": [
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "0"
+    },
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "60"
+    },
+    {
+      "x": "-1",
+      "y": "-0",
+      "width": "1",
+      "height": "10",
+      "angle": "-60"
+    }
+  ],
+  "Shield OPTIONAL": {
     "sprite": "shield.png",
     "max_shield": "500",
     "shield_fade": "40",
     "proration": "40"
   },
-  "Charge": {
+  "Charge OPTIONAL": {
     "sprite": "charge.png",
     "max_charge": "300",
     "charge_velocity": "1",
     "x": "-40",
     "y": "0"
   },
-  "Parry": {
+  "Parry OPTIONAL": {
     "duration": "60",
     "sound": "sounds/parry.ogg",
     "Parrying": {
@@ -62,172 +112,6 @@
         "width": "5",
         "height": "46",
         "angle": "-60"
-      }
-    ]
-  },
-  "Hitboxes": [
-    {
-      "x": "-10",
-      "y": "-5",
-      "width": "1",
-      "height": "10",
-      "angle": "0"
-    },
-    {
-      "x": "-10",
-      "y": "-5",
-      "width": "1",
-      "height": "10",
-      "angle": "60"
-    },
-    {
-      "x": "-1",
-      "y": "-0",
-      "width": "1",
-      "height": "10",
-      "angle": "-60"
-    }
-  ],
-  "Sounds": {
-    "hit": "sounds/hit.ogg"
-  },
-  "Sprites": [
-    {
-      "state": "start",
-      "Sprite": [
-        {
-          "path": "states/3_balloons/01.png"
-        },
-        {
-          "path": "states/3_balloons/02.png"
-        },
-        {
-          "path": "states/3_balloons/03.png"
-        },
-        {
-          "path": "states/3_balloons/04.png"
-        },
-        {
-          "path": "states/3_balloons/05.png"
-        }
-      ]
-    },
-    {
-      "state": "2 balloons",
-      "conditions" :
-      {
-        "hp": "3"
-      },
-      "Sprite": [
-        {
-          "path": "states/2_balloons/01.png"
-        },
-        {
-          "path": "states/2_balloons/02.png"
-        },
-        {
-          "path": "states/2_balloons/03.png"
-        },
-        {
-          "path": "states/2_balloons/04.png"
-        },
-        {
-          "path": "states/2_balloons/05.png"
-        }
-      ]
-    },
-    {
-      "state": "1 balloon",
-      "conditions" :
-      {
-        "hp": "2"
-      },
-      "Sprite": [
-        {
-          "path": "states/1_balloon/01.png"
-        },
-        {
-          "path": "states/1_balloon/02.png"
-        },
-        {
-          "path": "states/1_balloon/03.png"
-        },
-        {
-          "path": "states/1_balloon/04.png"
-        },
-        {
-          "path": "states/1_balloon/05.png"
-        }
-      ]
-    },
-    {
-      "state": "destroyed",
-      "Sprite": [
-        {
-          "path": "move/01.png"
-        },
-        {
-          "path": "move/02.png"
-        },
-        {
-          "path": "move/03.png"
-        },
-        {
-          "path": "move/04.png"
-        },
-        {
-          "path": "move/05.png"
-        },
-        {
-          "path": "move/06.png"
-        },
-        {
-          "path": "move/07.png"
-        },
-        {
-          "path": "move/08.png"
-        }
-      ]
-    }
-  ],
-  "FlatShadow": {
-    "image_path": "shadow.png",
-    "CaseRight": {
-      "Point": [
-        {
-          "x": "4",
-          "y": "0"
-        },
-        {
-          "x": "-3",
-          "y": "25"
-        }
-      ],
-      "Inbetween": {
-        "Point": {
-          "x": "0",
-          "y": "-50"
-        }
-      }
-    },
-    "CaseLeft": [
-      {
-        "x": "4",
-        "y": "0"
-      },
-      {
-        "x": "-3",
-        "y": "-25"
-      }
-    ],
-    "CaseTop": [
-      {
-        "x": "4",
-        "y": "0"
-      },
-      {
-        "x": "-3",
-        "y": "25"
       }
     ]
   }

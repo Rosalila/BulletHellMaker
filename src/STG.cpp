@@ -94,7 +94,7 @@ void STG::mainLoop()
 
   for (;;)
   {
-    if (rosalila()->receiver->isPressed(0, "b") && api_state == "")
+    if (rosalila()->receiver->isPressed(0, "back") && api_state == "")
     {
       //            int replay_size=0;
       //            string seed_str = rosalila()->utility->toString(rosalila()->utility->random_seed);
@@ -390,13 +390,12 @@ bool STG::logic()
     }
   }
 
-  int stage_displacement = stage->velocity;
-  if (isSlowActive())
-    stage_displacement /= 3;
+  //if (isSlowActive())
+    //stage_displacement /= 3;
   //rosalila()->graphics->camera_x+=stage_displacement;
-  player->logic(stage_displacement);
-  player->x = player->x + stage_displacement;
-  enemy->logic(stage_displacement, stage->name);
+  player->logic(0);
+  //player->x = player->x + stage_displacement;
+  enemy->logic(0, stage->name);
   //enemy->setX(enemy->x+stage_displacement);
   stage->logic();
 
@@ -767,7 +766,7 @@ bool STG::uploadErrorLoop()
       return true;
     }
 
-    if (rosalila()->receiver->isPressed(0, "b"))
+    if (rosalila()->receiver->isPressed(0, "back"))
     {
       return false;
     }

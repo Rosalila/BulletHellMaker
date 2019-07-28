@@ -10,7 +10,7 @@ Character::Character(std::string name, int sound_channel_base)
   this->y = 500;
   this->shooting = true;
   this->current_state = "start";
-  this->current_type = "1";
+  this->current_type = "primary";
   this->visible = true;
   this->life_bar = NULL;
 
@@ -94,37 +94,36 @@ void Character::loadMainXML()
 
   this->velocity = 5;
 
-  Node *attributes_node = root_node->getNodeByName("Attributes");
 
-  if (attributes_node->hasAttribute("velocity"))
+  if (root_node->hasAttribute("velocity"))
   {
-    this->velocity = atoi(attributes_node->attributes["velocity"].c_str());
+    this->velocity = atoi(root_node->attributes["velocity"].c_str());
   }
 
   this->animation_velocity = 5;
-  if (attributes_node->hasAttribute("animation_velocity"))
+  if (root_node->hasAttribute("animation_velocity"))
   {
-    this->animation_velocity = atoi(attributes_node->attributes["animation_velocity"].c_str());
+    this->animation_velocity = atoi(root_node->attributes["animation_velocity"].c_str());
   }
 
   this->max_hp = 100;
   this->hp = 100;
-  if (attributes_node->hasAttribute("hp"))
+  if (root_node->hasAttribute("hp"))
   {
-    this->max_hp = atoi(attributes_node->attributes["hp"].c_str());
+    this->max_hp = atoi(root_node->attributes["hp"].c_str());
   }
   this->hp = this->max_hp;
 
+  Node *initial_position_node = root_node->getNodeByName("InitialPosition");
   this->x = 100;
-  if (attributes_node->hasAttribute("initial_x"))
+  if (initial_position_node->hasAttribute("x"))
   {
-    this->x = atoi(attributes_node->attributes["initial_x"].c_str());
+    this->x = atoi(initial_position_node->attributes["x"].c_str());
   }
-
   this->y = 500;
-  if (attributes_node->hasAttribute("initial_y"))
+  if (initial_position_node->hasAttribute("y"))
   {
-    this->y = atoi(attributes_node->attributes["initial_y"].c_str());
+    this->y = atoi(initial_position_node->attributes["y"].c_str());
   }
 
   this->life_bar_x = 0;
@@ -138,9 +137,10 @@ void Character::loadMainXML()
   this->color.blue = 0;
   this->color.alpha = 255;
 
-  Node *life_bar_node = root_node->getNodeByName("LifeBar");
 
-  if (life_bar_node != NULL)
+  Node *life_bar_node = root_node->getNodeByName("LifeBar");
+  
+  if (life_bar_node)
   {
     if (life_bar_node->hasAttribute("x"))
       this->life_bar_x = atoi(life_bar_node->attributes["x"].c_str());
@@ -148,17 +148,11 @@ void Character::loadMainXML()
     if (life_bar_node->hasAttribute("y"))
       this->life_bar_y = atoi(life_bar_node->attributes["y"].c_str());
 
-    if (life_bar_node->hasAttribute("color_r"))
-      this->color.red = atoi(life_bar_node->attributes["color_r"].c_str());
+    if (life_bar_node->hasAttribute("width"))
+      this->life_bar_rect_width = atoi(life_bar_node->attributes["width"].c_str());
 
-    if (life_bar_node->hasAttribute("color_g"))
-      this->color.green = atoi(life_bar_node->attributes["color_g"].c_str());
-
-    if (life_bar_node->hasAttribute("color_b"))
-      this->color.blue = atoi(life_bar_node->attributes["color_b"].c_str());
-
-    if (life_bar_node->hasAttribute("color_a"))
-      this->color.alpha = atoi(life_bar_node->attributes["color_a"].c_str());
+    if (life_bar_node->hasAttribute("height"))
+      this->life_bar_rect_height = atoi(life_bar_node->attributes["height"].c_str());
 
     if (life_bar_node->hasAttribute("rect_offset_x"))
       this->life_bar_rect_offset_x = atoi(life_bar_node->attributes["color_offset_x"].c_str());
@@ -166,15 +160,25 @@ void Character::loadMainXML()
     if (life_bar_node->hasAttribute("rect_offset_y"))
       this->life_bar_rect_offset_y = atoi(life_bar_node->attributes["color_offset_y"].c_str());
 
-    if (life_bar_node->hasAttribute("rect_height"))
-      this->life_bar_rect_height = atoi(life_bar_node->attributes["rect_height"].c_str());
-
-    if (life_bar_node->hasAttribute("rect_width"))
-      this->life_bar_rect_width = atoi(life_bar_node->attributes["rect_width"].c_str());
-
     if (life_bar_node->hasAttribute("image"))
     {
       this->life_bar = rosalila()->graphics->getImage(std::string(assets_directory) + directory + life_bar_node->attributes["image"]);
+    }
+
+    Node *color_node = life_bar_node->getNodeByName("Color");
+    if(color_node)
+    {
+      if (color_node->hasAttribute("red"))
+        this->color.red = atoi(color_node->attributes["red"].c_str());
+
+      if (color_node->hasAttribute("green"))
+        this->color.green = atoi(color_node->attributes["green"].c_str());
+
+      if (color_node->hasAttribute("blue"))
+        this->color.blue = atoi(color_node->attributes["blue"].c_str());
+
+      if (color_node->hasAttribute("alpha"))
+        this->color.alpha = atoi(color_node->attributes["alpha"].c_str());
     }
   }
 
@@ -256,13 +260,6 @@ void Character::loadBulletsXML()
     std::string node_name = bullet_nodes[i]->attributes["name"];
     vector<string> random_sounds;
 
-    if (bullet_nodes[i]->hasAttribute("sound"))
-    {
-      std::string sound = std::string(assets_directory) + directory + bullet_nodes[i]->attributes["sound"];
-      rosalila()->sound->addSound("bullet." + node_name, sound);
-      random_sounds.push_back("bullet." + node_name);
-    }
-
     if (bullet_nodes[i]->hasAttribute("sound_hit"))
     {
       std::string sound_hit = std::string(assets_directory) + directory + bullet_nodes[i]->attributes["sound_hit"];
@@ -281,12 +278,23 @@ void Character::loadBulletsXML()
       arpeggio_length = atoi(bullet_nodes[i]->attributes["arpeggio_length"].c_str());
     }
 
-    int sound_channel = 0;
-    if (bullet_nodes[i]->hasAttribute("sound_channel"))
+    Node* sound_node = bullet_nodes[i]->getNodeByName("Sound");
+
+    int sound_channel = -1;
+    if(sound_node)
     {
-      sound_channel = atoi(bullet_nodes[i]->attributes["sound_channel"].c_str());
-      if (sound_channel != -1)
-        sound_channel += sound_channel_base;
+      if (sound_node->hasAttribute("sound_channel"))
+      {
+        sound_channel = atoi(sound_node->attributes["sound_channel"].c_str());
+        if (sound_channel != -1)
+          sound_channel += sound_channel_base;
+      }
+      if (sound_node->hasAttribute("sound"))
+      {
+        std::string sound = std::string(assets_directory) + directory + sound_node->attributes["sound"];
+        rosalila()->sound->addSound("bullet." + node_name, sound);
+        random_sounds.push_back("bullet." + node_name);
+      }
     }
 
     int damage = 1;
@@ -294,11 +302,11 @@ void Character::loadBulletsXML()
     {
       damage = atoi(bullet_nodes[i]->attributes["damage"].c_str());
     }
-    vector<Node *> sprite_nodes = bullet_nodes[i]->getNodesByName("Sprite");
+    vector<Node *> images_nodes = bullet_nodes[i]->getNodesByName("Images");
     vector<Image *> sprites_temp;
-    for (int j = 0; j < (int)sprite_nodes.size(); j++)
+    for (int j = 0; j < (int)images_nodes.size(); j++)
     {
-      sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_nodes[j]->attributes["path"]));
+      sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + images_nodes[j]->attributes["path"]));
     }
     vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("Hitbox");
     vector<Hitbox *> hitboxes_temp;
@@ -337,15 +345,15 @@ void Character::loadBulletsXML()
       hitboxes_temp.push_back(new Hitbox(x, y, width, height, angle));
     }
 
-    Node *onhit_node = bullet_nodes[i]->getNodeByName("OnHit");
+    Node *onhit_node = bullet_nodes[i]->getNodeByName("OnHitImages");
     vector<Image *> sprites_onhit_temp;
     
     if (onhit_node)
     {
-      vector<Node *> sprite_node = bullet_nodes[i]->getNodesByName("OnHit");
-      for (int j = 0; j < (int)sprite_node.size(); j++)
+      vector<Node *> on_hit_images_node = bullet_nodes[i]->getNodesByName("OnHitImages");
+      for (int j = 0; j < (int)on_hit_images_node.size(); j++)
       {
-        sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_node[j]->attributes["path"]));
+        sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + on_hit_images_node[j]->attributes["path"]));
       }
     }
     Node *random_sound_node = bullet_nodes[i]->getNodeByName("RandomSound");

@@ -236,7 +236,7 @@ void stageSelect()
   {
     rosalila()->sound->fadeMusicVolume(128, 2);
 
-    if (rosalila()->receiver->isPressed(0, "b"))
+    if (rosalila()->receiver->isPressed(0, "back"))
     {
       rosalila()->sound->playSound("Menu.back", 0, 0, 0);
       break;

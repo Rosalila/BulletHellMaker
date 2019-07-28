@@ -2,13 +2,13 @@
 "Bullet":
 [
   {
-    "name": "My Bullet",
-    "damage": "7",
+    "name": "bullet a",
+    "damage": "1",
     "width": "20",
     "height": "6",
-    "Sound OPTIONAL": {
+    "Sound": {
       "channel": "-1",
-      "path": "sounds/shoot.ogg"
+      "path": "sounds/basic.ogg"
     },
     "Images": [
       {

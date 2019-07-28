@@ -186,12 +186,6 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   if (nodo_bounds->hasAttribute("y2"))
     this->bound_y2 = atoi(nodo_bounds->attributes["y2"].c_str());
 
-  Node *nodo_misc = root_node->getNodeByName("Misc");
-
-  this->velocity = 0;
-  if (nodo_misc->hasAttribute("velocity"))
-    this->velocity = atoi(nodo_misc->attributes["velocity"].c_str());
-
   rosalila()->utility->writeLogLine("Loading stage's BackLayers.");
 
   vector<int> random_colors_r;

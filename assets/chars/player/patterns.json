@@ -2,10 +2,10 @@
 "Type":
 [
   {
-    "name": "1",
+    "name": "primary",
     "Pattern": [
       {
-        "bullet": "bullet a",
+        "bullet": "My Bullet",
         "animation_velocity": "5",
         "angle": "0",
         "random_angle": "0",
@@ -20,39 +20,22 @@
     ]
   },
   {
-    "name": "2",
-    "Pattern": {
-      "bullet": "bullet b",
-      "animation_velocity": "5",
-      "velocity": "50",
-      "acceleration": "0",
-      "a_frequency": "0",
-      "cooldown": "5",
-      "offset_x": "45"
-    }
-  },
-  {
-    "name": "bomb",
-    "Pattern": {
-      "bullet": "bullet b",
-      "undestructable": "yes",
-      "collides_bullets": "yes",
-      "collides_opponent": "no",
-      "animation_velocity": "2",
-      "angle": "0",
-      "velocity": "-5",
-      "max_velocity": "25",
-      "acceleration": "0",
-      "a_frequency": "1",
-      "cooldown": "10",
-      "offset_x": "-35",
-      "Modifier": {
-        "at": "1",
-        "bullet": "bullet b",
-        "acceleration": "1",
-        "a_frequency": "5"
+    "name": "secondary",
+    "Pattern": [
+      {
+        "bullet": "My Bullet",
+        "animation_velocity": "5",
+        "angle": "45",
+        "random_angle": "0",
+        "velocity": "20",
+        "max_velocity": "25",
+        "acceleration": "0",
+        "a_frequency": "0",
+        "cooldown": "15",
+        "offset_x": "60",
+        "offset_y": "0"
       }
-    }
+    ]
   }
 ]
 }

@@ -1,0 +1,35 @@
+{
+  "Bounds": {
+    "x1": "0",
+    "y1": "0",
+    "x2": "1920",
+    "y2": "1080"
+  },
+  "Misc": {
+    "velocity": "0"
+  },
+  "BackLayer": [
+    {
+      "velocity_x": "0",
+      "x": "0",
+      "y": "0",
+      "frame": {
+        "type": "image",
+        "image_path": "background.png"
+      }
+    },
+    {
+      "velocity_x": "-0.5",
+      "x": "300",
+      "y": "500",
+      "separation_x": "1500",
+      "frame_duration": "5",
+      "frame": [
+        {
+          "type": "image",
+          "image_path": "planet.png"
+        }
+      ]
+    }
+  ]
+}

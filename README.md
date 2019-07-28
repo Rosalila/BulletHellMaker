@@ -3,7 +3,7 @@ Rosalila Shooter Engine
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
 
-1. **Fast and modern development**: Create playable characters, enemies and stages no sweat.
+1. **Fast and modern development**: Create boss fights without coding.
 2. **No string attached**: Free as in freedom, available even for commercial projects.
 3. **Easy from start to deploy**: Easy to get started and easy to publish your game on stores such as Steam and Epic.
 
@@ -19,38 +19,92 @@ Rosalila Shooter Engine
 
 ### Define characters
 
+Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
+
+main.json:
+
 ```Json
 {
+  "velocity": "6",
+  "animation_velocity": "15",
+  "hp": "4",
+  "InitialPosition": {
+    "x": "100",
+    "y": "500"
+  },
+  "Sounds": {
+    "hit": "sounds/hit.ogg"
+  },
   "LifeBar": {
-    "color_r": "65",
-    "color_g": "255",
-    "color_b": "65",
-    "rect_offset_x": "60",
-    "rect_offset_y": "10",
-    "rect_width": "1280",
-    "rect_height": "8"
+    "x": "0",
+    "y": "0",
+    "width": "1920",
+    "height": "8",
+    "Color":
+    {
+      "red": "65",
+      "green": "255",
+      "blue": "65"
+    }
   },
-  "Attributes": {
-    "velocity": "6",
-    "animation_velocity": "15",
-    "hp": "4",
-    "initial_x": "100",
-    "initial_y": "500"
-  },
-  "Shield": {
+  "Sprites": [
+    {
+      "state": "start",
+      "Sprite": [
+        {
+          "path": "ship01.png"
+        },
+        {
+          "path": "ship02.png"
+        }
+      ]
+    },
+    {
+      "state": "destroyed",
+      "Sprite": [
+        {
+          "path": "ship01.png"
+        }
+      ]
+    }
+  ],
+  "Hitboxes": [
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "0"
+    },
+    {
+      "x": "-10",
+      "y": "-5",
+      "width": "1",
+      "height": "10",
+      "angle": "60"
+    },
+    {
+      "x": "-1",
+      "y": "-0",
+      "width": "1",
+      "height": "10",
+      "angle": "-60"
+    }
+  ],
+  "Shield OPTIONAL": {
     "sprite": "shield.png",
     "max_shield": "500",
     "shield_fade": "40",
     "proration": "40"
   },
-  "Charge": {
+  "Charge OPTIONAL": {
     "sprite": "charge.png",
     "max_charge": "300",
     "charge_velocity": "1",
     "x": "-40",
     "y": "0"
   },
-  "Parry": {
+  "Parry OPTIONAL": {
     "duration": "60",
     "sound": "sounds/parry.ogg",
     "Parrying": {
@@ -86,290 +140,46 @@ Rosalila Shooter Engine
         "angle": "-60"
       }
     ]
-  },
-  "Hitboxes": [
-    {
-      "x": "-10",
-      "y": "-5",
-      "width": "1",
-      "height": "10",
-      "angle": "0"
-    },
-    {
-      "x": "-10",
-      "y": "-5",
-      "width": "1",
-      "height": "10",
-      "angle": "60"
-    },
-    {
-      "x": "-1",
-      "y": "-0",
-      "width": "1",
-      "height": "10",
-      "angle": "-60"
-    }
-  ],
-  "Sounds": {
-    "hit": "sounds/hit.ogg"
-  },
-  "Sprites": [
-    {
-      "state": "start",
-      "Sprite": [
-        {
-          "path": "states/3_balloons/01.png"
-        },
-        {
-          "path": "states/3_balloons/02.png"
-        },
-        {
-          "path": "states/3_balloons/03.png"
-        },
-        {
-          "path": "states/3_balloons/04.png"
-        },
-        {
-          "path": "states/3_balloons/05.png"
-        }
-      ]
-    },
-    {
-      "state": "2 balloons",
-      "conditions" :
-      {
-        "hp": "3"
-      },
-      "Sprite": [
-        {
-          "path": "states/2_balloons/01.png"
-        },
-        {
-          "path": "states/2_balloons/02.png"
-        },
-        {
-          "path": "states/2_balloons/03.png"
-        },
-        {
-          "path": "states/2_balloons/04.png"
-        },
-        {
-          "path": "states/2_balloons/05.png"
-        }
-      ]
-    },
-    {
-      "state": "1 balloon",
-      "conditions" :
-      {
-        "hp": "2"
-      },
-      "Sprite": [
-        {
-          "path": "states/1_balloon/01.png"
-        },
-        {
-          "path": "states/1_balloon/02.png"
-        },
-        {
-          "path": "states/1_balloon/03.png"
-        },
-        {
-          "path": "states/1_balloon/04.png"
-        },
-        {
-          "path": "states/1_balloon/05.png"
-        }
-      ]
-    },
-    {
-      "state": "destroyed",
-      "Sprite": [
-        {
-          "path": "move/01.png"
-        },
-        {
-          "path": "move/02.png"
-        },
-        {
-          "path": "move/03.png"
-        },
-        {
-          "path": "move/04.png"
-        },
-        {
-          "path": "move/05.png"
-        },
-        {
-          "path": "move/06.png"
-        },
-        {
-          "path": "move/07.png"
-        },
-        {
-          "path": "move/08.png"
-        }
-      ]
-    }
-  ],
-  "FlatShadow": {
-    "image_path": "shadow.png",
-    "CaseRight": {
-      "Point": [
-        {
-          "x": "4",
-          "y": "0"
-        },
-        {
-          "x": "-3",
-          "y": "25"
-        }
-      ],
-      "Inbetween": {
-        "Point": {
-          "x": "0",
-          "y": "-50"
-        }
-      }
-    },
-    "CaseLeft": [
-      {
-        "x": "4",
-        "y": "0"
-      },
-      {
-        "x": "-3",
-        "y": "-25"
-      }
-    ],
-    "CaseTop": [
-      {
-        "x": "4",
-        "y": "0"
-      },
-      {
-        "x": "-3",
-        "y": "25"
-      }
-    ]
   }
 }
 ```
 
 ### Define bullets
 
+Also define a collection of bullets with their sprites, sounds, etc...
+
+bullets.xml:
+
 ```Json
 {
 "Bullet":
 [
   {
-    "name": "bullet a",
+    "name": "My Bullet",
     "damage": "7",
-    "sound_channel": "-1",
-    "sound": "sounds/shoot.ogg",
     "width": "20",
     "height": "6",
-    "Color": {
-      "red": "255",
-      "green": "255",
-      "blue": "255",
-      "alpha": "255"
+    "Sound OPTIONAL": {
+      "channel": "-1",
+      "path": "sounds/shoot.ogg"
     },
-    "Sprite": [
+    "Images": [
       {
-        "path": "bullets/a/01.png"
-      },
-      {
-        "path": "bullets/a/02.png"
-      },
-      {
-        "path": "bullets/a/03.png"
-      },
-      {
-        "path": "bullets/a/04.png"
+        "path": "bullet.png"
       }
     ],
-    "Hitbox": {
-      "x": "-10",
-      "y": "-3",
-      "width": "20",
-      "height": "6",
-      "angle": "0"
-    },
-    "OnHit": [
+    "OnHitImages": [
       {
-        "path": "kajira/01.png"
-      },
-      {
-        "path": "kajira/02.png"
-      },
-      {
-        "path": "kajira/03.png"
-      },
-      {
-        "path": "kajira/04.png"
-      },
-      {
-        "path": "kajira/05.png"
-      },
-      {
-        "path": "kajira/06.png"
-      },
-      {
-        "path": "kajira/07.png"
-      },
-      {
-        "path": "kajira/08.png"
+        "path": "on_hit.png"
       }
-    ]
-  },
-  {
-    "name": "bullet b",
-    "damage": "1",
-    "sound_channel": "-1",
-    "sound": "sounds/large.ogg",
-    "width": "10",
-    "height": "100",
-    "Color": {
-      "red": "255",
-      "green": "255",
-      "blue": "255",
-      "alpha": "255"
-    },
-    "Sprite": {
-      "path": "bullets/b/01.png"
-    },
-    "Hitbox": {
-      "x": "-5",
-      "y": "-50",
-      "width": "10",
-      "height": "100",
-      "angle": "0"
-    },
-    "OnHit": [
+    ],
+    "Hitbox": [
       {
-        "path": "kajira/01.png"
-      },
-      {
-        "path": "kajira/02.png"
-      },
-      {
-        "path": "kajira/03.png"
-      },
-      {
-        "path": "kajira/04.png"
-      },
-      {
-        "path": "kajira/05.png"
-      },
-      {
-        "path": "kajira/06.png"
-      },
-      {
-        "path": "kajira/07.png"
-      },
-      {
-        "path": "kajira/08.png"
+        "x": "-10",
+        "y": "-3",
+        "width": "20",
+        "height": "6",
+        "angle": "0"
       }
     ]
   }
@@ -379,15 +189,19 @@ Rosalila Shooter Engine
 
 ### Define patterns
 
+Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attacked to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior (see below). 
+
+patterns.json:
+
 ```Json
 {
 "Type":
 [
   {
-    "name": "1",
+    "name": "primary",
     "Pattern": [
       {
-        "bullet": "bullet a",
+        "bullet": "My Bullet",
         "animation_velocity": "5",
         "angle": "0",
         "random_angle": "0",
@@ -402,45 +216,32 @@ Rosalila Shooter Engine
     ]
   },
   {
-    "name": "2",
-    "Pattern": {
-      "bullet": "bullet b",
-      "animation_velocity": "5",
-      "velocity": "50",
-      "acceleration": "0",
-      "a_frequency": "0",
-      "cooldown": "5",
-      "offset_x": "45"
-    }
-  },
-  {
-    "name": "bomb",
-    "Pattern": {
-      "bullet": "bullet b",
-      "undestructable": "yes",
-      "collides_bullets": "yes",
-      "collides_opponent": "no",
-      "animation_velocity": "2",
-      "angle": "0",
-      "velocity": "-5",
-      "max_velocity": "25",
-      "acceleration": "0",
-      "a_frequency": "1",
-      "cooldown": "10",
-      "offset_x": "-35",
-      "Modifier": {
-        "at": "1",
-        "bullet": "bullet b",
-        "acceleration": "1",
-        "a_frequency": "5"
+    "name": "secondary",
+    "Pattern": [
+      {
+        "bullet": "My Bullet",
+        "animation_velocity": "5",
+        "angle": "45",
+        "random_angle": "0",
+        "velocity": "20",
+        "max_velocity": "25",
+        "acceleration": "0",
+        "a_frequency": "0",
+        "cooldown": "15",
+        "offset_x": "60",
+        "offset_y": "0"
       }
-    }
+    ]
   }
 ]
 }
 ```
 
-### Define enemy timeline
+### Define the enemy behavior
+
+Change enemy attributes or attacks in a given time or when health goes below certain amount to create some sort of timeline defined behavior.
+
+modifier.json:
 
 ```Json
 {
@@ -458,25 +259,29 @@ Rosalila Shooter Engine
   },
   {
     "at": "200",
-    "pattern_type": "A"
+    "pattern_type": "Pattern A"
   },
   {
     "life_at": "4000",
-    "pattern_type": "B"
+    "pattern_type": "Pattern B"
   },
   {
     "life_at": "3000",
-    "pattern_type": "C"
+    "pattern_type": "Pattern C"
   },
   {
     "life_at": "2000",
-    "pattern_type": "D"
+    "pattern_type": "Pattern D"
   }
 ]
 }
 ```
 
 ### Define stages
+
+Add annimated layers on the front and on the background for pure cosmetic purposes.
+
+main.xml:
 
 ```Json
 {
@@ -491,149 +296,40 @@ Rosalila Shooter Engine
   },
   "BackLayer": [
     {
-      "randomize_color": "no",
       "velocity_x": "0",
       "x": "0",
       "y": "0",
-      "separation_x": "1280",
       "frame": {
         "type": "image",
-        "image_path": "layers/l0.png"
+        "image_path": "background.png"
       }
     },
     {
-      "randomize_color": "no",
-      "velocity_x": "-0.03",
+      "velocity_x": "-0.5",
       "x": "300",
-      "y": "400",
-      "separation_x": "1280",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/l1.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.07",
-      "x": "1320",
-      "y": "120",
-      "separation_x": "1280",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/l2.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.2",
-      "x": "100",
-      "y": "210",
-      "separation_x": "1280",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/l3.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.2",
-      "x": "1400",
-      "y": "700",
-      "separation_x": "1280",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/l4.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-1.2",
-      "x": "0",
-      "y": "90",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/a1.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-1.2",
-      "x": "15",
-      "y": "125",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/a2.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-1.2",
-      "x": "10",
-      "y": "100",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/a3.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.5",
-      "x": "1700",
-      "y": "750",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/b1.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.5",
-      "x": "1715",
-      "y": "760",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/b2.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.5",
-      "x": "1690",
-      "y": "735",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/b3.png"
-      }
-    },
-    {
-      "randomize_color": "no",
-      "velocity_x": "-0.5",
-      "x": "1695",
-      "y": "145",
-      "separation_x": "2000",
-      "blend_effect": "yes",
-      "frame": {
-        "type": "image",
-        "image_path": "layers/x2.png"
-      }
+      "y": "500",
+      "separation_x": "1500",
+      "frame_duration": "5",
+      "frame": [
+        {
+          "type": "image",
+          "image_path": "planet.png"
+        }
+      ]
     }
   ]
 }
 ```
 
-## Build
+## Directory structure
+
+TODO
+
+## Example game
+
+TODO
+
+## Build & Run
 
 ```bash
 # Dependencies
@@ -644,4 +340,9 @@ mkdir build
 cd build
 cmake ..
 make
+
+# Run
+cd ..
+cp build/shmup .
+./shmup
 ```
