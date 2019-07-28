@@ -187,9 +187,9 @@ bullets.xml:
 }
 ```
 
-### Define patterns
+### Define attack patterns
 
-Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attacked to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior (see below). 
+Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior). 
 
 patterns.json:
 
@@ -237,7 +237,7 @@ patterns.json:
 }
 ```
 
-### Define the enemy behavior
+### Enemy behavior
 
 Change enemy attributes or attacks in a given time or when health goes below certain amount to create some sort of timeline defined behavior.
 
@@ -318,6 +318,134 @@ main.xml:
       ]
     }
   ]
+}
+```
+
+## General configuration
+
+Organize the stages order and other stuff here.
+
+config.json:
+
+```json
+{
+  "Chars": {
+    "char": {
+      "name": "player"
+    }
+  },
+  "Stages": {
+    "stage": [
+      {
+        "name": "FirstStage"
+      },
+      {
+        "name": "SecondStage"
+      }
+    ]
+  },
+  "Resolution": {
+    "x": "1920",
+    "y": "1080"
+  },
+  "ScreenSize": {
+    "x": "1920",
+    "y": "1080"
+  },
+  "Fullscreen": {
+    "enabled": "no"
+  },
+  "Font": {
+    "path": "assets/font.ttf",
+    "red": "255",
+    "green": "255",
+    "blue": "255",
+    "size": "30"
+  },
+  "Notifications": {
+    "background_path": "assets/notification_background.png"
+  },
+  "Inputs": {
+    "Player": {
+      "number": "0",
+      "Type": [
+        {
+          "name": "keyboard",
+          "button": [
+            {
+              "name": "8",
+              "key": "up"
+            },
+            {
+              "name": "2",
+              "key": "down"
+            },
+            {
+              "name": "4",
+              "key": "left"
+            },
+            {
+              "name": "6",
+              "key": "right"
+            },
+            {
+              "name": "a",
+              "key": "z"
+            },
+            {
+              "name": "b",
+              "key": "x"
+            },
+            {
+              "name": "c",
+              "key": "c"
+            },
+            {
+              "name": "back",
+              "key": "q"
+            }
+          ]
+        },
+        {
+          "name": "gamepad",
+          "button": [
+            {
+              "name": "8",
+              "key": "up"
+            },
+            {
+              "name": "2",
+              "key": "down"
+            },
+            {
+              "name": "4",
+              "key": "left"
+            },
+            {
+              "name": "6",
+              "key": "right"
+            },
+            {
+              "name": "a",
+              "key": "1"
+            },
+            {
+              "name": "b",
+              "key": "2"
+            },
+            {
+              "name": "c",
+              "key": "3"
+            },
+            {
+              "name": "back",
+              "key": "4"
+            }
+          ]
+        }
+      ]
+    }
+  }
 }
 ```
 

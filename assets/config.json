@@ -1,4 +1,16 @@
 {
+  "Chars": {
+    "char": {
+      "name": "player"
+    }
+  },
+  "Stages": {
+    "stage": [
+      {
+        "name": "StageExample"
+      }
+    ]
+  },
   "Resolution": {
     "x": "1920",
     "y": "1080"
@@ -100,17 +112,5 @@
         }
       ]
     }
-  },
-  "Chars": {
-    "char": {
-      "name": "player"
-    }
-  },
-  "Stages": {
-    "stage": [
-      {
-        "name": "StageExample"
-      }
-    ]
   }
 }
