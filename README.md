@@ -487,9 +487,9 @@ Your game/
 
 ## Getting started
 
-Download the boilerplate example game and run the binary corresponding to your system.
+Download the [boilerplate example](https://github.com/Rosalila/STGExample) game and run the binary corresponding to your system.
 
-## Build & Run
+## Build
 
 ```bash
 # Dependencies
@@ -500,9 +500,4 @@ mkdir build
 cd build
 cmake ..
 make
-
-# Run
-cd ..
-cp build/shmup .
-./shmup
 ```
