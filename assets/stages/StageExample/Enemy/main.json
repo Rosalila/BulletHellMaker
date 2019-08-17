@@ -26,54 +26,7 @@
       "state": "start",
       "Sprite": [
         {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
-        }
-      ]
-    },
-    {
-      "state": "up",
-      "Sprite": [
-        {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
-        }
-      ]
-    },
-    {
-      "state": "down",
-      "Sprite": [
-        {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
-        }
-      ]
-    },
-    {
-      "state": "left",
-      "Sprite": [
-        {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
-        }
-      ]
-    },
-    {
-      "state": "right",
-      "Sprite": [
-        {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
+          "path": "enemy.png"
         }
       ]
     },
@@ -81,10 +34,7 @@
       "state": "destroyed",
       "Sprite": [
         {
-          "path": "character/01.png"
-        },
-        {
-          "path": "character/02.png"
+          "path": "enemy.png"
         }
       ]
     }

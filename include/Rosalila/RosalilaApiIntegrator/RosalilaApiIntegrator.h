@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "Rosalila.h"
+#include "../Rosalila.h"
 
 #ifdef STEAM
 #include "Steam/SteamIntegration.h"

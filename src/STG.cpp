@@ -771,8 +771,11 @@ bool STG::uploadErrorLoop()
       return false;
     }
 
-    image_upload_error->color_filter.alpha = current_training_transparency;
-    rosalila()->graphics->drawImage(image_upload_error, 0, 0);
+    if(image_upload_error)
+    {
+      image_upload_error->color_filter.alpha = current_training_transparency;
+      rosalila()->graphics->drawImage(image_upload_error, 0, 0);
+    }
 
     rosalila()->update();
   }

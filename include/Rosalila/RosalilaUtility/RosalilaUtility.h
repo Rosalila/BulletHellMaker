@@ -55,6 +55,7 @@ public:
     string getAbsolutePath();
     vector<string> getDirectoryNames(string path);
     vector<string> getFileNames(string path);
+    int fileExists(std::string filename);
 };
 
 #endif

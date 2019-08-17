@@ -17,9 +17,11 @@ Rosalila Shooter Engine
 
 ## Usage
 
-### Define characters
+### Characters
 
 Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
+
+![](img/player.gif?raw=true)
 
 main.json:
 
@@ -144,7 +146,7 @@ main.json:
 }
 ```
 
-### Define bullets
+### Bullets
 
 Also define a collection of bullets with their sprites, sounds, etc...
 
@@ -187,9 +189,11 @@ bullets.xml:
 }
 ```
 
-### Define attack patterns
+### Attack patterns
 
-Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior). 
+Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior).
+
+![](img/enemy.gif?raw=true)
 
 patterns.json:
 
@@ -277,9 +281,11 @@ modifier.json:
 }
 ```
 
-### Define stages
+### Stages
 
 Add annimated layers on the front and on the background for pure cosmetic purposes.
+
+![](img/background.gif?raw=true)
 
 main.xml:
 
@@ -451,11 +457,35 @@ config.json:
 
 ## Directory structure
 
-TODO
+Follow the directory structure so the Shmup Maker detects your characters and stages.
 
-## Example game
+```
+Your game/
+│   shmup
+│
+└───assets/
+    │   config.json
+    │   font.ttf
+    │
+    └───chars/
+        └───Your Playable Character/
+            │   bullets.json
+            │   main.json
+            │   patterns.json
+    └───stages/
+        └───Your Stage
+            │   config.json
+            │
+            └───Enemy
+                │   bullets.json
+                │   main.json
+                │   modifiers.json
+                │   patterns.json
+```
 
-TODO
+## Getting started
+
+Download the boilerplate example game and run the binary corresponding to your system.
 
 ## Build & Run
 
