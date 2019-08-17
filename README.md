@@ -15,6 +15,8 @@ Rosalila Shooter Engine
 | Store, replay and share your best runs | ✔ |
 | Libre, MIT licensed | ✔ |
 
+![](img/game.png?raw=true)
+
 ## Usage
 
 ### Characters
