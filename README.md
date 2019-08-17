@@ -9,6 +9,9 @@ Rosalila Shooter Engine
 
 | Feature | Supported |
 |----------|------------ |
+| Create playable characters | ✔ |
+| Create bossfights | ✔ |
+| Customize everthing using JSON files | ✔ |
 | Windows / Linux / MacOS | ✔ |
 | PC, XInput, PS4 and Steam input supported | ✔ |
 | Steamworks achievements, stats and leaderboard | ✔ |
