@@ -5,6 +5,13 @@
     Rights:  See end of file.
 */
 
+#ifdef _WIN32
+#define WINDOWS
+#endif
+#ifdef _WIN64
+#define WINDOWS
+#endif
+
 #ifdef WINDOWS
 
 #include <dirent.h>
