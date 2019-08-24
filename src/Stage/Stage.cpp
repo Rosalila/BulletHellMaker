@@ -168,7 +168,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   //Load settings
   music_path = path + name + "/music.ogg";
 
-  Node *nodo_bounds = root_node->getNodeByName("Bounds");
+  Node *nodo_bounds = root_node->getNodeByName("bounds");
   this->bound_x1 = 0;
   this->bound_y1 = 0;
   this->bound_x2 = rosalila()->graphics->screen_width;
@@ -206,7 +206,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   map<string, int> max_layers;
   int current_layer = 0;
 
-  vector<Node *> backlayer_nodes = root_node->getNodesByName("BackLayer");
+  vector<Node *> backlayer_nodes = root_node->getNodesByName("back_layer");
 
   for (int i = 0; i < (int)backlayer_nodes.size(); i++)
   {

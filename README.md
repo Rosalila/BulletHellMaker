@@ -23,38 +23,99 @@ Rosalila Shooter Engine
 
 Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
 
+#### main.json
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| velocity           | `integer`                             | ✔ | Movement velocity |
+| animation_velocity | `integer`                             | ✔ | Animation speed |
+| hp                 | `integer`                             | ✔ | Health, hit points |
+| initial_position   | [initial_position](#initial_position) | ✔ | Character position at the beginning |
+| sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
+| life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
+| sprites[]          | [sprites](#sprites)                   | ✔ | Sprite list |
+| hitboxes[]         | [hitboxes](#hitboxes[])                 | ✔ | Hitboxes |
+
+#### initial_position
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Initial position on the x axis |
+| y      | `integer` | ✔ | Initial position on the y axis |
+
+#### sounds
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| hit | `file path` | ✔ | `.ogg` sfx to be played when the character is hit |
+
+#### life_bar
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Life bar position on the x axis |
+| y      | `integer` | ✔ | Life bar position on the y axis |
+| width  | `integer` | ✔ | Width of the life bar |
+| height | `integer` | ✔ | Height of the life bar |
+| color  | [color](#color) | ✔ | Color of the life bar |
+
+#### color
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| red   | `integer` | ✔ | Amount of red color from 0 to 255 |
+| green | `integer` | ✔ | Amount of green color from 0 to 255 |
+| blue  | `integer` | ✔ | Amount of blue color from 0 to 255 |
+
+#### sprites
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| state  | `string` | ✔ | Name of the state |
+| path[] | `string` | ✔ | `.png` path array |
+
+#### hitboxes[]
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Hitbox position on the x axis |
+| y      | `integer` | ✔ | Hitbox position on the y axis |
+| width  | `integer` | ✔ | Hitbox width |
+| height | `integer` | ✔ | Hitbox height |
+| angle  | `integer` | ✔ | Hitbox rotation |
+
 ![](img/player.gif?raw=true)
 
-main.json:
+example:
 
 ```Json
 {
   "velocity": "6",
   "animation_velocity": "15",
   "hp": "4",
-  "InitialPosition": {
+  "initial_position": {
     "x": "100",
     "y": "500"
   },
-  "Sounds": {
+  "sounds": {
     "hit": "sounds/hit.ogg"
   },
-  "LifeBar": {
+  "life_bar": {
     "x": "0",
     "y": "0",
     "width": "1920",
     "height": "8",
-    "Color":
+    "color":
     {
       "red": "65",
       "green": "255",
       "blue": "65"
     }
   },
-  "Sprites": [
+  "sprites": [
     {
       "state": "start",
-      "Sprite": [
+      "sprite": [
         {
           "path": "ship01.png"
         },
@@ -65,14 +126,14 @@ main.json:
     },
     {
       "state": "destroyed",
-      "Sprite": [
+      "sprite": [
         {
           "path": "ship01.png"
         }
       ]
     }
   ],
-  "Hitboxes": [
+  "hitboxes": [
     {
       "x": "-10",
       "y": "-5",
@@ -94,57 +155,7 @@ main.json:
       "height": "10",
       "angle": "-60"
     }
-  ],
-  "Shield OPTIONAL": {
-    "sprite": "shield.png",
-    "max_shield": "500",
-    "shield_fade": "40",
-    "proration": "40"
-  },
-  "Charge OPTIONAL": {
-    "sprite": "charge.png",
-    "max_charge": "300",
-    "charge_velocity": "1",
-    "x": "-40",
-    "y": "0"
-  },
-  "Parry OPTIONAL": {
-    "duration": "60",
-    "sound": "sounds/parry.ogg",
-    "Parrying": {
-      "sprite": "parrying.png",
-      "x": "-40",
-      "y": "-35"
-    },
-    "Parryed": {
-      "sprite": "parryed.png",
-      "x": "-40",
-      "y": "-35"
-    },
-    "Hitboxes": [
-      {
-        "x": "-21",
-        "y": "-25",
-        "width": "5",
-        "height": "50",
-        "angle": "0"
-      },
-      {
-        "x": "-21",
-        "y": "-19",
-        "width": "5",
-        "height": "46",
-        "angle": "60"
-      },
-      {
-        "x": "19",
-        "y": "-3",
-        "width": "5",
-        "height": "46",
-        "angle": "-60"
-      }
-    ]
-  }
+  ]
 }
 ```
 
@@ -156,7 +167,7 @@ bullets.xml:
 
 ```Json
 {
-"Bullet":
+"bullet":
 [
   {
     "name": "My Bullet",
@@ -167,17 +178,17 @@ bullets.xml:
       "channel": "-1",
       "path": "sounds/shoot.ogg"
     },
-    "Images": [
+    "images": [
       {
         "path": "bullet.png"
       }
     ],
-    "OnHitImages": [
+    "on_hit_images": [
       {
         "path": "on_hit.png"
       }
     ],
-    "Hitbox": [
+    "hitbox": [
       {
         "x": "-10",
         "y": "-3",
@@ -201,11 +212,11 @@ patterns.json:
 
 ```Json
 {
-"Type":
+"type":
 [
   {
     "name": "primary",
-    "Pattern": [
+    "pattern": [
       {
         "bullet": "My Bullet",
         "animation_velocity": "5",
@@ -223,7 +234,7 @@ patterns.json:
   },
   {
     "name": "secondary",
-    "Pattern": [
+    "pattern": [
       {
         "bullet": "My Bullet",
         "animation_velocity": "5",
@@ -251,7 +262,7 @@ modifier.json:
 
 ```Json
 {
-"Modifier":
+"modifier":
 [
   {
     "at": "0",
@@ -293,16 +304,13 @@ main.xml:
 
 ```Json
 {
-  "Bounds": {
+  "bounds": {
     "x1": "0",
     "y1": "0",
     "x2": "1920",
     "y2": "1080"
   },
-  "Misc": {
-    "velocity": "0"
-  },
-  "BackLayer": [
+  "back_layer": [
     {
       "velocity_x": "0",
       "x": "0",
@@ -337,12 +345,12 @@ config.json:
 
 ```json
 {
-  "Chars": {
+  "chars": {
     "char": {
       "name": "player"
     }
   },
-  "Stages": {
+  "stages": {
     "stage": [
       {
         "name": "FirstStage"
@@ -352,31 +360,31 @@ config.json:
       }
     ]
   },
-  "Resolution": {
+  "resolution": {
     "x": "1920",
     "y": "1080"
   },
-  "ScreenSize": {
+  "screen_size": {
     "x": "1920",
     "y": "1080"
   },
-  "Fullscreen": {
+  "fullscreen": {
     "enabled": "no"
   },
-  "Font": {
+  "font": {
     "path": "assets/font.ttf",
     "red": "255",
     "green": "255",
     "blue": "255",
     "size": "30"
   },
-  "Notifications": {
+  "notifications": {
     "background_path": "assets/notification_background.png"
   },
-  "Inputs": {
-    "Player": {
+  "inputs": {
+    "player": {
       "number": "0",
-      "Type": [
+      "type": [
         {
           "name": "keyboard",
           "button": [

@@ -114,7 +114,7 @@ void Character::loadMainXML()
   }
   this->hp = this->max_hp;
 
-  Node *initial_position_node = root_node->getNodeByName("InitialPosition");
+  Node *initial_position_node = root_node->getNodeByName("initial_position");
   this->x = 100;
   if (initial_position_node->hasAttribute("x"))
   {
@@ -138,7 +138,7 @@ void Character::loadMainXML()
   this->color.alpha = 255;
 
 
-  Node *life_bar_node = root_node->getNodeByName("LifeBar");
+  Node *life_bar_node = root_node->getNodeByName("life_bar");
   
   if (life_bar_node)
   {
@@ -165,7 +165,7 @@ void Character::loadMainXML()
       this->life_bar = rosalila()->graphics->getImage(std::string(assets_directory) + directory + life_bar_node->attributes["image"]);
     }
 
-    Node *color_node = life_bar_node->getNodeByName("Color");
+    Node *color_node = life_bar_node->getNodeByName("color");
     if(color_node)
     {
       if (color_node->hasAttribute("red"))
@@ -182,7 +182,7 @@ void Character::loadMainXML()
     }
   }
 
-  vector<Node *> hitboxes_node = root_node->getNodesByName("Hitboxes");
+  vector<Node *> hitboxes_node = root_node->getNodesByName("hitboxes");
 
   for (int i = 0; i < hitboxes_node.size(); i++)
   {
@@ -198,7 +198,7 @@ void Character::loadMainXML()
     this->hitboxes.push_back(hitbox);
   }
 
-  Node *sounds_node = root_node->getNodeByName("Sounds");
+  Node *sounds_node = root_node->getNodeByName("sounds");
 
   if (sounds_node)
   {
@@ -208,7 +208,7 @@ void Character::loadMainXML()
     }
   }
 
-  vector<Node *> sprites_nodes = root_node->getNodesByName("Sprites");
+  vector<Node *> sprites_nodes = root_node->getNodesByName("sprites");
 
   for (int i = 0; i < (int)sprites_nodes.size(); i++)
   {
@@ -235,7 +235,7 @@ void Character::loadMainXML()
       }
     }
 
-    vector<Node *> sprite_nodes = sprites_nodes[i]->getNodesByName("Sprite");
+    vector<Node *> sprite_nodes = sprites_nodes[i]->getNodesByName("sprite");
 
     for (int j = 0; j < (int)sprite_nodes.size(); j++)
     {
@@ -253,7 +253,7 @@ void Character::loadBulletsXML()
 {
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "bullets.json");
 
-  vector<Node *> bullet_nodes = root_node->getNodesByName("Bullet");
+  vector<Node *> bullet_nodes = root_node->getNodesByName("bullet");
 
   for (int i = 0; i < (int)bullet_nodes.size(); i++)
   {
@@ -302,13 +302,13 @@ void Character::loadBulletsXML()
     {
       damage = atoi(bullet_nodes[i]->attributes["damage"].c_str());
     }
-    vector<Node *> images_nodes = bullet_nodes[i]->getNodesByName("Images");
+    vector<Node *> images_nodes = bullet_nodes[i]->getNodesByName("images");
     vector<Image *> sprites_temp;
     for (int j = 0; j < (int)images_nodes.size(); j++)
     {
       sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + images_nodes[j]->attributes["path"]));
     }
-    vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("Hitbox");
+    vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("hitbox");
     vector<Hitbox *> hitboxes_temp;
     for (int j = 0; j < (int)hitbox_nodes.size(); j++)
     {
@@ -345,12 +345,12 @@ void Character::loadBulletsXML()
       hitboxes_temp.push_back(new Hitbox(x, y, width, height, angle));
     }
 
-    Node *onhit_node = bullet_nodes[i]->getNodeByName("OnHitImages");
+    Node *onhit_node = bullet_nodes[i]->getNodeByName("on_hit_images");
     vector<Image *> sprites_onhit_temp;
     
     if (onhit_node)
     {
-      vector<Node *> on_hit_images_node = bullet_nodes[i]->getNodesByName("OnHitImages");
+      vector<Node *> on_hit_images_node = bullet_nodes[i]->getNodesByName("on_hit_images");
       for (int j = 0; j < (int)on_hit_images_node.size(); j++)
       {
         sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + on_hit_images_node[j]->attributes["path"]));
@@ -382,7 +382,7 @@ void Character::loadBulletsXML()
       height = atoi(bullet_nodes[i]->attributes["height"].c_str());
     }
 
-    Node *color_node = bullet_nodes[i]->getNodeByName("Color");
+    Node *color_node = bullet_nodes[i]->getNodeByName("color");
 
     int red = 0;
     int green = 0;
@@ -513,7 +513,7 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
 
   std::map<int, vector<Modifier *>> *pattern_modifiers = new std::map<int, vector<Modifier *>>();
 
-  vector<Node *> modifier_nodes = pattern_node->getNodesByName("Modifier");
+  vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifier");
   for (int i = 0; i < (int)modifier_nodes.size(); i++)
   {
     int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
@@ -684,7 +684,7 @@ void Character::loadPatternsXML()
 {
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "patterns.json");
 
-  vector<Node *> type_nodes = root_node->getNodesByName("Type");
+  vector<Node *> type_nodes = root_node->getNodesByName("type");
 
   for (int i = 0; i < (int)type_nodes.size(); i++)
   {
@@ -692,7 +692,7 @@ void Character::loadPatternsXML()
 
     std::vector<Pattern *> patterns;
 
-    vector<Node *> pattern_nodes = type_nodes[i]->getNodesByName("Pattern");
+    vector<Node *> pattern_nodes = type_nodes[i]->getNodesByName("pattern");
 
     for (int j = 0; j < (int)pattern_nodes.size(); j++)
     {
@@ -705,7 +705,7 @@ void Character::loadPatternsXML()
     {
       int amount = atoi(repeat_nodes[j]->attributes["amount"].c_str());
 
-      vector<Node *> pattern_nodes = repeat_nodes[j]->getNodesByName("Pattern");
+      vector<Node *> pattern_nodes = repeat_nodes[j]->getNodesByName("pattern");
 
       for (int k = 0; k < (int)pattern_nodes.size(); k++)
       {

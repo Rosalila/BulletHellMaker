@@ -546,7 +546,7 @@ void Player::loadFromXML()
   this->proration = 0;
   this->shield_image = NULL;
 
-  Node *shield_node = root_node->getNodeByName("Shield");
+  Node *shield_node = root_node->getNodeByName("shield");
 
   if (shield_node)
   {
@@ -617,7 +617,7 @@ void Player::loadFromXML()
   this->parryed_x = 0;
   this->parryed_y = 0;
 
-  Node *parry_node = root_node->getNodeByName("Parry");
+  Node *parry_node = root_node->getNodeByName("parry");
 
   if (parry_node)
   {
@@ -650,7 +650,7 @@ void Player::loadFromXML()
       }
     }
 
-    Node *parryed_node = parry_node->getNodeByName("Parryed");
+    Node *parryed_node = parry_node->getNodeByName("parryed");
 
     if (parryed_node)
     {
@@ -668,7 +668,7 @@ void Player::loadFromXML()
       }
     }
 
-    vector<Node *> hitboxes_nodes = parry_node->getNodesByName("Hitboxes");
+    vector<Node *> hitboxes_nodes = parry_node->getNodesByName("hitboxes");
 
     for (int i = 0; i < (int)hitboxes_nodes.size(); i++)
     {

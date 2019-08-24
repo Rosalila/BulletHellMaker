@@ -49,7 +49,7 @@ std::vector<std::string> getStageNames()
   std::vector<std::string> stage_names;
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + "config.json");
 
-  vector<Node *> stage_nodes = root_node->getNodeByName("Stages")->getNodesByName("stage");
+  vector<Node *> stage_nodes = root_node->getNodeByName("stages")->getNodesByName("stage");
 
   for (int i = 0; i < (int)stage_nodes.size(); i++)
   {

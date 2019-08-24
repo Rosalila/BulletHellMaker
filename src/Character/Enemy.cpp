@@ -229,7 +229,7 @@ void Enemy::loadModifiersFromXML()
 {
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "modifiers.json");
 
-  vector<Node *> modifier_nodes = root_node->getNodesByName("Modifier");
+  vector<Node *> modifier_nodes = root_node->getNodesByName("modifier");
 
   for (int i = 0; i < (int)modifier_nodes.size(); i++)
   {
