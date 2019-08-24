@@ -9,6 +9,9 @@ Rosalila Shooter Engine
 
 | Feature | Supported |
 |----------|------------ |
+| Playable characters | ✔ |
+| Bossfights | ✔ |
+| Customize attack patterns, animations, sfx,  etc... via JSON | ✔ |
 | Windows / Linux / MacOS | ✔ |
 | PC, XInput, PS4 and Steam input supported | ✔ |
 | Steamworks achievements, stats and leaderboard | ✔ |
@@ -495,9 +498,9 @@ Your game/
 
 ## Getting started
 
-Download the boilerplate example game and run the binary corresponding to your system.
+Download the [boilerplate example](https://github.com/Rosalila/STGExample) game and run the binary corresponding to your system.
 
-## Build & Run
+## Build
 
 ```bash
 # Dependencies
@@ -508,9 +511,4 @@ mkdir build
 cd build
 cmake ..
 make
-
-# Run
-cd ..
-cp build/shmup .
-./shmup
 ```
