@@ -26,70 +26,7 @@ Rosalila Shooter Engine
 
 Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
 
-#### main.json
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| velocity           | `integer`                             | ✔ | Movement velocity |
-| animation_velocity | `integer`                             | ✔ | Animation speed |
-| hp                 | `integer`                             | ✔ | Health, hit points |
-| initial_position   | [initial_position](#initial_position) | ✔ | Character position at the beginning |
-| sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
-| life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
-| sprites[]          | [sprites](#sprites)                   | ✔ | Sprite list |
-| hitboxes[]         | [hitboxes](#hitboxes[])                 | ✔ | Hitboxes |
-
-#### initial_position
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Initial position on the x axis |
-| y      | `integer` | ✔ | Initial position on the y axis |
-
-#### sounds
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| hit | `file path` | ✔ | `.ogg` sfx to be played when the character is hit |
-
-#### life_bar
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Life bar position on the x axis |
-| y      | `integer` | ✔ | Life bar position on the y axis |
-| width  | `integer` | ✔ | Width of the life bar |
-| height | `integer` | ✔ | Height of the life bar |
-| color  | [color](#color) | ✔ | Color of the life bar |
-
-#### color
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| red   | `integer` | ✔ | Amount of red color from 0 to 255 |
-| green | `integer` | ✔ | Amount of green color from 0 to 255 |
-| blue  | `integer` | ✔ | Amount of blue color from 0 to 255 |
-
-#### sprites
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| state  | `string` | ✔ | Name of the state |
-| path[] | `string` | ✔ | `.png` path array |
-
-#### hitboxes[]
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Hitbox position on the x axis |
-| y      | `integer` | ✔ | Hitbox position on the y axis |
-| width  | `integer` | ✔ | Hitbox width |
-| height | `integer` | ✔ | Hitbox height |
-| angle  | `integer` | ✔ | Hitbox rotation |
-
 ![](img/player.gif?raw=true)
-
-example:
 
 ```Json
 {
@@ -161,6 +98,67 @@ example:
   ]
 }
 ```
+
+#### main.json
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| velocity           | `integer`                             | ✔ | Movement velocity |
+| animation_velocity | `integer`                             | ✔ | Animation speed |
+| hp                 | `integer`                             | ✔ | Health, hit points |
+| initial_position   | [initial_position](#initial_position) | ✔ | Character position at the beginning |
+| sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
+| life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
+| sprites[]          | [sprites](#sprites)                   | ✔ | Sprite list |
+| hitboxes[]         | [hitboxes](#hitboxes[])                 | ✔ | Hitboxes |
+
+#### initial_position
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Initial position on the x axis |
+| y      | `integer` | ✔ | Initial position on the y axis |
+
+#### sounds
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| hit | `file path` | ✔ | `.ogg` sfx to be played when the character is hit |
+
+#### life_bar
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Life bar position on the x axis |
+| y      | `integer` | ✔ | Life bar position on the y axis |
+| width  | `integer` | ✔ | Width of the life bar |
+| height | `integer` | ✔ | Height of the life bar |
+| color  | [color](#color) | ✔ | Color of the life bar |
+
+#### color
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| red   | `integer` | ✔ | Amount of red color from 0 to 255 |
+| green | `integer` | ✔ | Amount of green color from 0 to 255 |
+| blue  | `integer` | ✔ | Amount of blue color from 0 to 255 |
+
+#### sprites
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| state  | `string` | ✔ | Name of the state |
+| path[] | `string` | ✔ | `.png` path array |
+
+#### hitboxes[]
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Hitbox position on the x axis |
+| y      | `integer` | ✔ | Hitbox position on the y axis |
+| width  | `integer` | ✔ | Hitbox width |
+| height | `integer` | ✔ | Hitbox height |
+| angle  | `integer` | ✔ | Hitbox rotation |
 
 ### Bullets
 
