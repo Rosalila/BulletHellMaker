@@ -164,7 +164,35 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 
 Also define a collection of bullets with their sprites, sounds, etc...
 
-bullets.xml:
+#### bullets.xml
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name          | `string`          | ✔ | Bullet unique name identifier |
+| damage        | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
+| width         | `integer`         | ✔ | Bullet width |
+| height        | `integer`         | ✔ | Bullet height |
+| sound         | [sound](#sound)   |   | Sound to be played when emited |
+| images        | `string[]`        | ✔ | Sprite list |
+| on_hit_images | `string[]`        | ✔ | Sprite list |
+| hitbox[]      | [hitbox](#hitbox) | ✔ | Hitbox list |
+
+#### sound
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| channel | `integer`   | ✔ | Sound channel, -1 means auto assign |
+| path    | `file path` | ✔ | `.ogg` sound effect file |
+
+#### hitbox
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Hitbox position on the x axis |
+| y      | `integer` | ✔ | Hitbox position on the y axis |
+| width  | `integer` | ✔ | Hitbox width |
+| height | `integer` | ✔ | Hitbox height |
+| angle  | `integer` | ✔ | Hitbox rotation |
 
 ```Json
 {
@@ -175,10 +203,6 @@ bullets.xml:
     "damage": "7",
     "width": "20",
     "height": "6",
-    "Sound OPTIONAL": {
-      "channel": "-1",
-      "path": "sounds/shoot.ogg"
-    },
     "images": [
       {
         "path": "bullet.png"
@@ -479,10 +503,10 @@ Your game/
     │   font.ttf
     │
     └───chars/
-        └───Your Playable Character/
-            │   bullets.json
-            │   main.json
-            │   patterns.json
+    │   └───Your Playable Character/
+    │       │   bullets.json
+    │       │   main.json
+    │       │   patterns.json
     └───stages/
         └───Your Stage
             │   config.json
