@@ -1,5 +1,5 @@
-Rosalila Shooter Engine
-=======================
+Rosalila Shoot 'Em Up Maker
+===========================
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
 
@@ -27,6 +27,8 @@ Rosalila Shooter Engine
 Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
 
 ![](img/player.gif?raw=true)
+
+#### main.json
 
 ```Json
 {
@@ -99,8 +101,6 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 }
 ```
 
-#### main.json
-
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | velocity           | `integer`                             | ✔ | Movement velocity |
@@ -110,7 +110,7 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 | sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
 | life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
 | sprites[]          | [sprites](#sprites)                   | ✔ | Sprite list |
-| hitboxes[]         | [hitboxes](#hitboxes[])                 | ✔ | Hitboxes |
+| hitboxes[]         | [hitboxes](#hitboxes[])               | ✔ | Hitboxes |
 
 #### initial_position
 
@@ -166,34 +166,6 @@ Also define a collection of bullets with their sprites, sounds, etc...
 
 #### bullets.xml
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name          | `string`          | ✔ | Bullet unique name identifier |
-| damage        | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
-| width         | `integer`         | ✔ | Bullet width |
-| height        | `integer`         | ✔ | Bullet height |
-| sound         | [sound](#sound)   |   | Sound to be played when emited |
-| images        | `string[]`        | ✔ | Sprite list |
-| on_hit_images | `string[]`        | ✔ | Sprite list |
-| hitbox[]      | [hitbox](#hitbox) | ✔ | Hitbox list |
-
-#### sound
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| channel | `integer`   | ✔ | Sound channel, -1 means auto assign |
-| path    | `file path` | ✔ | `.ogg` sound effect file |
-
-#### hitbox
-
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Hitbox position on the x axis |
-| y      | `integer` | ✔ | Hitbox position on the y axis |
-| width  | `integer` | ✔ | Hitbox width |
-| height | `integer` | ✔ | Hitbox height |
-| angle  | `integer` | ✔ | Hitbox rotation |
-
 ```Json
 {
 "bullet":
@@ -227,13 +199,41 @@ Also define a collection of bullets with their sprites, sounds, etc...
 }
 ```
 
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name          | `string`          | ✔ | Bullet unique name identifier |
+| damage        | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
+| width         | `integer`         | ✔ | Bullet width |
+| height        | `integer`         | ✔ | Bullet height |
+| sound         | [sound](#sound)   |   | Sound to be played when emited |
+| images        | `string[]`        | ✔ | Sprite list |
+| on_hit_images | `string[]`        | ✔ | Sprite list |
+| hitbox[]      | [hitbox](#hitbox) | ✔ | Hitbox list |
+
+#### sound
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| channel | `integer`   | ✔ | Sound channel, -1 means auto assign |
+| path    | `file path` | ✔ | `.ogg` sound effect file |
+
+#### hitbox
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Hitbox position on the x axis |
+| y      | `integer` | ✔ | Hitbox position on the y axis |
+| width  | `integer` | ✔ | Hitbox width |
+| height | `integer` | ✔ | Hitbox height |
+| angle  | `integer` | ✔ | Hitbox rotation |
+
 ### Attack patterns
 
 Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior).
 
 ![](img/enemy.gif?raw=true)
 
-patterns.json:
+#### patterns.json
 
 ```Json
 {
@@ -279,11 +279,38 @@ patterns.json:
 }
 ```
 
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| type | [type[]](#type)| ✔ | A collection of attack patterns form an attack type |
+
+#### type
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name     | `string`             | ✔ | Pattern collection unique name |
+| patterns | [pattern[]](#pattern) | ✔ | Single bullet pattern |
+
+#### pattern
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| bullet             | `string`  | ✔ | Bullet identifier |
+| animation_velocity | `integer` | ✔ | Sprite animation speed |
+| angle              | `integer` | ✔ | Rotation |
+| random_angle       | `integer` | ✔ | Adds a random angle from 0 to the provided number |
+| velocity           | `integer` | ✔ | Speed |
+| max_velocity       | `integer` | ✔ | Maximum velocity cap |
+| acceleration       | `integer` | ✔ | Change of velocity added every frame |
+| a_frequency        | `integer` | ✔ | Frequency that the acceleration is applied |
+| cooldown           | `integer` | ✔ | Amount of frames between each bullet emision |
+| offset_x           | `integer` | ✔ | Pixels offset relative to the character on the x axis on emision |
+| offset_y           | `integer` | ✔ | Pixels offset relative to the character on the y axis on emision |
+
 ### Enemy behavior
 
 Change enemy attributes or attacks in a given time or when health goes below certain amount to create some sort of timeline defined behavior.
 
-modifier.json:
+#### modifier.json
 
 ```Json
 {
@@ -319,13 +346,27 @@ modifier.json:
 }
 ```
 
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| modifier           | [modifier[]](#modifier) | ✔ | Bullet identifier |
+
+#### modifier
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| at           | `integer`  | ✔ | Modifier's frame of execution |
+| life_at      | `integer`  | ✔ | Defines the amount of hit points needed to be reached to execute the modifier |
+| velocity     | `integer`  | ✔ | New enemy velocity to be set |
+| angle_change | `integer`  | ✔ | New enemy angle change to be set |
+| pattern_type | `integer`  | ✔ | New enemy pattern to be set |
+
 ### Stages
 
 Add annimated layers on the front and on the background for pure cosmetic purposes.
 
 ![](img/background.gif?raw=true)
 
-main.xml:
+#### main.json
 
 ```Json
 {
@@ -362,11 +403,34 @@ main.xml:
 }
 ```
 
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| bounds      | [bounds](#bounds) | ✔ | Bullet bounds, bullets outside this range will be automatically distroyed |
+| back_layer  | [layer[]](#layer) | ✔ | Animated layers to be displayed behind of characters and bullets |
+| front_layer | [layer[]](#layer) | ✔ | Animated layers to be displayed on front of characters and bullets |
+
+#### layer
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x              | `integer`         | ✔ | Initial position on the x axis |
+| y              | `integer`         | ✔ | Initial position on the y axis |
+| separation_x   | `integer`         | ✔ | Amount of pixels between every animation repetition |
+| frame_duration | `integer`         | ✔ | Animation speed |
+| frame          | [frame[]](#frame) | ✔ | Animation sprites |
+
+#### frame
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| type       | `image`     | ✔ | Type of frame |
+| image_path | `file path` | ✔ | Path to the `.png` image |
+
 ## General configuration
 
 Organize the stages order and other stuff here.
 
-config.json:
+#### config.json
 
 ```json
 {
@@ -489,6 +553,93 @@ config.json:
   }
 }
 ```
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `chars`         | [char[]](#char)                 | ✔ | Playable character |
+| `stages`        | [stage[]](#stage)               | ✔ | Playable character |
+| `resolution`    | [resolution](#resolution)       | ✔ | Screen resolution, in pixels |
+| `screen_size`   | [screen_size](#screen_size)     | ✔ | Screen size, in pixels |
+| `fullscreen`    | [fullscreen](#fullscreen)       | ✔ | Fullscreen settings |
+| `inputs`        | [inputs](#inputs)               | ✔ | Input settings |
+| `font`          | [font](#font)                   |   | Fullscreen settings |
+| `notifications` | [notifications](#notifications) |   | Notification settings |
+
+#### char
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name | `string` | ✔ | Character name, must match the directory under `assets/chars/` |
+
+#### stage
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name | `string` | ✔ | Stage name, must match the directory under `assets/stages/` |
+
+#### resolution
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x | `integer` | ✔ | Resolution width |
+| y | `integer` | ✔ | Resolution height |
+
+#### screen_size
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x | `integer` | ✔ | Screen width |
+| y | `integer` | ✔ | Screen height |
+
+#### fullscreen
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| enabled | `yes/no` | ✔ | Defines whether the game will go fullscreen or not |
+
+#### font
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| path  | `file path` | ✔ | Path to the `.ttf` file |
+| red   | `integer`   | ✔ | Amount of red color from 0 to 255 |
+| green | `integer`   | ✔ | Amount of green color from 0 to 255 |
+| blue  | `integer`   | ✔ | Amount of blue color from 0 to 255 |
+| size  | `integer`   | ✔ | Font size |
+
+#### notifications
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| background_path  | `file path` | ✔ | Path to the notification box `.png` background |
+
+#### inputs
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| player[]  | [player](#player) | ✔ | Array of player's button configuration |
+
+
+#### player
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| number | `integer`     | ✔ | Player number from 0 onwards... |
+| type[] | [type](#type) | ✔ | Array of types of inputs (gamepad or keyboard) |
+
+#### type
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name     | `keyboard/gamepad` | ✔ | Type of input configuration |
+| button[] | [button](#button)  | ✔ | Button key-name mapping |
+
+#### button
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| name | `string` | ✔ | Name of the button to be used on your game |
+| key  | `string` | ✔ | Key associated to the name |
 
 ## Directory structure
 
