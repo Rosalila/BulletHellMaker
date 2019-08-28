@@ -411,14 +411,6 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
   std::string bullet_name = pattern_node->attributes["bullet"];
   Bullet *bullet = bullets[bullet_name];
 
-  int velocity = 0;
-  if (pattern_node->hasAttribute("velocity"))
-    velocity = atoi(pattern_node->attributes["velocity"].c_str());
-
-  int max_velocity = 9999999;
-  if (pattern_node->hasAttribute("max_velocity"))
-    max_velocity = atoi(pattern_node->attributes["max_velocity"].c_str());
-
   int acceleration = 0;
   if (pattern_node->hasAttribute("acceleration"))
     acceleration = atoi(pattern_node->attributes["acceleration"].c_str());
@@ -427,98 +419,9 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
   if (pattern_node->hasAttribute("a_frequency"))
     a_frequency = atoi(pattern_node->attributes["a_frequency"].c_str());
 
-  int angle = 0;
-  if (pattern_node->hasAttribute("angle"))
-    angle = atoi(pattern_node->attributes["angle"].c_str());
-
-  int angle_change = 0;
-  if (pattern_node->hasAttribute("angle_change"))
-    angle_change = atoi(pattern_node->attributes["angle_change"].c_str());
-
-  int stop_ac_at = -1;
-  if (pattern_node->hasAttribute("stop_ac_at"))
-    stop_ac_at = atoi(pattern_node->attributes["stop_ac_at"].c_str());
-
-  int ac_frequency = 0;
-  if (pattern_node->hasAttribute("ac_frequency"))
-    ac_frequency = atoi(pattern_node->attributes["ac_frequency"].c_str());
-
-  int offset_x = 0;
-  if (pattern_node->hasAttribute("offset_x"))
-    offset_x = atoi(pattern_node->attributes["offset_x"].c_str());
-
-  int offset_y = 0;
-  if (pattern_node->hasAttribute("offset_y"))
-    offset_y = atoi(pattern_node->attributes["offset_y"].c_str());
-
-  int startup = 0;
-  if (pattern_node->hasAttribute("startup"))
-    startup = atoi(pattern_node->attributes["startup"].c_str());
-
-  int cooldown = 0;
-  if (pattern_node->hasAttribute("cooldown"))
-    cooldown = atoi(pattern_node->attributes["cooldown"].c_str());
-
-  int animation_velocity = 0;
-  if (pattern_node->hasAttribute("animation_velocity"))
-    animation_velocity = atoi(pattern_node->attributes["animation_velocity"].c_str());
-
-  double auto_scale = 0;
-  if (pattern_node->hasAttribute("auto_scale"))
-    auto_scale = atof(pattern_node->attributes["auto_scale"].c_str());
-
-  int duration = -1;
-  if (pattern_node->hasAttribute("duration"))
-    duration = atoi(pattern_node->attributes["duration"].c_str());
-
-  int random_angle = 0;
-  if (pattern_node->hasAttribute("random_angle"))
-    random_angle = atoi(pattern_node->attributes["random_angle"].c_str());
-
-  bool aim_player = false;
-  if (pattern_node->hasAttribute("aim_player"))
-    aim_player = pattern_node->attributes["aim_player"] == "yes";
-
-  int bullet_rotation = 0;
-  if (pattern_node->hasAttribute("bullet_rotation"))
-    bullet_rotation = atoi(pattern_node->attributes["bullet_rotation"].c_str());
-
-  int br_change = 0;
-  if (pattern_node->hasAttribute("br_change"))
-    br_change = atoi(pattern_node->attributes["br_change"].c_str());
-
-  bool independent_br = false;
-  if (pattern_node->hasAttribute("independent_br"))
-    independent_br = pattern_node->attributes["independent_br"] == "yes";
-
-  bool freeze = false;
-  if (pattern_node->hasAttribute("freeze"))
-    freeze = pattern_node->attributes["freeze"] == "yes";
-
-  bool homing = false;
-  if (pattern_node->hasAttribute("homing"))
-    homing = pattern_node->attributes["homing"] == "yes";
-
-  bool collides_bullets = false;
-  if (pattern_node->hasAttribute("collides_bullets"))
-    collides_bullets = pattern_node->attributes["collides_bullets"] == "yes";
-
-  bool collides_opponent = true;
-  if (pattern_node->hasAttribute("collides_opponent"))
-    collides_opponent = pattern_node->attributes["collides_opponent"] == "yes";
-
-  bool undestructable = false;
-  if (pattern_node->hasAttribute("undestructable"))
-    undestructable = pattern_node->attributes["undestructable"] == "yes";
-
-  std::map<int, vector<Modifier *>> *pattern_modifiers = new std::map<int, vector<Modifier *>>();
-
-  vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifier");
-  for (int i = 0; i < (int)modifier_nodes.size(); i++)
-  {
-    int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
-    (*pattern_modifiers)[at] = loadModifierXML(modifier_nodes[i]);
-  }
+  double additional_player_hp_change = 0;
+  if (pattern_node->hasAttribute("additional_player_hp_change"))
+    additional_player_hp_change = atof(pattern_node->attributes["additional_player_hp_change"].c_str());
 
   double additional_player_velocity_x = 0;
   if (pattern_node->hasAttribute("additional_player_velocity_x"))
@@ -528,9 +431,106 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
   if (pattern_node->hasAttribute("additional_player_velocity_y"))
     additional_player_velocity_y = atof(pattern_node->attributes["additional_player_velocity_y"].c_str());
 
-  double additional_player_hp_change = 0;
-  if (pattern_node->hasAttribute("additional_player_hp_change"))
-    additional_player_hp_change = atof(pattern_node->attributes["additional_player_hp_change"].c_str());
+  bool aim_player = false;
+  if (pattern_node->hasAttribute("aim_player"))
+    aim_player = pattern_node->attributes["aim_player"] == "yes";
+
+  int angle = 0;
+  if (pattern_node->hasAttribute("angle"))
+    angle = atoi(pattern_node->attributes["angle"].c_str());
+
+  int angle_change = 0;
+  if (pattern_node->hasAttribute("angle_change"))
+    angle_change = atoi(pattern_node->attributes["angle_change"].c_str());
+
+  int ac_frequency = 0;
+  if (pattern_node->hasAttribute("ac_frequency"))
+    ac_frequency = atoi(pattern_node->attributes["ac_frequency"].c_str());
+
+  int animation_velocity = 0;
+  if (pattern_node->hasAttribute("animation_velocity"))
+    animation_velocity = atoi(pattern_node->attributes["animation_velocity"].c_str());
+
+  double auto_scale = 0;
+  if (pattern_node->hasAttribute("auto_scale"))
+    auto_scale = atof(pattern_node->attributes["auto_scale"].c_str());
+
+  int bullet_rotation = 0;
+  if (pattern_node->hasAttribute("bullet_rotation"))
+    bullet_rotation = atoi(pattern_node->attributes["bullet_rotation"].c_str());
+
+  int br_change = 0;
+  if (pattern_node->hasAttribute("br_change"))
+    br_change = atoi(pattern_node->attributes["br_change"].c_str());
+
+  bool collides_bullets = false;
+  if (pattern_node->hasAttribute("collides_bullets"))
+    collides_bullets = pattern_node->attributes["collides_bullets"] == "yes";
+
+  bool collides_opponent = true;
+  if (pattern_node->hasAttribute("collides_opponent"))
+    collides_opponent = pattern_node->attributes["collides_opponent"] == "yes";
+  
+  int cooldown = 0;
+  if (pattern_node->hasAttribute("cooldown"))
+    cooldown = atoi(pattern_node->attributes["cooldown"].c_str());
+
+  int duration = -1;
+  if (pattern_node->hasAttribute("duration"))
+    duration = atoi(pattern_node->attributes["duration"].c_str());
+
+  bool freeze = false;
+  if (pattern_node->hasAttribute("freeze"))
+    freeze = pattern_node->attributes["freeze"] == "yes";
+
+  bool homing = false;
+  if (pattern_node->hasAttribute("homing"))
+    homing = pattern_node->attributes["homing"] == "yes";
+
+  bool independent_br = false;
+  if (pattern_node->hasAttribute("independent_br"))
+    independent_br = pattern_node->attributes["independent_br"] == "yes";
+  
+  int max_velocity = 9999999;
+  if (pattern_node->hasAttribute("max_velocity"))
+    max_velocity = atoi(pattern_node->attributes["max_velocity"].c_str());
+
+  int offset_x = 0;
+  if (pattern_node->hasAttribute("offset_x"))
+    offset_x = atoi(pattern_node->attributes["offset_x"].c_str());
+
+  int offset_y = 0;
+  if (pattern_node->hasAttribute("offset_y"))
+    offset_y = atoi(pattern_node->attributes["offset_y"].c_str());
+
+  int random_angle = 0;
+  if (pattern_node->hasAttribute("random_angle"))
+    random_angle = atoi(pattern_node->attributes["random_angle"].c_str());
+
+  int startup = 0;
+  if (pattern_node->hasAttribute("startup"))
+    startup = atoi(pattern_node->attributes["startup"].c_str());
+
+  int stop_ac_at = -1;
+  if (pattern_node->hasAttribute("stop_ac_at"))
+    stop_ac_at = atoi(pattern_node->attributes["stop_ac_at"].c_str());
+
+  bool undestructable = false;
+  if (pattern_node->hasAttribute("undestructable"))
+    undestructable = pattern_node->attributes["undestructable"] == "yes";
+
+  int velocity = 0;
+  if (pattern_node->hasAttribute("velocity"))
+    velocity = atoi(pattern_node->attributes["velocity"].c_str());
+
+  std::map<int, vector<Modifier *>> *pattern_modifiers = new std::map<int, vector<Modifier *>>();
+
+  vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifier");
+  for (int i = 0; i < (int)modifier_nodes.size(); i++)
+  {
+    int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
+    (*pattern_modifiers)[at] = loadModifierXML(modifier_nodes[i]);
+  }
 
   double player_velocity_override = 0;
   if (pattern_node->hasAttribute("player_velocity_override"))

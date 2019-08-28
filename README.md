@@ -292,19 +292,38 @@ Attach bullet to patterns to create attacks. Name the character attacks as `Prim
 
 #### pattern
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| bullet             | `string`  | ✔ | Bullet identifier |
-| animation_velocity | `integer` | ✔ | Sprite animation speed |
-| angle              | `integer` | ✔ | Rotation |
-| random_angle       | `integer` | ✔ | Adds a random angle from 0 to the provided number |
-| velocity           | `integer` | ✔ | Speed |
-| max_velocity       | `integer` | ✔ | Maximum velocity cap |
-| acceleration       | `integer` | ✔ | Change of velocity added every frame |
-| a_frequency        | `integer` | ✔ | Frequency that the acceleration is applied |
-| cooldown           | `integer` | ✔ | Amount of frames between each bullet emision |
-| offset_x           | `integer` | ✔ | Pixels offset relative to the character on the x axis on emision |
-| offset_y           | `integer` | ✔ | Pixels offset relative to the character on the y axis on emision |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| bullet                       | `string`     | ✔ |           | Bullet identifier |
+| acceleration                 | `integer`    |   | `0`       | Change of velocity added every frame |
+| a_frequency                  | `integer`    |   | `0`       | Frequency that the acceleration is applied |
+| additional_player_hp_change  | `double`     |   | `0`       | Player's hit points through time, use this to apply poison or heal buffs |
+| additional_player_velocity_x | `integer`    |   | `0`       | Player's velocity change, use this to pull or push him or to in conjuction with to `additional_player_velocity_y` to reduce the general velocity |
+| additional_player_velocity_y | `integer`    |   | `0`       | Player's velocity change, use this to push him up or down or to in conjuction with to `additional_player_velocity_x` to reduce the general velocity |
+| aim_player                   | `yes/no`     |   | `no`      | Overrides the bullet angle to now point to the player |
+| angle                        | `integer`    |   | `0`       | Rotation |
+| angle_change                 | `integer`    |   | `0`       | Rotation change through time |
+| ac_frequency                 | `integer`    |   | `0`       | Angle change frequency |
+| animation_velocity           | `integer`    |   | `0`       | Sprite animation speed |
+| auto_scale                   | `double`     |   | `0`       | Bullet scale change through time |
+| bullet_rotation              | `integer`    |   | `0`       | Rotates the bullet sprites withouth affecting other attributes such as the angle or hitboxes |
+| br_change                    | `integer`    |   | `0`       | Bullet rotation change through time |
+| collides_bullets             | `yes/no`     |   | `no`      | If the bullet collides with an opponent's one, both would be destroyed |
+| collides_opponent            | `yes/no`     |   | `yes`     | The bullet is able to hit the opponent |
+| cooldown                     | `integer`    |   | `0`       | Amount of frames between each bullet emision |
+| duration                     | `integer`    |   | `-1`      | Amount of frames before the bullet gets destroyed, -1 is infinite |
+| freeze                       | `yes/no`     |   | `no`      | All bullet changes, such as `velocity`, `acceleration` or `angle_chage` are stopped |
+| homming                      | `yes/no`     |   | `no`      | Bullet will track the player |
+| independent_br               | `yes/no`     |   | `no`      | The `bullet_rotation` is independent from the `angle` |
+| max_velocity                 | `yes/no`     |   | `9999999` | Velocity cap |
+| offset_x                     | `integer`    |   | `0`       | Pixels offset relative to the character on the x axis on emision |
+| offset_y                     | `integer`    |   | `0`       | Pixels offset relative to the character on the y axis on emision |
+| random_angle                 | `integer`    |   | `0`       | Adds a random angle from 0 to the provided number |
+| startup                      | `integer`    |   | `0`       | Amount of frames before emiting the bullet for the first time |
+| stop_ac_at                   | `integer`    |   | `-1`      | Amount of frames before stopping the `angle_change`, -1 means never |
+| undestructable               | `yes/no`     |   | `no`      | The bullet can be destroyed by other bullets |
+| velocity                     | `integer`    |   | `0`       | Speed |
+| modifier                     | `modifier[]` |   |           | Modifies a pattern in a specific frame |
 
 ### Enemy behavior
 
