@@ -168,23 +168,23 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   //Load settings
   music_path = path + name + "/music.ogg";
 
-  Node *nodo_bounds = root_node->getNodeByName("bounds");
+  Node *bullets_domain_node = root_node->getNodeByName("bullets_domain");
+
   this->bound_x1 = 0;
+  if (bullets_domain_node->hasAttribute("x"))
+    this->bound_x1 = atoi(bullets_domain_node->attributes["x"].c_str());
+
   this->bound_y1 = 0;
+  if (bullets_domain_node->hasAttribute("y"))
+    this->bound_y1 = atoi(bullets_domain_node->attributes["y"].c_str());
+
   this->bound_x2 = rosalila()->graphics->screen_width;
+  if (bullets_domain_node->hasAttribute("width"))
+    this->bound_x2 = this->bound_x1 + atoi(bullets_domain_node->attributes["width"].c_str());
+
   this->bound_y2 = rosalila()->graphics->screen_height;
-
-  if (nodo_bounds->hasAttribute("x1"))
-    this->bound_x1 = atoi(nodo_bounds->attributes["x1"].c_str());
-
-  if (nodo_bounds->hasAttribute("y1"))
-    this->bound_y1 = atoi(nodo_bounds->attributes["y1"].c_str());
-
-  if (nodo_bounds->hasAttribute("x2"))
-    this->bound_x2 = atoi(nodo_bounds->attributes["x2"].c_str());
-
-  if (nodo_bounds->hasAttribute("y2"))
-    this->bound_y2 = atoi(nodo_bounds->attributes["y2"].c_str());
+  if (bullets_domain_node->hasAttribute("height"))
+    this->bound_y2 = this->bound_y1 + atoi(bullets_domain_node->attributes["height"].c_str());
 
   rosalila()->utility->writeLogLine("Loading stage's BackLayers.");
 
@@ -280,8 +280,8 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     }
 
     int frame_duration = 0;
-    if (backlayer_nodes[i]->hasAttribute("frame_duration"))
-      frame_duration = atoi(backlayer_nodes[i]->attributes["frame_duration"].c_str());
+    if (backlayer_nodes[i]->hasAttribute("animation_velocity"))
+      frame_duration = atoi(backlayer_nodes[i]->attributes["animation_velocity"].c_str());
 
     if (backlayer_nodes[i]->hasAttribute("randomize_frame_duration"))
       frame_duration += rosalila()->utility->getNonSeededRandomNumber() % atoi(backlayer_nodes[i]->attributes["randomize_frame_duration"].c_str());
@@ -333,7 +333,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     if (backlayer_nodes[i]->hasAttribute("randomize_separation_x"))
       separation_x += rosalila()->utility->getNonSeededRandomNumber() % atoi(backlayer_nodes[i]->attributes["randomize_separation_x"].c_str());
 
-    vector<Node *> frame_nodes = backlayer_nodes[i]->getNodesByName("frame");
+    vector<Node *> frame_nodes = backlayer_nodes[i]->getNodesByName("sprites");
 
     vector<LayerFrame *> layer_frames;
 
@@ -371,8 +371,8 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   for (int i = 0; i < (int)frontlayer_nodes.size(); i++)
   {
     int frame_duration = 0;
-    if (frontlayer_nodes[i]->hasAttribute("frame_duration"))
-      frame_duration = atoi(frontlayer_nodes[i]->attributes["frame_duration"].c_str());
+    if (frontlayer_nodes[i]->hasAttribute("animation_velocity"))
+      frame_duration = atoi(frontlayer_nodes[i]->attributes["animation_velocity"].c_str());
 
     int depth_effect_x = 0;
     if (frontlayer_nodes[i]->hasAttribute("depth_effect_x"))
@@ -415,7 +415,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     std::vector<int> textures_size_x;
     std::vector<int> textures_size_y;
 
-    vector<Node *> frame_nodes = frontlayer_nodes[i]->getNodesByName("frame");
+    vector<Node *> frame_nodes = frontlayer_nodes[i]->getNodesByName("sprites");
 
     vector<LayerFrame *> layer_frames;
 
@@ -460,9 +460,9 @@ LayerFrame *Stage::getFrameFromNode(Node *frame_node)
   if (frame_node->hasAttribute("type"))
     type = frame_node->attributes["type"];
 
-  if (frame_node->hasAttribute("image_path"))
+  if (frame_node->hasAttribute("path"))
   {
-    string image_path = path + name + "/images/" + frame_node->attributes["image_path"];
+    string image_path = path + name + "/images/" + frame_node->attributes["path"];
     image_temp = rosalila()->graphics->getImage(image_path);
 
     width = image_temp->getWidth();

@@ -54,10 +54,10 @@ Playable and enemy characters are defined with the same attributes on a `main.js
       "blue": "65"
     }
   },
-  "sprites": [
+  "states": [
     {
-      "state": "start",
-      "sprite": [
+      "name": "start",
+      "sprites": [
         {
           "path": "ship01.png"
         },
@@ -67,8 +67,8 @@ Playable and enemy characters are defined with the same attributes on a `main.js
       ]
     },
     {
-      "state": "destroyed",
-      "sprite": [
+      "name": "destroyed",
+      "sprites": [
         {
           "path": "ship01.png"
         }
@@ -109,8 +109,8 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 | initial_position   | [initial_position](#initial_position) | ✔ | Character position at the beginning |
 | sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
 | life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
-| sprites[]          | [sprites](#sprites)                   | ✔ | Sprite list |
-| hitboxes[]         | [hitboxes](#hitboxes[])               | ✔ | Hitboxes |
+| states             | [states[]](#state)                    | ✔ | Sprite list |
+| hitboxes           | [hitbox[]](#hitbox)                   | ✔ | Hitboxes |
 
 #### initial_position
 
@@ -143,14 +143,20 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 | green | `integer` | ✔ | Amount of green color from 0 to 255 |
 | blue  | `integer` | ✔ | Amount of blue color from 0 to 255 |
 
-#### sprites
+#### state
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| state  | `string` | ✔ | Name of the state |
-| path[] | `string` | ✔ | `.png` path array |
+| name    | `string`            | ✔ | Name of the state |
+| sprites | [sprite[]](#sprite) | ✔ | `.png` path array |
 
-#### hitboxes[]
+#### sprite
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| path | `path` | ✔ | `.png` file path |
+
+#### hitbox
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -173,19 +179,17 @@ Also define a collection of bullets with their sprites, sounds, etc...
   {
     "name": "My Bullet",
     "damage": "7",
-    "width": "20",
-    "height": "6",
-    "images": [
+    "sprites": [
       {
         "path": "bullet.png"
       }
     ],
-    "on_hit_images": [
+    "on_hit_sprites": [
       {
         "path": "on_hit.png"
       }
     ],
-    "hitbox": [
+    "hitboxes": [
       {
         "x": "-10",
         "y": "-3",
@@ -201,14 +205,12 @@ Also define a collection of bullets with their sprites, sounds, etc...
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| name          | `string`          | ✔ | Bullet unique name identifier |
-| damage        | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
-| width         | `integer`         | ✔ | Bullet width |
-| height        | `integer`         | ✔ | Bullet height |
-| sound         | [sound](#sound)   |   | Sound to be played when emited |
-| images        | `string[]`        | ✔ | Sprite list |
-| on_hit_images | `string[]`        | ✔ | Sprite list |
-| hitbox[]      | [hitbox](#hitbox) | ✔ | Hitbox list |
+| name           | `string`          | ✔ | Bullet unique name identifier |
+| damage         | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
+| sound          | [sound](#sound)   |   | Sound to be played when emited |
+| images         | `string[]`        | ✔ | Sprite list |
+| on_hit_sprites | `string[]`        | ✔ | Sprite list to be displayed on bullet collision |
+| hitboxes       | [hitbox[]](#hitbox) | ✔ | Hitbox list |
 
 #### sound
 
@@ -325,6 +327,13 @@ Attach bullet to patterns to create attacks. Name the character attacks as `Prim
 | velocity                     | `integer`    |   | `0`       | Speed |
 | modifier                     | `modifier[]` |   |           | Modifies a pattern in a specific frame |
 
+#### modifier
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| at          | `integer`          | ✔ | Modifier's frame of execution |
+| `attribute` | `attribute's type` | ✔ | Attribute to be changed, e.g. `{at: "10", velocity: "3", homming: "true"}` |
+
 ### Enemy behavior
 
 Change enemy attributes or attacks in a given time or when health goes below certain amount to create some sort of timeline defined behavior.
@@ -333,7 +342,7 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 
 ```Json
 {
-"modifier":
+"modifiers":
 [
   {
     "at": "0",
@@ -367,7 +376,7 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| modifier           | [modifier[]](#modifier) | ✔ | Bullet identifier |
+| modifiers | [modifier[]](#modifier) | ✔ | Bullet identifier |
 
 #### modifier
 
@@ -381,7 +390,7 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 
 ### Stages
 
-Add annimated layers on the front and on the background for pure cosmetic purposes.
+Add animated layers on the front and on the background for pure cosmetic purposes.
 
 ![](img/background.gif?raw=true)
 
@@ -389,32 +398,34 @@ Add annimated layers on the front and on the background for pure cosmetic purpos
 
 ```Json
 {
-  "bounds": {
-    "x1": "0",
-    "y1": "0",
-    "x2": "1920",
-    "y2": "1080"
+  "bullets_domain": {
+    "x": "0",
+    "y": "0",
+    "width": "1920",
+    "height": "1080"
   },
   "back_layer": [
     {
       "velocity_x": "0",
       "x": "0",
       "y": "0",
-      "frame": {
-        "type": "image",
-        "image_path": "background.png"
-      }
+      "sprites": [
+        {
+          "type": "image",
+          "path": "background.png"
+        }
+      ]
     },
     {
       "velocity_x": "-0.5",
       "x": "300",
       "y": "500",
       "separation_x": "1500",
-      "frame_duration": "5",
-      "frame": [
+      "animation_velocity": "5",
+      "sprites": [
         {
           "type": "image",
-          "image_path": "planet.png"
+          "path": "planet.png"
         }
       ]
     }
@@ -424,26 +435,36 @@ Add annimated layers on the front and on the background for pure cosmetic purpos
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| bounds      | [bounds](#bounds) | ✔ | Bullet bounds, bullets outside this range will be automatically distroyed |
-| back_layer  | [layer[]](#layer) | ✔ | Animated layers to be displayed behind of characters and bullets |
-| front_layer | [layer[]](#layer) | ✔ | Animated layers to be displayed on front of characters and bullets |
+| bullets_domain | [bullets_domain](#bullets_domain) | ✔ | Bullet bounds, bullets outside this range will be automatically distroyed |
+| back_layer     | [layer[]](#layer)                 | ✔ | Animated layers to be displayed behind of characters and bullets |
+| front_layer    | [layer[]](#layer)                 | ✔ | Animated layers to be displayed on front of characters and bullets |
+
+#### bullets_domain
+
+| Attribute | Type | Required | Description |
+|-----------|------|----------|-------------|
+| x      | `integer` | ✔ | Position of the bullets domain on the x axis |
+| y      | `integer` | ✔ | Position of the bullets domain on the y axis |
+| width  | `integer` | ✔ | Bullets domain width |
+| height | `integer` | ✔ | Bullets domain height |
 
 #### layer
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| x              | `integer`         | ✔ | Initial position on the x axis |
-| y              | `integer`         | ✔ | Initial position on the y axis |
-| separation_x   | `integer`         | ✔ | Amount of pixels between every animation repetition |
-| frame_duration | `integer`         | ✔ | Animation speed |
-| frame          | [frame[]](#frame) | ✔ | Animation sprites |
+| x                  | `integer`         | ✔ | Initial position on the x axis |
+| y                  | `integer`         | ✔ | Initial position on the y axis |
+| separation_x       | `integer`         | ✔ | Amount of pixels between every animation repetition |
+| velocity_x         | `double`          | ✔ | Layer velocity on the x axis, use this to make parallax effect |
+| animation_velocity | `integer`         | ✔ | Animation speed |
+| sprites            | [sprite[]](#sprite) | ✔ | Animation sprites |
 
-#### frame
+#### sprite
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
-| type       | `image`     | ✔ | Type of frame |
-| image_path | `file path` | ✔ | Path to the `.png` image |
+| type | `image` | ✔ | Type of frame |
+| path | `path`  | ✔ | Path to the `.png` image |
 
 ## General configuration
 

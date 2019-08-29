@@ -208,13 +208,13 @@ void Character::loadMainXML()
     }
   }
 
-  vector<Node *> sprites_nodes = root_node->getNodesByName("sprites");
+  vector<Node *> sprites_nodes = root_node->getNodesByName("states");
 
   for (int i = 0; i < (int)sprites_nodes.size(); i++)
   {
     std::vector<Image *> sprites_vector;
 
-    std::string sprites_state = sprites_nodes[i]->attributes["state"];
+    std::string sprites_state = sprites_nodes[i]->attributes["name"];
 
     if (sprites_nodes[i]->hasAttribute("sound"))
     {
@@ -235,7 +235,7 @@ void Character::loadMainXML()
       }
     }
 
-    vector<Node *> sprite_nodes = sprites_nodes[i]->getNodesByName("sprite");
+    vector<Node *> sprite_nodes = sprites_nodes[i]->getNodesByName("sprites");
 
     for (int j = 0; j < (int)sprite_nodes.size(); j++)
     {
@@ -302,13 +302,13 @@ void Character::loadBulletsXML()
     {
       damage = atoi(bullet_nodes[i]->attributes["damage"].c_str());
     }
-    vector<Node *> images_nodes = bullet_nodes[i]->getNodesByName("images");
+    vector<Node *> sprites_nodes = bullet_nodes[i]->getNodesByName("sprites");
     vector<Image *> sprites_temp;
-    for (int j = 0; j < (int)images_nodes.size(); j++)
+    for (int j = 0; j < (int)sprites_nodes.size(); j++)
     {
-      sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + images_nodes[j]->attributes["path"]));
+      sprites_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprites_nodes[j]->attributes["path"]));
     }
-    vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("hitbox");
+    vector<Node *> hitbox_nodes = bullet_nodes[i]->getNodesByName("hitboxes");
     vector<Hitbox *> hitboxes_temp;
     for (int j = 0; j < (int)hitbox_nodes.size(); j++)
     {
@@ -345,15 +345,15 @@ void Character::loadBulletsXML()
       hitboxes_temp.push_back(new Hitbox(x, y, width, height, angle));
     }
 
-    Node *onhit_node = bullet_nodes[i]->getNodeByName("on_hit_images");
+    Node *onhit_node = bullet_nodes[i]->getNodeByName("on_hit_sprites");
     vector<Image *> sprites_onhit_temp;
     
     if (onhit_node)
     {
-      vector<Node *> on_hit_images_node = bullet_nodes[i]->getNodesByName("on_hit_images");
-      for (int j = 0; j < (int)on_hit_images_node.size(); j++)
+      vector<Node *> on_hit_sprites_node = bullet_nodes[i]->getNodesByName("on_hit_sprites");
+      for (int j = 0; j < (int)on_hit_sprites_node.size(); j++)
       {
-        sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + on_hit_images_node[j]->attributes["path"]));
+        sprites_onhit_temp.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + on_hit_sprites_node[j]->attributes["path"]));
       }
     }
     Node *random_sound_node = bullet_nodes[i]->getNodeByName("RandomSound");
@@ -368,18 +368,6 @@ void Character::loadBulletsXML()
         rosalila()->sound->addSound("bullet." + node_name + sound_nodes[j]->attributes["path"], sound);
         random_sounds.push_back("bullet." + node_name + sound_nodes[j]->attributes["path"]);
       }
-    }
-
-    int width = 0;
-    if (bullet_nodes[i]->hasAttribute("width"))
-    {
-      width = atoi(bullet_nodes[i]->attributes["width"].c_str());
-    }
-
-    int height = 0;
-    if (bullet_nodes[i]->hasAttribute("height"))
-    {
-      height = atoi(bullet_nodes[i]->attributes["height"].c_str());
     }
 
     Node *color_node = bullet_nodes[i]->getNodeByName("color");
@@ -400,7 +388,7 @@ void Character::loadBulletsXML()
         alpha = atoi(color_node->attributes["alpha"].c_str());
     }
 
-    bullets[node_name] = new Bullet(node_name, sprites_temp, sprites_onhit_temp, width, height, Color(red, green, blue, alpha), hitboxes_temp, random_sounds, randomize_sound_frequency, arpeggio_length, damage, sound_channel);
+    bullets[node_name] = new Bullet(node_name, sprites_temp, sprites_onhit_temp, Color(red, green, blue, alpha), hitboxes_temp, random_sounds, randomize_sound_frequency, arpeggio_length, damage, sound_channel);
   }
 
   delete root_node;
@@ -525,7 +513,7 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
 
   std::map<int, vector<Modifier *>> *pattern_modifiers = new std::map<int, vector<Modifier *>>();
 
-  vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifier");
+  vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifiers");
   for (int i = 0; i < (int)modifier_nodes.size(); i++)
   {
     int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
