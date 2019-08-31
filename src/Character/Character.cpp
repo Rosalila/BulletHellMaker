@@ -93,8 +93,6 @@ void Character::loadMainXML()
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "main.json");
 
   this->velocity = 5;
-
-
   if (root_node->hasAttribute("velocity"))
   {
     this->velocity = atoi(root_node->attributes["velocity"].c_str());
@@ -192,7 +190,9 @@ void Character::loadMainXML()
     int hitbox_y = atoi(hitbox_node->attributes["y"].c_str());
     int hitbox_width = atoi(hitbox_node->attributes["width"].c_str());
     int hitbox_height = atoi(hitbox_node->attributes["height"].c_str());
-    int hitbox_angle = atoi(hitbox_node->attributes["angle"].c_str());
+    int hitbox_angle = 0;
+    if (hitbox_node->hasAttribute("angle"))
+      hitbox_angle = atoi(hitbox_node->attributes["angle"].c_str());
 
     Hitbox *hitbox = new Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height, hitbox_angle);
     this->hitboxes.push_back(hitbox);
@@ -221,8 +221,6 @@ void Character::loadMainXML()
       std::string sprites_sound = sprites_nodes[i]->attributes["sound"];
       rosalila()->sound->addSound(name + "." + sprites_state, std::string(assets_directory) + directory + sprites_sound);
     }
-    
-    std::cout<<sprites_state<<endl;
 
     Node *conditions = sprites_nodes[i]->getNodeByName("conditions");
     if (conditions)
@@ -278,7 +276,7 @@ void Character::loadBulletsXML()
       arpeggio_length = atoi(bullet_nodes[i]->attributes["arpeggio_length"].c_str());
     }
 
-    Node* sound_node = bullet_nodes[i]->getNodeByName("Sound");
+    Node* sound_node = bullet_nodes[i]->getNodeByName("sound");
 
     int sound_channel = -1;
     if(sound_node)
@@ -289,9 +287,9 @@ void Character::loadBulletsXML()
         if (sound_channel != -1)
           sound_channel += sound_channel_base;
       }
-      if (sound_node->hasAttribute("sound"))
+      if (sound_node->hasAttribute("path"))
       {
-        std::string sound = std::string(assets_directory) + directory + sound_node->attributes["sound"];
+        std::string sound = std::string(assets_directory) + directory + sound_node->attributes["path"];
         rosalila()->sound->addSound("bullet." + node_name, sound);
         random_sounds.push_back("bullet." + node_name);
       }
@@ -680,20 +678,20 @@ void Character::loadPatternsXML()
 
     std::vector<Pattern *> patterns;
 
-    vector<Node *> pattern_nodes = type_nodes[i]->getNodesByName("pattern");
+    vector<Node *> pattern_nodes = type_nodes[i]->getNodesByName("patterns");
 
     for (int j = 0; j < (int)pattern_nodes.size(); j++)
     {
       patterns.push_back(loadPatternXML(pattern_nodes[j]));
     }
 
-    vector<Node *> repeat_nodes = type_nodes[i]->getNodesByName("Repeat");
+    vector<Node *> repeat_nodes = type_nodes[i]->getNodesByName("repeat");
 
     for (int j = 0; j < (int)repeat_nodes.size(); j++)
     {
       int amount = atoi(repeat_nodes[j]->attributes["amount"].c_str());
 
-      vector<Node *> pattern_nodes = repeat_nodes[j]->getNodesByName("pattern");
+      vector<Node *> pattern_nodes = repeat_nodes[j]->getNodesByName("patterns");
 
       for (int k = 0; k < (int)pattern_nodes.size(); k++)
       {

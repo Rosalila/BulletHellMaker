@@ -169,22 +169,26 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   music_path = path + name + "/music.ogg";
 
   Node *bullets_domain_node = root_node->getNodeByName("bullets_domain");
-
   this->bound_x1 = 0;
-  if (bullets_domain_node->hasAttribute("x"))
-    this->bound_x1 = atoi(bullets_domain_node->attributes["x"].c_str());
-
   this->bound_y1 = 0;
-  if (bullets_domain_node->hasAttribute("y"))
-    this->bound_y1 = atoi(bullets_domain_node->attributes["y"].c_str());
-
   this->bound_x2 = rosalila()->graphics->screen_width;
-  if (bullets_domain_node->hasAttribute("width"))
-    this->bound_x2 = this->bound_x1 + atoi(bullets_domain_node->attributes["width"].c_str());
-
   this->bound_y2 = rosalila()->graphics->screen_height;
-  if (bullets_domain_node->hasAttribute("height"))
-    this->bound_y2 = this->bound_y1 + atoi(bullets_domain_node->attributes["height"].c_str());
+
+  if(bullets_domain_node)
+  {
+    if (bullets_domain_node->hasAttribute("x"))
+      this->bound_x1 = atoi(bullets_domain_node->attributes["x"].c_str());
+
+    if (bullets_domain_node->hasAttribute("y"))
+      this->bound_y1 = atoi(bullets_domain_node->attributes["y"].c_str());
+
+    if (bullets_domain_node->hasAttribute("width"))
+      this->bound_x2 = this->bound_x1 + atoi(bullets_domain_node->attributes["width"].c_str());
+
+    if (bullets_domain_node->hasAttribute("height"))
+      this->bound_y2 = this->bound_y1 + atoi(bullets_domain_node->attributes["height"].c_str());
+  }
+
 
   rosalila()->utility->writeLogLine("Loading stage's BackLayers.");
 
@@ -279,7 +283,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
       continue;
     }
 
-    int frame_duration = 0;
+    int frame_duration = 5;
     if (backlayer_nodes[i]->hasAttribute("animation_velocity"))
       frame_duration = atoi(backlayer_nodes[i]->attributes["animation_velocity"].c_str());
 

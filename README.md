@@ -9,14 +9,14 @@ Rosalila Shoot 'Em Up Maker
 
 | Feature | Supported |
 |----------|------------ |
-| Playable characters | ✔ |
-| Bossfights | ✔ |
+| Playable characters                                          | ✔ |
+| Boss fights                                                  | ✔ |
 | Customize attack patterns, animations, sfx,  etc... via JSON | ✔ |
-| Windows / Linux / MacOS | ✔ |
-| PC, XInput, PS4 and Steam input supported | ✔ |
-| Steamworks achievements, stats and leaderboard | ✔ |
-| Store, replay and share your best runs | ✔ |
-| Libre, MIT licensed | ✔ |
+| Windows / Linux / MacOS                                      | ✔ |
+| PC, XInput, PS4 and Steam input supported                    | ✔ |
+| Steamworks achievements, stats and leaderboard               | ✔ |
+| Store, replay and share your best runs                       | ✔ |
+| Libre, MIT licensed                                          | ✔ |
 
 ![](img/game.png?raw=true)
 
@@ -101,70 +101,71 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 }
 ```
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| velocity           | `integer`                             | ✔ | Movement velocity |
-| animation_velocity | `integer`                             | ✔ | Animation speed |
-| hp                 | `integer`                             | ✔ | Health, hit points |
-| initial_position   | [initial_position](#initial_position) | ✔ | Character position at the beginning |
-| sounds             | [sounds](#sounds)                     | ✔ | Sound effects |
-| life_bar           | [life_bar](#life_bar)                 | ✔ | Life bar settings |
-| states             | [states[]](#state)                    | ✔ | Sprite list |
-| hitboxes           | [hitbox[]](#hitbox)                   | ✔ | Hitboxes |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| velocity           | `integer`                             |   | `5`   | Movement velocity |
+| animation_velocity | `integer`                             |   | `5`   | | Animation speed |
+| hp                 | `integer`                             |   | `100` | Health, hit points |
+| initial_position   | [initial_position](#initial_position) |   |       | Character position at the beginning |
+| sounds             | [sounds](#sounds)                     |   |       | Sound effects |
+| life_bar           | [life_bar](#life_bar)                 |   |       | Life bar settings |
+| states             | [states[]](#state)                    |   |       | Sprite list |
+| hitboxes           | [hitbox[]](#hitbox)                   |   |       | Hitboxes |
 
 #### initial_position
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Initial position on the x axis |
-| y      | `integer` | ✔ | Initial position on the y axis |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` |   | `100` | Initial position on the x axis |
+| y      | `integer` |   | `500` | Initial position on the y axis |
 
 #### sounds
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| hit | `file path` | ✔ | `.ogg` sfx to be played when the character is hit |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| hit | `file path` |   |  | `.ogg` sfx to be played when the character is hit |
 
 #### life_bar
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Life bar position on the x axis |
-| y      | `integer` | ✔ | Life bar position on the y axis |
-| width  | `integer` | ✔ | Width of the life bar |
-| height | `integer` | ✔ | Height of the life bar |
-| color  | [color](#color) | ✔ | Color of the life bar |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer`       |  | `0` | Life bar position on the x axis |
+| y      | `integer`       |  | `0` | Life bar position on the y axis |
+| width  | `integer`       |  | `0` | Width of the life bar |
+| height | `integer`       |  | `0` | Height of the life bar |
+| color  | [color](#color) |  |     | Color of the life bar |
 
 #### color
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| red   | `integer` | ✔ | Amount of red color from 0 to 255 |
-| green | `integer` | ✔ | Amount of green color from 0 to 255 |
-| blue  | `integer` | ✔ | Amount of blue color from 0 to 255 |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| red   | `integer` |  | `0`   | Amount of red color from 0 to 255 |
+| green | `integer` |  | `0`   | Amount of green color from 0 to 255 |
+| blue  | `integer` |  | `0`   | Amount of blue color from 0 to 255 |
+| alpha | `integer` |  | `255` | Amount of alpha from 0 to 255 |
 
 #### state
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name    | `string`            | ✔ | Name of the state |
-| sprites | [sprite[]](#sprite) | ✔ | `.png` path array |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name    | `string`            | ✔ |  | Name of the state |
+| sprites | [sprite[]](#sprite) |   |  | `.png` path array |
 
 #### sprite
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| path | `path` | ✔ | `.png` file path |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| path | `path` | ✔ |  | `.png` file path |
 
 #### hitbox
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Hitbox position on the x axis |
-| y      | `integer` | ✔ | Hitbox position on the y axis |
-| width  | `integer` | ✔ | Hitbox width |
-| height | `integer` | ✔ | Hitbox height |
-| angle  | `integer` | ✔ | Hitbox rotation |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` | ✔ |     | Hitbox position on the x axis |
+| y      | `integer` | ✔ |     | Hitbox position on the y axis |
+| width  | `integer` | ✔ |     | Hitbox width |
+| height | `integer` | ✔ |     | Hitbox height |
+| angle  | `integer` |   | `0` | Hitbox rotation |
 
 ### Bullets
 
@@ -203,31 +204,37 @@ Also define a collection of bullets with their sprites, sounds, etc...
 }
 ```
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name           | `string`          | ✔ | Bullet unique name identifier |
-| damage         | `integer`         | ✔ | Bullet attack damage to be inflicted on impact |
-| sound          | [sound](#sound)   |   | Sound to be played when emited |
-| images         | `string[]`        | ✔ | Sprite list |
-| on_hit_sprites | `string[]`        | ✔ | Sprite list to be displayed on bullet collision |
-| hitboxes       | [hitbox[]](#hitbox) | ✔ | Hitbox list |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name           | `string`            | ✔ |     | Bullet unique name identifier |
+| damage         | `integer`           |   | `1` | Bullet attack damage to be inflicted on impact |
+| sound          | [sound](#sound)     |   |     | Sound to be played when emited |
+| sprites        | [sprite[]](#sprite) |   |     | Sprite list |
+| on_hit_sprites | [sprite[]](#sprite) |   |     | Sprite list to be displayed on bullet collision |
+| hitboxes       | [hitbox[]](#hitbox) |   |     | Hitbox list |
+
+#### sprite
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| path | `path`  | ✔ |  | Path to the `.png` image |
 
 #### sound
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| channel | `integer`   | ✔ | Sound channel, -1 means auto assign |
-| path    | `file path` | ✔ | `.ogg` sound effect file |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| sound_channel | `integer`   |   | `-1` | Sound channel, -1 means auto assign |
+| path          | `file path` | ✔ |      | `.ogg` sound effect file |
 
 #### hitbox
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Hitbox position on the x axis |
-| y      | `integer` | ✔ | Hitbox position on the y axis |
-| width  | `integer` | ✔ | Hitbox width |
-| height | `integer` | ✔ | Hitbox height |
-| angle  | `integer` | ✔ | Hitbox rotation |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` | ✔ |     | Hitbox position on the x axis |
+| y      | `integer` | ✔ |     | Hitbox position on the y axis |
+| width  | `integer` | ✔ |     | Hitbox width |
+| height | `integer` | ✔ |     | Hitbox height |
+| angle  | `integer` |   | `0` | Hitbox rotation |
 
 ### Attack patterns
 
@@ -281,16 +288,17 @@ Attach bullet to patterns to create attacks. Name the character attacks as `Prim
 }
 ```
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| type | [type[]](#type)| ✔ | A collection of attack patterns form an attack type |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| type | [type[]](#type) |  |  | A collection of attack patterns form an attack type |
 
 #### type
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| name     | `string`             | ✔ | Pattern collection unique name |
-| patterns | [pattern[]](#pattern) | ✔ | Single bullet pattern |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name     | `string`              | ✔ |  | Pattern collection unique name |
+| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern |
+| repeat   | [repeat[]](#repeat)   |   |  | Group of patterns to be repeated an amount of times |
 
 #### pattern
 
@@ -331,8 +339,16 @@ Attach bullet to patterns to create attacks. Name the character attacks as `Prim
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| at          | `integer`          | ✔ | Modifier's frame of execution |
-| `attribute` | `attribute's type` | ✔ | Attribute to be changed, e.g. `{at: "10", velocity: "3", homming: "true"}` |
+| at          | `integer`          | ✔ |  | Modifier's frame of execution |
+| `attribute` | `attribute's type` |   |  | Attribute to be changed, e.g. `{at: "10", velocity: "3", homming: "true"}` |
+
+#### repeat
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| amount      | `integer`          | ✔ |  | Amount of times that the patterns will be repeated |
+| `attribute` | `attribute's type` | ✔ |  | Attribute to be changed, e.g. in `{amount: "5", startup: "5", patterns:[..]}` patterns will be repeated 3 times, in each repetition 5 frames will be added (first will be emited on frame 0, 2nd in frame 5 and third in 10) |
+| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern to be changed during repetition |
 
 ### Enemy behavior
 
@@ -374,19 +390,19 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 }
 ```
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| modifiers | [modifier[]](#modifier) | ✔ | Bullet identifier |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| modifiers | [modifier[]](#modifier) |   |  | Bullet identifier |
 
 #### modifier
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| at           | `integer`  | ✔ | Modifier's frame of execution |
-| life_at      | `integer`  | ✔ | Defines the amount of hit points needed to be reached to execute the modifier |
-| velocity     | `integer`  | ✔ | New enemy velocity to be set |
-| angle_change | `integer`  | ✔ | New enemy angle change to be set |
-| pattern_type | `integer`  | ✔ | New enemy pattern to be set |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| at           | `integer`  |  |  | Modifier's frame of execution |
+| life_at      | `integer`  |  |  | Defines the amount of hit points needed to be reached to execute the modifier |
+| velocity     | `integer`  |  |  | New enemy velocity to be set |
+| angle_change | `integer`  |  |  | New enemy angle change to be set |
+| pattern_type | `integer`  |  |  | New enemy pattern to be set |
 
 ### Stages
 
@@ -433,38 +449,38 @@ Add animated layers on the front and on the background for pure cosmetic purpose
 }
 ```
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| bullets_domain | [bullets_domain](#bullets_domain) | ✔ | Bullet bounds, bullets outside this range will be automatically distroyed |
-| back_layer     | [layer[]](#layer)                 | ✔ | Animated layers to be displayed behind of characters and bullets |
-| front_layer    | [layer[]](#layer)                 | ✔ | Animated layers to be displayed on front of characters and bullets |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| bullets_domain | [bullets_domain](#bullets_domain) |  |  | Bullet bounds, bullets outside this range will be automatically distroyed |
+| back_layer     | [layer[]](#layer)                 |  |  | Animated layers to be displayed behind of characters and bullets |
+| front_layer    | [layer[]](#layer)                 |  |  | Animated layers to be displayed on front of characters and bullets |
 
 #### bullets_domain
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x      | `integer` | ✔ | Position of the bullets domain on the x axis |
-| y      | `integer` | ✔ | Position of the bullets domain on the y axis |
-| width  | `integer` | ✔ | Bullets domain width |
-| height | `integer` | ✔ | Bullets domain height |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` |  | `0`             | Position of the bullets domain on the x axis |
+| y      | `integer` |  | `0`             | Position of the bullets domain on the y axis |
+| width  | `integer` |  | `screen width`  | Bullets domain width |
+| height | `integer` |  | `screen height` | Bullets domain height |
 
 #### layer
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| x                  | `integer`         | ✔ | Initial position on the x axis |
-| y                  | `integer`         | ✔ | Initial position on the y axis |
-| separation_x       | `integer`         | ✔ | Amount of pixels between every animation repetition |
-| velocity_x         | `double`          | ✔ | Layer velocity on the x axis, use this to make parallax effect |
-| animation_velocity | `integer`         | ✔ | Animation speed |
-| sprites            | [sprite[]](#sprite) | ✔ | Animation sprites |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x                  | `integer`           |  | `0` | Initial position on the x axis |
+| y                  | `integer`           |  | `0` | Initial position on the y axis |
+| separation_x       | `integer`           |  | `0` | Amount of pixels between every animation repetition |
+| velocity_x         | `double`            |  | `0` | Layer velocity on the x axis, use this to make parallax effect |
+| animation_velocity | `integer`           |  | `5` | Animation speed |
+| sprites            | [sprite[]](#sprite) |  |     | Animation sprites |
 
 #### sprite
 
-| Attribute | Type | Required | Description |
-|-----------|------|----------|-------------|
-| type | `image` | ✔ | Type of frame |
-| path | `path`  | ✔ | Path to the `.png` image |
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| type | `image` | ✔ |  | Type of frame |
+| path | `path`  | ✔ |  | Path to the `.png` image |
 
 ## General configuration
 
