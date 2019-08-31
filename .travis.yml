@@ -1,0 +1,20 @@
+language: c++
+
+os:
+  - linux
+
+dist: xenial
+sudo: false
+
+before_install:
+  - sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
+    
+script:
+  - mkdir build
+  - mkdir examples/build
+  - cd build
+  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ..
+  - make -j2
+  - cd ../examples/build
+  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ..
+  - make -j2
