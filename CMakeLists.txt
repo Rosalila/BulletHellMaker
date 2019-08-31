@@ -18,6 +18,7 @@ string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
 endforeach()
 
 IF (UNIX AND NOT APPLE)
+  link_directories(./lib)
   file(GLOB_RECURSE SOURCES "src/*.cpp" main.cpp)
   add_executable(shmup ${SOURCES})
   add_definitions(-DGLEW_STATIC)
