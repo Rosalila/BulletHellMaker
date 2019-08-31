@@ -3,7 +3,7 @@ language: c++
 os:
   - linux
 
-dist: xenial
+dist: bionic
 sudo: false
 
 before_install:
@@ -11,10 +11,6 @@ before_install:
     
 script:
   - mkdir build
-  - mkdir examples/build
   - cd build
-  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ..
-  - make -j2
-  - cd ../examples/build
   - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ..
   - make -j2

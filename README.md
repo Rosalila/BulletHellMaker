@@ -2,6 +2,8 @@ Rosalila Shoot 'Em Up Maker
 ===========================
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=travis)](https://travis-ci.org/Rosalila/ShootEmUpMaker)
+[![Appveyor](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/ShootEmUpMaker)
 
 1. **Fast and modern development**: Create boss fights without coding.
 2. **No string attached**: Free as in freedom, available even for commercial projects.
