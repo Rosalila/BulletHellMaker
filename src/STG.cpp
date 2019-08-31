@@ -14,7 +14,7 @@ STG::STG(Player *player, Enemy *enemy, Stage *stage, string game_mode, int curre
 
   this->game_over_timeout = 128;
 
-  this->image_upload_error = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/upload_error.png");
+  //this->image_upload_error = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/upload_error.png");
 
   this->image_training_box = NULL;
   this->image_training_x = NULL;
@@ -148,6 +148,7 @@ void STG::mainLoop()
 
     if (getGameOver() && api_state == "")
     {
+      /*
       game_over_timeout--;
       if (game_over_timeout < 0)
         game_over_timeout = 0;
@@ -160,6 +161,7 @@ void STG::mainLoop()
         if (!rosalila()->receiver->isDown(0, "a"))
           end_key_up_keyboard = true;
       }
+      */
     }
   }
 }
@@ -484,6 +486,7 @@ void STG::render()
 
   if (getGameOver() && score != -1 && game_mode != "replay")
   {
+    /*
     if (current_player_best_score == -1)
     {
       rosalila()->graphics->drawText(rosalila()->utility->toString(score), 0, 0, true, true);
@@ -499,6 +502,7 @@ void STG::render()
       score_text += ")";
       rosalila()->graphics->drawText(score_text, 0, 0, true, true);
     }
+    */
   }
   /*
     // TODO: Get the you win you lose animations running again
@@ -698,10 +702,12 @@ void STG::win()
 
 void STG::lose()
 {
+  rosalila()->utility->writeLogLine("Player lost");
   setPlayerWon(false);
   setGameOver(true);
   rosalila()->sound->fadeMusicVolume(0, 2);
-  rosalila()->sound->playSound("you lose", 4, 0, 0);
+  if(rosalila()->sound->soundExists("you lose"))
+    rosalila()->sound->playSound("you lose", 4, 0, 0);
 }
 
 void STG::uploadScore()
@@ -770,13 +776,13 @@ bool STG::uploadErrorLoop()
     {
       return false;
     }
-
+/*
     if(image_upload_error)
     {
       image_upload_error->color_filter.alpha = current_training_transparency;
       rosalila()->graphics->drawImage(image_upload_error, 0, 0);
     }
-
+*/
     rosalila()->update();
   }
 }

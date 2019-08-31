@@ -22,7 +22,7 @@ public:
 
     int score;
 
-    Image*image_upload_error;
+    //Image*image_upload_error;
 
     Image*image_training_box;
     Image*image_training_x;

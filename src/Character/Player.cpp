@@ -62,9 +62,9 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/2.png"));
   //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/3.png"));
   //Charge
-  rosalila()->sound->addSound("charge ready", std::string(assets_directory) + directory + "sounds/charge_ready.ogg");
-  rosalila()->sound->addSound("charging", std::string(assets_directory) + directory + "sounds/charging.ogg");
-  charging_sound_channel = rosalila()->sound->playSound("charging", 21, -1, this->x);
+  //rosalila()->sound->addSound("charge ready", std::string(assets_directory) + directory + "sounds/charge_ready.ogg");
+  //rosalila()->sound->addSound("charging", std::string(assets_directory) + directory + "sounds/charging.ogg");
+  //charging_sound_channel = rosalila()->sound->playSound("charging", 21, -1, this->x);
 
   // buffs and debuffs
   this->additional_velocity_x = 0;
@@ -360,7 +360,7 @@ void Player::logic(int stage_velocity)
   {
     if (current_state != "destroyed" && rosalila()->sound->soundExists(name + ".destroyed"))
       rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
-    current_state = "destroyed";
+    this->setState("destroyed");
     //this->hitbox.setValues(0,0,0,0,0);
   }
   //Enable or disable slow
@@ -414,7 +414,7 @@ void Player::logic(int stage_velocity)
     current_charge = max_charge;
     if (!charge_ready)
     {
-      rosalila()->sound->playSound("charge ready", -1, 0, this->x);
+      //rosalila()->sound->playSound("charge ready", -1, 0, this->x);
     }
     charge_ready = true;
   }
@@ -423,11 +423,12 @@ void Player::logic(int stage_velocity)
     charge_ready = false;
   }
 
+/*
   if (!charge_ready && !shooting && !getGameOver())
     Mix_Volume(charging_sound_channel, 128);
   else
     Mix_Volume(charging_sound_channel, 0);
-  
+  */
   for(std::map < /*current state*/ std::string, /*trigger validation*/ std::map< std::string, std::string > >::iterator i = state_triggers.begin();
         i != state_triggers.end();
         i++)
@@ -723,7 +724,7 @@ bool Player::collidesParry(Hitbox hitbox, int hitbox_x, int hitbox_y, float hitb
 
 void Player::exit()
 {
-  Mix_Volume(charging_sound_channel, 0);
+  //Mix_Volume(charging_sound_channel, 0);
 }
 
 bool Player::isDownWrapper(string button_map)

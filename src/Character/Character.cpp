@@ -281,9 +281,9 @@ void Character::loadBulletsXML()
     int sound_channel = -1;
     if(sound_node)
     {
-      if (sound_node->hasAttribute("sound_channel"))
+      if (sound_node->hasAttribute("channel"))
       {
-        sound_channel = atoi(sound_node->attributes["sound_channel"].c_str());
+        sound_channel = atoi(sound_node->attributes["channel"].c_str());
         if (sound_channel != -1)
           sound_channel += sound_channel_base;
       }
