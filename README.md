@@ -26,11 +26,13 @@ Rosalila Shoot 'Em Up Maker
 
 ### Characters
 
-Playable and enemy characters are defined with the same attributes on a `main.json` file. Notice the `Shield`, `Charge` and `Parry` attributes are optional.
+Playable and enemy characters are defined with the same attributes on a `character.json` file.
+
+See [full character.json docs](#character.json).
 
 ![](img/player.gif?raw=true)
 
-#### main.json
+#### character.json example
 
 ```Json
 {
@@ -103,81 +105,17 @@ Playable and enemy characters are defined with the same attributes on a `main.js
 }
 ```
 
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| velocity           | `integer`                             |   | `5`   | Movement velocity |
-| animation_velocity | `integer`                             |   | `5`   | | Animation speed |
-| hp                 | `integer`                             |   | `100` | Health, hit points |
-| initial_position   | [initial_position](#initial_position) |   |       | Character position at the beginning |
-| sounds             | [sounds](#sounds)                     |   |       | Sound effects |
-| life_bar           | [life_bar](#life_bar)                 |   |       | Life bar settings |
-| states             | [states[]](#state)                    |   |       | Sprite list |
-| hitboxes           | [hitbox[]](#hitbox)                   |   |       | Hitboxes |
-
-#### initial_position
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x      | `integer` |   | `100` | Initial position on the x axis |
-| y      | `integer` |   | `500` | Initial position on the y axis |
-
-#### sounds
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| hit | `file path` |   |  | `.ogg` sfx to be played when the character is hit |
-
-#### life_bar
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x      | `integer`       |  | `0` | Life bar position on the x axis |
-| y      | `integer`       |  | `0` | Life bar position on the y axis |
-| width  | `integer`       |  | `0` | Width of the life bar |
-| height | `integer`       |  | `0` | Height of the life bar |
-| color  | [color](#color) |  |     | Color of the life bar |
-
-#### color
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| red   | `integer` |  | `0`   | Amount of red color from 0 to 255 |
-| green | `integer` |  | `0`   | Amount of green color from 0 to 255 |
-| blue  | `integer` |  | `0`   | Amount of blue color from 0 to 255 |
-| alpha | `integer` |  | `255` | Amount of alpha from 0 to 255 |
-
-#### state
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| name    | `string`            | ✔ |  | Name of the state |
-| sprites | [sprite[]](#sprite) |   |  | `.png` path array |
-
-#### sprite
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| path | `path` | ✔ |  | `.png` file path |
-
-#### hitbox
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x      | `integer` | ✔ |     | Hitbox position on the x axis |
-| y      | `integer` | ✔ |     | Hitbox position on the y axis |
-| width  | `integer` | ✔ |     | Hitbox width |
-| height | `integer` | ✔ |     | Hitbox height |
-| angle  | `integer` |   | `0` | Hitbox rotation |
-
 ### Bullets
 
 Also define a collection of bullets with their sprites, sounds, etc...
 
-#### bullets.xml
+See [full bullets.json docs](#bullets.json).
+
+#### bullets.xml example
 
 ```Json
 {
-"bullet":
+"bullets":
 [
   {
     "name": "My Bullet",
@@ -206,49 +144,19 @@ Also define a collection of bullets with their sprites, sounds, etc...
 }
 ```
 
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| name           | `string`            | ✔ |     | Bullet unique name identifier |
-| damage         | `integer`           |   | `1` | Bullet attack damage to be inflicted on impact |
-| sound          | [sound](#sound)     |   |     | Sound to be played when emited |
-| sprites        | [sprite[]](#sprite) |   |     | Sprite list |
-| on_hit_sprites | [sprite[]](#sprite) |   |     | Sprite list to be displayed on bullet collision |
-| hitboxes       | [hitbox[]](#hitbox) |   |     | Hitbox list |
-
-#### sprite
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| path | `path`  | ✔ |  | Path to the `.png` image |
-
-#### sound
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| sound_channel | `integer`   |   | `-1` | Sound channel, -1 means auto assign |
-| path          | `file path` | ✔ |      | `.ogg` sound effect file |
-
-#### hitbox
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x      | `integer` | ✔ |     | Hitbox position on the x axis |
-| y      | `integer` | ✔ |     | Hitbox position on the y axis |
-| width  | `integer` | ✔ |     | Hitbox width |
-| height | `integer` | ✔ |     | Hitbox height |
-| angle  | `integer` |   | `0` | Hitbox rotation |
-
 ### Attack patterns
 
-Attach bullet to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior).
+Attach bullets to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior).
+
+See [full attacks.json docs](#attacks.json).
 
 ![](img/enemy.gif?raw=true)
 
-#### patterns.json
+#### attacks.json example
 
 ```Json
 {
-"type":
+"attacks":
 [
   {
     "name": "primary",
@@ -290,73 +198,13 @@ Attach bullet to patterns to create attacks. Name the character attacks as `Prim
 }
 ```
 
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| type | [type[]](#type) |  |  | A collection of attack patterns form an attack type |
-
-#### type
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| name     | `string`              | ✔ |  | Pattern collection unique name |
-| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern |
-| repeat   | [repeat[]](#repeat)   |   |  | Group of patterns to be repeated an amount of times |
-
-#### pattern
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| bullet                       | `string`     | ✔ |           | Bullet identifier |
-| acceleration                 | `integer`    |   | `0`       | Change of velocity added every frame |
-| a_frequency                  | `integer`    |   | `0`       | Frequency that the acceleration is applied |
-| additional_player_hp_change  | `double`     |   | `0`       | Player's hit points through time, use this to apply poison or heal buffs |
-| additional_player_velocity_x | `integer`    |   | `0`       | Player's velocity change, use this to pull or push him or to in conjuction with to `additional_player_velocity_y` to reduce the general velocity |
-| additional_player_velocity_y | `integer`    |   | `0`       | Player's velocity change, use this to push him up or down or to in conjuction with to `additional_player_velocity_x` to reduce the general velocity |
-| aim_player                   | `yes/no`     |   | `no`      | Overrides the bullet angle to now point to the player |
-| angle                        | `integer`    |   | `0`       | Rotation |
-| angle_change                 | `integer`    |   | `0`       | Rotation change through time |
-| ac_frequency                 | `integer`    |   | `0`       | Angle change frequency |
-| animation_velocity           | `integer`    |   | `0`       | Sprite animation speed |
-| auto_scale                   | `double`     |   | `0`       | Bullet scale change through time |
-| bullet_rotation              | `integer`    |   | `0`       | Rotates the bullet sprites withouth affecting other attributes such as the angle or hitboxes |
-| br_change                    | `integer`    |   | `0`       | Bullet rotation change through time |
-| collides_bullets             | `yes/no`     |   | `no`      | If the bullet collides with an opponent's one, both would be destroyed |
-| collides_opponent            | `yes/no`     |   | `yes`     | The bullet is able to hit the opponent |
-| cooldown                     | `integer`    |   | `0`       | Amount of frames between each bullet emision |
-| duration                     | `integer`    |   | `-1`      | Amount of frames before the bullet gets destroyed, -1 is infinite |
-| freeze                       | `yes/no`     |   | `no`      | All bullet changes, such as `velocity`, `acceleration` or `angle_chage` are stopped |
-| homming                      | `yes/no`     |   | `no`      | Bullet will track the player |
-| independent_br               | `yes/no`     |   | `no`      | The `bullet_rotation` is independent from the `angle` |
-| max_velocity                 | `yes/no`     |   | `9999999` | Velocity cap |
-| offset_x                     | `integer`    |   | `0`       | Pixels offset relative to the character on the x axis on emision |
-| offset_y                     | `integer`    |   | `0`       | Pixels offset relative to the character on the y axis on emision |
-| random_angle                 | `integer`    |   | `0`       | Adds a random angle from 0 to the provided number |
-| startup                      | `integer`    |   | `0`       | Amount of frames before emiting the bullet for the first time |
-| stop_ac_at                   | `integer`    |   | `-1`      | Amount of frames before stopping the `angle_change`, -1 means never |
-| undestructable               | `yes/no`     |   | `no`      | The bullet can be destroyed by other bullets |
-| velocity                     | `integer`    |   | `0`       | Speed |
-| modifier                     | `modifier[]` |   |           | Modifies a pattern in a specific frame |
-
-#### modifier
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| at          | `integer`          | ✔ |  | Modifier's frame of execution |
-| `attribute` | `attribute's type` |   |  | Attribute to be changed, e.g. `{at: "10", velocity: "3", homming: "true"}` |
-
-#### repeat
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| amount      | `integer`          | ✔ |  | Amount of times that the patterns will be repeated |
-| `attribute` | `attribute's type` | ✔ |  | Attribute to be changed, e.g. in `{amount: "5", startup: "5", patterns:[..]}` patterns will be repeated 3 times, in each repetition 5 frames will be added (first will be emited on frame 0, 2nd in frame 5 and third in 10) |
-| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern to be changed during repetition |
-
 ### Enemy behavior
 
-Change enemy attributes or attacks in a given time or when health goes below certain amount to create some sort of timeline defined behavior.
+Change enemy attributes or attacks in a given time or when health goes below certain amount.
 
-#### modifier.json
+See [full modifiers.json docs](#modifiers.json).
+
+#### modifiers.json example
 
 ```Json
 {
@@ -392,27 +240,15 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 }
 ```
 
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| modifiers | [modifier[]](#modifier) |   |  | Bullet identifier |
-
-#### modifier
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| at           | `integer`  |  |  | Modifier's frame of execution |
-| life_at      | `integer`  |  |  | Defines the amount of hit points needed to be reached to execute the modifier |
-| velocity     | `integer`  |  |  | New enemy velocity to be set |
-| angle_change | `integer`  |  |  | New enemy angle change to be set |
-| pattern_type | `integer`  |  |  | New enemy pattern to be set |
-
 ### Stages
 
 Add animated layers on the front and on the background for pure cosmetic purposes.
 
+See [full stage.json docs](#stage.json).
+
 ![](img/background.gif?raw=true)
 
-#### main.json
+#### stage.json example
 
 ```Json
 {
@@ -422,7 +258,7 @@ Add animated layers on the front and on the background for pure cosmetic purpose
     "width": "1920",
     "height": "1080"
   },
-  "back_layer": [
+  "back_layers": [
     {
       "velocity_x": "0",
       "x": "0",
@@ -451,44 +287,13 @@ Add animated layers on the front and on the background for pure cosmetic purpose
 }
 ```
 
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| bullets_domain | [bullets_domain](#bullets_domain) |  |  | Bullet bounds, bullets outside this range will be automatically distroyed |
-| back_layer     | [layer[]](#layer)                 |  |  | Animated layers to be displayed behind of characters and bullets |
-| front_layer    | [layer[]](#layer)                 |  |  | Animated layers to be displayed on front of characters and bullets |
-
-#### bullets_domain
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x      | `integer` |  | `0`             | Position of the bullets domain on the x axis |
-| y      | `integer` |  | `0`             | Position of the bullets domain on the y axis |
-| width  | `integer` |  | `screen width`  | Bullets domain width |
-| height | `integer` |  | `screen height` | Bullets domain height |
-
-#### layer
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| x                  | `integer`           |  | `0` | Initial position on the x axis |
-| y                  | `integer`           |  | `0` | Initial position on the y axis |
-| separation_x       | `integer`           |  | `0` | Amount of pixels between every animation repetition |
-| velocity_x         | `double`            |  | `0` | Layer velocity on the x axis, use this to make parallax effect |
-| animation_velocity | `integer`           |  | `5` | Animation speed |
-| sprites            | [sprite[]](#sprite) |  |     | Animation sprites |
-
-#### sprite
-
-| Attribute | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| type | `image` | ✔ |  | Type of frame |
-| path | `path`  | ✔ |  | Path to the `.png` image |
-
 ## General configuration
 
 Organize the stages order and other stuff here.
 
-#### config.json
+See [full config.json docs](#config.json).
+
+#### config.json example
 
 ```json
 {
@@ -612,6 +417,227 @@ Organize the stages order and other stuff here.
 }
 ```
 
+## JSON Docs
+
+### character.json docs
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| velocity           | `integer`                             |   | `5`   | Movement velocity |
+| animation_velocity | `integer`                             |   | `5`   | | Animation speed |
+| hp                 | `integer`                             |   | `100` | Health, hit points |
+| initial_position   | [initial_position](#initial_position) |   |       | Character position at the beginning |
+| sounds             | [sounds](#sounds)                     |   |       | Sound effects |
+| life_bar           | [life_bar](#life_bar)                 |   |       | Life bar settings |
+| states             | [states[]](#state)                    |   |       | Sprite list |
+| hitboxes           | [hitbox[]](#hitbox)                   |   |       | Hitboxes |
+
+#### initial_position
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` |   | `100` | Initial position on the x axis |
+| y      | `integer` |   | `500` | Initial position on the y axis |
+
+#### sounds
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| hit | `file path` |   |  | `.ogg` sfx to be played when the character is hit |
+
+#### life_bar
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer`       |  | `0` | Life bar position on the x axis |
+| y      | `integer`       |  | `0` | Life bar position on the y axis |
+| width  | `integer`       |  | `0` | Width of the life bar |
+| height | `integer`       |  | `0` | Height of the life bar |
+| color  | [color](#color) |  |     | Color of the life bar |
+
+#### color
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| red   | `integer` |  | `0`   | Amount of red color from 0 to 255 |
+| green | `integer` |  | `0`   | Amount of green color from 0 to 255 |
+| blue  | `integer` |  | `0`   | Amount of blue color from 0 to 255 |
+| alpha | `integer` |  | `255` | Amount of alpha from 0 to 255 |
+
+#### state
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name    | `string`            | ✔ |  | Name of the state |
+| sprites | [sprite[]](#sprite) |   |  | `.png` path array |
+
+#### sprite
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| path | `path` | ✔ |  | `.png` file path |
+
+#### hitbox
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` | ✔ |     | Hitbox position on the x axis |
+| y      | `integer` | ✔ |     | Hitbox position on the y axis |
+| width  | `integer` | ✔ |     | Hitbox width |
+| height | `integer` | ✔ |     | Hitbox height |
+| angle  | `integer` |   | `0` | Hitbox rotation |
+
+### bullets.json
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name           | `string`            | ✔ |     | Bullet unique name identifier |
+| damage         | `integer`           |   | `1` | Bullet attack damage to be inflicted on impact |
+| sound          | [sound](#sound)     |   |     | Sound to be played when emited |
+| sprites        | [sprite[]](#sprite) |   |     | Sprite list |
+| on_hit_sprites | [sprite[]](#sprite) |   |     | Sprite list to be displayed on bullet collision |
+| hitboxes       | [hitbox[]](#hitbox) |   |     | Hitbox list |
+
+#### sprite
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| path | `path`  | ✔ |  | Path to the `.png` image |
+
+#### sound
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| sound_channel | `integer`   |   | `-1` | Sound channel, -1 means auto assign |
+| path          | `file path` | ✔ |      | `.ogg` sound effect file |
+
+#### hitbox
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` | ✔ |     | Hitbox position on the x axis |
+| y      | `integer` | ✔ |     | Hitbox position on the y axis |
+| width  | `integer` | ✔ |     | Hitbox width |
+| height | `integer` | ✔ |     | Hitbox height |
+| angle  | `integer` |   | `0` | Hitbox rotation |
+
+### attacks.json
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| attacks | [attacks[]](#attacks) |  |  | A collection of attack patterns form an attack type |
+
+#### type
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| name     | `string`              | ✔ |  | Pattern collection unique name |
+| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern |
+| repeat   | [repeat[]](#repeat)   |   |  | Group of patterns to be repeated an amount of times |
+
+#### pattern
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| bullet                       | `string`     | ✔ |           | Bullet identifier |
+| acceleration                 | `integer`    |   | `0`       | Change of velocity added every frame |
+| a_frequency                  | `integer`    |   | `0`       | Frequency that the acceleration is applied |
+| additional_player_hp_change  | `double`     |   | `0`       | Player's hit points through time, use this to apply poison or heal buffs |
+| additional_player_velocity_x | `integer`    |   | `0`       | Player's velocity change, use this to pull or push him or to in conjuction with to `additional_player_velocity_y` to reduce the general velocity |
+| additional_player_velocity_y | `integer`    |   | `0`       | Player's velocity change, use this to push him up or down or to in conjuction with to `additional_player_velocity_x` to reduce the general velocity |
+| aim_player                   | `yes/no`     |   | `no`      | Overrides the bullet angle to now point to the player |
+| angle                        | `integer`    |   | `0`       | Rotation |
+| angle_change                 | `integer`    |   | `0`       | Rotation change through time |
+| ac_frequency                 | `integer`    |   | `0`       | Angle change frequency |
+| animation_velocity           | `integer`    |   | `0`       | Sprite animation speed |
+| auto_scale                   | `double`     |   | `0`       | Bullet scale change through time |
+| bullet_rotation              | `integer`    |   | `0`       | Rotates the bullet sprites withouth affecting other attributes such as the angle or hitboxes |
+| br_change                    | `integer`    |   | `0`       | Bullet rotation change through time |
+| collides_bullets             | `yes/no`     |   | `no`      | If the bullet collides with an opponent's one, both would be destroyed |
+| collides_opponent            | `yes/no`     |   | `yes`     | The bullet is able to hit the opponent |
+| cooldown                     | `integer`    |   | `0`       | Amount of frames between each bullet emision |
+| duration                     | `integer`    |   | `-1`      | Amount of frames before the bullet gets destroyed, -1 is infinite |
+| freeze                       | `yes/no`     |   | `no`      | All bullet changes, such as `velocity`, `acceleration` or `angle_chage` are stopped |
+| homming                      | `yes/no`     |   | `no`      | Bullet will track the player |
+| independent_br               | `yes/no`     |   | `no`      | The `bullet_rotation` is independent from the `angle` |
+| max_velocity                 | `yes/no`     |   | `9999999` | Velocity cap |
+| offset_x                     | `integer`    |   | `0`       | Pixels offset relative to the character on the x axis on emision |
+| offset_y                     | `integer`    |   | `0`       | Pixels offset relative to the character on the y axis on emision |
+| random_angle                 | `integer`    |   | `0`       | Adds a random angle from 0 to the provided number |
+| startup                      | `integer`    |   | `0`       | Amount of frames before emiting the bullet for the first time |
+| stop_ac_at                   | `integer`    |   | `-1`      | Amount of frames before stopping the `angle_change`, -1 means never |
+| undestructable               | `yes/no`     |   | `no`      | The bullet can be destroyed by other bullets |
+| velocity                     | `integer`    |   | `0`       | Speed |
+| modifier                     | `modifier[]` |   |           | Modifies a pattern in a specific frame |
+
+#### modifier
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| at          | `integer`          | ✔ |  | Modifier's frame of execution |
+| `attribute` | `attribute's type` |   |  | Attribute to be changed, e.g. `{at: "10", velocity: "3", homming: "true"}` |
+
+#### repeat
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| amount      | `integer`          | ✔ |  | Amount of times that the patterns will be repeated |
+| `attribute` | `attribute's type` | ✔ |  | Attribute to be changed, e.g. in `{amount: "5", startup: "5", patterns:[..]}` patterns will be repeated 3 times, in each repetition 5 frames will be added (first will be emited on frame 0, 2nd in frame 5 and third in 10) |
+| patterns | [pattern[]](#pattern) |   |  | Single bullet pattern to be changed during repetition |
+
+### modifiers.json
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| modifiers | [modifier[]](#modifier) |   |  | Bullet identifier |
+
+#### modifier
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| at           | `integer`  |  |  | Modifier's frame of execution |
+| life_at      | `integer`  |  |  | Defines the amount of hit points needed to be reached to execute the modifier |
+| velocity     | `integer`  |  |  | New enemy velocity to be set |
+| angle_change | `integer`  |  |  | New enemy angle change to be set |
+| pattern_type | `integer`  |  |  | New enemy pattern to be set |
+
+### stage.json
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| bullets_domain | [bullets_domain](#bullets_domain) |  |  | Bullet bounds, bullets outside this range will be automatically distroyed |
+| back_layers     | [layer[]](#layer)                 |  |  | Animated layers to be displayed behind of characters and bullets |
+| front_layer    | [layer[]](#layer)                 |  |  | Animated layers to be displayed on front of characters and bullets |
+
+#### bullets_domain
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` |  | `0`             | Position of the bullets domain on the x axis |
+| y      | `integer` |  | `0`             | Position of the bullets domain on the y axis |
+| width  | `integer` |  | `screen width`  | Bullets domain width |
+| height | `integer` |  | `screen height` | Bullets domain height |
+
+#### layer
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x                  | `integer`           |  | `0` | Initial position on the x axis |
+| y                  | `integer`           |  | `0` | Initial position on the y axis |
+| separation_x       | `integer`           |  | `0` | Amount of pixels between every animation repetition |
+| velocity_x         | `double`            |  | `0` | Layer velocity on the x axis, use this to make parallax effect |
+| animation_velocity | `integer`           |  | `5` | Animation speed |
+| sprites            | [sprite[]](#sprite) |  |     | Animation sprites |
+
+#### sprite
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| type | `image` | ✔ |  | Type of frame |
+| path | `path`  | ✔ |  | Path to the `.png` image |
+
+### config.json
+
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `chars`         | [char[]](#char)                 | ✔ | Playable character |
@@ -714,22 +740,22 @@ Your game/
     └───chars/
     │   └───Your Playable Character/
     │       │   bullets.json
-    │       │   main.json
-    │       │   patterns.json
+    │       │   character.json
+    │       │   attacks.json
     └───stages/
         └───Your Stage
-            │   config.json
+            │   stage.json
             │
             └───Enemy
                 │   bullets.json
-                │   main.json
+                │   character.json
                 │   modifiers.json
-                │   patterns.json
+                │   attacks.json
 ```
 
 ## Getting started
 
-Download the [boilerplate example](https://github.com/Rosalila/STGExample) game and run the binary corresponding to your system.
+Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpMakerExample) game and run the binary corresponding to your system.
 
 ## Build
 

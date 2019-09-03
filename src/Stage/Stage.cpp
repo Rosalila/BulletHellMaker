@@ -163,7 +163,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
 
   rosalila()->utility->writeLogLine("Loading stage from XML.");
 
-  Node *root_node = rosalila()->parser->getNodes(path + name + "/main.json");
+  Node *root_node = rosalila()->parser->getNodes(path + name + "/stage.json");
 
   //Load settings
   music_path = path + name + "/music.ogg";
@@ -210,7 +210,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   map<string, int> max_layers;
   int current_layer = 0;
 
-  vector<Node *> backlayer_nodes = root_node->getNodesByName("back_layer");
+  vector<Node *> backlayer_nodes = root_node->getNodesByName("back_layers");
 
   for (int i = 0; i < (int)backlayer_nodes.size(); i++)
   {

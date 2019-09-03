@@ -90,7 +90,7 @@ void Character::loadFromXML()
 
 void Character::loadMainXML()
 {
-  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "main.json");
+  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
 
   this->velocity = 5;
   if (root_node->hasAttribute("velocity"))
@@ -251,7 +251,7 @@ void Character::loadBulletsXML()
 {
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "bullets.json");
 
-  vector<Node *> bullet_nodes = root_node->getNodesByName("bullet");
+  vector<Node *> bullet_nodes = root_node->getNodesByName("bullets");
 
   for (int i = 0; i < (int)bullet_nodes.size(); i++)
   {
@@ -668,9 +668,9 @@ vector<Modifier *> Character::loadModifierXML(Node *modifier_node)
 
 void Character::loadPatternsXML()
 {
-  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "patterns.json");
+  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "attacks.json");
 
-  vector<Node *> type_nodes = root_node->getNodesByName("type");
+  vector<Node *> type_nodes = root_node->getNodesByName("attacks");
 
   for (int i = 0; i < (int)type_nodes.size(); i++)
   {

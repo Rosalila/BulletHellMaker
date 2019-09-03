@@ -55,7 +55,7 @@ std::vector<std::string> getStageNames()
   {
     stage_names.push_back(stage_nodes[i]->attributes["name"]);
 
-    string file_name = std::string(assets_directory) + "stages/" + stage_nodes[i]->attributes["name"] + "/Enemy/patterns.json";
+    string file_name = std::string(assets_directory) + "stages/" + stage_nodes[i]->attributes["name"] + "/Enemy/attacks.json";
     cout << rosalila()->utility->checksumFileA(file_name) << ",";
     cout << rosalila()->utility->checksumFileB(file_name) << ",";
     cout << rosalila()->utility->checksumFileC(file_name) << endl;
@@ -555,9 +555,9 @@ void stageSelect()
 #endif
 
       string bullets_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/bullets.json";
-      string main_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/main.json";
+      string main_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/character.json";
       string modifiers_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/modifiers.json";
-      string patterns_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/patterns.json";
+      string patterns_file_path = std::string(assets_directory) + "stages/" + stage_names[current_stage] + "/Enemy/attacks.json";
 
       if (!rosalila()->utility->checkFile(bullets_file_path) || !rosalila()->utility->checkFile(main_file_path) || !rosalila()->utility->checkFile(modifiers_file_path) || !rosalila()->utility->checkFile(patterns_file_path))
       {

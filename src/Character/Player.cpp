@@ -101,7 +101,7 @@ void Player::loadPlayerFromXML()
 {
   loadFromXML();
 
-  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "main.json");
+  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
 
   this->current_slow = 0;
   this->max_slow = -1;
@@ -540,7 +540,7 @@ void Player::loadFromXML()
 {
   Character::loadFromXML();
 
-  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "main.json");
+  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
 
   this->max_shield = 0;
   this->shield_fade = 0;
