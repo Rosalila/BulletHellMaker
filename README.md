@@ -755,7 +755,7 @@ Your game/
 
 ## Getting started
 
-Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpMakerExample) game and run the binary corresponding to your system.
+Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpExample) game and run the binary corresponding to your system.
 
 ## Build
 
