@@ -172,12 +172,12 @@ void Enemy::logic(int stage_velocity, string stage_name)
 
     if (p->homing)
     {
-      p->angle = -atan2(distance_y, distance_x) * 180 / PI;
-      p->angle += p->homing_angle;
+      p->angle = (float)(-atan2(distance_y, distance_x) * 180 / PI);
+      p->angle += (float)(p->homing_angle);
     }
     else if (p->getAimPlayer())
     {
-      p->angle = p->angle - atan2(distance_y, distance_x) * 180 / PI;
+      p->angle = (int)(p->angle - atan2(distance_y, distance_x) * 180 / PI);
     }
 
     player->additional_velocity_x = p->additional_player_velocity_x;
@@ -185,7 +185,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
     player->additional_hp_change = p->additional_player_hp_change;
     player->velocity_override = p->player_velocity_override;
 
-    player->hp += p->additional_player_hp_change;
+    player->hp += (int)p->additional_player_hp_change;
     if(player->hp <= 0)
       player->hp = 1;
   }
@@ -198,7 +198,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
     {
       current_state = "destroyed";
       if (rosalila()->sound->soundExists(name + ".destroyed"))
-        rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
+        rosalila()->sound->playSound(name + ".destroyed", 1, 0, (int)this->x);
 
       for (int i = 0; i < (int)hitboxes.size(); i++)
         this->hitboxes[i]->setValues(0, 0, 0, 0, 0);
@@ -312,7 +312,7 @@ void Enemy::addActivePattern(Pattern *pattern)
 {
   if (getGameOver())
     return;
-  Pattern *pattern_temp = new Pattern(pattern, this->x, this->y);
+  Pattern *pattern_temp = new Pattern(pattern, (int)this->x, (int)this->y);
   float angle = pattern_temp->angle;
   angle += pattern_temp->getRandomAngle();
 
