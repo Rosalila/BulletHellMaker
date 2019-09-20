@@ -10,6 +10,8 @@ last_replay
 *.o
 *.obj
 
+.vscode/
+
 #shhh this is  a secret
 Makefile.secret
 RosalilaShooter/Menus/StageSecretSelect.*
