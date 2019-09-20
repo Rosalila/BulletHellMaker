@@ -41,8 +41,8 @@ Pattern::Pattern(int velocity, int max_velocity, int acceleration, int a_frequen
   this->current_cooldown = 0;
 
   //Bullet rotation
-  this->bullet_rotation = bullet_rotation;
-  this->br_change = br_change;
+  this->bullet_rotation = (float)bullet_rotation;
+  this->br_change = (float)br_change;
   this->independent_br = independent_br;
 
   this->iteration = 0;
@@ -255,7 +255,7 @@ void Pattern::logic(int stage_speed)
     if (current_ac_frequency > ac_frequency)
     {
       current_ac_frequency = 0;
-      angle += angle_change / getSlowdown();
+      angle += (int)(angle_change / getSlowdown());
     }
   }
 
@@ -283,12 +283,12 @@ void Pattern::render()
     if (getGameOver())
       transparency_divider = 8;
     
-    image->scale = 1.0 - (frame * auto_scale);
+    image->scale = (float)(1.0 - (frame * auto_scale));
     image->rotation = getBulletAngle();
     image->color_filter.alpha = 255 / transparency_divider;
     rosalila()->graphics->drawImage(image,
-                                      this->x - image->getWidth() / 2,
-                                      this->y - image->getHeight() / 2);
+		(int)this->x - image->getWidth() / 2,
+		(int)this->y - image->getHeight() / 2);
   }
 
   if (rosalila()->receiver->isKeyDown(SDLK_h))

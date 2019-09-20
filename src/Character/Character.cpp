@@ -182,7 +182,7 @@ void Character::loadMainXML()
 
   vector<Node *> hitboxes_node = root_node->getNodesByName("hitboxes");
 
-  for (int i = 0; i < hitboxes_node.size(); i++)
+  for (int i = 0; i < (int)hitboxes_node.size(); i++)
   {
     Node *hitbox_node = hitboxes_node[i];
 
@@ -194,7 +194,7 @@ void Character::loadMainXML()
     if (hitbox_node->hasAttribute("angle"))
       hitbox_angle = atoi(hitbox_node->attributes["angle"].c_str());
 
-    Hitbox *hitbox = new Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height, hitbox_angle);
+    Hitbox *hitbox = new Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height, (float)hitbox_angle);
     this->hitboxes.push_back(hitbox);
   }
 
@@ -340,7 +340,7 @@ void Character::loadBulletsXML()
         angle = atoi(hitbox_nodes[j]->attributes["angle"].c_str());
       }
 
-      hitboxes_temp.push_back(new Hitbox(x, y, width, height, angle));
+      hitboxes_temp.push_back(new Hitbox(x, y, width, height, (float)angle));
     }
 
     Node *onhit_node = bullet_nodes[i]->getNodeByName("on_hit_sprites");
@@ -522,7 +522,7 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
   if (pattern_node->hasAttribute("player_velocity_override"))
     player_velocity_override = atof(pattern_node->attributes["player_velocity_override"].c_str());
 
-  return new Pattern(velocity, max_velocity, acceleration, a_frequency, angle, angle_change, stop_ac_at, ac_frequency, animation_velocity, auto_scale, bullet, offset_x, offset_y,
+  return new Pattern(velocity, max_velocity, acceleration, a_frequency, (float)angle, angle_change, stop_ac_at, ac_frequency, animation_velocity, auto_scale, bullet, offset_x, offset_y,
                      startup, cooldown, duration, random_angle, aim_player, bullet_rotation, br_change, independent_br, freeze, homing, collides_bullets, collides_opponent, undestructable, pattern_modifiers, &bullets,
                      additional_player_velocity_x, additional_player_velocity_y, additional_player_hp_change, player_velocity_override
                      );
@@ -799,7 +799,7 @@ void Character::spellControl(int stage_velocity)
       patterns[i]->updateStateShouting();
       if (patterns[i]->isReady())
       {
-        patterns[i]->bullet->playSound(patterns[i]->x + this->x, true);
+        patterns[i]->bullet->playSound((int)(patterns[i]->x + this->x), true);
         this->addActivePattern(patterns[i]);
       }
     }
@@ -836,8 +836,8 @@ void Character::bottomRender()
   sprites[current_state][current_sprite]->color_filter.alpha = color_filter_alpha;
 
   rosalila()->graphics->drawImage(sprites[current_state][current_sprite],
-                                    this->x - sprites[current_state][current_sprite]->getWidth() / 2 + current_screen_shake_x,
-                                    this->y - sprites[current_state][current_sprite]->getHeight() / 2 + current_screen_shake_y);
+	  (int)this->x - sprites[current_state][current_sprite]->getWidth() / 2 + current_screen_shake_x,
+	  (int)this->y - sprites[current_state][current_sprite]->getHeight() / 2 + current_screen_shake_y);
 
 
 
@@ -845,10 +845,10 @@ void Character::bottomRender()
   {
     for (int i = 0; i < (int)hitboxes.size(); i++)
     {
-      rosalila()->graphics->drawRectangle(hitboxes[i]->getX() + x,
-                                          hitboxes[i]->getY() + y,
-                                          hitboxes[i]->getWidth(), hitboxes[i]->getHeight(),
-                                          hitboxes[i]->angle, 100, 0, 0, 100);
+      rosalila()->graphics->drawRectangle((int)(hitboxes[i]->getX() + x),
+		  (int)(hitboxes[i]->getY() + y),
+		  hitboxes[i]->getWidth(), hitboxes[i]->getHeight(),
+		  hitboxes[i]->angle, 100, 0, 0, 100);
     }
   }
 }
@@ -915,8 +915,8 @@ void Character::topRender()
   double current_life_bar_width = life_bar_rect_width * current_percentual_hp;
 
   rosalila()->graphics->drawRectangle(life_bar_x, life_bar_y,
-                                      current_life_bar_width, life_bar_rect_height,
-                                      0, color.red, color.blue, color.green, 255);
+	  (int)current_life_bar_width, life_bar_rect_height,
+      0, color.red, color.blue, color.green, 255);
 
   rosalila()->graphics->drawRectangles(rectangles);
 
@@ -949,7 +949,7 @@ void Character::hit(int damage)
 
 void Character::addActivePattern(Pattern *pattern)
 {
-  Pattern *pattern_temp = new Pattern(pattern, this->x, this->y);
+  Pattern *pattern_temp = new Pattern(pattern, (int)this->x, (int)this->y);
   float angle = pattern_temp->angle;
   angle += pattern_temp->getRandomAngle();
   pattern_temp->angle = angle;
