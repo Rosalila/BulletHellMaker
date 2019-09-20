@@ -285,7 +285,10 @@ bool STG::logic()
           //rosalila()->graphics->point_explosion_effect->explode(p->x, p->y, Color(255, 255, 255, 200), p->bullet->damage);
           p->hit(enemy->sound_channel_base + 1, false);
           if (!player_is_immortal)
+          {
             player->hit(p->bullet->damage);
+            rosalila()->graphics->screen_shake_effect.set(20, 10, 0, 0);
+          }
           parry_count = 0;
           //rosalila()->graphics->screen_shake_effect.set(30,15,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
           if (rosalila()->sound->soundExists(player->name + ".hit"))

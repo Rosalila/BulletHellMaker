@@ -17,19 +17,15 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    std::cout<<"A"<<std::endl;
     bool input_config=false;
     if(argc>1 && strcmp(argv[1],"config")==0)
     {
         input_config=true;
     }
-    std::cout<<"B"<<assets_directory<<std::endl;
 
     std::string config_file_path = std::string(assets_directory)+"config.json";
-    std::cout<<"CP:"<<config_file_path<<std::endl;
     rosalila()->init(config_file_path);
     initShooterUtility();
-    std::cout<<"C"<<std::endl;
 
     rosalila()->sound->addSound("Menu.back",std::string(assets_directory)+"menu/audio/back.ogg");
     rosalila()->sound->addSound("Menu.confirm",std::string(assets_directory)+"menu/audio/confirm.ogg");
@@ -40,7 +36,6 @@ int main(int argc, char *argv[])
     rosalila()->sound->addSound("Menu.invalid",std::string(assets_directory)+"menu/audio/invalid.ogg");
 
     rosalila()->api_integrator->setCurrentControllerActionSet("MenuControls");
-    std::cout<<"D"<<std::endl;
 
     intro();
 
