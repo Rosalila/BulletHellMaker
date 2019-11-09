@@ -51,6 +51,17 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
 
   current_shield = max_shield;
 
+  //Input control
+  this->pressed_1_last_frame = this->pressed_2_last_frame = this->pressed_3_last_frame = this->pressed_4_last_frame =
+    this->pressed_6_last_frame = this->pressed_7_last_frame = this->pressed_8_last_frame = this->pressed_9_last_frame = false;
+
+    this->pressed_1_last_frameX = this->pressed_2_last_frameX = this->pressed_3_last_frameX = this->pressed_4_last_frameX =
+    this->pressed_6_last_frameX = this->pressed_7_last_frameX = this->pressed_8_last_frameX = this->pressed_9_last_frameX = 0;
+
+  //Dash
+  this->dash_last_tap_frame = 0;
+  this->dash_extra_velocity_x = this->dash_extra_velocity_y = 0;
+
   //Parry
   this->current_parry_frame = parry_duration + 1;
 
@@ -223,44 +234,161 @@ void Player::inputControl()
 
   if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
   {
+    if(this->frame - this->pressed_8_last_frameX < 10)
+    {
+      this->dash_extra_velocity_y = -20;
+      this->pressed_8_last_frameX = 0;
+    }else
+    {
+      if(this->dash_extra_velocity_y == 0)
+      {
+        this->pressed_8_last_frame = true;
+      }
+    }
     delta_y = -(current_velocity + velocity_boost) / getSlowdown();
+  }else
+  {
+    if(this->pressed_8_last_frame)
+    {
+      this->pressed_1_last_frameX = 0;
+      this->pressed_2_last_frameX = 0;
+      this->pressed_3_last_frameX = 0;
+      this->pressed_4_last_frameX = 0;
+      this->pressed_6_last_frameX = 0;
+      this->pressed_7_last_frameX = 0;
+      this->pressed_8_last_frameX = this->frame;
+      this->pressed_9_last_frameX = 0;
+    }
+    this->pressed_8_last_frame = false;
   }
+  
   if (!up_pressed && down_pressed && !left_pressed && !right_pressed) //2
   {
+    if(this->frame - this->pressed_2_last_frameX < 10)
+    {
+      this->dash_extra_velocity_y = 20;
+      this->pressed_2_last_frameX = 0;
+    }else
+    {
+      if(this->dash_extra_velocity_y == 0)
+      {
+        this->pressed_2_last_frame = true;
+      }
+    }
     delta_y = (current_velocity + velocity_boost) / getSlowdown();
+  }else
+  {
+    if(this->pressed_2_last_frame)
+    {
+      this->pressed_1_last_frameX = 0;
+      this->pressed_2_last_frameX = this->frame;
+      this->pressed_3_last_frameX = 0;
+      this->pressed_4_last_frameX = 0;
+      this->pressed_6_last_frameX = 0;
+      this->pressed_7_last_frameX = 0;
+      this->pressed_8_last_frameX = 0;
+      this->pressed_9_last_frameX = 0;
+    }
+    this->pressed_2_last_frame = false;
   }
+
   if (!up_pressed && !down_pressed && left_pressed && !right_pressed) //4
   {
+    if(this->frame - this->pressed_4_last_frameX < 10)
+    {
+      this->dash_extra_velocity_x = -20;
+      this->pressed_4_last_frameX = 0;
+    }else
+    {
+      if(this->dash_extra_velocity_y == 0)
+      {
+        this->pressed_4_last_frame = true;
+      }
+    }
     delta_x = -(current_velocity + velocity_boost) / getSlowdown();
+  }else
+  {
+    if(this->pressed_4_last_frame)
+    {
+      this->pressed_1_last_frameX = 0;
+      this->pressed_2_last_frameX = 0;
+      this->pressed_3_last_frameX = 0;
+      this->pressed_4_last_frameX = this->frame;
+      this->pressed_6_last_frameX = 0;
+      this->pressed_7_last_frameX = 0;
+      this->pressed_8_last_frameX = 0;
+      this->pressed_9_last_frameX = 0;
+    }
+    this->pressed_4_last_frame = false;
   }
+
+
   if (!up_pressed && !down_pressed && !left_pressed && right_pressed) //6
   {
+    if(this->frame - this->pressed_6_last_frameX < 10)
+    {
+      this->dash_extra_velocity_x = 20;
+      this->pressed_6_last_frameX = 0;
+    }else
+    {
+      if(this->dash_extra_velocity_y == 0)
+      {
+        this->pressed_6_last_frame = true;
+      }
+    }
     delta_x = (current_velocity + velocity_boost) / getSlowdown();
+  }else
+  {
+    if(this->pressed_6_last_frame)
+    {
+      this->pressed_1_last_frameX = 0;
+      this->pressed_2_last_frameX = 0;
+      this->pressed_3_last_frameX = 0;
+      this->pressed_4_last_frameX = 0;
+      this->pressed_6_last_frameX = this->frame;
+      this->pressed_7_last_frameX = 0;
+      this->pressed_8_last_frameX = 0;
+      this->pressed_9_last_frameX = 0;
+    }
+    this->pressed_6_last_frame = false;
   }
 
   if (!up_pressed && down_pressed && left_pressed && !right_pressed) //1
   {
+    this->pressed_1_last_frame = true;
     delta_x = cos(225 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
     delta_y = -sin(225 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
   }
   if (!up_pressed && down_pressed && !left_pressed && right_pressed) //3
   {
+    this->pressed_3_last_frame = true;
     delta_x = cos(315 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
     delta_y = -sin(315 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
   }
   if (up_pressed && !down_pressed && left_pressed && !right_pressed) //7
   {
+    this->pressed_7_last_frame = true;
     delta_x = cos(135 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
     delta_y = -sin(135 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
   }
   if (up_pressed && !down_pressed && !left_pressed && right_pressed) //9
   {
+    this->pressed_9_last_frame = true;
     delta_x = cos(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
     delta_y = -sin(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
   }
   
-  this->x += delta_x + additional_velocity_x;
-  this->y += delta_y + additional_velocity_y;
+  this->x += delta_x + additional_velocity_x + this->dash_extra_velocity_x;
+  this->y += delta_y + additional_velocity_y + this->dash_extra_velocity_y;
+
+  if(this->dash_extra_velocity_x < 0)
+    this->dash_extra_velocity_x++;
+  if(this->dash_extra_velocity_x > 0)
+    this->dash_extra_velocity_x--;
+  if(this->dash_extra_velocity_y < 0)
+    this->dash_extra_velocity_y++;
+  if(this->dash_extra_velocity_y > 0)
+    this->dash_extra_velocity_y--;
 
   if (isDownWrapper("a"))
   {
@@ -441,6 +569,7 @@ void Player::logic(int stage_velocity)
       }
     }
   }
+  this->frame++;
 }
 
 void Player::bottomRender()

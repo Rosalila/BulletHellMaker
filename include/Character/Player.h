@@ -28,6 +28,16 @@ public:
   Color slow_bar_color;
   Color slow_bar_cooldown_color;
 
+  //Input control
+  bool pressed_1_last_frame, pressed_2_last_frame, pressed_3_last_frame, pressed_4_last_frame,
+    pressed_6_last_frame, pressed_7_last_frame, pressed_8_last_frame, pressed_9_last_frame;
+  int pressed_1_last_frameX, pressed_2_last_frameX, pressed_3_last_frameX, pressed_4_last_frameX,
+    pressed_6_last_frameX, pressed_7_last_frameX, pressed_8_last_frameX, pressed_9_last_frameX;
+
+  //Dash
+  int dash_last_tap_frame;
+  int dash_extra_velocity_x, dash_extra_velocity_y;
+
   //Shield
   int current_shield;
   int max_shield;

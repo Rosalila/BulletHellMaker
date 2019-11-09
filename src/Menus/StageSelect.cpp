@@ -581,10 +581,10 @@ void stageSelect()
           current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 #endif
 
-        Stage *stage = new Stage();
-        stage->loadFromXML(stage_names[current_stage], false);
         Player *player = new Player("player", 10, intro_input, replay_input, game_mode);
         Enemy *enemy = new Enemy(stage_names[current_stage], player, 20, false);
+        Stage *stage = new Stage(player);
+        stage->loadFromXML(stage_names[current_stage], false);
         rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
         STG *stg = new STG(player, enemy, stage, game_mode, current_player_best_score);
 

@@ -1,7 +1,8 @@
 #include "Stage/Stage.h"
 
-Stage::Stage()
+Stage::Stage(Player* player)
 {
+  this->player = player;
   this->iterator = 0;
   this->iterate_slowdown_flag = false;
   this->current_slowdown_iteration = 0;
@@ -105,6 +106,16 @@ void Stage::drawLayer(Layer *layer)
     delete rectangles[i];
   }
 
+  if (rosalila()->receiver->isKeyDown(SDLK_h))
+  {
+    rosalila()->graphics->drawRectangle(layer->bounds_x + layer->x,
+                                         rosalila()->graphics->screen_height - current_layer_frame->height - layer->y - layer->bounds_y,
+                                         layer->bounds_width,
+                                         layer->bounds_height,
+                                         0,
+                                         0, 100, 0, 100);
+  }
+
   // TODO redo paralax
   /*
     if(layer->depth_effect_x>0)
@@ -145,6 +156,29 @@ void Stage::dibujarFront()
     Layer *layer = front[i];
     drawLayer(layer);
   }
+}
+
+vector<Modifier *> loadLayerModifierXML(Node *modifier_node)
+{
+  vector<Modifier *> temp_modifiers;
+
+  if (modifier_node->hasAttribute("velocity_x"))
+  {
+    std::string value = modifier_node->attributes["velocity_x"];
+    temp_modifiers.push_back(new Modifier("velocity_x", value));
+  }
+  if (modifier_node->hasAttribute("velocity_y"))
+  {
+    std::string value = modifier_node->attributes["velocity_y"];
+    temp_modifiers.push_back(new Modifier("velocity_y", value));
+  }
+  if (modifier_node->hasAttribute("frame"))
+  {
+    std::string value = modifier_node->attributes["frame"];
+    temp_modifiers.push_back(new Modifier("frame", value));
+  }
+
+  return temp_modifiers;
 }
 
 void Stage::loadFromXML(std::string name, bool is_mod)
@@ -359,18 +393,57 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     if (backlayer_nodes[i]->hasAttribute("alpha"))
       color.alpha = atoi(backlayer_nodes[i]->attributes["alpha"].c_str());
 
-    back.push_back(new Layer(layer_frames, frame_duration,
+    // Load modifiers
+    std::map<int, vector<Modifier *>> *layer_modifiers = new std::map<int, vector<Modifier *>>();
+
+    vector<Node *> modifier_nodes = backlayer_nodes[i]->getNodesByName("modifiers");
+    for (int i = 0; i < (int)modifier_nodes.size(); i++)
+    {
+      int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
+      (*layer_modifiers)[at] = loadLayerModifierXML(modifier_nodes[i]);
+    }
+
+    // Load bounds
+    bool is_bounds_active = false;
+    int bounds_x = 0;
+    int bounds_y = 0;
+    int bounds_width = 0;
+    int bounds_height = 0;
+
+    Node* bounds_node = backlayer_nodes[i]->getNodeByName("bounds");
+    if (bounds_node)
+    {
+      if (bounds_node->hasAttribute("is_active"))
+        is_bounds_active = bounds_node->attributes["is_active"] == "yes";
+      if (bounds_node->hasAttribute("x"))
+        bounds_x = atoi(bounds_node->attributes["x"].c_str());
+      if (bounds_node->hasAttribute("y"))
+        bounds_y = atoi(bounds_node->attributes["y"].c_str());
+      if (bounds_node->hasAttribute("width"))
+        bounds_width = atoi(bounds_node->attributes["width"].c_str());
+      if (bounds_node->hasAttribute("height"))
+        bounds_height = atoi(bounds_node->attributes["height"].c_str());
+    }
+
+    back.push_back(new Layer(layer_frames,
+                             layer_modifiers, 
+                             frame_duration,
                              depth_effect_x, depth_effect_y,
                              x, y,
                              velocity_x, velocity_y,
                              separation_x,
+                             is_bounds_active,
+                             bounds_x,
+                             bounds_y,
+                             bounds_width,
+                             bounds_height,
                              blend_effect,
                              color));
   }
 
   rosalila()->utility->writeLogLine("Loading stage's FrontLayers.");
 
-  vector<Node *> frontlayer_nodes = root_node->getNodesByName("FrontLayer");
+  vector<Node *> frontlayer_nodes = root_node->getNodesByName("front_layers");
   //Load front layer
   for (int i = 0; i < (int)frontlayer_nodes.size(); i++)
   {
@@ -412,8 +485,8 @@ void Stage::loadFromXML(std::string name, bool is_mod)
       separation_x = atoi(frontlayer_nodes[i]->attributes["separation_x"].c_str());
 
     bool blend_effect = false;
-    if (backlayer_nodes[i]->hasAttribute("blend_effect"))
-      blend_effect = backlayer_nodes[i]->attributes["blend_effect"] == "yes";
+    if (frontlayer_nodes[i]->hasAttribute("blend_effect"))
+      blend_effect = frontlayer_nodes[i]->attributes["blend_effect"] == "yes";
 
     std::vector<Image *> textures;
     std::vector<int> textures_size_x;
@@ -441,17 +514,56 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     if (frontlayer_nodes[i]->hasAttribute("alpha"))
       color.alpha = atoi(frontlayer_nodes[i]->attributes["alpha"].c_str());
 
-    front.push_back(new Layer(layer_frames, frame_duration,
+    // Load modifiers
+    std::map<int, vector<Modifier *>> *layer_modifiers = new std::map<int, vector<Modifier *>>();
+
+    vector<Node *> modifier_nodes = frontlayer_nodes[i]->getNodesByName("modifiers");
+    for (int i = 0; i < (int)modifier_nodes.size(); i++)
+    {
+      int at = atoi(modifier_nodes[i]->attributes["at"].c_str());
+      (*layer_modifiers)[at] = loadLayerModifierXML(modifier_nodes[i]);
+    }
+
+    // Load bounds
+    bool is_bounds_active = false;
+    int bounds_x = 0;
+    int bounds_y = 0;
+    int bounds_width = 0;
+    int bounds_height = 0;
+
+    Node* bounds_node = frontlayer_nodes[i]->getNodeByName("bounds");
+    if (bounds_node)
+    {
+      if (bounds_node->hasAttribute("is_active"))
+        is_bounds_active = bounds_node->attributes["is_active"] == "yes";
+      if (bounds_node->hasAttribute("x"))
+        bounds_x = atoi(bounds_node->attributes["x"].c_str());
+      if (bounds_node->hasAttribute("y"))
+        bounds_y = atoi(bounds_node->attributes["y"].c_str());
+      if (bounds_node->hasAttribute("width"))
+        bounds_width = atoi(bounds_node->attributes["width"].c_str());
+      if (bounds_node->hasAttribute("height"))
+        bounds_height = atoi(bounds_node->attributes["height"].c_str());
+    }
+
+    front.push_back(new Layer(layer_frames,
+                              layer_modifiers,
+                              frame_duration,
                               depth_effect_x, depth_effect_y,
                               x, y,
                               velocity_x, velocity_y,
                               separation_x,
+                              is_bounds_active,
+                              bounds_x,
+                              bounds_y,
+                              bounds_width,
+                              bounds_height,
                               blend_effect,
                               color));
   }
 
   delete root_node;
-  rosalila()->utility->writeLogLine("Stage loaded succesfully from XML.");
+  rosalila()->utility->writeLogLine("Stage loaded succesfully from Json.");
 }
 
 LayerFrame *Stage::getFrameFromNode(Node *frame_node)
@@ -489,13 +601,13 @@ void Stage::logic()
   for (int i = 0; i < (int)back.size(); i++)
   {
     Layer *layer = back[i];
-    layer->logic();
+    layer->logic(player);
   }
 
   for (int i = 0; i < (int)front.size(); i++)
   {
     Layer *layer = front[i];
-    layer->logic();
+    layer->logic(player);
   }
 }
 
