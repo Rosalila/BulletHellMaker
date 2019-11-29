@@ -8,10 +8,12 @@
 #include "Character/Bullet.h"
 #include "Character/Pattern.h"
 #include "Character/Character.h"
+#include "Stage/Stage.h"
 
 class Player : public Character
 {
 public:
+  Stage* stage;
   //Slow bar variables
   string game_mode;
   Image *slow_bar;

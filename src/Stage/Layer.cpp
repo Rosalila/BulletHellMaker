@@ -1,4 +1,5 @@
 #include "Stage/Layer.h"
+#include "Character/Player.h"
 
 Layer::Layer(vector<LayerFrame *> layer_frames,
   std::map<int, vector<Modifier *>> *modifiers,
@@ -70,9 +71,15 @@ void Layer::modifiersControl()
     this->frame++;
 }
 
-bool playerIsInBounds(Player* player, int x, int y, int width, int height)
+bool Layer::playerIsInBounds(Player* player)
 {
-  if(player->x < x || player->y < y || player->x > x + width || player->y > y + height)
+  int image_height = 0;
+  if(layer_frames.size() > 0)
+    image_height = layer_frames[0]->height;
+
+  int current_bounds_x = this->x + this->bounds_x;
+  int current_bounds_y = rosalila()->graphics->screen_height - image_height - this->y - this->bounds_y;
+  if(player->x < current_bounds_x || player->y < current_bounds_y || player->x > current_bounds_x + this->bounds_width || player->y > current_bounds_y + this->bounds_height)
     return false;
   return true;
 }
@@ -81,21 +88,15 @@ void Layer::logic(Player* player)
 {
   modifiersControl();
 
+  bool player_is_in_bounds = playerIsInBounds(player);
+
   this->x += velocity_x;
   this->y += velocity_y;
 
 
   if(is_bounds_active)
   {
-    int image_height = 0;
-    if(layer_frames.size() > 0)
-      image_height = layer_frames[0]->height;
-    if(playerIsInBounds(player,
-        x + bounds_x,
-        rosalila()->graphics->screen_height - image_height - y - bounds_y,
-        bounds_width,
-        bounds_height)
-      )
+    if(player_is_in_bounds)
     {
       player->x += velocity_x;
       player->y -= velocity_y;

@@ -132,7 +132,6 @@ void STG::mainLoop()
     ////            string random_number = toString((rand()*999999)%1000);
     //            rosalila()->graphics->screenshot(0,0, 1366, 768, stage->name +".bmp");
     //        }
-
     render();
 
     if (!logic())
@@ -141,7 +140,6 @@ void STG::mainLoop()
       rosalila()->sound->playSound(std::string("Menu.back"), 1, 0, 0);
       break;
     }
-
     //        rosalila()->receiver->isKeyDown(SDLK_z)
 
     rosalila()->update();
@@ -293,12 +291,16 @@ bool STG::logic()
           //rosalila()->graphics->screen_shake_effect.set(30,15,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
           if (rosalila()->sound->soundExists(player->name + ".hit"))
             rosalila()->sound->playSound(player->name + ".hit", 3, 0, player->x);
-          if (player->hp == 0)
-          {
-            lose();
-          }
         }
       }
+    }
+  }
+  
+  if(!getGameOver())
+  {
+    if (player->hp == 0)
+    {
+      lose();
     }
   }
 
@@ -705,12 +707,18 @@ void STG::win()
 
 void STG::lose()
 {
+  cout<<"A1"<<endl;
   rosalila()->utility->writeLogLine("Player lost");
+  cout<<"A2"<<endl;
   setPlayerWon(false);
+  cout<<"A3"<<endl;
   setGameOver(true);
+  cout<<"A4"<<endl;
   rosalila()->sound->fadeMusicVolume(0, 2);
+  cout<<"A5"<<endl;
   if(rosalila()->sound->soundExists("you lose"))
     rosalila()->sound->playSound("you lose", 4, 0, 0);
+  cout<<"A6"<<endl;
 }
 
 void STG::uploadScore()

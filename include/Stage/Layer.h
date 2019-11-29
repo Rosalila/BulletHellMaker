@@ -5,8 +5,9 @@
 #include "Rosalila/Rosalila.h"
 #include "Stage/LayerFrame.h"
 #include "Character/Modifier.h"
-#include "Character/Player.h"
 using namespace std;
+
+class Player;
 
 class Layer
 {
@@ -54,7 +55,8 @@ public:
         int bounds_height,
         bool blend_effect,
         Color color);
-
+  
+  bool playerIsInBounds(Player* player);
   void modifiersControl();
   void logic(Player* player);
 

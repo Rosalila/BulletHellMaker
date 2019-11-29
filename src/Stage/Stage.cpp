@@ -1,4 +1,5 @@
 #include "Stage/Stage.h"
+#include "../Character/Player.h"
 
 Stage::Stage(Player* player)
 {
@@ -137,6 +138,17 @@ void Stage::drawLayer(Layer *layer)
   {
     layer->x += frame_width + layer->separation_x;
   }
+}
+
+bool Stage::playerIsInBounds()
+{
+  for (int i = 0; i < (int)back.size(); i++)
+  {
+    Layer *layer = back[i];
+    if (layer->playerIsInBounds(player))
+      return true;
+  }
+  return false;
 }
 
 void Stage::dibujarBack()

@@ -2,6 +2,7 @@
 
 Player::Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode)
 {
+  this->stage = NULL;
   this->game_mode = game_mode;
   //Setting up the other variables
   this->name = name;
@@ -53,10 +54,10 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
 
   //Input control
   this->pressed_1_last_frame = this->pressed_2_last_frame = this->pressed_3_last_frame = this->pressed_4_last_frame =
-    this->pressed_6_last_frame = this->pressed_7_last_frame = this->pressed_8_last_frame = this->pressed_9_last_frame = false;
+  this->pressed_6_last_frame = this->pressed_7_last_frame = this->pressed_8_last_frame = this->pressed_9_last_frame = false;
 
-    this->pressed_1_last_frameX = this->pressed_2_last_frameX = this->pressed_3_last_frameX = this->pressed_4_last_frameX =
-    this->pressed_6_last_frameX = this->pressed_7_last_frameX = this->pressed_8_last_frameX = this->pressed_9_last_frameX = 0;
+  this->pressed_1_last_frameX = this->pressed_2_last_frameX = this->pressed_3_last_frameX = this->pressed_4_last_frameX =
+  this->pressed_6_last_frameX = this->pressed_7_last_frameX = this->pressed_8_last_frameX = this->pressed_9_last_frameX = 0;
 
   //Dash
   this->dash_last_tap_frame = 0;
@@ -232,6 +233,8 @@ void Player::inputControl()
     current_velocity = velocity_override;
   }
 
+  // Double tap
+  /*
   if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
   {
     if(this->frame - this->pressed_8_last_frameX < 10)
@@ -352,7 +355,27 @@ void Player::inputControl()
     }
     this->pressed_6_last_frame = false;
   }
+  */
 
+  if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
+  {
+    delta_y = -(current_velocity + velocity_boost) / getSlowdown();
+  }
+  if (!up_pressed && down_pressed && !left_pressed && !right_pressed) //2
+  {
+    delta_y = (current_velocity + velocity_boost) / getSlowdown();
+  }
+
+  if (!up_pressed && !down_pressed && left_pressed && !right_pressed) //4
+  {
+    delta_x = -(current_velocity + velocity_boost) / getSlowdown();
+  }
+
+  if (!up_pressed && !down_pressed && !left_pressed && right_pressed) //6
+  {
+    delta_x = (current_velocity + velocity_boost) / getSlowdown();
+  }
+ 
   if (!up_pressed && down_pressed && left_pressed && !right_pressed) //1
   {
     this->pressed_1_last_frame = true;
@@ -377,9 +400,86 @@ void Player::inputControl()
     delta_x = cos(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
     delta_y = -sin(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
   }
+
+  if(dash_extra_velocity_x == 0 && dash_extra_velocity_y == 0
+      && delta_x > 0
+      && this->current_state != "right"
+      && this->hasState("right"))
+    this->setState("right");
+  else if(dash_extra_velocity_x == 0 && dash_extra_velocity_y == 0
+      && delta_x < 0
+      && this->current_state != "left"
+      && this->hasState("left"))
+    this->setState("left");
+  else if(dash_extra_velocity_x == 0 && dash_extra_velocity_y == 0
+      && delta_x == 0 && delta_y > 0
+      && this->current_state != "down"
+      && this->hasState("down"))
+    this->setState("down");
+  else if(dash_extra_velocity_x == 0 && dash_extra_velocity_y == 0
+      && delta_x == 0 && delta_y < 0
+      && this->current_state != "up"
+      && this->hasState("up"))
+    this->setState("up");
+
+  bool dash_pressed = rosalila()->receiver->isPressed(0,"c");
+
+  if(dash_pressed && isDownWrapper("6")
+      && this->hasState("dash right"))
+  {
+    dash_extra_velocity_x = 20;
+    this->setState("dash right");
+  }
+  if(dash_pressed && isDownWrapper("4")
+      && this->hasState("dash left"))
+  {
+    dash_extra_velocity_x = -20;
+    this->setState("dash left");
+  }
+  if(dash_pressed && isDownWrapper("2")
+      && this->hasState("dash down"))
+  {
+    dash_extra_velocity_y = 20;
+    this->setState("dash down");
+  }
+  if(dash_pressed && isDownWrapper("8")
+      && this->hasState("dash up"))
+  {
+    dash_extra_velocity_y = -20;
+    this->setState("dash up");
+  }
+
+  if( delta_x == 0 && (this->current_state == "right" || this->current_state == "left") && this->hasState("after left/right"))
+  {
+    this->setState("after left/right");
+  }
+  if( delta_y == 0 && (this->current_state == "up" || this->current_state == "down") && this->hasState("after up/down"))
+  {
+    this->setState("after up/down");
+  }
   
+  if( dash_extra_velocity_x == 0 && (this->current_state == "dash right" || this->current_state == "dash left") && this->hasState("after left/right"))
+  {
+    this->setState("after left/right");
+  }
+  else if( dash_extra_velocity_y == 0 && (this->current_state == "dash up" || this->current_state == "dash down") && this->hasState("after up/down"))
+  {
+    this->setState("after up/down");
+  }
+
+  int last_x = this->x;
+  int last_y = this->y;
+  bool player_was_in_bounds = this->stage->playerIsInBounds();
+
   this->x += delta_x + additional_velocity_x + this->dash_extra_velocity_x;
   this->y += delta_y + additional_velocity_y + this->dash_extra_velocity_y;
+
+  if(player_was_in_bounds && !this->stage->playerIsInBounds()
+      && (this->dash_extra_velocity_x == 0 && this->dash_extra_velocity_y == 0) )
+  {
+    this->x = last_x;
+    this->y = last_y;
+  }
 
   if(this->dash_extra_velocity_x < 0)
     this->dash_extra_velocity_x++;
@@ -440,6 +540,7 @@ void Player::inputControl()
     this->current_type = "secondary";
     this->velocity = 6;
   }
+  /*
   else if (isDownWrapper("c"))
   {
     current_input_replay_store += "c";
@@ -447,6 +548,7 @@ void Player::inputControl()
     this->current_type = "bomb";
     this->velocity = 6;
   }
+  */
   else
   {
     this->velocity = 6;
@@ -491,6 +593,18 @@ void Player::logic(int stage_velocity)
     this->setState("destroyed");
     //this->hitbox.setValues(0,0,0,0,0);
   }
+
+  // Die if out of bounds
+  if(!getGameOver()
+    && !this->stage->playerIsInBounds()
+    && this->current_state != "dash up"
+    && this->current_state != "dash down"
+    && this->current_state != "dash left"
+    && this->current_state != "dash right")
+  {
+    this->hit(9999);
+  }
+
   //Enable or disable slow
   if (isSlowPressed() && !slow_in_cooldown)
   {

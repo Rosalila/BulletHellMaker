@@ -830,16 +830,19 @@ void Character::bottomRender()
     }
   }
 
-  sprites[current_state][current_sprite]->color_filter.red = color_filter_red;
-  sprites[current_state][current_sprite]->color_filter.green = color_filter_green;
-  sprites[current_state][current_sprite]->color_filter.blue = color_filter_blue;
-  sprites[current_state][current_sprite]->color_filter.alpha = color_filter_alpha;
+  if(sprites.find(current_state) != sprites.end() && current_sprite < sprites[current_state].size())
+  {
+    Image * current_image = sprites[current_state][current_sprite];
 
-  rosalila()->graphics->drawImage(sprites[current_state][current_sprite],
-	  (int)this->x - sprites[current_state][current_sprite]->getWidth() / 2 + current_screen_shake_x,
-	  (int)this->y - sprites[current_state][current_sprite]->getHeight() / 2 + current_screen_shake_y);
+    current_image->color_filter.red = color_filter_red;
+    current_image->color_filter.green = color_filter_green;
+    current_image->color_filter.blue = color_filter_blue;
+    current_image->color_filter.alpha = color_filter_alpha;
 
-
+    rosalila()->graphics->drawImage(current_image,
+      (int)this->x - current_image->getWidth() / 2 + current_screen_shake_x,
+      (int)this->y - current_image->getHeight() / 2 + current_screen_shake_y);
+  }
 
   if (rosalila()->receiver->isKeyDown(SDLK_h))
   {
@@ -928,6 +931,13 @@ void Character::setState(string state)
 {
   this->current_state = state;
   this->current_sprite = 0;
+}
+
+bool Character::hasState(string state)
+{
+  if(this->sprites.find(state) == this->sprites.end())
+    return false;
+  return true;
 }
 
 bool Character::collides(Hitbox hitbox, int hitbox_x, int hitbox_y, float hitbox_angle)

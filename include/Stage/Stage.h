@@ -1,10 +1,11 @@
 #ifndef STAGE_H
 #define STAGE_H
 
-#include "../Character/Player.h"
 #include "Stage/Layer.h"
 #include "Utility/Utility.h"
 #include <map>
+
+class Player;
 
 class Stage
 {
@@ -26,6 +27,7 @@ public:
 
   Stage(Player* player);
   ~Stage();
+  bool playerIsInBounds();
   void dibujarBack();
   void dibujarFront();
   void drawLayer(Layer*layer);
