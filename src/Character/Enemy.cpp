@@ -186,7 +186,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
     player->velocity_override = p->player_velocity_override;
 
     player->hp += (int)p->additional_player_hp_change;
-    if(player->hp <= 0)
+    if(p->additional_player_hp_change < 0 && player->hp <= 0)
       player->hp = 1;
   }
 

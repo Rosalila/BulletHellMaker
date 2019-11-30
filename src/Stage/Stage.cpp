@@ -174,15 +174,20 @@ vector<Modifier *> loadLayerModifierXML(Node *modifier_node)
 {
   vector<Modifier *> temp_modifiers;
 
-  if (modifier_node->hasAttribute("velocity_x"))
+  if (modifier_node->hasAttribute("velocity"))
   {
-    std::string value = modifier_node->attributes["velocity_x"];
-    temp_modifiers.push_back(new Modifier("velocity_x", value));
+    std::string value = modifier_node->attributes["velocity"];
+    temp_modifiers.push_back(new Modifier("velocity", value));
   }
-  if (modifier_node->hasAttribute("velocity_y"))
+  if (modifier_node->hasAttribute("angle"))
   {
-    std::string value = modifier_node->attributes["velocity_y"];
-    temp_modifiers.push_back(new Modifier("velocity_y", value));
+    std::string value = modifier_node->attributes["angle"];
+    temp_modifiers.push_back(new Modifier("angle", value));
+  }
+  if (modifier_node->hasAttribute("angle_change"))
+  {
+    std::string value = modifier_node->attributes["angle_change"];
+    temp_modifiers.push_back(new Modifier("angle_change", value));
   }
   if (modifier_node->hasAttribute("frame"))
   {
@@ -364,13 +369,17 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     if (backlayer_nodes[i]->hasAttribute("randomize_y"))
       y += rosalila()->utility->getNonSeededRandomNumber() % atoi(backlayer_nodes[i]->attributes["randomize_y"].c_str());
 
-    double velocity_x = 0;
-    if (backlayer_nodes[i]->hasAttribute("velocity_x"))
-      velocity_x = atof(backlayer_nodes[i]->attributes["velocity_x"].c_str());
+    double velocity = 0;
+    if (backlayer_nodes[i]->hasAttribute("velocity"))
+      velocity = atof(backlayer_nodes[i]->attributes["velocity"].c_str());
 
-    double velocity_y = 0;
-    if (backlayer_nodes[i]->hasAttribute("velocity_y"))
-      velocity_y = atof(backlayer_nodes[i]->attributes["velocity_y"].c_str());
+    double angle = 0;
+    if (backlayer_nodes[i]->hasAttribute("angle"))
+      angle = atof(backlayer_nodes[i]->attributes["angle"].c_str());
+
+    double angle_change = 0;
+    if (backlayer_nodes[i]->hasAttribute("angle_change"))
+      angle_change = atof(backlayer_nodes[i]->attributes["angle_change"].c_str());
 
     int separation_x = 0;
     if (backlayer_nodes[i]->hasAttribute("separation_x"))
@@ -442,7 +451,9 @@ void Stage::loadFromXML(std::string name, bool is_mod)
                              frame_duration,
                              depth_effect_x, depth_effect_y,
                              x, y,
-                             velocity_x, velocity_y,
+                             velocity,
+                             angle,
+                             angle_change,
                              separation_x,
                              is_bounds_active,
                              bounds_x,
@@ -485,13 +496,18 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     if (frontlayer_nodes[i]->hasAttribute("randomize_y"))
       y += rosalila()->utility->getNonSeededRandomNumber() % atoi(frontlayer_nodes[i]->attributes["randomize_y"].c_str());
 
-    int velocity_x = 0;
-    if (frontlayer_nodes[i]->hasAttribute("velocity_x"))
-      velocity_x = atoi(frontlayer_nodes[i]->attributes["velocity_x"].c_str());
+    double velocity = 0;
+    if (frontlayer_nodes[i]->hasAttribute("velocity"))
+      velocity = atoi(frontlayer_nodes[i]->attributes["velocity"].c_str());
 
-    int velocity_y = 0;
-    if (frontlayer_nodes[i]->hasAttribute("velocity_y"))
-      velocity_y = atoi(frontlayer_nodes[i]->attributes["velocity_y"].c_str());
+    double angle = 0;
+    if (frontlayer_nodes[i]->hasAttribute("angle"))
+      angle = atoi(frontlayer_nodes[i]->attributes["angle"].c_str());
+
+    double angle_change = 0;
+    if (frontlayer_nodes[i]->hasAttribute("angle_change"))
+      angle_change = atoi(frontlayer_nodes[i]->attributes["angle_change"].c_str());
+
     int separation_x = 0;
     if (frontlayer_nodes[i]->hasAttribute("separation_x"))
       separation_x = atoi(frontlayer_nodes[i]->attributes["separation_x"].c_str());
@@ -563,7 +579,9 @@ void Stage::loadFromXML(std::string name, bool is_mod)
                               frame_duration,
                               depth_effect_x, depth_effect_y,
                               x, y,
-                              velocity_x, velocity_y,
+                              velocity,
+                              angle,
+                              angle_change,
                               separation_x,
                               is_bounds_active,
                               bounds_x,

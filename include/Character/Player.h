@@ -35,6 +35,11 @@ public:
     pressed_6_last_frame, pressed_7_last_frame, pressed_8_last_frame, pressed_9_last_frame;
   int pressed_1_last_frameX, pressed_2_last_frameX, pressed_3_last_frameX, pressed_4_last_frameX,
     pressed_6_last_frameX, pressed_7_last_frameX, pressed_8_last_frameX, pressed_9_last_frameX;
+  
+  //Velocity
+  double original_velocity;
+  double primary_weapon_velocity;
+  double secondary_weapon_velocity;
 
   //Dash
   int dash_last_tap_frame;

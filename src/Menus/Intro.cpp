@@ -68,10 +68,13 @@ void intro()
 
   while (true)
   {
+    // auto skip
+    /*
     if (frames > 180)
     {
       break;
     }
+    */
     if (rosalila()->receiver->isPressed(0, "a"))
     {
       rosalila()->sound->playSound("Menu.right", 0, 0, 0);

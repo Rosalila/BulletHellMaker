@@ -8,8 +8,9 @@ Layer::Layer(vector<LayerFrame *> layer_frames,
   int depth_effect_y,
   double x,
   double y,
-  double velocity_x,
-  double velocity_y,
+  double velocity,
+  double angle,
+  double angle_change,
   int separation_x,
   bool is_bounds_active,
   int bounds_x,
@@ -28,8 +29,9 @@ Layer::Layer(vector<LayerFrame *> layer_frames,
   this->time_elapsed = 0;
   this->x = x;
   this->y = y;
-  this->velocity_x = velocity_x;
-  this->velocity_y = velocity_y;
+  this->velocity = velocity;
+  this->angle = angle;
+  this->angle_change = angle_change;
   this->separation_x = separation_x;
   this->is_bounds_active = is_bounds_active;
   this->bounds_x = bounds_x;
@@ -51,19 +53,22 @@ void Layer::modifiersControl()
   for (int i = 0; i < (int)current_modifiers.size(); i++)
   {
     Modifier *modifier = current_modifiers[i];
-
     if (modifier->variable == "frame")
     {
       this->frame = atoi(modifier->value.c_str());
       flag_iterator_change = true;
     }
-    if (modifier->variable == "velocity_x")
+    if (modifier->variable == "velocity")
     {
-      this->velocity_x = atof(modifier->value.c_str());
+      this->velocity = atof(modifier->value.c_str());
     }
-    if (modifier->variable == "velocity_y")
+    if (modifier->variable == "angle")
     {
-      this->velocity_y = atof(modifier->value.c_str());
+      this->angle = atof(modifier->value.c_str());
+    }
+    if (modifier->variable == "angle_change")
+    {
+      this->angle_change = atof(modifier->value.c_str());
     }
   }
 
@@ -90,18 +95,23 @@ void Layer::logic(Player* player)
 
   bool player_is_in_bounds = playerIsInBounds(player);
 
-  this->x += velocity_x;
-  this->y += velocity_y;
+  int delta_x = (cos(this->angle * PI / 180) * this->velocity) / getSlowdown();
+  int delta_y = sin(this->angle * PI / 180) * this->velocity / getSlowdown();
+
+  this->x += delta_x;
+  this->y -= delta_y;
 
 
   if(is_bounds_active)
   {
     if(player_is_in_bounds)
     {
-      player->x += velocity_x;
-      player->y -= velocity_y;
+      player->x += delta_x;
+      player->y += delta_y;
     }
   }
+
+  this->angle += this->angle_change;
 }
 
 Layer::~Layer()

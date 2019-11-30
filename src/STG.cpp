@@ -8,6 +8,9 @@ STG::STG(Player *player, Enemy *enemy, Stage *stage, string game_mode, int curre
   this->game_mode = game_mode;
   this->current_player_best_score = current_player_best_score;
 
+  this->you_win = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/you_win.png");
+  this->you_lose = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/you_lose.png");
+
   this->api_state = "";
 
   this->score = -1;
@@ -77,6 +80,11 @@ STG::~STG()
 
   if (image_training_bar_fill)
     delete image_training_bar_fill;
+  
+  if(you_win)
+    delete you_win;
+  if(you_lose)
+    delete you_lose;
 }
 
 void STG::stageSelectModeInit()
@@ -146,20 +154,18 @@ void STG::mainLoop()
 
     if (getGameOver() && api_state == "")
     {
-      /*
       game_over_timeout--;
       if (game_over_timeout < 0)
         game_over_timeout = 0;
       if (game_over_timeout == 0)
       {
-        if (rosalila()->receiver->isKeyPressed(SDLK_RETURN) || (rosalila()->receiver->isDown(0, "a") && end_key_up_keyboard))
+        if (rosalila()->receiver->isKeyPressed(SDLK_RETURN) || (this->player->isDownWrapper("a") && end_key_up_keyboard))
         {
           break;
         }
         if (!rosalila()->receiver->isDown(0, "a"))
           end_key_up_keyboard = true;
       }
-      */
     }
   }
 }
@@ -489,8 +495,13 @@ void STG::render()
 
   stage->dibujarFront();
 
-  if (getGameOver() && score != -1 && game_mode != "replay")
+  if (getGameOver())// && score != -1 && game_mode != "replay")
   {
+    if(enemy->hp==0)
+      rosalila()->graphics->drawImage(you_win, 0,0);
+    if(player->hp==0)
+        rosalila()->graphics->drawImage(you_lose, 0,0);
+        
     /*
     if (current_player_best_score == -1)
     {
@@ -707,18 +718,12 @@ void STG::win()
 
 void STG::lose()
 {
-  cout<<"A1"<<endl;
   rosalila()->utility->writeLogLine("Player lost");
-  cout<<"A2"<<endl;
   setPlayerWon(false);
-  cout<<"A3"<<endl;
   setGameOver(true);
-  cout<<"A4"<<endl;
   rosalila()->sound->fadeMusicVolume(0, 2);
-  cout<<"A5"<<endl;
   if(rosalila()->sound->soundExists("you lose"))
     rosalila()->sound->playSound("you lose", 4, 0, 0);
-  cout<<"A6"<<endl;
 }
 
 void STG::uploadScore()

@@ -21,8 +21,9 @@ public:
   int depth_effect_y;
   double x;
   double y;
-  double velocity_x;
-  double velocity_y;
+  double velocity;
+  double angle;
+  double angle_change;
   int separation_x;
 
   bool blend_effect;
@@ -46,7 +47,9 @@ public:
         int frame_duration,
         int depth_effect_x, int depth_effect_y,
         double x, double y,
-        double velocity_x, double velocity_y,
+        double velocity,
+        double angle,
+        double angle_change,
         int separation_x,
         bool is_bounds_active,
         int bounds_x,

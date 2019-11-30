@@ -914,7 +914,9 @@ void Character::topRender()
     //        }
   }
 
-  double current_percentual_hp = (double)this->hp / (double)this->max_hp;
+  double current_percentual_hp = 0;
+  if(this->hp > 0)
+    current_percentual_hp = (double)this->hp / (double)this->max_hp;
   double current_life_bar_width = life_bar_rect_width * current_percentual_hp;
 
   rosalila()->graphics->drawRectangle(life_bar_x, life_bar_y,

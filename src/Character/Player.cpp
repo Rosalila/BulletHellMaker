@@ -48,6 +48,11 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
 
   this->sound_channel_base = sound_channel_base;
 
+  // velocity
+  this->original_velocity = 0;
+  this->primary_weapon_velocity = 0;
+  this->secondary_weapon_velocity = 0;
+
   loadPlayerFromXML();
 
   current_shield = max_shield;
@@ -117,6 +122,19 @@ void Player::loadPlayerFromXML()
 
   this->current_slow = 0;
   this->max_slow = -1;
+
+  if (root_node->hasAttribute("velocity"))
+    this->original_velocity = atoi(root_node->attributes["velocity"].c_str());
+  
+  if (root_node->hasAttribute("primary_weapon_velocity"))
+    this->primary_weapon_velocity = atoi(root_node->attributes["primary_weapon_velocity"].c_str());
+  else
+    this->primary_weapon_velocity = this->original_velocity;
+
+  if (root_node->hasAttribute("secondary_weapon_velocity"))
+    this->secondary_weapon_velocity = atoi(root_node->attributes["secondary_weapon_velocity"].c_str());
+  else
+    this->secondary_weapon_velocity = this->original_velocity;
 
   if (root_node->hasAttribute("slow"))
   {
@@ -425,24 +443,28 @@ void Player::inputControl()
   bool dash_pressed = rosalila()->receiver->isPressed(0,"c");
 
   if(dash_pressed && isDownWrapper("6")
+      && this->current_state != "dash right"
       && this->hasState("dash right"))
   {
     dash_extra_velocity_x = 20;
     this->setState("dash right");
   }
   if(dash_pressed && isDownWrapper("4")
+      && this->current_state != "dash left"
       && this->hasState("dash left"))
   {
     dash_extra_velocity_x = -20;
     this->setState("dash left");
   }
   if(dash_pressed && isDownWrapper("2")
+      && this->current_state != "dash down"
       && this->hasState("dash down"))
   {
     dash_extra_velocity_y = 20;
     this->setState("dash down");
   }
   if(dash_pressed && isDownWrapper("8")
+      && this->current_state != "dash up"
       && this->hasState("dash up"))
   {
     dash_extra_velocity_y = -20;
@@ -495,7 +517,7 @@ void Player::inputControl()
     current_input_replay_store += "a";
     this->shooting = true;
     this->current_type = "primary";
-    this->velocity = 6;
+    this->velocity = this->primary_weapon_velocity;
 
     /*
         if(!this->shooting && !isParrying() && parries_left>0)
@@ -538,7 +560,7 @@ void Player::inputControl()
     current_input_replay_store += "b";
     this->shooting = true;
     this->current_type = "secondary";
-    this->velocity = 6;
+    this->velocity = this->secondary_weapon_velocity;
   }
   /*
   else if (isDownWrapper("c"))
@@ -551,7 +573,7 @@ void Player::inputControl()
   */
   else
   {
-    this->velocity = 6;
+    this->velocity = this->original_velocity;
     this->shooting = false;
   }
 

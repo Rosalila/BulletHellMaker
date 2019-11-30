@@ -23,6 +23,8 @@ public:
     int score;
 
     //Image*image_upload_error;
+    Image* you_win;
+    Image* you_lose;
 
     Image*image_training_box;
     Image*image_training_x;
