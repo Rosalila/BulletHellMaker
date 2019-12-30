@@ -37,7 +37,7 @@ Playable and enemy characters are defined with the same attributes on a `charact
 
 #### character.json
 
-See [full character.json docs](#characterjson).
+See [full character.json attributes](#characterjson-attributes).
 
 *Example:*
 
@@ -118,7 +118,7 @@ Also define a collection of bullets with their sprites, sounds, etc...
 
 #### bullets.xml
 
-See [full bullets.json docs](#bulletsjson).
+See [full bullets.json attributes](#bulletsjson-attributes).
 
 *Example:*
 
@@ -161,7 +161,7 @@ Attach bullets to patterns to create attacks. Name the character attacks as `Pri
 
 #### attacks.json
 
-See [full attacks.json docs](#attacksjson).
+See [full attacks.json attributes](#attacksjson-attributes).
 
 *Example:*
 
@@ -215,7 +215,7 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 
 #### modifiers.json
 
-See [full modifiers.json docs](#modifiersjson).
+See [full modifiers.json attributes](#modifiersjson-attributes).
 
 *Example:*
 
@@ -261,7 +261,7 @@ Add animated layers on the front and on the background for pure cosmetic purpose
 
 #### stage.json
 
-See [full stage.json docs](#stagejson).
+See [full stage.json attributes](#stagejson-attributes).
 
 *Example:*
 
@@ -308,7 +308,7 @@ Organize the stages order and other stuff here.
 
 #### config.json
 
-See [full config.json docs](#configjson).
+See [full config.json attributes](#configjson-attributes).
 
 *Example:*
 
@@ -436,7 +436,7 @@ See [full config.json docs](#configjson).
 
 ## JSON Docs
 
-### character.json
+### character.json attributes
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -504,7 +504,7 @@ See [full config.json docs](#configjson).
 | height | `integer` | ✔ |     | Hitbox height |
 | angle  | `integer` |   | `0` | Hitbox rotation |
 
-### bullets.json
+### bullets.json  attributes
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -538,7 +538,7 @@ See [full config.json docs](#configjson).
 | height | `integer` | ✔ |     | Hitbox height |
 | angle  | `integer` |   | `0` | Hitbox rotation |
 
-### attacks.json
+### attacks.json attributes
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -602,7 +602,7 @@ See [full config.json docs](#configjson).
 | `attribute` | `attribute's type` | ✔ |  | Attribute to be changed, e.g. in `{amount: "5", startup: "5", patterns:[..]}` patterns will be repeated 3 times, in each repetition 5 frames will be added (first will be emited on frame 0, 2nd in frame 5 and third in 10) |
 | patterns | [pattern[]](#pattern) |   |  | Single bullet pattern to be changed during repetition |
 
-### modifiers.json
+### modifiers.json attributes
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -653,7 +653,7 @@ See [full config.json docs](#configjson).
 | type | `image` | ✔ |  | Type of frame |
 | path | `path`  | ✔ |  | Path to the `.png` image |
 
-### config.json
+### config.json attributes
 
 | Attribute | Type | Required | Description |
 |-----------|------|----------|-------------|
