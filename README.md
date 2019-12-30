@@ -33,11 +33,13 @@ Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpExample/
 
 Playable and enemy characters are defined with the same attributes on a `character.json` file.
 
-See [full character.json docs](#character.json).
-
 ![](img/player.gif?raw=true)
 
-#### character.json example
+#### character.json
+
+See [full character.json docs](#character.json).
+
+*Example:*
 
 ```Json
 {
@@ -114,9 +116,11 @@ See [full character.json docs](#character.json).
 
 Also define a collection of bullets with their sprites, sounds, etc...
 
-See [full bullets.json docs](#bullets.json).
+#### bullets.xml
 
-#### bullets.xml example
+See [full bullets.json docs](#bulletsjson).
+
+*Example:*
 
 ```Json
 {
@@ -153,11 +157,13 @@ See [full bullets.json docs](#bullets.json).
 
 Attach bullets to patterns to create attacks. Name the character attacks as `Primary` and `Secondary` so they get automatically attached to the `a` and `b` buttons defined on the `config.json`. You can name enemy attack patterns as you want and then invoke them when you define the enemy behavior, see [Enemy behavior](#Enemy-behavior).
 
-See [full attacks.json docs](#attacks.json).
-
 ![](img/enemy.gif?raw=true)
 
-#### attacks.json example
+#### attacks.json
+
+See [full attacks.json docs](#attacks.json).
+
+*Example:*
 
 ```Json
 {
@@ -207,9 +213,11 @@ See [full attacks.json docs](#attacks.json).
 
 Change enemy attributes or attacks in a given time or when health goes below certain amount.
 
+#### modifiers.json
+
 See [full modifiers.json docs](#modifiers.json).
 
-#### modifiers.json example
+*Example:*
 
 ```Json
 {
@@ -249,11 +257,13 @@ See [full modifiers.json docs](#modifiers.json).
 
 Add animated layers on the front and on the background for pure cosmetic purposes.
 
-See [full stage.json docs](#stage.json).
-
 ![](img/background.gif?raw=true)
 
-#### stage.json example
+#### stage.json
+
+See [full stage.json docs](#stage.json).
+
+*Example:*
 
 ```Json
 {
@@ -296,9 +306,11 @@ See [full stage.json docs](#stage.json).
 
 Organize the stages order and other stuff here.
 
+#### config.json
+
 See [full config.json docs](#config.json).
 
-#### config.json example
+*Example:*
 
 ```json
 {
@@ -424,7 +436,7 @@ See [full config.json docs](#config.json).
 
 ## JSON Docs
 
-### character.json docs
+### character.json
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
@@ -761,7 +773,7 @@ Your game/
 ## Build
 
 Notice this guide is for compiling the Shoot 'Em Up Maker from source, if you wan't to create a game please refer to the [Getting started](#getting-started).
-
+ docs
 ```bash
 # Dependencies
 sudo apt-get install g++ cmake libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libglew-dev
