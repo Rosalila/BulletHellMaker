@@ -37,7 +37,7 @@ Playable and enemy characters are defined with the same attributes on a `charact
 
 #### character.json
 
-See [full character.json docs](#character.json).
+See [full character.json docs](#characterjson).
 
 *Example:*
 
@@ -161,7 +161,7 @@ Attach bullets to patterns to create attacks. Name the character attacks as `Pri
 
 #### attacks.json
 
-See [full attacks.json docs](#attacks.json).
+See [full attacks.json docs](#attacksjson).
 
 *Example:*
 
@@ -215,7 +215,7 @@ Change enemy attributes or attacks in a given time or when health goes below cer
 
 #### modifiers.json
 
-See [full modifiers.json docs](#modifiers.json).
+See [full modifiers.json docs](#modifiersjson).
 
 *Example:*
 
@@ -261,7 +261,7 @@ Add animated layers on the front and on the background for pure cosmetic purpose
 
 #### stage.json
 
-See [full stage.json docs](#stage.json).
+See [full stage.json docs](#stagejson).
 
 *Example:*
 
@@ -308,7 +308,7 @@ Organize the stages order and other stuff here.
 
 #### config.json
 
-See [full config.json docs](#config.json).
+See [full config.json docs](#configjson).
 
 *Example:*
 
