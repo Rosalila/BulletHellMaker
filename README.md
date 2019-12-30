@@ -116,7 +116,7 @@ See [full character.json attributes](#characterjson-attributes).
 
 Also define a collection of bullets with their sprites, sounds, etc...
 
-#### bullets.xml
+#### bullets.json
 
 See [full bullets.json attributes](#bulletsjson-attributes).
 
