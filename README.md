@@ -2,6 +2,7 @@ Rosalila Shoot 'Em Up Maker
 ===========================
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
+[![Discord](https://img.shields.io/discord/650862206925275156.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.gg/fGBbQZ8)
 [![Travis](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=travis)](https://travis-ci.org/Rosalila/ShootEmUpMaker)
 [![Appveyor](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/ShootEmUpMaker)
 
@@ -21,6 +22,10 @@ Rosalila Shoot 'Em Up Maker
 | Libre, MIT licensed                                          | ✔ |
 
 ![](img/game.png?raw=true)
+
+## Getting started
+
+Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpExample/archive/master.zip) game and run the binary corresponding to your system (`./shmup` on Linux and `shmup.exe` on Windows).
 
 ## Usage
 
@@ -753,11 +758,9 @@ Your game/
                 │   attacks.json
 ```
 
-## Getting started
-
-Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpExample) game and run the binary corresponding to your system.
-
 ## Build
+
+Notice this guide is for compiling the Shoot 'Em Up Maker from source, if you wan't to create a game please refer to the [Getting started](#getting-started).
 
 ```bash
 # Dependencies
