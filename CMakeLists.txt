@@ -48,7 +48,7 @@ ENDIF ()
 
 IF (MSVC)
   include_directories(windows_dependencies/include)
-  link_directories(windows_dependencies/lib)
+  link_directories(${CMAKE_SOURCE_DIR}/windows_dependencies/lib)
   add_definitions(-DROSALILA_STATICLIB)
   file(GLOB_RECURSE SOURCES "src/*.cpp" main.cpp)
   add_executable(shmup ${SOURCES})
