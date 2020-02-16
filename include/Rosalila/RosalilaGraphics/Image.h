@@ -51,7 +51,7 @@
 #endif
 
 #ifdef WINDOWS
-#include <SDL_opengl.h>
+#include <SDL2/SDL_opengl.h>
 #endif
 
 #include <stdio.h>
