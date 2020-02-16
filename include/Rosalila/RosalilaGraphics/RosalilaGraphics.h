@@ -15,19 +15,21 @@
 #ifdef LINUX
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_opengl.h>
 #endif
 
 #ifdef WINDOWS
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_opengl.h>
 #endif
 
 #ifdef OSX
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_opengl.h>
 #endif
 
-#include <SDL2/SDL_opengl.h>
 #include <stdio.h>
 
 #include "Color.h"
