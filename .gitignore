@@ -9,8 +9,10 @@ shmup
 last_replay
 *.o
 *.obj
+.DS_Store
 
 .vscode/
+.DS_Store/
 
 #shhh this is  a secret
 Makefile.secret

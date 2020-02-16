@@ -45,7 +45,7 @@
 #endif
 
 #ifdef OSX
-#include <SDL2_image/SDL_image.h>
+#include <SDL_image.h>
 #endif
 
 #include <SDL2/SDL_opengl.h>
