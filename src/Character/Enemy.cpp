@@ -18,6 +18,8 @@ Enemy::Enemy(std::string name, Player *player, int sound_channel_base, bool is_m
 
   this->life_bar = NULL;
 
+  this->bullet_cancel_count = 0;
+
   //Enemy variables
   this->angle = 180;
   this->velocity = 0;
@@ -139,6 +141,19 @@ void Enemy::modifiersControl()
           }
 
           //Clean screen
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+200, this->y+150 ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-150, this->y-300 ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+50, this->y-210 ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-60, this->y-30 ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-190, this->y+200 ));
+          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+100, this->y-80 ));
+          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-200, this->y+200 ));
+          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-200, this->y+200 ));
+          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-100, this->y+200 ));
+          animation_controls.push_back(new AnimationControl("explosion02", 5, this->x, this->y ));
+          this->bullet_cancel_count += this->active_patterns->size();
           for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
             (*i)->hit(this->sound_channel_base + 1, false);
 
@@ -155,8 +170,7 @@ void Enemy::modifiersControl()
 
 void Enemy::logic(int stage_velocity, string stage_name)
 {
-  animationControl();
-  spellControl(stage_velocity);
+  Character::logic(stage_velocity);
 
   player->additional_velocity_x = 0;
   player->additional_velocity_y = 0;
@@ -213,11 +227,41 @@ void Enemy::logic(int stage_velocity, string stage_name)
   getIterateSlowdownFlag();
 
   //current_color_effect_a = /*255-*/(255*hp)/max_hp;
+  this->frame++;
 }
 
 void Enemy::bottomRender()
 {
   Character::bottomRender();
+
+  for(auto animation_control : animation_controls)
+  {
+    Image *image = this->animation_images[animation_control->name][animation_control->current_frame];
+    rosalila()->graphics->drawImage(image,
+      animation_control->x - image->getWidth() / 2 + current_screen_shake_x,
+      animation_control->y - image->getHeight() / 2 + current_screen_shake_y);
+    animation_control->current_frame++;
+    if(animation_control->current_frame >= this->animation_images[animation_control->name].size())
+    {
+      animation_control->delete_flag = true;
+      animation_control->current_frame = 0;
+    }
+  }
+
+  std::list<AnimationControl *>::iterator i = animation_controls.begin();
+  while (i != animation_controls.end())
+  {
+    AnimationControl *a_c = (AnimationControl *)*i;
+    if (a_c->delete_flag)
+    {
+      animation_controls.erase(i++);
+      delete a_c;
+    }
+    else
+    {
+      ++i;
+    }
+  }
 }
 
 void Enemy::topRender()

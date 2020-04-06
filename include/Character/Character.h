@@ -16,6 +16,7 @@ public:
   std::string name;
   std::string directory;
   int hp;
+  int frame;
   int max_hp;
   int iteration;
   bool visible;
@@ -25,6 +26,8 @@ public:
   std::string current_state;
   std::string current_type;
   std::map < /*current state*/ std::string, /*trigger validation*/ std::map< std::string, std::string > >state_triggers;
+  std::map< std::string, vector<Image*> > animation_images;
+  std::list<AnimationControl*> animation_controls;
 
   //Life bar variables
   int current_slow;

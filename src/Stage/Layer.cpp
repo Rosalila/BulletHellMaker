@@ -73,7 +73,7 @@ void Layer::modifiersControl()
   }
 
   if (!flag_iterator_change)
-    this->frame++;
+    this->frame += 1/getSlowdown();
 }
 
 bool Layer::playerIsInBounds(Player* player)
@@ -84,7 +84,10 @@ bool Layer::playerIsInBounds(Player* player)
 
   int current_bounds_x = this->x + this->bounds_x;
   int current_bounds_y = rosalila()->graphics->screen_height - image_height - this->y - this->bounds_y;
-  if(player->x < current_bounds_x || player->y < current_bounds_y || player->x > current_bounds_x + this->bounds_width || player->y > current_bounds_y + this->bounds_height)
+  if(player->x < current_bounds_x
+    || player->y < current_bounds_y
+    || player->x > current_bounds_x + this->bounds_width
+    || player->y > current_bounds_y + this->bounds_height)
     return false;
   return true;
 }
@@ -95,12 +98,11 @@ void Layer::logic(Player* player)
 
   bool player_is_in_bounds = playerIsInBounds(player);
 
-  int delta_x = (cos(this->angle * PI / 180) * this->velocity) / getSlowdown();
-  int delta_y = sin(this->angle * PI / 180) * this->velocity / getSlowdown();
+  double delta_x = cos(this->angle * PI / 180.0) * this->velocity / getSlowdown();
+  double delta_y = sin(this->angle * PI / 180.0) * this->velocity / getSlowdown();
 
   this->x += delta_x;
   this->y -= delta_y;
-
 
   if(is_bounds_active)
   {

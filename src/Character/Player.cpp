@@ -2,6 +2,7 @@
 
 Player::Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode)
 {
+  this->enemy = NULL;
   this->stage = NULL;
   this->game_mode = game_mode;
   //Setting up the other variables
@@ -88,6 +89,18 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->additional_velocity_y = 0;
   this->additional_hp_change = 0;
   this->velocity_override = 0;
+
+  // Bomb animation
+  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/01.png"));
+  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/02.png"));
+  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/03.png"));
+  bomb_images[0]->color_filter.alpha = 255;
+  bomb_images[1]->color_filter.alpha = 255;
+  bomb_images[2]->color_filter.alpha = 255;
+  current_bomb_frame = 0;
+  current_bomb_image = 0;
+  bomb_image_duration = 5;
+  is_bomb_animation_active = false;
 }
 
 Player::~Player()
@@ -120,9 +133,6 @@ void Player::loadPlayerFromXML()
 
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
 
-  this->current_slow = 0;
-  this->max_slow = -1;
-
   if (root_node->hasAttribute("velocity"))
     this->original_velocity = atoi(root_node->attributes["velocity"].c_str());
   
@@ -136,30 +146,11 @@ void Player::loadPlayerFromXML()
   else
     this->secondary_weapon_velocity = this->original_velocity;
 
-  if (root_node->hasAttribute("slow"))
-  {
-    this->current_slow = atoi(root_node->attributes["slow"].c_str());
-    this->max_slow = atoi(root_node->attributes["slow"].c_str());
-  }
-
+  this->current_slow = 0;
+  this->max_slow = -1;
   this->slow_decrement = 3;
-  if (root_node->hasAttribute("slow_decrement"))
-  {
-    this->slow_decrement = atoi(root_node->attributes["slow_decrement"].c_str());
-  }
-
   this->slow_increment = 1;
-  if (root_node->hasAttribute("slow_increment"))
-  {
-    this->slow_increment = atoi(root_node->attributes["slow_increment"].c_str());
-  }
-
   this->slow_cooldown_increment = 2;
-  if (root_node->hasAttribute("slow_cooldown_increment"))
-  {
-    this->slow_cooldown_increment = atoi(root_node->attributes["slow_cooldown_increment"].c_str());
-  }
-
   this->slow_bar_x = 0;
   this->slow_bar_y = 0;
   this->slow_bar_rect_offset_x = 0;
@@ -174,40 +165,69 @@ void Player::loadPlayerFromXML()
   this->slow_bar_cooldown_color.green = 0;
   this->slow_bar_cooldown_color.blue = 0;
   this->slow_bar_cooldown_color.alpha = 128;
-
-  Node *slow_bar_node = root_node->getNodeByName("SlowBar");
-  if (slow_bar_node)
+  Node *slow_node = root_node->getNodeByName("slow");
+  if (slow_node)
   {
-    if (slow_bar_node->hasAttribute("x"))
-      this->slow_bar_x = atoi(slow_bar_node->attributes["x"].c_str());
-    if (slow_bar_node->hasAttribute("y"))
-      this->slow_bar_y = atoi(slow_bar_node->attributes["y"].c_str());
-    if (slow_bar_node->hasAttribute("color_r"))
-      this->slow_bar_color.red = atoi(slow_bar_node->attributes["color_r"].c_str());
-    if (slow_bar_node->hasAttribute("color_g"))
-      this->slow_bar_color.green = atoi(slow_bar_node->attributes["color_g"].c_str());
-    if (slow_bar_node->hasAttribute("color_b"))
-      this->slow_bar_color.blue = atoi(slow_bar_node->attributes["color_b"].c_str());
-    if (slow_bar_node->hasAttribute("color_a"))
-      this->slow_bar_color.alpha = atoi(slow_bar_node->attributes["color_a"].c_str());
+    if (slow_node->hasAttribute("max"))
+    {
+      this->current_slow = atoi(slow_node->attributes["max"].c_str());
+      this->max_slow = atoi(slow_node->attributes["max"].c_str());
+    }
+    if (slow_node->hasAttribute("decrement"))
+      this->slow_decrement = atoi(slow_node->attributes["decrement"].c_str());
+    if (slow_node->hasAttribute("increment"))
+      this->slow_increment = atoi(slow_node->attributes["increment"].c_str());
+    if (slow_node->hasAttribute("cooldown_increment"))
+      this->slow_cooldown_increment = atoi(slow_node->attributes["cooldown_increment"].c_str());
 
-    if (slow_bar_node->hasAttribute("cooldown_color_r"))
-      this->slow_bar_cooldown_color.red = atoi(slow_bar_node->attributes["cooldown_color_r"].c_str());
-    if (slow_bar_node->hasAttribute("cooldown_color_g"))
-      this->slow_bar_cooldown_color.green = atoi(slow_bar_node->attributes["cooldown_color_g"].c_str());
-    if (slow_bar_node->hasAttribute("cooldown_color_b"))
-      this->slow_bar_cooldown_color.blue = atoi(slow_bar_node->attributes["cooldown_color_b"].c_str());
-    if (slow_bar_node->hasAttribute("cooldown_color_a"))
-      this->slow_bar_cooldown_color.alpha = atoi(slow_bar_node->attributes["cooldown_color_a"].c_str());
 
-    if (slow_bar_node->hasAttribute("rect_offset_x"))
-      this->slow_bar_rect_offset_x = atoi(slow_bar_node->attributes["rect_offset_x"].c_str());
-    if (slow_bar_node->hasAttribute("rect_offset_y"))
-      this->slow_bar_rect_offset_y = atoi(slow_bar_node->attributes["rect_offset_y"].c_str());
-    if (slow_bar_node->hasAttribute("rect_height"))
-      this->slow_bar_rect_height = atoi(slow_bar_node->attributes["rect_height"].c_str());
-    if (slow_bar_node->hasAttribute("rect_width"))
-      this->slow_bar_rect_width = atoi(slow_bar_node->attributes["rect_width"].c_str());
+    Node *slow_bar_node = slow_node->getNodeByName("slow_bar");
+    if (slow_bar_node)
+    {
+      if (slow_bar_node->hasAttribute("x"))
+        this->slow_bar_x = atoi(slow_bar_node->attributes["x"].c_str());
+      if (slow_bar_node->hasAttribute("y"))
+        this->slow_bar_y = atoi(slow_bar_node->attributes["y"].c_str());
+
+      Node *slow_bar_color_active_node = slow_bar_node->getNodeByName("active_color");
+      if (slow_bar_color_active_node)
+      {
+        if (slow_bar_color_active_node->hasAttribute("r"))
+          this->slow_bar_color.red = atoi(slow_bar_color_active_node->attributes["r"].c_str());
+        if (slow_bar_color_active_node->hasAttribute("g"))
+          this->slow_bar_color.green = atoi(slow_bar_color_active_node->attributes["g"].c_str());
+        if (slow_bar_color_active_node->hasAttribute("b"))
+          this->slow_bar_color.blue = atoi(slow_bar_color_active_node->attributes["b"].c_str());
+        if (slow_bar_color_active_node->hasAttribute("a"))
+          this->slow_bar_color.alpha = atoi(slow_bar_color_active_node->attributes["a"].c_str());
+      }
+      
+      Node *slow_bar_color_cooldown_node = slow_bar_node->getNodeByName("cooldown_color");
+      if (slow_bar_color_cooldown_node)
+      {
+        if (slow_bar_color_cooldown_node->hasAttribute("r"))
+          this->slow_bar_cooldown_color.red = atoi(slow_bar_color_cooldown_node->attributes["r"].c_str());
+        if (slow_bar_color_cooldown_node->hasAttribute("g"))
+          this->slow_bar_cooldown_color.green = atoi(slow_bar_color_cooldown_node->attributes["g"].c_str());
+        if (slow_bar_color_cooldown_node->hasAttribute("b"))
+          this->slow_bar_cooldown_color.blue = atoi(slow_bar_color_cooldown_node->attributes["b"].c_str());
+        if (slow_bar_color_cooldown_node->hasAttribute("a"))
+          this->slow_bar_cooldown_color.alpha = atoi(slow_bar_color_cooldown_node->attributes["a"].c_str());
+      }
+
+      Node *slow_bar_rectangle_node = slow_bar_node->getNodeByName("rectangle");
+      if (slow_bar_rectangle_node)
+      {
+        if (slow_bar_rectangle_node->hasAttribute("x"))
+          this->slow_bar_rect_offset_x = atoi(slow_bar_rectangle_node->attributes["x"].c_str());
+        if (slow_bar_rectangle_node->hasAttribute("y"))
+          this->slow_bar_rect_offset_y = atoi(slow_bar_rectangle_node->attributes["y"].c_str());
+        if (slow_bar_rectangle_node->hasAttribute("height"))
+          this->slow_bar_rect_height = atoi(slow_bar_rectangle_node->attributes["height"].c_str());
+        if (slow_bar_rectangle_node->hasAttribute("width"))
+          this->slow_bar_rect_width = atoi(slow_bar_rectangle_node->attributes["width"].c_str());
+      }
+    }
   }
 
   delete root_node;
@@ -489,8 +509,8 @@ void Player::inputControl()
     this->setState("after up/down");
   }
 
-  int last_x = this->x;
-  int last_y = this->y;
+  double last_x = this->x;
+  double last_y = this->y;
   bool player_was_in_bounds = this->stage->playerIsInBounds();
 
   this->x += delta_x + additional_velocity_x + this->dash_extra_velocity_x;
@@ -502,6 +522,15 @@ void Player::inputControl()
     this->x = last_x;
     this->y = last_y;
   }
+
+  if(this->x < 0)
+    this->x = 0;
+  if(this->y < 0)
+    this->y = 0;
+  if(this->x > rosalila()->graphics->screen_width)
+    this->x = rosalila()->graphics->screen_width;
+  if(this->y > rosalila()->graphics->screen_height)
+    this->y = rosalila()->graphics->screen_height;
 
   if(this->dash_extra_velocity_x < 0)
     this->dash_extra_velocity_x++;
@@ -628,7 +657,8 @@ void Player::logic(int stage_velocity)
   }
 
   //Enable or disable slow
-  if (isSlowPressed() && !slow_in_cooldown)
+  if (!slow_in_cooldown
+      && isDownWrapper("d"))
   {
     enableSlow();
     current_slow -= slow_decrement;
@@ -660,6 +690,7 @@ void Player::logic(int stage_velocity)
   if (!slow_in_cooldown && current_slow <= 0)
   {
     slow_in_cooldown = true;
+    this->activateBomb();
   }
 
   spellControl(stage_velocity);
@@ -705,11 +736,52 @@ void Player::logic(int stage_velocity)
       }
     }
   }
+
+  // Shadow control
+  if(isSlowEnabled() && frame%10 == 0)
+  {
+    this->shadows.push_back(new ShadowControl(this->current_state, this->current_sprite, 128, this->x, this->y));
+  }
+
+  for(auto shadow : shadows)
+  {
+    shadow->alpha-=2;
+  }
+
+  if(shadows.size() > 0 && shadows.front()->alpha <= 0)
+  {
+    delete shadows.front();
+    shadows.pop_front();    
+  }
+
   this->frame++;
 }
 
 void Player::bottomRender()
 {
+  for(auto shadow : shadows)
+  {
+    Image* shadow_image = this->sprites[shadow->state][shadow->image_number];
+
+    int previous_red = shadow_image->color_filter.red;
+    int previous_green = shadow_image->color_filter.green;
+    int previous_blue = shadow_image->color_filter.blue;
+    int previous_alpha = shadow_image->color_filter.alpha;
+
+    shadow_image->color_filter.alpha = shadow->alpha;
+    shadow_image->color_filter.red = 0;
+    shadow_image->color_filter.green = 0;
+
+    rosalila()->graphics->drawImage(shadow_image,
+      shadow->x - shadow_image->getWidth() / 2 + current_screen_shake_x,
+      shadow->y - shadow_image->getHeight() / 2 + current_screen_shake_y);
+    
+    shadow_image->color_filter.red = previous_red;
+    shadow_image->color_filter.green = previous_green;
+    shadow_image->color_filter.blue = previous_blue;
+    shadow_image->color_filter.alpha = previous_alpha;
+  }
+
   Character::bottomRender();
 
   if (current_shield > 0)
@@ -750,6 +822,23 @@ void Player::topRender()
 {
   Character::topRender();
 
+  double current_percentual_slow = 0;
+  if(this->current_slow > 0)
+    current_percentual_slow = (double)this->current_slow / (double)this->max_slow;
+  double current_slow_bar_width = slow_bar_rect_width * current_percentual_slow;
+
+  if(!slow_in_cooldown)
+  {
+    rosalila()->graphics->drawRectangle(slow_bar_x, slow_bar_y,
+      (int)current_slow_bar_width, slow_bar_rect_height,
+        0, slow_bar_color.red, slow_bar_color.green, slow_bar_color.blue, slow_bar_color.alpha);
+  }else
+  {
+    rosalila()->graphics->drawRectangle(slow_bar_x, slow_bar_y,
+      (int)current_slow_bar_width, slow_bar_rect_height,
+        0, slow_bar_cooldown_color.red, slow_bar_cooldown_color.green, slow_bar_cooldown_color.blue, slow_bar_cooldown_color.alpha);
+  }
+
   if (isParrying() && parries_left >= 1)
   {
     Image *image = parry_sprites[parries_left - 1];
@@ -778,6 +867,27 @@ void Player::topRender()
                                           parry_hitboxes[i]->getWidth(), parry_hitboxes[i]->getHeight(),
                                           parry_hitboxes[i]->getAngle(), 100, 0, 0, 100);
     }
+
+  /*
+  std::vector<Image *> bomb_images;
+  int current_bomb_image;
+  int bomb_image_duration;
+  bool is_bomb_animation_active;
+  */
+
+  if(is_bomb_animation_active)
+  {
+    rosalila()->graphics->drawImage(bomb_images[current_bomb_image],
+                                    0,
+                                    0);
+    current_bomb_frame++;
+    if(current_bomb_frame % bomb_image_duration == 0)
+    {
+      current_bomb_image++;
+      if(current_bomb_image>bomb_images.size())
+        is_bomb_animation_active = false;
+    }
+  }
 }
 
 void Player::hit(int damage)
@@ -1022,4 +1132,12 @@ bool Player::isDownWrapper(string button_map)
 bool Player::isOnIntro()
 {
   return this->frame < (int)this->intro_input.size();
+}
+
+void Player::activateBomb()
+{
+  current_bomb_image = 0;
+  current_bomb_frame = 0;
+  is_bomb_animation_active = true;
+  enemy->deleteActivePatterns();
 }

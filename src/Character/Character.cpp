@@ -3,6 +3,7 @@
 Character::Character(std::string name, int sound_channel_base)
 {
   //Setting up the other variables
+  this->frame = 0;
   this->name = name;
   this->directory = "";
   this->active_patterns = new std::list<Pattern *>;
@@ -38,6 +39,9 @@ Character::Character(std::string name, int sound_channel_base)
   this->sound_channel_base = sound_channel_base;
 
   loadFromXML();
+
+  if(life_bar)
+    this->life_bar->color_filter.alpha = 255;
 }
 
 Character::~Character()
@@ -243,6 +247,25 @@ void Character::loadMainXML()
 
     sprites[sprites_state] = sprites_vector;
   }
+
+  vector<Node *> animations_nodes = root_node->getNodesByName("animations");
+
+  for (int i = 0; i < (int)animations_nodes.size(); i++)
+  {
+    std::vector<Image *> images_vector;
+    std::string name = animations_nodes[i]->attributes["name"];
+
+    vector<Node *> animation_images_nodes = animations_nodes[i]->getNodesByName("images");
+    
+    for (int i = 0; i < (int)animation_images_nodes.size(); i++)
+    {
+      std::string path = animation_images_nodes[i]->attributes["path"];
+      images_vector.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + this->directory + path));
+    }
+
+    this->animation_images[name] = images_vector;
+  }
+
 
   delete root_node;
 }
@@ -770,6 +793,7 @@ void Character::logic(int stage_velocity)
     color_filter_blue++;
   if (color_filter_alpha < 255)
     color_filter_alpha++;
+  this->frame++;
 }
 
 void Character::animationControl()
@@ -922,6 +946,12 @@ void Character::topRender()
   rosalila()->graphics->drawRectangle(life_bar_x, life_bar_y,
 	  (int)current_life_bar_width, life_bar_rect_height,
       0, color.red, color.blue, color.green, 255);
+  
+  if(this->life_bar)
+  {
+    this->life_bar->color_filter.alpha = 255;
+    rosalila()->graphics->drawImage(this->life_bar,this->life_bar_x, this->life_bar_y);
+  }
 
   rosalila()->graphics->drawRectangles(rectangles);
 

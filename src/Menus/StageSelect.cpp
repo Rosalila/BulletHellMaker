@@ -585,6 +585,7 @@ void stageSelect()
         Enemy *enemy = new Enemy(stage_names[current_stage], player, 20, false);
         Stage *stage = new Stage(player);
         player->stage = stage;
+        player->enemy = enemy;
         stage->loadFromXML(stage_names[current_stage], false);
         rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
         STG *stg = new STG(player, enemy, stage, game_mode, current_player_best_score);

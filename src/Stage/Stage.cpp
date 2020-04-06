@@ -41,6 +41,19 @@ void Stage::drawLayer(Layer *layer)
   //Loop animation
   if (getIterateSlowdownFlag())
     layer->time_elapsed++;
+  
+  if(isSlowEnabled())
+  {
+    layer->color.red-=5;
+    if(layer->color.red<0)
+      layer->color.red=0;
+  }else if(!getGameOver())
+  {
+    layer->color.red+=10;
+    if(layer->color.red>255)
+      layer->color.red = 255;
+  }
+  
 
   if (layer->current_frame >= (int)layer->layer_frames.size())
     layer->current_frame = 0;

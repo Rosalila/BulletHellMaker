@@ -126,13 +126,13 @@ void setIsFirstWin(bool is_first_win_param)
 
 bool getIterateSlowdownFlag()
 {
-  return !isSlowActive() || iterate_slowdown_flag;
+  return !isSlowEnabled() || iterate_slowdown_flag;
 }
 
 void slowExtraControl()
 {
   //slow extra control
-  if (isSlowActive())
+  if (isSlowEnabled())
   {
     iterate_slowdown_flag = false;
     current_slowdown_iteration++;
@@ -142,11 +142,6 @@ void slowExtraControl()
       iterate_slowdown_flag = true;
     }
   }
-}
-
-bool isSlowPressed()
-{
-  return rosalila()->receiver->isKeyDown(SDLK_x) || rosalila()->receiver->isJoyDown(5, 0);
 }
 
 void disableSlow()
@@ -161,15 +156,11 @@ bool isSlowEnabled()
 {
   return slow_enabled;
 }
-bool isSlowActive()
-{
-  return isSlowEnabled() && isSlowPressed();
-}
 
 double getSlowdown()
 {
   int slowdown = 1.0;
-  if (isSlowPressed() && isSlowEnabled())
+  if (isSlowEnabled())
     slowdown = 3.0;
   return slowdown;
 }

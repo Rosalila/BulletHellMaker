@@ -440,14 +440,17 @@ See [full config.json attributes](#configjson-attributes).
 
 | Attribute | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| velocity           | `integer`                             |   | `5`   | Movement velocity |
-| animation_velocity | `integer`                             |   | `5`   | | Animation speed |
-| hp                 | `integer`                             |   | `100` | Health, hit points |
-| initial_position   | [initial_position](#initial_position) |   |       | Character position at the beginning |
-| sounds             | [sounds](#sounds)                     |   |       | Sound effects |
-| life_bar           | [life_bar](#life_bar)                 |   |       | Life bar settings |
-| states             | [states[]](#state)                    |   |       | Sprite list |
-| hitboxes           | [hitbox[]](#hitbox)                   |   |       | Hitboxes |
+| velocity                  | `integer`                             |   | `5`   | Movement velocity |
+| primary_weapon_velocity   | `integer`                             |   | `5`   | Movement velocity |
+| secondary_weapon_velocity | `integer`                             |   | `5`   | Movement velocity |
+| animation_velocity        | `integer`                             |   | `5`   | | Animation speed |
+| hp                        | `integer`                             |   | `100` | Health, hit points |
+| initial_position          | [initial_position](#initial_position) |   |       | Character position at the beginning |
+| sounds                    | [sounds](#sounds)                     |   |       | Sound effects |
+| life_bar                  | [life_bar](#life_bar)                 |   |       | Life bar settings |
+| states                    | [states[]](#state)                    |   |       | Sprite list |
+| hitboxes                  | [hitbox[]](#hitbox)                   |   |       | Hitboxes |
+| slow                      | [slow](#slow)                         |   |       | Slow mechanics config |
 
 #### initial_position
 
@@ -503,6 +506,35 @@ See [full config.json attributes](#configjson-attributes).
 | width  | `integer` | ✔ |     | Hitbox width |
 | height | `integer` | ✔ |     | Hitbox height |
 | angle  | `integer` |   | `0` | Hitbox rotation |
+
+#### slow
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| max                | `integer` |   |     | Maximum amount of slow points |
+| decrement          | `integer` |   |     | Decrement velocity of slow points when activated |
+| increment          | `integer` |   |     | Increment velocity of slow when not activated |
+| cooldown_increment | `integer` |   |     | After slow depletes, it get into cooldown state `cooldown_increment` sets the velocity of increment during this state. |
+| bar                | [slow_bar](#slow_bar) |  |     | Slow bar settings |
+
+#### slow_bar
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x              | `integer` |   |     | X position |
+| y              | `integer` |   |     | Y position |
+| active_color   | [color](#color) |  |     | Slow bar color when active |
+| cooldown_color | [color](#color) |  |     | Slow bar color during cooldown |
+| rectangle      | [rectangle](#rectangle) |  |     | Slow bar position and size |
+
+#### rectangle
+
+| Attribute | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| x      | `integer` |   |     | X position |
+| y      | `integer` |   |     | Y position |
+| width  | `integer` |   |     | Width size |
+| height | `integer` |   |     | Height size |
 
 ### bullets.json  attributes
 

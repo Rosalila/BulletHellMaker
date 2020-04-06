@@ -21,6 +21,7 @@ public:
   double angle_change;
   bool is_mod;
   int last_frame_hp;
+  int bullet_cancel_count;
 
   Enemy(string name, Player *player, int sound_channel_base, bool is_mod);
   ~Enemy();

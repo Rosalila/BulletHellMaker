@@ -10,9 +10,28 @@
 #include "Character/Character.h"
 #include "Stage/Stage.h"
 
+class ShadowControl
+{
+public:
+  std::string state;
+  int image_number;
+  int alpha;
+  int x;
+  int y;
+  ShadowControl(std::string state, int image_number, int alpha, int x, int y)
+  {
+    this->state = state;
+    this->image_number = image_number;
+    this->alpha = alpha;
+    this->x = x;
+    this->y = y;
+  }
+};
+
 class Player : public Character
 {
 public:
+  Character* enemy;
   Stage* stage;
   //Slow bar variables
   string game_mode;
@@ -88,6 +107,16 @@ public:
   double additional_hp_change;
   double velocity_override;
 
+  // Bomb animation
+  std::vector<Image *> bomb_images;
+  int current_bomb_frame;
+  int current_bomb_image;
+  int bomb_image_duration;
+  bool is_bomb_animation_active;
+
+  // Shadow
+  std::list<ShadowControl*> shadows;
+
   Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode);
   ~Player();
   void loadFromXML();
@@ -105,6 +134,7 @@ public:
   bool isDownWrapper(string button_map);
   void exit();
   bool isOnIntro();
+  void activateBomb();
 };
 
 #endif

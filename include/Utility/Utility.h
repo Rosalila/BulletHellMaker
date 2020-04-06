@@ -14,7 +14,6 @@ void initShooterUtility();
 bool getIterateSlowdownFlag();
 bool isSlowPressed();
 bool isSlowEnabled();
-bool isSlowActive();
 void slowExtraControl();
 void disableSlow();
 void enableSlow();
@@ -35,5 +34,25 @@ int getNotificationDuration();
 vector<int>* getColorPaletteR();
 vector<int>* getColorPaletteG();
 vector<int>* getColorPaletteB();
+
+class AnimationControl
+{
+public:
+  std::string name;
+  int current_frame;
+  int animation_velocity;
+  int x;
+  int y;
+  bool delete_flag;
+  AnimationControl(std::string name, int animation_velocity, int x, int y)
+  {
+    this->name = name;
+    this->animation_velocity = animation_velocity;
+    this->x = x;
+    this->y = y;
+    this->current_frame = 0;
+    this->delete_flag = false;
+  }
+};
 
 #endif

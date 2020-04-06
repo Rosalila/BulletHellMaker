@@ -31,7 +31,7 @@ public:
   int current_frame;
   int time_elapsed;
 
-  int frame;
+  double frame;
 
   // Bounds
   bool is_bounds_active;
