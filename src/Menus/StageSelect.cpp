@@ -588,6 +588,7 @@ void stageSelect()
         player->enemy = enemy;
         stage->loadFromXML(stage_names[current_stage], false);
         rosalila()->api_integrator->setCurrentControllerActionSet("InGameControls");
+        updateMusic(current_stage);
         STG *stg = new STG(player, enemy, stage, game_mode, current_player_best_score);
 
         if (getIsFirstWin())
@@ -691,7 +692,7 @@ void stageSelect()
     if (background_color.blue > target_color.blue)
       background_color.blue--;
 
-    updateMusic(current_stage);
+    //updateMusic(current_stage);
 
     rosalila()->graphics->drawImage(background, 0, 0);
 

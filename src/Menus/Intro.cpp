@@ -66,6 +66,7 @@ void intro()
 
   frames = 0;
 
+  rosalila()->sound->playMusic(std::string(assets_directory) + "intro.ogg", -1);
   while (true)
   {
     // auto skip

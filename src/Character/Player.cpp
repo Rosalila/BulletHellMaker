@@ -136,6 +136,10 @@ void Player::loadPlayerFromXML()
   if (root_node->hasAttribute("velocity"))
     this->original_velocity = atoi(root_node->attributes["velocity"].c_str());
   
+  this->dash_velocity = 0;
+  if (root_node->hasAttribute("dash_velocity"))
+    this->dash_velocity = atoi(root_node->attributes["dash_velocity"].c_str());
+  
   if (root_node->hasAttribute("primary_weapon_velocity"))
     this->primary_weapon_velocity = atoi(root_node->attributes["primary_weapon_velocity"].c_str());
   else
@@ -271,130 +275,6 @@ void Player::inputControl()
     current_velocity = velocity_override;
   }
 
-  // Double tap
-  /*
-  if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
-  {
-    if(this->frame - this->pressed_8_last_frameX < 10)
-    {
-      this->dash_extra_velocity_y = -20;
-      this->pressed_8_last_frameX = 0;
-    }else
-    {
-      if(this->dash_extra_velocity_y == 0)
-      {
-        this->pressed_8_last_frame = true;
-      }
-    }
-    delta_y = -(current_velocity + velocity_boost) / getSlowdown();
-  }else
-  {
-    if(this->pressed_8_last_frame)
-    {
-      this->pressed_1_last_frameX = 0;
-      this->pressed_2_last_frameX = 0;
-      this->pressed_3_last_frameX = 0;
-      this->pressed_4_last_frameX = 0;
-      this->pressed_6_last_frameX = 0;
-      this->pressed_7_last_frameX = 0;
-      this->pressed_8_last_frameX = this->frame;
-      this->pressed_9_last_frameX = 0;
-    }
-    this->pressed_8_last_frame = false;
-  }
-  
-  if (!up_pressed && down_pressed && !left_pressed && !right_pressed) //2
-  {
-    if(this->frame - this->pressed_2_last_frameX < 10)
-    {
-      this->dash_extra_velocity_y = 20;
-      this->pressed_2_last_frameX = 0;
-    }else
-    {
-      if(this->dash_extra_velocity_y == 0)
-      {
-        this->pressed_2_last_frame = true;
-      }
-    }
-    delta_y = (current_velocity + velocity_boost) / getSlowdown();
-  }else
-  {
-    if(this->pressed_2_last_frame)
-    {
-      this->pressed_1_last_frameX = 0;
-      this->pressed_2_last_frameX = this->frame;
-      this->pressed_3_last_frameX = 0;
-      this->pressed_4_last_frameX = 0;
-      this->pressed_6_last_frameX = 0;
-      this->pressed_7_last_frameX = 0;
-      this->pressed_8_last_frameX = 0;
-      this->pressed_9_last_frameX = 0;
-    }
-    this->pressed_2_last_frame = false;
-  }
-
-  if (!up_pressed && !down_pressed && left_pressed && !right_pressed) //4
-  {
-    if(this->frame - this->pressed_4_last_frameX < 10)
-    {
-      this->dash_extra_velocity_x = -20;
-      this->pressed_4_last_frameX = 0;
-    }else
-    {
-      if(this->dash_extra_velocity_y == 0)
-      {
-        this->pressed_4_last_frame = true;
-      }
-    }
-    delta_x = -(current_velocity + velocity_boost) / getSlowdown();
-  }else
-  {
-    if(this->pressed_4_last_frame)
-    {
-      this->pressed_1_last_frameX = 0;
-      this->pressed_2_last_frameX = 0;
-      this->pressed_3_last_frameX = 0;
-      this->pressed_4_last_frameX = this->frame;
-      this->pressed_6_last_frameX = 0;
-      this->pressed_7_last_frameX = 0;
-      this->pressed_8_last_frameX = 0;
-      this->pressed_9_last_frameX = 0;
-    }
-    this->pressed_4_last_frame = false;
-  }
-
-
-  if (!up_pressed && !down_pressed && !left_pressed && right_pressed) //6
-  {
-    if(this->frame - this->pressed_6_last_frameX < 10)
-    {
-      this->dash_extra_velocity_x = 20;
-      this->pressed_6_last_frameX = 0;
-    }else
-    {
-      if(this->dash_extra_velocity_y == 0)
-      {
-        this->pressed_6_last_frame = true;
-      }
-    }
-    delta_x = (current_velocity + velocity_boost) / getSlowdown();
-  }else
-  {
-    if(this->pressed_6_last_frame)
-    {
-      this->pressed_1_last_frameX = 0;
-      this->pressed_2_last_frameX = 0;
-      this->pressed_3_last_frameX = 0;
-      this->pressed_4_last_frameX = 0;
-      this->pressed_6_last_frameX = this->frame;
-      this->pressed_7_last_frameX = 0;
-      this->pressed_8_last_frameX = 0;
-      this->pressed_9_last_frameX = 0;
-    }
-    this->pressed_6_last_frame = false;
-  }
-  */
-
   if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
   {
     delta_y = -(current_velocity + velocity_boost) / getSlowdown();
@@ -466,28 +346,28 @@ void Player::inputControl()
       && this->current_state != "dash right"
       && this->hasState("dash right"))
   {
-    dash_extra_velocity_x = 20;
+    dash_extra_velocity_x = dash_velocity;
     this->setState("dash right");
   }
   if(dash_pressed && isDownWrapper("4")
       && this->current_state != "dash left"
       && this->hasState("dash left"))
   {
-    dash_extra_velocity_x = -20;
+    dash_extra_velocity_x = -dash_velocity;
     this->setState("dash left");
   }
   if(dash_pressed && isDownWrapper("2")
       && this->current_state != "dash down"
       && this->hasState("dash down"))
   {
-    dash_extra_velocity_y = 20;
+    dash_extra_velocity_y = dash_velocity;
     this->setState("dash down");
   }
   if(dash_pressed && isDownWrapper("8")
       && this->current_state != "dash up"
       && this->hasState("dash up"))
   {
-    dash_extra_velocity_y = -20;
+    dash_extra_velocity_y = -dash_velocity;
     this->setState("dash up");
   }
 
