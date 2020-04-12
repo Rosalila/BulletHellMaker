@@ -596,10 +596,12 @@ void STG::render()
   //                               0, 150, false, false);
 
   //rosalila()->graphics->updateScreen();
+  /*
   rosalila()->graphics->drawText("Time",50,10,true,false);
   rosalila()->graphics->drawText(rosalila()->utility->toString(this->frame),50,50,true,false);
   rosalila()->graphics->drawText("Bullets",-70,10,true,false);
   rosalila()->graphics->drawText(rosalila()->utility->toString(this->enemy->bullet_cancel_count),-70,50,true,false);
+  */
 }
 
 bool STG::isOutOfBounds(int pos_x, int pos_y)
