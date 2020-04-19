@@ -90,17 +90,18 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->additional_hp_change = 0;
   this->velocity_override = 0;
 
-  // Bomb animation
-  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/01.png"));
-  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/02.png"));
-  bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/03.png"));
-  bomb_images[0]->color_filter.alpha = 255;
-  bomb_images[1]->color_filter.alpha = 255;
-  bomb_images[2]->color_filter.alpha = 255;
-  current_bomb_frame = 0;
-  current_bomb_image = 0;
-  bomb_image_duration = 5;
-  is_bomb_animation_active = false;
+  // Bomb
+  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/01.png"));
+  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/02.png"));
+  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/03.png"));
+  this->bomb_images[0]->color_filter.alpha = 255;
+  this->bomb_images[1]->color_filter.alpha = 255;
+  this->bomb_images[2]->color_filter.alpha = 255;
+  this->current_bomb_frame = 0;
+  this->current_bomb_image = 0;
+  this->bomb_image_duration = 5;
+  this->is_bomb_animation_active = false;
+  this->is_bomb_active = false;
 }
 
 Player::~Player()
@@ -570,8 +571,14 @@ void Player::logic(int stage_velocity)
   if (!slow_in_cooldown && current_slow <= 0)
   {
     slow_in_cooldown = true;
+  }
+
+  if(!slow_in_cooldown && isDownWrapper("e"))
+  {
     this->activateBomb();
   }
+
+  bombLogic();
 
   spellControl(stage_velocity);
 
@@ -748,25 +755,11 @@ void Player::topRender()
                                           parry_hitboxes[i]->getAngle(), 100, 0, 0, 100);
     }
 
-  /*
-  std::vector<Image *> bomb_images;
-  int current_bomb_image;
-  int bomb_image_duration;
-  bool is_bomb_animation_active;
-  */
-
   if(is_bomb_animation_active)
   {
     rosalila()->graphics->drawImage(bomb_images[current_bomb_image],
                                     0,
                                     0);
-    current_bomb_frame++;
-    if(current_bomb_frame % bomb_image_duration == 0)
-    {
-      current_bomb_image++;
-      if(current_bomb_image>bomb_images.size())
-        is_bomb_animation_active = false;
-    }
   }
 }
 
@@ -1016,8 +1009,36 @@ bool Player::isOnIntro()
 
 void Player::activateBomb()
 {
-  current_bomb_image = 0;
-  current_bomb_frame = 0;
-  is_bomb_animation_active = true;
-  enemy->deleteActivePatterns();
+  this->current_bomb_image = 0;
+  this->current_bomb_frame = 0;
+  this->is_bomb_animation_active = true;
+  this->is_bomb_active = true;
+}
+
+void Player::disableBomb()
+{
+  this->is_bomb_animation_active = false;
+  this->is_bomb_active = false;
+}
+
+void Player::bombLogic()
+{
+  if(this->is_bomb_active)
+  {
+    this->enemy->deleteActivePatterns();
+
+    this->current_slow-=6;
+    if(current_slow <= 0)
+    {
+      disableBomb();
+    }
+
+    current_bomb_frame++;
+    if(current_bomb_frame % bomb_image_duration == 0)
+    {
+      current_bomb_image++;
+      if(current_bomb_image > bomb_images.size())
+        current_bomb_image = 0;
+    }
+  }
 }
