@@ -57,7 +57,7 @@ class RosalilaApiIntegrator;
 
 //extern std::string assets_directory;
 
-#define assets_directory "assets/"
+#define assets_directory "../assets/"
 
 extern std::string CONFIG_FILE_PATH;
 
