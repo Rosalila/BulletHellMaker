@@ -22,7 +22,7 @@ IF (UNIX AND NOT APPLE)
   file(GLOB_RECURSE SOURCES "src/*.cpp" main.cpp)
   add_executable(shmup ${SOURCES})
   add_definitions(-DGLEW_STATIC)
-  target_link_libraries (shmup GL GLEW SDL2 SDL2_image SDL2_ttf SDL2_mixer rosalila libsteam_api.so)
+  target_link_libraries (shmup GL SDL2 SDL2_image SDL2_ttf SDL2_mixer rosalila libsteam_api.so)
 ENDIF ()
 
 IF (APPLE)
