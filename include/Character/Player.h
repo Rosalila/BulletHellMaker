@@ -114,6 +114,7 @@ public:
   int current_bomb_image;
   int bomb_image_duration;
   bool is_bomb_animation_active;
+  bool is_bomb_active;
 
   // Shadow
   std::list<ShadowControl*> shadows;
@@ -136,6 +137,8 @@ public:
   void exit();
   bool isOnIntro();
   void activateBomb();
+  void disableBomb();
+  void bombLogic();
 };
 
 #endif
