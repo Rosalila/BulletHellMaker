@@ -3,9 +3,9 @@
 
 #ifdef WINDOWS
 #include <windows.h>
+#include <GL/glew.h>
 #endif
 
-//#include <GL/glew.h>
 
 #include <iostream>
 #include <list>
@@ -13,21 +13,22 @@
 #include "../Rosalila.h"
 
 #ifdef LINUX
+//#include <GL/glew.h>
+#include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_opengl.h>
 #endif
 
 #ifdef WINDOWS
+#include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_opengl.h>
 #endif
 
 #ifdef OSX
+#include <SDL_opengl.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-#include <SDL_opengl.h>
 #endif
 
 #include <stdio.h>

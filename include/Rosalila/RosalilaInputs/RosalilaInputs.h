@@ -8,17 +8,16 @@
 #include <stdarg.h>
 using namespace std;
 
-#ifdef WINDOWS
-#include <SDL2/SDL.h>
+#ifdef LINUX
+#include "SDL2/SDL.h"
 #endif
 
-
-#ifdef LINUX
-#include <SDL2/SDL.h>
+#ifdef WINDOWS
+#include "SDL2/SDL.h"
 #endif
 
 #ifdef OSX
-#include <SDL.h>
+#include "SDL.h"
 #endif
 
 #include "../RosalilaUtility/RosalilaUtility.h"

@@ -9,18 +9,19 @@
 #include <iostream>
 using namespace std;
 
+//SDL
 #ifdef LINUX
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 #include <SDL2/SDL_mixer.h>
 #endif
 
 #ifdef WINDOWS
-#include <SDL2/SDL.h>
+#include "SDL2/SDL.h"
 #include <SDL2/SDL_mixer.h>
 #endif
 
 #ifdef OSX
-#include <SDL.h>
+#include "SDL.h"
 #include <SDL_mixer.h>
 #endif
 
