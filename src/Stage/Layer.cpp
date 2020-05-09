@@ -3,6 +3,7 @@
 
 Layer::Layer(vector<LayerFrame *> layer_frames,
   std::map<int, vector<Modifier *>> *modifiers,
+  std::string type,
   int frame_duration,
   int depth_effect_x,
   int depth_effect_y,
@@ -22,6 +23,7 @@ Layer::Layer(vector<LayerFrame *> layer_frames,
 {
   this->layer_frames = layer_frames;
   this->modifiers = modifiers;
+  this->type = type;
   this->frame_duration = frame_duration;
   this->depth_effect_x = depth_effect_x;
   this->depth_effect_y = depth_effect_y;

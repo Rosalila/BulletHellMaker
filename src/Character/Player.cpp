@@ -91,17 +91,20 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->velocity_override = 0;
 
   // Bomb
-  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/01.png"));
-  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/02.png"));
-  this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/03.png"));
-  this->bomb_images[0]->color_filter.alpha = 255;
-  this->bomb_images[1]->color_filter.alpha = 255;
-  this->bomb_images[2]->color_filter.alpha = 255;
+  for(int i=29; i>=0; i--)
+  {
+    std::string image_number = rosalila()->utility->toString(i+1);
+    if(image_number.size()==1)
+      image_number = "0" + image_number;
+    this->bomb_images.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/bomb_background/" + image_number+ ".png"));
+    //this->bomb_images[i]->color_filter.alpha = 255;
+  }
   this->current_bomb_frame = 0;
   this->current_bomb_image = 0;
   this->bomb_image_duration = 5;
-  this->is_bomb_animation_active = false;
   this->is_bomb_active = false;
+  
+  this->dash_button_was_down_last_frame = false;
 }
 
 Player::~Player()
@@ -341,7 +344,8 @@ void Player::inputControl()
       && this->hasState("up"))
     this->setState("up");
 
-  bool dash_pressed = rosalila()->receiver->isPressed(0,"c");
+  bool dash_pressed = !this->dash_button_was_down_last_frame && isDownWrapper("c");
+  this->dash_button_was_down_last_frame = isDownWrapper("c");
 
   if(dash_pressed && isDownWrapper("6")
       && this->current_state != "dash right"
@@ -539,7 +543,7 @@ void Player::logic(int stage_velocity)
 
   //Enable or disable slow
   if (!slow_in_cooldown
-      && isDownWrapper("d"))
+      && isDownWrapper("b"))
   {
     enableSlow();
     current_slow -= slow_decrement;
@@ -573,7 +577,7 @@ void Player::logic(int stage_velocity)
     slow_in_cooldown = true;
   }
 
-  if(!slow_in_cooldown && isDownWrapper("e"))
+  if(!slow_in_cooldown && isDownWrapper("d"))
   {
     this->activateBomb();
   }
@@ -754,13 +758,6 @@ void Player::topRender()
                                           parry_hitboxes[i]->getWidth(), parry_hitboxes[i]->getHeight(),
                                           parry_hitboxes[i]->getAngle(), 100, 0, 0, 100);
     }
-
-  if(is_bomb_animation_active)
-  {
-    rosalila()->graphics->drawImage(bomb_images[current_bomb_image],
-                                    0,
-                                    0);
-  }
 }
 
 void Player::hit(int damage)
@@ -1011,13 +1008,13 @@ void Player::activateBomb()
 {
   this->current_bomb_image = 0;
   this->current_bomb_frame = 0;
-  this->is_bomb_animation_active = true;
   this->is_bomb_active = true;
+  int bomb_duration = this->current_slow/6 + 6;
+  rosalila()->graphics->screen_shake_effect.set(15, bomb_duration, 0, 0);
 }
 
 void Player::disableBomb()
 {
-  this->is_bomb_animation_active = false;
   this->is_bomb_active = false;
 }
 
@@ -1037,7 +1034,7 @@ void Player::bombLogic()
     if(current_bomb_frame % bomb_image_duration == 0)
     {
       current_bomb_image++;
-      if(current_bomb_image > bomb_images.size())
+      if(current_bomb_image >= bomb_images.size())
         current_bomb_image = 0;
     }
   }

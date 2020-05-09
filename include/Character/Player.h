@@ -113,8 +113,9 @@ public:
   int current_bomb_frame;
   int current_bomb_image;
   int bomb_image_duration;
-  bool is_bomb_animation_active;
   bool is_bomb_active;
+
+  bool dash_button_was_down_last_frame;
 
   // Shadow
   std::list<ShadowControl*> shadows;

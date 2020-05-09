@@ -16,6 +16,8 @@ public:
 
   Color color;
 
+  std::string type;
+
   int frame_duration;
   int depth_effect_x;
   int depth_effect_y;
@@ -44,6 +46,7 @@ public:
 
   Layer(vector<LayerFrame *> layer_frames,
         std::map<int, vector<Modifier *>> *modifiers,
+        std::string type,
         int frame_duration,
         int depth_effect_x, int depth_effect_y,
         double x, double y,

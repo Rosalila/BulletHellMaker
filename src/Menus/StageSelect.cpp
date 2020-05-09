@@ -182,6 +182,7 @@ void stageSelect()
   std::vector<Image *> stage_images = getStageImages(getStageNames());
 
   Image *background = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/background.png");
+  Image *stage_loading = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/stage_loading.png");
   Image *left_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/left_arrow.png");
   Image *right_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/right_arrow.png");
   Image *up_arrow = rosalila()->graphics->getImage(std::string(assets_directory) + "menu/up_arrow.png");
@@ -580,6 +581,13 @@ void stageSelect()
         if (current_leaderboard && current_leaderboard->leaderboard_self_entry != NULL)
           current_player_best_score = current_leaderboard->leaderboard_self_entry->score;
 #endif
+
+        stage_loading->color_filter.red = 255;
+        stage_loading->color_filter.green = 255;
+        stage_loading->color_filter.blue = 255;
+        stage_loading->color_filter.alpha = 255;
+        rosalila()->graphics->drawImage(stage_loading, 0, 0);
+        rosalila()->update();
 
         Player *player = new Player("player", 10, intro_input, replay_input, game_mode);
         Enemy *enemy = new Enemy(stage_names[current_stage], player, 20, false);

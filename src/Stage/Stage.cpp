@@ -166,10 +166,19 @@ bool Stage::playerIsInBounds()
 
 void Stage::dibujarBack()
 {
+  if(this->player->is_bomb_active)
+  {
+    rosalila()->graphics->drawImage(this->player->bomb_images[this->player->current_bomb_image],
+                                    0,
+                                    0);
+  }
   for (int i = 0; i < (int)back.size(); i++)
   {
     Layer *layer = back[i];
-    drawLayer(layer);
+    if(this->player->is_bomb_active && layer->type == "bomb")
+      drawLayer(layer);
+    else if(!this->player->is_bomb_active && layer->type != "bomb")
+      drawLayer(layer);
   }
   //    rosalila()->graphics->clearScreen(Color(0,0,0,0));
 }
@@ -347,6 +356,10 @@ void Stage::loadFromXML(std::string name, bool is_mod)
       continue;
     }
 
+    std::string type = "";
+    if (backlayer_nodes[i]->hasAttribute("type"))
+      type = backlayer_nodes[i]->attributes["type"];
+
     int frame_duration = 5;
     if (backlayer_nodes[i]->hasAttribute("animation_velocity"))
       frame_duration = atoi(backlayer_nodes[i]->attributes["animation_velocity"].c_str());
@@ -460,7 +473,8 @@ void Stage::loadFromXML(std::string name, bool is_mod)
     }
 
     back.push_back(new Layer(layer_frames,
-                             layer_modifiers, 
+                             layer_modifiers,
+                             type,
                              frame_duration,
                              depth_effect_x, depth_effect_y,
                              x, y,
@@ -483,6 +497,10 @@ void Stage::loadFromXML(std::string name, bool is_mod)
   //Load front layer
   for (int i = 0; i < (int)frontlayer_nodes.size(); i++)
   {
+    std::string type = "";
+    if (backlayer_nodes[i]->hasAttribute("type"))
+      type = backlayer_nodes[i]->attributes["type"];
+    
     int frame_duration = 0;
     if (frontlayer_nodes[i]->hasAttribute("animation_velocity"))
       frame_duration = atoi(frontlayer_nodes[i]->attributes["animation_velocity"].c_str());
@@ -589,6 +607,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
 
     front.push_back(new Layer(layer_frames,
                               layer_modifiers,
+                              type,
                               frame_duration,
                               depth_effect_x, depth_effect_y,
                               x, y,
