@@ -83,15 +83,21 @@ bool Layer::playerIsInBounds(Player* player)
   int image_height = 0;
   if(layer_frames.size() > 0)
     image_height = layer_frames[0]->height;
-
-  int current_bounds_x = this->x + this->bounds_x;
-  int current_bounds_y = rosalila()->graphics->screen_height - image_height - this->y - this->bounds_y;
-  if(player->x < current_bounds_x
-    || player->y < current_bounds_y
-    || player->x > current_bounds_x + this->bounds_width
-    || player->y > current_bounds_y + this->bounds_height)
-    return false;
-  return true;
+  
+  bool is_in_bounds = false;
+  for(int i = 0;
+      separation_x!=0 && i + this->x + this->bounds_x < rosalila()->graphics->screen_width;
+      i+=separation_x + this->layer_frames[this->current_frame]->width)
+  {
+    int current_bounds_x = this->x + this->bounds_x + i;
+    int current_bounds_y = rosalila()->graphics->screen_height - image_height - this->y - this->bounds_y;
+    if((player->x < current_bounds_x
+      || player->y < current_bounds_y
+      || player->x > current_bounds_x + this->bounds_width
+      || player->y > current_bounds_y + this->bounds_height) == false)
+      is_in_bounds = true;
+  }
+  return is_in_bounds;
 }
 
 void Layer::logic(Player* player)

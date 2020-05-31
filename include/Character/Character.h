@@ -10,6 +10,26 @@
 #include "Character/Pattern.h"
 #include "Character/Modifier.h"
 
+class AnimationControl
+{
+public:
+  std::string name;
+  int current_frame;
+  int animation_velocity;
+  int x;
+  int y;
+  bool delete_flag;
+  AnimationControl(std::string name, int animation_velocity, int x, int y)
+  {
+    this->name = name;
+    this->animation_velocity = animation_velocity;
+    this->x = x;
+    this->y = y;
+    this->current_frame = 0;
+    this->delete_flag = false;
+  }
+};
+
 class Character
 {
 public:
@@ -80,9 +100,7 @@ public:
   vector<Modifier *> loadModifierXML(Node *modifier_node);
   Pattern *loadPatternXML(Node *pattern_node);
 
-  void logic(int stage_velocity);
   void animationControl();
-  void spellControl(int stage_velocity);
   virtual void addActivePattern(Pattern *pattern);
 
   void bottomRender();

@@ -106,6 +106,16 @@ void Stage::drawLayer(Layer *layer)
       image->color_filter.blue =  layer->color.blue;
       image->color_filter.alpha =  layer->color.alpha;
       rosalila()->graphics->drawImage(image,pos_x, pos_y);
+
+      if (rosalila()->receiver->isKeyDown(SDLK_h))
+      {
+        rosalila()->graphics->drawRectangle(pos_x + layer->bounds_x,
+                                            rosalila()->graphics->screen_height - current_layer_frame->height - layer->y - layer->bounds_y,
+                                            layer->bounds_width,
+                                            layer->bounds_height,
+                                            0,
+                                            0, 100, 0, 100);
+      }
     }
     if (current_layer_frame->type == "rectangle")
     {
@@ -118,16 +128,6 @@ void Stage::drawLayer(Layer *layer)
   for (int i = 0; i < (int)rectangles.size(); i++)
   {
     delete rectangles[i];
-  }
-
-  if (rosalila()->receiver->isKeyDown(SDLK_h))
-  {
-    rosalila()->graphics->drawRectangle(layer->bounds_x + layer->x,
-                                         rosalila()->graphics->screen_height - current_layer_frame->height - layer->y - layer->bounds_y,
-                                         layer->bounds_width,
-                                         layer->bounds_height,
-                                         0,
-                                         0, 100, 0, 100);
   }
 
   // TODO redo paralax

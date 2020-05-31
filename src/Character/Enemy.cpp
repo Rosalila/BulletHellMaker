@@ -1,4 +1,15 @@
 #include "Character/Enemy.h"
+#include "Utility/Utility.h"
+
+double getPlayerDistanceX(Player* player, Pattern* pattern)
+{
+  return player->x - pattern->x;
+}
+
+double getPlayerDistanceY(Player* player, Pattern* pattern)
+{
+  return player->y - pattern->y;
+}
 
 Enemy::Enemy(std::string name, Player *player, int sound_channel_base, bool is_mod)
 {
@@ -91,8 +102,7 @@ void Enemy::modifiersControl()
       //Reset cooldowns
       for (int i = 0; i < (int)type[current_type].size(); i++)
       {
-        type[current_type][i]->current_cooldown = 0;
-        type[current_type][i]->current_startup = 0;
+        type[current_type][i]->state_manager = 0;
         type[current_type][i]->iteration = 0;
         type[current_type][i]->state = "startup";
       }
@@ -134,8 +144,7 @@ void Enemy::modifiersControl()
           //Reset cooldowns
           for (int i = 0; i < (int)type[current_type].size(); i++)
           {
-            type[current_type][i]->current_cooldown = 0;
-            type[current_type][i]->current_startup = 0;
+            type[current_type][i]->state_manager = 0;
             type[current_type][i]->iteration = 0;
             type[current_type][i]->state = "startup";
           }
@@ -170,37 +179,71 @@ void Enemy::modifiersControl()
 
 void Enemy::logic(int stage_velocity, string stage_name)
 {
-  Character::logic(stage_velocity);
+  animationControl();
+
+  for (auto pattern : type[current_type])
+  {
+    if(pattern->aim_player_on_begin && 
+        (
+          (pattern->state=="startup" && pattern->state_manager + pattern->repeat_startup_offset == pattern->startup)
+          || (pattern->state=="cooldown" && pattern->state_manager + pattern->repeat_startup_offset == pattern->cooldown)
+        )
+      )
+    {
+      pattern->player_x_on_begin = player->x;
+      pattern->player_y_on_begin = player->y;
+    }
+    if (shooting && this->hp != 0)
+    {
+      pattern->updateStateShouting();
+      if (pattern->isReady())
+      {
+        pattern->bullet->playSound((int)(pattern->x + this->x), true);
+        this->addActivePattern(pattern);
+      }
+    }
+    else
+    {
+      pattern->updateStateNotShouting();
+    }
+  }
+  
+  if (color_filter_red < 255)
+    color_filter_red++;
+  if (color_filter_green < 255)
+    color_filter_green++;
+  if (color_filter_blue < 255)
+    color_filter_blue++;
+  if (color_filter_alpha < 255)
+    color_filter_alpha++;
 
   player->additional_velocity_x = 0;
   player->additional_velocity_y = 0;
   player->additional_hp_change = 0;
   player->velocity_override = 0;
 
-  for (std::list<Pattern *>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
+  for (std::list<Pattern *>::iterator iterator = active_patterns->begin(); iterator != active_patterns->end(); iterator++)
   {
-    Pattern *p = (Pattern *)*pattern;
-    double distance_x = player->hitboxes[0]->x + player->x + -p->x;
-    double distance_y = player->hitboxes[0]->y + player->y + -p->y;
-    //.getPlacedHitbox(this->x,this->y)
+    Pattern *active_pattern = (Pattern *)*iterator;
+    active_pattern->logic(stage_velocity);
 
-    if (p->homing)
+    if (active_pattern->homing)
     {
-      p->angle = (float)(-atan2(distance_y, distance_x) * 180 / PI);
-      p->angle += (float)(p->homing_angle);
+      active_pattern->angle = (float)(-atan2(getPlayerDistanceY(player, active_pattern), getPlayerDistanceX(player, active_pattern)) * 180 / PI);
+      active_pattern->angle += (float)(active_pattern->homing_angle);
     }
-    else if (p->getAimPlayer())
+    else if (active_pattern->getAimPlayer())
     {
-      p->angle = (int)(p->angle - atan2(distance_y, distance_x) * 180 / PI);
+      active_pattern->angle = (int)(active_pattern->angle - atan2(getPlayerDistanceY(player, active_pattern), getPlayerDistanceX(player, active_pattern)) * 180 / PI);
     }
 
-    player->additional_velocity_x = p->additional_player_velocity_x;
-    player->additional_velocity_y = p->additional_player_velocity_y;
-    player->additional_hp_change = p->additional_player_hp_change;
-    player->velocity_override = p->player_velocity_override;
+    player->additional_velocity_x = active_pattern->additional_player_velocity_x;
+    player->additional_velocity_y = active_pattern->additional_player_velocity_y;
+    player->additional_hp_change = active_pattern->additional_player_hp_change;
+    player->velocity_override = active_pattern->player_velocity_override;
 
-    player->hp += (int)p->additional_player_hp_change;
-    if(p->additional_player_hp_change < 0 && player->hp <= 0)
+    player->hp += (int)active_pattern->additional_player_hp_change;
+    if(active_pattern->additional_player_hp_change < 0 && player->hp <= 0)
       player->hp = 1;
   }
 
@@ -356,18 +399,25 @@ void Enemy::addActivePattern(Pattern *pattern)
 {
   if (getGameOver())
     return;
-  Pattern *pattern_temp = new Pattern(pattern, (int)this->x, (int)this->y);
-  float angle = pattern_temp->angle;
-  angle += pattern_temp->getRandomAngle();
+  Pattern *new_pattern = new Pattern(pattern, (int)this->x, (int)this->y);
+  float angle = new_pattern->angle;
+  angle += new_pattern->getRandomAngle();
 
-  pattern_temp->angle = angle;
+  new_pattern->angle = angle;
 
-  if (pattern_temp->getAimPlayer())
+  if (new_pattern->getAimPlayer())
   {
-    double distance_x = player->x - pattern_temp->x;
-    double distance_y = player->y - pattern_temp->y;
-    pattern_temp->angle = pattern_temp->angle - atan2(distance_y, distance_x) * 180 / PI;
+    double distance_x = player->x - new_pattern->x;
+    double distance_y = player->y - new_pattern->y;
+    new_pattern->angle = new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
   }
 
-  active_patterns->push_back(pattern_temp);
+  if(pattern->aim_player_on_begin)
+  {
+    double distance_x = pattern->player_x_on_begin - new_pattern->x;
+    double distance_y = pattern->player_y_on_begin - new_pattern->y;
+    new_pattern->angle = new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
+  }
+  
+  active_patterns->push_back(new_pattern);
 }

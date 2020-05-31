@@ -1,8 +1,10 @@
 #include "Character/Pattern.h"
+#include "Utility/Utility.h"
 
 Pattern::Pattern(int velocity, int max_velocity, int acceleration, int a_frequency, float angle, int angle_change, int stop_ac_at, int ac_frequency, int animation_velocity, double auto_scale,
                  Bullet *bullet, int offset_x, int offset_y, int startup, int cooldown, int duration, int random_angle, bool aim_player, int bullet_rotation, int br_change, int independent_br, bool freeze, bool homing, bool collides_bullets, bool collides_opponent, bool undestructable, std::map<int, vector<Modifier *>> *modifiers, std::map<std::string, Bullet *> *bullets,
-                 double additional_player_velocity_x, double additional_player_velocity_y, double additional_player_hp_change, double player_velocity_override
+                 double additional_player_velocity_x, double additional_player_velocity_y, double additional_player_hp_change, double player_velocity_override,
+                 bool aim_player_on_begin
                  )
 {
   this->pattern = NULL;
@@ -37,8 +39,7 @@ Pattern::Pattern(int velocity, int max_velocity, int acceleration, int a_frequen
   this->animation_iteration = 0;
   this->current_sprite = 0;
   this->state = "startup";
-  this->current_startup = 0;
-  this->current_cooldown = 0;
+  this->state_manager = 0;
 
   //Bullet rotation
   this->bullet_rotation = (float)bullet_rotation;
@@ -64,6 +65,13 @@ Pattern::Pattern(int velocity, int max_velocity, int acceleration, int a_frequen
   this->additional_player_velocity_y = additional_player_velocity_y;
   this->additional_player_hp_change = additional_player_hp_change;
   this->player_velocity_override = player_velocity_override;
+
+  // Aim player on startup
+  this->aim_player_on_begin = aim_player_on_begin;
+  this->player_x_on_begin = 0;
+  this->player_y_on_begin = 0;
+  this->repeat_startup_offset = 0;
+  this->repeat_cooldown_offset = 0;
 }
 
 Pattern::Pattern(Pattern *pattern, int x, int y)
@@ -120,6 +128,13 @@ Pattern::Pattern(Pattern *pattern, int x, int y)
   this->additional_player_hp_change = pattern->additional_player_hp_change;
   this->player_velocity_override = pattern->player_velocity_override;
 
+  // Aim player on startup
+  this->aim_player_on_begin = pattern->aim_player_on_begin;
+  this->player_x_on_begin = pattern->player_x_on_begin;
+  this->player_y_on_begin = pattern->player_y_on_begin;
+  this->repeat_startup_offset = pattern->repeat_startup_offset;
+  this->repeat_cooldown_offset = pattern->repeat_cooldown_offset;
+
   //Keeping the parent for reasons
   this->pattern = pattern;
 }
@@ -143,8 +158,7 @@ bool Pattern::isReady()
   if (state == "ready")
   {
     state = "cooldown";
-    current_startup = 0;
-    current_cooldown = 0;
+    state_manager = 0;
     return true;
   }
   return false;
@@ -161,26 +175,26 @@ void Pattern::updateStateShouting()
   {
     if (state == "startup")
     {
-      if (current_startup < startup)
+      if (state_manager < startup)
       {
-        current_startup++;
+        state_manager++;
       }
       else
       {
-        current_startup = 0;
+        state_manager = 0;
         state = "ready";
       }
     }
 
     if (state == "cooldown")
     {
-      if (current_cooldown < cooldown)
+      if (state_manager < cooldown)
       {
-        current_cooldown++;
+        state_manager++;
       }
       else
       {
-        current_cooldown = 0;
+        state_manager = 0;
         state = "ready";
       }
     }
@@ -189,8 +203,7 @@ void Pattern::updateStateShouting()
 
 void Pattern::updateStateNotShouting()
 {
-  current_startup = 0;
-  current_cooldown++;
+  state_manager = 0;
 }
 
 void Pattern::logic(int stage_speed)
@@ -340,13 +353,6 @@ bool Pattern::getAimPlayer()
     return false;
   aim_player = false;
   return true;
-}
-
-void Pattern::aimTo(int x, int y)
-{
-  double distance_x = 10;
-  double distance_y = 20;
-  angle -= atan2(distance_y, distance_x) * 180 / PI;
 }
 
 void Pattern::hit(int channel, bool hit_undestructable)

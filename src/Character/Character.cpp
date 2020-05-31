@@ -1,4 +1,5 @@
 #include "Character/Character.h"
+#include "Utility/Utility.h"
 
 Character::Character(std::string name, int sound_channel_base)
 {
@@ -532,6 +533,10 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
   if (pattern_node->hasAttribute("velocity"))
     velocity = atoi(pattern_node->attributes["velocity"].c_str());
 
+  bool aim_player_on_begin = false;
+  if (pattern_node->hasAttribute("aim_player_on_begin"))
+    aim_player_on_begin = pattern_node->attributes["aim_player_on_begin"] == "yes";
+
   std::map<int, vector<Modifier *>> *pattern_modifiers = new std::map<int, vector<Modifier *>>();
 
   vector<Node *> modifier_nodes = pattern_node->getNodesByName("modifiers");
@@ -547,7 +552,8 @@ Pattern *Character::loadPatternXML(Node *pattern_node)
 
   return new Pattern(velocity, max_velocity, acceleration, a_frequency, (float)angle, angle_change, stop_ac_at, ac_frequency, animation_velocity, auto_scale, bullet, offset_x, offset_y,
                      startup, cooldown, duration, random_angle, aim_player, bullet_rotation, br_change, independent_br, freeze, homing, collides_bullets, collides_opponent, undestructable, pattern_modifiers, &bullets,
-                     additional_player_velocity_x, additional_player_velocity_y, additional_player_hp_change, player_velocity_override
+                     additional_player_velocity_x, additional_player_velocity_y, additional_player_hp_change, player_velocity_override,
+                     aim_player_on_begin
                      );
 }
 
@@ -753,10 +759,16 @@ void Character::loadPatternsXML()
             p->offset_y += atoi(repeat_nodes[j]->attributes["offset_y"].c_str()) * l;
 
           if (repeat_nodes[j]->hasAttribute("startup"))
-            p->startup += atoi(repeat_nodes[j]->attributes["startup"].c_str()) * l;
+          {
+            p->repeat_startup_offset = atoi(repeat_nodes[j]->attributes["startup"].c_str()) * l;
+            p->startup += p->repeat_startup_offset;
+          }
 
           if (repeat_nodes[j]->hasAttribute("cooldown"))
-            p->cooldown += atoi(repeat_nodes[j]->attributes["cooldown"].c_str()) * l;
+          {
+            p->repeat_cooldown_offset += atoi(repeat_nodes[j]->attributes["cooldown"].c_str()) * l;
+            p->cooldown += p->repeat_cooldown_offset;
+          }
 
           if (repeat_nodes[j]->hasAttribute("animation_velocity"))
             p->animation_velocity += atoi(repeat_nodes[j]->attributes["animation_velocity"].c_str()) * l;
@@ -781,21 +793,6 @@ void Character::loadPatternsXML()
   delete root_node;
 }
 
-void Character::logic(int stage_velocity)
-{
-  animationControl();
-  spellControl(stage_velocity);
-  if (color_filter_red < 255)
-    color_filter_red++;
-  if (color_filter_green < 255)
-    color_filter_green++;
-  if (color_filter_blue < 255)
-    color_filter_blue++;
-  if (color_filter_alpha < 255)
-    color_filter_alpha++;
-  this->frame++;
-}
-
 void Character::animationControl()
 {
   if (current_state == "destroyed")
@@ -811,30 +808,6 @@ void Character::animationControl()
   }
   if (getIterateSlowdownFlag())
     animation_iteration++;
-}
-
-void Character::spellControl(int stage_velocity)
-{
-  std::vector<Pattern *> patterns = type[current_type];
-  for (int i = 0; i < (int)patterns.size(); i++)
-  {
-    if (shooting && this->hp != 0)
-    {
-      patterns[i]->updateStateShouting();
-      if (patterns[i]->isReady())
-      {
-        patterns[i]->bullet->playSound((int)(patterns[i]->x + this->x), true);
-        this->addActivePattern(patterns[i]);
-      }
-    }
-    else
-    {
-      patterns[i]->updateStateNotShouting();
-    }
-  }
-
-  for (std::list<Pattern *>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-    ((Pattern *)*pattern)->logic(stage_velocity);
 }
 
 void Character::bottomRender()
@@ -991,12 +964,11 @@ void Character::hit(int damage)
 
 void Character::addActivePattern(Pattern *pattern)
 {
-  Pattern *pattern_temp = new Pattern(pattern, (int)this->x, (int)this->y);
-  float angle = pattern_temp->angle;
-  angle += pattern_temp->getRandomAngle();
-  pattern_temp->angle = angle;
-
-  active_patterns->push_back(pattern_temp);
+  Pattern *new_pattern = new Pattern(pattern, (int)this->x, (int)this->y);
+  float angle = new_pattern->angle;
+  angle += new_pattern->getRandomAngle();
+  new_pattern->angle = angle;
+  active_patterns->push_back(new_pattern);
 }
 
 void Character::shakeScreen(int shake_magnitude, int shake_time)

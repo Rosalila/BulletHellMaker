@@ -594,7 +594,8 @@ See [full config.json attributes](#configjson-attributes).
 | additional_player_hp_change  | `double`     |   | `0`       | Player's hit points through time, use this to apply poison or heal buffs |
 | additional_player_velocity_x | `integer`    |   | `0`       | Player's velocity change, use this to pull or push him or to in conjuction with to `additional_player_velocity_y` to reduce the general velocity |
 | additional_player_velocity_y | `integer`    |   | `0`       | Player's velocity change, use this to push him up or down or to in conjuction with to `additional_player_velocity_x` to reduce the general velocity |
-| aim_player                   | `yes/no`     |   | `no`      | Overrides the bullet angle to now point to the player |
+| aim_player                   | `yes/no`     |   | `no`      | Makes the bullet angle point to the player |
+| aim_player_on_begin          | `yes/no`     |   | `no`      | Makes the bullet angle point to the player position when the bullet was created |
 | angle                        | `integer`    |   | `0`       | Rotation |
 | angle_change                 | `integer`    |   | `0`       | Rotation change through time |
 | ac_frequency                 | `integer`    |   | `0`       | Angle change frequency |

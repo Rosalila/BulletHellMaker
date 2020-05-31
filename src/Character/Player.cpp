@@ -1,4 +1,5 @@
 #include "Character/Player.h"
+#include "Utility/Utility.h"
 
 Player::Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode)
 {
@@ -584,7 +585,29 @@ void Player::logic(int stage_velocity)
 
   bombLogic();
 
-  spellControl(stage_velocity);
+  for (auto pattern : type[current_type])
+  {
+    if (shooting && this->hp != 0)
+    {
+      pattern->updateStateShouting();
+      if (pattern->isReady())
+      {
+        pattern->bullet->playSound((int)(pattern->x + this->x), true);
+        this->addActivePattern(pattern);
+      }
+    }
+    else
+    {
+      pattern->updateStateNotShouting();
+    }
+  }
+
+  for (std::list<Pattern *>::iterator iterator = active_patterns->begin(); iterator != active_patterns->end(); iterator++)
+  {
+    Pattern *active_pattern = (Pattern *)*iterator;
+    active_pattern->logic(stage_velocity);
+  }
+
 
   iteration++;
 
