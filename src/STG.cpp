@@ -486,7 +486,7 @@ void STG::render()
   stage->dibujarBack();
   if (player->hp > 0)
     player->bottomRender();
-  if (enemy->hp > 0)
+  //if (enemy->hp > 0)
     enemy->bottomRender();
   if (player->hp > 0)
     player->topRender();
@@ -703,6 +703,7 @@ void STG::win()
 
   setPlayerWon(true);
   setGameOver(true);
+  enemy->onDefeated();
   setIsFirstWin(old_clears == 0);
 
   if (game_mode != "replay")

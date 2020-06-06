@@ -31,6 +31,8 @@ public:
   virtual void addActivePattern(Pattern *pattern);
   void bottomRender();
   void topRender();
+  void onBulletCancel();
+  void onDefeated();
 };
 
 #endif

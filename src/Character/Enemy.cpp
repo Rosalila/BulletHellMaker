@@ -59,6 +59,15 @@ Enemy::Enemy(std::string name, Player *player, int sound_channel_base, bool is_m
 
   loadFromXML();
 
+  Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
+
+  Node *sounds_node = root_node->getNodeByName("sounds");
+  if (sounds_node)
+  {
+    if (sounds_node->hasAttribute("bullet_cancel"))
+      rosalila()->sound->addSound(this->name + ".bullet_cancel", std::string(assets_directory) + directory + sounds_node->attributes["bullet_cancel"]);
+  }
+
   loadModifiersFromXML();
 }
 
@@ -141,31 +150,7 @@ void Enemy::modifiersControl()
         }
         if (life_at_modifier->variable == "pattern_type")
         {
-          //Reset cooldowns
-          for (int i = 0; i < (int)type[current_type].size(); i++)
-          {
-            type[current_type][i]->state_manager = 0;
-            type[current_type][i]->iteration = 0;
-            type[current_type][i]->state = "startup";
-          }
-
-          //Clean screen
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+200, this->y+150 ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-150, this->y-300 ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+50, this->y-210 ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-60, this->y-30 ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x-190, this->y+200 ));
-          animation_controls.push_back(new AnimationControl("explosion", 5, this->x+100, this->y-80 ));
-          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-200, this->y+200 ));
-          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-200, this->y+200 ));
-          animation_controls.push_back(new AnimationControl("explosion03", 5, this->x-100, this->y+200 ));
-          animation_controls.push_back(new AnimationControl("explosion02", 5, this->x, this->y ));
-          this->bullet_cancel_count += this->active_patterns->size();
-          for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
-            (*i)->hit(this->sound_channel_base + 1, false);
-
+          this->onBulletCancel();
           this->current_type = life_at_modifier->value;
         }
       }
@@ -275,10 +260,16 @@ void Enemy::logic(int stage_velocity, string stage_name)
 
 void Enemy::bottomRender()
 {
-  Character::bottomRender();
+  if (this->hp > 0)
+    Character::bottomRender();
 
   for(auto animation_control : animation_controls)
   {
+    if(animation_control->frames_until_startup > 0)
+    {
+      animation_control->frames_until_startup--;
+      continue;
+    }
     Image *image = this->animation_images[animation_control->name][animation_control->current_frame];
     rosalila()->graphics->drawImage(image,
       animation_control->x - image->getWidth() / 2 + current_screen_shake_x,
@@ -420,4 +411,61 @@ void Enemy::addActivePattern(Pattern *pattern)
   }
   
   active_patterns->push_back(new_pattern);
+}
+
+void Enemy::onBulletCancel()
+{
+  if (rosalila()->sound->soundExists(name + ".bullet_cancel"))
+    rosalila()->sound->playSound(name + ".bullet_cancel", 1, 0, this->x);
+  
+  for (int i = 0; i < (int)type[current_type].size(); i++)
+  {
+    type[current_type][i]->state_manager = 0;
+    type[current_type][i]->iteration = 0;
+    type[current_type][i]->state = "startup";
+  }
+
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+200, this->y+150, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-150, this->y-300, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+50, this->y-210, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-60, this->y-30, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-190, this->y+200, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+100, this->y-80, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-200, this->y+200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-200, this->y+200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-100, this->y+200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, this->x, this->y, 20));
+
+  this->bullet_cancel_count += this->active_patterns->size();
+  for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
+    (*i)->hit(this->sound_channel_base + 1, false);
+}
+
+void Enemy::onDefeated()
+{
+  if (current_state != "destroyed" && rosalila()->sound->soundExists(name + ".destroyed"))
+    rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
+  
+  rosalila()->graphics->screen_shake_effect.set(40, 100, 0, 0);
+  
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+200, this->y+150, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-150, this->y-300, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+120, this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+120, this->y, 10));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+50, this->y-210, 10));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-60, this->y-30, 15));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-190, this->y+200, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+100, this->y-80, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-200, this->y+200, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-200, this->y+200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-100, this->y+200, 40));
+  animation_controls.push_back(new AnimationControl("explosion", 10, this->x, this->y, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x, this->y, 30));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x+50, this->y+20, 20));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x+50, this->y+20, 34));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x-20, this->y-15, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x-5, this->y+30, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 40, this->x-5, this->y, 60));
 }

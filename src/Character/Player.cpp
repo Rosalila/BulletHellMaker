@@ -23,6 +23,8 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->parrying_image = NULL;
   this->parryed_image = NULL;
 
+  this->bomb_channel = -1;
+
   this->life_bar = NULL;
 
   //Sprites animation
@@ -138,12 +140,17 @@ void Player::loadPlayerFromXML()
 
   Node *root_node = rosalila()->parser->getNodes(std::string(assets_directory) + directory + "character.json");
 
+  Node *sounds_node = root_node->getNodeByName("sounds");
+  if (sounds_node)
+  {
+    if (sounds_node->hasAttribute("bomb"))
+      rosalila()->sound->addSound(this->name + ".bomb", std::string(assets_directory) + directory + sounds_node->attributes["bomb"]);
+    if (sounds_node->hasAttribute("dash"))
+      rosalila()->sound->addSound(this->name + ".dash", std::string(assets_directory) + directory + sounds_node->attributes["dash"]);
+  }
+
   if (root_node->hasAttribute("velocity"))
     this->original_velocity = atoi(root_node->attributes["velocity"].c_str());
-  
-  this->dash_velocity = 0;
-  if (root_node->hasAttribute("dash_velocity"))
-    this->dash_velocity = atoi(root_node->attributes["dash_velocity"].c_str());
   
   if (root_node->hasAttribute("primary_weapon_velocity"))
     this->primary_weapon_velocity = atoi(root_node->attributes["primary_weapon_velocity"].c_str());
@@ -154,6 +161,14 @@ void Player::loadPlayerFromXML()
     this->secondary_weapon_velocity = atoi(root_node->attributes["secondary_weapon_velocity"].c_str());
   else
     this->secondary_weapon_velocity = this->original_velocity;
+  
+  this->dash_velocity = 10;
+  Node *dash_node = root_node->getNodeByName("dash");
+  if (dash_node)
+  {
+    if (dash_node->hasAttribute("velocity"))
+      this->dash_velocity = atoi(dash_node->attributes["velocity"].c_str());
+  }
 
   this->current_slow = 0;
   this->max_slow = -1;
@@ -348,33 +363,9 @@ void Player::inputControl()
   bool dash_pressed = !this->dash_button_was_down_last_frame && isDownWrapper("c");
   this->dash_button_was_down_last_frame = isDownWrapper("c");
 
-  if(dash_pressed && isDownWrapper("6")
-      && this->current_state != "dash right"
-      && this->hasState("dash right"))
+  if(dash_pressed)
   {
-    dash_extra_velocity_x = dash_velocity;
-    this->setState("dash right");
-  }
-  if(dash_pressed && isDownWrapper("4")
-      && this->current_state != "dash left"
-      && this->hasState("dash left"))
-  {
-    dash_extra_velocity_x = -dash_velocity;
-    this->setState("dash left");
-  }
-  if(dash_pressed && isDownWrapper("2")
-      && this->current_state != "dash down"
-      && this->hasState("dash down"))
-  {
-    dash_extra_velocity_y = dash_velocity;
-    this->setState("dash down");
-  }
-  if(dash_pressed && isDownWrapper("8")
-      && this->current_state != "dash up"
-      && this->hasState("dash up"))
-  {
-    dash_extra_velocity_y = -dash_velocity;
-    this->setState("dash up");
+    this->onDash();
   }
 
   if( delta_x == 0 && (this->current_state == "right" || this->current_state == "left") && this->hasState("after left/right"))
@@ -525,9 +516,7 @@ void Player::logic(int stage_velocity)
   }
   else
   {
-    if (current_state != "destroyed" && rosalila()->sound->soundExists(name + ".destroyed"))
-      rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
-    this->setState("destroyed");
+    this->onDefeated();
     //this->hitbox.setValues(0,0,0,0,0);
   }
 
@@ -578,9 +567,9 @@ void Player::logic(int stage_velocity)
     slow_in_cooldown = true;
   }
 
-  if(!slow_in_cooldown && isDownWrapper("d"))
+  if(!slow_in_cooldown && isDownWrapper("d") && !this->is_bomb_active)
   {
-    this->activateBomb();
+    this->onBomb();
   }
 
   bombLogic();
@@ -1027,20 +1016,6 @@ bool Player::isOnIntro()
   return this->frame < (int)this->intro_input.size();
 }
 
-void Player::activateBomb()
-{
-  this->current_bomb_image = 0;
-  this->current_bomb_frame = 0;
-  this->is_bomb_active = true;
-  int bomb_duration = this->current_slow/6 + 6;
-  rosalila()->graphics->screen_shake_effect.set(15, bomb_duration, 0, 0);
-}
-
-void Player::disableBomb()
-{
-  this->is_bomb_active = false;
-}
-
 void Player::bombLogic()
 {
   if(this->is_bomb_active)
@@ -1050,7 +1025,7 @@ void Player::bombLogic()
     this->current_slow-=6;
     if(current_slow <= 0)
     {
-      disableBomb();
+      onBombFinished();
     }
 
     current_bomb_frame++;
@@ -1060,5 +1035,69 @@ void Player::bombLogic()
       if(current_bomb_image >= bomb_images.size())
         current_bomb_image = 0;
     }
+  }
+}
+
+void Player::onBomb()
+{
+  if (rosalila()->sound->soundExists(name + ".bomb"))
+    this->bomb_channel = rosalila()->sound->playSound(name + ".bomb", -1, 99, 0);
+
+  this->current_bomb_image = 0;
+  this->current_bomb_frame = 0;
+  this->is_bomb_active = true;
+  int bomb_duration = this->current_slow/6 + 6;
+  rosalila()->graphics->screen_shake_effect.set(15, bomb_duration, 0, 0);
+}
+
+void Player::onBombFinished()
+{
+  this->is_bomb_active = false;
+  if(bomb_channel != -1)
+  {
+    rosalila()->sound->stopSound(this->bomb_channel);
+    this->bomb_channel = -1;
+  }
+}
+
+void Player::onDefeated()
+{
+  if (current_state != "destroyed" && rosalila()->sound->soundExists(name + ".destroyed"))
+    rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
+  this->setState("destroyed");
+}
+
+void Player::onDash()
+{
+  if (rosalila()->sound->soundExists(name + ".dash"))
+    rosalila()->sound->playSound(name + ".dash", 1, 0, this->x);
+  
+  if(isDownWrapper("6")
+      && this->current_state != "dash right"
+      && this->hasState("dash right"))
+  {
+    dash_extra_velocity_x = dash_velocity;
+    this->setState("dash right");
+  }
+  if(isDownWrapper("4")
+      && this->current_state != "dash left"
+      && this->hasState("dash left"))
+  {
+    dash_extra_velocity_x = -dash_velocity;
+    this->setState("dash left");
+  }
+  if(isDownWrapper("2")
+      && this->current_state != "dash down"
+      && this->hasState("dash down"))
+  {
+    dash_extra_velocity_y = dash_velocity;
+    this->setState("dash down");
+  }
+  if(isDownWrapper("8")
+      && this->current_state != "dash up"
+      && this->hasState("dash up"))
+  {
+    dash_extra_velocity_y = -dash_velocity;
+    this->setState("dash up");
   }
 }

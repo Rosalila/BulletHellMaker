@@ -140,7 +140,6 @@ void Character::loadMainXML()
   this->color.blue = 0;
   this->color.alpha = 255;
 
-
   Node *life_bar_node = root_node->getNodeByName("life_bar");
   
   if (life_bar_node)
@@ -208,9 +207,10 @@ void Character::loadMainXML()
   if (sounds_node)
   {
     if (sounds_node->hasAttribute("hit"))
-    {
       rosalila()->sound->addSound(this->name + ".hit", std::string(assets_directory) + directory + sounds_node->attributes["hit"]);
-    }
+
+    if (sounds_node->hasAttribute("destroyed"))
+      rosalila()->sound->addSound(this->name + ".destroyed", std::string(assets_directory) + directory + sounds_node->attributes["destroyed"]);
   }
 
   vector<Node *> sprites_nodes = root_node->getNodesByName("states");

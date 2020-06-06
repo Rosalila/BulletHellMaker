@@ -49,6 +49,9 @@ public:
   Color slow_bar_color;
   Color slow_bar_cooldown_color;
 
+  // Sound Channels
+  int bomb_channel;
+
   //Input control
   bool pressed_1_last_frame, pressed_2_last_frame, pressed_3_last_frame, pressed_4_last_frame,
     pressed_6_last_frame, pressed_7_last_frame, pressed_8_last_frame, pressed_9_last_frame;
@@ -137,9 +140,11 @@ public:
   bool isDownWrapper(string button_map);
   void exit();
   bool isOnIntro();
-  void activateBomb();
-  void disableBomb();
   void bombLogic();
+  void onBomb();
+  void onBombFinished();
+  void onDash();
+  void onDefeated();
 };
 
 #endif

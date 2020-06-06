@@ -41,6 +41,7 @@ public:
     void addSound(std::string variable,std::string value);
     bool soundExists(std::string variable);
     int playSound(std::string variable, int channel,int loops, int panning);
+    void stopSound(int channel);
     void playMusic(std::string variable,int loops);
     void stopMusic();
     int getMusicVolume();
