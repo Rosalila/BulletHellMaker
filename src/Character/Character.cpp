@@ -55,6 +55,14 @@ Character::~Character()
     }
   }
 
+  for (map<string, vector<Image *>>::iterator i = animation_images.begin(); i != animation_images.end(); i++)
+  {
+    for (int j = 0; j < (int)(*i).second.size(); j++)
+    {
+      delete (*i).second[j];
+    }
+  }
+
   for (map<string, Bullet *>::iterator i = bullets.begin(); i != bullets.end(); i++)
   {
     delete (*i).second;
@@ -918,7 +926,7 @@ void Character::topRender()
 
   rosalila()->graphics->drawRectangle(life_bar_x, life_bar_y,
 	  (int)current_life_bar_width, life_bar_rect_height,
-      0, color.red, color.blue, color.green, 255);
+      0, color.red, color.green, color.blue, 255);
   
   if(this->life_bar)
   {

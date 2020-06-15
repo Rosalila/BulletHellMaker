@@ -49,6 +49,11 @@ public:
   Color slow_bar_color;
   Color slow_bar_cooldown_color;
 
+  // Jump tutorial
+  Image* jump_tutorial_image;
+  bool jump_tutorial_was_pressed;
+  int jump_tutorial_frame;
+
   // Sound Channels
   int bomb_channel;
 
@@ -122,6 +127,13 @@ public:
 
   // Shadow
   std::list<ShadowControl*> shadows;
+
+  // Hitbox animation
+  int hitbox_animation_current_image = 0;
+  int hitbox_animation_velocity;
+  int hitbox_animation_x;
+  int hitbox_animation_y;
+  std::vector<Image *> hitbox_animation_vector;
 
   Player(std::string name, int sound_channel_base, vector<string> intro_input, vector<string> replay_input, string game_mode);
   ~Player();

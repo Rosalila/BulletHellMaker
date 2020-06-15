@@ -108,6 +108,10 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->is_bomb_active = false;
   
   this->dash_button_was_down_last_frame = false;
+
+  this->jump_tutorial_image = rosalila()->graphics->getImage(std::string(assets_directory) + "misc/jump.png");
+  this->jump_tutorial_was_pressed = false;
+  this->jump_tutorial_frame = 0;
 }
 
 Player::~Player()
@@ -131,6 +135,16 @@ Player::~Player()
   for (int i = 0; i < (int)parry_sprites.size(); i++)
   {
     delete parry_sprites[i];
+  }
+
+  for (int i = 0; i < (int)bomb_images.size(); i++)
+  {
+    delete bomb_images[i];
+  }
+
+  for (int i = 0; i < (int)hitbox_animation_vector.size(); i++)
+  {
+    delete hitbox_animation_vector[i];
   }
 }
 
@@ -770,6 +784,35 @@ void Player::topRender()
                                           parry_hitboxes[i]->getWidth(), parry_hitboxes[i]->getHeight(),
                                           parry_hitboxes[i]->getAngle(), 100, 0, 0, 100);
     }
+  
+  if(hitbox_animation_vector.size()>0)
+  {
+    this->hitbox_animation_vector[hitbox_animation_current_image]->color_filter.alpha = 255;
+    rosalila()->graphics->drawImage(hitbox_animation_vector[hitbox_animation_current_image],
+                                    this->x + this->hitbox_animation_x,
+                                    this->y + this->hitbox_animation_y);
+    if(this->frame % hitbox_animation_velocity == 0)
+    {
+      hitbox_animation_current_image++;
+      if(hitbox_animation_current_image >= hitbox_animation_vector.size())
+        hitbox_animation_current_image = 0;
+    }
+  }
+
+  if(!jump_tutorial_was_pressed)
+  {
+    if(this->frame % 25 == 0)
+    {
+      jump_tutorial_frame++;
+      if(jump_tutorial_frame == 2)
+        jump_tutorial_frame = 0;
+    }
+    if(jump_tutorial_frame == 1)
+    {
+      jump_tutorial_image->color_filter.alpha = 255;
+      rosalila()->graphics->drawImage(jump_tutorial_image, 50,750);
+    }
+  }
 }
 
 void Player::hit(int damage)
@@ -803,6 +846,27 @@ void Player::loadFromXML()
   this->shield_fade = 0;
   this->proration = 0;
   this->shield_image = NULL;
+
+  
+  Node* hitbox_animation_node = root_node->getNodeByName("hitbox_animation");
+  this->hitbox_animation_velocity = 0;
+  if (hitbox_animation_node->hasAttribute("animation_velocity"))
+    this->hitbox_animation_velocity = atoi(hitbox_animation_node->attributes["animation_velocity"].c_str());
+  
+  this->hitbox_animation_x = 0;
+  if (hitbox_animation_node->hasAttribute("x"))
+    this->hitbox_animation_x = atoi(hitbox_animation_node->attributes["x"].c_str());
+
+  this->hitbox_animation_y = 0;
+  if (hitbox_animation_node->hasAttribute("y"))
+    this->hitbox_animation_y = atoi(hitbox_animation_node->attributes["y"].c_str());
+
+  vector<Node *> hitbox_animation_sprites_nodes = hitbox_animation_node->getNodesByName("sprites");
+  for (int i = 0; i < (int)hitbox_animation_sprites_nodes.size(); i++)
+  {
+    string sprite_path = hitbox_animation_sprites_nodes[i]->attributes["path"];
+    hitbox_animation_vector.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_path));
+  }
 
   Node *shield_node = root_node->getNodeByName("shield");
 
@@ -1069,8 +1133,10 @@ void Player::onDefeated()
 
 void Player::onDash()
 {
+  this->jump_tutorial_was_pressed = true;
+
   if (rosalila()->sound->soundExists(name + ".dash"))
-    rosalila()->sound->playSound(name + ".dash", 1, 0, this->x);
+    rosalila()->sound->playSound(name + ".dash", -1, 0, this->x);
   
   if(isDownWrapper("6")
       && this->current_state != "dash right"
