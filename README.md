@@ -93,20 +93,6 @@ See [full character.json attributes](#characterjson-attributes).
       "width": "1",
       "height": "10",
       "angle": "0"
-    },
-    {
-      "x": "-10",
-      "y": "-5",
-      "width": "1",
-      "height": "10",
-      "angle": "60"
-    },
-    {
-      "x": "-1",
-      "y": "-0",
-      "width": "1",
-      "height": "10",
-      "angle": "-60"
     }
   ]
 }
@@ -382,10 +368,6 @@ See [full config.json attributes](#configjson-attributes).
               "key": "x"
             },
             {
-              "name": "c",
-              "key": "c"
-            },
-            {
               "name": "back",
               "key": "q"
             }
@@ -417,10 +399,6 @@ See [full config.json attributes](#configjson-attributes).
             {
               "name": "b",
               "key": "2"
-            },
-            {
-              "name": "c",
-              "key": "3"
             },
             {
               "name": "back",
