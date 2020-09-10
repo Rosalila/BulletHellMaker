@@ -13,7 +13,7 @@ STG::STG(Player *player, Enemy *enemy, Stage *stage, string game_mode, int curre
 
   this->api_state = "";
 
-  this->score = -1;
+  setScore(0);
 
   this->game_over_timeout = 128;
 
@@ -323,6 +323,7 @@ bool STG::logic()
           //rosalila()->graphics->point_explosion_effect->explode(p->x, p->y, Color(255, 255, 255, 200), p->bullet->damage + damage_level * 5);
           p->hit(player->sound_channel_base + 1, false);
           enemy->hit(p->bullet->damage + damage_level);
+          setScore(getScore()+2);
           enemy->shakeScreen(p->bullet->damage + damage_level * 3, p->bullet->damage + damage_level * 2);
           if (rosalila()->sound->soundExists(enemy->name + ".hit"))
             rosalila()->sound->playSound(enemy->name + ".hit", 1, 0, enemy->x);
@@ -494,6 +495,8 @@ void STG::render()
     enemy->topRender();
 
   stage->dibujarFront();
+
+  rosalila()->graphics->drawText(400,-20,rosalila()->utility->toString(getScore()));
 
   if (getGameOver())// && score != -1 && game_mode != "replay")
   {
@@ -710,13 +713,13 @@ void STG::win()
     rosalila()->api_integrator->unlockAchievement("B");
   double milliseconds = SDL_GetTicks() - initial_ticks;
   double hp_penalty = (1.0 + ((double)player->max_hp - (double)player->hp) / 100.0);
-  score = milliseconds * hp_penalty;
+  setScore(getScore() + milliseconds * hp_penalty);
   enemy->hp = 0;
   //rosalila()->graphics->screen_shake_effect.set(50,20,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
   rosalila()->sound->playSound("you win", 2, 0, 0);
   enemy->deleteActivePatterns();
 
-  if (game_mode != "replay" && (score < current_player_best_score || current_player_best_score == -1))
+  if (game_mode != "replay" && (getScore() < current_player_best_score || current_player_best_score == -1))
   {
     if (rosalila()->api_integrator->isUsingApi())
       uploadScore();
@@ -739,7 +742,7 @@ void STG::uploadScore()
   rosalila()->utility->writeLogLine("uploading score");
 
   if (game_mode != "replay")
-    rosalila()->api_integrator->setScore(stage->name, score);
+    rosalila()->api_integrator->setScore(stage->name, getScore());
 
   rosalila()->graphics->notification_handler.notifications.push_back(
       new Notification(getLoadingImage(), rosalila()->graphics->screen_width / 2 - getLoadingImage()->getWidth() / 2,

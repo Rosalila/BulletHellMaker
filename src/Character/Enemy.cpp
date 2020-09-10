@@ -437,7 +437,8 @@ void Enemy::onBulletCancel()
   animation_controls.push_back(new AnimationControl("explosion", 5, this->x-200, this->y+200, 30));
   animation_controls.push_back(new AnimationControl("explosion", 5, this->x-100, this->y+200, 30));
   animation_controls.push_back(new AnimationControl("explosion", 5, this->x, this->y, 20));
-
+  
+  setScore(getScore()+this->active_patterns->size()+5);
   this->bullet_cancel_count += this->active_patterns->size();
   for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
     (*i)->hit(this->sound_channel_base + 1, false);

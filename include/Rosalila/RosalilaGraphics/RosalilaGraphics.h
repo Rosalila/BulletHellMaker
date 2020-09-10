@@ -108,5 +108,16 @@ class ROSALILA_DLL RosalilaGraphics
     void frameCap();
     void clearScreen(Color color);
     void screenshot(int x, int y, int w, int h, string filename);
+
+    //Calculate space
+    int mSpace = 0;
+    //Calculate new line
+    int mNewLine = 0;
+    Image* image_font;
+    SDL_Rect mChars[ 256 ];
+
+    void initImageFont();
+    void drawText(int x, int y, std::string text);
+    void drawCroppedImage (Image* texture, int x, int y, int crop_x, int crop_y, int crop_w, int crop_h);
 };
 #endif

@@ -177,11 +177,14 @@ void Player::loadPlayerFromXML()
     this->secondary_weapon_velocity = this->original_velocity;
   
   this->dash_velocity = 10;
+  this->dash_friction = 10;
   Node *dash_node = root_node->getNodeByName("dash");
   if (dash_node)
   {
     if (dash_node->hasAttribute("velocity"))
       this->dash_velocity = atoi(dash_node->attributes["velocity"].c_str());
+    if (dash_node->hasAttribute("friction"))
+      this->dash_friction = atoi(dash_node->attributes["friction"].c_str());
   }
 
   this->current_slow = 0;
@@ -424,13 +427,29 @@ void Player::inputControl()
     this->y = rosalila()->graphics->screen_height;
 
   if(this->dash_extra_velocity_x < 0)
-    this->dash_extra_velocity_x++;
+  {
+    this->dash_extra_velocity_x += this->dash_friction;
+    if(this->dash_extra_velocity_x > 0)
+      this->dash_extra_velocity_x = 0;
+  }
   if(this->dash_extra_velocity_x > 0)
-    this->dash_extra_velocity_x--;
+  {
+    this->dash_extra_velocity_x-=this->dash_friction;
+    if(this->dash_extra_velocity_x < 0)
+      this->dash_extra_velocity_x = 0;
+  }
   if(this->dash_extra_velocity_y < 0)
-    this->dash_extra_velocity_y++;
+  {
+    this->dash_extra_velocity_y+=this->dash_friction;
+    if(this->dash_extra_velocity_y > 0)
+      this->dash_extra_velocity_y = 0;
+  }
   if(this->dash_extra_velocity_y > 0)
-    this->dash_extra_velocity_y--;
+  {
+    this->dash_extra_velocity_y-=this->dash_friction;
+    if(this->dash_extra_velocity_y < 0)
+      this->dash_extra_velocity_y = 0;
+  }
 
   if (isDownWrapper("a"))
   {

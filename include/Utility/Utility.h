@@ -35,4 +35,7 @@ vector<int>* getColorPaletteR();
 vector<int>* getColorPaletteG();
 vector<int>* getColorPaletteB();
 
+void setScore(int score);
+int getScore();
+
 #endif

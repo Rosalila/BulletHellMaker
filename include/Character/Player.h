@@ -71,6 +71,7 @@ public:
   //Dash
   int dash_last_tap_frame;
   int dash_velocity;
+  int dash_friction;
   int dash_extra_velocity_x, dash_extra_velocity_y;
 
   //Shield

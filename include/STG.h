@@ -20,8 +20,6 @@ public:
     
     int frame;
 
-    int score;
-
     //Image*image_upload_error;
     Image* you_win;
     Image* you_lose;

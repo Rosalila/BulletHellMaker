@@ -6,6 +6,7 @@ bool slow_enabled = false;
 bool game_over;
 bool player_won;
 bool is_first_win = false;
+int current_score = 0;
 
 Image *loading_image;
 Image *error_image;
@@ -198,4 +199,14 @@ vector<int> *getColorPaletteG()
 vector<int> *getColorPaletteB()
 {
   return color_palette_b;
+}
+
+void setScore(int score)
+{
+  current_score = score;
+}
+
+int getScore()
+{
+  return current_score;
 }
