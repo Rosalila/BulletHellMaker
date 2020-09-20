@@ -14,14 +14,9 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->current_state = "start";
   this->current_type = "primary";
   this->visible = true;
-  this->charge_ready = false;
   this->frame = 0;
-  this->charging_sound_channel = -1;
   this->slow_bar = NULL;
   this->shield_image = NULL;
-  this->charge_image = NULL;
-  this->parrying_image = NULL;
-  this->parryed_image = NULL;
 
   this->bomb_channel = -1;
 
@@ -72,21 +67,6 @@ Player::Player(std::string name, int sound_channel_base, vector<string> intro_in
   this->dash_last_tap_frame = 0;
   this->dash_extra_velocity_x = this->dash_extra_velocity_y = 0;
 
-  //Parry
-  this->current_parry_frame = parry_duration + 1;
-
-  //Acceleration
-  this->invulnerable_frames_left = 0;
-
-  parries_left = 3;
-  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/1.png"));
-  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/2.png"));
-  //parry_sprites.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/parry/3.png"));
-  //Charge
-  //rosalila()->sound->addSound("charge ready", std::string(assets_directory) + directory + "sounds/charge_ready.ogg");
-  //rosalila()->sound->addSound("charging", std::string(assets_directory) + directory + "sounds/charging.ogg");
-  //charging_sound_channel = rosalila()->sound->playSound("charging", 21, -1, this->x);
-
   // buffs and debuffs
   this->additional_velocity_x = 0;
   this->additional_velocity_y = 0;
@@ -120,22 +100,6 @@ Player::~Player()
     delete this->slow_bar;
   if (this->shield_image)
     delete this->shield_image;
-  if (this->charge_image)
-    delete this->charge_image;
-  if (this->parrying_image)
-    delete this->parrying_image;
-  if (this->parryed_image)
-    delete this->parryed_image;
-
-  for (int i = 0; i < (int)parry_hitboxes.size(); i++)
-  {
-    delete parry_hitboxes[i];
-  }
-
-  for (int i = 0; i < (int)parry_sprites.size(); i++)
-  {
-    delete parry_sprites[i];
-  }
 
   for (int i = 0; i < (int)bomb_images.size(); i++)
   {
@@ -301,59 +265,53 @@ void Player::inputControl()
     current_input_replay_store += "6";
   }
 
-  int velocity_boost = invulnerable_frames_left;
-
   double delta_y = 0;
   double delta_x = 0;
 
   double current_velocity = velocity;
   if(velocity_override != 0)
-  {
     current_velocity = velocity_override;
-  }
 
   if (up_pressed && !down_pressed && !left_pressed && !right_pressed) //8
   {
-    delta_y = -(current_velocity + velocity_boost) / getSlowdown();
+    delta_y = -current_velocity / getSlowdown();
   }
   if (!up_pressed && down_pressed && !left_pressed && !right_pressed) //2
   {
-    delta_y = (current_velocity + velocity_boost) / getSlowdown();
+    delta_y = current_velocity / getSlowdown();
   }
-
   if (!up_pressed && !down_pressed && left_pressed && !right_pressed) //4
   {
-    delta_x = -(current_velocity + velocity_boost) / getSlowdown();
+    delta_x = -current_velocity / getSlowdown();
   }
-
   if (!up_pressed && !down_pressed && !left_pressed && right_pressed) //6
   {
-    delta_x = (current_velocity + velocity_boost) / getSlowdown();
+    delta_x = current_velocity / getSlowdown();
   }
  
   if (!up_pressed && down_pressed && left_pressed && !right_pressed) //1
   {
     this->pressed_1_last_frame = true;
-    delta_x = cos(225 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
-    delta_y = -sin(225 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
+    delta_x = cos(225 * PI / 180) * current_velocity / getSlowdown();
+    delta_y = -sin(225 * PI / 180) * current_velocity / getSlowdown();
   }
   if (!up_pressed && down_pressed && !left_pressed && right_pressed) //3
   {
     this->pressed_3_last_frame = true;
-    delta_x = cos(315 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
-    delta_y = -sin(315 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
+    delta_x = cos(315 * PI / 180) * current_velocity / getSlowdown();
+    delta_y = -sin(315 * PI / 180) * current_velocity / getSlowdown();
   }
   if (up_pressed && !down_pressed && left_pressed && !right_pressed) //7
   {
     this->pressed_7_last_frame = true;
-    delta_x = cos(135 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
-    delta_y = -sin(135 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
+    delta_x = cos(135 * PI / 180) * current_velocity / getSlowdown();
+    delta_y = -sin(135 * PI / 180) * current_velocity / getSlowdown();
   }
   if (up_pressed && !down_pressed && !left_pressed && right_pressed) //9
   {
     this->pressed_9_last_frame = true;
-    delta_x = cos(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
-    delta_y = -sin(45 * PI / 180) * (current_velocity + velocity_boost) / getSlowdown();
+    delta_x = cos(45 * PI / 180) * current_velocity / getSlowdown();
+    delta_y = -sin(45 * PI / 180) * current_velocity / getSlowdown();
   }
 
   if(dash_extra_velocity_x == 0 && dash_extra_velocity_y == 0
@@ -410,8 +368,10 @@ void Player::inputControl()
   this->x += delta_x + additional_velocity_x + this->dash_extra_velocity_x;
   this->y += delta_y + additional_velocity_y + this->dash_extra_velocity_y;
 
-  if(player_was_in_bounds && !this->stage->playerIsInBounds()
-      && (this->dash_extra_velocity_x == 0 && this->dash_extra_velocity_y == 0) )
+  if(player_was_in_bounds
+      && !this->stage->playerIsInBounds()
+      && (this->dash_extra_velocity_x == 0 && this->dash_extra_velocity_y == 0)
+      && !isSlowEnabled())
   {
     this->x = last_x;
     this->y = last_y;
@@ -457,43 +417,6 @@ void Player::inputControl()
     this->shooting = true;
     this->current_type = "primary";
     this->velocity = this->primary_weapon_velocity;
-
-    /*
-        if(!this->shooting && !isParrying() && parries_left>0)
-        {
-            current_parry_frame=0;
-        }
-        if(max_charge!=0 && current_charge==max_charge)
-        {
-            if(!isOnIntro())
-            {
-                int counter = rosalila()->api_integrator->getStat("TotalCharges") + 1;
-                if(game_mode!="replay")rosalila()->api_integrator->setStat("TotalCharges",counter);
-
-                if(counter >= 3)
-                {
-                    if(game_mode!="replay")rosalila()->api_integrator->unlockAchievement("Charge1");
-                }
-                if(counter >= 20)
-                {
-                    if(game_mode!="replay")rosalila()->api_integrator->unlockAchievement("Charge2");
-                }
-                if(counter >= 100)
-                {
-                    if(game_mode!="replay")rosalila()->api_integrator->unlockAchievement("Charge3");
-                }
-                if(counter >= 200)
-                {
-                    if(game_mode!="replay")rosalila()->api_integrator->unlockAchievement("Charge4");
-                }
-            }
-
-            std::vector<Pattern*> patterns=type["bomb"];
-            patterns[0]->bullet->playSound(patterns[0]->x + this->x, true);
-            this->addActivePattern(patterns[0]);
-        }
-        current_charge=0;
-        */
   }else if (isDownWrapper("b"))
   {
     current_input_replay_store += "b";
@@ -522,26 +445,6 @@ void Player::inputControl()
 
 void Player::logic(int stage_velocity)
 {
-  current_parry_frame++;
-
-  invulnerable_frames_left -= 1;
-  if (invulnerable_frames_left < 0)
-    invulnerable_frames_left = 0;
-
-  if (!shooting)
-  {
-    invulnerable_frames_left = 0;
-  }
-
-  if (invulnerable_frames_left > 0)
-  {
-    enableSlow();
-  }
-  else
-  {
-    disableSlow();
-  }
-
   animationControl();
   if (this->hp != 0)
   {
@@ -550,12 +453,12 @@ void Player::logic(int stage_velocity)
   else
   {
     this->onDefeated();
-    //this->hitbox.setValues(0,0,0,0,0);
   }
 
   // Die if out of bounds
   if(!getGameOver()
     && !this->stage->playerIsInBounds()
+    && !isSlowEnabled()
     && this->current_state != "dash up"
     && this->current_state != "dash down"
     && this->current_state != "dash left"
@@ -615,7 +518,7 @@ void Player::logic(int stage_velocity)
       if (pattern->isReady())
       {
         pattern->bullet->playSound((int)(pattern->x + this->x), true);
-        this->addActivePattern(pattern);
+        this->addActivePattern(pattern, this->x, this->y);
       }
     }
     else
@@ -633,33 +536,10 @@ void Player::logic(int stage_velocity)
 
   iteration++;
 
-  //current_color_effect_a = (255*hp)/max_hp;
-
   current_shield -= shield_fade;
   if (current_shield < 0)
     current_shield = 0;
 
-  current_charge += charge_velocity;
-  if (current_charge >= max_charge)
-  {
-    current_charge = max_charge;
-    if (!charge_ready)
-    {
-      //rosalila()->sound->playSound("charge ready", -1, 0, this->x);
-    }
-    charge_ready = true;
-  }
-  else
-  {
-    charge_ready = false;
-  }
-
-/*
-  if (!charge_ready && !shooting && !getGameOver())
-    Mix_Volume(charging_sound_channel, 128);
-  else
-    Mix_Volume(charging_sound_channel, 0);
-  */
   for(std::map < /*current state*/ std::string, /*trigger validation*/ std::map< std::string, std::string > >::iterator i = state_triggers.begin();
         i != state_triggers.end();
         i++)
@@ -730,28 +610,6 @@ void Player::bottomRender()
                                         this->y - shield_image->getHeight() / 2 + current_screen_shake_y);
     }
   }
-/*
-  if (current_charge > 0)
-  {
-    int transparency_divider = 1;
-    if (getGameOver())
-      transparency_divider = 8;
-
-    int charge_transparency_effect = 255;
-    if (charge_ready)
-      charge_transparency_effect = (frame * 10) % 255;
-
-    if (charge_image)
-      rosalila()->graphics->draw2DImage(charge_image,
-                                        charge_image->getWidth(), charge_image->getHeight() * ((double)current_charge / (double)max_charge),
-                                        this->x + charge_sprite_x,
-                                        this->y + charge_sprite_y - charge_image->getHeight() * ((double)current_charge / (double)max_charge) / 2,
-                                        1.0,
-                                        0.0,
-                                        false,
-                                        Color(255, 255, 255, charge_transparency_effect / transparency_divider));
-  }
-*/
 }
 
 void Player::topRender()
@@ -774,35 +632,6 @@ void Player::topRender()
       (int)current_slow_bar_width, slow_bar_rect_height,
         0, slow_bar_cooldown_color.red, slow_bar_cooldown_color.green, slow_bar_cooldown_color.blue, slow_bar_cooldown_color.alpha);
   }
-
-  if (isParrying() && parries_left >= 1)
-  {
-    Image *image = parry_sprites[parries_left - 1];
-    rosalila()->graphics->drawImage(image,
-                                      this->x + parrying_x,
-                                      this->y + parrying_y);
-  }
-
-  if (parrying_image != NULL && false)
-    if (isParrying())
-      rosalila()->graphics->drawImage(parrying_image,
-                                        this->x + parrying_x,
-                                        this->y + parrying_y);
-
-  if (parryed_image != NULL)
-    if (invulnerable_frames_left > 0)
-      rosalila()->graphics->drawImage(parryed_image,
-                                        this->x + parryed_x,
-                                        this->y + parryed_y);
-
-  if (rosalila()->receiver->isKeyDown(SDLK_h))
-    for (int i = 0; i < (int)parry_hitboxes.size(); i++)
-    {
-      rosalila()->graphics->drawRectangle(parry_hitboxes[i]->getX() + x,
-                                          parry_hitboxes[i]->getY() + y,
-                                          parry_hitboxes[i]->getWidth(), parry_hitboxes[i]->getHeight(),
-                                          parry_hitboxes[i]->getAngle(), 100, 0, 0, 100);
-    }
   
   if(hitbox_animation_vector.size()>0)
   {
@@ -911,160 +740,7 @@ void Player::loadFromXML()
       this->shield_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + shield_node->attributes["sprite"]);
     }
   }
-
-  charge_image = NULL;
-  current_charge = 0;
-  max_charge = 0;
-  charge_velocity = 0;
-  charge_sprite_x = 0;
-  charge_sprite_y = 0;
-
-  Node *charge_node = root_node->getNodeByName("Charge");
-
-  if (charge_node)
-  {
-    if (charge_node->hasAttribute("max_charge"))
-    {
-      this->max_charge = atoi(charge_node->attributes["max_charge"].c_str());
-    }
-
-    if (charge_node->hasAttribute("charge_velocity"))
-    {
-      this->charge_velocity = atoi(charge_node->attributes["charge_velocity"].c_str());
-    }
-
-    if (charge_node->hasAttribute("x"))
-    {
-      this->charge_sprite_x = atoi(charge_node->attributes["x"].c_str());
-    }
-
-    if (charge_node->hasAttribute("y"))
-    {
-      this->charge_sprite_y = atoi(charge_node->attributes["y"].c_str());
-    }
-
-    if (charge_node->hasAttribute("sprite"))
-    {
-      this->charge_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + charge_node->attributes["sprite"]);
-    }
-  }
-
-  this->parry_duration = 0;
-
-  this->parrying_image = NULL;
-  this->parrying_x = 0;
-  this->parrying_y = 0;
-  this->parryed_image = NULL;
-  this->parryed_x = 0;
-  this->parryed_y = 0;
-
-  Node *parry_node = root_node->getNodeByName("parry");
-
-  if (parry_node)
-  {
-    if (parry_node->hasAttribute("duration"))
-    {
-      this->parry_duration = atoi(parry_node->attributes["duration"].c_str());
-    }
-
-    if (parry_node->hasAttribute("sound"))
-    {
-      std::string sprites_sound = parry_node->attributes["sound"];
-      rosalila()->sound->addSound(name + ".parry", std::string(assets_directory) + directory + sprites_sound);
-    }
-
-    Node *parrying_node = parry_node->getNodeByName("Parrying");
-
-    if (parrying_node)
-    {
-      if (parrying_node->hasAttribute("sprite"))
-      {
-        this->parrying_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + parrying_node->attributes["sprite"]);
-      }
-      if (parrying_node->hasAttribute("x"))
-      {
-        this->parrying_x = atoi(parrying_node->attributes["x"].c_str());
-      }
-      if (parrying_node->hasAttribute("y"))
-      {
-        this->parrying_y = atoi(parrying_node->attributes["y"].c_str());
-      }
-    }
-
-    Node *parryed_node = parry_node->getNodeByName("parryed");
-
-    if (parryed_node)
-    {
-      if (parryed_node->hasAttribute("sprite"))
-      {
-        this->parryed_image = rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + parryed_node->attributes["sprite"]);
-      }
-      if (parryed_node->hasAttribute("x"))
-      {
-        this->parryed_x = atoi(parryed_node->attributes["x"].c_str());
-      }
-      if (parryed_node->hasAttribute("y"))
-      {
-        this->parryed_y = atoi(parryed_node->attributes["y"].c_str());
-      }
-    }
-
-    vector<Node *> hitboxes_nodes = parry_node->getNodesByName("hitboxes");
-
-    for (int i = 0; i < (int)hitboxes_nodes.size(); i++)
-    {
-      int hitbox_x = atoi(hitboxes_nodes[i]->attributes["x"].c_str());
-      int hitbox_y = atoi(hitboxes_nodes[i]->attributes["y"].c_str());
-      int hitbox_width = atoi(hitboxes_nodes[i]->attributes["width"].c_str());
-      int hitbox_height = atoi(hitboxes_nodes[i]->attributes["height"].c_str());
-      int hitbox_angle = atoi(hitboxes_nodes[i]->attributes["angle"].c_str());
-      Hitbox *hitbox = new Hitbox(hitbox_x, hitbox_y, hitbox_width, hitbox_height, hitbox_angle);
-      this->parry_hitboxes.push_back(hitbox);
-    }
-  }
-
   delete root_node;
-}
-
-bool Player::isParrying()
-{
-  return current_parry_frame < parry_duration;
-}
-
-bool Player::isInvulnerable()
-{
-  return invulnerable_frames_left > 0;
-}
-
-void Player::parry(bool infinite_parries)
-{
-  if (invulnerable_frames_left == 0)
-  {
-    invulnerable_frames_left = 15;
-    if (!infinite_parries)
-    {
-      parries_left -= 1;
-    }
-  }
-  if (rosalila()->sound->soundExists(this->name + ".parry"))
-  {
-    rosalila()->sound->playSound(this->name + ".parry", sound_channel_base + 1, 0, this->x);
-  }
-}
-
-bool Player::collidesParry(Hitbox hitbox, int hitbox_x, int hitbox_y, float hitbox_angle)
-{
-  if (!visible)
-    return false;
-  for (int i = 0; i < (int)parry_hitboxes.size(); i++)
-    if (parry_hitboxes[i]->getPlacedHitbox(this->x, this->y).collides(hitbox))
-      return true;
-  return false;
-}
-
-void Player::exit()
-{
-  //Mix_Volume(charging_sound_channel, 0);
 }
 
 bool Player::isDownWrapper(string button_map)

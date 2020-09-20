@@ -184,7 +184,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
       if (pattern->isReady())
       {
         pattern->bullet->playSound((int)(pattern->x + this->x), true);
-        this->addActivePattern(pattern);
+        this->addActivePattern(pattern, this->x, this->y);
       }
     }
     else
@@ -386,15 +386,16 @@ void Enemy::loadModifiersFromXML()
   delete root_node;
 }
 
-void Enemy::addActivePattern(Pattern *pattern)
+void Enemy::addActivePattern(Pattern *pattern, int new_pattern_x, int new_pattern_y)
 {
   if (getGameOver())
     return;
-  Pattern *new_pattern = new Pattern(pattern, (int)this->x, (int)this->y);
+  Pattern *new_pattern = new Pattern(pattern, new_pattern_x, new_pattern_y);
   float angle = new_pattern->angle;
   angle += new_pattern->getRandomAngle();
 
   new_pattern->angle = angle;
+  new_pattern->homing_angle = angle;
 
   if (new_pattern->getAimPlayer())
   {
@@ -441,7 +442,13 @@ void Enemy::onBulletCancel()
   setScore(getScore()+this->active_patterns->size()+5);
   this->bullet_cancel_count += this->active_patterns->size();
   for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
-    (*i)->hit(this->sound_channel_base + 1, false);
+  {
+    if((*i)->bullet->name != "reward")
+    {
+      this->addActivePattern(this->type["reward"][0], (*i)->x, (*i)->y);
+      (*i)->hit(this->sound_channel_base + 1, false);
+    }
+  }
 }
 
 void Enemy::onDefeated()

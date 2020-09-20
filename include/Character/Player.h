@@ -33,9 +33,11 @@ class Player : public Character
 public:
   Character* enemy;
   Stage* stage;
-  //Slow bar variables
   string game_mode;
+  //Slow bar variables
   Image *slow_bar;
+  int current_slow;
+  int max_slow;
   int slow_decrement;
   int slow_increment;
   int slow_cooldown_increment;
@@ -81,31 +83,7 @@ public:
   double proration;
   Image *shield_image;
 
-  //Charge
-  int max_charge;
-  int charge_velocity;
-  int charge_sprite_x;
-  int charge_sprite_y;
-  Image *charge_image;
-  bool charge_ready;
-  int charging_sound_channel;
-
-  //Parry
-  int current_parry_frame;
-  int parry_duration;
-  Image *parrying_image;
-  int parrying_x, parrying_y;
-  Image *parryed_image;
-  int parryed_x, parryed_y;
-  vector<Hitbox *> parry_hitboxes;
-
-  vector<Image *> parry_sprites;
-
   int frame;
-
-  int parries_left;
-  int invulnerable_frames_left;
-  int current_charge;
 
   vector<string> intro_input;
   vector<string> replay_input;
@@ -144,14 +122,9 @@ public:
   void logic(int stage_velocity);
   double getShieldPercentage();
   void hit(int damage);
-  bool isParrying();
-  bool isInvulnerable();
-  void parry(bool infinite_parries);
-  bool collidesParry(Hitbox hitbox, int hitbox_x, int hitbox_y, float hitbox_angle);
   void bottomRender();
   void topRender();
   bool isDownWrapper(string button_map);
-  void exit();
   bool isOnIntro();
   void bombLogic();
   void onBomb();

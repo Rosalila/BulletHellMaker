@@ -28,7 +28,7 @@ public:
   void loadModifiersFromXML();
   void logic(int stage_velocity, string stage_name);
   void modifiersControl();
-  virtual void addActivePattern(Pattern *pattern);
+  virtual void addActivePattern(Pattern *pattern, int new_pattern_x, int new_pattern_y);
   void bottomRender();
   void topRender();
   void onBulletCancel();

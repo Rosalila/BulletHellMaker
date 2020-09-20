@@ -79,7 +79,7 @@ void Layer::modifiersControl()
 }
 
 bool Layer::playerIsInBounds(Player* player)
-{
+{  
   int image_height = 0;
   if(layer_frames.size() > 0)
     image_height = layer_frames[0]->height;

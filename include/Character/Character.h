@@ -52,8 +52,6 @@ public:
   std::list<AnimationControl*> animation_controls;
 
   //Life bar variables
-  int current_slow;
-  int max_slow;
   int life_bar_x;
   int life_bar_y;
   int life_bar_rect_offset_x;
@@ -103,7 +101,7 @@ public:
   Pattern *loadPatternXML(Node *pattern_node);
 
   void animationControl();
-  virtual void addActivePattern(Pattern *pattern);
+  virtual void addActivePattern(Pattern *pattern, int new_pattern_x, int new_pattern_y);
 
   void bottomRender();
   void topRender();

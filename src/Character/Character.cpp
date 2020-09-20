@@ -970,9 +970,9 @@ void Character::hit(int damage)
     hp = 0;
 }
 
-void Character::addActivePattern(Pattern *pattern)
+void Character::addActivePattern(Pattern *pattern, int new_pattern_x, int new_pattern_y)
 {
-  Pattern *new_pattern = new Pattern(pattern, (int)this->x, (int)this->y);
+  Pattern *new_pattern = new Pattern(pattern, new_pattern_x, new_pattern_y);
   float angle = new_pattern->angle;
   angle += new_pattern->getRandomAngle();
   new_pattern->angle = angle;
@@ -991,7 +991,7 @@ void Character::deleteActivePatterns()
   while (i != active_patterns->end())
   {
     Pattern *p = (Pattern *)*i;
-    if(!p->is_hit)
+    if(!p->is_hit && p->bullet->name != "reward")
       p->hit(sound_channel_base + 1, true);
     i++;
   }

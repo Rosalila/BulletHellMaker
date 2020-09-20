@@ -474,40 +474,6 @@ void stageSelect()
 
       string game_mode = "Stage select";
 
-      if (stage_names[current_stage] == "Training1")
-      {
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training1");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-      if (stage_names[current_stage] == "Training2")
-      {
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training2");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-      if (stage_names[current_stage] == "Training3")
-      {
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training3");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-      if (stage_names[current_stage] == "Training4")
-      {
-        game_mode = "charge training";
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training4");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-      if (stage_names[current_stage] == "Training5")
-      {
-        game_mode = "parry training";
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training5");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-      if (stage_names[current_stage] == "Training6")
-      {
-        game_mode = "parry dash training";
-        intro_input = getReplayInput(std::string(assets_directory) + "misc/training/intros/Training6");
-        rosalila()->graphics->grayscale_effect.set(0, 1);
-      }
-
       rosalila()->graphics->transparency_effect.set(0, 1);
       rosalila()->graphics->transparency_effect.set(1, 0.03);
 
