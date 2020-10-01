@@ -293,8 +293,8 @@ void Pattern::render()
   if (image != NULL)
   {
     int transparency_divider = 1;
-    if (getGameOver())
-      transparency_divider = 8;
+    //if (getGameOver())
+      //transparency_divider = 8;
     
     image->scale = (float)(1.0 - (frame * auto_scale));
     image->rotation = getBulletAngle();

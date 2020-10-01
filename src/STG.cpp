@@ -129,13 +129,13 @@ bool STG::logic()
           enemy->hit(pattern->bullet->damage);
           player->current_slow += damage_level;
           //!!-!!
-          enemy->addActivePattern(enemy->type["reward"][0], pattern->x, pattern->y);
+          //enemy->addActivePattern(enemy->type["proximity_reward"][0], pattern->x, pattern->y);
           setScore(getScore()+2);
           enemy->shakeScreen(pattern->bullet->damage + damage_level * 3, pattern->bullet->damage + damage_level * 2);
           if (rosalila()->sound->soundExists(enemy->name + ".hit"))
             rosalila()->sound->playSound(enemy->name + ".hit", 1, 0, enemy->x);
           if (enemy->hp == 0)
-            win();
+            onWin();
         }
       }
     }
@@ -222,7 +222,7 @@ void STG::render()
     enemy->bottomRender();
   if (player->hp > 0)
     player->topRender();
-  if (enemy->hp > 0)
+  //if (enemy->hp > 0)
     enemy->topRender();
 
   stage->dibujarFront();
@@ -310,7 +310,7 @@ bool STG::enemyWon()
   return player->hp == 0;
 }
 
-void STG::win()
+void STG::onWin()
 {
   int old_clears = rosalila()->api_integrator->getStat(stage->name + "Clears");
   if (game_mode != "replay")
@@ -336,7 +336,7 @@ void STG::win()
   enemy->hp = 0;
   //rosalila()->graphics->screen_shake_effect.set(50,20,rosalila()->graphics->camera_x,rosalila()->graphics->camera_y);
   rosalila()->sound->playSound("you win", 2, 0, 0);
-  enemy->deleteActivePatterns();
+  enemy->cancelAllBullets();
 
   if (game_mode != "replay" && (getScore() < current_player_best_score || current_player_best_score == -1))
   {

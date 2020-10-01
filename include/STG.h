@@ -43,7 +43,7 @@ public:
     void deletePatterns();
     bool playerWon();
     bool enemyWon();
-    void win();
+    void onWin();
     void lose();
     void uploadScore();
     void uploadReplay();

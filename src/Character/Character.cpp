@@ -863,61 +863,9 @@ void Character::bottomRender()
 
 void Character::topRender()
 {
-  //    for (std::list<Pattern*>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-  //        ((Pattern*)*pattern)->render();
-
   vector<DrawableRectangle *> rectangles;
   for (std::list<Pattern *>::iterator pattern = active_patterns->begin(); pattern != active_patterns->end(); pattern++)
-  {
-    //if (!(*pattern)->is_hit)
-    {
       (*pattern)->render();
-      /*
-            double bullet_width = (*pattern)->bullet->width;
-            bullet_width *= 1-((*pattern)->frame * (*pattern)->auto_scale);
-
-            double bullet_heigth = (*pattern)->bullet->height;
-
-            Image* bullet_image = (*pattern)->bullet->getImage(0);
-
-            rosalila()->graphics->draw2DImage
-            (   bullet_image,
-                bullet_image->getWidth(),bullet_image->getHeight(),
-                (*pattern)->x - bullet_image->getWidth()/2,
-                (*pattern)->y - bullet_image->getHeight()/2,
-                1.0,
-                (*pattern)->angle+(*pattern)->bullet_rotation,
-                false,
-                Color(current_color_effect_r,current_color_effect_g,current_color_effect_b,current_color_effect_a));
-         */
-      /*
-            DrawableRectangle* rectangle = new DrawableRectangle(
-                                                 (*pattern)->x - bullet_width/2,
-                                                 (*pattern)->y - bullet_heigth/2,
-                                                 bullet_width,
-                                                 bullet_heigth,
-                                                 (*pattern)->angle+(*pattern)->bullet_rotation,
-                                                 (*pattern)->bullet->color
-                                                 );
-            rectangles.push_back(rectangle);
-*/
-    }
-
-    //        for(int i=0;i<(*pattern)->bullet->hitboxes.size();i++)
-    //        {
-    //            if(!(*pattern)->is_hit)
-    //            {
-    //                Hitbox *hitbox=(*pattern)->bullet->hitboxes[i];
-    //
-    //                DrawableRectangle* rectangle2 = new DrawableRectangle(hitbox->getX()+(*pattern)->x,hitbox->getY()+(*pattern)->y,
-    //                                                     hitbox->getWidth(),hitbox->getHeight(),
-    //                                                     (*pattern)->angle+hitbox->angle+(*pattern)->bullet_rotation,
-    //                                                     Color(255,255,255,255)
-    //                                                     );
-    //                rectangles.push_back(rectangle2);
-    //            }
-    //        }
-  }
 
   double current_percentual_hp = 0;
   if(this->hp > 0)
@@ -991,7 +939,7 @@ void Character::deleteActivePatterns()
   while (i != active_patterns->end())
   {
     Pattern *p = (Pattern *)*i;
-    if(!p->is_hit && p->bullet->name != "reward")
+    if(!p->is_hit && p->bullet->name != "cancel_reward")
       p->hit(sound_channel_base + 1, true);
     i++;
   }

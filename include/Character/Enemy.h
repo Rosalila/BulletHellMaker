@@ -32,6 +32,7 @@ public:
   void bottomRender();
   void topRender();
   void onBulletCancel();
+  void cancelAllBullets();
   void onDefeated();
 };
 

@@ -232,9 +232,9 @@ void Enemy::logic(int stage_velocity, string stage_name)
       player->hp = 1;
   }
 
-  if (!getGameOver())
-    modifiersControl();
-  else
+  modifiersControl();
+
+  if (getGameOver())
   {
     if (current_state != "destroyed")
     {
@@ -388,8 +388,6 @@ void Enemy::loadModifiersFromXML()
 
 void Enemy::addActivePattern(Pattern *pattern, int new_pattern_x, int new_pattern_y)
 {
-  if (getGameOver())
-    return;
   Pattern *new_pattern = new Pattern(pattern, new_pattern_x, new_pattern_y);
   float angle = new_pattern->angle;
   angle += new_pattern->getRandomAngle();
@@ -439,13 +437,18 @@ void Enemy::onBulletCancel()
   animation_controls.push_back(new AnimationControl("explosion", 5, this->x-100, this->y+200, 30));
   animation_controls.push_back(new AnimationControl("explosion", 5, this->x, this->y, 20));
   
+  this->cancelAllBullets();
+}
+
+void Enemy::cancelAllBullets()
+{
   setScore(getScore()+this->active_patterns->size()+5);
   this->bullet_cancel_count += this->active_patterns->size();
   for(std::list<Pattern *>::iterator i = this->active_patterns->begin(); i != this->active_patterns->end(); i++)
   {
-    if((*i)->bullet->name != "reward")
+    if((*i)->bullet->name != "cancel_reward" && (*i)->bullet->name != "proximity_reward")
     {
-      this->addActivePattern(this->type["reward"][0], (*i)->x, (*i)->y);
+      this->addActivePattern(this->type["cancel_reward"][0], (*i)->x, (*i)->y);
       (*i)->hit(this->sound_channel_base + 1, false);
     }
   }
