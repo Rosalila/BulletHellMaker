@@ -27,7 +27,8 @@ public:
 
   Stage(Player* player);
   ~Stage();
-  bool playerIsInBounds();
+  bool playerIsInPlatform();
+  bool playerIsInObstacle();
   void dibujarBack();
   void dibujarFront();
   void drawLayer(Layer*layer);

@@ -82,52 +82,59 @@ void Stage::drawLayer(Layer *layer)
 
   LayerFrame *current_layer_frame = layer->layer_frames[layer->current_frame];
 
-  int frame_width = current_layer_frame->width;
-  int frame_heigth = current_layer_frame->height;
-
-  vector<DrawableRectangle *> rectangles;
-
-  for (int i = 0; i < rosalila()->graphics->screen_width / (frame_width + layer->separation_x) + 2; i++)
+  if(layer->type != "obstacle"
+      || (layer->type == "obstacle" && layer->obstacle_hit_points > 0))
   {
+    int frame_width = current_layer_frame->width;
+    int frame_heigth = current_layer_frame->height;
 
-    int pos_x = layer->x + i * (frame_width + layer->separation_x);
-    int pos_y = rosalila()->graphics->screen_height - frame_heigth - layer->y;
+    vector<DrawableRectangle *> rectangles;
 
-    if (current_layer_frame->type == "image")
+    for (int i = 0; i < rosalila()->graphics->screen_width / (frame_width + layer->separation_x) + 2; i++)
     {
-      Image *image = current_layer_frame->image;
-      //TODO: Fix paralax
-      //TODO: Review Layer and LayerFrame name, variable names and stuff
-      image->width = frame_width;
-      image->height = frame_heigth;
-      image->blend_effect = layer->blend_effect;
-      image->color_filter.red =  layer->color.red;
-      image->color_filter.green =  layer->color.green;
-      image->color_filter.blue =  layer->color.blue;
-      image->color_filter.alpha =  layer->color.alpha;
-      rosalila()->graphics->drawImage(image,pos_x, pos_y);
+      int pos_x = layer->x + i * (frame_width + layer->separation_x);
+      int pos_y = rosalila()->graphics->screen_height - frame_heigth - layer->y;
 
-      if (rosalila()->receiver->isKeyDown(SDLK_h))
+      if (current_layer_frame->type == "image")
       {
-        rosalila()->graphics->drawRectangle(pos_x + layer->bounds_x,
-                                            rosalila()->graphics->screen_height - current_layer_frame->height - layer->y - layer->bounds_y,
-                                            layer->bounds_width,
-                                            layer->bounds_height,
-                                            0,
-                                            0, 100, 0, 100);
+        Image *image = current_layer_frame->image;
+        //TODO: Fix paralax
+        //TODO: Review Layer and LayerFrame name, variable names and stuff
+        image->width = frame_width;
+        image->height = frame_heigth;
+        image->blend_effect = layer->blend_effect;
+        image->color_filter.red =  layer->color.red;
+        image->color_filter.green =  layer->color.green;
+        image->color_filter.blue =  layer->color.blue;
+        image->color_filter.alpha =  layer->color.alpha;
+        rosalila()->graphics->drawImage(image,pos_x, pos_y);
+
+        if (rosalila()->receiver->isKeyDown(SDLK_h))
+        {
+          rosalila()->graphics->drawRectangle(pos_x + layer->bounds_x,
+                                              rosalila()->graphics->screen_height - current_layer_frame->height - layer->y - layer->bounds_y,
+                                              layer->bounds_width,
+                                              layer->bounds_height,
+                                              0,
+                                              0, 100, 0, 100);
+        }
+      }
+      if (current_layer_frame->type == "rectangle")
+      {
+        rectangles.push_back(new DrawableRectangle(pos_x, pos_y, frame_width, frame_heigth, 0, Color(layer->color.red, layer->color.green, layer->color.blue, layer->color.alpha)));
       }
     }
-    if (current_layer_frame->type == "rectangle")
+    rosalila()->graphics->drawRectangles(rectangles);
+
+    for (int i = 0; i < (int)rectangles.size(); i++)
     {
-      rectangles.push_back(new DrawableRectangle(pos_x, pos_y, frame_width, frame_heigth, 0, Color(layer->color.red, layer->color.green, layer->color.blue, layer->color.alpha)));
+      delete rectangles[i];
     }
-  }
 
-  rosalila()->graphics->drawRectangles(rectangles);
-
-  for (int i = 0; i < (int)rectangles.size(); i++)
-  {
-    delete rectangles[i];
+    if (layer->x < -frame_width - layer->separation_x)
+    {
+      layer->x += frame_width + layer->separation_x;
+    }
   }
 
   // TODO redo paralax
@@ -146,19 +153,25 @@ void Stage::drawLayer(Layer *layer)
         }
     }
     */
-
-  if (layer->x < -frame_width - layer->separation_x)
-  {
-    layer->x += frame_width + layer->separation_x;
-  }
 }
 
-bool Stage::playerIsInBounds()
+bool Stage::playerIsInPlatform()
 {
   for (int i = 0; i < (int)back.size(); i++)
   {
     Layer *layer = back[i];
-    if (layer->playerIsInBounds(player))
+    if (layer->type=="platform" && layer->playerIsInBounds(player))
+      return true;
+  }
+  return false;
+}
+
+bool Stage::playerIsInObstacle()
+{
+  for (int i = 0; i < (int)back.size(); i++)
+  {
+    Layer *layer = back[i];
+    if (layer->playerIsInObstacle(player))
       return true;
   }
   return false;
@@ -472,6 +485,15 @@ void Stage::loadFromXML(std::string name, bool is_mod)
         bounds_height = atoi(bounds_node->attributes["height"].c_str());
     }
 
+    // Load obstacle info
+    int obstacle_hit_points = 5;
+    Node* obstacle_node = backlayer_nodes[i]->getNodeByName("obstacle");
+    if (obstacle_node)
+    {
+      if (obstacle_node->hasAttribute("obstacle_hit_points"))
+        obstacle_hit_points = atoi(obstacle_node->attributes["obstacle_hit_points"].c_str());
+    }
+
     back.push_back(new Layer(layer_frames,
                              layer_modifiers,
                              type,
@@ -488,6 +510,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
                              bounds_width,
                              bounds_height,
                              blend_effect,
+                             obstacle_hit_points,
                              color));
   }
 
@@ -605,6 +628,15 @@ void Stage::loadFromXML(std::string name, bool is_mod)
         bounds_height = atoi(bounds_node->attributes["height"].c_str());
     }
 
+    // Load obstacle info
+    int obstacle_hit_points = 5;
+    Node* obstacle_node = frontlayer_nodes[i]->getNodeByName("obstacle");
+    if (obstacle_node)
+    {
+      if (obstacle_node->hasAttribute("obstacle_hit_points"))
+        obstacle_hit_points = atoi(obstacle_node->attributes["obstacle_hit_points"].c_str());
+    }
+
     front.push_back(new Layer(layer_frames,
                               layer_modifiers,
                               type,
@@ -621,6 +653,7 @@ void Stage::loadFromXML(std::string name, bool is_mod)
                               bounds_width,
                               bounds_height,
                               blend_effect,
+                              obstacle_hit_points,
                               color));
   }
 

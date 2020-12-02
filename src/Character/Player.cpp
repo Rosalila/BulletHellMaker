@@ -363,15 +363,17 @@ void Player::inputControl()
 
   double last_x = this->x;
   double last_y = this->y;
-  bool player_was_in_bounds = this->stage->playerIsInBounds();
+  bool player_was_in_platform = this->stage->playerIsInPlatform();
 
   this->x += delta_x + additional_velocity_x + this->dash_extra_velocity_x;
   this->y += delta_y + additional_velocity_y + this->dash_extra_velocity_y;
 
-  if(player_was_in_bounds
-      && !this->stage->playerIsInBounds()
+  if(this->stage->playerIsInObstacle()
+      ||(player_was_in_platform
+      && !this->stage->playerIsInPlatform()
       && (this->dash_extra_velocity_x == 0 && this->dash_extra_velocity_y == 0)
       && !isSlowEnabled())
+    )
   {
     this->x = last_x;
     this->y = last_y;
@@ -457,7 +459,7 @@ void Player::logic(int stage_velocity)
 
   // Die if out of bounds
   if(!getGameOver()
-    && !this->stage->playerIsInBounds()
+    && !this->stage->playerIsInPlatform()
     && !isSlowEnabled()
     && this->current_state != "dash up"
     && this->current_state != "dash down"

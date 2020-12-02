@@ -42,6 +42,9 @@ public:
   int bounds_width;
   int bounds_height;
 
+  // Obstacle
+  int obstacle_hit_points;
+
   map<int, vector<Modifier *>> *modifiers;
 
   Layer(vector<LayerFrame *> layer_frames,
@@ -60,9 +63,12 @@ public:
         int bounds_width,
         int bounds_height,
         bool blend_effect,
+        int obstacle_hit_points,
         Color color);
   
   bool playerIsInBounds(Player* player);
+  bool pointIsInBounds(int x, int y);
+  bool playerIsInObstacle(Player* player);
   void modifiersControl();
   void logic(Player* player);
 
