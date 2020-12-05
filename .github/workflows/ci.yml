@@ -44,7 +44,7 @@ jobs:
           - name: Windows 2019 MSVC
             os: windows-2019
             compiler: cl
-            cmake-args: -DBUILD_SHARED_LIBS=OFF -Dgtest_force_shared_crt=on
+            cmake-args: -DBUILD_SHARED_LIBS=OFF -Dgtest_force_shared_crt=on -A Win32
 
           # - name: Windows 2019 GCC
           #   os: windows-2019

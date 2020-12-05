@@ -184,7 +184,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
       if (pattern->isReady())
       {
         pattern->bullet->playSound((int)(pattern->x + this->x), true);
-        this->addActivePattern(pattern, this->x, this->y);
+        this->addActivePattern(pattern, (int)this->x, (int)this->y);
       }
     }
     else
@@ -219,7 +219,7 @@ void Enemy::logic(int stage_velocity, string stage_name)
     }
     else if (active_pattern->getAimPlayer())
     {
-      active_pattern->angle = (int)(active_pattern->angle - atan2(getPlayerDistanceY(player, active_pattern), getPlayerDistanceX(player, active_pattern)) * 180 / PI);
+      active_pattern->angle = (active_pattern->angle - atan2(getPlayerDistanceY(player, active_pattern), getPlayerDistanceX(player, active_pattern)) * 180 / PI);
     }
 
     player->additional_velocity_x = active_pattern->additional_player_velocity_x;
@@ -275,7 +275,7 @@ void Enemy::bottomRender()
       animation_control->x - image->getWidth() / 2 + current_screen_shake_x,
       animation_control->y - image->getHeight() / 2 + current_screen_shake_y);
     animation_control->current_frame++;
-    if(animation_control->current_frame >= this->animation_images[animation_control->name].size())
+    if(animation_control->current_frame >= (int)this->animation_images[animation_control->name].size())
     {
       animation_control->delete_flag = true;
       animation_control->current_frame = 0;
@@ -399,14 +399,14 @@ void Enemy::addActivePattern(Pattern *pattern, int new_pattern_x, int new_patter
   {
     double distance_x = player->x - new_pattern->x;
     double distance_y = player->y - new_pattern->y;
-    new_pattern->angle = new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
+    new_pattern->angle = (int)new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
   }
 
   if(pattern->aim_player_on_begin)
   {
     double distance_x = pattern->player_x_on_begin - new_pattern->x;
     double distance_y = pattern->player_y_on_begin - new_pattern->y;
-    new_pattern->angle = new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
+    new_pattern->angle = (int)new_pattern->angle - atan2(distance_y, distance_x) * 180 / PI;
   }
   
   active_patterns->push_back(new_pattern);
@@ -415,7 +415,7 @@ void Enemy::addActivePattern(Pattern *pattern, int new_pattern_x, int new_patter
 void Enemy::onBulletCancel()
 {
   if (rosalila()->sound->soundExists(name + ".bullet_cancel"))
-    rosalila()->sound->playSound(name + ".bullet_cancel", 1, 0, this->x);
+    rosalila()->sound->playSound(name + ".bullet_cancel", 1, 0, (int)this->x);
   
   for (int i = 0; i < (int)type[current_type].size(); i++)
   {
@@ -424,18 +424,18 @@ void Enemy::onBulletCancel()
     type[current_type][i]->state = "startup";
   }
 
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+200, this->y+150, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-150, this->y-300, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+120, this->y, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+50, this->y-210, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-60, this->y-30, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-190, this->y+200, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x+100, this->y-80, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-200, this->y+200, 30));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-200, this->y+200, 30));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x-100, this->y+200, 30));
-  animation_controls.push_back(new AnimationControl("explosion", 5, this->x, this->y, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x + 200, (int)this->y + 150, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 150, (int)this->y-300, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x + 120, (int)this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x + 120, (int)this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x + 50, (int)this->y - 210, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 60, (int)this->y - 30, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 190, (int)this->y + 200, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x + 100, (int)this->y - 80, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 200, (int)this->y + 200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 200, (int)this->y + 200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x - 100, (int)this->y + 200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 5, (int)this->x, (int)this->y, 20));
   
   this->cancelAllBullets();
 }
@@ -448,7 +448,7 @@ void Enemy::cancelAllBullets()
   {
     if((*i)->bullet->name != "cancel_reward" && (*i)->bullet->name != "proximity_reward")
     {
-      this->addActivePattern(this->type["cancel_reward"][0], (*i)->x, (*i)->y);
+      this->addActivePattern(this->type["cancel_reward"][0], (int)(*i)->x, (int)(*i)->y);
       (*i)->hit(this->sound_channel_base + 1, false);
     }
   }
@@ -457,26 +457,26 @@ void Enemy::cancelAllBullets()
 void Enemy::onDefeated()
 {
   if (current_state != "destroyed" && rosalila()->sound->soundExists(name + ".destroyed"))
-    rosalila()->sound->playSound(name + ".destroyed", 1, 0, this->x);
+    rosalila()->sound->playSound(name + ".destroyed", 1, 0, (int)this->x);
   
   rosalila()->graphics->screen_shake_effect.set(40, 100, 0, 0);
   
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+200, this->y+150, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-150, this->y-300, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+120, this->y, 0));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+120, this->y, 10));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+50, this->y-210, 10));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-60, this->y-30, 15));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-190, this->y+200, 20));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x+100, this->y-80, 20));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-200, this->y+200, 20));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-200, this->y+200, 30));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x-100, this->y+200, 40));
-  animation_controls.push_back(new AnimationControl("explosion", 10, this->x, this->y, 50));
-  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x, this->y, 30));
-  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x+50, this->y+20, 20));
-  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x+50, this->y+20, 34));
-  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x-20, this->y-15, 50));
-  animation_controls.push_back(new AnimationControl("explosion_big", 20, this->x-5, this->y+30, 50));
-  animation_controls.push_back(new AnimationControl("explosion_big", 40, this->x-5, this->y, 60));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x + 200, (int)this->y + 150, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 150, (int)this->y - 300, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x + 120, (int)this->y, 0));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x + 120, (int)this->y, 10));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x + 50, (int)this->y - 210, 10));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 60, (int)this->y - 30, 15));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 190, (int)this->y + 200, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x + 100, (int)this->y - 80, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 200, (int)this->y + 200, 20));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 200, (int)this->y+200, 30));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x - 100, (int)this->y + 200, 40));
+  animation_controls.push_back(new AnimationControl("explosion", 10, (int)this->x, (int)this->y, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, (int)this->x, (int)this->y, 30));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, (int)this->x + 50, (int)this->y + 20, 20));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, (int)this->x + 50, (int)this->y + 20, 34));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, (int)this->x - 20, (int)this->y - 15, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 20, (int)this->x - 5, (int)this->y + 30, 50));
+  animation_controls.push_back(new AnimationControl("explosion_big", 40, (int)this->x - 5, (int)this->y, 60));
 }
