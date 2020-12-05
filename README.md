@@ -1,10 +1,10 @@
-Rosalila Shoot 'Em Up Maker
-===========================
+Rosalila Bullet Hell Maker
+==========================
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/650862206925275156.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.gg/fGBbQZ8)
-[![Travis](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=travis)](https://travis-ci.org/Rosalila/ShootEmUpMaker)
-[![Appveyor](https://img.shields.io/travis/Rosalila/ShootEmUpMaker.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/ShootEmUpMaker)
+[![Travis](https://img.shields.io/travis/Rosalila/BulletHellMaker.svg?logo=travis)](https://travis-ci.org/Rosalila/BulletHellMaker)
+[![Appveyor](https://img.shields.io/travis/Rosalila/BulletHellMaker.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/BulletHellMaker)
 
 1. **Fast and modern development**: Create boss fights without coding.
 2. **No string attached**: Free as in freedom, available even for commercial projects.
@@ -25,7 +25,7 @@ Rosalila Shoot 'Em Up Maker
 
 ## Getting started
 
-Download the [boilerplate example](https://github.com/Rosalila/ShootEmUpExample/archive/master.zip) game and run the binary corresponding to your system (`./shmup` on Linux and `shmup.exe` on Windows).
+Download the [boilerplate example](https://github.com/Rosalila/BulletHellExample/archive/master.zip) game and run the binary corresponding to your system (`./BulletHellGame` on Linux and `BulletHellGame.exe` on Windows).
 
 ## Usage
 
@@ -414,11 +414,11 @@ See [full config.json attributes](#configjson-attributes).
 
 ## Directory structure
 
-Follow the directory structure so the Shmup Maker detects your characters and stages.
+Follow the directory structure so the Bullet Hell Maker detects your characters and stages.
 
 ```
 Your game/
-│   shmup
+│   BulletHellGame
 │
 └───assets/
     │   config.json
@@ -442,7 +442,7 @@ Your game/
 
 ## Build
 
-Notice this guide is for compiling the Shoot 'Em Up Maker from source, if you wan't to create a game please refer to the [Getting started](#getting-started).
+Notice this guide is for compiling the Bullet Hell Maker from source, if you wan't to create a game please refer to the [Getting started](#getting-started).
  docs
 ```bash
 # Dependencies

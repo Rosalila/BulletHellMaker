@@ -4,7 +4,7 @@ log
 STG
 Flatshot
 STG.layout
-shmup
+BulletHellGame
 *.sav
 last_replay
 *.o
