@@ -3,8 +3,7 @@ Rosalila Bullet Hell Maker
 
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/Rosalila/STG/blob/master/LICENSE)
 [![Discord](https://img.shields.io/discord/650862206925275156.svg?label=Discord&logo=discord&color=7289DA&labelColor=2C2F33)](https://discord.gg/fGBbQZ8)
-[![Travis](https://img.shields.io/travis/Rosalila/BulletHellMaker.svg?logo=travis)](https://travis-ci.org/Rosalila/BulletHellMaker)
-[![Appveyor](https://img.shields.io/travis/Rosalila/BulletHellMaker.svg?logo=appveyor)](https://ci.appveyor.com/project/Turupawn/BulletHellMaker)
+[![GitHub Action](https://github.com/Rosalila/BulletHellMaker/workflows/ci/badge.svg)](https://github.com/Rosalila/BulletHellMaker/actions)
 
 1. **Fast and modern development**: Create boss fights without coding.
 2. **No string attached**: Free as in freedom, available even for commercial projects.
