@@ -216,7 +216,6 @@ bool STG::logic()
 void STG::render()
 {
   stage->dibujarBack();
-  cout<<player->hp<<endl;cout.flush();
   if (player->hp > 0)
     player->bottomRender();
   //if (enemy->hp > 0)
