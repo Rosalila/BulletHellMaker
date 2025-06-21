@@ -216,6 +216,7 @@ bool STG::logic()
 void STG::render()
 {
   stage->dibujarBack();
+  cout<<player->hp<<endl;cout.flush();
   if (player->hp > 0)
     player->bottomRender();
   //if (enemy->hp > 0)
@@ -229,7 +230,7 @@ void STG::render()
 
   rosalila()->graphics->drawText(400,-20,rosalila()->utility->toString(getScore()));
 
-  if (getGameOver())// && score != -1 && game_mode != "replay")
+  if (false && getGameOver())// && score != -1 && game_mode != "replay")
   {
     if(enemy->hp==0)
       rosalila()->graphics->drawImage(you_win, 0,0);

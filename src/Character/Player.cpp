@@ -648,7 +648,7 @@ void Player::topRender()
         hitbox_animation_current_image = 0;
     }
   }
-
+  /*
   if(!jump_tutorial_was_pressed)
   {
     if(this->frame % 25 == 0)
@@ -662,7 +662,7 @@ void Player::topRender()
       jump_tutorial_image->color_filter.alpha = 255;
       rosalila()->graphics->drawImage(jump_tutorial_image, 50,750);
     }
-  }
+  }*/
 }
 
 void Player::hit(int damage)
@@ -699,23 +699,25 @@ void Player::loadFromXML()
 
   
   Node* hitbox_animation_node = root_node->getNodeByName("hitbox_animation");
-  this->hitbox_animation_velocity = 0;
-  if (hitbox_animation_node->hasAttribute("animation_velocity"))
-    this->hitbox_animation_velocity = atoi(hitbox_animation_node->attributes["animation_velocity"].c_str());
-  
-  this->hitbox_animation_x = 0;
-  if (hitbox_animation_node->hasAttribute("x"))
-    this->hitbox_animation_x = atoi(hitbox_animation_node->attributes["x"].c_str());
+  if(hitbox_animation_node) {
+    this->hitbox_animation_velocity = 0;
+    if (hitbox_animation_node->hasAttribute("animation_velocity"))
+      this->hitbox_animation_velocity = atoi(hitbox_animation_node->attributes["animation_velocity"].c_str());
+    
+    this->hitbox_animation_x = 0;
+    if (hitbox_animation_node->hasAttribute("x"))
+      this->hitbox_animation_x = atoi(hitbox_animation_node->attributes["x"].c_str());
 
-  this->hitbox_animation_y = 0;
-  if (hitbox_animation_node->hasAttribute("y"))
-    this->hitbox_animation_y = atoi(hitbox_animation_node->attributes["y"].c_str());
+    this->hitbox_animation_y = 0;
+    if (hitbox_animation_node->hasAttribute("y"))
+      this->hitbox_animation_y = atoi(hitbox_animation_node->attributes["y"].c_str());
 
-  vector<Node *> hitbox_animation_sprites_nodes = hitbox_animation_node->getNodesByName("sprites");
-  for (int i = 0; i < (int)hitbox_animation_sprites_nodes.size(); i++)
-  {
-    string sprite_path = hitbox_animation_sprites_nodes[i]->attributes["path"];
-    hitbox_animation_vector.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_path));
+    vector<Node *> hitbox_animation_sprites_nodes = hitbox_animation_node->getNodesByName("sprites");
+    for (int i = 0; i < (int)hitbox_animation_sprites_nodes.size(); i++)
+    {
+      string sprite_path = hitbox_animation_sprites_nodes[i]->attributes["path"];
+      hitbox_animation_vector.push_back(rosalila()->graphics->getImage(std::string(assets_directory) + directory + "sprites/" + sprite_path));
+    }
   }
 
   Node *shield_node = root_node->getNodeByName("shield");
